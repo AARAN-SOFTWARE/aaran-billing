@@ -38,8 +38,11 @@
                 <x-input.text-input-static :label="'Email'"/>
                 <div class="inline-flex items-center gap-x-6">
                     <x-input.checkbox-new/>
+{{--                    <x-input.checkbox-animate/>--}}
                     <span>Terms and Conditions</span>
                 </div>
+                <x-rating.star />
+                <x-rating.emote />
                 <x-input.textarea :placeholder="'Write Some Comments'"/>
                 <x-button.register>Register</x-button.register>
             </div>
@@ -79,6 +82,13 @@
             <x-input.text-input-static :label="'Input'" class="w-96"/>
             <x-input.textarea :placeholder="'comments'"/>
             <x-input.drag-drop/>
+            <x-pagination.ellipsis />
+            <x-input.input-trigger />
         </x-forms.m-panel>
+        <div>
+            <x-interactions.share />
+        </div>
     </div>
 </x-app-layout>
+
+
