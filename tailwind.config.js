@@ -15,6 +15,10 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                roboto:["Roboto Condensed", "sans-serif"],
+                asul:["Asul", "sans-serif"],
+                merri:["Merriweather", "sans-serif"]
+
             },
         },
     },
