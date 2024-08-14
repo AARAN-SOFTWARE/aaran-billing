@@ -74,7 +74,7 @@
                     delete
                 </a>
 
-                <x-modal.delete/>
+{{--                <x-modal.delete/>--}}
             </div>
         </div>
     </div>
