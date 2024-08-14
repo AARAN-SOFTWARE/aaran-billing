@@ -49,7 +49,7 @@
         </x-forms.m-panel>
         <div class="font-roboto py-12 text-2xl mx-5 font-semibold tracking-wider">Cards & Carousels</div>
         <x-forms.m-panel>
-            <x-accordion.accord/>
+            <x-accordion.accord />
             <div class="my-2 flex gap-6">
                 <x-cards.card-1/>
                 <x-cards.card-2/>
