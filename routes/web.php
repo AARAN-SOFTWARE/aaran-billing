@@ -14,5 +14,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     })->name('dashboard');
 
     Route::get('/elements', App\Livewire\UiElements\Index::class)->name('elements');
+
     Route::get('/icons', App\Livewire\Utilities\Icon\Index::class)->name('icons');
 });
