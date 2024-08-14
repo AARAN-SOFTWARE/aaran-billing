@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     <x-corousels.carousel-auto/>
     <div class="h-auto w-auto mx-auto p-12">
         <div class="font-roboto py-12 text-2xl mx-5 font-semibold tracking-wider">Alerts</div>
@@ -38,7 +38,7 @@
                 <x-input.text-input-static :label="'Email'"/>
                 <div class="inline-flex items-center gap-x-6">
                     <x-input.checkbox-new/>
-{{--                    <x-input.checkbox-animate/>--}}
+                    {{--                    <x-input.checkbox-animate/>--}}
                     <span>Terms and Conditions</span>
                 </div>
                 <x-rating.star />
@@ -88,18 +88,15 @@
 
         <x-forms.m-panel>
             <div class="flex gap-6 justify-center items-center">
-            <x-interactions.download />
-            <x-interactions.clip />
+                <x-interactions.download />
+                <x-interactions.clip />
             </div>
             <div class="w-8/12 mx-auto flex justify-end">
-            <x-interactions.share />
+                <x-interactions.share />
             </div>
         </x-forms.m-panel>
         <div class="py-12 flex justify-end">
-    <x-pagination.ellipsis />
+            <x-pagination.ellipsis />
         </div>
     </div>
-
-</x-app-layout>
-
-
+</div>
