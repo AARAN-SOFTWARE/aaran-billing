@@ -13,7 +13,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/elements', App\Livewire\UiElements\Index::class)->name('elements');
+    Route::get('/elements', App\Livewire\Utilities\UiElements\Index::class)->name('elements');
 
     Route::get('/icons', App\Livewire\Utilities\Icon\Index::class)->name('icons');
 });
