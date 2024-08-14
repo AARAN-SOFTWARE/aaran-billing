@@ -1,11 +1,12 @@
 @props([
-'icon' => 'wifi'
+'icon' => 'wifi',
+'colour' => '#000000',
 ])
 
 <div>
     <button class="border border-gray-300 rounded-xl p-3 bg-white grid grid-rows-2 w-24 h-24 hover:bg-gray-100"
             onclick="copyToClipboard('{{$icon}}')">
-        <x-icons.icon :icon="$icon" class="block w-8 h-auto"/>
+        <x-icons.icon-fill :iconfill="$icon" :colour="$colour" class="block w-8 h-auto"/>
 
 
         {{--        <x-icons.icon :icon="'{{Str::of($icon)->trim()}}'" class="block w-8 h-auto"/>--}}
