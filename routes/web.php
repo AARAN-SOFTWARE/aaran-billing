@@ -16,5 +16,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('ui', App\Livewire\UiElements\Index::class)->name('ui');
+    Route::get('/elements', App\Livewire\UiElements\Index::class)->name('elements');
 });
