@@ -199,6 +199,8 @@ class Index extends Component
             'microphone',
             'megaphone',
             'pencil',
+            'ascend',
+            'descend',
 
 
         ]);
