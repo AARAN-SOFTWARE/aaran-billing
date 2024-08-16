@@ -2,22 +2,35 @@
     <x-slot name="header">Labels</x-slot>
 
     <x-forms.m-panel>
-        <form wire:submit.prevent="save">
-            <x-input.model-text wire:model="common.vname"/>
-            <x-input.model-text wire:model="common.active_id"/>
+        <form wire:submit.prevent="save" class="flex gap-3">
+            <x-input.model-text wire:model="common.vname" :label="'Name'"/>
+            <x-input.model-text wire:model="common.active_id" :label="'Active_id'"/>
             <x-button.save/>
         </form>
 
         <div>
-            <x-input.model-text wire:model.live="getListForm.searches"/>
-            @foreach($list as $row)
-                <div class="flex gap-3">
-                    <span  wire:click.prevent="sortBy('vname')" class="cursor-pointer">{{$row->vname}}</span>
-                    <span>{{$row->active_id}}</span>
-                    <x-jet.secondary-button wire:click="edit({{$row->id}})">edit</x-jet.secondary-button>
-                    <x-jet.danger-button wire:click="getDelete({{$row->id}})">delete</x-jet.danger-button>
-                </div>
-            @endforeach
+            <x-icons.search-new wire:model.live="getListForm.searches" />
+            <x-table.caption :caption="'Label'">
+                {{$list->count()}}
+            </x-table.caption>
+            <x-table.form>
+                <x-slot:table_header name="table_header" class="bg-green-600">
+                    <x-table.header-serial width="20%"/>
+                    <x-table.header-text wire:click.prevent="sortBy('vname')" fill="ascend" display="block">Common Name</x-table.header-text>
+                    <x-table.header-text>Status</x-table.header-text>
+                    <x-table.header-action/>
+                </x-slot:table_header>
+                <x-slot:table_body name="table_body">
+                    @foreach($list as $index=>$row)
+                        <x-table.row>
+                            <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+                            <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
+                            <x-table.cell-status active="{{$row->active_id}}"/>
+                            <x-table.cell-action id="{{$row->id}}"/>
+                        </x-table.row>
+                    @endforeach
+                </x-slot:table_body>
+            </x-table.form>
         </div>
         <x-modal.delete/>
     </x-forms.m-panel>
