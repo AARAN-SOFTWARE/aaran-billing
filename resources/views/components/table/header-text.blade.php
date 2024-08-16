@@ -11,7 +11,7 @@
     ])}}>
 
     <div class="inline-flex items-center gap-x-1">
-        <span>{{$slot}}</span><span><button><x-icons.icon-fill :iconfill="$fill" :width="'16px'"
-           :height="'16px'" class="mt-1.5 {{$display}}" /></button></span>
+        <span>{{$slot}}</span><span><button><x-icons.icon-fill :iconfill="$fill" :width="'14px'"
+           :height="'14px'" class="mt-1.5 {{$display}}" /></button></span>
     </div>
 </th>

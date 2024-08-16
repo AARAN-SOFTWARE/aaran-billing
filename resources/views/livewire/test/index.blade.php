@@ -11,7 +11,7 @@
                 <x-table.header-check/>
                 <x-table.header-text fill="ascend" display="block">Name</x-table.header-text>
                 <x-table.header-text fill="descend" display="block">Email</x-table.header-text>
-                <x-table.header-text>Description</x-table.header-text>
+                <x-table.header-text fill="info-circle" display="block">Description</x-table.header-text>
                 <x-table.header-text>Status</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
@@ -19,8 +19,9 @@
                 <x-table.row>
                     <x-table.cell-text>1</x-table.cell-text>
                     <x-table.cell-check/>
-                    <x-table.cell-user />
-                    <x-table.cell-text left>Jerry@mail</x-table.cell-text>
+{{--                    <x-table.cell-user />--}}
+                    <x-table.cell-text >Jerry</x-table.cell-text>
+                    <x-table.cell-text >Jerry@mail</x-table.cell-text>
                     <x-table.cell-text>Jerry@mail</x-table.cell-text>
                     <x-table.cell-status />
                     <x-table.cell-action />
@@ -28,7 +29,8 @@
                 <x-table.row>
                     <x-table.cell-text>2</x-table.cell-text>
                     <x-table.cell-check/>
-                    <x-table.cell-user />
+{{--                    <x-table.cell-user />--}}
+                    <x-table.cell-text>jaga</x-table.cell-text>
                     <x-table.cell-text>jaga@mail</x-table.cell-text>
                     <x-table.cell-text>jaga@mail</x-table.cell-text>
                     <x-table.cell-status />
@@ -37,7 +39,8 @@
                 <x-table.row>
                     <x-table.cell-text>1</x-table.cell-text>
                     <x-table.cell-check/>
-                    <x-table.cell-user />
+{{--                    <x-table.cell-user />--}}
+                    <x-table.cell-text>Divi</x-table.cell-text>
                     <x-table.cell-text>Divi@mail</x-table.cell-text>
                     <x-table.cell-text>Divi@mail</x-table.cell-text>
                     <x-table.cell-status />
