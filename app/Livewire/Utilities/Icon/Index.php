@@ -210,6 +210,10 @@ class Index extends Component
             'fb-round',
             'back-space1',
 
+            'ascend',
+            'descend',
+
+
 
         ]);
     }

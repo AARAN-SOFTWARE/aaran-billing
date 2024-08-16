@@ -8,7 +8,7 @@
         <div class="gap-5">
             <x-button.secondary wire:click.prevent="$set('showDeleteModal', false)">Cancel</x-button.secondary>
 
-            <x-button.primary wire:click.prevent="delete">Delete</x-button.primary>
+            <x-button.primary wire:click.prevent="trashData">Delete</x-button.primary>
         </div>
     </x-slot>
 </x-modal.confirmation>

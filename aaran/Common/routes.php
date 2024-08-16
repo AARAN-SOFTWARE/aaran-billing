@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/commons', App\Livewire\Common\Index::class)->name('commons');
+    Route::get('/labels', App\Livewire\Common\LabelList::class)->name('labels');
 
     //    Route::get('/cities', App\Livewire\Common\CityList::class)->name('cities');
 //    Route::get('/states', App\Livewire\Common\StateList::class)->name('states');
