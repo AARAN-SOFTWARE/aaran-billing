@@ -20,22 +20,19 @@
     <body class="font-sans antialiased">
         <x.jet-banner />
 
-        <div class="min-h-screen">
-            @livewire('navigation-menu')
+        <div x-data="{ sidebarOpen: false }" @keydown.window.escape="sidebarOpen=false"
+             class="min-h-screen bg-white print:bg-white">
+            <div class="flex-1">
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+                <x-menu.top-menu>{{$header}}</x-menu.top-menu>
+                <x-menu.side-menu/>
 
-            <!-- Page Content -->
-            <main class="p-3 bg-white print:bg-white">
-                {{ $slot }}
-            </main>
+                <!-- Page Content -->
+                <main class="p-3 bg-white print:bg-white">
+                    {{ $slot }}
+                </main>
+
+            </div>
         </div>
 
         @stack('modals')

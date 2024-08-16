@@ -6,4 +6,5 @@ return [
     App\Providers\JetstreamServiceProvider::class,
 
     Aaran\Aadmin\Providers\AadminServiceProvider::class,
+    Aaran\Common\Providers\CommonServiceProvider::class,
 ];
