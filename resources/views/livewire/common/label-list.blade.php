@@ -1,15 +1,13 @@
 <div>
-    <x-slot name="header">Common</x-slot>
+    <x-slot name="header">Labels</x-slot>
 
     <x-forms.m-panel>
-
         <form wire:submit.prevent="save">
             <x-input.model-text wire:model="common.vname"/>
-            <x-input.model-text wire:model="desc" :label="'desc'"/>
-            <x-input.model-text wire:model="desc_1" :label="'desc 1'"/>
             <x-input.model-text wire:model="common.active_id"/>
             <x-button.save/>
         </form>
+
         <div>
             <x-input.model-text wire:model.live="getListForm.searches"/>
             @foreach($list as $row)
@@ -23,4 +21,5 @@
         </div>
         <x-modal.delete/>
     </x-forms.m-panel>
+
 </div>
