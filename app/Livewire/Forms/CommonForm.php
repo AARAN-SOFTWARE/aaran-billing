@@ -57,7 +57,7 @@ class CommonForm extends Form
         $this->vname = '';
         $this->active_id = 1;
         foreach ($extraFields as $key => $value) {
-            $this->$key = '';
+            $key = null;
         }
     }
 
