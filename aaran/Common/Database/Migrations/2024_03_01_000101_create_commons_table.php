@@ -11,6 +11,7 @@ return new class extends Migration {
 
             Schema::create('commons', function (Blueprint $table) {
                 $table->id();
+                $table->foreignId('tag_id')->nullable();
                 $table->string('vname')->unique();
                 $table->string('desc')->nullable();
                 $table->string('desc_1')->nullable();
