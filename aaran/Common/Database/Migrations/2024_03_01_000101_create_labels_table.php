@@ -9,11 +9,9 @@ return new class extends Migration {
     {
         if (Aaran\Aadmin\Src\Customise::hasCommon()) {
 
-            Schema::create('commons', function (Blueprint $table) {
+            Schema::create('labels', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname')->unique();
-                $table->string('desc')->nullable();
-                $table->string('desc_1')->nullable();
                 $table->smallInteger('active_id')->nullable();
             });
         }
@@ -21,6 +19,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('commons');
+        Schema::dropIfExists('labels');
     }
 };
