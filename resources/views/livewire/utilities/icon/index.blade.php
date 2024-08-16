@@ -5,9 +5,9 @@
     <x-forms.m-panel>
 
         {{--<----row-1----->--}}
+        <x-icons.search-new/>
         <div class="bg-white">
             <div class="lg:grid lg:grid-cols-12 gap-2 md:grid md:grid-cols-8">
-
                 @foreach($list as $row)
                     <x-icons.utilities :icon="$row"/>
                 @endforeach

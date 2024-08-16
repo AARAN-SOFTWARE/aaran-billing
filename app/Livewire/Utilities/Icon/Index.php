@@ -32,6 +32,12 @@ class Index extends Component
             'exclamation-circle',
             'information-circle',
             'x-circle',
+            'arrow-down-circle',
+            'arrow-up-circle',
+            'u-turn-down',
+            'u-turn-up',
+            'u-turn-left',
+            'u-turn-right',
             'backward',
             'clipboard-document',
             'wifi',
@@ -94,9 +100,7 @@ class Index extends Component
             'user-group',
             'dashboard-outline',
             'mail',
-            'u-turn-left',
 
-            'u-turn-right',
             'bug-ant',
             'link',
             'apple',
@@ -150,7 +154,8 @@ class Index extends Component
             'image-user',
             'image-circle',
             'user-pen',
-            'crown'
+            'crown',
+            'pencil-bar',
 
 
         ]);
@@ -199,8 +204,15 @@ class Index extends Component
             'microphone',
             'megaphone',
             'pencil',
+            'cmp1',
+            'dashboard',
+            'git-new',
+            'fb-round',
+            'back-space1',
+
             'ascend',
             'descend',
+
 
 
         ]);
