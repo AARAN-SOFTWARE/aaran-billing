@@ -2,37 +2,47 @@
     <x-slot name="header">Labels</x-slot>
 
     <x-forms.m-panel>
-        <form wire:submit.prevent="save" class="flex gap-3">
-            <x-input.model-text wire:model="common.vname" :label="'Name'"/>
-            <x-input.model-text wire:model="common.active_id" :label="'Active_id'"/>
-            <x-button.save/>
-        </form>
 
-        <div>
-            <x-icons.search-new wire:model.live="getListForm.searches" />
-            <x-table.caption :caption="'Label'">
-                {{$list->count()}}
-            </x-table.caption>
-            <x-table.form>
-                <x-slot:table_header name="table_header" class="bg-green-600">
-                    <x-table.header-serial width="20%"/>
-                    <x-table.header-text wire:click.prevent="sortBy('vname')" fill="ascend" display="block">Common Name</x-table.header-text>
-                    <x-table.header-text>Status</x-table.header-text>
-                    <x-table.header-action/>
-                </x-slot:table_header>
-                <x-slot:table_body name="table_body">
-                    @foreach($list as $index=>$row)
-                        <x-table.row>
-                            <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                            <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
-                            <x-table.cell-status active="{{$row->active_id}}"/>
-                            <x-table.cell-action id="{{$row->id}}"/>
-                        </x-table.row>
-                    @endforeach
-                </x-slot:table_body>
-            </x-table.form>
-        </div>
+        <!-- Top Controls --------------------------------------------------------------------------------------------->
+        <x-forms.top-controls :show-filters="$showFilters"/>
+
+        <!-- Table Caption -------------------------------------------------------------------------------------------->
+        <x-table.caption :caption="'Labels'">
+            {{$list->count()}}
+        </x-table.caption>
+
+        <!-- Table Data ----------------------------------------------------------------------------------------------->
+        <x-table.form>
+
+            <x-slot:table_header>
+                <x-table.header-serial/>
+                <x-table.header-text wire:click.prevent="sortBy('vname')"  sortIcon="{{$getListForm->sortAsc}}">
+                    Name
+                </x-table.header-text>
+                <x-table.header-status/>
+                <x-table.header-action/>
+            </x-slot:table_header>
+
+            <x-slot:table_body>
+                @foreach($list as $index=>$row)
+                    <x-table.row>
+                        <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
+                        <x-table.cell-status active="{{$row->active_id}}"/>
+                        <x-table.cell-action id="{{$row->id}}"/>
+                    </x-table.row>
+                @endforeach
+            </x-slot:table_body>
+
+        </x-table.form>
+
+        <!-- Delete Modal --------------------------------------------------------------------------------------------->
         <x-modal.delete/>
-    </x-forms.m-panel>
 
+        <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
+        <x-forms.create :id="$common->vid">
+            <x-input.model-text wire:model="vname" :label="'City Name'"/>
+        </x-forms.create>
+
+    </x-forms.m-panel>
 </div>

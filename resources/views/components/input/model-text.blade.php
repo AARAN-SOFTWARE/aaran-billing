@@ -9,4 +9,7 @@
     <input id="{{$label}}" autocomplete="off" {{ $attributes }}
     value="{{ old('label') }}" class="w-full rounded-lg"
     />
+    @error('vname')
+    <span class="text-red-500">{{  $message }}</span>
+    @enderror
 </div>
