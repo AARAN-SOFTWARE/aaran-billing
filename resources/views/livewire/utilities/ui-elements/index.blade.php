@@ -6,13 +6,11 @@
     <x-web.uielements.buttons />
     <x-web.uielements.cards />
     <x-web.uielements.extra />
-
     <x-web.uielements.form />
 
 
 
 
     <div class="py-12 flex justify-end">
-        <x-pagination.ellipsis/>
     </div>
 </div>

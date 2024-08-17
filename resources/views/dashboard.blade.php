@@ -7,7 +7,7 @@
 
     <x-web.dashboard.greetings />
 
-    <div class="py-12">
+    <div class="py-4">
         <div class="bg-white overflow-hidden">
             <x-jet.welcome/>
         </div>

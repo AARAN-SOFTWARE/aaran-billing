@@ -20,30 +20,6 @@
                 label: 'Bentley',
                 value: 'Bentley'
             },
-            {
-                label: 'BMW',
-                value: 'BMW'
-            },
-            {
-                label: 'Bugatti',
-                value: 'Bugatti'
-            },
-            {
-                label: 'Buick',
-                value: 'Buick'
-            },
-            {
-                label: 'Cadillac',
-                value: 'Cadillac'
-            },
-            {
-                label: 'Chevrolet',
-                value: 'Chevrolet'
-            },
-            {
-                label: 'Chrysler',
-                value: 'Chrysler'
-            }
         ],
         options: [],
         isOpen: false,

@@ -3,4 +3,6 @@
 
     <div>Test Here</div>
 
+    <x-combobox.search />
+
 </div>
