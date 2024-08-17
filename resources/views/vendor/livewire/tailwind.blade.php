@@ -18,7 +18,7 @@
         <div class=" md:w-full md:flex md:flex-row md:relative md:items-center md:justify-evenly hidden">
             <button wire:click="previousPage('{{ $paginator->getPageName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}"
                     dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
-                    class="inline-flex gap-4 border border-gray-300 px-4 py-2 rounded-md text-sm">
+                    class="inline-flex gap-4 border border-gray-300 px-4 py-2 rounded-md text-sm hover:bg-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                      stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"/>
@@ -50,7 +50,7 @@
                                     <button type="button"
                                             wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
                                             x-on:click="{{ $scrollIntoViewJsSnippet }}"
-                                            class="px-4" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
+                                            class="px-4 mx-0.5 rounded-md hover:bg-gray-200" aria-label="{{ __('Go to page :page', ['page' => $page]) }}" >
                                         {{ $page }}
                                     </button>
                                 @endif
@@ -62,7 +62,7 @@
 
             <button wire:click="nextPage('{{ $paginator->getPageName() }}')"  x-on:click="{{ $scrollIntoViewJsSnippet }}"
                     dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
-                    class="absolute right-0 inline-flex gap-4 border border-gray-300 px-4 py-2 rounded-md text-sm">
+                    class="absolute right-0 inline-flex gap-4 border border-gray-300 px-4 py-2 rounded-md text-sm hover:bg-gray-100">
                 <span>Next</span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                      stroke="currentColor" class="size-5">
