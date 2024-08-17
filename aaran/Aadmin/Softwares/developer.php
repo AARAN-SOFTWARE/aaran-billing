@@ -5,6 +5,7 @@ use Aaran\Aadmin\Src\Customise;
 return [
 
     'customise' => [
-        Customise::common()
+        Customise::common(),
+        Customise::master()
     ],
 ];

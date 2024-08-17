@@ -25,6 +25,17 @@ class Customise
     {
         return 'common';
     }
+
+    public static function hasMAster(): bool
+    {
+        return static::enabled(static::master());
+    }
+
+    public static function master(): string
+    {
+        return 'master';
+    }
+
     #endregion
 
 }
