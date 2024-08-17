@@ -6,9 +6,9 @@
     </x-slot>
     <x-slot name="footer">
         <div class="gap-5">
-            <x-button.secondary wire:click.prevent="$set('showDeleteModal', false)">Cancel</x-button.secondary>
+            <x-button.cancel wire:click.prevent="$set('showDeleteModal', false)">Cancel</x-button.cancel>
 
-            <x-button.primary wire:click.prevent="trashData">Delete</x-button.primary>
+            <x-button.danger wire:click.prevent="trashData">Delete</x-button.danger>
         </div>
     </x-slot>
 </x-modal.confirmation>

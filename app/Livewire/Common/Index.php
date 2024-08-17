@@ -23,7 +23,7 @@ class Index extends Component
                 'desc_1'=>$this->desc_1,
             ];
             $this->common->save($Common,$extraFields);
-
+            $this->clearFields();
             $message = "Saved";
         } else {
             $Common = Common::find($this->common->vid);
@@ -33,6 +33,7 @@ class Index extends Component
                 'desc_1'=>$this->desc_1,
             ];
             $this->common->edit($Common,$extraFields);
+            $this->clearFields();
             $message = "Updated";
         }
         $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
@@ -51,6 +52,16 @@ class Index extends Component
             return $Common;
         }
         return null;
+    }
+
+    public function clearFields():void
+    {
+        $this->common->vid = '';
+        $this->common->vname = '';
+        $this->common->active_id = '1';
+        $this->desc = '';
+        $this->desc_1 = '';
+        $this->label_id = '';
     }
 
     public function getRoute()
