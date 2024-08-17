@@ -17,13 +17,10 @@
             {{$table_body}}
         @endif
         </tbody>
-
     </table>
-
-</div>
-
-<div class="py-2">
-    @if(isset($table_pagination))
-        {{$table_pagination}}
-    @endif
+{{--    <div class="py-2">--}}
+{{--        @if(isset($table_pagination))--}}
+{{--            {{$table_pagination}}--}}
+{{--        @endif--}}
+{{--    </div>--}}
 </div>

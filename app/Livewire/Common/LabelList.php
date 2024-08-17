@@ -5,10 +5,12 @@ namespace App\Livewire\Common;
 use Aaran\Common\Models\Label;
 use App\Livewire\Trait\CommonTraitNew;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class LabelList extends Component
 {
   use CommonTraitNew;
+  use WithPagination;
 
     public function getSave(): void
     {
