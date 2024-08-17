@@ -7,4 +7,5 @@ return [
 
     Aaran\Aadmin\Providers\AadminServiceProvider::class,
     Aaran\Common\Providers\CommonServiceProvider::class,
+    Aaran\Master\Providers\MasterServiceProvider::class,
 ];
