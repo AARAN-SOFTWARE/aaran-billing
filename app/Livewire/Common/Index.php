@@ -3,6 +3,7 @@
 namespace App\Livewire\Common;
 
 use Aaran\Common\Models\Common;
+use Aaran\Common\Models\Label;
 use App\Livewire\Trait\CommonTraitNew;
 use Livewire\Component;
 
@@ -12,6 +13,12 @@ class Index extends Component
     public $desc;
     public $desc_1;
     public $label_id;
+    public $labelData;
+
+    public function mount()
+    {
+        $this->labelData=Label::all();
+    }
 
     public function getSave(): void
     {
@@ -19,7 +26,7 @@ class Index extends Component
             $Common = new Common();
             $extraFields=[
                 'desc'=>$this->desc,
-                'label_id'=>1,
+                'label_id'=>$this->label_id,
                 'desc_1'=>$this->desc_1,
             ];
             $this->common->save($Common,$extraFields);
@@ -72,7 +79,7 @@ class Index extends Component
     {
         return view('livewire.common.index')->with([
             'list' => $this->getListForm->getList(Common::class,function ($query){
-                return $query->where('id','>','');
+                return $query->orderBy('label_id', 'asc' );
             }),
         ]);
     }

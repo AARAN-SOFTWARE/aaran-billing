@@ -27,7 +27,7 @@ trait CommonTraitNew
 
     public function create(): void
     {
-        $this->common->clearFields();
+        $this->clearFields();
         $this->showEditModal = true;
     }
 
@@ -42,12 +42,13 @@ trait CommonTraitNew
     {
         $message = $this->getSave();
         session()->flash('success', '"' . $this->common->vname . '"  has been' . $message . ' .');
-//        $this->showEditModal = false;
+        $this->clearFields();
+        $this->showEditModal = false;
     }
 
     public function edit($id): void
     {
-        $this->common->clearFields();
+        $this->clearFields();
         $this->getObj($id);
         $this->showEditModal = true;
     }
@@ -55,7 +56,7 @@ trait CommonTraitNew
     public function getDelete($id): void
     {
         if ($id) {
-            $this->common->clearFields();
+            $this->clearFields();
             $this->getObj($id);
             $this->showDeleteModal = true;
         }
@@ -66,8 +67,15 @@ trait CommonTraitNew
             $obj = $this->getObj($this->common->vid);
             $obj->delete();
             $this->showDeleteModal = false;
-            $this->common->clearFields();
+            $this->clearFields();
         }
+    }
+
+    public function clearFields():void
+    {
+        $this->common->vid='';
+        $this->common->vname = '';
+        $this->common->active_id = 1;
     }
 
 }

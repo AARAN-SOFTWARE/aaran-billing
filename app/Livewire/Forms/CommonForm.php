@@ -9,7 +9,7 @@ class CommonForm extends Form
 {
     #[Rule('required')]
     public $vname = '';
-    public $active_id = 1;
+    public bool $active_id = false;
     public $vid='';
 
     public function rules(): array
@@ -27,7 +27,7 @@ class CommonForm extends Form
             $model->$key = $value;
         }
         if ($model->save()) {
-            $this->clearFields($extraFields);
+
             return true;
         }
 
@@ -45,20 +45,12 @@ class CommonForm extends Form
         }
 
         if ($model->save()) {
-            $this->clearFields($extraFields);
             return true;
         }
 
         return false;
     }
 
-    public function clearFields($extraFields = [])
-    {
-        $this->vname = '';
-        $this->active_id = 1;
-        foreach ($extraFields as $key => $value) {
-            $key = null;
-        }
-    }
+
 
 }
