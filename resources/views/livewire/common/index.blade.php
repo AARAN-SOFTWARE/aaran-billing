@@ -5,33 +5,68 @@
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-        <x-table.caption :caption="'Common'">
-            {{$list->count()}}
-        </x-table.caption>
+        <div class="flex gap-3">
+            <div>
+{{--                <div class="ml-8">--}}
+{{--                    <div x-data="{show: false}">--}}
+{{--                        <a href="#" x-on:click.prevent="show = !show" class="relative z-10 border border-gray-600 rounded px-4 py-2 bg-white">--}}
+{{--                            <span class="inline-block">Select Vehicle Type</span>--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current inline-block w-4 h-4 transform transition duration-150" x-bind:class="{ 'rotate-180': show }">--}}
+{{--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />--}}
+{{--                            </svg>--}}
+{{--                        </a>--}}
+{{--                        <div x-show.transition="show" class="relative z-20 mt-1 flex w-64 flex-col px-4 py-8 whitespace-nowrap border border-gray-600 rounded bg-white">--}}
+{{--                          @foreach($labelData as $data)--}}
+{{--                            <div><input type="checkbox" name="type[]" wire:model.live="filter" value="{{$data->id}}" class="inline-block mr-2" />{{$data->vname}}</div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+            </div>
+            <x-table.caption :caption="'Common'">
+                {{$list->count()}}
+            </x-table.caption>
+        </div>
         <x-table.form>
             <x-slot:table_header name="table_header" class="bg-green-600">
                 <x-table.header-serial width="20%"/>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Common Name
+                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Common
+                    Name
                 </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Description
+                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
+                    Description
                 </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Description-2
+                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
+                    Description-2
                 </x-table.header-text>
                 <x-table.header-text>Status</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
             <x-slot:table_body name="table_body">
-                @foreach($list as $index=>$row)
+                @foreach($labelData as $data)
                     <x-table.row>
-                        <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->desc}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->desc_1}}</x-table.cell-text>
-                        <x-table.cell-status active="{{$row->active_id}}"/>
-                        <x-table.cell-action id="{{$row->id}}"/>
+                        <x-table.cell-text :colspan="'6'" left>
+                                <span class="ml-10 text-lg font-bold">
+                                    {{$data->vname}}
+                                </span>
+                        </x-table.cell-text>
+                        @foreach($list as $index=>$row)
+                            @if($data->id==$row->label_id)
+                                <x-table.row>
+                                    <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row->desc}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row->desc_1}}</x-table.cell-text>
+                                    <x-table.cell-status active="{{$row->active_id}}"/>
+                                    <x-table.cell-action id="{{$row->id}}"/>
+                                </x-table.row>
+                            @endif
+                        @endforeach
+
                     </x-table.row>
                 @endforeach
             </x-slot:table_body>
+
         </x-table.form>
         <x-modal.delete/>
 

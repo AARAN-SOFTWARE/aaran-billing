@@ -14,10 +14,16 @@ class Index extends Component
     public $desc_1;
     public $label_id;
     public $labelData;
+    public array $filter=[];
 
-    public function mount()
+    public function mount($id=null)
     {
-        $this->labelData=Label::all();
+        if ($id!=null) {
+            $this->filter[] = $id;
+        }
+        $this->labelData=Label::all()->when($this->filter,function ($query,$filter){
+            return $query->whereIn('id',$filter);
+        });
     }
 
     public function getSave(): void
@@ -79,7 +85,10 @@ class Index extends Component
     {
         return view('livewire.common.index')->with([
             'list' => $this->getListForm->getList(Common::class,function ($query){
-                return $query->orderBy('label_id', 'asc' );
+                return $query->orderBy('label_id', 'asc' )
+                    ->when($this->filter,function ($query,$filter){
+                        return $query->whereIn('label_id',$filter);
+                    });
             }),
         ]);
     }
