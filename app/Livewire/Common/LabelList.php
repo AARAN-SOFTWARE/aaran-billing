@@ -45,7 +45,8 @@ class LabelList extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.common.label-list')->with([
+        return view('livewire.common.label-list')
+            ->with([
             'list' => $this->getListForm->getList(Label::class,function ($query){
                 return $query->where('id','>','');
             }),

@@ -6,7 +6,7 @@
     'right' => false,
     'sortIcon' =>true,
 ])
-<th scope="col" {{$attributes->class(['p-4 border-r border-neutral-300 cursor-pointer', 'text-left'=>$left,
+<th scope="col" {{$attributes->class(['py-2 border-r border-neutral-300 cursor-pointer', 'text-left'=>$left,
     'text-center'=>$center,
     'text-right'=>$right,
     ])}}>

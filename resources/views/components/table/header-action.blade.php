@@ -1,3 +1,3 @@
-<th scope="col" class="p-4">
+<th scope="col">
     Action
 </th>

@@ -1,4 +1,4 @@
-<td class="p-4 border-r border-neutral-300">
+<td class="border-r border-neutral-300">
     <label for="user2335" class="flex justify-center items-center cursor-pointer text-neutral-600 dark:text-neutral-300 ">
         <div class="relative flex items-center">
             <input type="checkbox" id="user2335" class="before:content[''] peer relative size-4 cursor-pointer appearance-none overflow-hidden rounded border border-neutral-300 bg-white before:absolute before:inset-0 checked:border-black checked:before:bg-black focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-neutral-800 checked:focus:outline-black active:outline-offset-0 dark:border-neutral-700 dark:bg-neutral-900 dark:checked:border-white dark:checked:before:bg-white dark:focus:outline-neutral-300 dark:checked:focus:outline-white" :checked="checkAll" />
