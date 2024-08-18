@@ -24,13 +24,13 @@
                 </x-table.header-text>
 
                 @if($module->cols === 2)
-                    <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
+                    <x-table.header-text sortIcon="none">
                         Description
                     </x-table.header-text>
                 @endif
 
                 @if($module->cols === 3)
-                    <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
+                    <x-table.header-text sortIcon="none">
                         Description-2
                     </x-table.header-text>
                 @endif

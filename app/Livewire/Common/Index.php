@@ -33,8 +33,8 @@ class Index extends Component
         if ($this->common->vid == '') {
             $Common = new Common();
             $extraFields = [
+                'label_id' => $this->module->id,
                 'desc' => $this->desc,
-                'label_id' => $this->label_id,
                 'desc_1' => $this->desc_1,
             ];
             $this->common->save($Common, $extraFields);
@@ -43,8 +43,8 @@ class Index extends Component
         } else {
             $Common = Common::find($this->common->vid);
             $extraFields = [
+                'label_id' => $this->module->id,
                 'desc' => $this->desc,
-                'label_id' => $this->label_id,
                 'desc_1' => $this->desc_1,
             ];
             $this->common->edit($Common, $extraFields);
