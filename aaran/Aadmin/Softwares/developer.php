@@ -6,6 +6,7 @@ return [
 
     'customise' => [
         Customise::common(),
-        Customise::master()
+        Customise::master(),
+        Customise::entries(),
     ],
 ];

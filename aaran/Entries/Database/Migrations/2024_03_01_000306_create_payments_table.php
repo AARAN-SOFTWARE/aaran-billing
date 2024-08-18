@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasEntry()) {
+        if (Aaran\Aadmin\Src\Customise::hasEntries()) {
 
             Schema::create('payments', function (Blueprint $table) {
                 $table->id();
@@ -15,7 +15,7 @@ return new class extends Migration {
                 $table->string('acyear')->nullable();
                 $table->date('vdate');
                 $table->foreignId('contact_id')->references('id')->on('contacts');
-                $table->foreignId('receipttype_id')->references('id')->on('receipttypes');
+                $table->foreignId('receipttype_id')->references('id')->on('commons');
                 $table->string('chq_no')->nullable();
                 $table->string('chq_date')->nullable();
                 $table->foreignId('bank_id')->nullable();

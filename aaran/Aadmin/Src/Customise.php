@@ -6,9 +6,7 @@ class Customise
 {
     public static function enabled(string $feature): bool
     {
-
         return match (config('aadmin.app_code')) {
-
 
             config('software.DEVELOPER') => in_array($feature, config('developer.customise', [])),
 
@@ -26,6 +24,9 @@ class Customise
         return 'common';
     }
 
+    #endregion
+
+    #region[Master]
     public static function hasMAster(): bool
     {
         return static::enabled(static::master());
@@ -38,4 +39,16 @@ class Customise
 
     #endregion
 
+    #region[Entries]
+    public static function hasEntries(): bool
+    {
+        return static::enabled(static::entries());
+    }
+
+    public static function entries(): string
+    {
+        return 'entries';
+    }
+
+    #endregion
 }

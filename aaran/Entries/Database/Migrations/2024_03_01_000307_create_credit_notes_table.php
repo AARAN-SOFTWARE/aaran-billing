@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasCreditNote()) {
+        if (Aaran\Aadmin\Src\Customise::hasEntries()) {
 
             Schema::create('credit_notes', function (Blueprint $table) {
                 $table->id();
