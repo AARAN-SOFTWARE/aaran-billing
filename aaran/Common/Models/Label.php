@@ -3,6 +3,7 @@
 namespace Aaran\Common\Models;
 
 use Aaran\Common\Database\Factories\CommonFactory;
+use Aaran\Common\Database\Factories\LabelFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,8 +15,8 @@ class Label extends Model
 
     public $timestamps = false;
 
-    protected static function newFactory(): CommonFactory
+    protected static function newFactory(): LabelFactory
     {
-        return new CommonFactory();
+        return new LabelFactory();
     }
 }

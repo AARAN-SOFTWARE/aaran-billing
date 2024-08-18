@@ -2,7 +2,6 @@
 
 namespace Aaran\Common\Database\Factories;
 
-use Aaran\Common\Models\Common;
 use Aaran\Common\Models\Label;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

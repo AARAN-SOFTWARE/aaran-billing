@@ -33,11 +33,10 @@
                     </x-table.row>
                 @endforeach
             </x-slot:table_body>
-
         </x-table.form>
-
         <!-- Delete Modal --------------------------------------------------------------------------------------------->
         <x-modal.delete/>
+        <div class="pt-5">{{ $list->links() }}</div>
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$common->vid">
