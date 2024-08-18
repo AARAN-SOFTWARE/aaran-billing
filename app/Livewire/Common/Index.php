@@ -10,6 +10,7 @@ use Livewire\Component;
 class Index extends Component
 {
     use CommonTraitNew;
+
     public $desc;
     public $desc_1;
     public $label_id;
@@ -17,29 +18,29 @@ class Index extends Component
 
     public function mount()
     {
-        $this->labelData=Label::all();
+        $this->labelData = Label::all();
     }
 
     public function getSave(): void
     {
         if ($this->common->vid == '') {
             $Common = new Common();
-            $extraFields=[
-                'desc'=>$this->desc,
-                'label_id'=>$this->label_id,
-                'desc_1'=>$this->desc_1,
+            $extraFields = [
+                'desc' => $this->desc,
+                'label_id' => $this->label_id,
+                'desc_1' => $this->desc_1,
             ];
-            $this->common->save($Common,$extraFields);
+            $this->common->save($Common, $extraFields);
             $this->clearFields();
             $message = "Saved";
         } else {
             $Common = Common::find($this->common->vid);
-            $extraFields=[
-                'desc'=>$this->desc,
-                'label_id'=>$this->label_id,
-                'desc_1'=>$this->desc_1,
+            $extraFields = [
+                'desc' => $this->desc,
+                'label_id' => $this->label_id,
+                'desc_1' => $this->desc_1,
             ];
-            $this->common->edit($Common,$extraFields);
+            $this->common->edit($Common, $extraFields);
             $this->clearFields();
             $message = "Updated";
         }
@@ -61,7 +62,7 @@ class Index extends Component
         return null;
     }
 
-    public function clearFields():void
+    public function clearFields(): void
     {
         $this->common->vid = '';
         $this->common->vname = '';
@@ -75,11 +76,12 @@ class Index extends Component
     {
         return route('commons');
     }
+
     public function render()
     {
         return view('livewire.common.index')->with([
-            'list' => $this->getListForm->getList(Common::class,function ($query){
-                return $query->orderBy('label_id', 'asc' );
+            'list' => $this->getListForm->getList(Common::class, function ($query) {
+                return $query->orderBy('label_id', 'asc');
             }),
         ]);
     }
