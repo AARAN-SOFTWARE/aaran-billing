@@ -247,6 +247,20 @@ class Index extends Component
 
             'ascend',
             'descend',
+            'cube',
+            'equals',
+            'link',
+            'language',
+            'rss',
+            'signal',
+            'square',
+            'tag',
+            'user-circle',
+            'user-group',
+            'users',
+            'colour-swatch',
+            'window',
+            'trash',
 
 
 

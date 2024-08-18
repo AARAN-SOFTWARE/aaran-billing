@@ -30,6 +30,10 @@
                 <x-menu.sub.common/>
             @endif
 
+                @if(Aaran\Aadmin\Src\Customise::hasMaster())
+                    <x-menu.sub.master/>
+                @endif
+
 
             <x-menu.sub.logout/>
 
