@@ -4,7 +4,7 @@
     'right' => false,
      'colspan' => 0,
 ])
-<td colspan="{{$colspan}}" {{$attributes->class(['p-2 border-r border-neutral-300', 'text-left'=>$left,
+<td colspan="{{$colspan}}" {{$attributes->class(['px-3 py-2 border-r border-neutral-300', 'text-left'=>$left,
     'text-center'=>$center,
     'text-right'=>$right,])}}>
     {{$slot}}

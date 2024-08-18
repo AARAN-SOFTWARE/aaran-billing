@@ -12,6 +12,7 @@ return new class extends Migration {
             Schema::create('labels', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname')->unique();
+                $table->integer('cols')->nullable();
                 $table->smallInteger('active_id')->nullable();
             });
         }

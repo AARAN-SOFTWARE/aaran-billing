@@ -5,10 +5,15 @@ use Illuminate\Support\Facades\Route;
 //Common
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-    Route::get('/commons/{id?}', App\Livewire\Common\Index::class)->name('commons');
+    Route::get('/commons/{id?}', App\Livewire\Common\CommonList::class)->name('commons');
     Route::get('/labels', App\Livewire\Common\LabelList::class)->name('labels');
 
+    Route::get('/cities/{id}', App\Livewire\Common\Index::class)->name('cities');
+    Route::get('/states/{id}', App\Livewire\Common\Index::class)->name('states');
+
     //    Route::get('/cities', App\Livewire\Common\CityList::class)->name('cities');
+
+
 //    Route::get('/states', App\Livewire\Common\StateList::class)->name('states');
 //    Route::get('/pincodes', App\Livewire\Common\PincodeList::class)->name('pincodes');
 //    Route::get('/countries', App\Livewire\Common\CountryList::class)->name('countries');

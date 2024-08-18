@@ -5,27 +5,27 @@ namespace App\Livewire\Common;
 use Aaran\Common\Models\Common;
 use Aaran\Common\Models\Label;
 use App\Livewire\Trait\CommonTraitNew;
-use Illuminate\Support\Str;
 use Livewire\Component;
 
-class Index extends Component
+class CommonList extends Component
 {
     use CommonTraitNew;
 
-    public mixed $module;
-    public mixed $desc;
-    public mixed $desc_1;
-    public mixed $label_id;
-    public mixed $labelData;
-
+    public $desc;
+    public $desc_1;
+    public $label_id;
+    public $labelData;
     public array $filter = [];
 
-    public function mount($id)
+    public function mount($id = null)
     {
         if ($id != null) {
             $this->filter[] = $id;
-            $this->module = Label::find($id);
         }
+        $this->labelData = Label::all()->when($this->filter, function ($query, $filter) {
+            return $query->whereIn('id', $filter);
+        });
+
     }
 
     public function getSave(): void
@@ -86,7 +86,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.common.index')->with([
+        return view('livewire.common.common-list')->with([
             'list' => $this->getListForm->getList(Common::class, function ($query) {
                 return $query->orderBy('label_id', 'asc')
                     ->when($this->filter, function ($query, $filter) {
