@@ -19,7 +19,7 @@
                     Mobile
                 </x-table.header-text>
                 <x-table.header-text sortIcon="none">Contact Type</x-table.header-text>
-                <x-table.header-text sortIcon="none">GST No</x-table.header-text>
+                <x-table.header-text sortIcon="none">Contact Person</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
 
@@ -32,9 +32,9 @@
                         </x-table.cell-text>
                         <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->mobile}}</a>
                         </x-table.cell-text>
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->whatsapp}}</a>
-                        </x-table.cell-text>
                         <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_type}}</a>
+                        </x-table.cell-text>
+                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_person}}</a>
                         </x-table.cell-text>
                         <x-table.cell-text>
                             <div class="w-full flex justify-center gap-3">
