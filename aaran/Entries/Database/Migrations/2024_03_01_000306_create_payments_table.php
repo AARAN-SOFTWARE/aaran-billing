@@ -13,13 +13,14 @@ return new class extends Migration {
                 $table->id();
                 $table->foreignId('company_id')->references('id')->on('companies');
                 $table->string('acyear')->nullable();
+                $table->string('mode')->nullable();
                 $table->date('vdate');
                 $table->foreignId('contact_id')->references('id')->on('contacts');
                 $table->foreignId('receipttype_id')->references('id')->on('commons');
                 $table->string('chq_no')->nullable();
                 $table->string('chq_date')->nullable();
                 $table->foreignId('bank_id')->nullable();
-                $table->decimal('payment_amount', 11, 2);
+                $table->decimal('amount', 11, 2);
                 $table->string('active_id', 10)->nullable();
                 $table->timestamps();
             });

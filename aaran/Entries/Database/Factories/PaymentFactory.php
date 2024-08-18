@@ -2,8 +2,7 @@
 
 namespace Aaran\Entries\Database\Factories;
 
-use Aaran\Common\Models\Bank;
-use Aaran\Common\Models\Receipttype;
+use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Payment;
 use Aaran\Master\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -15,19 +14,20 @@ class PaymentFactory extends Factory
 
     public function definition(): array
     {
-        $contact=Contact::pluck('id');
-        $receiptType=Receipttype::pluck('id');
-        $bank=Bank::pluck('id');
+        $contact = Contact::pluck('id');
+        $receiptType = Common::pluck('id')->where('id', '=', 1);
+        $bank = Common::pluck('id')->where('id', '=', 1);
         return [
             'company_id' => 1,
             'acyear' => 8,
             'vdate' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
+            'mode' => 'receipt',
             'contact_id' => $contact->random(),
             'receipttype_id' => $receiptType->random(),
-            'chq_no'=>$this->faker->randomNumber(),
+            'chq_no' => $this->faker->randomNumber(),
             'chq_date' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
-            'bank_id'=> $bank->random(),
-            'payment_amount'=>$this->faker->numberBetween(1,50000),
+            'bank_id' => $bank->random(),
+            'payment_amount' => $this->faker->numberBetween(1, 50000),
             'active_id' => 1,
         ];
     }

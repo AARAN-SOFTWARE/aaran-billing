@@ -51,4 +51,30 @@ class Customise
     }
 
     #endregion
+
+    #region[Blog]
+    public static function hasBlog(): bool
+    {
+        return static::enabled(static::blog());
+    }
+
+    public static function blog(): string
+    {
+        return 'blog';
+    }
+
+    #endregion
+
+    #region[Task Manger]
+    public static function hasTaskManager(): bool
+    {
+        return static::enabled(static::taskManager());
+    }
+
+    public static function taskManager(): string
+    {
+        return 'taskManager';
+    }
+
+    #endregion
 }
