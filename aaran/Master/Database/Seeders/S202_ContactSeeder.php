@@ -4,11 +4,8 @@ namespace Aaran\Master\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class ContactDetailSeeder extends Seeder
+class S202_ContactSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         //

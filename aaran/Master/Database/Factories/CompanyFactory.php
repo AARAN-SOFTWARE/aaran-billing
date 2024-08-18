@@ -2,12 +2,12 @@
 
 namespace Aaran\Master\Database\Factories;
 
-use Aaran\Master\Models\Product;
+use Aaran\Master\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductFactory extends Factory
+class CompanyFactory extends Factory
 {
-    protected $model = Product::class;
+    protected $model = Company::class;
     public function definition(): array
     {
         return [
