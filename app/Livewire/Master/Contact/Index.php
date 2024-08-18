@@ -12,7 +12,7 @@ class Index extends Component
 {
     use CommonTraitNew;
 
-    public function create():void
+    public function create(): void
     {
         $this->redirect(route('contacts.upsert', ['0']));
     }
@@ -29,7 +29,7 @@ class Index extends Component
 
     public function trashData(): void
     {
-        $obj= $this->getObj($this->common->vid);
+        $obj = $this->getObj($this->common->vid);
         DB::table('contact_details')->where('contact_id', '=', $this->common->vid)->delete();
         $obj->delete();
         $this->showDeleteModal = false;
@@ -38,8 +38,8 @@ class Index extends Component
     public function render()
     {
         return view('livewire.master.contact.index')->with([
-            'list' => $this->getListForm->getList(Contact::class,function ($query){
-                return $query->where('id','>', '' );
+            'list' => $this->getListForm->getList(Contact::class, function ($query) {
+                return $query->where('id', '>', '');
             }),
         ]);
     }

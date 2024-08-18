@@ -4,7 +4,7 @@
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <x-forms.top-controls :show-filters="$showFilters"/>
         <!-- Top Controls --------------------------------------------------------------------------------------------->
-        <x-table.caption :caption="'Common'">
+        <x-table.caption :caption="'Contacts'">
             {{$list->count()}}
         </x-table.caption>
 
@@ -12,40 +12,44 @@
 
             <x-slot:table_header name="table_header" class="bg-green-600">
                 <x-table.header-serial width="20%"/>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Common
+                <x-table.header-text wire:click="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
                     Name
                 </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
+                <x-table.header-text wire:click="sortBy('mobile')" sortIcon="{{$getListForm->sortAsc}}">
                     Mobile
                 </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
-                    Whatsapp
-                </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
-                    Contact Type
-                </x-table.header-text>
+                <x-table.header-text sortIcon="none">Contact Type</x-table.header-text>
+                <x-table.header-text sortIcon="none">GST No</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
 
             <x-slot:table_body name="table_body">
                 @foreach($list as $index=>$row)
                     <x-table.row>
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$index+1}}</a></x-table.cell-text>
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->vname}}</a></x-table.cell-text>
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->mobile}}</a></x-table.cell-text>
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->whatsapp}}</a></x-table.cell-text>
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_type}}</a></x-table.cell-text>
+                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$index+1}}</a>
+                        </x-table.cell-text>
+                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->vname}}</a>
+                        </x-table.cell-text>
+                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->mobile}}</a>
+                        </x-table.cell-text>
+                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->whatsapp}}</a>
+                        </x-table.cell-text>
+                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_type}}</a>
+                        </x-table.cell-text>
                         <x-table.cell-text>
                             <div class="w-full flex justify-center gap-3">
                                 <div class="group inline-block relative cursor-pointer max-w-fit min-w-fit">
                                     <a href="{{route('contacts.upsert',[$row->id])}}"
                                        class="flex text-gray-600 truncate text-xl text-center">
-                                        <div class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
+                                        <div
+                                            class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
                                             <div class="flex flex-col justify-start items-center -translate-y-full">
-                                                <div class="bg-blue-500  shadow-md text-white rounded-lg py-1 px-3 cursor-default text-base">
+                                                <div
+                                                    class="bg-blue-500  shadow-md text-white rounded-lg py-1 px-3 cursor-default text-base">
                                                     Edit
                                                 </div>
-                                                <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-blue-500 -mt-[1px]"></div>
+                                                <div
+                                                    class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-blue-500 -mt-[1px]"></div>
                                             </div>
                                         </div>
                                         <x-button.link>&nbsp;
@@ -59,12 +63,15 @@
                                 </div>
                                 <div class="group inline-block relative cursor-pointer max-w-fit min-w-fit">
                                     <x-button.link wire:click="getDelete({{$row->id}})">&nbsp;
-                                        <div class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
+                                        <div
+                                            class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
                                             <div class="flex flex-col justify-start items-center -translate-y-full">
-                                                <div class="bg-red-500  shadow-md text-white rounded-lg py-1 px-3 cursor-default text-base">
+                                                <div
+                                                    class="bg-red-500  shadow-md text-white rounded-lg py-1 px-3 cursor-default text-base">
                                                     delete
                                                 </div>
-                                                <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-red-500 -mt-[1px]"></div>
+                                                <div
+                                                    class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-red-500 -mt-[1px]"></div>
                                             </div>
                                         </div>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
