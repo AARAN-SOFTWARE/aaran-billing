@@ -52,31 +52,24 @@
 
         <div class="flex space-x-6">
             <ul x-ref="slider" @scroll="updateCurrentSlide"
-                class="flex w-full md:h-screen h-96 overflow-x-hidden snap-x snap-mandatory">
+                class="flex w-full md:h-screen h-80 overflow-x-hidden snap-x snap-mandatory">
 
                 @if($list)
                     @forelse($list as $row)
-                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start animate__animated">
+                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start relative">
 
                             <div style="background-image: url('/../../../storage/images/{{$row->bg_image}}');"
-                                 class="w-full md:h-screen h-96 bg-cover bg-no-repeat mx-auto  flex-col flex justify-center relative">
-
+                                 class=" w-full md:h-screen h-80 bg-cover bg-no-repeat mx-auto flex-col opacity-80 flex justify-center relative">
+                            </div>
+                            <div
+                                class="absolute bottom-56 left-56 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
 
                                 <div
-                                    class=" w-auto h-10/12 flex-col text-white font-roboto p-5 my-5 border-l-[16px] border-white px-10 absolute md:left-80 left-20 ">
+                                    class=" md:text-9xl text-xl capitalize drop-shadow-lg">{{$row->vname}}</div>
 
-                                    <div
-                                        class=" md:text-9xl text-xl  ml-10  animate__animated wow animate__bounceInUp capitalize drop-shadow-lg">{{$row->vname}}</div>
-
-                                    {{--                                    <div--}}
-                                    {{--                                        class="md:text-6xl mt-3 text-justify tracking-wider drop-shadow-lg ml-10
-                                    animate__animated wow animate__slideInLeft capitalize">{!! $row->description !!}</div>--}}
-                                    <div
-                                        class="text-md mt-3 text-white ml-10 drop-shadow-lg bg-black/10 ">{{$row->created_at}}</div>
-                                </div>
-
+                                <div
+                                    class="text-md mt-3 text-white">{{$row->created_at}}</div>
                             </div>
-
                         </li>
                     @empty
                         <div>&nbsp;</div>
@@ -112,7 +105,7 @@
                 <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">
                     <button @click="goToSlide(index)"
                             :class="{'bg-gray-500': currentSlide === index, 'bg-bubble': currentSlide !== index}"
-                            class="w-3 h-1 rounded-full lg:w-3 lg:h-3 hover:bg-orange-400 focus:outline-none"></button>
+                            class="w-3 h-1 rounded-full lg:w-3 lg:h-3 hover:bg-orange-400 bg-gray-400 focus:outline-none"></button>
                 </template>
             </div>
         </div>
