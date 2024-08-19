@@ -733,6 +733,29 @@
             <line x1="7" x2="7.01" y1="7" y2="7"/>
             @break
 
+        @case('r-turn-down')
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"/>
+            @break
+
+        @case('right-arrow')
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+            @break
+
+        @case('r-turn-up')
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="m16.49 12 3.75-3.751m0 0-3.75-3.75m3.75 3.75H3.74V19.5"/>
+            @break
+
+        @case('chevrons-double-r')
+            <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"/>
+            @break
+
+        @case('forward')
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z"/>
+            @break
+
         @default
             Default case...
 

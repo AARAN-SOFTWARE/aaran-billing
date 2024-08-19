@@ -44,9 +44,10 @@
 
                 @foreach($list as $index=>$row)
                     <x-table.row>
+
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
-                        <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
+                       <x-table.cell-text left> <span class="capitalize">{{$row->vname}}</span></x-table.cell-text>
 
                         @if($module->cols === 2)
                             <x-table.cell-text>{{$row->desc}}</x-table.cell-text>

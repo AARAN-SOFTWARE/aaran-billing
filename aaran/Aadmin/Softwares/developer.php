@@ -9,5 +9,6 @@ return [
         Customise::master(),
         Customise::entries(),
         Customise::core(),
+        Customise::blog(),
     ],
 ];

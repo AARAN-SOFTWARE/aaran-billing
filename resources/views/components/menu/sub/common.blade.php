@@ -7,7 +7,7 @@
                                 text-gray-500 hover:text-gray-200 border-l-4 border-transparent hover:border-blue-500 pr-3">
 
                         <span class="inline-flex justify-center items-center ml-4">
-                            <x-icons.icon :icon="'database'" class="w-5 h-auto block"/>
+                            <x-icons.icon-fill :iconfill="'home'" class="w-5 h-auto block" :colour="'#656d7b'"/>
 
                             <span
                                 class="ml-3 flex font-semibold text-sm tracking-wide truncate my-4 font-sans uppercase">
