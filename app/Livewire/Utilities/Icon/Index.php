@@ -156,6 +156,12 @@ class Index extends Component
             'user-pen',
             'crown',
             'pencil-bar',
+            'tag',
+            'r-turn-down',
+            'right-arrow',
+            'r-turn-up',
+            'chevrons-double-r',
+            'forward',
 
 
         ]);
@@ -251,6 +257,7 @@ class Index extends Component
             'equals',
             'link',
             'language',
+            'news-paper',
             'rss',
             'signal',
             'square',
@@ -259,6 +266,7 @@ class Index extends Component
             'user-group',
             'users',
             'colour-swatch',
+            'wifi',
             'window',
             'trash',
 

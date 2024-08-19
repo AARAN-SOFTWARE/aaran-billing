@@ -30,28 +30,30 @@ class Index extends Component
 
     public function getSave(): void
     {
-        if ($this->common->vid == '') {
-            $Common = new Common();
-            $extraFields = [
-                'label_id' => $this->module->id,
-                'desc' => $this->desc,
-                'desc_1' => $this->desc_1,
-            ];
-            $this->common->save($Common, $extraFields);
-            $this->clearFields();
-            $message = "Saved";
-        } else {
-            $Common = Common::find($this->common->vid);
-            $extraFields = [
-                'label_id' => $this->module->id,
-                'desc' => $this->desc,
-                'desc_1' => $this->desc_1,
-            ];
-            $this->common->edit($Common, $extraFields);
-            $this->clearFields();
-            $message = "Updated";
+        if ($this->common->vname != '') {
+            if ($this->common->vid == '') {
+                $Common = new Common();
+                $extraFields = [
+                    'label_id' => $this->module->id,
+                    'desc' => $this->desc,
+                    'desc_1' => $this->desc_1,
+                ];
+                $this->common->save($Common, $extraFields);
+                $this->clearFields();
+                $message = "Saved";
+            } else {
+                $Common = Common::find($this->common->vid);
+                $extraFields = [
+                    'label_id' => $this->module->id,
+                    'desc' => $this->desc,
+                    'desc_1' => $this->desc_1,
+                ];
+                $this->common->edit($Common, $extraFields);
+                $this->clearFields();
+                $message = "Updated";
+            }
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
-        $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
     }
 
     public function getObj($id)
