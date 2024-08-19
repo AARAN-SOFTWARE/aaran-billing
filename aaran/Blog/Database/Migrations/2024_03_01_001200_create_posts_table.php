@@ -11,11 +11,12 @@ return new class extends Migration {
 
             Schema::create('posts', function (Blueprint $table) {
                 $table->id();
-                $table->string('title');
+                $table->string('vname');
                 $table->longText('body');
                 $table->longText('image')->nullable();
                 $table->foreignId('user_id')->references('id')->on('users');
-                $table->foreignId('company_id')->references('id')->on('companies');
+                $table->decimal('active_id')->nullable();
+//                $table->foreignId('company_id')->references('id')->on('companies');
                 $table->timestamps();
             });
 

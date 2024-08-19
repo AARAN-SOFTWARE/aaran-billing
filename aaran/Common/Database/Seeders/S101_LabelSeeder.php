@@ -69,5 +69,10 @@ class S101_LabelSeeder extends Seeder
             'cols' => 1,
             'active_id' => '1'
         ]);
+        Label::create([
+            'vname' => 'Receipt Type ',
+            'cols' => 1,
+            'active_id' => '1'
+        ]);
     }
 }
