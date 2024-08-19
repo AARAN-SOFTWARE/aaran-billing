@@ -8,6 +8,8 @@ return [
 
     'git_version' => '#539',
 
+    'current_acyear' => '2024_25',
+
     'app_type' => env('APP_TYPE', '1'),
 
     'app_code' => env('APP_CODE', '1'),
