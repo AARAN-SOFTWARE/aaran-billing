@@ -10,4 +10,6 @@ return [
     Aaran\Master\Providers\MasterServiceProvider::class,
     Aaran\Entries\Providers\EntriesServiceProvider::class,
     Aaran\Web\Providers\WebServiceProvider::class,
+
+    Aaran\Blog\Providers\BlogServiceProvider::class,
 ];
