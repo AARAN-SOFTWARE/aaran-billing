@@ -33,14 +33,10 @@ class Upsert extends Component
     public mixed $opening_balance = 0;
     public string $effective_from = '';
     public mixed $route;
-
     #endregion
 
     #region[Address Properties]
-    public $contact_detail_id = '';
-    public $address_type = '';
-    public $address_1 = '';
-    public $address_2 = '';
+    public $address_type;
     public $gstin = '';
     public $email = '';
 
@@ -80,8 +76,6 @@ class Upsert extends Component
             "pincode_name" => "",
             "address_1" => "",
             "address_2" => "",
-            "gstin" => "",
-            "email" => "",
         ];
         $this->city_name="";
         $this->state_name="";
@@ -429,6 +423,8 @@ class Upsert extends Component
                     'opening_balance' => $this->opening_balance?:0,
                     'effective_from' => $this->effective_from,
                     'active_id' => $this->active_id,
+                    'gstin'=>Str::upper($this->gstin),
+                    'email'=>$this->email,
                     'user_id' => Auth::id(),
                 ]);
                 $this->saveItem($obj->id);
@@ -447,6 +443,8 @@ class Upsert extends Component
                 $obj->msme_type = $this->msme_type;
                 $obj->opening_balance = $this->opening_balance?:0;
                 $obj->effective_from = $this->effective_from;
+                $obj->gstin=$this->gstin;
+                $obj->email=$this->email;
                 $obj->active_id = $this->active_id;
                 $obj->user_id = Auth::id();
                 $obj->save();
@@ -465,6 +463,8 @@ class Upsert extends Component
             $this->msme_type = '';
             $this->opening_balance = '';
             $this->effective_from = '';
+            $this->gstin='';
+            $this->email='';
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
@@ -484,8 +484,6 @@ class Upsert extends Component
                         'state_id' => $sub['state_id']?:4,
                         'pincode_id' => $sub['pincode_id']?:6,
                         'country_id' => $sub['country_id']?:7,
-                        'gstin' => Str::upper($sub['gstin']),
-                        'email' => $sub['email'],
                     ]);
                 } elseif ($sub['contact_detail_id'] != 0&&$sub['address_1']!="") {
                     $detail = ContactDetail::find($sub['contact_detail_id']);
@@ -496,8 +494,6 @@ class Upsert extends Component
                     $detail->state_id = $sub['state_id'];
                     $detail->pincode_id = $sub['pincode_id'];
                     $detail->country_id = $sub['country_id'];
-                    $detail->gstin = $sub['gstin'];
-                    $detail->email = $sub['email'];
                     $detail->save();
                 }
             }
@@ -511,8 +507,6 @@ class Upsert extends Component
                 'state_id' => 4,
                 'pincode_id' =>6,
                 'country_id' => 7,
-                'gstin' => '-',
-                'email' => '-',
             ]);
         }
     }
@@ -536,6 +530,8 @@ class Upsert extends Component
             $this->msme_type = $obj->msme_type;
             $this->opening_balance = $obj->opening_balance;
             $this->effective_from = $obj->effective_from;
+            $this->gstin=$obj->gstin;
+            $this->email=$obj->email;
             $this->active_id = $obj->active_id;
 
 
@@ -567,8 +563,6 @@ class Upsert extends Component
                         'country_id' => $data->country_id,
                         'address_1' => $data->address_1,
                         'address_2' => $data->address_2,
-                        'gstin' => $data->gstin,
-                        'email' => $data->email,
                     ];
                 });
             $this->itemList = $data->toArray();
@@ -591,8 +585,6 @@ class Upsert extends Component
                 "pincode_name"=>"",
                 "address_1"=>"-",
                 "address_2"=>"",
-                "gstin"=>"",
-                "email"=>"",
             ];
             $this->address_type = "Primary";
         }

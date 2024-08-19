@@ -21,6 +21,8 @@ return new class extends Migration {
                 $table->string('msme_type')->nullable();
                 $table->decimal('opening_balance')->nullable();
                 $table->string('effective_from')->nullable();
+                $table->string('gstin')->nullable();
+                $table->string('email')->nullable();
                 $table->string('active_id', 3)->nullable();
                 $table->foreignId('user_id')->references('id')->on('users');
                 $table->timestamps();
@@ -36,8 +38,6 @@ return new class extends Migration {
                 $table->foreignId('state_id')->references('id')->on('commons');
                 $table->foreignId('pincode_id')->references('id')->on('commons');
                 $table->foreignId('country_id')->references('id')->on('commons');
-                $table->string('gstin')->nullable();
-                $table->string('email')->nullable();
                 $table->timestamps();
             });
         }
