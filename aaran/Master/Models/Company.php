@@ -5,7 +5,7 @@ namespace Aaran\Master\Models;
 use Aaran\Common\Models\Common;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
 
 class Company extends Model
@@ -43,9 +43,11 @@ class Company extends Model
         ]);
     }
 
-    public function common(): BelongsTo
+    public function commons(): HasOne
     {
-        return $this->belongsTo(Common::class);
+        return $this->hasOne(Common::class, 'id', 'city_id')
+            ->orWhere('id', 'state_id')
+            ->orWhere('id', 'pincode_id');
     }
 
 }

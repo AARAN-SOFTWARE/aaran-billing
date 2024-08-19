@@ -77,4 +77,16 @@ class Customise
     }
 
     #endregion
+
+    #region[Core]
+    public static function hasCore(): bool
+    {
+        return static::enabled(static::core());
+    }
+
+    public static function core(): string
+    {
+        return 'core';
+    }
+    #endregion
 }

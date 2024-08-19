@@ -8,6 +8,7 @@ return [
         Customise::common(),
         Customise::master(),
         Customise::entries(),
+        Customise::core(),
         Customise::blog(),
     ],
 ];

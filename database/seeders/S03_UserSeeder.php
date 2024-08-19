@@ -16,8 +16,8 @@ class S03_UserSeeder extends Seeder
             'password' => bcrypt('kalarani'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-//            'tenant_id' => '1',
-//            'role_id' => '1'
+            'tenant_id' => '1',
+            'role_id' => '1'
         ]);
 
         User::create([
@@ -26,8 +26,8 @@ class S03_UserSeeder extends Seeder
             'password' => bcrypt('123456789'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-//            'tenant_id' => '1',
-//            'role_id' => '1'
+            'tenant_id' => '1',
+            'role_id' => '1'
         ]);
 
 
@@ -37,8 +37,8 @@ class S03_UserSeeder extends Seeder
             'password' => bcrypt('123456789'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-//            'tenant_id' => '1',
-//            'role_id' => '1'
+            'tenant_id' => '1',
+            'role_id' => '1'
         ]);
 
 //        User::create([
