@@ -15,7 +15,7 @@ return [
     'brand' => env('BRAND', 'AARAN'),
 
     'main_menu' => [
-        ['menu' => 'Home', 'link' => 'home'],
+        ['menu' => 'home', 'link' => 'home'],
         ['menu' => 'Gallery', 'link' => 'gallery'],
         ['menu' => 'News', 'link' => 'news'],
         ['menu' => 'Blog', 'link' => 'feed'],
