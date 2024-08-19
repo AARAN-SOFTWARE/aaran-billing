@@ -9,4 +9,5 @@ return [
     Aaran\Common\Providers\CommonServiceProvider::class,
     Aaran\Master\Providers\MasterServiceProvider::class,
     Aaran\Entries\Providers\EntriesServiceProvider::class,
+    Aaran\Web\Providers\WebServiceProvider::class,
 ];
