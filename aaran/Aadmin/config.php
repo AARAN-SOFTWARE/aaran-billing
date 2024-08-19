@@ -12,4 +12,14 @@ return [
 
     'app_code' => env('APP_CODE', '1'),
 
+    'brand' => env('BRAND', 'AARAN'),
+
+    'main_menu' => [
+        ['menu' => 'Home', 'link' => 'home'],
+        ['menu' => 'Gallery', 'link' => 'gallery'],
+        ['menu' => 'News', 'link' => 'news'],
+        ['menu' => 'Blog', 'link' => 'feed'],
+        ['menu' => 'About', 'link' => 'sportAbout'],
+        ['menu' => 'Contact', 'link' => 'sportContact'],
+    ]
 ];
