@@ -10,8 +10,9 @@ class GetListForm extends Form
 {
     public bool $sortAsc = true;
     public string $perPage = "25";
-    public string $activeRecord = "1";
+    public string $activeRecord = '1';
     public string $sortField = 'vname';
+    public string $searchField = 'vname';
 
     public string $searches = "";
 
@@ -39,7 +40,7 @@ class GetListForm extends Form
         }
 
         $query = $query->when($this->searches, function ($query, $search) {
-            return $query->where('vname', 'like', '%' . $search . '%');
+            return $query->where($this->searchField, 'like', '%' . $search . '%');
         })
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');

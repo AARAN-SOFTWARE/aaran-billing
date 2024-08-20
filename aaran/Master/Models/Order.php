@@ -19,7 +19,6 @@ class Order extends Model
         return empty($searches) ? static::query()
             : static::where('vname', 'like', '%' . $searches . '%');
     }
-
     protected static function newFactory():OrderFactory
     {
         return new OrderFactory();

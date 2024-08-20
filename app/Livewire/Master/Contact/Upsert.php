@@ -181,7 +181,7 @@ class Upsert extends Component
     {
         $this->cityCollection = $this->itemList[$this->openTab]['city_name']
             ? Common::search(trim($this->itemList[$this->openTab]['city_name'] ))->where('label_id','=','1')->get()
-            : Common::all()->where('label_id','=','1');
+            : Common::where('label_id','=','1')->get();
     }
     #endregion
 
@@ -247,7 +247,7 @@ class Upsert extends Component
     {
         $this->stateCollection =  $this->itemList[$this->openTab]['state_name']
             ? Common::search(trim($this->itemList[$this->openTab]['state_name'] ))->where('label_id','=','2')
-            ->get() : Common::all()->where('label_id','=','2');
+            ->get() : Common::where('label_id','=','2')->get();
     }
     #endregion
 
@@ -324,7 +324,7 @@ class Upsert extends Component
     {
         $this->pincodeCollection = $this->itemList[$this->openTab]['pincode_name']
             ? Common::search(trim($this->itemList[$this->openTab]['pincode_name'] ))->where('label_id','=','3')
-            ->get() : Common::all()->where('label_id','=','3');
+            ->get() : Common::where('label_id','=','3')->get();
     }
 
     #endregion
@@ -402,7 +402,7 @@ class Upsert extends Component
     {
         $this->countryCollection = $this->itemList[$this->openTab]['country_name']
             ? Common::search(trim($this->itemList[$this->openTab]['country_name'] ))->where('label_id','=','4')
-            ->get() : Common::all()->where('label_id','=','4');
+            ->get() : Common::where('label_id','=','4')->get();
     }
 
     #endregion
@@ -426,6 +426,7 @@ class Upsert extends Component
                     'gstin'=>Str::upper($this->gstin),
                     'email'=>$this->email,
                     'user_id' => Auth::id(),
+                    'company_id'=>session()->get('company_id'),
                 ]);
                 $this->saveItem($obj->id);
 
@@ -447,6 +448,7 @@ class Upsert extends Component
                 $obj->email=$this->email;
                 $obj->active_id = $this->active_id;
                 $obj->user_id = Auth::id();
+                $obj->company_id=session()->get('company_id');
                 $obj->save();
 
                 $this->saveItem($obj->id);

@@ -39,7 +39,7 @@ class Index extends Component
     {
         return view('livewire.master.contact.index')->with([
             'list' => $this->getListForm->getList(Contact::class, function ($query) {
-                return $query->where('id', '>', '');
+                return $query->where('company_id', '=',session()->get('company_id'));
             }),
         ]);
     }

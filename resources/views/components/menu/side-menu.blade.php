@@ -30,9 +30,13 @@
                 <x-menu.sub.common/>
             @endif
 
-                @if(Aaran\Aadmin\Src\Customise::hasMaster())
-                    <x-menu.sub.master/>
-                @endif
+            @if(Aaran\Aadmin\Src\Customise::hasMaster())
+                <x-menu.sub.master/>
+            @endif
+
+            @if(Aaran\Aadmin\Src\Customise::hasEntries())
+                <x-menu.sub.entries/>
+            @endif
 
 
             <x-menu.sub.logout/>
