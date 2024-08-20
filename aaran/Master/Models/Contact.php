@@ -18,6 +18,12 @@ class Contact extends Model
         return new ContactFactory();
     }
 
+    public static function search(string $searches)
+    {
+        return empty($searches) ? static::query()
+            : static::where('vname', 'like', '%' . $searches . '%');
+    }
+
     public function common(): BelongsTo
     {
         return $this->belongsTo(Common::class);

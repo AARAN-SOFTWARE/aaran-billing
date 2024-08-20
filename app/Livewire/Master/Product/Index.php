@@ -33,6 +33,7 @@ class Index extends Component
                     'gst_percent' => $this->gst_percent,
                     'quantity' => $this->quantity,
                     'user_id' => auth()->id(),
+                    'company_id' =>session()->get('company_id'),
                 ];
                 $this->common->save($Product, $extraFields);
                 $message = "Saved";
@@ -45,6 +46,7 @@ class Index extends Component
                     'gst_percent' => $this->gst_percent,
                     'quantity' => $this->quantity,
                     'user_id' => auth()->id(),
+                    'company_id' =>session()->get('company_id'),
                 ];
                 $this->common->edit($Product, $extraFields);
                 $message = "Updated";

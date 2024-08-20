@@ -34,7 +34,7 @@ trait CommonTraitNew
     public function resetFilters()
     {
         $this->getListForm->activeRecord='1';
-        $this->resetPage();
+        $this->getListForm->perPage='25';
         $this->showFilters = false;
     }
 
@@ -77,5 +77,4 @@ trait CommonTraitNew
         $this->common->vname = '';
         $this->common->active_id = 1;
     }
-
 }

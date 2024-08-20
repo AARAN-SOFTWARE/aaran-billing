@@ -19,6 +19,7 @@ return new class extends Migration {
                 $table->decimal('quantity',12,2)->nullable();
                 $table->string('active_id', 3)->nullable();
                 $table->foreignId('user_id')->references('id')->on('users');
+                $table->foreignId('company_id')->references('id')->on('companies');
                 $table->timestamps();
             });
         }
