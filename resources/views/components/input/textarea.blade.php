@@ -4,7 +4,7 @@
 <div class="max-w-sm w-full space-y-5">
     <!-- Floating Textarea -->
     <div class="relative">
-    <textarea id="hs-floating-textarea" class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600
+    <textarea {{$attributes}} id="hs-floating-textarea" class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600
     focus:pt-6
     focus:pb-2
     [&:not(:placeholder-shown)]:pt-6

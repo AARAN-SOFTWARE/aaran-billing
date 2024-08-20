@@ -14,19 +14,11 @@ class Index extends Component
     use WithFileUploads;
 
     #region[properties]
-
     public string $body;
     public $users;
     public $image;
     public $old_image;
-    public mixed $firstPost='';
     #endregion
-
-    public function Mount()
-    {
-        $this->firstPost = Post::where('id','=','1')->firstOrFail();
-//        dd($this->firstPost);
-    }
 
     #region[Get-Save]
     public function getSave(): void
@@ -63,7 +55,7 @@ class Index extends Component
             $Post = Post::find($id);
             $this->common->vid = $Post->id;
             $this->common->vname = $Post->vname;
-            $this->common->body = $Post->body;
+            $this->body = $Post->body;
             $this->common->active_id = $Post->active_id;
             $this->old_image = $Post->image;
             return $Post;
@@ -112,7 +104,6 @@ class Index extends Component
     #endregion
 
 
-
     #region[Render]
     public function getRoute()
     {
@@ -121,7 +112,10 @@ class Index extends Component
     public function render()
     {
         return view('livewire.blog.index')->with([
-            'list' => $this ->getListForm ->getList(Post::class),
+            'list' => $this ->getListForm ->getList(Post::class,function ($query){
+                return $query->latest();
+            }),
+            'firstPost'=>Post::latest()->take(1)->get(),
         ]);
     }
     #endregion
