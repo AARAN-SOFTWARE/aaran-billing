@@ -18,7 +18,7 @@
                 <span class="">Get it now</span>
             </button>
         </div>
-        <div class="animate__animated wow animate__backInRight" data-wow-duration="3s">
+        <div class="">
             <x-storyset.laptop />
         </div>
     </div>

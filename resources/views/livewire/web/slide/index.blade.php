@@ -30,9 +30,9 @@
                     Background Image
                 </x-table.header-text>
 
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Content
-                    Image
-                </x-table.header-text>
+                {{--                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Content--}}
+                {{--                    Image--}}
+                {{--                </x-table.header-text>--}}
 
                 <x-table.header-action/>
 
@@ -55,16 +55,16 @@
                                      alt=""/>
                             </div>
                         </x-table.cell-text>
-                        <x-table.cell-text>
-                            <div class="flex-shrink-0 h-12 w-12 rounded-xl mx-auto mt-2">
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->cont_image)}}"
-                                     alt="{{$row->cont_image}}"/>
-                            </div>
-                        </x-table.cell-text>
+                        {{--                        <x-table.cell-text>--}}
+                        {{--                            <div class="flex-shrink-0 h-12 w-12 rounded-xl mx-auto mt-2">--}}
+                        {{--                                <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->cont_image)}}"--}}
+                        {{--                                     alt="{{$row->cont_image}}"/>--}}
+                        {{--                            </div>--}}
+                        {{--                        </x-table.cell-text>--}}
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
                 @empty
-                    <x-table.cell-empty />
+                    <x-table.cell-empty/>
                 @endforelse
             </x-slot:table_body>
         </x-table.form>
@@ -135,57 +135,57 @@
 
                     <!-- Content Image------------------------------------------------------------------------->
 
-                    <div class="flex flex-row gap-6">
-                        <div class="flex">
+                    {{--                    <div class="flex flex-row gap-6">--}}
+                    {{--                        <div class="flex">--}}
 
-                            <label for="bg_image"
-                                   class="w-[10rem] text-zinc-500 tracking-wide py-2">Image</label>
+                    {{--                            <label for="bg_image"--}}
+                    {{--                                   class="w-[10rem] text-zinc-500 tracking-wide py-2">Image</label>--}}
 
-                            <div class="flex-shrink-0">
+                    {{--                            <div class="flex-shrink-0">--}}
 
-                                <div>
-                                    @if($cont_image)
-                                        <div class="flex-shrink-0 ">
-                                            <img class="h-24 w-full" src="{{ $cont_image->temporaryUrl() }}"
-                                                 alt="{{$cont_image?:''}}"/>
-                                        </div>
-                                    @endif
+                    {{--                                <div>--}}
+                    {{--                                    @if($cont_image)--}}
+                    {{--                                        <div class="flex-shrink-0 ">--}}
+                    {{--                                            <img class="h-24 w-full" src="{{ $cont_image->temporaryUrl() }}"--}}
+                    {{--                                                 alt="{{$cont_image?:''}}"/>--}}
+                    {{--                                        </div>--}}
+                    {{--                                    @endif--}}
 
-                                    @if(!$cont_image && isset($cont_image))
-                                        <img class="h-24 w-full"
-                                             src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_cont_image))}}"
-                                             alt="">
+                    {{--                                    @if(!$cont_image && isset($cont_image))--}}
+                    {{--                                        <img class="h-24 w-full"--}}
+                    {{--                                             src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_cont_image))}}"--}}
+                    {{--                                             alt="">--}}
 
-                                    @else
-                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
+                    {{--                                    @else--}}
+                    {{--                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>--}}
+                    {{--                                    @endif--}}
+                    {{--                                </div>--}}
+                    {{--                            </div>--}}
+                    {{--                        </div>--}}
 
-                        <div class="relative">
+                    {{--                        <div class="relative">--}}
 
-                            <div>
-                                <label for="cont_image"
-                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
-                                   justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2
-                                   mx-auto font-[sans-serif]">
-                                    <x-icons.icon icon="cloud-upload"
-                                                  class="w-8 h-auto block text-gray-400"/>
-                                    Upload Photo
+                    {{--                            <div>--}}
+                    {{--                                <label for="cont_image"--}}
+                    {{--                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center--}}
+                    {{--                                   justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2--}}
+                    {{--                                   mx-auto font-[sans-serif]">--}}
+                    {{--                                    <x-icons.icon icon="cloud-upload"--}}
+                    {{--                                                  class="w-8 h-auto block text-gray-400"/>--}}
+                    {{--                                    Upload Photo--}}
 
-                                    <input type="file" id='cont_image' wire:model="cont_image" class="hidden"/>
-                                    <p class="text-xs font-light text-gray-400 mt-2">PNG and JPG are
-                                        Allowed.</p>
-                                </label>
-                            </div>
+                    {{--                                    <input type="file" id='cont_image' wire:model="cont_image" class="hidden"/>--}}
+                    {{--                                    <p class="text-xs font-light text-gray-400 mt-2">PNG and JPG are--}}
+                    {{--                                        Allowed.</p>--}}
+                    {{--                                </label>--}}
+                    {{--                            </div>--}}
 
-                            <div wire:loading wire:target="cont_image" class="z-10 absolute top-6 left-12">
-                                <div class="w-14 h-14 rounded-full animate-spin
-                                                        border-y-4 border-dashed border-green-500 border-t-transparent"></div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--                            <div wire:loading wire:target="cont_image" class="z-10 absolute top-6 left-12">--}}
+                    {{--                                <div class="w-14 h-14 rounded-full animate-spin--}}
+                    {{--                                                        border-y-4 border-dashed border-green-500 border-t-transparent"></div>--}}
+                    {{--                            </div>--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
                 </div>
             </div>
         </x-forms.create>
