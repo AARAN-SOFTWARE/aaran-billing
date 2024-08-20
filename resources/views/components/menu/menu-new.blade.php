@@ -14,13 +14,13 @@
         <li><a href="{{route('home')}}"
                class="font-bold text-white underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-white dark:hover:text-white"
                aria-current="page">Home</a></li>
-        <li><a href="#"
+        <li><a href="{{route('about')}}"
                class="font-medium text-white underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">About</a>
         </li>
         <li><a href="#"
                class="font-medium text-white underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Blog</a>
         </li>
-        <li><a href="#"
+        <li><a href="{{route('contact')}}"
                class="font-medium text-white underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Contact</a>
         </li>
         @if (Route::has('login'))
@@ -37,7 +37,7 @@
                 </form>
             @else
                 <li><a href="{{route('login')}}"
-                       class="font-medium text-neutral-600 underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Login</a>
+                       class="font-semibold text-white underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Login</a>
                 </li>
             @endauth
            @endif
