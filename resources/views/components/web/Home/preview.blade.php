@@ -5,11 +5,11 @@
         </div>
         <div class="w-8/12 flex-col flex gap-6 justify-center">
             <div class="text-5xl border-b border-black pb-8 animate__animated wow animate__backInRight" data-wow-duration="2s">A growing library of more than 2 dozen demos</div>
-            <div class="text-md animate__animated wow animate__backInRight" data-wow-duration="2s">
+            <div class="text-md text-gray-400 animate__animated wow animate__backInRight" data-wow-duration="2s">
                 Our demos are one of a kind: we only offer full concept demos with multiple pages that show
                 whole projects, unlike others who only include a single page and call that a demo.
             </div>
-            <div class="text-md animate__animated wow animate__backInRight" data-wow-duration="2s">
+            <div class="text-md text-gray-400 animate__animated wow animate__backInRight" data-wow-duration="2s">
                 You can import them with a single click, they are easily adaptable to your needs and you can
                 chose from a variety of layouts and niche designs. In addition to that you can also use the
                 demo images used in our demo for your own project!

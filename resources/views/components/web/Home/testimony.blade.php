@@ -4,7 +4,7 @@
             <div class="text-5xl py-12 border-b border-black animate__animated wow animate__bounceInDown" data-wow-duration="3s">More than 100.000 users and the best rating on
                 Aaran InfoTech.
             </div>
-            <div class="text-lg text-gray-300 animate__animated wow bounceInDown" data-wow-duration="3s">
+            <div class="text-lg text-gray-400 animate__animated wow bounceInDown" data-wow-duration="3s">
                 Enfold is the best rated top seller on Themeforest. There is no other theme with that many sales that
                 has
                 an average rating of 4.85. Heck, you will be hard pressed to find ANY product on the web with that many

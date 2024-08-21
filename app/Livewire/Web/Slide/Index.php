@@ -25,6 +25,8 @@ class Index extends Component
     #region[Get-Save]
     public function getSave(): void
     {
+        $this->validate(['common.vname' => 'required|min:3|max:150']);
+        $this->validate(['description' => 'min:3|max:255']);
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
                 $Slides = new HomeSlide();
