@@ -101,6 +101,7 @@ class Index extends Component
     public function citySave($name)
     {
         $obj= Common::create([
+            'label_id'=>1,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -167,6 +168,17 @@ class Index extends Component
         $this->state_name = $v['name'];
         $this->stateTyped = false;
 
+    }
+
+    public function stateSave($name):void
+    {
+        $obj=Common::create([
+            'label_id'=>2,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v=['name'=>$name,'id'=>$obj->id];
+        $this->refreshState($v);
     }
 
     public function getStateList(): void

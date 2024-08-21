@@ -21,7 +21,7 @@ return new class extends Migration {
                 $table->foreignId('order_id')->references('id')->on('orders');
                 $table->foreignId('billing_id')->references('id')->on('contact_details');
                 $table->foreignId('shipping_id')->references('id')->on('contact_details');
-                $table->foreignId('style_id')->references('id')->on('commons');
+                $table->foreignId('style_id')->references('id')->on('styles');
                 $table->foreignId('despatch_id')->references('id')->on('commons');
                 $table->string('job_no')->nullable();
                 $table->foreignId('transport_id')->references('id')->on('commons');

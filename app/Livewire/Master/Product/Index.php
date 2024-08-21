@@ -13,11 +13,8 @@ class Index extends Component
     use CommonTraitNew;
 
     #region[Properties]
-    public $product_type;
-    public $common_id;
-    public $units;
-    public $gst_percent;
     public $quantity;
+    public $price;
     #endregion
 
     #region[Get-Save]
@@ -27,11 +24,12 @@ class Index extends Component
             if ($this->common->vid == '') {
                 $Product = new Product();
                 $extraFields = [
-                    'product_type' => $this->product_type,
-                    'common_id' => $this->common_id,
-                    'units' => $this->units,
-                    'gst_percent' => $this->gst_percent,
-                    'quantity' => $this->quantity,
+                    'producttype_id' => $this->producttype_id?:'39',
+                    'hsncode_id' => $this->hsncode_id?:'8',
+                    'unit_id' => $this->unit_id?:'43',
+                    'gstpercent_id' => $this->gstpercent_id?:'47',
+                    'initial_quantity' => $this->quantity?:'0',
+                    'initial_price' => $this->price?:'0',
                     'user_id' => auth()->id(),
                     'company_id' =>session()->get('company_id'),
                 ];
@@ -40,11 +38,12 @@ class Index extends Component
             } else {
                 $Product = Product::find($this->common->vid);
                 $extraFields = [
-                    'product_type' => $this->product_type,
-                    'common_id' => $this->common_id,
-                    'units' => $this->units,
-                    'gst_percent' => $this->gst_percent,
-                    'quantity' => $this->quantity,
+                    'producttype_id' => $this->producttype_id,
+                    'hsncode_id' => $this->hsncode_id,
+                    'unit_id' => $this->unit_id,
+                    'gstpercent_id' => $this->gstpercent_id,
+                    'initial_quantity' => $this->quantity,
+                    'initial_price' => $this->price,
                     'user_id' => auth()->id(),
                     'company_id' =>session()->get('company_id'),
                 ];
@@ -56,74 +55,285 @@ class Index extends Component
     }
     #endregion
 
-    #region[hsn-code]
+    #region[hsncode]
+    public $hsncode_id = '';
+    public $hsncode_name = '';
+    public Collection $hsncodeCollection;
+    public $highlightHsncode = 0;
+    public $hsncodeTyped = false;
 
-    public $common_no = '';
-    public Collection $commonCollection;
-    public $highlightCommon = 0;
-    public $commonTyped = false;
-
-    public function decrementCommon(): void
+    public function decrementHsncode(): void
     {
-        if ($this->highlightCommon === 0) {
-            $this->highlightCommon = count($this->commonCollection) - 1;
+        if ($this->highlightHsncode === 0) {
+            $this->highlightHsncode = count($this->hsncodeCollection) - 1;
             return;
         }
-        $this->highlightCommon--;
+        $this->highlightHsncode--;
     }
 
-    public function incrementCommon(): void
+    public function incrementHsncode(): void
     {
-        if ($this->highlightCommon === count($this->commonCollection) - 1) {
-            $this->highlightCommon = 0;
+        if ($this->highlightHsncode === count($this->hsncodeCollection) - 1) {
+            $this->highlightHsncode = 0;
             return;
         }
-        $this->highlightCommon++;
+        $this->highlightHsncode++;
     }
 
-    public function setCommon($name, $id): void
+    public function setHsncode($name, $id): void
     {
-        $this->common_no = $name;
-        $this->common_id = $id;
-        $this->getCommon();
+        $this->hsncode_name = $name;
+        $this->hsncode_id = $id;
+        $this->getHsncodeList();
     }
 
-    public function enterCommon(): void
+    public function enterHsncode(): void
     {
-        $obj = $this->commonCollection[$this->highlightCommon] ?? null;
+        $obj = $this->hsncodeCollection[$this->highlightHsncode] ?? null;
 
-        $this->common_no = '';
-        $this->commonCollection = Collection::empty();
-        $this->highlightCommon = 0;
+        $this->hsncode_name = '';
+        $this->hsncodeCollection = Collection::empty();
+        $this->highlightHsncode = 0;
 
-        $this->common_no = $obj['vname'] ?? '';;
-        $this->common_id = $obj['id'] ?? '';;
+        $this->hsncode_name = $obj['vname'] ?? '';
+        $this->hsncode_id = $obj['id'] ?? '';
     }
 
-    #[On('refresh-common')]
-    public function refreshCommon($v): void
+    public function refreshHsncode($v): void
     {
-        $this->common_id = $v['id'];
-        $this->common_no = $v['name'];
-        $this->commonTyped = false;
+        $this->hsncode_id = $v['id'];
+        $this->hsncode_name = $v['name'];
+        $this->hsncodeTyped = false;
     }
 
-    public function commonSave($name)
+    public function hsncodeSave($name)
     {
         $obj = Common::create([
+            'label_id' => 5,
             'vname' => $name,
             'active_id' => '1'
         ]);
         $v = ['name' => $name, 'id' => $obj->id];
-        $this->refreshCommon($v);
+        $this->refreshHsncode($v);
     }
 
-    public function getCommonList(): void
+    public function getHsncodeList(): void
     {
-        $this->commonCollection = $this->common_no ? Common::search(trim($this->common_no))->where('label_id', '=', 5)->get() :
-            Common::all()->where('label_id', '=', 5);
+        $this->hsncodeCollection = $this->hsncode_name ?
+            Common::search(trim($this->hsncode_name))->where('label_id', '=', '5')->get() :
+            Common::where('label_id', '=', '5')->get();
     }
-    #endregion
+#endregion
+
+    #region[producttype]
+    public $producttype_id = '';
+    public $producttype_name = '';
+    public Collection $producttypeCollection;
+    public $highlightProductType = 0;
+    public $producttypeTyped = false;
+
+    public function decrementProductType(): void
+    {
+        if ($this->highlightProductType === 0) {
+            $this->highlightProductType = count($this->producttypeCollection) - 1;
+            return;
+        }
+        $this->highlightProductType--;
+    }
+
+    public function incrementProductType(): void
+    {
+        if ($this->highlightProductType === count($this->producttypeCollection) - 1) {
+            $this->highlightProductType = 0;
+            return;
+        }
+        $this->highlightProductType++;
+    }
+
+    public function setProductType($name, $id): void
+    {
+        $this->producttype_name = $name;
+        $this->producttype_id = $id;
+        $this->getProductTypeList();
+    }
+
+    public function enterProductType(): void
+    {
+        $obj = $this->producttypeCollection[$this->highlightProductType] ?? null;
+
+        $this->producttype_name = '';
+        $this->producttypeCollection = Collection::empty();
+        $this->highlightProductType = 0;
+
+        $this->producttype_name = $obj['vname'] ?? '';
+        $this->producttype_id = $obj['id'] ?? '';
+    }
+
+    public function refreshProductType($v): void
+    {
+        $this->producttype_id = $v['id'];
+        $this->producttype_name = $v['name'];
+        $this->producttypeTyped = false;
+    }
+
+    public function productTypeSave($name)
+    {
+        $obj = Common::create([
+            'label_id' => '14',
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshProductType($v);
+    }
+
+    public function getProductTypeList(): void
+    {
+        $this->producttypeCollection = $this->producttype_name ?
+            Common::search(trim($this->producttype_name))->where('label_id', '=', '14')->get() :
+            Common::where('label_id', '=', '14')->get();
+    }
+#endregion
+
+    #region[unit]
+    public $unit_id = '';
+    public $unit_name = '';
+    public Collection $unitCollection;
+    public $highlightUnit = 0;
+    public $unitTyped = false;
+
+    public function decrementUnit(): void
+    {
+        if ($this->highlightUnit === 0) {
+            $this->highlightUnit = count($this->unitCollection) - 1;
+            return;
+        }
+        $this->highlightUnit--;
+    }
+
+    public function incrementUnit(): void
+    {
+        if ($this->highlightUnit === count($this->unitCollection) - 1) {
+            $this->highlightUnit = 0;
+            return;
+        }
+        $this->highlightUnit++;
+    }
+
+    public function setUnit($name, $id): void
+    {
+        $this->unit_name = $name;
+        $this->unit_id = $id;
+        $this->getUnitList();
+    }
+
+    public function enterUnit(): void
+    {
+        $obj = $this->unitCollection[$this->highlightUnit] ?? null;
+
+        $this->unit_name = '';
+        $this->unitCollection = Collection::empty();
+        $this->highlightUnit = 0;
+
+        $this->unit_name = $obj['vname'] ?? '';
+        $this->unit_id = $obj['id'] ?? '';
+    }
+
+    public function refreshUnit($v): void
+    {
+        $this->unit_id = $v['id'];
+        $this->unit_name = $v['name'];
+        $this->unitTyped = false;
+    }
+
+    public function unitSave($name)
+    {
+        $obj = Common::create([
+            'label_id' => '15',
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshUnit($v);
+    }
+
+    public function getUnitList(): void
+    {
+        $this->unitCollection = $this->unit_name ?
+            Common::search(trim($this->unit_name))->where('label_id', '=', '15')->get() :
+            Common::where('label_id', '=', '15')->get();
+    }
+#endregion
+
+    #region[gstpercent]
+    public $gstpercent_id = '';
+    public $gstpercent_name = '';
+    public Collection $gstpercentCollection;
+    public $highlightGstPercent = 0;
+    public $gstpercentTyped = false;
+
+    public function decrementGstPercent(): void
+    {
+        if ($this->highlightGstPercent === 0) {
+            $this->highlightGstPercent = count($this->gstpercentCollection) - 1;
+            return;
+        }
+        $this->highlightGstPercent--;
+    }
+
+    public function incrementGstPercent(): void
+    {
+        if ($this->highlightGstPercent === count($this->gstpercentCollection) - 1) {
+            $this->highlightGstPercent = 0;
+            return;
+        }
+        $this->highlightGstPercent++;
+    }
+
+    public function setGstPercent($name, $id): void
+    {
+        $this->gstpercent_name = $name;
+        $this->gstpercent_id = $id;
+        $this->getGstPercentList();
+    }
+
+    public function enterGstPercent(): void
+    {
+        $obj = $this->gstpercentCollection[$this->highlightGstPercent] ?? null;
+
+        $this->gstpercent_name = '';
+        $this->gstpercentCollection = Collection::empty();
+        $this->highlightGstPercent = 0;
+
+        $this->gstpercent_name = $obj['vname'] ?? '';
+        $this->gstpercent_id = $obj['id'] ?? '';
+    }
+
+    public function refreshGstPercent($v): void
+    {
+        $this->gstpercent_id = $v['id'];
+        $this->gstpercent_name = $v['name'];
+        $this->gstpercentTyped = false;
+    }
+
+    public function gstPercentSave($name)
+    {
+        $obj = Common::create([
+            'label_id' => '16',
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshGstPercent($v);
+    }
+
+    public function getGstPercentList(): void
+    {
+        $this->gstpercentCollection = $this->gstpercent_name ?
+            Common::search(trim($this->gstpercent_name))->where('label_id', '=', '16')->get() :
+            Common::where('label_id', '=', '16')->get();
+    }
+#endregion
 
     #region[Get-Obj]
     public function getObj($id)
@@ -133,11 +343,16 @@ class Index extends Component
             $this->common->vid = $Product->id;
             $this->common->vname = $Product->vname;
             $this->common->active_id = $Product->active_id;
-            $this->product_type = $Product->product_type;
-            $this->common_id = $Product->common_id;
-            $this->units = $Product->units;
-            $this->gst_percent = $Product->gst_percent;
-            $this->quantity = $Product->quantity;
+            $this->hsncode_id = $Product->hsncode_id;
+            $this->hsncode_name=$Product->hsncode_id?Common::find($Product->hsncode_id)->vname:'';
+            $this->producttype_id = $Product->producttype_id;
+            $this->producttype_name=$Product->producttype_id?Common::find($Product->producttype_id)->vname:'';
+            $this->unit_id = $Product->unit_id;
+            $this->unit_name=$Product->unit_id?Common::find($Product->unit_id)->vname:'';
+            $this->gstpercent_id = $Product->gstpercent_id;
+            $this->gstpercent_name=$Product->gstpercent_id?Common::find($Product->gstpercent_id)->vname:'';
+            $this->quantity = $Product->initial_quantity;
+            $this->price = $Product->initial_price;
             return $Product;
         }
         return null;
@@ -150,11 +365,16 @@ class Index extends Component
         $this->common->vid = '';
         $this->common->vname = '';
         $this->common->active_id = '1';
-        $this->product_type = '';
-        $this->common_id = '';
-        $this->units = '';
-        $this->gst_percent = '';
+        $this->hsncode_id = '';
+        $this->hsncode_name='';
+        $this->gstpercent_name='';
+        $this->gstpercent_id='';
+        $this->unit_name='';
+        $this->unit_id='';
+        $this->producttype_id='';
+        $this->producttype_name='';
         $this->quantity = '';
+        $this->price='';
     }
     #endregion
 
@@ -166,7 +386,10 @@ class Index extends Component
 
     public function render()
     {
-        $this->getCommonList();
+        $this->getHsncodeList();
+        $this->getProductTypeList();
+        $this->getUnitList();
+        $this->getGstPercentList();
         return view('livewire.master.product.index')->with([
             'list' => $this->getListForm->getList(Product::class, function ($query) {
                 return $query->where('id', '>', '');

@@ -23,7 +23,7 @@
                                 wire:keydown.arrow-up="decrementContact"
                                 wire:keydown.arrow-down="incrementContact"
                                 wire:keydown.enter="enterContact"
-                                class="block w-full purple-textbox "
+                                class="block w-full rounded-lg "
                             />
                             @error('contact_id')
                             <span class="text-red-500">{{'The Party Name is Required.'}}</span>
@@ -67,7 +67,7 @@
 
                 <!-- Order No --------------------------------------------------------------------------------------------->
 
-{{--                @if(\Aaran\Aadmin\Src\SaleEntry::hasOrder())--}}
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasOrder())
                     <div class="xl:flex flex-col gap-2 pt-6">
                         <div class="xl:flex w-full gap-2">
                             <label for="order_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Order NO</label>
@@ -87,7 +87,7 @@
                                         wire:keydown.arrow-up="decrementOrder"
                                         wire:keydown.arrow-down="incrementOrder"
                                         wire:keydown.enter="enterOrder"
-                                        class="block w-full purple-textbox"
+                                        class="block w-full rounded-lg"
                                     />
                                     @error('order_id')
                                     <span class="text-red-500">{{'The Order is Required.'}}</span>
@@ -124,11 +124,11 @@
                             </div>
                         </div>
                     </div>
-{{--                @endif--}}
+                @endif
 
                 <!-- Billing Address -------------------------------------------------------------------------------------->
 
-{{--                @if(\Aaran\Aadmin\Src\SaleEntry::hasBillingAddress())--}}
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasBillingAddress())
                     <div class="xl:flex gap-2 md:w-full pt-6">
                         <label for="billing_address" class="w-[10rem] text-zinc-500 tracking-wide py-2">Billing
                             Address</label>
@@ -148,7 +148,7 @@
                                     wire:keydown.arrow-up="decrementBilling_address"
                                     wire:keydown.arrow-down="incrementBilling_address"
                                     wire:keydown.enter="enterBilling_address"
-                                    class="block w-full purple-textbox "
+                                    class="block w-full rounded-lg "
                                 />
                                 <div x-show="isTyped"
                                      x-transition:leave="transition ease-in duration-100"
@@ -189,11 +189,11 @@
                             </div>
                         </div>
                     </div>
-{{--                @endif--}}
+                @endif
 
                 <!-- Shipping Address ------------------------------------------------------------------------------------->
 
-{{--                @if(\Aaran\Aadmin\Src\SaleEntry::hasShippingAddress())--}}
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasShippingAddress())
                     <div class="xl:flex gap-2 w-full pt-6">
                         <label for="shipping_address" class="w-[10rem] text-zinc-500 tracking-wide py-2">Shipping
                             Address</label>
@@ -213,7 +213,7 @@
                                     wire:keydown.arrow-up="decrementShipping_address"
                                     wire:keydown.arrow-down="incrementShipping_address"
                                     wire:keydown.enter="enterShipping_address"
-                                    class="block w-full purple-textbox "
+                                    class="block w-full rounded-lg "
                                 />
                                 <div x-show="isTyped"
                                      x-transition:leave="transition ease-in duration-100"
@@ -254,7 +254,7 @@
                             </div>
                         </div>
                     </div>
-{{--                @endif--}}
+                @endif
 
             </div>
 
@@ -272,13 +272,13 @@
                     <option value="IGST">IGST</option>
                 </x-input.model-select>
 
-{{--                @if(\Aaran\Aadmin\Src\SaleEntry::hasJob_no())--}}
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasJob_no())
                     <x-input.model-text wire:model="job_no" :label="'Job No'"/>
-{{--                @endif--}}
+                @endif
 
                 <!-- Style ------------------------------------------------------------------------------------------------>
 
-{{--                @if(\Aaran\Aadmin\Src\SaleEntry::hasStyle())--}}
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasStyle())
                     <div class="xl:flex gap-2 w-full pt-4">
                         <label for="contact_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Style</label>
                         <div x-data="{isTyped: @entangle('styleTyped')}" @click.away="isTyped = false"
@@ -297,7 +297,7 @@
                                     wire:keydown.arrow-up="decrementStyle"
                                     wire:keydown.arrow-down="incrementStyle"
                                     wire:keydown.enter="enterStyle"
-                                    class="block w-full purple-textbox"
+                                    class="block w-full rounded-lg"
                                 />
 
                                 <div x-show="isTyped"
@@ -330,11 +330,11 @@
                             </div>
                         </div>
                     </div>
-{{--                @endif--}}
+                @endif
 
                 <!-- Despatch --------------------------------------------------------------------------------------------->
 
-{{--                @if(\Aaran\Aadmin\Src\SaleEntry::hasDespatch())--}}
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasDespatch())
                     <div class="xl:flex gap-2 w-full pt-4">
                         <label for="contact_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">
                             @if(config('aadmin.app_type')==308)
@@ -359,7 +359,7 @@
                                     wire:keydown.arrow-up="decrementDespatch"
                                     wire:keydown.arrow-down="incrementDespatch"
                                     wire:keydown.enter="enterDespatch"
-                                    class="block w-full purple-textbox"
+                                    class="block w-full rounded-lg"
                                 />
 
                                 <div x-show="isTyped"
@@ -392,7 +392,7 @@
                             </div>
                         </div>
                     </div>
-{{--                @endif--}}
+                @endif
             </div>
         </section>
         <x-forms.section-border/>
@@ -407,23 +407,23 @@
 
             <!--PO/DC  -------------------------------------------------------------------------------------------------------->
 
-{{--            @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())--}}
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())
                 <div class="w-full">
                     <label for="qty"></label>
-                    <input id="qty" wire:model.live="po_no" class="block w-full purple-textbox-no-rounded"
+                    <input id="qty" wire:model.live="po_no" class="block w-full rounded-lg-no-rounded"
                            autocomplete="false"
                            placeholder="PO No..">
                 </div>
-{{--            @endif--}}
+            @endif
 
-{{--            @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())--}}
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
                 <div class="w-full">
                     <label for="qty"></label>
-                    <input id="qty" wire:model.live="dc_no" class="block w-full md:w-full purple-textbox-no-rounded"
+                    <input id="qty" wire:model.live="dc_no" class="block w-full md:w-full rounded-lg-no-rounded"
                            autocomplete="false"
                            placeholder="DC No..">
                 </div>
-{{--            @endif--}}
+            @endif
 
 
             <!--Product Name ---------------------------------------------------------------------------------------------->
@@ -444,7 +444,7 @@
                             wire:keydown.arrow-up="decrementProduct"
                             wire:keydown.arrow-down="incrementProduct"
                             wire:keydown.enter="enterProduct"
-                            class="block w-full purple-textbox-no-rounded"
+                            class="block w-full rounded-lg-no-rounded"
                         />
 
                         <div x-show="isTyped"
@@ -463,10 +463,10 @@
 
                                                 <li class="cursor-pointer w-full h-fit px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300
                                                         {{ $highlightProduct === $i ? 'bg-yellow-100' : '' }}"
-                                                    wire:click.prevent="setProduct('{{$product->vname}}','{{$product->id}}','{{$product->gst_percent}}')"
+                                                    wire:click.prevent="setProduct('{{$product->vname}}','{{$product->id}}','{{$product->gstpercent_id}}')"
                                                     x-on:click="isTyped = false">
                                                     {{ $product->vname }} &nbsp;-&nbsp; GST&nbsp;:
-                                                    &nbsp;{{$product->gst_percent}}%
+                                                    &nbsp;{{\Aaran\Entries\Models\Sale::commons($product->gstpercent_id)}}%
                                                 </li>
 
                                             @empty
@@ -484,29 +484,29 @@
 
             <!--Product Description --------------------------------------------------------------------------------------->
 
-{{--            @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())--}}
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
                 <div class="w-full">
                     <label for="qty"></label>
-                    <input id="qty" wire:model.live="description" class="block w-full purple-textbox-no-rounded"
+                    <input id="qty" wire:model.live="description" class="block w-full rounded-lg-no-rounded"
                            autocomplete="false"
                            placeholder="description">
                 </div>
-{{--            @endif--}}
+            @endif
 
             <!--No of rolls --------------------------------------------------------------------------------------->
-{{--            @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())--}}
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
                 <div class="w-full">
                     <label for="no_of_roll"></label>
                     <input id="no_of_roll" wire:model.live="no_of_roll"
-                           class="block w-full md:w-full purple-textbox-no-rounded"
+                           class="block w-full md:w-full rounded-lg-no-rounded"
                            autocomplete="false"
                            placeholder="No of Roll..">
                 </div>
-{{--            @endif--}}
+            @endif
 
             <!--Colour Name ----------------------------------------------------------------------------------------------->
 
-{{--            @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())--}}
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
                 <div class="w-full">
                     <label for="colour_name"></label>
                     <div x-data="{isTyped: @entangle('colourTyped')}" @click.away="isTyped = false">
@@ -524,7 +524,7 @@
                                 wire:keydown.arrow-up="decrementColour"
                                 wire:keydown.arrow-down="incrementColour"
                                 wire:keydown.enter="enterColour"
-                                class="block w-full purple-textbox-no-rounded"
+                                class="block w-full rounded-lg-no-rounded"
                             />
 
                             <div x-show="isTyped"
@@ -562,11 +562,11 @@
                         </div>
                     </div>
                 </div>
-{{--            @endif--}}
+            @endif
 
             <!--Size ------------------------------------------------------------------------------------------------------>
 
-{{--            @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())--}}
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
                 <div class="w-full">
                     <label for="size_name"></label>
                     <div x-data="{isTyped: @entangle('sizeTyped')}" @click.away="isTyped = false">
@@ -584,7 +584,7 @@
                                 wire:keydown.arrow-up="decrementSize"
                                 wire:keydown.arrow-down="incrementSize"
                                 wire:keydown.enter="enterSize"
-                                class="block w-full purple-textbox-no-rounded"
+                                class="block w-full rounded-lg-no-rounded"
                             />
 
                             <div x-show="isTyped"
@@ -622,12 +622,12 @@
                         </div>
                     </div>
                 </div>
-{{--            @endif--}}
+            @endif
 
             <!-- Quantity ------------------------------------------------------------------------------------------------->
             <div class="w-full">
                 <label for="qty"></label>
-                <input id="qty" wire:model.live="qty" class="block w-full purple-textbox-no-rounded"
+                <input id="qty" wire:model.live="qty" class="block w-full rounded-lg-no-rounded"
                        autocomplete="false"
                        placeholder="Qty">
             </div>
@@ -635,7 +635,7 @@
             <!-- Price ---------------------------------------------------------------------------------------------------->
             <div class="w-full">
                 <label for="price"></label>
-                <input id="price" wire:model.live="price" class="block w-full purple-textbox-no-rounded"
+                <input id="price" wire:model.live="price" class="block w-full rounded-lg-no-rounded"
                        autocomplete="false"
                        placeholder="price">
             </div>
@@ -655,27 +655,27 @@
 
                         <th class="w-12 px-2 text-center border border-gray-300">#</th>
 
-{{--                        @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())--}}
+                        @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())
                             <th class="px-2 text-center border border-gray-300">Po</th>
-{{--                        @endif--}}
+                        @endif
 
-{{--                        @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())--}}
+                        @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
                             <th class="px-2 text-center border border-gray-300">Dc</th>
-{{--                        @endif--}}
+                        @endif
 
-{{--                        @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())--}}
+                        @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
                             <th class="px-2 text-center border border-gray-300">No of Roll</th>
-{{--                        @endif--}}
+                        @endif
 
                         <th class="px-2 text-center border border-gray-300">PRODUCT</th>
 
-{{--                        @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())--}}
+                        @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
                             <th class="px-2 text-center border border-gray-300">COLOUR</th>
-{{--                        @endif--}}
+                        @endif
 
-{{--                        @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())--}}
+                        @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
                             <th class="px-2 text-center border border-gray-300">SIZE</th>
-{{--                        @endif--}}
+                        @endif
 
                         <th class="px-2 text-center border border-gray-300">QTY</th>
                         <th class="px-2 text-center border border-gray-300">PRICE</th>
@@ -703,20 +703,20 @@
                                 </td>
 
 
-{{--                                @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())--}}
+                                @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())
                                     <td class="px-2 text-left border border-gray-300 cursor-pointer"
                                         wire:click.prevent="changeItems({{$index}})">{{$row['po_no']}}</td>
-{{--                                @endif--}}
+                                @endif
 
-{{--                                @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())--}}
+                                @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
                                     <td class="px-2 text-left border border-gray-300 cursor-pointer"
                                         wire:click.prevent="changeItems({{$index}})">{{$row['dc_no']}}</td>
-{{--                                @endif--}}
+                                @endif
 
-{{--                                @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())--}}
+                                @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
                                     <td class="px-2 text-left border border-gray-300 cursor-pointer"
                                         wire:click.prevent="changeItems({{$index}})">{{$row['no_of_roll']}}</td>
-{{--                                @endif--}}
+                                @endif
 
                                 <td class="px-2 text-left border border-gray-300 cursor-pointer"
                                     wire:click.prevent="changeItems({{$index}})">
@@ -724,22 +724,22 @@
                                         @if($row['description'])
                                             &nbsp;-&nbsp;
                                         @endif
-{{--                                        @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())--}}
+                                        @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
                                             {{ $row['description']}}
-{{--                                        @endif--}}
+                                        @endif
                                     </div>
 
                                 </td>
 
-{{--                                @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())--}}
+                                @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
                                     <td class="px-2 text-left border border-gray-300 cursor-pointer"
                                         wire:click.prevent="changeItems({{$index}})">{{$row['colour_name']}}</td>
-{{--                                @endif--}}
+                                @endif
 
-{{--                                @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())--}}
+                                @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
                                     <td class="px-2 text-left border border-gray-300 cursor-pointer"
                                         wire:click.prevent="changeItems({{$index}})">{{$row['size_name']}}</td>
-{{--                                @endif--}}
+                                @endif
 
                                 <td class="px-2 text-center border border-gray-300 cursor-pointer"
                                     wire:click.prevent="changeItems({{$index}})">{{$row['qty']}}</td>
@@ -768,11 +768,11 @@
                     <tfoot class="mt-2">
                     <tr class="h-8 text-sm border border-gray-400 bg-cyan-50">
 
-{{--                        @if(\Aaran\Aadmin\Src\SaleEntry::hasSize() or \Aaran\Aadmin\Src\SaleEntry::hasColour())--}}
-                            <td colspan="7" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
-{{--                        @else--}}
-{{--                            <td colspan="2" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>--}}
-{{--                        @endif--}}
+                        @if(\Aaran\Aadmin\Src\SaleEntry::hasSize() or \Aaran\Aadmin\Src\SaleEntry::hasColour())
+                            <td colspan="4" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
+                        @else
+                            <td colspan="2" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
+                        @endif
 
                         <td class="px-2 text-center border border-gray-300">{{$total_qty}}</td>
                         <td class="px-2 text-center border border-gray-300">&nbsp;</td>
@@ -799,7 +799,7 @@
 
                     @if($showInput)
                         <x-input.model-text wire:model="additional" wire:change.debounce="calculateTotal"
-                                            class="md:text-right purple-textbox w-full md:ml-20" :label="'Additional'"/>
+                                            class="md:text-right rounded-lg w-full md:ml-20" :label="'Additional'"/>
                                 <!-- Ledger ----------------------------------------------------------------------------------->
                         <div class="flex flex-col gap-2 pt-5">
                             <div class="xl:flex w-full gap-2">
@@ -822,7 +822,7 @@
                                             wire:keydown.arrow-up="decrementLedger"
                                             wire:keydown.arrow-down="incrementLedger"
                                             wire:keydown.enter="enterLedger"
-                                            class="block w-full purple-textbox"
+                                            class="block w-full rounded-lg"
                                         />
                                         @error('ledger_id')
                                         <span class="text-red-500">{{'The Ledger is Required.'}}</span>
@@ -861,11 +861,12 @@
                         </div>
                     @endif
                     <!-- Transport ---------------------------------------------------------------------------------------->
-                    <div class="mt-3">
+                    <div class="mt-3 flex flex-col gap-2 ">
+                        <div>
                         <input   type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
-                         dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:click="show1">&nbsp;&nbsp;&nbsp;<label>Other</label>
+                         dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:click="show1">&nbsp;&nbsp;&nbsp;<label>Other</label></div>
                         @if($showTransport)
-{{--                            @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())--}}
+                            @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
                                 <div class="flex flex-col gap-2 pt-5">
                                     <div class="xl:flex w-full gap-2">
                                         <label for="transport_name"
@@ -887,7 +888,7 @@
                                                     wire:keydown.arrow-up="decrementTransport"
                                                     wire:keydown.arrow-down="incrementTransport"
                                                     wire:keydown.enter="enterTransport"
-                                                    class="block w-full purple-textbox"
+                                                    class="block w-full rounded-lg"
                                                 />
                                                 @error('transport_id')
                                                 <span class="text-red-500">{{'The Transport is Required.'}}</span>
@@ -924,15 +925,15 @@
                                         </div>
                                     </div>
                                 </div>
-{{--                            @endif--}}
+                            @endif
 
-{{--                            @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())--}}
+                            @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())
                                 <x-input.model-text wire:model="destination" :label="'Destination'"/>
-{{--                            @endif--}}
+                            @endif
 
-{{--                            @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())--}}
+                            @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
                                 <x-input.model-text wire:model="bundle" :label="'Bundle'"/>
-{{--                            @endif--}}
+                            @endif
                         @endif
                     </div>
                 </div>

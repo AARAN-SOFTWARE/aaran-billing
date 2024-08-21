@@ -170,6 +170,7 @@ class Upsert extends Component
     public function citySave($name,$index)
     {
         $obj= Common::create([
+            'label_id'=>1,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -243,6 +244,17 @@ class Upsert extends Component
         $this->stateTyped = false;
     }
 
+    public function stateSave($name,$index):void
+    {
+        $obj=Common::create([
+            'label_id'=>2,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v=['name'=>$name,'id'=>$obj->id,'index'=>$index];
+        $this->refreshState($v);
+    }
+
     public function getStateList(): void
     {
         $this->stateCollection =  $this->itemList[$this->openTab]['state_name']
@@ -313,6 +325,7 @@ class Upsert extends Component
     public function pincodeSave($name,$index)
     {
         $obj= Common::create([
+            'label_id'=>3,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -391,6 +404,7 @@ class Upsert extends Component
     public function countrySave($name,$index)
     {
         $obj= Common::create([
+            'label_id'=>4,
             'vname' => $name,
             'active_id' => '1'
         ]);

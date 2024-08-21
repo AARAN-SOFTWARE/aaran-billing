@@ -9,6 +9,7 @@ use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
+use Aaran\Master\Models\Style;
 use App\Livewire\Trait\CommonTraitNew;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -376,8 +377,8 @@ class Upsert extends Component
 
     public function getStyleList(): void
     {
-        $this->styleCollection = $this->style_name ? Common::search(trim($this->style_name))
-            ->get() : Common::all();
+        $this->styleCollection = $this->style_name ? Style::search(trim($this->style_name))
+            ->get() : Style::all();
     }
 
     #endregion
@@ -599,7 +600,7 @@ class Upsert extends Component
     {
         $this->product_name = $name;
         $this->product_id = $id;
-        $this->gst_percent1 = $percent;
+        $this->gst_percent1 =Sale::commons($percent);
         $this->getProductList();
     }
 
@@ -612,7 +613,7 @@ class Upsert extends Component
 
         $this->product_name = $obj['vname'] ?? '';
         $this->product_id = $obj['id'] ?? '';
-        $this->gst_percent1 = $obj['gst_percent'] ?? '';
+        $this->gst_percent1 = Sale::commons($obj['gstpercent_id'])?? '';
     }
 
     #[On('refresh-product')]
@@ -620,7 +621,7 @@ class Upsert extends Component
     {
         $this->product_id = $v['id'];
         $this->product_name = $v['name'];
-        $this->gst_percent1 = $v['gst_percent'];
+        $this->gst_percent1 = Sale::commons($v['gstpercent_id']);
         $this->productTyped = false;
 
     }
@@ -961,7 +962,7 @@ class Upsert extends Component
         } else {
             $this->uniqueno = "{$this->contact_id}~{$this->invoice_no}~{$this->invoice_date}";
             $this->common->active_id = true;
-            $this->sales_type = 0;
+            $this->sales_type = 'CGST-SGST';
             $this->gst_percent = 5;
             $this->additional = 0;
             $this->grand_total = 0;

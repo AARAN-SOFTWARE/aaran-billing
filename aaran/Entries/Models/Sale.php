@@ -3,6 +3,7 @@
 namespace Aaran\Entries\Models;
 
 use Aaran\Aadmin\Src\Customise;
+use Aaran\Common\Models\Common;
 use Aaran\Common\Models\Despatch;
 use Aaran\Common\Models\Ledger;
 use Aaran\Common\Models\Transport;
@@ -63,7 +64,15 @@ class Sale extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function style(): BelongsTo
+    {
+        return $this->belongsTo(Style::class);
+    }
 
+    public static function commons($id)
+    {
+        return Common::find($id)->vname;
+    }
 
     protected static function newFactory(): SaleFactory
     {

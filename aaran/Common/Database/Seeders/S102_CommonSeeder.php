@@ -287,6 +287,93 @@ class S102_CommonSeeder extends Seeder
             'desc_1' => '-',
             'active_id' => '1'
         ]);
+        #product type-14
+        Common::create([
+            'label_id'=>'14',
+            'vname' => 'Goods',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'14',
+            'vname' => 'Service',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        #units-15
+        Common::create([
+            'label_id'=>'15',
+            'vname' => 'Kgs',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'15',
+            'vname' => 'Mts',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'15',
+            'vname' => 'Pcs',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'15',
+            'vname' => 'Nos',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'15',
+            'vname' => 'Lts',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        #Gst percent-16
+        Common::create([
+            'label_id'=>'16',
+            'vname' => '0',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'16',
+            'vname' => '5',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'16',
+            'vname' => '12',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'16',
+            'vname' => '18',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'16',
+            'vname' => '24',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
 
     }
 }
