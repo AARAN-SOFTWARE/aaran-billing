@@ -18,87 +18,91 @@
             <div class="w-6/12 border-r border-gray-200 pr-10 font-roboto tracking-wider">
                 @foreach($firstPost as $data)
 
-                    <div class="text-4xl tracking-wider">Entry With Audio{{ $data->vname }}</div>
+                    <a href="{{route('posts.show',[$data->id])}}">
+                        <div class="text-4xl tracking-wider">Entry With Audio{{ $data->vname }}</div>
 
-                    <div class="flex flex-row gap-x-1 text-gray-500 text-md mt-3 uppercase">
-                        <span>{{ $data->user->name }},</span>
-                        <span>Personal,</span>
-                        <span>Uncategorized</span>
-                    </div>
-
-                    <div class="flex flex-col my-4 gap-y-2">
-                        <img
-                            src="{{URL(\Illuminate\Support\Facades\Storage::url('/images/'.$data->image))}}"
-                            alt="{{$data->image}}"
-                            class="w-full md:h-[25rem] h-72 rounded-md">
-
-                        <div class="text-md text-gray-500 pt-1.5">
-                            {!!\Illuminate\Support\Str::words( $data->body,35 )!!}
+                        <div class="flex flex-row gap-x-1 text-gray-500 text-md mt-3 uppercase">
+                            <span>{{ $data->user->name }},</span>
+                            <span>Personal,</span>
+                            <span>Uncategorized</span>
                         </div>
 
-                        <div class="flex justify-between items-center ">
-                            <div class="inline-flex items-center gap-x-1">
-                                <span>Read More</span>
-                                <span><x-icons.icon :icon="'right-arrow'"
-                                                    class="w-5 h-auto mt-2"/></span>
+                        <div class="flex flex-col my-4 gap-y-2">
+                            <img
+                                src="{{URL(\Illuminate\Support\Facades\Storage::url('/images/'.$data->image))}}"
+                                alt="{{$data->image}}"
+                                class="w-full md:h-[25rem] h-72 rounded-md">
+
+                            <div class="text-md text-gray-500 pt-1.5">
+                                {!!\Illuminate\Support\Str::words( $data->body,35 )!!}
                             </div>
 
-                            <div class="text-gray-500 text-sm inline-flex gap-x-0.5">
-                                <x-icons.icon :icon="'clock'" class="w-5 h-5 text-gray-800"/>
-                                <time>{{ $data->created_at->diffForHumans() }}</time>
+                            <div class="flex justify-between items-center ">
+                                <div class="inline-flex items-center gap-x-1">
+                                    <span>Read More</span>
+                                    <span><x-icons.icon :icon="'right-arrow'"
+                                                        class="w-5 h-auto mt-2"/></span>
+                                </div>
+
+                                <div class="text-gray-500 text-sm inline-flex gap-x-0.5">
+                                    <x-icons.icon :icon="'clock'" class="w-5 h-5 text-gray-800"/>
+                                    <time>{{ $data->created_at->diffForHumans() }}</time>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
 
                 <!-- grid cards --------------------------------------------------------------------------------------->
                 <div class="h-[20rem] grid grid-cols-2 gap-10">
 
                     @foreach($list->skip(1) as $row)
+                        <a href="{{route('posts.show',[$row->id])}}">
 
-                        <div class="flex-col border-b border-gray-200 rounded-lg ">
+                            <div class="flex-col border-b border-gray-200 rounded-lg ">
 
-                            <div>
-                                <img
-                                    src="{{URL(\Illuminate\Support\Facades\Storage::url('/images/'.$row->image))}}"
-                                    alt="{{$row->image}}"
-                                    class="w-full md:h-[20rem] my-5 h-32">
+                                <div>
+                                    <img
+                                        src="{{URL(\Illuminate\Support\Facades\Storage::url('/images/'.$row->image))}}"
+                                        alt="{{$row->image}}"
+                                        class="w-full md:h-[20rem] my-5 h-32">
+                                </div>
+
+                                <div class="flex flex-col gap-y-3">
+                                    <div class="text-4xl tracking-wider">
+                                        A small Gallery&nbsp;{{ \Illuminate\Support\Str::words($row->vname,5) }}
+                                    </div>
+
+                                    <div class="flex flex-row gap-x-1 text-gray-500 text-md uppercase">
+                                        <span>{{ $row->user->name }},</span>
+                                        <span>Personal,</span>
+                                        <span>Uncategorized</span>
+                                    </div>
+
+                                    <div class="text-md text-gray-500">
+                                        {!!\Illuminate\Support\Str::words( $row->body,20 )!!}&nbsp;
+                                    </div>
+
+                                    <div class="text-gray-500 inline-flex gap-x-3">
+                                        <time>{{ $row->created_at->diffForHumans() }}</time>
+
+                                        <button wire:click="edit({{$row->id}})"
+                                                class="rounded-md ">
+
+                                            <x-icons.icon :icon="'pencil'"
+                                                          class="h-5 w-auto block text-cyan-700 hover:scale-110"/>
+                                        </button>
+
+                                        <button wire:click="getDelete({{$row->id}})"
+                                                class="rounded-md ">
+
+                                            <x-icons.icon :icon="'trash'"
+                                                          class="h-5 w-auto block text-cyan-700 hover:scale-110"/>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="flex flex-col gap-y-3">
-                                <div class="text-4xl tracking-wider">
-                                    A small Gallery&nbsp;{{ \Illuminate\Support\Str::words($row->vname,5) }}
-                                </div>
-
-                                <div class="flex flex-row gap-x-1 text-gray-500 text-md uppercase">
-                                    <span>{{ $row->user->name }},</span>
-                                    <span>Personal,</span>
-                                    <span>Uncategorized</span>
-                                </div>
-
-                                <div class="text-md text-gray-500">
-                                    {!!\Illuminate\Support\Str::words( $row->body,20 )!!}&nbsp;
-                                </div>
-
-                                <div class="text-gray-500 inline-flex gap-x-3">
-                                    <time>{{ $row->created_at->diffForHumans() }}</time>
-
-                                    <button wire:click="edit({{$row->id}})"
-                                            class="rounded-md ">
-
-                                        <x-icons.icon :icon="'pencil'"
-                                                      class="h-5 w-auto block text-cyan-700 hover:scale-110"/>
-                                    </button>
-
-                                    <button wire:click="getDelete({{$row->id}})"
-                                            class="rounded-md ">
-
-                                        <x-icons.icon :icon="'trash'"
-                                                      class="h-5 w-auto block text-cyan-700 hover:scale-110"/>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
