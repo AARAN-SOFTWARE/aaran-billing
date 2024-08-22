@@ -270,7 +270,24 @@ class Index extends Component
             'window',
             'trash',
 
-
+            'arrow-cir-l',
+            'arrow-cir-r',
+            'arrow-circle-down',
+            'arrow-circle-up',
+            'chevron-down',
+            'chevron-left',
+            'chevron-right',
+            'chevron-up',
+            'chevron-d-down',
+            'chevron-d-left',
+            'chevron-d-right',
+            'chevron-d-up',
+            'arrow-up-r',
+            'arrow-up-l',
+            'turn-down-l',
+            'turn-down-r',
+            'cube',
+            'hand-right',
 
         ]);
     }

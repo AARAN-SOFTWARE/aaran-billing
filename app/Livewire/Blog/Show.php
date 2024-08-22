@@ -46,15 +46,24 @@ class Show extends Component
                     'user_id' => Auth::id(),
                     'post_id' => $this->post_id,
                 ]);
-            }
+            } else {
+                $comment = Comment::find($this->vid);
+                $comment->body = $this->body;
+                $comment->user_id = Auth::id();
+                $comment->post_id = $this->post_id;
+                if ($comment->user_id == Auth::id()) {
+                    $comment->save();
+                }
 
-            $this->clearFields();
+                $this->clearFields();
+            }
         }
     }
 
     #endregion
 
-    public function clearFields()
+    public
+    function clearFields()
     {
         $this->body = '';
 
@@ -62,7 +71,8 @@ class Show extends Component
 
 
     #region[Edit]
-    public function editComment($id)
+    public
+    function editComment($id)
     {
         $obj = Comment::find($id);
         $this->vid = $obj->id;
@@ -71,7 +81,8 @@ class Show extends Component
         $this->post_id = $obj->post_id;
     }
 
-    public function deleteComment($id)
+    public
+    function deleteComment($id)
     {
         $obj = Comment::find($id);
         $obj->delete();
@@ -80,7 +91,8 @@ class Show extends Component
     #endregion
 
 
-    public function render()
+    public
+    function render()
     {
         return view('livewire.blog.show')->with([
             'list' => Comment::where('post_id', '=', $this->post_id)->orderBy('created_at', 'desc')

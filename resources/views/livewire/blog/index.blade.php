@@ -31,7 +31,7 @@
                             <img
                                 src="{{URL(\Illuminate\Support\Facades\Storage::url('/images/'.$data->image))}}"
                                 alt="{{$data->image}}"
-                                class="w-full md:h-[25rem] h-72 rounded-md">
+                                class="w-full md:h-[25rem] h-72 rounded-md hover:opacity-80 duration-300">
 
                             <div class="text-md text-gray-500 pt-1.5">
                                 {!!\Illuminate\Support\Str::words( $data->body,35 )!!}
@@ -57,18 +57,19 @@
                 <div class="h-[20rem] grid grid-cols-2 gap-10">
 
                     @foreach($list->skip(1) as $row)
-                        <a href="{{route('posts.show',[$row->id])}}">
 
-                            <div class="flex-col border-b border-gray-200 rounded-lg ">
+                        <div class="flex-col border-b border-gray-200 rounded-lg ">
+                            <a href="{{route('posts.show',[$row->id])}}">
 
                                 <div>
                                     <img
                                         src="{{URL(\Illuminate\Support\Facades\Storage::url('/images/'.$row->image))}}"
                                         alt="{{$row->image}}"
-                                        class="w-full md:h-[20rem] my-5 h-32">
+                                        class="w-full md:h-[20rem] my-5 h-32 hover:opacity-80 duration-300">
                                 </div>
-
-                                <div class="flex flex-col gap-y-3">
+                            </a>
+                            <div class="flex flex-col gap-y-3">
+                                <a href="{{route('posts.show',[$row->id])}}">
                                     <div class="text-4xl tracking-wider">
                                         A small Gallery&nbsp;{{ \Illuminate\Support\Str::words($row->vname,5) }}
                                     </div>
@@ -82,27 +83,27 @@
                                     <div class="text-md text-gray-500">
                                         {!!\Illuminate\Support\Str::words( $row->body,20 )!!}&nbsp;
                                     </div>
+                                </a>
+                                <div class="text-gray-500 inline-flex gap-x-3">
+                                    <time>{{ $row->created_at->diffForHumans() }}</time>
 
-                                    <div class="text-gray-500 inline-flex gap-x-3">
-                                        <time>{{ $row->created_at->diffForHumans() }}</time>
+                                    <button wire:click="edit({{$row->id}})"
+                                            class="rounded-md ">
 
-                                        <button wire:click="edit({{$row->id}})"
-                                                class="rounded-md ">
+                                        <x-icons.icon :icon="'pencil'"
+                                                      class="h-5 w-auto block text-cyan-700 hover:scale-110"/>
+                                    </button>
 
-                                            <x-icons.icon :icon="'pencil'"
-                                                          class="h-5 w-auto block text-cyan-700 hover:scale-110"/>
-                                        </button>
+                                    <button wire:click="getDelete({{$row->id}})"
+                                            class="rounded-md ">
 
-                                        <button wire:click="getDelete({{$row->id}})"
-                                                class="rounded-md ">
-
-                                            <x-icons.icon :icon="'trash'"
-                                                          class="h-5 w-auto block text-cyan-700 hover:scale-110"/>
-                                        </button>
-                                    </div>
+                                        <x-icons.icon :icon="'trash'"
+                                                      class="h-5 w-auto block text-cyan-700 hover:scale-110"/>
+                                    </button>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+
                     @endforeach
                 </div>
             </div>
