@@ -14,4 +14,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/orders', App\Livewire\Master\Orders\Index::class)->name('orders');
 
+    Route::get('/styles', App\Livewire\Master\Style\Index::class)->name('styles');
+
 });

@@ -193,9 +193,11 @@
                                                                                     </li>
 
                                                                                 @empty
-
-                                                                                    @livewire('controls.model.common.state-model',[$itemList[0]['state_name'],0])
-
+                                                                                    <button
+                                                                                        wire:click.prevent="stateSave('{{ $itemList[0]['state_name'] }}','{{0}}')"
+                                                                                        class="text-white bg-green-500 text-center w-full">
+                                                                                        create
+                                                                                    </button>
                                                                                 @endforelse
                                                                             @endif
                                                                         </ul>
@@ -456,9 +458,11 @@
                                                                                         </li>
 
                                                                                     @empty
-
-                                                                                        @livewire('controls.model.common.state-model',[$itemList[$row]['state_name'],$row])
-
+                                                                                        <button
+                                                                                            wire:click.prevent="stateSave('{{$itemList[$row]['state_name']}}','{{$row}}')"
+                                                                                            class="text-white bg-green-500 text-center w-full">
+                                                                                            create
+                                                                                        </button>
                                                                                     @endforelse
                                                                                 @endif
                                                                             </ul>

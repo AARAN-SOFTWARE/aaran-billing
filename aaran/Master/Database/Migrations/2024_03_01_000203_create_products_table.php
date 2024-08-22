@@ -12,11 +12,12 @@ return new class extends Migration {
             Schema::create('products', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname')->unique();
-                $table->string('product_type')->nullable();
-                $table->foreignId('common_id')->references('id')->on('commons');
-                $table->string('units')->nullable();
-                $table->string('gst_percent')->nullable();
-                $table->decimal('quantity',12,2)->nullable();
+                $table->foreignId('producttype_id')->references('id')->on('commons');
+                $table->foreignId('hsncode_id')->references('id')->on('commons');
+                $table->foreignId('unit_id')->references('id')->on('commons');
+                $table->foreignId('gstpercent_id')->references('id')->on('commons');
+                $table->decimal('initial_quantity',12,2)->nullable();
+                $table->decimal('initial_price',12,2)->nullable();
                 $table->string('active_id', 3)->nullable();
                 $table->foreignId('user_id')->references('id')->on('users');
                 $table->foreignId('company_id')->references('id')->on('companies');

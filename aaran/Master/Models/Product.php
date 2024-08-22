@@ -14,9 +14,9 @@ class Product extends Model
 
     protected $guarded = [];
 
-    public function common(): BelongsTo
+    public static function common($id)
     {
-        return $this->belongsTo(Common::class);
+        return Common::find($id)->vname;
     }
 
     public static function search(string $searches)
