@@ -113,7 +113,7 @@
                                                                 {{ $order->vname }}
                                                             </li>
                                                         @empty
-{{--                                                            @livewire('controls.model.order.order-model',[$order_name])--}}
+                                                            @livewire('controls.model.order-model',[$order_name])
                                                         @endforelse
                                                     @endif
                                                 </ul>
@@ -320,7 +320,7 @@
                                                             {{ $style->vname }}
                                                         </li>
                                                     @empty
-                                                        @livewire('controls.model.order.style-model',[$style_name])
+                                                        @livewire('controls.model.style-model',[$style_name])
                                                     @endforelse
                                                 @endif
                                             </ul>
@@ -382,7 +382,11 @@
                                                             {{ $despatch->vname }}
                                                         </li>
                                                     @empty
-                                                        @livewire('controls.model.common.despatch-model',[$despatch_name])
+                                                        <button
+                                                            wire:click.prevent="despatchSave('{{$dispatch_name}}')"
+                                                            class="text-white bg-green-500 text-center w-full">
+                                                            create
+                                                        </button>
                                                     @endforelse
                                                 @endif
                                             </ul>
@@ -466,11 +470,12 @@
                                                     wire:click.prevent="setProduct('{{$product->vname}}','{{$product->id}}','{{$product->gstpercent_id}}')"
                                                     x-on:click="isTyped = false">
                                                     {{ $product->vname }} &nbsp;-&nbsp; GST&nbsp;:
-                                                    &nbsp;{{\Aaran\Entries\Models\Sale::commons($product->gstpercent_id)}}%
+                                                    &nbsp;{{\Aaran\Entries\Models\Sale::commons($product->gstpercent_id)}}
+                                                    %
                                                 </li>
 
                                             @empty
-{{--                                                @livewire('controls.model.master.product-model',[$product_name])--}}
+                                                @livewire('controls.model.product-model',[$product_name])
                                             @endforelse
                                         @endif
 
@@ -794,13 +799,10 @@
             <!-- Bottom Left -------------------------------------------------------------------------------------------------->
             <section class="w-full">
                 <div class="w-3/4">
-                    <input   type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
-                     dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:click="show">&nbsp;&nbsp;&nbsp;<label>Additional Charges</label>
-
-                    @if($showInput)
+                    <x-accordion.accordion :heading="'Additional Charges'">
                         <x-input.model-text wire:model="additional" wire:change.debounce="calculateTotal"
-                                            class="md:text-right rounded-lg w-full md:ml-20" :label="'Additional'"/>
-                                <!-- Ledger ----------------------------------------------------------------------------------->
+                                            class="md:text-right rounded-lg w-full" :label="'Additional'"/>
+                        <!-- Ledger ----------------------------------------------------------------------------------->
                         <div class="flex flex-col gap-2 pt-5">
                             <div class="xl:flex w-full gap-2">
 
@@ -848,7 +850,12 @@
                                                                     {{ $ledger->vname }}
                                                                 </li>
                                                             @empty
-{{--                                                                @livewire('controls.model.common.ledger-model',[$ledger_name])--}}
+                                                                {{--                                                                @livewire('controls.model.common.ledger-model',[$ledger_name])--}}
+                                                                <button
+                                                                    wire:click.prevent="ledgerSave('{{$ledger_name}}')"
+                                                                    class="text-white bg-green-500 text-center w-full">
+                                                                    create
+                                                                </button>
                                                             @endforelse
                                                         @endif
                                                     </ul>
@@ -859,13 +866,10 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    </x-accordion.accordion>
                     <!-- Transport ---------------------------------------------------------------------------------------->
-                    <div class="mt-3 flex flex-col gap-2 ">
-                        <div>
-                        <input   type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
-                         dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:click="show1">&nbsp;&nbsp;&nbsp;<label>Other</label></div>
-                        @if($showTransport)
+                    <x-accordion.accordion :heading="'Others'">
+                        <div class="mt-3 flex flex-col gap-2 ">
                             @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
                                 <div class="flex flex-col gap-2 pt-5">
                                     <div class="xl:flex w-full gap-2">
@@ -914,7 +918,11 @@
                                                                             {{ $transport->vname }}
                                                                         </li>
                                                                     @empty
-                                                                        @livewire('controls.model.common.transport-mode',[$transport_name])
+                                                                        <button
+                                                                            wire:click.prevent="transportSave('{{$transport_name}}')"
+                                                                            class="text-white bg-green-500 text-center w-full">
+                                                                            create
+                                                                        </button>
                                                                     @endforelse
                                                                 @endif
                                                             </ul>
@@ -934,8 +942,8 @@
                             @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
                                 <x-input.model-text wire:model="bundle" :label="'Bundle'"/>
                             @endif
-                        @endif
-                    </div>
+                        </div>
+                    </x-accordion.accordion>
                 </div>
             </section>
 
