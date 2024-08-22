@@ -28,7 +28,7 @@
                 <x-menu.side-menu/>
 
                 <!-- Page Content -->
-                <main class="p-3 bg-white print:bg-white">
+                <main class="bg-white print:bg-white">
                     {{ $slot }}
                 </main>
 
