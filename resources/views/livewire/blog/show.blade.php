@@ -103,7 +103,7 @@
                 <span>Post Comments</span>
 
                 <div class="inline-flex gap-1.5">
-                    <x-icons.icon icon="annotation"
+                    <x-icons.icon :icon="'annotation'"
                                   class="w-6 h-5"/>
                     <span class="text-md">({{$commentsCount}})</span>
                 </div>
@@ -111,18 +111,26 @@
 
             @foreach($list as $row)
 
-                <div class="h-32 gap-y-3 border-b shadow-md border my-3 flex flex-col justify-center p-2 ">
+                <div class="h-32 gap-y-3 border-b shadow-md border my-3 flex flex-col justify-center p-2 group relative">
                     <div class="flex flex-row">
                         <img src="../../../../images/wp1.webp" alt="" class="w-10 h-10 rounded-full">
 
                         <div class="flex flex-col mx-3">
                             <span class="text-sm capitalize">{{$row->user->name}}</span>
-                            <span class="text-xs">{{$row->created_at->diffForHumans() }}</span>
+                            <span class="text-xs text-gray-500">{{$row->created_at->diffForHumans() }}</span>
                         </div>
                     </div>
 
                     <div class="w-full">
                         {{$row->body}}
+                    </div>
+
+
+                    <div class="flex">
+                        <x-icons.icon :icon="'pencil'" wire:click="editComment({{ $row->id }})"
+                                      class="text-gray-400 h-5 hover:cursor-pointer hover:text-black px-0.5 py-0.5 hover:rounded-sm inline-flex invisible group-hover:visible "/>
+                        <x-icons.icon :icon="'trash'" wire:click="deleteComment({{ $row->id }})"
+                                      class="text-gray-400 h-5 hover:cursor-pointer hover:text-black px-0.5 py-0.5 hover:rounded-sm inline-flex invisible group-hover:visible"/>
                     </div>
                 </div>
             @endforeach
