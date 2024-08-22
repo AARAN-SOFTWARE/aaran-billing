@@ -62,6 +62,7 @@
                                 <x-input.model-text wire:model="gstin" :label="'GSTin'"/>
                                 <x-input.model-text wire:model="pan" :label="'Pan'"/>
                                 <x-input.model-text wire:model="email" :label="'Email'"/>
+                                <x-input.model-text wire:model="website" :label="'Website'"/>
                             </div>
                         </x-tabs.content>
 
@@ -75,7 +76,7 @@
                                         <label for="city_name"
                                                class="w-[10rem] text-zinc-500 tracking-wide py-2 ">City</label>
                                         <div x-data="{isTyped: @entangle('cityTyped')}" @click.away="isTyped = false"
-                                             class="w-full">
+                                             class="w-full relative">
                                             <div>
                                                 <input
                                                     id="city_name"
@@ -135,7 +136,7 @@
                                         <label for="state_name"
                                                class="w-[10rem] text-zinc-500 tracking-wide py-2">State</label>
                                         <div x-data="{isTyped: @entangle('stateTyped')}" @click.away="isTyped = false"
-                                             class="w-full">
+                                             class="w-full relative">
                                             <div>
                                                 <input
                                                     id="state_name"
@@ -173,7 +174,11 @@
                                                                             {{ $states->vname }}
                                                                         </li>
                                                                     @empty
-{{--                                                                        @livewire('controls.model.common.state-model',[$state_name])--}}
+                                                                        <button
+                                                                            wire:click.prevent="stateSave('{{ $state_name }}')"
+                                                                            class="text-white bg-green-500 text-center w-full">
+                                                                            create
+                                                                        </button>
                                                                     @endforelse
                                                                 @endif
                                                             </ul>
@@ -191,7 +196,7 @@
                                         <label for="pincode_name"
                                                class="w-[10rem] text-zinc-500 tracking-wide py-2">Pincode</label>
                                         <div x-data="{isTyped: @entangle('pincodeTyped')}" @click.away="isTyped = false"
-                                             class="w-full">
+                                             class="w-full relative">
                                             <div>
                                                 <input
                                                     id="pincode_name"
@@ -322,7 +327,6 @@
                             <div class="flex flex-col gap-3">
                                 <x-input.model-text wire:model="msme_no" :label="'MSME No'"/>
                                 <x-input.model-text wire:model="msme_type" :label="'MSME Type'"/>
-                                <x-input.model-text wire:model="website" :label="'Website'"/>
                             </div>
                         </x-tabs.content>
 

@@ -11,6 +11,9 @@
 <x-menu.base.route-menuitem  href="{{route('departments',[11])}}" :label="'Departments'"/>
 <x-menu.base.route-menuitem  href="{{route('dispatches',[12])}}" :label="'Dispatches'"/>
 <x-menu.base.route-menuitem  href="{{route('receipt-types',[13])}}" :label="'Receipt-Types'"/>
+<x-menu.base.route-menuitem  href="{{route('receipt-types',[14])}}" :label="'Product Type'"/>
+<x-menu.base.route-menuitem  href="{{route('receipt-types',[15])}}" :label="'Units'"/>
+<x-menu.base.route-menuitem  href="{{route('receipt-types',[16])}}" :label="'GST Percent'"/>
 
 
 

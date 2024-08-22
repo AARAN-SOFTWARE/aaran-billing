@@ -9,6 +9,7 @@ use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
+use Aaran\Master\Models\Style;
 use App\Livewire\Trait\CommonTraitNew;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -56,8 +57,6 @@ class Upsert extends Component
     public $grandtotalBeforeRound;
     public $dc_no;
     public $no_of_roll;
-    public $showInput = false;
-    public $showTransport = false;
     #endregion
 
     #region[Contact]
@@ -376,8 +375,8 @@ class Upsert extends Component
 
     public function getStyleList(): void
     {
-        $this->styleCollection = $this->style_name ? Common::search(trim($this->style_name))
-            ->get() : Common::all();
+        $this->styleCollection = $this->style_name ? Style::search(trim($this->style_name))
+            ->get() : Style::all();
     }
 
     #endregion
@@ -427,13 +426,25 @@ class Upsert extends Component
         $this->transport_id = $obj['id'] ?? '';
     }
 
-    #[On('refresh-transport')]
     public function refreshTransport($v): void
     {
         $this->transport_id = $v['id'];
         $this->transport_name = $v['name'];
         $this->transportTyped = false;
 
+    }
+
+    public function transportSave($name)
+    {
+        if ($name){
+           $obj= Common::create([
+                'label_id'=>'10',
+                'vname'=>$name,
+                'active_id'=>'1',
+            ]);
+            $v=['name'=>$name,'id'=>$obj->id];
+            $this->refreshTransport($v);
+        }
     }
 
     public function getTransportList(): void
@@ -489,13 +500,25 @@ class Upsert extends Component
         $this->despatch_id = $obj['id'] ?? '';
     }
 
-    #[On('refresh-despatch')]
     public function refreshDespatch($v): void
     {
         $this->despatch_id = $v['id'];
         $this->despatch_name = $v['name'];
         $this->despatchTyped = false;
 
+    }
+
+    public function despatchSave($name)
+    {
+        if ($name){
+            $obj=Common::create([
+                'label_id'=>'12',
+                'vname'=>$name,
+                'active_id'=>'1',
+            ]);
+            $v=['name'=>$name,'id'=>$obj->id];
+            $this->refreshDespatch($v);
+        }
     }
 
     public function getDespatchList(): void
@@ -551,13 +574,25 @@ class Upsert extends Component
         $this->ledger_id = $obj['id'] ?? '';
     }
 
-    #[On('refresh-ledger')]
     public function refreshLedger($v): void
     {
         $this->ledger_id = $v['id'];
         $this->ledger_name = $v['name'];
         $this->ledgerTyped = false;
 
+    }
+
+    public function ledgerSave($name)
+    {
+        if ($name){
+            $obj=Common::create([
+                'label_id'=>'9',
+                'vname'=>$name,
+                'active_id'=>'1',
+            ]);
+            $v=['name'=>$name,'id'=>$obj->id];
+            $this->refreshLedger($v);
+        }
     }
 
     public function getLedgerList(): void
@@ -599,7 +634,7 @@ class Upsert extends Component
     {
         $this->product_name = $name;
         $this->product_id = $id;
-        $this->gst_percent1 = $percent;
+        $this->gst_percent1 =Sale::commons($percent);
         $this->getProductList();
     }
 
@@ -612,7 +647,7 @@ class Upsert extends Component
 
         $this->product_name = $obj['vname'] ?? '';
         $this->product_id = $obj['id'] ?? '';
-        $this->gst_percent1 = $obj['gst_percent'] ?? '';
+        $this->gst_percent1 = Sale::commons($obj['gstpercent_id'])?? '';
     }
 
     #[On('refresh-product')]
@@ -620,7 +655,7 @@ class Upsert extends Component
     {
         $this->product_id = $v['id'];
         $this->product_name = $v['name'];
-        $this->gst_percent1 = $v['gst_percent'];
+        $this->gst_percent1 = Sale::commons($v['gstpercent_id']);
         $this->productTyped = false;
 
     }
@@ -797,16 +832,16 @@ class Upsert extends Component
                         'billing_id' => $this->billing_id ?: ContactDetail::getId($this->contact_id),
                         'shipping_id' => $this->shipping_id ?: ContactDetail::getId($this->contact_id),
                         'style_id' => $this->style_id ?: 1,
-                        'despatch_id' => $this->despatch_id ?: 1,
+                        'despatch_id' => $this->despatch_id ?: 31,
                         'job_no' => $this->job_no,
                         'sales_type' => $this->sales_type,
-                        'transport_id' => $this->transport_id ?: 1,
+                        'transport_id' => $this->transport_id ?: 27,
                         'destination' => $this->destination,
                         'bundle' => $this->bundle,
                         'total_qty' => $this->total_qty,
                         'total_taxable' => $this->total_taxable,
                         'total_gst' => $this->total_gst,
-                        'ledger_id' => $this->ledger_id ?: 1,
+                        'ledger_id' => $this->ledger_id ?: 25,
                         'additional' => $this->additional,
                         'round_off' => $this->round_off,
                         'grand_total' => $this->grand_total,
@@ -879,8 +914,8 @@ class Upsert extends Component
                 'dc_no' => $sub['dc_no'],
                 'no_of_roll' => $sub['no_of_roll'],
                 'product_id' => $sub['product_id'],
-                'colour_id' => $sub['colour_id'] ?: '1',
-                'size_id' => $sub['size_id'] ?: '1',
+                'colour_id' => $sub['colour_id'] ?: '11',
+                'size_id' => $sub['size_id'] ?: '14',
                 'qty' => $sub['qty'],
                 'price' => $sub['price'],
                 'gst_percent' => $sub['gst_percent'],
@@ -911,7 +946,7 @@ class Upsert extends Component
             $this->shipping_id = $obj->shipping_id;
             $this->shipping_address = ContactDetail::printDetails($obj->shipping_id)->get('address_1');
             $this->style_id = $obj->style_id;
-            $this->style_name = $obj->style_id ? Common::find($obj->style_id)->vname : '';
+            $this->style_name = $obj->style->vname;
             $this->despatch_id = $obj->despatch_id;
             $this->despatch_name = $obj->despatch_id ? Common::find($obj->despatch_id)->vname : '';
             $this->job_no = $obj->job_no;
@@ -961,7 +996,7 @@ class Upsert extends Component
         } else {
             $this->uniqueno = "{$this->contact_id}~{$this->invoice_no}~{$this->invoice_date}";
             $this->common->active_id = true;
-            $this->sales_type = 0;
+            $this->sales_type = 'CGST-SGST';
             $this->gst_percent = 5;
             $this->additional = 0;
             $this->grand_total = 0;
@@ -1111,18 +1146,6 @@ class Upsert extends Component
         }
     }
 
-    #endregion
-
-    #region[]
-    public function show(): void
-    {
-        $this->showInput = !$this->showInput;
-    }
-
-    public function show1():void
-    {
-        $this->showTransport = !$this->showTransport;
-    }
     #endregion
 
     #region[Render]

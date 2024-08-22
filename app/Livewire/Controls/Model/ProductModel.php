@@ -1,59 +1,72 @@
 <?php
 
-namespace App\Livewire\Master\Product;
+namespace App\Livewire\Controls\Model;
 
 use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Product;
-use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
-class Index extends Component
+class ProductModel extends Component
 {
-    use CommonTraitNew;
+    public bool $showModel = false;
 
-    #region[Properties]
+    public $vname = "";
     public $quantity;
     public $price;
-    #endregion
 
-    #region[Get-Save]
-    public function getSave(): void
+    public function mount($name): void
     {
-        if ($this->common->vname != '') {
-            if ($this->common->vid == '') {
-                $Product = new Product();
-                $extraFields = [
-                    'producttype_id' => $this->producttype_id?:'39',
-                    'hsncode_id' => $this->hsncode_id?:'8',
-                    'unit_id' => $this->unit_id?:'43',
-                    'gstpercent_id' => $this->gstpercent_id?:'47',
-                    'initial_quantity' => $this->quantity?:'0',
-                    'initial_price' => $this->price?:'0',
-                    'user_id' => auth()->id(),
-                    'company_id' =>session()->get('company_id'),
-                ];
-                $this->common->save($Product, $extraFields);
-                $message = "Saved";
-            } else {
-                $Product = Product::find($this->common->vid);
-                $extraFields = [
-                    'producttype_id' => $this->producttype_id,
-                    'hsncode_id' => $this->hsncode_id,
-                    'unit_id' => $this->unit_id,
-                    'gstpercent_id' => $this->gstpercent_id,
-                    'initial_quantity' => $this->quantity,
-                    'initial_price' => $this->price,
-                    'user_id' => auth()->id(),
-                    'company_id' =>session()->get('company_id'),
-                ];
-                $this->common->edit($Product, $extraFields);
-                $message = "Updated";
-            }
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+        $this->vname = $name;
+        $this->producttype_id = 39;
+        $this->producttype_name=$this->producttype_id?Common::find($this->producttype_id)->vname:'';
+        $this->hsncode_id = 8;
+        $this->hsncode_name=$this->hsncode_id?Common::find($this->hsncode_id)->vname:'';
+        $this->unit_id = 43;
+        $this->unit_name=$this->unit_id?Common::find($this->unit_id)->vname:'';
+        $this->gstpercent_id = 47;
+        $this->gstpercent_name=$this->gstpercent_id?Common::find($this->gstpercent_id)->vname:'';
+        $this->quantity=0;
+        $this->price=0;
+    }
+
+    public function save(): void
+    {
+        if ($this->vname != '') {
+            $obj = Product::create([
+                'vname' => Str::ucfirst($this->vname),
+                'producttype_id' => $this->producttype_id?:'39',
+                'hsncode_id' => $this->hsncode_id?:'8',
+                'unit_id' => $this->unit_id?:'43',
+                'gstpercent_id' => $this->gstpercent_id?:'47',
+                'initial_quantity' => $this->quantity?:'0',
+                'initial_price' => $this->price?:'0',
+                'user_id' => Auth::id(),
+                'company_id'=>session()->get('company_id'),
+                'active_id' => '1'
+            ]);
+            $this->dispatch('refresh-product', ['name' => $this->vname, 'id' => $obj->id,'gstpercent_id'=>$this->gstpercent_id]);
+            $this->clearAll();
         }
     }
-    #endregion
+
+    public function clearAll(): void
+    {
+        $this->showModel = false;
+        $this->vname = "";
+        $this->hsncode_id='';
+        $this->hsncode_name='';
+        $this->gstpercent_name='';
+        $this->gstpercent_id='';
+        $this->unit_name='';
+        $this->unit_id='';
+        $this->producttype_id='';
+        $this->producttype_name='';
+        $this->quantity = '';
+        $this->price='';
+    }
 
     #region[hsncode]
     public $hsncode_id = '';
@@ -335,66 +348,12 @@ class Index extends Component
     }
 #endregion
 
-    #region[Get-Obj]
-    public function getObj($id)
-    {
-        if ($id) {
-            $Product = Product::find($id);
-            $this->common->vid = $Product->id;
-            $this->common->vname = $Product->vname;
-            $this->common->active_id = $Product->active_id;
-            $this->hsncode_id = $Product->hsncode_id;
-            $this->hsncode_name=$Product->hsncode_id?Common::find($Product->hsncode_id)->vname:'';
-            $this->producttype_id = $Product->producttype_id;
-            $this->producttype_name=$Product->producttype_id?Common::find($Product->producttype_id)->vname:'';
-            $this->unit_id = $Product->unit_id;
-            $this->unit_name=$Product->unit_id?Common::find($Product->unit_id)->vname:'';
-            $this->gstpercent_id = $Product->gstpercent_id;
-            $this->gstpercent_name=$Product->gstpercent_id?Common::find($Product->gstpercent_id)->vname:'';
-            $this->quantity = $Product->initial_quantity;
-            $this->price = $Product->initial_price;
-            return $Product;
-        }
-        return null;
-    }
-    #endregion
-
-    #region[Clear-Fields]
-    public function clearFields(): void
-    {
-        $this->common->vid = '';
-        $this->common->vname = '';
-        $this->common->active_id = '1';
-        $this->hsncode_id = '';
-        $this->hsncode_name='';
-        $this->gstpercent_name='';
-        $this->gstpercent_id='';
-        $this->unit_name='';
-        $this->unit_id='';
-        $this->producttype_id='';
-        $this->producttype_name='';
-        $this->quantity = '';
-        $this->price='';
-    }
-    #endregion
-
-    #region[Render]
-    public function getRoute()
-    {
-        return route('products');
-    }
-
     public function render()
     {
         $this->getHsncodeList();
         $this->getProductTypeList();
         $this->getUnitList();
         $this->getGstPercentList();
-        return view('livewire.master.product.index')->with([
-            'list' => $this->getListForm->getList(Product::class, function ($query) {
-                return $query->where('id', '>', '');
-            }),
-        ]);
+        return view('livewire.controls.model.product-model');
     }
-    #endregion
 }
