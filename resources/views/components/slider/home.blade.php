@@ -62,11 +62,12 @@
                                  class=" w-full md:h-screen h-80 bg-cover bg-no-repeat mx-auto flex-col opacity-80 flex justify-center relative">
                             </div>
                             <div
-                                class="absolute bottom-56 left-[380px] w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
+                                class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
 
                                 <div
                                     class=" md:text-9xl text-xl capitalize drop-shadow-lg">{{$row->vname}}</div>
-
+                                <div
+                                    class="text-2xl mt-3 text-white">{{$row->description}}</div>
                                 <div
                                     class="text-md mt-3 text-white">{{$row->created_at}}</div>
                             </div>

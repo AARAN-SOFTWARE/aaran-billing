@@ -13,7 +13,7 @@
                            class="py-2 bg-transparent border border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
                     <input type="text" placeholder="E-mail*"
                            class="py-2 bg-transparent border border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
-                    <button class="border border-white py-2 hover:bg-red-300 duration-700">
+                    <button class="border border-white py-2 hover:bg-[#3F5AF3]/60 duration-700">
                         Subscribe
                     </button>
                 </div>

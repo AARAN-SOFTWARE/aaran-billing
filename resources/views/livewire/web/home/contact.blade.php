@@ -1,6 +1,16 @@
 <div>
+    <div class="relative">
+        <div style="background-image: url('/../../../images/wp1.webp')"
+             class="h-[25rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
+        </div>
+        <div class="absolute text-white top-44 left-[280px] w-8/12 text-center">
+            <div class="text-6xl pb-4">Contact</div>
+            <div class="text-lg pb-4">We Design and develop Outstanding Digital products and digital - first Brands</div>
+        </div>
+    </div>
+
     <div class="h-[35rem] flex-col flex justify-center items-center tracking-wider font-roboto">
-        <div class="w-8/12 text-3xl pt-20">Contact</div>
+        <div class="w-8/12 text-3xl">Contact</div>
         <div class="w-8/12 grid grid-cols-2 gap-5 my-2">
             <form class="flex-col flex gap-6">
                 <div class="grid-cols-2 grid gap-2">

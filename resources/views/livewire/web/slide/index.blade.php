@@ -77,6 +77,9 @@
 
             <div class="flex flex-col  gap-3">
                 <x-input.model-text wire:model="common.vname" :label="'Title'"/>
+                @error('common.vname')
+                    <span class="text-red-400">{{ $message }}</span>
+                @enderror
                 <x-input.model-text wire:model="description" :label="'Description'"/>
                 <x-input.model-text wire:model="link" :label="'Link'"/>
                 <!-- Bg Image --------------------------------------------------------------------------------->

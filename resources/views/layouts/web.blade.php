@@ -21,7 +21,7 @@
 </head>
 <body class="">
 <div class="w-full">
-    <x-menu.menu-new />
+    <x-menu.new />
     {{ $slot }}
 </div>
 
