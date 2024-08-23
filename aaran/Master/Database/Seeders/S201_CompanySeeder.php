@@ -10,13 +10,13 @@ class S201_CompanySeeder extends Seeder
     public static function run(): void
     {
         Company::create([
-            'vname' => '-',
+            'vname' => 'ABC company pvt ltd',
             'display_name' => '-',
-            'address_1' => '-',
-            'address_2' => '-',
+            'address_1' => '5th block',
+            'address_2' => 'kuvempu layout',
             'mobile' => '-',
             'landline' => '-',
-            'gstin' => '-',
+            'gstin' => '29AABCT1332L000',
             'pan' => '-',
             'email' => '-',
             'website' => '-',

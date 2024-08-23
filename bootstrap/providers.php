@@ -13,4 +13,5 @@ return [
     Aaran\Web\Providers\WebServiceProvider::class,
 
     Aaran\Blog\Providers\BlogServiceProvider::class,
+    Aaran\MasterGst\Providers\MasterGstServiceProvider::class,
 ];

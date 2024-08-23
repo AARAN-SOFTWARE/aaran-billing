@@ -5,14 +5,18 @@ namespace App\Livewire\Entries\Sales;
 use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Sale;
 use Aaran\Entries\Models\Saleitem;
+use Aaran\Master\Models\Company;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
 use Aaran\Master\Models\Style;
+use Aaran\MasterGst\Models\MasterGstToken;
+use App\Livewire\Forms\MasterGstApi;
 use App\Livewire\Trait\CommonTraitNew;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
@@ -21,6 +25,10 @@ use Livewire\Component;
 class Upsert extends Component
 {
     use CommonTraitNew;
+
+    public MasterGstApi $masterGstApi;
+    public $token;
+    public $irnData;
 
     #region[Properties]
     public string $uniqueno = '';
@@ -436,21 +444,22 @@ class Upsert extends Component
 
     public function transportSave($name)
     {
-        if ($name){
-           $obj= Common::create([
-                'label_id'=>'10',
-                'vname'=>$name,
-                'active_id'=>'1',
+        if ($name) {
+            $obj = Common::create([
+                'label_id' => '10',
+                'vname' => $name,
+                'active_id' => '1',
             ]);
-            $v=['name'=>$name,'id'=>$obj->id];
+            $v = ['name' => $name, 'id' => $obj->id];
             $this->refreshTransport($v);
         }
     }
 
     public function getTransportList(): void
     {
-        $this->transportCollection = $this->transport_name ? Common::search(trim($this->transport_name))->where('label_id','=',10)
-            ->get() : Common::where('label_id','=',10)->get();
+        $this->transportCollection = $this->transport_name ? Common::search(trim($this->transport_name))->where('label_id',
+            '=', 10)
+            ->get() : Common::where('label_id', '=', 10)->get();
     }
 
     #endregion
@@ -510,21 +519,22 @@ class Upsert extends Component
 
     public function despatchSave($name)
     {
-        if ($name){
-            $obj=Common::create([
-                'label_id'=>'12',
-                'vname'=>$name,
-                'active_id'=>'1',
+        if ($name) {
+            $obj = Common::create([
+                'label_id' => '12',
+                'vname' => $name,
+                'active_id' => '1',
             ]);
-            $v=['name'=>$name,'id'=>$obj->id];
+            $v = ['name' => $name, 'id' => $obj->id];
             $this->refreshDespatch($v);
         }
     }
 
     public function getDespatchList(): void
     {
-        $this->despatchCollection = $this->despatch_name ? Common::search(trim($this->despatch_name))->where('label_id','=',12)
-            ->get() : Common::where('label_id','=',12)->get();
+        $this->despatchCollection = $this->despatch_name ? Common::search(trim($this->despatch_name))->where('label_id',
+            '=', 12)
+            ->get() : Common::where('label_id', '=', 12)->get();
     }
 
     #endregion
@@ -584,21 +594,22 @@ class Upsert extends Component
 
     public function ledgerSave($name)
     {
-        if ($name){
-            $obj=Common::create([
-                'label_id'=>'9',
-                'vname'=>$name,
-                'active_id'=>'1',
+        if ($name) {
+            $obj = Common::create([
+                'label_id' => '9',
+                'vname' => $name,
+                'active_id' => '1',
             ]);
-            $v=['name'=>$name,'id'=>$obj->id];
+            $v = ['name' => $name, 'id' => $obj->id];
             $this->refreshLedger($v);
         }
     }
 
     public function getLedgerList(): void
     {
-        $this->ledgerCollection = $this->ledger_name ? Common::search(trim($this->ledger_name))->where('label_id','=',9)
-            ->get() : Common::where('label_id','=',9)->get();
+        $this->ledgerCollection = $this->ledger_name ? Common::search(trim($this->ledger_name))->where('label_id', '=',
+            9)
+            ->get() : Common::where('label_id', '=', 9)->get();
     }
 
     #endregion
@@ -634,7 +645,7 @@ class Upsert extends Component
     {
         $this->product_name = $name;
         $this->product_id = $id;
-        $this->gst_percent1 =Sale::commons($percent);
+        $this->gst_percent1 = Sale::commons($percent);
         $this->getProductList();
     }
 
@@ -647,7 +658,7 @@ class Upsert extends Component
 
         $this->product_name = $obj['vname'] ?? '';
         $this->product_id = $obj['id'] ?? '';
-        $this->gst_percent1 = Sale::commons($obj['gstpercent_id'])?? '';
+        $this->gst_percent1 = Sale::commons($obj['gstpercent_id']) ?? '';
     }
 
     #[On('refresh-product')]
@@ -725,7 +736,7 @@ class Upsert extends Component
     public function colourSave($name)
     {
         $obj = Common::create([
-            'label_id'=>6,
+            'label_id' => 6,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -735,8 +746,9 @@ class Upsert extends Component
 
     public function getColourList(): void
     {
-        $this->colourCollection = $this->colour_name ? Common::search(trim($this->colour_name))->where('label_id','=',6)
-            ->get() : Common::where('label_id','=',6)->get();
+        $this->colourCollection = $this->colour_name ? Common::search(trim($this->colour_name))->where('label_id', '=',
+            6)
+            ->get() : Common::where('label_id', '=', 6)->get();
     }
 
     #endregion
@@ -798,7 +810,7 @@ class Upsert extends Component
     public function sizeSave($name)
     {
         $obj = Common::create([
-            'label_id'=>'7',
+            'label_id' => '7',
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -808,8 +820,8 @@ class Upsert extends Component
 
     public function getSizeList(): void
     {
-        $this->sizeCollection = $this->size_name ? Common::search(trim($this->size_name))->where('label_id','=',7)
-            ->get() : Common::where('label_id','=',7)->get();
+        $this->sizeCollection = $this->size_name ? Common::search(trim($this->size_name))->where('label_id', '=', 7)
+            ->get() : Common::where('label_id', '=', 7)->get();
     }
 
     #endregion
@@ -849,10 +861,6 @@ class Upsert extends Component
 
                     ]);
                     $this->saveItem($obj->id);
-                    $data=response()->json([
-                        'sale'=>json_encode( $obj),
-                        'saleItem'=>json_encode($this->itemList),
-                    ]);
                     $message = "Saved";
                     $this->getRoute();
 
@@ -890,14 +898,11 @@ class Upsert extends Component
                     $obj->save();
                     DB::table('saleitems')->where('sale_id', '=', $obj->id)->delete();
                     $this->saveItem($obj->id);
-                    $data=response()->json([
-                        'sale'=>json_encode( $obj),
-                        'saleItem'=>json_encode($this->itemList),
-                    ]);
                     $message = "Updated";
                 }
 
                 $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
+                $this->jsonFormate();
                 $this->getRoute();
             }
         } catch (\Exception $exception) {
@@ -925,10 +930,159 @@ class Upsert extends Component
     }
     #endregion
 
-    #region[mount]
+    #region[jsonFormate]
+    public function jsonFormate()
+    {
 
+        $company = Company::find(session()->get('company_id'));
+        $contact = Contact::find($this->contact_id);
+        $contactDetail = ContactDetail::where('contact_id', $contact->id)->first();
+        $documentDate = date('d/m/Y', strtotime($this->invoice_date));
+        $jsonData = [
+            "Version" => "1.1",
+            "TranDtls" => [
+                "TaxSch" => "GST",
+                "SupTyp" => "B2B",
+            ],
+            "DocDtls" => [
+                "Typ" => "INV",
+                "No" => $this->invoice_no,
+                "Dt" => $documentDate,
+            ],
+            "SellerDtls" => [
+                "Gstin" => $company->gstin,
+                "LglNm" => $company->vname,
+                "Addr1" => $company->address_1.','.$company->address_2,
+                "Loc" => Common::find($company->city_id)->vname,
+                "Pin" => Common::find($company->pincode_id)->vname,
+                "Stcd" => Common::find($company->state_id)->desc,
+
+            ],
+            "BuyerDtls" => [
+                "Gstin" => $contact->gstin,
+                "LglNm" => $contact->vname,
+                "Pos" => Common::find($contactDetail->state_id)->desc,
+                "Addr1" => $contactDetail->address_1.','.$contactDetail->address_2,
+                "Loc" => Common::find($contactDetail->city_id)->vname,
+                "Pin" => Common::find($contactDetail->pincode_id)->vname,
+                "Stcd" => Common::find($contactDetail->state_id)->desc,
+            ],
+            "DispDtls" => [
+                "Nm" => $company->vname,
+                "Addr1" => $company->address_1.','.$company->address_2,
+                "Loc" => Common::find($company->city_id)->vname,
+                "Pin" => Common::find($company->pincode_id)->vname,
+                "Stcd" => Common::find($company->state_id)->desc,
+            ],
+            "ShipDtls" => [
+                "LglNm" => $contact->vname,
+                "Addr1" => $contactDetail->address_1.','.$contactDetail->address_2,
+                "Loc" => Common::find($contactDetail->city_id)->vname,
+                "Pin" => Common::find($contactDetail->pincode_id)->vname,
+                "Stcd" => Common::find($contactDetail->state_id)->desc,
+            ],
+            "ItemList" => [
+
+            ],
+            "ValDtls" => [
+                "AssVal" => $this->total_taxable,
+                "OthChrg" => $this->additional,
+                "RndOffAmt" => $this->round_off,
+                "TotInvVal" => $this->grand_total,
+            ],
+
+
+            "EwbDtls" => [
+                "Transid" => "12AWGPV7107B1Z1",
+                "Transname" => "XYZ EXPORTS",
+                "Distance" => 0,
+                "Transdocno" => "DOC01",
+                "TransdocDt" => "01/08/2020",
+                "Vehno" => "ka123456",
+                "Vehtype" => "R",
+                "TransMode" => "1"
+            ]
+        ];
+        foreach ($this->itemList as $index => $row) {
+            $productData = Product::find($row['product_id']);
+            $itemData = [
+                "SlNo" => (string)($index + 1),
+                "PrdDesc"=>$productData->vname,
+                "HsnCd" => Sale::commons($productData->hsncode_id),
+                "BchDtls" => [
+                    "Nm" => $productData->vname,
+                ],
+                "Qty" => $row['qty'],
+                "Unit" => Sale::commons($productData->unit_id),
+                "UnitPrice" => $row['price'],
+                "TotAmt" => $row['taxable'],
+                "AssAmt" => $row['taxable'],
+                "GstRt" => $row['gst_percent'],
+                "TotItemVal" => $row['subtotal'],
+            ];
+            if (Sale::commons($productData->producttype_id) == 'Goods') {
+                $itemData["IsServc"] = 'N';
+            } else {
+                $itemData["IsServc"] = 'Y';
+            }
+            if ($this->sales_type == 'CGST-SGST') {
+                $itemData["SgstAmt"] = $row['gst_amount'] / 2;
+                $itemData["CgstAmt"] = $row['gst_amount'] / 2;
+                $itemData["IgstAmt"] = 0;
+            } else {
+                $itemData["IgstAmt"] = $row['gst_amount'];
+                $itemData["SgstAmt"] =0;
+                $itemData["CgstAmt"] = 0;
+            }
+
+            $jsonData["ItemList"][] = $itemData;
+        }
+
+        if ($this->sales_type == 'CGST-SGST') {
+            $jsonData["ValDtls"]["CgstVal"] = $this->total_gst / 2;
+            $jsonData["ValDtls"]["SgstVal"] = $this->total_gst / 2;
+            $jsonData["ValDtls"]["IgstVal"] = 0;
+        } else {
+            $jsonData["ValDtls"]["IgstVal"] = $this->total_gst;
+            $jsonData["ValDtls"]["CgstVal"] = 0;
+            $jsonData["ValDtls"]["SgstVal"] = 0;
+        }
+        $this->irnData=$jsonData;
+        $this->generateIrn();
+    }
+    #endregion
+
+    #region[apiAuthenticate]
+    public function apiAuthenticate()
+    {
+        $apiToken = MasterGstToken::orderByDesc('id')->first();
+        if ($apiToken) {
+            if (\Illuminate\Support\Carbon::now()->format('Y-m-d H:i:s') < $apiToken->expires_at) {
+                $this->token = $apiToken->token;
+            } else {
+                $this->masterGstApi->authenticate();
+                $obj = MasterGstToken::orderByDesc('id')->first();
+                $this->token = $obj->token;
+            }
+        } else {
+            $this->masterGstApi->authenticate();
+            $obj = MasterGstToken::orderByDesc('id')->first();
+            $this->token = $obj->token;
+        }
+    }
+    #endregion
+
+    #region[]
+    public function generateIrn()
+    {
+        $response = $this->masterGstApi->getIrn(new Request(), $this->token, $this->irnData);
+    }
+    #endregion
+
+    #region[mount]
     public function mount($id): void
     {
+        $this->apiAuthenticate();
         $this->invoice_no = Sale::nextNo();
         if ($id != 0) {
             $obj = Sale::find($id);
@@ -994,7 +1148,7 @@ class Upsert extends Component
                 });
             $this->itemList = $data;
         } else {
-            $this->uniqueno = "{$this->contact_id}~{$this->invoice_no}~{$this->invoice_date}";
+            $this->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
             $this->common->active_id = true;
             $this->sales_type = 'CGST-SGST';
             $this->gst_percent = 5;
@@ -1154,6 +1308,7 @@ class Upsert extends Component
     {
         $this->redirect(route('sales'));
     }
+
     public function render()
     {
         $this->getContactList();

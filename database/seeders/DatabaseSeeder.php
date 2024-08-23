@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Aaran\Common\Database\Seeders\S101_LabelSeeder;
 use Aaran\Common\Database\Seeders\S102_CommonSeeder;
 use Aaran\Master\Database\Seeders\S201_CompanySeeder;
+use Aaran\Master\Database\Seeders\S202_ContactSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         S102_CommonSeeder::run();
 
         S201_CompanySeeder::run();
+        S202_ContactSeeder::run();
     }
 }
