@@ -54,9 +54,8 @@ class Show extends Component
                 if ($comment->user_id == Auth::id()) {
                     $comment->save();
                 }
-
-                $this->clearFields();
             }
+            $this->clearFields();
         }
     }
 
@@ -68,7 +67,6 @@ class Show extends Component
         $this->body = '';
 
     }
-
 
     #region[Edit]
     public
@@ -90,7 +88,15 @@ class Show extends Component
 
     #endregion
 
-
+    public function getObj($id)
+    {
+        if ($id){
+            $Comment = Comment::find($id);
+            $this->common->vid = $Comment->id;
+            return $Comment;
+        }
+        return null;
+    }
     public
     function render()
     {

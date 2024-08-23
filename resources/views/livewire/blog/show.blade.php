@@ -129,10 +129,12 @@
                     <div class="flex">
                         <x-icons.icon :icon="'pencil'" wire:click="editComment({{ $row->id }})"
                                       class="text-gray-400 h-5 hover:cursor-pointer hover:text-black px-0.5 py-0.5 hover:rounded-sm inline-flex invisible group-hover:visible "/>
-                        <x-icons.icon :icon="'trash'" wire:click="deleteComment({{ $row->id }})"
+                        <x-icons.icon :icon="'trash'" wire:click="getDelete({{ $row->id }})"
                                       class="text-gray-400 h-5 hover:cursor-pointer hover:text-black px-0.5 py-0.5 hover:rounded-sm inline-flex invisible group-hover:visible"/>
+
                     </div>
                 </div>
+                <x-modal.delete/>
             @endforeach
         </div>
 
