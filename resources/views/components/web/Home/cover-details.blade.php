@@ -1,4 +1,4 @@
-<div class="shadow shadow-gray-600">
+<div class="">
 
     <div class=" font-roboto tracking-wider grid gap-10 pt-20">
         <div class="flex items-center gap-x-3 justify-center">
@@ -17,7 +17,7 @@
 
                     </span>
                     <span class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center">
-                        <svg width="70px" height="70px" viewBox="0 0 50 50" data-name="Layer 1" id="Layer_1" class="group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"
+                        <svg width="70px" height="70px" viewBox="0 0 50 50" data-name="Layer 1" id="Layer_1" class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"
                              xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1 {
                                         fill: #2846f0;
                                     }

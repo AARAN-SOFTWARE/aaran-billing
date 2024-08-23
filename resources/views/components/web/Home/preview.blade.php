@@ -1,19 +1,31 @@
 <div>
 
-{{--    <div class="font-roboto ">--}}
-{{--        <div class="flex items-center gap-x-3 justify-center">--}}
-{{--            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>--}}
-{{--            <span class="text-[#5069F4] text-sm font-semibold">WORK PROCESS</span>--}}
-{{--            <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>--}}
-{{--        </div>--}}
-{{--        <div>Service We Provide</div>--}}
-{{--        <div>--}}
-{{--            <div>--}}
-{{--                <div>/DESIFNING</div>--}}
-{{--                <img src="../../../../images/about-img-2.jpg" alt="">--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    <div class="font-roboto  flex-col flex gap-6 my-16">
+        <div class="flex items-center gap-x-3 justify-center">
+            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
+            <span class="text-[#5069F4] text-sm font-semibold">WORK PROCESS</span>
+            <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
+        </div>
+        <div class="text-center text-6xl font-semibold">Service We Provide</div>
+        <div class="grid grid-cols-4 gap-6 w-10/12 mx-auto">
+            <div>
+                <div class="text-center font-semibold text-3xl">/DESIGNING</div>
+                <img src="../../../../images/about-img-2.jpg" alt="">
+            </div>
+            <div>
+                <div>/DESIGNING</div>
+                <img src="../../../../images/about-img-2.jpg" alt="">
+            </div>
+            <div>
+                <div>/DESIGNING</div>
+                <img src="../../../../images/about-img-2.jpg" alt="">
+            </div>
+            <div>
+                <div>/DESIGNING</div>
+                <img src="../../../../images/about-img-2.jpg" alt="">
+            </div>
+        </div>
+    </div>
     <div class="h-auto w-full grid grid-cols-2">
         <div class="animate__animated wow animate__backInLeft" data-wow-duration="2s">
             <img src="../../../../images/bookcovers.png" alt="" class="w-auto h-[40rem]">
