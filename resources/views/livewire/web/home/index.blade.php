@@ -1,4 +1,4 @@
-<div>
+<div class="scroll-smooth">
     <x-slider.home :list="$slides"/>
     <x-web.home.cover-details />
     <x-web.home.testimony />
@@ -6,8 +6,7 @@
     <x-web.home.features />
     <x-web.home.gallery />
     <x-web.home.partner />
-    <x-web.home.support />
-    <x-web.home.footer />
+    <x-web.home.footer-address />
     <x-web.home.copyright />
 
     <script

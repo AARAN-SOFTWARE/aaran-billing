@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', App\Livewire\Web\Home\Index::class)->name('home');
 Route::get('/about', App\Livewire\Web\Home\About::class)->name('about');
 Route::get('/contact', App\Livewire\Web\Home\Contact::class)->name('contact');
+Route::get('/blog', App\Livewire\Web\Home\Blog::class)->name('blog');
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {

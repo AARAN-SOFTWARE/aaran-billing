@@ -1,11 +1,12 @@
 <div>
-    <div class="relative">
+    <div class="relative font-roboto tracking-wider">
         <div style="background-image: url('/../../../images/wp1.webp')"
-             class="h-[25rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
+             class="h-[30rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
-        <div class="absolute text-white top-44 left-[280px] w-8/12 text-center">
-            <div class="text-6xl pb-4">Contact</div>
-            <div class="text-lg pb-4">We Design and develop Outstanding Digital products and digital - first Brands</div>
+        <div class="w-full absolute text-white top-44 text-center">
+            <div class="w-6/12 mx-auto text-8xl font-semibold pb-4">Contact us</div>
+            <div class="w-6/12 mx-auto text-lg pb-4">We Design and develop Outstanding Digital products and digital - first Brands
+            </div>
         </div>
     </div>
 
@@ -40,7 +41,7 @@
     <div>
         <div class="relative">
             <div style="background-image: url('/../../../images/wp1.webp')"
-                 class="h-[40rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
+                 class="h-[30rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
             </div>
             <div class="absolute top-24 left-[540px] py-6">
                 <div class="w-8/12 flex-col flex gap-y-7 text-white font-roboto tracking-wider">
@@ -61,43 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-0">
-                <div
-                    class="w-screen h-[12rem] bg-[#35383C] flex-col flex justify-evenly items-center font-roboto tracking-wider">
-                    <div class="flex justify-evenly items-center font-roboto tracking-wider w-7/12 gap-x-3 mx-auto text-xs">
-                        <div class="w-3/12 flex-col flex gap-y-4  ">
-                            <div class="text-gray-400 ">Interesting Links</div>
-                            <div class="text-white">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                            </div>
-                        </div>
-                        <div class="w-3/12 flex-col flex gap-y-4  ">
-                            <div class="text-gray-400 text-xs">Where to find us</div>
-                            <div class="text-white">
-                                10-A Venkatappa Gounder Street
-                                Postal Colony, P.N.road
-                                Tiruppur - 641602
-                                Tamilnadu, INDIA.
-                            </div>
-                        </div>
-                        <div class="w-3/12 flex-col flex gap-y-4  j">
-                            <div class="text-gray-400 text-xs">More Stuff</div>
-                            <div class="text-white">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                            </div>
-                        </div>
-                        <div class="w-3/12 flex-col flex gap-y-4 ">
-                            <div class="text-gray-400 text-xs">Our Office Hours</div>
-                            <div class="text-white">
-                                Mo-Fr: 8:00-19:00 <br>
-                                Sa: 8:00-14:00  <br>
-                                S: closed
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            <x-web.home.footer-address />
         </div>
     </div>
     <x-web.home.copyright />

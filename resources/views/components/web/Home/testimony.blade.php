@@ -3,7 +3,7 @@
         <div class="flex-col flex justify-center gap-y-10 items-center px-16">
             <div class="w-full flex items-center gap-x-3 justify-center ">
                 <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-                <span class=" text-[#5069F4] text-xl font-semibold">Testimony</span>
+                <span class=" text-[#5069F4] text-xl font-semibold">TESTIMONY</span>
                 <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
             </div>
             <div class="text-5xl font-bold pb-6 border-b border-black animate__animated wow animate__bounceInDown" data-wow-duration="3s">More than 100.000 users and the best rating on
@@ -27,5 +27,6 @@
 
         </div>
     </div>
-    <img src="../../../../images/lptp.png" alt=""  class="absolute right-16 -top-36 w-[45rem] h-auto animate__animated wow animate__backInLeft transform scaleX(-1) transition-all" data-wow-duration="2s">
+    <img src="../../../../images/lptp.png" alt=""  class="z-20 absolute right-16 -top-36 w-[45rem] h-auto animate__animated wow animate__backInLeft transform " data-wow-duration="2s">
+    <div class="z-10 absolute right-20 top-4 w-[720px] h-[520px] fancy-border bg-[#7084f5] animate-pulse duration-1000 transition-all ease-linear"></div>
 </div>
