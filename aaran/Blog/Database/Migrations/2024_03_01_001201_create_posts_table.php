@@ -14,6 +14,8 @@ return new class extends Migration {
                 $table->string('vname');
                 $table->longText('body');
                 $table->longText('image')->nullable();
+                $table->foreignId('blogcategory_id')->references('id')->on('commons');
+                $table->foreignId('blogtag_id')->references('id')->on('blog_tags');
                 $table->foreignId('user_id')->references('id')->on('users');
                 $table->decimal('active_id')->nullable();
 //                $table->foreignId('company_id')->references('id')->on('companies');
