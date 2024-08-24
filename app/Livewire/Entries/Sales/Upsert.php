@@ -827,7 +827,7 @@ class Upsert extends Component
     #endregion
 
     #region[Save]
-    public function save(): void
+    public function saveExit(): void
     {
 
         try {
@@ -862,7 +862,7 @@ class Upsert extends Component
                     ]);
                     $this->saveItem($obj->id);
                     $message = "Saved";
-                    $this->getRoute();
+
 
                 } else {
                     $obj = Sale::find($this->common->vid);
@@ -902,12 +902,16 @@ class Upsert extends Component
                 }
 
                 $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
-                $this->jsonFormate();
-                $this->getRoute();
+
             }
         } catch (\Exception $exception) {
             echo($exception->getMessage());
         }
+    }
+    public function save()
+    {
+        $this->saveExit();
+        $this->getRoute();
     }
 
     public function saveItem($id): void
@@ -1072,10 +1076,29 @@ class Upsert extends Component
     }
     #endregion
 
-    #region[]
+    #region[saveGenerate]
+    public function saveGenerate()
+    {
+        $this->saveExit();
+        $this->jsonFormate();
+        $this->getRoute();
+    }
+    #endregion
+
+    #region[generateIrn]
     public function generateIrn()
     {
         $response = $this->masterGstApi->getIrn(new Request(), $this->token, $this->irnData);
+//        if ($response->successful()) {
+//            $data = $response->json();
+//            dd($data);
+//            return response()->json($data);
+//        } else {
+//
+//            $errorMessage = $response->body();
+//            dd($errorMessage);
+//            return response()->json(['error' => $errorMessage], $response->status());
+//        }
     }
     #endregion
 

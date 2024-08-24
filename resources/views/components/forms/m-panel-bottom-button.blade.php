@@ -16,6 +16,9 @@
 
                 <x-button.back/>
             @endif
+                <div>
+                    {{$slot}}
+                </div>
         </div>
         <div>
             @if($print)
@@ -27,5 +30,6 @@
                 <x-button.active/>
             @endif
         </div>
+
     </div>
 </div>
