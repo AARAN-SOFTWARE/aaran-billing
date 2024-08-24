@@ -9,7 +9,7 @@
         <div class="text-center text-6xl font-semibold">Service We Provide</div>
         <div class="grid grid-cols-4 gap-6 w-10/12 mx-auto">
             <div class="relative group flex-col flex gap-4">
-                <div class="text-center font-semibold text-3xl">/DESIGNING</div>
+                <div class="text-center font-semibold text-3xl">/SW DEVELOPMENT</div>
                 <img src="../../../../images/about-img-2.jpg" alt="" class="brightness-50">
                 <div
                     class="w-[60px] h-[60px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
@@ -72,18 +72,21 @@
                 <button
                     class="absolute bottom-1 left-8 bg-[#2846f0] text-white inline-flex items-center max-w-max px-5 py-4
                     invisible group-hover:visible group-hover:-translate-y-6 group-hover:opacity-90 ease-linear transition-all duration-200">
-                    <span>Read Details</span>
+
+                    <span><a href="{{route('service')}}">Read Details</a></span>
                     <span>
+                        <a href="{{route('service')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="size-4">
                           <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/>
                         </svg>
+                        </a>
                     </span>
                 </button>
             </div>
             <div class="relative group flex-col flex gap-4">
-                <div class="text-center font-semibold text-3xl">/DEVELOPMENT</div>
+                <div class="text-center font-semibold text-3xl">/GST BILLING</div>
                 <img src="../../../../images/about-img-2.jpg" alt="" class="brightness-50">
                 <div
                     class="w-[60px] h-[60px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
@@ -146,13 +149,15 @@
                 <button
                     class="absolute bottom-1 left-8 bg-[#2846f0] text-white inline-flex items-center max-w-max px-5 py-4
                     invisible group-hover:visible group-hover:-translate-y-6 group-hover:opacity-90 ease-linear transition-all duration-200">
-                    <span>Read Details</span>
+                    <span><a href="{{route('service')}}">Read Details</a></span>
                     <span>
+                        <a href="{{route('service')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="size-4">
                           <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/>
                         </svg>
+                        </a>
                     </span>
                 </button>
             </div>
@@ -171,18 +176,20 @@
                 <button
                     class="absolute bottom-1 left-8 bg-[#2846f0] text-white inline-flex items-center max-w-max px-5 py-4
                     invisible group-hover:visible group-hover:-translate-y-6 group-hover:opacity-90 ease-linear transition-all duration-200">
-                    <span>Read Details</span>
+                    <span><a href="{{route('service')}}">Read Details</a></span>
                     <span>
+                        <a href="{{route('service')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="size-4">
                           <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/>
                         </svg>
+                        </a>
                     </span>
                 </button>
             </div>
             <div class="relative group flex-col flex gap-4">
-                <div class="text-center font-semibold text-3xl">/MOBILE SOLUTION</div>
+                <div class="text-center font-semibold text-3xl">/RAPID SOLUTION</div>
                 <img src="../../../../images/about-img-2.jpg" alt="" class="brightness-50">
                 <div
                     class="w-[60px] h-[60px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
@@ -212,13 +219,15 @@
                 <button
                     class="absolute bottom-1 left-8 bg-[#2846f0] text-white inline-flex items-center max-w-max px-5 py-4
                     invisible group-hover:visible group-hover:-translate-y-6 group-hover:opacity-90 ease-linear transition-all duration-200">
-                    <span>Read Details</span>
+                    <span><a href="{{route('service')}}">Read Details</a></span>
                     <span>
+                        <a href="{{route('service')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="size-4">
                           <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/>
                         </svg>
+                        </a>
                     </span>
                 </button>
             </div>

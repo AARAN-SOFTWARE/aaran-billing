@@ -277,7 +277,7 @@
         </div>
         <div class="w-10/12 mx-auto grid grid-cols-4 gap-3 p-3 bg-[#F3F4F6]">
             <div class="flex-col flex gap-y-2">
-                <img src="../../../../images/p2.jpg" alt="" class="animate__animated wow animate__backInLeft"
+                <img src="../../../../images/t1.webp" alt="" class="animate__animated wow animate__backInLeft"
                      data-wow-duration="2s">
                 <div class="flex-col flex gap-y-2">
                     <div class="text-2xl font-semibold">Mac Rayonds</div>
@@ -285,7 +285,7 @@
                 </div>
             </div>
             <div class="flex-col flex gap-y-2">
-                <img src="../../../../images/p3.jpg" alt="" class="animate__animated wow animate__backInLeft"
+                <img src="../../../../images/t3.webp" alt="" class="animate__animated wow animate__backInLeft"
                      data-wow-duration="2s">
                 <div class="flex-col flex gap-y-2">
                     <div class="text-2xl font-semibold">Lara Williams</div>
@@ -293,7 +293,7 @@
                 </div>
             </div>
             <div class="flex-col flex gap-y-2">
-                <img src="../../../../images/p4.jpg" alt="" class="animate__animated wow animate__backInRight"
+                <img src="../../../../images/t4.webp" alt="" class="animate__animated wow animate__backInRight"
                      data-wow-duration="2s">
                 <div class="flex-col flex gap-y-2">
                     <div class="text-2xl font-semibold">Shilph Adams</div>
@@ -301,7 +301,7 @@
                 </div>
             </div>
             <div class="flex-col flex gap-y-2">
-                <img src="../../../../images/p5.jpg" alt="" class="animate__animated wow animate__backInRight"
+                <img src="../../../../images/t5.webp" alt="" class="animate__animated wow animate__backInRight"
                      data-wow-duration="2s">
                 <div class="flex-col flex gap-y-2">
                     <div class="text-2xl font-semibold">Mana Green</div>

@@ -20,6 +20,9 @@
         <li><a href="{{route('blog')}}"
                class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Blog</a>
         </li>
+        <li><a href="{{route('service')}}"
+               class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Services</a>
+        </li>
         <li><a href="{{route('contact')}}"
                class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Contact</a>
         </li>
@@ -72,6 +75,9 @@
         </li>
         <li class="py-2"><a href="{{route('blog')}}"
                             class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">Blog</a>
+        </li>
+        <li class="py-2"><a href="{{route('service')}}"
+                            class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">Services</a>
         </li>
         <li class="py-2"><a href="{{route('contact')}}"
                             class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">Contact</a>

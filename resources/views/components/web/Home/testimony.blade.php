@@ -10,10 +10,9 @@
                 Aaran InfoTech.
             </div>
             <div class="text-lg text-gray-400 animate__animated wow bounceInDown" data-wow-duration="3s">
-                Enfold is the best rated top seller on Themeforest. There is no other theme with that many sales that
-                has
-                an average rating of 4.85. Heck, you will be hard pressed to find ANY product on the web with that many
-                sales and a rating that good ;)
+                Aaran is the best rated top seller on web. There is no other billing software with that many sales that
+                has an average rating of 4.85. Heck, you will be hard pressed to find any product on the web with that many
+                sales and a rating that good 😊
             </div>
             <div class="animate__animated wow bounceInUp" data-wow-duration="3s">
                 <x-rating.star class="w-16 h-auto "/>
