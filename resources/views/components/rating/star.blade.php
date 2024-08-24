@@ -1,4 +1,4 @@
-<div x-data="{ currentVal: 3 }" class="flex items-center gap-1">
+<div x-data="{ currentVal: 5 }" class="flex items-center gap-1">
     <label for="oneStar" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
         <span class="sr-only">one star</span>
         <input x-model="currentVal" id="oneStar" type="radio" class="sr-only" name="rating" value="1">

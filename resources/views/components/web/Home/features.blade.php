@@ -1,69 +1,69 @@
 <div>
-    <div class="w-8/12 h-screen mx-auto py-12 flex-col flex gap-6 justify-evenly items-center">
-        <div class="font-roboto text-4xl text-gray-500 flex justify-center py-2 animate__animated wow bounceInDown" data-wow-duration="3s">A Software packed with great features
+    <div class="w-8/12 h-screen mx-auto flex-col flex gap-6 justify-evenly items-center">
+        <div class="font-roboto text-4xl font-bold flex justify-center py-2 animate__animated wow bounceInDown" data-wow-duration="3s">A Software packed with great features
         </div>
         <div style="background-image: url('/../../../images/unsplash.jpg')"
              class="relative w-full mx-auto bg-no-repeat bg-cover h-[30rem] rounded-xl shadow-lg shadow-gray-300 animate__animated wow bounceInDown" data-wow-duration="3s">
             <div class="absolute top-16 left-9 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInLeft" data-wow-duration="3s">
                 <div
-                    class="w-60 p-3 text-gray-600 text-xs font-roboto tracking-wider bg-white shadow shadow-gray-200 rounded-md">
+                    class="w-60 p-3 text-white text-xs font-roboto tracking-wider bg-[#2846f0]/80 shadow shadow-gray-200 rounded-md">
                     Beautiful new demos with each release
                 </div>
                 <div class="relative">
                     <div
-                        class="w-9 h-9 rounded-full bg-white/40 animate-ping transition  duration-[5000] delay-1000 ease-in  ">
+                        class="w-9 h-9 rounded-full bg-[#2846f0]/40 animate-ping transition  duration-[5000] delay-1000 ease-in  ">
 
                     </div>
                     <div
-                        class="absolute top-1 left-1 w-7 h-7 rounded-full bg-white text-gray-600 font-bold font-roboto flex items-center justify-center text-xs">
+                        class="absolute top-1 left-1 w-7 h-7 rounded-full bg-[#2846f0] text-white font-bold font-roboto flex items-center justify-center text-xs">
                         1
                     </div>
                 </div>
             </div>
             <div class="absolute bottom-16 left-48 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInLeft" data-wow-duration="3s">
                 <div
-                    class="w-60 p-3 text-gray-600 text-xs font-roboto tracking-wider bg-white shadow shadow-gray-200 rounded-md">
+                    class="w-60 p-3 text-white text-xs font-roboto tracking-wider bg-[#2846f0]/80 shadow shadow-gray-200 rounded-md">
                     Free Stock Pictures included in all demos
                 </div>
                 <div class="relative">
                     <div
-                        class="w-9 h-9 rounded-full bg-white/40 animate-ping transition  duration-[5000] delay-1000 ease-in  ">
+                        class="w-9 h-9 rounded-full bg-[#2846f0]/40 animate-ping transition  duration-[5000] delay-1000 ease-in  ">
 
                     </div>
                     <div
-                        class="absolute top-1 left-1 w-7 h-7 rounded-full bg-white text-gray-600 font-bold font-roboto flex items-center justify-center text-xs">
+                        class="absolute top-1 left-1 w-7 h-7 rounded-full bg-[#2846f0] text-white font-bold font-roboto flex items-center justify-center text-xs">
                         2
                     </div>
                 </div>
             </div>
             <div class="absolute bottom-64 right-56 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
                 <div
-                    class="w-60 px-3 py-4 text-gray-600 text-xs font-roboto tracking-wider bg-white shadow shadow-gray-200 rounded-md">
+                    class="w-60 px-3 py-4 text-white text-xs font-roboto tracking-wider bg-[#2846f0]/80 shadow shadow-gray-200 rounded-md">
                     Retina ready and responsive – works great on devices of any size
                 </div>
                 <div class="relative">
                     <div
-                        class="w-9 h-9 rounded-full bg-white/40 animate-ping transition  duration-[5000] delay-1000 ease-in  ">
+                        class="w-9 h-9 rounded-full bg-[#2846f0]/40 animate-ping transition  duration-[5000] delay-1000 ease-in  ">
 
                     </div>
                     <div
-                        class="absolute top-1 left-1 w-7 h-7 rounded-full bg-white text-gray-600 font-bold font-roboto flex items-center justify-center text-xs">
+                        class="absolute top-1 left-1 w-7 h-7 rounded-full bg-[#2846f0] text-white font-bold font-roboto flex items-center justify-center text-xs">
                         3
                     </div>
                 </div>
             </div>
             <div class="absolute bottom-28 right-80 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
                 <div
-                    class="w-60 p-3 text-gray-600 text-xs font-roboto tracking-wider bg-white shadow shadow-gray-200 rounded-md">
+                    class="w-60 p-3 text-white text-xs font-roboto tracking-wider bg-[#2846f0]/80 shadow shadow-gray-200 rounded-md">
                     Amazing Theme Options for unlimited colors and styles
                 </div>
                 <div class="relative">
                     <div
-                        class="w-9 h-9 rounded-full bg-white/40 animate-ping transition  duration-[5000] delay-1000 ease-in  ">
+                        class="w-9 h-9 rounded-full bg-[#2846f0]/40 animate-ping transition  duration-[5000] delay-1000 ease-in  ">
 
                     </div>
                     <div
-                        class="absolute top-1 left-1 w-7 h-7 rounded-full bg-white text-gray-600 font-bold font-roboto flex items-center justify-center text-xs">
+                        class="absolute top-1 left-1 w-7 h-7 rounded-full bg-[#2846f0] text-white font-bold font-roboto flex items-center justify-center text-xs">
                         4
                     </div>
                 </div>

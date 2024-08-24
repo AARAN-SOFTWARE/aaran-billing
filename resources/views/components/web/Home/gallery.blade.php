@@ -1,5 +1,6 @@
 <div>
-    <div class="bg-[#35383C] p-5">
+    <div class="bg-[#F2F3F4]  p-5">
+{{--        bg-[#35383C]  --}}
         {{--@props([--}}
         {{--    'list'=>null--}}
         {{--])--}}
@@ -151,47 +152,38 @@
                 </template>
             </div>
         </section>
-        <div class="py-16 text-white font-roboto tracking-wider">
-            <div class="text-4xl w-5/12 mx-auto border-b border-white pb-6 text-center animate__animated wow animate__bounceInUp" data-wow-duration="2s">Can’t get enough? Here are even more features!</div>
+        <div class="py-16 font-roboto tracking-wider">
+            <div class="text-4xl w-5/12 mx-auto border-b border-black pb-6 text-center animate__animated wow animate__bounceInUp" data-wow-duration="2s">Can’t get enough? Here are even more features!</div>
             <div class="w-9/12 mx-auto grid grid-cols-3 pt-8">
                 @for($i=0; $i<3; $i++)
                     <div class="flex-col flex animate__animated wow animate__bounceInUp" data-wow-duration="2s">
-                        <div class="inline-flex items-center gap-1.5">
-                            <x-icons.icon icon="arrow-right-circle" class="w-5 h-auto text-white"/>
-                            <span>Clean and modern Design</span>
-                        </div>
-                        <div class="inline-flex items-center gap-1.5">
-                            <x-icons.icon icon="arrow-right-circle" class="w-5 h-auto text-white"/>
-                            <span>Drag and Drop Template Builder</span>
-                        </div>
-                        <div class="inline-flex items-center gap-1.5">
-                            <x-icons.icon icon="arrow-right-circle" class="w-5 h-auto text-white"/>
-                            <span>Ajax Instant Search</span>
-                        </div>
-                        <div class="inline-flex items-center gap-1.5">
-                            <x-icons.icon icon="arrow-right-circle" class="w-5 h-auto text-white"/>
-                            <span>Translation ready</span>
-                        </div>
-                        <div class="inline-flex items-center gap-1.5">
-                            <x-icons.icon icon="arrow-right-circle" class="w-5 h-auto text-white"/>
-                            <span>WooCommerce ready</span>
-                        </div>
-                        <div class="inline-flex items-center gap-1.5">
-                            <x-icons.icon icon="arrow-right-circle" class="w-5 h-auto text-white"/>
-                            <span>WooCommerce Bookings Support</span>
-                        </div>
-                        <div class="inline-flex items-center gap-1.5">
-                            <x-icons.icon icon="arrow-right-circle" class="w-5 h-auto text-white"/>
-                            <span>WPML ready</span>
-                        </div>
-                        <div class="inline-flex items-center gap-1.5">
-                            <x-icons.icon icon="arrow-right-circle" class="w-5 h-auto text-white"/>
-                            <span>Responsive design</span>
-                        </div>
-                        <div class="inline-flex items-center gap-1.5">
-                            <x-icons.icon icon="arrow-right-circle" class="w-5 h-auto text-white"/>
-                            <span>Child theme support</span>
-                        </div>
+                        <x-accordion-single.list heading="Clean and modern Design">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium asperiores autem commodi ex inventore laborum libero omnis quaerat qui quo recusandae repellat sit ut, veniam?
+                        </x-accordion-single.list>
+                        <x-accordion-single.list heading="Drag and Drop Template Builder">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, vero!
+                        </x-accordion-single.list>
+                        <x-accordion-single.list heading="Ajax Instant Search">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, vero!
+                        </x-accordion-single.list>
+                        <x-accordion-single.list heading="Translation ready">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, vero!
+                        </x-accordion-single.list>
+                        <x-accordion-single.list heading="WooCommerce ready">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, vero!
+                        </x-accordion-single.list>
+                        <x-accordion-single.list heading="WooCommerce Bookings Support">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, vero!
+                        </x-accordion-single.list>
+                        <x-accordion-single.list heading="WPML ready">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, vero!
+                        </x-accordion-single.list>
+                        <x-accordion-single.list heading="Responsive design">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, vero!
+                        </x-accordion-single.list>
+                        <x-accordion-single.list heading="Child theme support">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, vero!
+                        </x-accordion-single.list>
                     </div>
                 @endfor
             </div>
