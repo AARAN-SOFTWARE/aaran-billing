@@ -11,6 +11,7 @@ return [
         Customise::entries(),
         Customise::core(),
         Customise::blog(),
+        Customise::gstapi(),
     ],
     'SalesEntry' => [
         SaleEntry::order(),

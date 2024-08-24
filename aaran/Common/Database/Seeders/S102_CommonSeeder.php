@@ -31,13 +31,20 @@ class S102_CommonSeeder extends Seeder
             'active_id' => '1'
         ]);
 
+        #region[state]
         Common::create([
             'label_id'=>'2',
-            'vname' => 'TamilNadu',
-            'desc' => '-',
+            'vname' => 'TAMIL NADU',
+            'desc' => '33',
             'desc_1' => '-',
             'active_id' => '1'
         ]);
+
+        #endregion
+
+
+
+        #pin-code
         Common::create([
             'label_id'=>'3',
             'vname' => '641666',
@@ -375,5 +382,252 @@ class S102_CommonSeeder extends Seeder
             'active_id' => '1'
         ]);
 
+        #region[states]
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'KERALA',
+            'desc' => '32',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'PUDUCHERRY',
+            'desc' => '34',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'JAMMU AND KASHMIR',
+            'desc' => '1',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'HIMACHAL PRADESH',
+            'desc' => '2',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'PUNJAB',
+            'desc' => '3',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'CHANDIGARH',
+            'desc' => '4',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'UTTARAKHAND',
+            'desc' => '5',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'HARYANA',
+            'desc' => '6',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'DELHI',
+            'desc' => '7',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'RAJASTHAN',
+            'desc' => '8',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'UTTAR PRADESH',
+            'desc' => '9',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'BIHAR',
+            'desc' => '10',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'SIKKIM',
+            'desc' => '11',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'ARUNACHAL PRADESH',
+            'desc' => '12',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'NAGALAND',
+            'desc' => '13',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'MANIPUR',
+            'desc' => '14',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'MIZORAM',
+            'desc' => '15',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'TRIPURA',
+            'desc' => '16',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'MEGHALAYA',
+            'desc' => '17',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'ASSAM',
+            'desc' => '18',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'WEST BENGAL',
+            'desc' => '19',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'JHARKHAND',
+            'desc' => '20',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'ODISHA',
+            'desc' => '21',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'CHATTISGARH',
+            'desc' => '22',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'MADHYA PRADESH',
+            'desc' => '23',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'GUJARAT',
+            'desc' => '24',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'DADRA AND NAGAR HAVELI AND DAMAN AND DIU',
+            'desc' => '26',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'MAHARASHTRA',
+            'desc' => '27',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'KARNATAKA',
+            'desc' => '29',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'GOA',
+            'desc' => '30',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'ANDAMAN AND NICOBAR ISLANDS',
+            'desc' => '35',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'LAKSHADWEEP',
+            'desc' => '31',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'TELANGANA',
+            'desc' => '36',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'LADAKH',
+            'desc' => '38',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'2',
+            'vname' => 'Andhra Pradesh',
+            'desc' => '37',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        #endregion
     }
 }

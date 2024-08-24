@@ -89,4 +89,15 @@ class Customise
         return 'core';
     }
     #endregion
+    #region[Core]
+    public static function hasGstApi(): bool
+    {
+        return static::enabled(static::gstapi());
+    }
+
+    public static function gstapi(): string
+    {
+        return 'gstapi';
+    }
+    #endregion
 }

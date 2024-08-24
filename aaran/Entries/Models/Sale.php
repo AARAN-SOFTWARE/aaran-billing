@@ -2,19 +2,13 @@
 
 namespace Aaran\Entries\Models;
 
-use Aaran\Aadmin\Src\Customise;
 use Aaran\Common\Models\Common;
-use Aaran\Common\Models\Despatch;
-use Aaran\Common\Models\Ledger;
-use Aaran\Common\Models\Transport;
 use Aaran\Entries\Database\Factories\SaleFactory;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\Contact;
-use Aaran\Master\Models\Contact_detail;
 use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Style;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
