@@ -19,7 +19,7 @@
                 @foreach($firstPost as $data)
 
                     <a href="{{route('posts.show',[$data->id])}}">
-                        <div class="text-4xl tracking-wider">Entry With Audio{{ $data->vname }}</div>
+                        <div class="text-4xl tracking-wider">{{ $data->vname }}</div>
 
                         <div class="flex flex-row gap-x-1 text-gray-500 text-md mt-3 uppercase">
                             <span>{{ $data->user->name }},</span>
@@ -33,7 +33,7 @@
                                 alt="{{$data->image}}"
                                 class="w-full md:h-[25rem] h-72 rounded-md hover:opacity-80 duration-300">
 
-                            <div class="text-md text-gray-500 pt-1.5">
+                            <div class="text-md text-gray-600 pt-1.5">
                                 {!!\Illuminate\Support\Str::words( $data->body,35 )!!}
                             </div>
 
@@ -68,19 +68,19 @@
                                         class="w-full md:h-[20rem] my-5 h-32 hover:opacity-80 duration-300">
                                 </div>
                             </a>
-                            <div class="flex flex-col gap-y-3">
+                            <div class="flex flex-col gap-y-5">
                                 <a href="{{route('posts.show',[$row->id])}}">
                                     <div class="text-4xl tracking-wider">
-                                        A small Gallery&nbsp;{{ \Illuminate\Support\Str::words($row->vname,5) }}
+                                        {{ \Illuminate\Support\Str::words($row->vname,5) }}
                                     </div>
 
-                                    <div class="flex flex-row gap-x-1 text-gray-500 text-md uppercase">
+                                    <div class="flex flex-row gap-x-1 text-gray-500 text-md uppercase my-2.5">
                                         <span>{{ $row->user->name }},</span>
                                         <span>Personal,</span>
                                         <span>Uncategorized</span>
                                     </div>
 
-                                    <div class="text-md text-gray-500">
+                                    <div class="text-md text-gray-600">
                                         {!!\Illuminate\Support\Str::words( $row->body,20 )!!}&nbsp;
                                     </div>
                                 </a>
