@@ -1,4 +1,4 @@
-<div>
+<div class="mt-10">
     <div class="relative">
         <div style="background-image: url('/../../../images/wp1.webp')"
              class="h-screen bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
@@ -6,8 +6,8 @@
         <div class="w-full absolute top-24 py-6">
             <div class="w-6/12 mx-auto flex-col flex gap-y-7 text-white font-roboto tracking-wider">
                 <div class="text-2xl text-center w-5/6 mx-auto animate__animated wow animate__backInLeft"
-                     data-wow-duration="2s">Another great feature included in the theme:
-                    Mailchimp Newsletter Sign Up
+                     data-wow-duration="2s">
+                    Ready to Transform Your Business? Take the First Step Today!
                 </div>
                 <div class="grid grid-cols-3 gap-3 animate__animated wow animate__bounceInUp" data-wow-duration="2s">
                     <input type="text" placeholder="Name*"
@@ -18,21 +18,20 @@
                         Subscribe
                     </button>
                 </div>
-                <div class="text-xs text-center text-gray-300 animate__animated wow animate__backInRight"
+                <div class="text-xl text-center text-gray-300 animate__animated wow animate__backInRight"
                      data-wow-duration="2s">
-                    Use either normal contact forms, like the one above, or similar looking mailchimp forms that let
-                    your customer directly subscribe to your mailchimp newsletter!
+                    Stay updated and compliant with the online GST software for accounting,
+                    Manage your finances, and file GST online for your business—all from one platform.
                 </div>
             </div>
         </div>
+
         <div class="absolute bottom-0">
             <div
                 class="w-screen h-[20rem] bg-[#F1F1F1] flex-col flex justify-evenly items-center font-roboto tracking-wider">
                 <div
                     class="w-6/12 mx-auto text-center text-2xl text-gray-600 border-b border-black pb-6 animate__animated wow animate__bounceInDown"
-                    data-wow-duration="2s">Deep integration for
-                    market-leading plugins.
-                    And of course working out of the box with thousands more…
+                    data-wow-duration="2s">Trusted By The Best Companies all around global
                 </div>
                 <div class="flex grayscale-0 w-6/12 mx-auto justify-between animate__animated wow animate__bounceInUp"
                      data-wow-duration="2s">
