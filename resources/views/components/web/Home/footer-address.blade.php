@@ -3,7 +3,7 @@
 
         <div class="flex flex-col mt-10 ">
             <!-- address, socialmedia-->
-            <div class="text-white text-xl">AARAN INFOTECH
+            <div class="text-white text-xl">AARAN INFO TECH
             </div>
 
             <div class="mt-3">
@@ -13,7 +13,7 @@
                     Tiruppur - 641602 <br>
                     Tamilnadu, INDIA. <br>
                     &nbsp;<br>
-                    info@sportsclub.com<br>
+                    info@aarnerp.com<br>
                     +91 9655227738<br>
                 </div>
             </div>
@@ -21,36 +21,35 @@
         </div>
 
         <!-- link -->
-        <div class="my-3">
-            <div class="text-white text-2xl my-2">Aaran</div>
-            <div class="text-white text-sm tracking-widest my-4">About</div>
-            <div class="text-white text-sm tracking-widest my-4">Contact Us</div>
-            <div class="text-white text-sm tracking-widest my-4">We are Hiring</div>
-            <div class="text-white text-sm tracking-widest my-4">Blog</div>
-            <div class="text-white text-sm tracking-widest my-4">Careers</div>
-
-            <div class="text-white text-sm tracking-widest my-4">Finance</div>
+        <div class="my-3 flex flex-col gap-2 shrink-0">
+            <a class="text-white text-2xl my-2  cursor-pointer hover:text-green-500">Aaran</a>
+            <a class="text-white text-sm tracking-widest cursor-pointer hover:text-orange-500">About</a>
+            <a class="text-white text-sm tracking-widest cursor-pointer hover:text-orange-500">Contact Us</a>
+            <a class="text-white text-sm tracking-widest cursor-pointer hover:text-orange-500">We are Hiring</a>
+            <a class="text-white text-sm tracking-widest cursor-pointer hover:text-orange-500">Blog</a>
+            <a class="text-white text-sm tracking-widest cursor-pointer hover:text-orange-500">Careers</a>
+            <a class="text-white text-sm tracking-widest cursor-pointer hover:text-orange-500">Finance</a>
         </div>
 
 
         <div class="my-3 ">
             <div class="text-white text-2xl font-nunito my-2">Links</div>
-            <div class="text-white text-sm tracking-widest my-4">FAQ</div>
-            <div class="text-white text-sm tracking-widest my-4">Pricing</div>
-            <div class="text-white text-sm tracking-widest my-4">Feedback</div>
-            <div class="text-white text-sm tracking-widest my-4">Terms of Service</div>
-            <div class="text-white text-sm tracking-widest my-4">Privacy and Policy</div>
-            <div class="text-white text-sm tracking-widest my-4">Help and Support</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">FAQ</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">Pricing</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">Feedback</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">Terms of Service</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">Privacy and Policy</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">Help and Support</div>
         </div>
 
 
         <div class="my-3 ">
             <div class="text-white text-2xl font-nunito my-2">Products</div>
-            <div class="text-white text-sm tracking-widest my-4">Accounting Software</div>
-            <div class="text-white text-sm tracking-widest my-4">GST Billing Software</div>
-            <div class="text-white text-sm tracking-widest my-4">e-way Bill Software</div>
-            <div class="text-white text-sm tracking-widest my-4">e-invoice Software</div>
-            <div class="text-white text-sm tracking-widest my-4">Invoice Software</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">GST Billing Software</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">ERP Software</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">Marketing software</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">Task Management Software</div>
+            <div class="text-white text-sm tracking-widest my-4 cursor-pointer">Auditor Software</div>
 
         </div>
 

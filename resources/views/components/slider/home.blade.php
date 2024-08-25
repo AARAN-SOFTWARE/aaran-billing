@@ -65,11 +65,11 @@
                                 class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
 
                                 <div
-                                    class=" md:text-9xl text-xl capitalize drop-shadow-lg">{{$row->vname}}</div>
+                                    class=" md:text-6xl text-xl capitalize drop-shadow-lg">{{$row->vname}}</div>
                                 <div
                                     class="text-2xl mt-3 text-white">{{$row->description}}</div>
-                                <div
-                                    class="text-md mt-3 text-white">{{$row->created_at}}</div>
+{{--                                <div--}}
+{{--                                    class="text-md mt-3 text-white">{{$row->created_at}}</div>--}}
                             </div>
                         </li>
                     @empty
@@ -82,7 +82,7 @@
                                 class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
 
                                 <div
-                                    class=" md:text-9xl text-xl capitalize drop-shadow-lg">GST Billing Software Online
+                                    class=" md:text-6xl text-xl capitalize drop-shadow-lg">GST Billing Software Online
                                     in India
                                 </div>
                                 <div
@@ -92,8 +92,8 @@
                                     100% safe, reliable, and secure GST-compliant billing software.
                                     Aaran for invoicing, quotations, inventory, eWay bills & more!
                                 </div>
-                                <div
-                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>
+{{--                                <div--}}
+{{--                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>--}}
                             </div>
                         </li>
                         <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start relative">
@@ -105,14 +105,14 @@
                                 class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
 
                                 <div
-                                    class=" md:text-9xl text-xl capitalize drop-shadow-lg">Only GST Billing Software You Need For Your Business
+                                    class=" md:text-6xl text-xl capitalize drop-shadow-lg">Only GST Billing Software You Need For Your Business
                                 </div>
                                 <div
                                     class="text-2xl mt-3 text-white">Streamline your invoicing with Refrens GST billing software: effortlessly create GST-compliant
                                     invoices in minutes. Seamlessly share invoices via WhatsApp, Email, PDF, and shareable links.
                                 </div>
-                                <div
-                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>
+{{--                                <div--}}
+{{--                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>--}}
                             </div>
                         </li>
                         <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start relative">
@@ -124,13 +124,13 @@
                                 class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
 
                                 <div
-                                    class=" md:text-9xl text-xl capitalize drop-shadow-lg">Empower your business with our streamlined GST billing software</div>
+                                    class=" md:text-6xl text-xl capitalize drop-shadow-lg">Empower your business with our streamlined GST billing software</div>
                                 <div
                                     class="text-2xl mt-3 text-white">
                                     Automate payment reminders for quicker settlements. Enjoy one-click IRN & QR Code generation for enhanced compliance.
                                     Experience the simplicity, reliability, and security of our user-friendly platform.</div>
-                                <div
-                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>
+{{--                                <div--}}
+{{--                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>--}}
                             </div>
                         </li>
                     @endforelse
