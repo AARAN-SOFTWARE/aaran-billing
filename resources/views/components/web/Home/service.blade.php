@@ -3,14 +3,15 @@
     <div class="font-roboto  flex-col flex gap-6 my-16">
         <div class="flex items-center gap-x-3 justify-center">
             <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-            <span class="text-[#5069F4] text-xl font-semibold">SERVICE</span>
+            <span class="text-[#5069F4] text-xl font-semibold">Get real-time Collaborate</span>
             <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
         </div>
-        <div class="text-center text-6xl font-semibold">Service We Provide</div>
+        <div class="text-center text-4xl font-semibold">How Codexsun can improve your business:</div>
         <div class="grid grid-cols-4 gap-6 w-10/12 mx-auto">
+
             <div class="relative group flex-col flex gap-4">
-                <div class="text-center font-semibold text-3xl">/SW DEVELOPMENT</div>
-                <img src="../../../../images/about-img-2.jpg" alt="" class="brightness-50">
+                <div class="text-center font-semibold text-2xl">/SW DEVELOPMENT</div>
+                <img src="../../../../images/softwareDev.png" alt="" class="brightness-50">
                 <div
                     class="w-[60px] h-[60px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
                     group-hover:opacity-90 ease-linear transition-all duration-200 bg-white/90 inline-flex justify-center items-center rounded-md">
@@ -85,9 +86,10 @@
                     </span>
                 </button>
             </div>
+
             <div class="relative group flex-col flex gap-4">
-                <div class="text-center font-semibold text-3xl">/GST BILLING</div>
-                <img src="../../../../images/about-img-2.jpg" alt="" class="brightness-50">
+                <div class="text-center font-semibold text-2xl">/GST BILLING</div>
+                <img src="../../../../images/gstBilling.png" alt="" class="brightness-50">
                 <div
                     class="w-[60px] h-[60px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
                     group-hover:opacity-90 ease-linear transition-all duration-200 bg-white/90 inline-flex justify-center items-center p-2 rounded-md">
@@ -161,9 +163,10 @@
                     </span>
                 </button>
             </div>
+
             <div class="relative group flex-col flex gap-4">
-                <div class="text-center font-semibold text-3xl">/USER EXPERIENCE</div>
-                <img src="../../../../images/about-img-2.jpg" alt="" class="brightness-50">
+                <div class="text-center font-semibold text-2xl">/USER EXPERIENCE</div>
+                <img src="../../../../images/userExperience.png" alt="" class="brightness-50">
                 <div
                     class="w-[60px] h-[60px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
                     group-hover:opacity-90 ease-linear transition-all duration-200 bg-white/90 inline-flex justify-center items-center rounded-md">
@@ -188,8 +191,9 @@
                     </span>
                 </button>
             </div>
+
             <div class="relative group flex-col flex gap-4">
-                <div class="text-center font-semibold text-3xl">/RAPID SOLUTION</div>
+                <div class="text-center font-semibold text-2xl">/RAPID SOLUTION</div>
                 <img src="../../../../images/about-img-2.jpg" alt="" class="brightness-50">
                 <div
                     class="w-[60px] h-[60px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9

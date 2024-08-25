@@ -1,12 +1,12 @@
-<div class="">
+<div class="py-8">
 
     <div class=" font-roboto tracking-wider grid gap-10 pt-20">
         <div class="flex items-center gap-x-3 justify-center">
             <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-            <span class="text-[#5069F4] text-sm font-semibold">WORK PROCESS</span>
+            <span class="text-[#5069F4] text-sm font-semibold">Billing Made Simple and Efficient</span>
             <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
         </div>
-        <div class="text-center text-6xl font-semibold">Follow 4 Work Steps</div>
+        <div class="text-center text-6xl font-semibold">Try India’s easiest GST billing platform</div>
         <div class="grid grid-cols-4 w-10/12 mx-auto gap-6">
             <div class="h-96 flex-col">
                 <div class="relative inline-flex items-center justify-center group">
@@ -16,8 +16,11 @@
                                                    class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
 
                     </span>
-                        <span class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center">
-                        <svg fill="#2846f0" class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear" width="60px"
+                    <span
+                        class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center cursor-pointer">
+                        <svg fill="#2846f0"
+                             class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"
+                             width="60px"
                              height="60px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path
                                 d="M136.948 908.811c5.657 0 10.24-4.583 10.24-10.24V610.755c0-5.657-4.583-10.24-10.24-10.24h-81.92a10.238 10.238 0 00-10.24 10.24v287.816c0 5.657 4.583 10.24 10.24 10.24h81.92zm0 40.96h-81.92c-28.278 0-51.2-22.922-51.2-51.2V610.755c0-28.278 22.922-51.2 51.2-51.2h81.92c28.278 0 51.2 22.922 51.2 51.2v287.816c0 28.278-22.922 51.2-51.2 51.2zm278.414-40.96c5.657 0 10.24-4.583 10.24-10.24V551.322c0-5.657-4.583-10.24-10.24-10.24h-81.92a10.238 10.238 0 00-10.24 10.24v347.249c0 5.657 4.583 10.24 10.24 10.24h81.92zm0 40.96h-81.92c-28.278 0-51.2-22.922-51.2-51.2V551.322c0-28.278 22.922-51.2 51.2-51.2h81.92c28.278 0 51.2 22.922 51.2 51.2v347.249c0 28.278-22.922 51.2-51.2 51.2zm278.414-40.342c5.657 0 10.24-4.583 10.24-10.24V492.497c0-5.651-4.588-10.24-10.24-10.24h-81.92c-5.652 0-10.24 4.589-10.24 10.24v406.692c0 5.657 4.583 10.24 10.24 10.24h81.92zm0 40.96h-81.92c-28.278 0-51.2-22.922-51.2-51.2V492.497c0-28.271 22.924-51.2 51.2-51.2h81.92c28.276 0 51.2 22.929 51.2 51.2v406.692c0 28.278-22.922 51.2-51.2 51.2zm278.414-40.958c5.657 0 10.24-4.583 10.24-10.24V441.299c0-5.657-4.583-10.24-10.24-10.24h-81.92a10.238 10.238 0 00-10.24 10.24v457.892c0 5.657 4.583 10.24 10.24 10.24h81.92zm0 40.96h-81.92c-28.278 0-51.2-22.922-51.2-51.2V441.299c0-28.278 22.922-51.2 51.2-51.2h81.92c28.278 0 51.2 22.922 51.2 51.2v457.892c0 28.278-22.922 51.2-51.2 51.2zm-6.205-841.902C677.379 271.088 355.268 367.011 19.245 387.336c-11.29.683-19.889 10.389-19.206 21.679s10.389 19.889 21.679 19.206c342.256-20.702 670.39-118.419 964.372-284.046 9.854-5.552 13.342-18.041 7.79-27.896s-18.041-13.342-27.896-7.79z"/><path
                                 d="M901.21 112.64l102.39.154c11.311.017 20.494-9.138 20.511-20.449s-9.138-20.494-20.449-20.511l-102.39-.154c-11.311-.017-20.494 9.138-20.511 20.449s9.138 20.494 20.449 20.511z"/><path
@@ -25,9 +28,10 @@
                        </span>
                 </div>
                 <div class="text-2xl font-semibold py-4">Sales & Purchase</div>
-                <div class="text-gray-600 text-sm">Streamlines the sales order processing,Helps track sales orders,
-                    Facilitates the purchase order management, Provides a better customer experience,
-                    Provides detailed reports.
+                <div class="text-gray-600 text-sm">Create sleek invoices with the click of a button.
+                    From adding your company logo to changing fonts, customize invoice templates to reflect your brand.
+                    Streamlines the sales order processing, Facilitates the purchase order management, Provides a better
+                    customer experience...
                 </div>
             </div>
             <div class="h-96 flex-col">
@@ -38,7 +42,8 @@
                                                   class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
 
                     </span>
-                    <span class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center">
+                    <span
+                        class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center  cursor-pointer">
 
                         <svg fill="#2846f0" height="60px" width="60px" version="1.1" id="Capa_1"
                              class="group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"
@@ -109,8 +114,9 @@
                     </span>
                 </div>
                 <div class="text-2xl font-semibold py-4">Payable & Receivable</div>
-                <div class="text-gray-600 text-sm">Streamlines the purchase order management process, Helps manage
-                    vendor payments,Streamlines the invoicing process.
+                <div class="text-gray-600 text-sm">Send customized statements to your clients and
+                    Simplify payment procedures for your customers by giving them access to the customer portal and
+                    enabling direct portal-based payments...
                 </div>
             </div>
             <div class="h-96 flex-col">
@@ -121,12 +127,16 @@
                                                    class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
 
                     </span>
-                    <span class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center">
+                    <span
+                        class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center  cursor-pointer">
 
-                        <svg  class="group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"  height="60px" width="60px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        <svg class="group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"
+                             height="60px" width="60px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                             xmlns:xlink="http://www.w3.org/1999/xlink"
                              viewBox="0 0 505 505" xml:space="preserve">
                         <circle style="fill:#2846f0;" cx="252.5" cy="252.5" r="252.5"/>
-                        <polygon style="fill:#FFFFFF;" points="325.6,86.1 325.6,139.7 379.1,139.7 379.1,418.9 125.9,418.9 125.9,86.1 "/>
+                        <polygon style="fill:#FFFFFF;"
+                                 points="325.6,86.1 325.6,139.7 379.1,139.7 379.1,418.9 125.9,418.9 125.9,86.1 "/>
                         <polygon style="fill:#E6E9EE;" points="325.6,86.1 379.1,139.7 325.6,139.7 "/>
                         <path style="fill:#2846f0;" d="M243.7,221.7c-1.2-5.3-3.3-10.3-6.1-14.7l4.2-8.7l-10-10l-8.7,4.2c-4.5-2.8-9.4-4.9-14.7-6.1
                             l-3.2-9.1H191l-3.2,9.1c-5.3,1.2-10.3,3.3-14.8,6.1l-8.7-4.2l-10,10l4.2,8.7c-2.8,4.5-4.9,9.4-6.1,14.7l-9.1,3.2v14.2l9.1,3.2
@@ -142,9 +152,12 @@
                         </svg>
                     </span>
                 </div>
-                <div class="text-2xl font-semibold py-4">Sales & Purchase Reports</div>
-                <div class="text-gray-600 text-sm">Daily , Weekly & Monthly Sales Report,
-                    Total Purchases Report, Supplier Performance Report, Inventory Purchase Report.
+                <div class="text-2xl font-semibold py-4">Reporting Tools</div>
+                <div class="text-gray-600 text-sm">
+                    View dashboards, reports and charts covering all your receivables, payable,
+                    Daily , Weekly & Monthly Sales Report, Supplier Performance Report,
+                    Inventory Purchase Report and more. Use your report data to make inferences and create robust,
+                    up-to-date business plans...
                 </div>
             </div>
             <div class="h-96">
@@ -153,9 +166,10 @@
                         class="z-10 absolute bottom-6 right-12 group-hover:translate-x-11 group-hover:translate-y-3 duration-700 transition-all ease-in-out">
                         <div class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
                     </span>
-                    <span class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center p-12">
+                    <span class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center p-12  cursor-pointer">
 
-<svg   class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+<svg class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear" version="1.1" id="Layer_1"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      viewBox="0 0 512 512" xml:space="preserve">
 <path style="fill:#2846f0;" d="M499.449,176.668C466.054,74.12,369.691,0,256,0C114.615,0,0,114.616,0,256
 	c0,113.691,74.12,210.055,176.667,243.45L499.449,176.668z"/>
@@ -182,8 +196,10 @@
                     </span>
                 </div>
                 <div class="text-2xl font-semibold py-4">e-Invoice</div>
-                <div class="text-gray-600 text-sm">Automatic Invoice Generation, Integration with GSTN, Unique Invoice
-                    Reference Number (IRN), Data Accuracy, Real-Time Tracking.
+                <div class="text-gray-600 text-sm">Automatic E-Invoice Generation, The new system of e-invoicing
+                    has standardized how business-to -business invoices are accounted in the GST system.
+                    you can connect with the IRP directly and create invoices in the e-invoicing format,
+                    hassle-free process...
                 </div>
             </div>
         </div>
