@@ -105,5 +105,11 @@ class S101_LabelSeeder extends Seeder
             'cols' => 1,
             'active_id' => '1'
         ]);
+        #17
+        Label::create([
+            'vname' => 'Blog Category',
+            'cols' => 1,
+            'active_id' => '1'
+        ]);
     }
 }
