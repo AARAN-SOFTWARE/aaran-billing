@@ -3,8 +3,9 @@
         <div style="background-image: url('/../../../images/wp1.webp')"
              class="h-[30rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
-        <div class="w-full absolute text-white top-44 text-center">
-            <div class="w-6/12 mx-auto text-8xl font-semibold pb-4">Blog</div>
+        <div class="w-full absolute text-white top-44 text-center flex-col flex items-center justify-center">
+            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4">Blog</div>
+            <span class="z-10 absolute top-6 py-5 px-[92px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]">&nbsp;</span>
             <div class="w-6/12 mx-auto text-lg pb-4">We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>

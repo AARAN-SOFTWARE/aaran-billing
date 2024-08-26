@@ -17,16 +17,12 @@
             <div class="animate__animated wow bounceInUp" data-wow-duration="3s">
                 <x-rating.star class="w-16 h-auto "/>
             </div>
-            <a href="#"
-                role="button" class="rounded-xl inline-flex items-center gap-x-2 max-w-max px-5 py-3 cursor-pointer bg-[#3F5AF3] text-white  animate__animated wow bounceInUp" data-wow-duration="3s">
-                <span class=""><x-icons.icon icon="cart" class="w-5 h-auto mt-1.5 text-white"/></span>
-                <span class="">Get it now</span>
-            </a>
+            <x-button.animate1>Get it now</x-button.animate1>
         </div>
         <div class="">
 
         </div>
     </div>
-    <img src="../../../../images/laptop.png" alt=""  class="z-20 absolute right-16 -top-14  w-[45rem] h-auto animate__animated wow animate__backInLeft transform " data-wow-duration="2s">
+    <img src="../../../../images/laptop.png" alt=""  class="z-20 absolute right-16 -top-14  w-[50rem] h-auto animate__animated wow animate__backInLeft transform " data-wow-duration="2s">
     <div class="z-10 absolute right-20 top-4 w-[720px] h-[520px] fancy-border bg-[#7084f5] animate-pulse duration-1000 transition-all ease-linear"></div>
 </div>

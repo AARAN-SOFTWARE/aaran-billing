@@ -1,11 +1,13 @@
 <div class="font-roboto tracking-wider">
     <div class="relative font-roboto tracking-wider">
         <div style="background-image: url('/../../../images/wp1.webp')"
-             class="h-[30rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
+             class="h-[30rem] bg-no-repeat bg-cover bg-center bg-fixed brightness-50 bg-black">
         </div>
-        <div class="w-full absolute text-white top-44 text-center">
-            <div class="w-6/12 mx-auto text-8xl font-semibold pb-4">About us</div>
-            <div class="w-6/12 mx-auto text-lg pb-4">We Design and develop Outstanding Digital products and digital - first Brands
+        <div class=" w-full absolute text-white top-44 text-center flex-col flex items-center justify-center">
+            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4">About us</div>
+            <span class="z-10 absolute top-6 py-5 px-44 bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]">&nbsp;</span>
+            <div class="w-6/12 mx-auto text-lg pb-4">We Design and develop Outstanding Digital products and digital -
+                first Brands
             </div>
         </div>
     </div>
@@ -19,8 +21,9 @@
         </div>
         <div class=" flex-col flex gap-y-8 py-8">
             <div class="flex items-center gap-x-3">
-                <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA]">&nbsp;</span><span
-                    class="text-[#5069F4] text-sm font-semibold">ABOUT OUR COMPANY</span>
+                <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
+                <span class="text-[#5069F4] text-sm font-semibold">ABOUT OUR COMPANY</span>
+                <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
             </div>
             <div class="text-5xl font-semibold">We Design and develop Outstanding Digital products and digital - first
                 Brands
@@ -136,15 +139,7 @@
                     <span>Provide Market Standard Service for Client's</span>
                 </div>
             </div>
-            <button class="inline-flex items-center gap-x-2 max-w-max px-5 py-4 bg-[#3F5AF3] text-white ">
-                <span>Get Started Now</span>
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="size-4">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/>
-                    </svg>
-                </span>
-            </button>
+            <x-button.animate1>Get Started</x-button.animate1>
         </div>
     </div>
 
@@ -162,7 +157,7 @@
         </div>
         <div class="w-8/12 mx-auto gap-6 grid grid-cols-3 pt-16">
             @for($i=1; $i<=3; $i++)
-                <div class="bg-gray-100 h-auto flex-col flex justify-center items-center p-5 gap-y-6">
+                <div class="bg-gray-100 h-auto flex-col flex p-5 gap-y-6">
                     <div class="w-full">
                         <div class="max-w-max text-[#5B72F3] border border-[#5B72F3] px-4 py-2 rounded-md">01</div>
                     </div>
@@ -171,15 +166,7 @@
                         Dignissimos,
                         dolores in veniam veritatis voluptatem voluptatibus.
                     </div>
-                    <div class="w-full text-[#5B72F3] inline-flex items-center gap-x-2 font-semibold">
-                        <span>Read More</span>
-                        <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                   stroke="currentColor" class="size-4">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"/>
-                    </svg>
-                    </span>
-                    </div>
+                    <x-button.animate3>Read More</x-button.animate3>
                 </div>
             @endfor
         </div>
@@ -232,16 +219,10 @@
                 molestiae neque nostrum nulla obcaecati quidem recusandae reprehenderit tempore temporibus voluptate.
                 Asperiores magni minima nihil!
             </div>
-            <div class="w-3/6 grid grid-cols-3 gap-6">
-                <button class="tab-button px-4 py-2 bg-[#F3F4F6]" onclick="showTab('tab1')">
-                    button 1
-                </button>
-                <button class="tab-button px-4 py-1 bg-[#F3F4F6]" onclick="showTab('tab2')">
-                    button 2
-                </button>
-                <button class="tab-button px-4 py-1 bg-[#F3F4F6]" onclick="showTab('tab3')">
-                    button 3
-                </button>
+            <div class="w-4/6 grid grid-cols-3 gap-6">
+                <x-button.animate2 class="tab-button" onclick="showTab('tab1')">Button 1</x-button.animate2>
+                <x-button.animate2 class="tab-button" onclick="showTab('tab2')">Button 2</x-button.animate2>
+                <x-button.animate2 class="tab-button" onclick="showTab('tab3')">Button 3</x-button.animate2>
             </div>
             <div id="tab1" class="tab-content">
                 <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam autem distinctio dolor dolorum
@@ -258,7 +239,6 @@
                 </div>
             </div>
         </div>
-
         <div class=" relative flex">
             <img src="../../../../images/about-img-2.jpg" alt="" class="w-auto z-10 h-[450px]">
             <img src="../../../../images/about-shape-2.png" alt="" class="absolute z-0 top-7 right-16 w-72 h-auto">
@@ -281,7 +261,7 @@
                      data-wow-duration="2s">
                 <div class="flex-col flex gap-y-2">
                     <div class="text-2xl font-semibold">Mac Rayonds</div>
-                    <div class="text-gray-600 text-sm font-semibold">UI/UX Design</div>
+                    <div class=" text-sm font-semibold text-[#3F5AF3]">UI/UX Design</div>
                 </div>
             </div>
             <div class="flex-col flex gap-y-2">
@@ -289,7 +269,7 @@
                      data-wow-duration="2s">
                 <div class="flex-col flex gap-y-2">
                     <div class="text-2xl font-semibold">Lara Williams</div>
-                    <div class="text-gray-600 text-sm font-semibold">Web Developer</div>
+                    <div class=" text-sm font-semibold text-[#3F5AF3]">Web Developer</div>
                 </div>
             </div>
             <div class="flex-col flex gap-y-2">
@@ -297,7 +277,7 @@
                      data-wow-duration="2s">
                 <div class="flex-col flex gap-y-2">
                     <div class="text-2xl font-semibold">Shilph Adams</div>
-                    <div class="text-gray-600 text-sm font-semibold">Accounts</div>
+                    <div class=" text-sm font-semibold text-[#3F5AF3]">Accounts</div>
                 </div>
             </div>
             <div class="flex-col flex gap-y-2">
@@ -305,7 +285,7 @@
                      data-wow-duration="2s">
                 <div class="flex-col flex gap-y-2">
                     <div class="text-2xl font-semibold">Mana Green</div>
-                    <div class="text-gray-600 text-sm font-semibold">Senior Executive</div>
+                    <div class=" text-sm font-semibold text-[#3F5AF3]">Senior Executive</div>
                 </div>
             </div>
 
@@ -401,9 +381,9 @@
 
     <style>
         .tab-button.active {
-            background-color: #3F5AF3;
-            border-color: white;
-            color: white;
+            background-color: #F3F4F6;
+            border-color: #3F5AF3;
+            color: #3F5AF3;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
