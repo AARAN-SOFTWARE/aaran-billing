@@ -9,6 +9,7 @@ use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Style;
+use Aaran\MasterGst\Models\MasterGstIrn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -66,6 +67,11 @@ class Sale extends Model
     public static function commons($id)
     {
         return Common::find($id)->vname;
+    }
+
+    public static function Irn($id)
+    {
+        return MasterGstIrn::where('sales_id',$id)->first();
     }
 
     protected static function newFactory(): SaleFactory

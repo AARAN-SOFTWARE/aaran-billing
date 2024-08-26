@@ -12,11 +12,13 @@ return new class extends Migration
         if (Aaran\Aadmin\Src\Customise::hasGstApi()) {
             Schema::create('master_gst_irns', function (Blueprint $table) {
                 $table->id();
+                $table->foreignId('sales_id')->references('id')->on('sales')->onDelete('cascade');
                 $table->longText('ackno');
                 $table->longText('ackdt');
                 $table->longText('irn');
                 $table->longText('signed_invoice');
                 $table->longText('signed_qrcode');
+                $table->string('status')->nullable();
                 $table->timestamps();
             });
         }

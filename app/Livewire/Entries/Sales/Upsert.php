@@ -11,6 +11,7 @@ use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
 use Aaran\Master\Models\Style;
+use Aaran\MasterGst\Models\MasterGstIrn;
 use Aaran\MasterGst\Models\MasterGstToken;
 use App\Livewire\Forms\MasterGstApi;
 use App\Livewire\Trait\CommonTraitNew;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use phpDocumentor\Reflection\Types\Float_;
 
 class Upsert extends Component
 {
@@ -29,6 +31,12 @@ class Upsert extends Component
     public MasterGstApi $masterGstApi;
     public $token;
     public $irnData;
+    public $IrnCancel;
+    public $sales_id;
+    public $Irn_no;
+    public $CnlRsn;
+    public $CnlRem;
+    public $showModel=false;
 
     #region[Properties]
     public string $uniqueno = '';
@@ -829,7 +837,6 @@ class Upsert extends Component
     #region[Save]
     public function saveExit(): void
     {
-
         try {
             if ($this->uniqueno != '') {
                 if ($this->common->vid == "") {
@@ -860,7 +867,8 @@ class Upsert extends Component
                         'active_id' => $this->common->active_id,
 
                     ]);
-                    $this->saveItem($obj->id);
+                    $this->sales_id=$obj->id;
+                    $this->saveItem( $this->sales_id);
                     $message = "Saved";
 
 
@@ -896,8 +904,9 @@ class Upsert extends Component
                     $obj->grand_total = $this->grand_total;
                     $obj->active_id = $this->common->active_id;
                     $obj->save();
-                    DB::table('saleitems')->where('sale_id', '=', $obj->id)->delete();
-                    $this->saveItem($obj->id);
+                    $this->sales_id=$obj->id;
+                    DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
+                    $this->saveItem( $this->sales_id);
                     $message = "Updated";
                 }
 
@@ -1079,6 +1088,7 @@ class Upsert extends Component
     #region[saveGenerate]
     public function saveGenerate()
     {
+
         $this->saveExit();
         $this->jsonFormate();
         $this->getRoute();
@@ -1088,17 +1098,28 @@ class Upsert extends Component
     #region[generateIrn]
     public function generateIrn()
     {
-        $response = $this->masterGstApi->getIrn(new Request(), $this->token, $this->irnData);
-//        if ($response->successful()) {
-//            $data = $response->json();
-//            dd($data);
-//            return response()->json($data);
-//        } else {
-//
-//            $errorMessage = $response->body();
-//            dd($errorMessage);
-//            return response()->json(['error' => $errorMessage], $response->status());
-//        }
+        $response = $this->masterGstApi->getIrn(new Request(), $this->token, $this->irnData,$this->sales_id);
+    }
+    #endregion
+
+    #region[cancelIrn]
+    public function cancelIrn()
+    {
+        $this->showModel=true;
+        $obj=MasterGstIrn::where('sales_id',$this->common->vid)->first();
+        $this->Irn_no=$obj->irn;
+        $this->CnlRsn=1;
+        $this->CnlRem="Wrong entry";
+    }
+    public function getCancelIrn()
+    {
+        $this->IrnCancel=[
+            'Irn'=>$this->Irn_no,
+            'CnlRsn'=> (string)($this->CnlRsn),
+            'CnlRem'=>$this->CnlRem,
+        ];
+        $this->masterGstApi->getIrnCancel(new Request(),$this->IrnCancel,$this->token,$this->common->vid);
+        $this->getRoute();
     }
     #endregion
 
