@@ -1,14 +1,14 @@
 <div class="py-8">
 
-    <div class=" font-roboto tracking-wider grid gap-10 pt-20">
+    <div class=" font-roboto tracking-wider grid gap-10 sm:pt-20 pt-0">
         <div class="flex items-center gap-x-3 justify-center">
             <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-            <span class="text-[#5069F4] text-sm font-semibold">Billing Made Simple and Efficient</span>
-            <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
+            <span class="text-[#5069F4] sm:text-sm text-xs font-semibold">Billing Made Simple and Efficient</span>
+            <span class="hidden sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
         </div>
-        <div class="text-center text-6xl font-semibold">Try India’s easiest GST billing platform</div>
-        <div class="grid grid-cols-4 w-10/12 mx-auto gap-6">
-            <div class="h-96 flex-col">
+        <div class="text-center sm:text-6xl text-lg font-semibold">Try India’s easiest GST billing platform</div>
+        <div class="grid sm:grid-cols-4 grid-cols-1 w-10/12 mx-auto gap-6 sm:">
+            <div class="sm:h-96 flex-col">
                 <div class="relative inline-flex items-center justify-center group">
                     <span
                         class="z-10 absolute bottom-6 right-12 group-hover:translate-x-11 group-hover:translate-y-3 duration-700 transition-all ease-in-out">
