@@ -11,6 +11,8 @@ return new class extends Migration
         if (Aaran\Aadmin\Src\Customise::hasGstApi()) {
             Schema::create('master_gst_eways', function (Blueprint $table) {
                 $table->id();
+                $table->foreignId('irn_id')->references('id')->on('master_gst_irns')->onDelete('cascade');
+                $table->foreignId('sales_id')->references('id')->on('sales')->onDelete('cascade');
                 $table->longText('ewbno');
                 $table->longText('ewbdt');
                 $table->longText('ewbvalidtill');

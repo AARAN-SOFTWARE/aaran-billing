@@ -22,13 +22,13 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
-use phpDocumentor\Reflection\Types\Float_;
 
 class Upsert extends Component
 {
     use CommonTraitNew;
-
+    #region[E-invoice properties]
     public MasterGstApi $masterGstApi;
+    public $e_invoiceDetails;
     public $token;
     public $irnData;
     public $IrnCancel;
@@ -36,7 +36,17 @@ class Upsert extends Component
     public $Irn_no;
     public $CnlRsn;
     public $CnlRem;
+    public $distance=0;
     public $showModel=false;
+    public $successMessage='';
+    public $Transid;
+    public $Transname;
+    public $Transdocno;
+    public $TransdocDt;
+    public $Vehno;
+    public $Vehtype;
+    public $TransMode;
+    #endregion
 
     #region[Properties]
     public string $uniqueno = '';
@@ -857,6 +867,7 @@ class Upsert extends Component
                         'transport_id' => $this->transport_id ?: 27,
                         'destination' => $this->destination,
                         'bundle' => $this->bundle,
+                        'distance' => $this->distance,
                         'total_qty' => $this->total_qty,
                         'total_taxable' => $this->total_taxable,
                         'total_gst' => $this->total_gst,
@@ -994,9 +1005,9 @@ class Upsert extends Component
                 "Pin" => Common::find($contactDetail->pincode_id)->vname,
                 "Stcd" => Common::find($contactDetail->state_id)->desc,
             ],
-            "ItemList" => [
 
-            ],
+            "ItemList" => [],
+
             "ValDtls" => [
                 "AssVal" => $this->total_taxable,
                 "OthChrg" => $this->additional,
@@ -1006,14 +1017,14 @@ class Upsert extends Component
 
 
             "EwbDtls" => [
-                "Transid" => "12AWGPV7107B1Z1",
-                "Transname" => "XYZ EXPORTS",
-                "Distance" => 0,
-                "Transdocno" => "DOC01",
-                "TransdocDt" => "01/08/2020",
-                "Vehno" => "ka123456",
-                "Vehtype" => "R",
-                "TransMode" => "1"
+                "Transid" =>$this->Transid,
+                "Transname" => $this->Transname,
+                "Distance" => $this->distance,
+                "Transdocno" => $this->Transdocno,
+                "TransdocDt" =>  date('d/m/Y', strtotime($this->TransdocDt)),
+                "Vehno" => $this->Vehno,
+                "Vehtype" => $this->Vehtype,
+                "TransMode" => (string)($this->TransMode),
             ]
         ];
         foreach ($this->itemList as $index => $row) {
@@ -1098,12 +1109,17 @@ class Upsert extends Component
     #region[generateIrn]
     public function generateIrn()
     {
-        $response = $this->masterGstApi->getIrn(new Request(), $this->token, $this->irnData,$this->sales_id);
+        $result = $this->masterGstApi->getIrn(new Request(), $this->token, $this->irnData,$this->sales_id);
+        if (isset($response['data']['Irn'])) {
+            $this->successMessage = 'IRN generated successfully: ' . $result['data']['Irn'];
+        } else {
+            $this->successMessage = 'Failed to generate IRN.';
+        }
     }
     #endregion
 
     #region[cancelIrn]
-    public function cancelIrn()
+    public function cancelIrn(): void
     {
         $this->showModel=true;
         $obj=MasterGstIrn::where('sales_id',$this->common->vid)->first();
@@ -1111,7 +1127,7 @@ class Upsert extends Component
         $this->CnlRsn=1;
         $this->CnlRem="Wrong entry";
     }
-    public function getCancelIrn()
+    public function getCancelIrn(): void
     {
         $this->IrnCancel=[
             'Irn'=>$this->Irn_no,
@@ -1120,6 +1136,58 @@ class Upsert extends Component
         ];
         $this->masterGstApi->getIrnCancel(new Request(),$this->IrnCancel,$this->token,$this->common->vid);
         $this->getRoute();
+    }
+    #endregion
+
+    #region[E-wayGenerate]
+    public function E_wayGenerate()
+    {
+        $company = Company::find(session()->get('company_id'));
+        $contact = Contact::find($this->contact_id);
+        $contactDetail = ContactDetail::where('contact_id', $contact->id)->first();
+        $obj=MasterGstIrn::where('sales_id',$this->common->vid)->first();
+        $jsonData = [
+            "Irn" => $obj->irn,
+            "Distance" => $this->distance,
+            "TransMode" => (string)($this->TransMode),
+            "TransId" =>$this->Transid,
+            "TransName" => $this->Transname,
+            "TransDocNo" => $this->Transdocno,
+            "TransDocDt" =>  date('d/m/Y', strtotime($this->TransdocDt)),
+            "VehNo" => $this->Vehno,
+            "VehType" => $this->Vehtype,
+            "ExpShipDtls" => [
+                "LglNm" => $contact->vname,
+                "Addr1" => $contactDetail->address_1.','.$contactDetail->address_2,
+                "Loc" => Common::find($contactDetail->city_id)->vname,
+                "Pin" => Common::find($contactDetail->pincode_id)->vname,
+                "Stcd" => Common::find($contactDetail->state_id)->desc,
+            ],
+            "DispDtls" => [
+                "Nm" => $company->vname,
+                "Addr1" => $company->address_1.','.$company->address_2,
+                "Loc" => Common::find($company->city_id)->vname,
+                "Pin" => Common::find($company->pincode_id)->vname,
+                "Stcd" => Common::find($company->state_id)->desc,
+            ],
+        ];
+        $result=$this->masterGstApi->getEwayBill(new Request(),$jsonData,$this->token,$this->common->vid);
+        if (isset($result['data']['Irn'])) {
+            $this->successMessage = 'E-wayBill generated successfully: ' . $result['data']['EwbNo'];
+        } else {
+            $this->successMessage = 'Failed to generate E-wayBill.';
+        }
+    }
+    #endregion
+
+    #region[E-wayDetails]
+    public function E_wayDetails()
+    {
+        $company = Company::find(session()->get('company_id'));
+        $obj=MasterGstIrn::where('sales_id',$this->common->vid)->first();
+        if ($obj){
+        $response=$this->masterGstApi->getEwayDetails($this->token,$obj->irn,$company->gstin);
+        }
     }
     #endregion
 
@@ -1153,6 +1221,7 @@ class Upsert extends Component
             $this->transport_name = $obj->transport_id ? Common::find($obj->transport_id)->vname : '';
             $this->destination = $obj->destination;
             $this->bundle = $obj->bundle;
+            $this->distance = $obj->distance;
             $this->total_qty = $obj->total_qty;
             $this->total_taxable = $obj->total_taxable;
             $this->total_gst = $obj->total_gst;
@@ -1191,6 +1260,8 @@ class Upsert extends Component
                     ];
                 });
             $this->itemList = $data;
+            $this->e_invoiceDetails=MasterGstIrn::where('sales_id',$this->common->vid)->first();
+            $this->E_wayDetails();
         } else {
             $this->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
             $this->common->active_id = true;
@@ -1202,6 +1273,9 @@ class Upsert extends Component
             $this->round_off = 0;
             $this->total_gst = 0;
             $this->invoice_date = Carbon::now()->format('Y-m-d');
+            $this->TransMode=1;
+            $this->Vehtype='R';
+            $this->TransdocDt=Carbon::now()->format('Y-m-d');
         }
 
         $this->calculateTotal();

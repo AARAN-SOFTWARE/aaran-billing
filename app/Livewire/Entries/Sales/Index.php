@@ -6,10 +6,12 @@ use Aaran\Entries\Models\Sale;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
     use CommonTraitNew;
+    use WithPagination;
 
     #region[create]
     public function create(): void

@@ -70,16 +70,14 @@
                                         <div
                                             class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
                                             <span class="h-1.5 w-1.5  rounded-full bg-emerald-500 "></span>
-                                            <h2 class=" font-normal text-emerald-500 ">
-                                                Generated
+                                            <h2 class=" font-normal text-emerald-500 ">{{$obj->status}}
                                             </h2>
                                         </div>
                                     @elseif($obj->status=='Canceled')
                                         <div
                                             class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-red-100/60 dark:bg-gray-800">
                                             <span class="h-1.5 w-1.5  rounded-full bg-red-500 "></span>
-                                            <h2 class=" font-normal text-red-500 ">
-                                                Generated
+                                            <h2 class=" font-normal text-red-500 ">{{$obj->status}}
                                             </h2>
                                         </div>
                                     @endif
@@ -150,6 +148,8 @@
         </x-table.form>
 
         <x-modal.delete/>
+
+        <div class="pt-5">{{ $list->links() }}</div>
 
     </x-forms.m-panel>
 

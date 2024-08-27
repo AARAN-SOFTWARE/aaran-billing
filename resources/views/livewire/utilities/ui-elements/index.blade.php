@@ -7,7 +7,7 @@
     <x-web.uielements.cards />
     <x-web.uielements.extra />
     <x-web.uielements.form />
-    <x-accordion-single.accordion/>
+{{--    <x-accordion-single.accordion/>--}}
 
 
 

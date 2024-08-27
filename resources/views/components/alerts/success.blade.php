@@ -7,8 +7,8 @@
             </svg>
         </div>
         <div class="ml-2">
-            <h3 class="text-sm font-semibold text-green-500">Successfully Subscribed</h3>
-            <p class="text-xs font-medium sm:text-sm">Success! You've subscribed to our newsletter. Welcome aboard!</p>
+            <h3 class="text-sm font-semibold text-green-500">Successfully</h3>
+            <p class="text-xs font-medium sm:text-sm">{{$slot}}</p>
         </div>
         <button type="button" @click="alertIsVisible = false" class="ml-auto" aria-label="dismiss alert">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="2.5" class="w-4 h-4 shrink-0">
