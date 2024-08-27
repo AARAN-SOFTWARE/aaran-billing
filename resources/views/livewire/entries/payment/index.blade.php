@@ -1,5 +1,4 @@
 <div>
-    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
     <x-slot name="header">Payment</x-slot>
 
     <x-forms.m-panel>
@@ -14,14 +13,18 @@
 
                 <x-table.header-serial></x-table.header-serial>
 
-                <x-table.header-text>Date</x-table.header-text>
+                <x-table.header-text>Chq No</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Contact
                     Name
                 </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Model
+                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Receipt
+                    Type
                 </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Amount
+
+                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Mode
                 </x-table.header-text>
+
+                <x-table.header-text>Status</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
 
@@ -31,11 +34,11 @@
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
                         <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->vdate}}</x-table.cell-text>
-                        <x-table.cell-text>{{\Aaran\Master\Models\Payment::common($row->contact_id)}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
                         <x-table.cell-text>
-                            {{\Aaran\Master\Models\Payment::common($row->receipttype_id)}}
+                            {{\Aaran\Entries\Models\Payment::common($row->receipttype_id)}}
                         </x-table.cell-text>
+                        <x-table.cell-text>{{$row->mode}}</x-table.cell-text>
                         <x-table.cell-status active="{{$row->active_id}}"/>
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
@@ -51,9 +54,44 @@
         <x-forms.create :id="$common->vid">
 
             <div class="flex flex-col  gap-3">
-                <x-input.model-text wire:model="common.vname" :label="'Name'"/>
 
-                <x-input.model-date :label="'date'"/>
+                <div class="flex flex-row gap-3">
+                    <div class="mb-[0.125rem] block min-h-[1.5rem] ps-[1.5rem]">Receipt
+                        <input wire:model="mode"
+                               class="relative float-left -ms-[1.5rem] me-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-secondary-500
+                               before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0
+                               before:shadow-checkbox before:shadow-transparent before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full
+                               after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2
+                               checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary
+                               checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04]
+                               hover:before:shadow-black/60 focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12]
+                               focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100
+                               checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] rtl:float-right dark:border-neutral-400
+                               dark:checked:border-primary"
+                               type="radio"
+                               name="flexRadioNoLabel" value="Receipt"
+                               id="radioNoLabel01"/>
+                    </div>
+
+                    <!--Default checked radio without label-->
+                    <div class="mb-[0.125rem] block min-h-[1.5rem] ps-[1.5rem]">Payment
+                        <input wire:model="mode"
+                               class="relative float-left -ms-[1.5rem] me-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-secondary-500
+                               before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0
+                               before:shadow-checkbox before:shadow-transparent before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full
+                               after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2
+                               checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary
+                               checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04]
+                               hover:before:shadow-black/60 focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12]
+                               focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100
+                               checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] rtl:float-right dark:border-neutral-400
+                               dark:checked:border-primary"
+                               type="radio"
+                               name="flexRadioNoLabel" value="Payment"
+                               id="radioNoLabel02"
+                               checked/>
+                    </div>
+                </div>
 
 
                 <!-- Party Name --------------------------------------------------------------------------------------->
@@ -62,19 +100,19 @@
                     <div x-data="{isTyped: @entangle('contactTyped')}" @click.away="isTyped = false" class="w-full">
                         <div class="relative ">
                             <input
-                                    id="contact_name"
-                                    type="search"
-                                    wire:model.live="contact_name"
-                                    autocomplete="off"
-                                    placeholder="Party Name.."
-                                    @focus="isTyped = true"
-                                    @keydown.escape.window="isTyped = false"
-                                    @keydown.tab.window="isTyped = false"
-                                    @keydown.enter.prevent="isTyped = false"
-                                    wire:keydown.arrow-up="decrementContact"
-                                    wire:keydown.arrow-down="incrementContact"
-                                    wire:keydown.enter="enterContact"
-                                    class="block w-full rounded-lg "
+                                id="contact_name"
+                                type="search"
+                                wire:model.live="contact_name"
+                                autocomplete="off"
+                                placeholder="Contact Name.."
+                                @focus="isTyped = true"
+                                @keydown.escape.window="isTyped = false"
+                                @keydown.tab.window="isTyped = false"
+                                @keydown.enter.prevent="isTyped = false"
+                                wire:keydown.arrow-up="decrementContact"
+                                wire:keydown.arrow-down="incrementContact"
+                                wire:keydown.enter="enterContact"
+                                class="block w-full rounded-lg "
                             />
                             @error('contact_id')
                             <span class="text-red-500">{{'The Party Name is Required.'}}</span>
@@ -116,29 +154,32 @@
                     </div>
                 </div>
 
-                <!-- receipt type --------------------------------------------------------------------------------------->
+                <x-input.model-date wire:model="vdate" :label="'date'"/>
 
-                <div class="flex flex-row py-3 gap-3">
-                    <div class="xl:flex w-full gap-2">
-                        <label for="receipt_type_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Receipt
-                            Type</label>
+                <x-input.model-text wire:model="amount" :label="'Amount'"/>
+
+                <!-- receipt type ------------------------------------------------------------------------------------->
+
+                <div class="flex flex-row rounded-lg">
+                    <div class="xl:flex w-full rounded-lg">
+                        <label for="receipt_type_name" class="w-[10rem] text-zinc-500 tracking-wide">Type</label>
                         <div x-data="{isTyped: @entangle('receipt_typeTyped')}" @click.away="isTyped = false"
-                             class="w-full relative">
+                             class="w-full relative ">
                             <div>
                                 <input
-                                        id="receipt_type_name"
-                                        type="search"
-                                        wire:model.live="receipt_type_name"
-                                        autocomplete="off"
-                                        placeholder="Receipt Type Name.."
-                                        @focus="isTyped = true"
-                                        @keydown.escape.window="isTyped = false"
-                                        @keydown.tab.window="isTyped = false"
-                                        @keydown.enter.prevent="isTyped = false"
-                                        wire:keydown.arrow-up="decrementReceiptType"
-                                        wire:keydown.arrow-down="incrementReceiptType"
-                                        wire:keydown.enter="enterReceiptType"
-                                        class="block w-full purple-textbox"
+                                    id="receipt_type_name"
+                                    type="search"
+                                    wire:model.live="receipt_type_name"
+                                    autocomplete="off"
+                                    placeholder="Type Name.."
+                                    @focus="isTyped = true"
+                                    @keydown.escape.window="isTyped = false"
+                                    @keydown.tab.window="isTyped = false"
+                                    @keydown.enter.prevent="isTyped = false"
+                                    wire:keydown.arrow-up="decrementReceiptType"
+                                    wire:keydown.arrow-down="incrementReceiptType"
+                                    wire:keydown.enter="enterReceiptType"
+                                    class="block w-full rounded-lg"
                                 />
 
                                 <div x-show="isTyped"
@@ -161,8 +202,8 @@
                                                         </li>
                                                     @empty
                                                         <button
-                                                                wire:click.prevent="receiptTypeSave('{{$receipt_type_name}}')"
-                                                                class="text-white bg-green-500 text-center w-full">
+                                                            wire:click.prevent="receiptTypeSave('{{$receipt_type_name}}')"
+                                                            class="text-white bg-green-500 text-center w-full">
                                                             create
                                                         </button>
                                                     @endforelse
@@ -175,6 +216,70 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- bank --------------------------------------------------------------------------------------------->
+                <div class="flex flex-row ">
+                    <div class="xl:flex w-full">
+                        <label for="bank_name" class="w-[10rem] text-zinc-500 tracking-wide rounded-lg">Bank</label>
+                        <div x-data="{isTyped: @entangle('bankTyped')}" @click.away="isTyped = false"
+                             class="w-full relative ">
+                            <div>
+                                <input
+                                    id="bank_name"
+                                    type="search"
+                                    wire:model.live="bank_name"
+                                    autocomplete="off"
+                                    placeholder="Bank Name.."
+                                    @focus="isTyped = true"
+                                    @keydown.escape.window="isTyped = false"
+                                    @keydown.tab.window="isTyped = false"
+                                    @keydown.enter.prevent="isTyped = false"
+                                    wire:keydown.arrow-up="decrementBank"
+                                    wire:keydown.arrow-down="incrementBank"
+                                    wire:keydown.enter="enterBank"
+                                    class="block w-full rounded-lg "
+                                />
+
+                                <div x-show="isTyped"
+                                     x-transition:leave="transition ease-in duration-100"
+                                     x-transition:leave-start="opacity-100"
+                                     x-transition:leave-end="opacity-0"
+                                     x-cloak
+                                >
+                                    <div class="absolute z-20 w-full mt-2">
+                                        <div class="block py-1 shadow-md w-full rounded-lg border-transparent flex-1 appearance-none border
+                        bg-white text-gray-800 ring-1 ring-purple-600">
+                                            <ul class="overflow-y-scroll h-96">
+                                                @if($bankCollection)
+                                                    @forelse ($bankCollection as $i => $bank)
+                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8
+                                            {{ $highlightBank === $i ? 'bg-yellow-100' : '' }}"
+                                                            wire:click.prevent="setBank('{{$bank->vname}}','{{$bank->id}}')"
+                                                            x-on:click="isTyped = false">
+                                                            {{ $bank->vname }}
+                                                        </li>
+                                                    @empty
+                                                        <button
+                                                            wire:click.prevent="bankSave('{{$bank_name}}')"
+                                                            class="text-white bg-green-500 text-center w-full">
+                                                            create
+                                                        </button>
+                                                    @endforelse
+                                                @endif
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <x-input.model-text wire:model="common.vname" :label="'Chq No'"/>
+
+                <x-input.model-date :label="'date'"/>
+
+
 
             </div>
         </x-forms.create>

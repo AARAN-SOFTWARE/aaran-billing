@@ -7,6 +7,7 @@ use Aaran\Entries\Models\Payment;
 use Aaran\Master\Models\Contact;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -14,9 +15,15 @@ class Index extends Component
 {
 
     use CommonTraitNew;
-    public $chq_no;
+    public $mode;
+    public $vdate;
     public $chq_date;
     public $amount;
+
+    public function Mount()
+    {
+        $this->vdate = Carbon::now()->format('Y-m-d');
+    }
 
     #region[Get-Save]
     public function getSave(): void
@@ -28,11 +35,12 @@ class Index extends Component
                     'mode' => $this->mode,
                     'contact_id' => $this->contact_id,
                     'receipttype_id' => $this->receipt_type_id,
-                    'chq_no' => $this->chq_no,
+                    'vdate' => $this->vdate,
                     'chq_date' => $this->chq_date,
                     'bank_id' => $this->bank_id,
                     'amount' => $this->amount,
                     'user_id' => auth()->id(),
+                    'acyear' => session()->get('acyear'),
                     'company_id' =>session()->get('company_id'),
                 ];
                 $this->common->save($Payment, $extraFields);
@@ -43,11 +51,12 @@ class Index extends Component
                     'mode' => $this->mode,
                     'contact_id' => $this->contact_id,
                     'receipttype_id' => $this->receipt_type_id,
-                    'chq_no' => $this->chq_no,
+                    'vdate' => $this->vdate,
                     'chq_date' => $this->chq_date,
                     'bank_id' => $this->bank_id,
                     'amount' => $this->amount,
                     'user_id' => auth()->id(),
+                    'acyear' => session()->get('acyear'),
                     'company_id' =>session()->get('company_id'),
                 ];
                 $this->common->edit($Payment, $extraFields);
@@ -152,7 +161,7 @@ class Index extends Component
     {
         $this->bank_name = $name;
         $this->bank_id = $id;
-        $this->getHsncodeList();
+        $this->getBankList();
     }
 
     public function enterBank(): void
@@ -271,14 +280,15 @@ class Index extends Component
             $this->common->vid = $Payment->id;
             $this->common->vname = $Payment->vname;
             $this->common->active_id = $Payment->active_id;
+            $this->mode = $Payment->mode;
             $this->bank_id = $Payment->bank_id;
             $this->bank_name=$Payment->bank_id?Common::find($Payment->bank_id)->vname:'';
             $this->contact_id = $Payment->contact_id;
             $this->contact_name = $Payment->contact_id?Contact::find($Payment->contact_id)->vname:'';
-            $this->receipt_type_id = $Payment->receipt_type_id;
-            $this->receipt_type_name=$Payment->receipt_type_id?Common::find($Payment->receipttype_id)->vname:'';
-            $this->chq_no = $Payment->chq_no;
+            $this->receipt_type_id = $Payment->receipttype_id;
+            $this->receipt_type_name = $Payment->receipttype_id?Common::find($Payment->receipttype_id)->vname:'';
             $this->chq_date = $Payment->chq_date;
+            $this->vdate = $Payment->vdate;
             $this->amount = $Payment->amount;
             return $Payment;
         }
@@ -290,17 +300,18 @@ class Index extends Component
     public function clearFields(): void
     {
         $this->common->vid = '';
-        $this->common->vname = '';
+        $this->common->vname = '-';
         $this->common->active_id = '1';
+        $this->mode = 'Receipt';
         $this->bank_id = '';
         $this->bank_name='';
         $this->contact_id='';
         $this->contact_name='';
         $this->receipt_type_id='';
         $this->receipt_type_name='';
-        $this->chq_no='';
         $this->chq_date='';
         $this->amount = '';
+        $this->vdate = Carbon::now()->format('Y-m-d');
     }
     #endregion
 
