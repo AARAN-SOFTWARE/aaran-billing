@@ -1,6 +1,7 @@
 <article class="group flex rounded-xl max-w-sm flex-col overflow-hidden border border-slate-300 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
     <div class="h-44 md:h-64 overflow-hidden">
-        <img src="https://penguinui.s3.amazonaws.com/component-assets/card-img-2.webp" class="object-cover transition duration-700 ease-out group-hover:scale-105" alt="view of a coastal Mediterranean village on a hillside, with small boats in the water." />
+        <img src="https://penguinui.s3.amazonaws.com/component-assets/card-img-2.webp" class="object-cover transition duration-700 ease-out group-hover:scale-105"
+             alt="view of a coastal Mediterranean village on a hillside, with small boats in the water." />
     </div>
     <div class="flex flex-col gap-4 p-6">
         <div class="flex items-center gap-1 font-medium">

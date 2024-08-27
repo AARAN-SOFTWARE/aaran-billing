@@ -69,6 +69,9 @@
 
         <x-modal.delete/>
 
+        <div class="pt-5">{{ $list->links() }}</div>
+
+
         <x-forms.create :id="$common->vid">
             <div class="flex flex-col  gap-3">
 

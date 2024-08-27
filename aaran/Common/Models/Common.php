@@ -2,9 +2,11 @@
 
 namespace Aaran\Common\Models;
 
+use Aaran\Blog\Models\BlogTag;
 use Aaran\Common\Database\Factories\CommonFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Common extends Model
 {
@@ -24,4 +26,5 @@ class Common extends Model
     {
         return new CommonFactory();
     }
+
 }

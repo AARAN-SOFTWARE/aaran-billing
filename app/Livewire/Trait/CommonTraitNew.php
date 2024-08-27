@@ -5,9 +5,13 @@ namespace App\Livewire\Trait;
 use App\Livewire\Forms\CommonForm;
 use App\Livewire\Forms\GetListForm;
 use JetBrains\PhpStorm\NoReturn;
+use Livewire\WithPagination;
 
 trait CommonTraitNew
+
 {
+    use WithPagination;
+
     public CommonForm $common;
     public GetListForm $getListForm;
 

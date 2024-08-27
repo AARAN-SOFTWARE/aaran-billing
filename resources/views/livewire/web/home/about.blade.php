@@ -1,11 +1,12 @@
 <div class="font-roboto tracking-wider">
     <div class="relative font-roboto tracking-wider">
         <div style="background-image: url('/../../../images/wp1.webp')"
-             class="h-[30rem] bg-no-repeat bg-cover bg-center bg-fixed brightness-50 bg-black">
+             class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
-        <div class=" w-full absolute text-white top-44 text-center flex-col flex items-center justify-center">
+        <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
             <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4">About us</div>
-            <span class="z-10 absolute top-6 py-5 px-44 bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]">&nbsp;</span>
+            <span
+                class="z-10 absolute top-6 py-5 px-[180px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]">&nbsp;</span>
             <div class="w-6/12 mx-auto text-lg pb-4">We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>
@@ -321,57 +322,26 @@
         </div>
         <div class="text-5xl text-center font-semibold">CLIENTS FEEDBACK</div>
         <div class="w-9/12 mx-auto grid grid-cols-3 gap-4 my-16">
-            <div class="relative">
-                <div class="z-10 bg-[#F2F3F4] flex-col flex justify-center items-center gap-y-6 pt-24 p-5">
-                    <div>
-                        <div class="text-2xl text-2xl">Daniel Joseph</div>
+            @for($i=1; $i<=3; $i++)
+                <div class="relative">
+                    <div class="z-10 bg-[#F2F3F4] flex-col flex justify-center items-center gap-y-3 pt-28 p-5">
+                        <div>
+                            <div class="text-xl font-semibold">Daniel Joseph</div>
+                        </div>
+                        <div class="text-[#5069F4] font-semibold text-sm">WRITER</div>
+                        <div class="text-center text-sm text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dolores, eos
+                            excepturi
+                            ipsum
+                            laboriosam nemo quisquam suscipit temporibus voluptates. Hic!
+                        </div>
                     </div>
-                    <div class="">WRITER</div>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dolores, eos excepturi
-                        ipsum
-                        laboriosam nemo quisquam suscipit temporibus voluptates. Hic!
-                    </div>
-                </div>
-                <div class="absolute -top-16 left-28 z-20">
-                    <div class="w-40 h-40 p-4 bg-white rounded-full">
-                        <img src="../../../../images/a1.png" alt="" class="w-full h-full bg-[#F2F3F4] rounded-full">
-                    </div>
-                </div>
-            </div>
-            <div class="relative">
-                <div class="z-10 bg-[#F2F3F4] flex-col flex justify-center items-center gap-y-6 pt-24 p-5">
-                    <div>
-                        <div class="text-2xl ">Daniel Joseph</div>
-                    </div>
-                    <div>WRITER</div>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dolores, eos excepturi
-                        ipsum
-                        laboriosam nemo quisquam suscipit temporibus voluptates. Hic!
+                    <div class="absolute -top-16 left-28 z-20">
+                        <div class="w-40 h-40 p-2 bg-white rounded-full">
+                            <img src="../../../../images/a1.png" alt="" class="w-full h-full bg-[#F2F3F4] rounded-full">
+                        </div>
                     </div>
                 </div>
-                <div class="absolute -top-16 left-28 z-20">
-                    <div class="w-40 h-40 p-4 bg-white rounded-full">
-                        <img src="../../../../images/a1.png" alt="" class="w-full h-full bg-[#F2F3F4] rounded-full">
-                    </div>
-                </div>
-            </div>
-            <div class="relative">
-                <div class="z-10 bg-[#F2F3F4] flex-col flex justify-center items-center gap-y-6 pt-24 p-5">
-                    <div>
-                        <div class="text-2xl ">Daniel Joseph</div>
-                    </div>
-                    <div>WRITER</div>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dolores, eos excepturi
-                        ipsum
-                        laboriosam nemo quisquam suscipit temporibus voluptates. Hic!
-                    </div>
-                </div>
-                <div class="absolute -top-16 left-28 z-20">
-                    <div class="w-40 h-40 p-4 bg-white rounded-full">
-                        <img src="../../../../images/a1.png" alt="" class="w-full h-full bg-[#F2F3F4] rounded-full">
-                    </div>
-                </div>
-            </div>
+            @endfor
         </div>
     </div>
 

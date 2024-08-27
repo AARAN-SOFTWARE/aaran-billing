@@ -22,4 +22,29 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Common::class);
+    }
+
+    public function tag(): BelongsTo
+    {
+        return $this->belongsTo(BlogTag::class);
+    }
+
+    public static function type($str)
+    {
+        if ($str) {
+            return Common::find($str)->vname;
+        } else return '';
+    }
+
+    public static function tagName($str)
+    {
+        if ($str) {
+            return BlogTag::find($str)->vname;
+        } else return '';
+    }
+
 }
