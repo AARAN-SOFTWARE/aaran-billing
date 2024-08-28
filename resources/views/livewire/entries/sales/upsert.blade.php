@@ -944,6 +944,29 @@
                             @endif
                         </div>
                     </x-accordion.accordion>
+                    <!-- E-way Bill ---------------------------------------------------------------------------------------->
+                    <x-accordion.accordion :heading="'E-way Bill Details'">
+                        <div class="flex flex-col gap-2 ">
+                        <x-input.model-text wire:model="distance" :label="'Distance'"/>
+                        <x-input.model-text wire:model="Transid" :label="'Transport Id'"/>
+                        <x-input.model-text wire:model="Transname" :label="'Transportv Name'"/>
+                        <x-input.model-text wire:model="Transdocno" :label="'Transport No'"/>
+                        <x-input.model-date wire:model="TransdocDt" :label="'Transport Date'"/>
+                        <x-input.model-text wire:model="Vehno" :label="'Vechile No'"/>
+                        <x-input.model-select wire:model="Vehtype" :label="'Vechile Type'">
+                            <option value="">Choose..</option>
+                            <option value="R">Regular</option>
+                            <option value="O">ODC</option>
+                        </x-input.model-select>
+                        <x-input.model-select wire:model="TransMode" :label="'Transport Mode'">
+                            <option value="">Choose..</option>
+                            <option value="1">Road</option>
+                            <option value="2">Rail</option>
+                            <option value="3">Air</option>
+                            <option value="4">ship</option>
+                        </x-input.model-select>
+                        </div>
+                    </x-accordion.accordion>
                 </div>
             </section>
 
@@ -985,24 +1008,77 @@
             </section>
 
         </section>
+        <x-jet.modal wire:model.defer="showModel">
+            <div class="px-6  pt-4">
+                <div class="text-lg">
+                    Cancel E-Invoice
+                </div>
+                <x-forms.section-border class="py-2"/>
+                <div class="flex flex-col gap-3 mt-5">
+                    <x-input.model-select :label="'Cancel Resion'" wire:model="CnlRsn">
+                        <option>Choose..</option>
+                        <option value="1">Duplicate</option>
+                        <option value="2">Data entry mistake</option>
+                        <option value="3">Order Cancelled</option>
+                        <option value="4">Others</option>
+                    </x-input.model-select>
+                    <x-input.model-text :label="'Cancel Remark'" wire:model="CnlRem"/>
+                </div>
+                <div class="mb-1">&nbsp;</div>
+            </div>
+            <div class="px-6 py-3 bg-gray-100 text-right">
+                <div class="w-full flex justify-between gap-3">
+                    <div class="py-2">&nbsp;</div>
+                    <div class="flex gap-3">
+                        <x-button.secondary wire:click.prevent="$set('showModel', false)">Cancel</x-button.secondary>
+                        <x-button.secondary wire:click="getCancelIrn" class="bg-red-500 hover:bg-red-700">E-invoice
+                            Cancel
+                        </x-button.secondary>
+                    </div>
+                </div>
+            </div>
+        </x-jet.modal>
+
+
+        @if ($successMessage)
+            <div class="rounded-lg bg-emerald-100 text-emerald-300">
+                <x-alerts.success>
+                    {{ $successMessage }}</x-alerts.success>
+            </div>
+        @endif
+
     </x-forms.m-panel>
     @if( $common->vid != "")
         <x-forms.m-panel-bottom-button save back print>
+            <div class="flex gap-3">
+                @if(!isset($e_invoiceDetails->id))
+                    <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
+            focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
+            transition-all linear duration-400 ' wire:click="saveGenerate">
+                        <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
+                        <span>Save And Generate Irn</span>
+                    </button>
+                @endif
+                @if(isset($e_invoiceDetails))
+                    @if($e_invoiceDetails->status!='Canceled')
+                        <button class='max-w-max bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 focus:ring-2 focus:ring-offset-2
+            focus:ring-red-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
+            transition-all linear duration-400 ' wire:click="cancelIrn">
+                            <x-icons.icon :icon="'x-mark'" class="sm:h-5 h-3 w-auto"/>
+                            <span>Cancel  E-Invoice</span>
+                        </button>
+                    @endif
+                @endif
+            </div>
+        </x-forms.m-panel-bottom-button>
+    @else
+        <x-forms.m-panel-bottom-button save back>
             <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
             focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
             transition-all linear duration-400 ' wire:click="saveGenerate">
                 <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
                 <span>Save And Generate Irn</span>
             </button>
-        </x-forms.m-panel-bottom-button>
-    @else
-        <x-forms.m-panel-bottom-button save back>
-        <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
-            focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
-            transition-all linear duration-400 ' wire:click="saveGenerate">
-            <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
-            <span>Save And Generate Irn</span>
-        </button>
         </x-forms.m-panel-bottom-button>
     @endif
 </div>
