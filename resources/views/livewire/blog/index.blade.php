@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="flex justify-center my-16">
+        <div class="flex justify-center my-16 ">
             <!-- left side card --------------------------------------------------------------------------------------->
             <div class="w-6/12 border-r border-gray-200 pr-10 font-roboto tracking-wider">
                 @foreach($firstPost as $data)
@@ -172,6 +172,8 @@
                     </div>
                 </div>
 
+                <!-- Blog Category ------------------------------------------------------------------------------------>
+
                 <div class=" flex flex-col gap-2.5">
                     <span class="text-xl">Categories</span>
                     @foreach($BlogCategories as $blogcategory)
@@ -184,6 +186,44 @@
                     @endforeach
 
                 </div>
+
+                <!-- Blog Tag ----------------------------------------------------------------------------------------->
+
+                <div class="flex flex-col gap-2.5">
+                    @if($tags)
+
+                        <span>Tags</span>
+                        @foreach($tags as $tag)
+                            <span class="text-gray-500 capitalize">
+                            <button wire:click="getFilter({{$tag->id}})">
+                                {{$tag->vname}}
+                            </button>
+
+                        </span>
+                        @endforeach
+                    @endif
+                </div>
+
+                <!-- Tag Filter --------------------------------------------------------------------------------------->
+
+                <div class="flex gap-1">
+                    @if($tagfilter)
+                        @foreach($tagfilter as $index => $i)
+                            <span class="rounded-lg inline-flex bg-purple-100 capitalize items-center p-1">
+
+                         {{\Aaran\Blog\Models\BlogTag::find($i)->vname}}
+
+                                <button wire:click="removeFilter({{$index}})">
+                                <x-icons.icon :icon="'x-mark'" class="w-5 h-auto"/>
+                                </button>
+
+                            </span>
+                        @endforeach
+                        <button wire:click="clearFilter()" class="border border-gray-200 rounded-lg p-2 text-xs hover:bg-blue-100">Clear All
+                        </button>
+                    @endif
+                </div>
+
             </div>
         </div>
         <x-modal.delete/>

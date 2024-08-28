@@ -24,6 +24,7 @@ class Index extends Component
     public $BlogCategories;
     public $category_id;
     public $tags;
+    public $tagfilter = [];
     #endregion
 
     public function mount()
@@ -277,6 +278,24 @@ class Index extends Component
         $this->tags = BlogTag::where('blogcategory_id', '=', $this->category_id)->get();
     }
 
+    public function getFilter($id)
+    {
+        if (!in_array($id,$this->tagfilter,true)) {
+            return array_push($this->tagfilter, $id);
+        }
+    }
+
+    public function clearFilter()
+    {
+        $this->tagfilter=[];
+    }
+
+    public function removeFilter($id)
+    {
+        unset($this->tagfilter[$id]);
+    }
+
+
     #region[Render]
     public function getRoute()
     {
@@ -289,9 +308,13 @@ class Index extends Component
 
         return view('livewire.blog.index')->with([
             'list' => $this ->getListForm ->getList(Post::class,function ($query){
-                return $query->latest();
+                return $query->latest()->when($this->tagfilter,function ($query,$tagfilter){
+                    return $query->whereIn('blogtag_id',$tagfilter);
+                });
             }),
-            'firstPost'=>Post::latest()->take(1)->get(),
+            'firstPost'=>Post::latest()->take(1)->when($this->tagfilter,function ($query,$tagfilter){
+                return $query->whereIn('blogtag_id',$tagfilter);
+            })->get(),
         ]);
     }
     #endregion

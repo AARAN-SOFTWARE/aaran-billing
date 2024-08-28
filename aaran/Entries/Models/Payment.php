@@ -3,6 +3,7 @@
 namespace Aaran\Entries\Models;
 
 use Aaran\Common\Models\Bank;
+use Aaran\Common\Models\Common;
 use Aaran\Common\Models\Receipttype;
 use Aaran\Entries\Database\Factories\PaymentFactory;
 use Aaran\Master\Models\Company;
@@ -26,7 +27,7 @@ class Payment extends Model
 
     public static function nextNo()
     {
-        return static::where('company_id','=',session()->get('company_id'))->max('entry_no') + 1;
+        return static::where('company_id', '=', session()->get('company_id'))->max('entry_no') + 1;
     }
 
     public function contact(): BelongsTo
@@ -52,6 +53,11 @@ class Payment extends Model
     public function bank(): BelongsTo
     {
         return $this->belongsTo(Bank::class);
+    }
+
+    public static function common($id)
+    {
+        return Common::find($id)->vname;
     }
 
     protected static function newFactory(): PaymentFactory
