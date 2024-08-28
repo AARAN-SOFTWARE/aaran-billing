@@ -7,6 +7,7 @@ use Aaran\Common\Models\Label;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {

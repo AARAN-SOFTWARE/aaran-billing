@@ -11,64 +11,68 @@
 @endphp
 
 <div>
-
     @if ($paginator->hasPages())
 
         <!-- full view -->
-        <div class=" md:w-full md:flex md:flex-row md:relative md:items-center md:justify-evenly hidden">
-            <button wire:click="previousPage('{{ $paginator->getPageName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}"
-                    dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
-                    class="inline-flex gap-4 border border-gray-300 px-4 py-2 rounded-md text-sm hover:bg-gray-100">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="size-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"/>
-                </svg>
-                <span>Previous</span>
-            </button>
+        <div class="relative md:w-full md:flex md:flex-row md:relative md:items-center md:justify-between hidden">
+                <button wire:click="previousPage('{{ $paginator->getPageName() }}')"
+                        x-on:click="{{ $scrollIntoViewJsSnippet }}"
+                        dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
+                        class="inline-flex gap-4 border border-gray-300 px-4 py-2 rounded-md text-sm hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"/>
+                    </svg>
+                    <span>Previous</span>
+                </button>
 
-            <div class="w-3/12 mx-auto flex justify-center text-sm text-gray-500 ">
-                {{-- Pagination Elements --}}
-                @foreach ($elements as $element)
-                    {{-- "Three Dots" Separator --}}
-                    @if (is_string($element))
-                        <span aria-disabled="true">
+                <div class="w-8/12 mx-auto flex justify-center items-center text-sm text-gray-500 pl-5 md:pr-32">
+                    {{-- Pagination Elements --}}
+                    @foreach ($elements as $element)
+                        {{-- "Three Dots" Separator --}}
+                        @if (is_string($element))
+                            <span aria-disabled="true">
                         <span
                             class="">{{ $element }}</span>
                         </span>
-                    @endif
+                        @endif
 
-                    {{-- Array Of Links --}}
-                    @if (is_array($element))
-                        @foreach ($element as $page => $url)
-                            <div wire:key="paginator-{{ $paginator->getPageName() }}-page{{ $page }}" class="">
-                                @if ($page == $paginator->currentPage())
-                                    <button class="px-4 text-[#2E69EB] bg-[#DBEAFE]  rounded-md">
+                        {{-- Array Of Links --}}
+                        @if (is_array($element))
+                            @foreach ($element as $page => $url)
+                                <div wire:key="paginator-{{ $paginator->getPageName() }}-page{{ $page }}" class="">
+                                    @if ($page == $paginator->currentPage())
+                                        <button class="px-4 text-[#2E69EB] bg-[#DBEAFE]  rounded-md">
                                 <span aria-current="page">
                                     <span>{{ $page }}</span></span>
-                                    </button>
-                                @else
-                                    <button type="button"
-                                            wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
-                                            x-on:click="{{ $scrollIntoViewJsSnippet }}"
-                                            class="px-4 mx-0.5 rounded-md hover:bg-gray-200" aria-label="{{ __('Go to page :page', ['page' => $page]) }}" >
-                                        {{ $page }}
-                                    </button>
-                                @endif
-                            </div>
-                        @endforeach
-                    @endif
-                @endforeach
-            </div>
+                                        </button>
+                                    @else
+                                        <button type="button"
+                                                wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
+                                                x-on:click="{{ $scrollIntoViewJsSnippet }}"
+                                                class="px-4 mx-0.5 rounded-md hover:bg-gray-200"
+                                                aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
+                                            {{ $page }}
+                                        </button>
+                                    @endif
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
+                </div>
 
-            <button wire:click="nextPage('{{ $paginator->getPageName() }}')"  x-on:click="{{ $scrollIntoViewJsSnippet }}"
-                    dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
-                    class="absolute right-0 inline-flex gap-4 border border-gray-300 px-4 py-2 rounded-md text-sm hover:bg-gray-100">
-                <span>Next</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="size-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/>
-                </svg>
-            </button>
+                <button wire:click="nextPage('{{ $paginator->getPageName() }}')"
+                        x-on:click="{{ $scrollIntoViewJsSnippet }}"
+                        dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
+                        class="absolute right-0 inline-flex gap-4 border border-gray-300 px-4 py-2 rounded-md text-sm hover:bg-gray-100">
+                    <span>Next</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/>
+                    </svg>
+                </button>
         </div>
     @endif
 
