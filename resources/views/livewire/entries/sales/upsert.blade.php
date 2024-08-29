@@ -798,104 +798,46 @@
         <section class="grid grid-cols-2 gap-2 ">
             <!-- Bottom Left -------------------------------------------------------------------------------------------------->
             <section class="w-full">
-                <div class="w-3/4">
-                    <x-accordion.accordion :heading="'Additional Charges'">
-                        <x-input.model-text wire:model="additional" wire:change.debounce="calculateTotal"
-                                            class="md:text-right rounded-lg w-full" :label="'Additional'"/>
-                        <!-- Ledger ----------------------------------------------------------------------------------->
-                        <div class="flex flex-col gap-2 pt-5">
-                            <div class="xl:flex w-full gap-2">
+                <div class="w-full">
+                    <x-tabs.tab-panel>
 
-                                <label for="ledger_name"
-                                       class="w-[10rem] text-zinc-500 tracking-wide py-2">Ledger</label>
-                                <div x-data="{isTyped: @entangle('ledgerTyped')}" @click.away="isTyped = false"
-                                     class='w-full'>
-                                    <div class="relative">
-                                        <input
-                                            id="ledger_name"
-                                            type="search"
-                                            wire:model.live="ledger_name"
-                                            autocomplete="off"
-                                            placeholder="Ledger.."
-                                            @focus="isTyped = true"
-                                            @keydown.escape.window="isTyped = false"
-                                            @keydown.tab.window="isTyped = false"
-                                            @keydown.enter.prevent="isTyped = false"
-                                            wire:keydown.arrow-up="decrementLedger"
-                                            wire:keydown.arrow-down="incrementLedger"
-                                            wire:keydown.enter="enterLedger"
-                                            class="block w-full rounded-lg"
-                                        />
-                                        @error('ledger_id')
-                                        <span class="text-red-500">{{'The Ledger is Required.'}}</span>
-                                        @enderror
+                        <x-slot name="tabs">
+                            <x-tabs.tab>Additional Charges</x-tabs.tab>
+                            <x-tabs.tab>Others</x-tabs.tab>
+                            <x-tabs.tab>E-way Bill Details</x-tabs.tab>
+                        </x-slot>
 
-                                        <div x-show="isTyped"
-                                             x-transition:leave="transition ease-in duration-100"
-                                             x-transition:leave-start="opacity-100"
-                                             x-transition:leave-end="opacity-0"
-                                             x-cloak
-                                        >
-                                            <div class="absolute z-20 w-full mt-2">
-                                                <div class="block py-1 shadow-md w-full
-                rounded-lg border-transparent flex-1 appearance-none border
-                                 bg-white text-gray-800 ring-1 ring-purple-600">
-                                                    <ul class="overflow-y-scroll h-96">
-                                                        @if($ledgerCollection)
-                                                            @forelse ($ledgerCollection as $i => $ledger)
-                                                                <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
-                                                        {{ $highlightLedger === $i ? 'bg-yellow-100' : '' }}"
-                                                                    wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')"
-                                                                    x-on:click="isTyped = false">
-                                                                    {{ $ledger->vname }}
-                                                                </li>
-                                                            @empty
-                                                                {{--                                                                @livewire('controls.model.common.ledger-model',[$ledger_name])--}}
-                                                                <button
-                                                                    wire:click.prevent="ledgerSave('{{$ledger_name}}')"
-                                                                    class="text-white bg-green-500 text-center w-full">
-                                                                    create
-                                                                </button>
-                                                            @endforelse
-                                                        @endif
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </x-accordion.accordion>
-                    <!-- Transport ---------------------------------------------------------------------------------------->
-                    <x-accordion.accordion :heading="'Others'">
-                        <div class="mt-3 flex flex-col gap-2 ">
-                            @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
+                        <x-slot name="content">
+
+                            <x-tabs.content>
+                                <x-input.model-text wire:model="additional" wire:change.debounce="calculateTotal"
+                                                    class="md:text-right rounded-lg w-full" :label="'Additional'"/>
+                                <!-- Ledger ----------------------------------------------------------------------------------->
                                 <div class="flex flex-col gap-2 pt-5">
                                     <div class="xl:flex w-full gap-2">
-                                        <label for="transport_name"
-                                               class="w-[10rem] text-zinc-500 tracking-wide py-2">Transport</label>
-                                        <div x-data="{isTyped: @entangle('transportTyped')}"
-                                             @click.away="isTyped = false"
-                                             class="w-full">
+
+                                        <label for="ledger_name"
+                                               class="w-[10rem] text-zinc-500 tracking-wide py-2">Ledger</label>
+                                        <div x-data="{isTyped: @entangle('ledgerTyped')}" @click.away="isTyped = false"
+                                             class='w-full'>
                                             <div class="relative">
                                                 <input
-                                                    id="transport_name"
+                                                    id="ledger_name"
                                                     type="search"
-                                                    wire:model.live="transport_name"
+                                                    wire:model.live="ledger_name"
                                                     autocomplete="off"
-                                                    placeholder="Transport.."
+                                                    placeholder="Ledger.."
                                                     @focus="isTyped = true"
                                                     @keydown.escape.window="isTyped = false"
                                                     @keydown.tab.window="isTyped = false"
                                                     @keydown.enter.prevent="isTyped = false"
-                                                    wire:keydown.arrow-up="decrementTransport"
-                                                    wire:keydown.arrow-down="incrementTransport"
-                                                    wire:keydown.enter="enterTransport"
+                                                    wire:keydown.arrow-up="decrementLedger"
+                                                    wire:keydown.arrow-down="incrementLedger"
+                                                    wire:keydown.enter="enterLedger"
                                                     class="block w-full rounded-lg"
                                                 />
-                                                @error('transport_id')
-                                                <span class="text-red-500">{{'The Transport is Required.'}}</span>
+                                                @error('ledger_id')
+                                                <span class="text-red-500">{{'The Ledger is Required.'}}</span>
                                                 @enderror
 
                                                 <div x-show="isTyped"
@@ -909,17 +851,18 @@
                 rounded-lg border-transparent flex-1 appearance-none border
                                  bg-white text-gray-800 ring-1 ring-purple-600">
                                                             <ul class="overflow-y-scroll h-96">
-                                                                @if($transportCollection)
-                                                                    @forelse ($transportCollection as $i => $transport)
+                                                                @if($ledgerCollection)
+                                                                    @forelse ($ledgerCollection as $i => $ledger)
                                                                         <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
-                                                        {{ $highlightTransport === $i ? 'bg-yellow-100' : '' }}"
-                                                                            wire:click.prevent="setTransport('{{$transport->vname}}','{{$transport->id}}')"
+                                                        {{ $highlightLedger === $i ? 'bg-yellow-100' : '' }}"
+                                                                            wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')"
                                                                             x-on:click="isTyped = false">
-                                                                            {{ $transport->vname }}
+                                                                            {{ $ledger->vname }}
                                                                         </li>
                                                                     @empty
+                                                                        {{--                                                                @livewire('controls.model.common.ledger-model',[$ledger_name])--}}
                                                                         <button
-                                                                            wire:click.prevent="transportSave('{{$transport_name}}')"
+                                                                            wire:click.prevent="ledgerSave('{{$ledger_name}}')"
                                                                             class="text-white bg-green-500 text-center w-full">
                                                                             create
                                                                         </button>
@@ -933,40 +876,114 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            </x-tabs.content>
 
-                            @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())
-                                <x-input.model-text wire:model="destination" :label="'Destination'"/>
-                            @endif
+                            <x-tabs.content>
+                                <div class="mt-3 flex flex-col gap-2 ">
+                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
+                                        <div class="flex flex-col gap-2 pt-5">
+                                            <div class="xl:flex w-full gap-2">
+                                                <label for="transport_name"
+                                                       class="w-[10rem] text-zinc-500 tracking-wide py-2">Transport</label>
+                                                <div x-data="{isTyped: @entangle('transportTyped')}"
+                                                     @click.away="isTyped = false"
+                                                     class="w-full">
+                                                    <div class="relative">
+                                                        <input
+                                                            id="transport_name"
+                                                            type="search"
+                                                            wire:model.live="transport_name"
+                                                            autocomplete="off"
+                                                            placeholder="Transport.."
+                                                            @focus="isTyped = true"
+                                                            @keydown.escape.window="isTyped = false"
+                                                            @keydown.tab.window="isTyped = false"
+                                                            @keydown.enter.prevent="isTyped = false"
+                                                            wire:keydown.arrow-up="decrementTransport"
+                                                            wire:keydown.arrow-down="incrementTransport"
+                                                            wire:keydown.enter="enterTransport"
+                                                            class="block w-full rounded-lg"
+                                                        />
+                                                        @error('transport_id')
+                                                        <span class="text-red-500">{{'The Transport is Required.'}}</span>
+                                                        @enderror
 
-                            @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
-                                <x-input.model-text wire:model="bundle" :label="'Bundle'"/>
-                            @endif
-                        </div>
-                    </x-accordion.accordion>
-                    <!-- E-way Bill ---------------------------------------------------------------------------------------->
-                    <x-accordion.accordion :heading="'E-way Bill Details'">
-                        <div class="flex flex-col gap-2 ">
-                        <x-input.model-text wire:model="distance" :label="'Distance'"/>
-                        <x-input.model-text wire:model="Transid" :label="'Transport Id'"/>
-                        <x-input.model-text wire:model="Transname" :label="'Transportv Name'"/>
-                        <x-input.model-text wire:model="Transdocno" :label="'Transport No'"/>
-                        <x-input.model-date wire:model="TransdocDt" :label="'Transport Date'"/>
-                        <x-input.model-text wire:model="Vehno" :label="'Vechile No'"/>
-                        <x-input.model-select wire:model="Vehtype" :label="'Vechile Type'">
-                            <option value="">Choose..</option>
-                            <option value="R">Regular</option>
-                            <option value="O">ODC</option>
-                        </x-input.model-select>
-                        <x-input.model-select wire:model="TransMode" :label="'Transport Mode'">
-                            <option value="">Choose..</option>
-                            <option value="1">Road</option>
-                            <option value="2">Rail</option>
-                            <option value="3">Air</option>
-                            <option value="4">ship</option>
-                        </x-input.model-select>
-                        </div>
-                    </x-accordion.accordion>
+                                                        <div x-show="isTyped"
+                                                             x-transition:leave="transition ease-in duration-100"
+                                                             x-transition:leave-start="opacity-100"
+                                                             x-transition:leave-end="opacity-0"
+                                                             x-cloak
+                                                        >
+                                                            <div class="absolute z-20 w-full mt-2">
+                                                                <div class="block py-1 shadow-md w-full
+                rounded-lg border-transparent flex-1 appearance-none border
+                                 bg-white text-gray-800 ring-1 ring-purple-600">
+                                                                    <ul class="overflow-y-scroll h-96">
+                                                                        @if($transportCollection)
+                                                                            @forelse ($transportCollection as $i => $transport)
+                                                                                <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
+                                                        {{ $highlightTransport === $i ? 'bg-yellow-100' : '' }}"
+                                                                                    wire:click.prevent="setTransport('{{$transport->vname}}','{{$transport->id}}')"
+                                                                                    x-on:click="isTyped = false">
+                                                                                    {{ $transport->vname }}
+                                                                                </li>
+                                                                            @empty
+                                                                                <button
+                                                                                    wire:click.prevent="transportSave('{{$transport_name}}')"
+                                                                                    class="text-white bg-green-500 text-center w-full">
+                                                                                    create
+                                                                                </button>
+                                                                            @endforelse
+                                                                        @endif
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())
+                                        <x-input.model-text wire:model="destination" :label="'Destination'"/>
+                                    @endif
+
+                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
+                                        <x-input.model-text wire:model="bundle" :label="'Bundle'"/>
+                                    @endif
+                                </div>
+                            </x-tabs.content>
+
+                            <x-tabs.content>
+                                <div class="flex  gap-3">
+                                    <div class="flex flex-col gap-2">
+                                    <x-input.model-text wire:model="distance" :label="'Distance'"/>
+                                    <x-input.model-text wire:model="Transid" :label="'Transport Id'"/>
+                                    <x-input.model-text wire:model="Transname" :label="'Transport Name'"/>
+                                    <x-input.model-text wire:model="Transdocno" :label="'Transport No'"/>
+                                    </div>
+                                    <div class="flex flex-col gap-2">
+                                    <x-input.model-date wire:model="TransdocDt" :label="'Transport Date'"/>
+                                    <x-input.model-text wire:model="Vehno" :label="'Vechile No'"/>
+                                    <x-input.model-select wire:model="Vehtype" :label="'Vechile Type'">
+                                        <option value="">Choose..</option>
+                                        <option value="R">Regular</option>
+                                        <option value="O">ODC</option>
+                                    </x-input.model-select>
+                                    <x-input.model-select wire:model="TransMode" :label="'Transport Mode'">
+                                        <option value="">Choose..</option>
+                                        <option value="1">Road</option>
+                                        <option value="2">Rail</option>
+                                        <option value="3">Air</option>
+                                        <option value="4">ship</option>
+                                    </x-input.model-select>
+                                    </div>
+                                </div>
+                            </x-tabs.content>
+
+                        </x-slot>
+                    </x-tabs.tab-panel>
                 </div>
             </section>
 
@@ -1039,12 +1056,14 @@
             </div>
         </x-jet.modal>
 
+        @if (session()->has('message'))
 
-        @if ($successMessage)
             <div class="rounded-lg bg-emerald-100 text-emerald-300">
-                <x-alerts.success>
-                    {{ $successMessage }}</x-alerts.success>
+
+                {{ session('message') }}
+
             </div>
+
         @endif
 
     </x-forms.m-panel>
@@ -1056,7 +1075,7 @@
             focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
             transition-all linear duration-400 ' wire:click="saveGenerate">
                         <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
-                        <span>Save And Generate Irn</span>
+                        <span>Save & Generate Irn</span>
                     </button>
                 @endif
                 @if(isset($e_invoiceDetails))
@@ -1069,6 +1088,9 @@
                         </button>
                     @endif
                 @endif
+                @if(!isset($e_wayDetails))
+                    <x-button.secondary class="bg-emerald-300 hover:bg-emerald-400" wire:click="E_wayGenerate">Generate E-way</x-button.secondary>
+                @endif
             </div>
         </x-forms.m-panel-bottom-button>
     @else
@@ -1077,7 +1099,7 @@
             focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
             transition-all linear duration-400 ' wire:click="saveGenerate">
                 <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
-                <span>Save And Generate Irn</span>
+                <span>Save & Generate Irn</span>
             </button>
         </x-forms.m-panel-bottom-button>
     @endif

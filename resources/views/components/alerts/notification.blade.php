@@ -5,7 +5,7 @@
             this.messages.splice(this.messages.indexOf(message), 1)
         },
     }"
-        @notify.window="let message = $event.detail; messages.push(message); setTimeout(() => { remove(message) }, 2500)"
+        @notify.window="let message = $event.detail; messages.push(message); setTimeout(() => { remove(message) }, 3500)"
         class="fixed inset-0 flex flex-col items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:justify-start space-y-4"
 >
     <template x-for="(message, messageIndex) in messages" :key="messageIndex" hidden>
@@ -28,7 +28,7 @@
                             </svg>
                         </div>
                         <div class="ml-3 w-0 flex-1 pt-0.5">
-                            <p x-text="message" class="text-sm leading-5 text-white font-medium"></p>
+                            <p x-text="message.content" class="text-sm leading-5 text-white font-medium"></p>
                         </div>
                         <div class="ml-4 flex-shrink-0 flex">
                             <button @click="remove(message)"

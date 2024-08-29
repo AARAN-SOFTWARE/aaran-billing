@@ -11,6 +11,7 @@ use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
 use Aaran\Master\Models\Style;
+use Aaran\MasterGst\Models\MasterGstEway;
 use Aaran\MasterGst\Models\MasterGstIrn;
 use Aaran\MasterGst\Models\MasterGstToken;
 use App\Livewire\Forms\MasterGstApi;
@@ -26,9 +27,11 @@ use Livewire\Component;
 class Upsert extends Component
 {
     use CommonTraitNew;
+
     #region[E-invoice properties]
     public MasterGstApi $masterGstApi;
     public $e_invoiceDetails;
+    public $e_wayDetails;
     public $token;
     public $irnData;
     public $IrnCancel;
@@ -868,6 +871,13 @@ class Upsert extends Component
                         'destination' => $this->destination,
                         'bundle' => $this->bundle,
                         'distance' => $this->distance,
+                        'TransMode' => $this->TransMode,
+                        'Transid' => $this->Transid,
+                        'Transname' => $this->Transname,
+                        'Transdocno' => $this->Transdocno,
+                        'TransdocDt' => $this->TransdocDt,
+                        'Vehno' => $this->Vehno,
+                        'Vehtype' => $this->Vehtype,
                         'total_qty' => $this->total_qty,
                         'total_taxable' => $this->total_taxable,
                         'total_gst' => $this->total_gst,
@@ -906,6 +916,14 @@ class Upsert extends Component
                     $obj->transport_id = $this->transport_id;
                     $obj->destination = $this->destination;
                     $obj->bundle = $this->bundle;
+                    $obj->distance = $this->distance;
+                    $obj->TransMode = $this->TransMode;
+                    $obj->Transid = $this->Transid;
+                    $obj->Transname = $this->Transname;
+                    $obj->Transdocno = $this->Transdocno;
+                    $obj->TransdocDt = $this->TransdocDt;
+                    $obj->Vehno = $this->Vehno;
+                    $obj->Vehtype = $this->Vehtype;
                     $obj->total_qty = $this->total_qty;
                     $obj->total_taxable = $this->total_taxable;
                     $obj->total_gst = $this->total_gst;
@@ -1110,11 +1128,12 @@ class Upsert extends Component
     public function generateIrn()
     {
         $result = $this->masterGstApi->getIrn(new Request(), $this->token, $this->irnData,$this->sales_id);
-        if (isset($response['data']['Irn'])) {
-            $this->successMessage = 'IRN generated successfully: ' . $result['data']['Irn'];
+        if (isset($result['data']['Irn'])) {
+            $this->successMessage = 'E-invoice generated successfully: ' . $result['data']['Irn'];
         } else {
             $this->successMessage = 'Failed to generate IRN.';
         }
+        $this->dispatch('notify', ...['type' => 'success', 'content' => $this->successMessage]);
     }
     #endregion
 
@@ -1142,6 +1161,7 @@ class Upsert extends Component
     #region[E-wayGenerate]
     public function E_wayGenerate()
     {
+        $this->saveExit();
         $company = Company::find(session()->get('company_id'));
         $contact = Contact::find($this->contact_id);
         $contactDetail = ContactDetail::where('contact_id', $contact->id)->first();
@@ -1177,6 +1197,8 @@ class Upsert extends Component
         } else {
             $this->successMessage = 'Failed to generate E-wayBill.';
         }
+        $this->dispatch('notify', ...['type' => 'success', 'content' => $this->successMessage]);
+        $this->getRoute();
     }
     #endregion
 
@@ -1222,6 +1244,13 @@ class Upsert extends Component
             $this->destination = $obj->destination;
             $this->bundle = $obj->bundle;
             $this->distance = $obj->distance;
+            $this->TransMode = $obj->TransMode;
+            $this->Transid = $obj->Transid;
+            $this->Transname = $obj->Transname;
+            $this->Transdocno = $obj->Transdocno;
+            $this->TransdocDt = $obj->TransdocDt;
+            $this->Vehno = $obj->Vehno;
+            $this->Vehtype = $obj->Vehtype;
             $this->total_qty = $obj->total_qty;
             $this->total_taxable = $obj->total_taxable;
             $this->total_gst = $obj->total_gst;
@@ -1261,6 +1290,7 @@ class Upsert extends Component
                 });
             $this->itemList = $data;
             $this->e_invoiceDetails=MasterGstIrn::where('sales_id',$this->common->vid)->first();
+            $this->e_wayDetails=MasterGstEway::where('sales_id',$this->common->vid)->first();
             $this->E_wayDetails();
         } else {
             $this->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
