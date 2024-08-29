@@ -3,8 +3,8 @@
     'maxWidth' => '2xl'
 ])
 
-<form wire:submit.prevent="save" wire:keydown.enter="save">
-    <div class="w-full">
+<form wire:submit.prevent="save">
+    <div class="w-full h-auto">
         <x-jet.modal wire:model.defer="showEditModal" maxWidth="{{{$maxWidth}}}">
             <div class="px-6  pt-4">
                 <div class="text-lg">

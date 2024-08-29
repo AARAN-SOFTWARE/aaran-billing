@@ -253,7 +253,7 @@ class Index extends Component
         $this->receipt_typeTyped = false;
     }
 
-    public function receipt_typeSave($name)
+    public function receiptTypeSave($name)
     {
         $obj = Common::create([
             'label_id' => 13,

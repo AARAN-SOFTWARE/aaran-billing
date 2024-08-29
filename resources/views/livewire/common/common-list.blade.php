@@ -80,9 +80,12 @@
                         <option value="{{$value->id}}">{{$value->vname}}</option>
                     @endforeach
                 </x-input.model-select>
-                <x-input.model-text wire:model="common.vname" :label="'Name'"/>
-                <x-input.model-text wire:model="desc" :label="'desc'"/>
-                <x-input.model-text wire:model="desc_1" :label="'desc 1'"/>
+{{--                <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
+                <x-input.floating  wire:model="common.vname" label="Name"/>
+                <x-input.floating  wire:model="desc" label="Description 1"/>
+                <x-input.floating  wire:model="desc_1" label="Description 2"/>
+{{--                <x-input.model-text wire:model="desc" :label="'desc'"/>--}}
+{{--                <x-input.model-text wire:model="desc_1" :label="'desc 1'"/>--}}
             </div>
         </x-forms.create>
     </x-forms.m-panel>

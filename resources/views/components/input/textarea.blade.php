@@ -1,55 +1,24 @@
-@props([
-    'placeholder' => ''
-    ])
-<div class="max-w-sm w-full space-y-5">
-    <!-- Floating Textarea -->
-    <div class="relative">
-    <textarea {{$attributes}} id="hs-floating-textarea" class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600
-    focus:pt-6
-    focus:pb-2
-    [&:not(:placeholder-shown)]:pt-6
-    [&:not(:placeholder-shown)]:pb-2
-    autofill:pt-6
-    autofill:pb-2" placeholder="This is a textarea placeholder"></textarea>
-        <label for="hs-floating-textarea" class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none
-      peer-focus:text-xs
-      peer-focus:-translate-y-1.5
-      peer-focus:text-gray-500 dark:peer-focus:text-neutral-500
-      peer-[:not(:placeholder-shown)]:text-xs
-      peer-[:not(:placeholder-shown)]:-translate-y-1.5
-      peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500 dark:text-neutral-500">{{$placeholder}}</label>
+{{--@props([--}}
+{{--    'label' => ''--}}
+{{--])--}}
+
+<div class="w-96">
+    <div class="relative w-full min-w-[200px]">
+    <textarea
+        class="peer h-full min-h-[100px] w-full resize-none rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
+        placeholder=" "></textarea>
+        <label
+            class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full
+             w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none
+             before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t
+             before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border
+             after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200
+             after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500
+             peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px]
+             peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-gray-900
+             peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+            Message
+        </label>
     </div>
-    <!-- End Floating Textarea -->
-
 </div>
-<script>
-    (function () {
-        function textareaAutoHeight(el, offsetTop = 0) {
-            el.style.height = 'auto';
-            el.style.height = `${el.scrollHeight + offsetTop}px`;
-        }
 
-        (function () {
-            const textareas = [
-                '#hs-floating-textarea',
-                '#hs-floating-textarea-gray',
-                '#hs-floating-textarea-underline'
-            ];
-
-            textareas.forEach((el) => {
-                const textarea = document.querySelector(el);
-                const overlay = textarea.closest('.hs-overlay');
-
-                if (overlay) {
-                    const { element } = HSOverlay.getInstance(overlay, true);
-
-                    element.on('open', () => textareaAutoHeight(textarea, 3));
-                } else textareaAutoHeight(textarea, 3);
-
-                textarea.addEventListener('input', () => {
-                    textareaAutoHeight(textarea, 3);
-                });
-            });
-        })();
-    })()
-</script>

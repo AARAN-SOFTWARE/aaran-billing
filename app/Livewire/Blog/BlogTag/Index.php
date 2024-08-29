@@ -45,20 +45,20 @@ class Index extends Component
 
     public function decrementBlogcategory(): void
     {
-        if ($this->highlightBlogcategory === 0) {
-            $this->highlightBlogcategory = count($this->blogcategoryCollection) - 1;
+        if ($this->highlightBlogCategory === 0) {
+            $this->highlightBlogCategory = count($this->blogcategoryCollection) - 1;
             return;
         }
-        $this->highlightBlogcategory--;
+        $this->highlightBlogCategory--;
     }
 
     public function incrementBlogcategory(): void
     {
-        if ($this->highlightBlogcategory === count($this->blogcategoryCollection) - 1) {
-            $this->highlightBlogcategory = 0;
+        if ($this->highlightBlogCategory === count($this->blogcategoryCollection) - 1) {
+            $this->highlightBlogCategory = 0;
             return;
         }
-        $this->highlightBlogcategory++;
+        $this->highlightBlogCategory++;
     }
 
     public function setBlogcategory($name, $id): void
@@ -70,11 +70,11 @@ class Index extends Component
 
     public function enterBlogcategory(): void
     {
-        $obj = $this->blogcategoryCollection[$this->highlightBlogcategory] ?? null;
+        $obj = $this->blogcategoryCollection[$this->highlightBlogCategory] ?? null;
 
         $this->blogcategory_name = '';
         $this->blogcategoryCollection = Collection::empty();
-        $this->highlightBlogcategory = 0;
+        $this->highlightBlogCategory = 0;
 
         $this->blogcategory_name = $obj['vname'] ?? '';
         $this->blogcategory_id = $obj['id'] ?? '';
