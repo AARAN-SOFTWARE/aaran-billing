@@ -25,6 +25,7 @@
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Total Gst</x-table.header-text>
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Grand Total</x-table.header-text>
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">E-Invoice</x-table.header-text>
+                <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Print</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
 
@@ -61,7 +62,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sales.upsert',[$row->id])}}">
+                            <a href="{{route('sales.upsert',[$row->id])}}" >
                                 <?php
                                     $obj=\Aaran\Entries\Models\Sale::Irn($row->id);
                                     ?>
@@ -95,7 +96,12 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <div class="w-full flex justify-center gap-3">
+                            <x-icons.icon :icon="'printer'" wire:click="print({{$row->id}})"
+                                          class="mt-1 hover:rounded-sm hover:bg-purple-500 hover:text-white h-5 w-auto block"/>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <div class="w-full flex justify-center gap-3 print:hidden">
                                 <div class="group inline-block relative cursor-pointer max-w-fit min-w-fit">
                                     <a href="{{route('sales.upsert',[$row->id])}}"
                                        class="flex text-gray-600 truncate text-xl text-center">

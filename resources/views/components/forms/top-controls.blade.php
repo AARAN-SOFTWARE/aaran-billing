@@ -2,7 +2,7 @@
 'showFilters'=>false,
 ])
 
-<div class="flex sm:flex-row sm:justify-between sm:items-center  flex-col gap-6 py-4">
+<div class="flex sm:flex-row sm:justify-between sm:items-center  flex-col gap-6 py-4 print:hidden">
     <div class="w-2/4 flex items-center space-x-2">
 
         <x-input.search-bar wire:model.live="getListForm.searches"  wire:keydown.escape="$set('getListForm.searches', '')"  placeholder="Search"/>
