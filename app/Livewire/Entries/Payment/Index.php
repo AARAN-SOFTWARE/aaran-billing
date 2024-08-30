@@ -8,6 +8,7 @@ use Aaran\Master\Models\Contact;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\URL;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -20,9 +21,14 @@ class Index extends Component
     public $chq_date;
     public $amount;
 
-    public function Mount()
+    public function mount($id)
     {
         $this->vdate = Carbon::now()->format('Y-m-d');
+        if ($id == 1){
+            $this->mode = 'Receipt';
+        }elseif ($id == 2){
+            $this->mode = 'Payment';
+        }
     }
 
     #region[Get-Save]
@@ -302,7 +308,6 @@ class Index extends Component
         $this->common->vid = '';
         $this->common->vname = '-';
         $this->common->active_id = '1';
-        $this->mode = 'Receipt';
         $this->bank_id = '';
         $this->bank_name='';
         $this->contact_id='';
@@ -324,7 +329,7 @@ class Index extends Component
 
         return view('livewire.entries.payment.index')->with([
             'list' => $this->getListForm->getList(Payment::class,function ($query){
-                return $query -> where('id','>','');
+                return $query -> where('mode','=',$this->mode);
             }),
         ]);
     }

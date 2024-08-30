@@ -90,10 +90,16 @@
             <!-- Contact Form ---------------------------------------------------------------------------------------->
 
             <div class="border border-gray-300 p-10 ml-6 rounded-md">
-                <form class="flex-col flex gap-6" >
+                <form class="flex-col flex gap-6">
 
-                        <input type="text" placeholder="Your Name*" wire:model="common.vname"
-                               class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4">
+                    <input type="text" placeholder="Your Name*" wire:model="common.vname"
+                           class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4">
+
+                    @error('common.vname')
+                    <div class="text-xs text-red-500">
+                        {{$message}}
+                    </div>
+                    @enderror
 
                     <div class="grid-cols-2 grid gap-2">
                         <input type="text" placeholder="Phone Number" wire:model="phone"
@@ -101,7 +107,7 @@
 
                         @error('phone')
                         <div class="text-xs text-red-500">
-                            {{ 'num only' }}
+                            {{$message}}
                         </div>
                         @enderror
 
@@ -110,7 +116,7 @@
 
                         @error('email')
                         <div class="text-xs text-red-500">
-                            {{ 'enter a valid email' }}
+                            {{$message}}
                         </div>
                         @enderror
 
@@ -120,7 +126,8 @@
                            class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4">
                     <textarea name="" id="" cols="30" rows="5" placeholder="Message*" wire:model="message"
                               class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm"></textarea>
-                    <button type="submit" wire:click.prevent="getSave" class="bg-[#3F5AF3] max-w-max text-white text-sm px-6 py-4">Submit Message
+                    <button type="submit" wire:click.prevent="getSave"
+                            class="bg-[#3F5AF3] max-w-max text-white text-sm px-6 py-4">Submit Message
                     </button>
                 </form>
             </div>

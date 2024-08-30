@@ -12,10 +12,10 @@ return new class extends Migration
         Schema::create('demo_requests', function (Blueprint $table) {
             $table->id();
             $table->string('vname');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('phone')->unique();
+            $table->string('email')->unique();
             $table->string('subject')->nullable();
-            $table->longText('message');
+            $table->longText('message')->nullable();
             $table->string('active_id')->nullable();
             $table->timestamps();
         });

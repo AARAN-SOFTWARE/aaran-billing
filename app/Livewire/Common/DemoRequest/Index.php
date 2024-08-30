@@ -1,32 +1,25 @@
 <?php
 
-namespace App\Livewire\Web\Home;
+namespace App\Livewire\Common\DemoRequest;
 
 use Aaran\Web\Models\DemoRequest;
 use App\Livewire\Trait\CommonTraitNew;
 use Livewire\Component;
 
-class Contact extends Component
+class Index extends Component
 {
     use CommonTraitNew;
 
-    public $email;
     public $phone;
+    public $email;
     public $subject;
     public $message;
 
-    public function mount()
-    {
-        $this->common->active_id = 1;
-    }
-
-    #region[Get-Save]
-    public function getSave(): void
+    public function getSave()
     {
         $this->validate([
-                'common.vname' => 'required|min:3',
-                'email' => 'required|email|unique:demo_requests,email',
-                'phone' => 'required|numeric|digits:10|unique:demo_requests,phone',
+                'email' => 'required|email',
+                'phone' => 'required|numeric|digits:10',
             ]
         );
         if ($this->common->vname != '') {
@@ -40,12 +33,21 @@ class Contact extends Component
                 ];
                 $this->common->save($DemoRequest, $extraFields);
                 $message = "Saved";
+            }else {
+                $DemoRequest = DemoRequest::find($this->common->vid);
+                $extraFields = [
+                    'phone' => $this->phone,
+                    'email' => $this->email,
+                    'subject' => $this->subject,
+                    'message' => $this->message,
+                ];
+                $this->common->edit($DemoRequest, $extraFields);
+                $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
         $this->clearFields();
     }
-    #endregion
 
     #region[Get-Obj]
     public function getObj($id)
@@ -79,6 +81,10 @@ class Contact extends Component
     #endregion
     public function render()
     {
-        return view('livewire.web.home.contact')->layout('layouts.web');
+        return view('livewire.common.demo-request.index')->with([
+            'list' => $this->getListForm->getList(DemoRequest::class,function ($query){
+                return $query->where('id','>','');
+            }),
+        ]);
     }
 }
