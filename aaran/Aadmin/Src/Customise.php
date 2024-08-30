@@ -89,7 +89,8 @@ class Customise
         return 'core';
     }
     #endregion
-    #region[Core]
+
+    #region[GST-API]
     public static function hasGstApi(): bool
     {
         return static::enabled(static::gstapi());
@@ -98,6 +99,18 @@ class Customise
     public static function gstapi(): string
     {
         return 'gstapi';
+    }
+    #endregion
+
+    #region[Transaction]
+    public static function hasTransaction(): bool
+    {
+        return static::enabled(static::transaction());
+    }
+
+    public static function transaction(): string
+    {
+        return 'transaction';
     }
     #endregion
 }

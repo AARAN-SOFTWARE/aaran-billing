@@ -656,6 +656,35 @@ class S102_CommonSeeder extends Seeder
             'desc_1' => '-',
             'active_id' => '1'
         ]);
+        Common::create([
+            'label_id'=>'18',
+            'vname' => 'Cash Book',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'18',
+            'vname' => 'Bank Book',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'19',
+            'vname' => 'Payment',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id'=>'19',
+            'vname' => 'Receipt',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+
         #endregion
     }
 }
