@@ -236,7 +236,7 @@
 {{--            <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
             <x-input.floating wire:model="common.vname" label="Name"/>
 
-            <x-input.textarea wire:model="body"/>
+            <x-input.textarea wire:model="body" label="Description"/>
 
             <x-dropdown.wrapper label="Blog Category" type="blogcategoryTyped">
                 <div class="relative ">
@@ -341,7 +341,7 @@
                             @empty
                                 <button
                                     wire:click.prevent="blogtagSave('{{$blogtag_name}}')"
-                                    class="text-white bg-green-500 text-center w-full">
+                                    class=" bg-blue-100 text-blue-600 text-center hover:font-bold w-full">
                                     create
                                 </button>
                             @endforelse

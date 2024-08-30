@@ -25,6 +25,5 @@
         <x-dropdown.click />
     </div>
 
-
-
+    <x-input.textarea />
 </div>
