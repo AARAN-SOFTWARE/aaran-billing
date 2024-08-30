@@ -77,7 +77,6 @@ class MasterGstApi extends Form
                 'gstin' => '29AABCT1332L000',
                 'Content-Type' => 'application/json',
             ])->post('https://api.mastergst.com/einvoice/type/GENERATE/version/V1_03?email=aaranoffice%40gmail.com', $jsonData);
-
             if ($response->successful()) {
                 $data = $response->json();
                 $obj=MasterGstIrn::create([
@@ -172,7 +171,6 @@ class MasterGstApi extends Form
                 'Content-Type' => 'application/json',
             ])->post('https://api.mastergst.com/einvoice/type/GENERATE_EWAYBILL/version/V1_03?email=aaranoffice%40gmail.com',
                 $jsonData);
-
 
             if ($response->successful()) {
                 $data = $response->json();

@@ -83,10 +83,10 @@
                                     @endif
                                 @else
                                     <div
-                                        class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-yellow-100/60 dark:bg-gray-800">
+                                        class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-purple-100/60 dark:bg-gray-800">
                                         <span
-                                            class="h-1.5 w-1.5  rounded-full bg-yellow-500 "></span>
-                                        <h2 class=" font-normal text-yellow-500 ">
+                                            class="h-1.5 w-1.5  rounded-full bg-purple-500 "></span>
+                                        <h2 class=" font-normal text-purple-500 ">
                                             Not-Generated
                                         </h2>
                                     </div>
