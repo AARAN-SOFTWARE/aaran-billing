@@ -41,6 +41,13 @@ class Index extends Component
         $this->showDeleteModal = false;
     }
     #endregon
+    #region[print]
+    public function print($id)
+    {
+
+        $this->redirect(route('sales.print', [$id]));
+    }
+    #endregion
 
     #region[render]
     public function render()

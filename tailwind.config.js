@@ -20,6 +20,9 @@ export default {
                 merri:["Merriweather", "sans-serif"]
 
             },
+            screens: {
+                'print': { 'raw': 'print' },
+            }
         },
     },
 
