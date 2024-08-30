@@ -11,7 +11,7 @@ class TransactionServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->mergeConfigFrom(__DIR__ . '/../config.php','transactions');
 
-        $this->app->register(TransactionServiceProvider::class);
+        $this->app->register(TransactionRouteServiceProvider::class);
     }
 
 }

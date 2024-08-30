@@ -84,7 +84,7 @@
                 </x-dropdown.wrapper>
 
 
-                <x-input.model-date wire:model="vdate" :label="'date'"/>
+                <x-input.model-date wire:model="vdate" :label="'Date'"/>
 
                 <x-input.floating wire:model="amount" label="Amount"/>
 

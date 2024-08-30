@@ -111,5 +111,17 @@ class S101_LabelSeeder extends Seeder
             'cols' => 1,
             'active_id' => '1'
         ]);
+        #18
+        Label::create([
+            'vname' => 'Transaction Type',
+            'cols' => 1,
+            'active_id' => '1'
+        ]);
+        #19
+        Label::create([
+            'vname' => 'Mode of Payment',
+            'cols' => 1,
+            'active_id' => '1'
+        ]);
     }
 }
