@@ -124,7 +124,6 @@ class Index extends Component
             if (Storage::disk('public')->exists(Storage::path('public/images' . $this->old_cont_image))) {
                 Storage::disk('public')->delete(Storage::path('public/images' . $this->old_cont_image));
             }
-
             $image->StoreAs('images', $filname,'public');
 
             return $filname;
