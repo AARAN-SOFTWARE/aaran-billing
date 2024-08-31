@@ -972,6 +972,7 @@ class Upsert extends Component
     }
     #endregion
 
+    #region[api]
     #region[jsonFormate]
     public function jsonFormate()
     {
@@ -1211,6 +1212,94 @@ class Upsert extends Component
         $response=$this->masterGstApi->getEwayDetails($this->token,$obj->irn,$company->gstin);
         }
     }
+    #endregion
+
+    #region[EwayBill]
+    public function EwayBill()
+    {
+        $company = Company::find(session()->get('company_id'));
+        $contact = Contact::find($this->contact_id);
+        $contactDetail = ContactDetail::where('contact_id', $contact->id)->first();
+        $bodyData = [
+            "supplyType" => "O",
+            "subSupplyType" => "1",
+            "subSupplyDesc" => " ",
+            "docType" => "INV",
+            "docNo" => $this->invoice_no,
+            "docDate" => date('d/m/Y', strtotime($this->invoice_date)),
+            "fromGstin" => $company->gstin,
+            "fromTrdName" => $company->vname,
+            "fromAddr1" => $company->address_1,
+            "fromAddr2" =>$company->address_2,
+            "fromPlace" => Common::find($company->city_id)->vname,
+            "actFromStateCode" => (int)(Common::find($company->state_id)->desc),
+            "fromPincode" =>(int)( Common::find($company->pincode_id)->vname),
+            "fromStateCode" => (int)(Common::find($company->state_id)->desc),
+            "toGstin" => $contact->gstin,
+            "toTrdName" =>$contact->vname,
+            "toAddr1" => $contactDetail->address_1,
+            "toAddr2" => $contactDetail->address_2,
+            "toPlace" => Common::find($contactDetail->city_id)->vname,
+            "toPincode" =>(int) (Common::find($contactDetail->pincode_id)->vname),
+            "actToStateCode" =>(int)(Common::find($contactDetail->state_id)->desc),
+            "toStateCode" =>(int)(Common::find($contactDetail->state_id)->desc),
+            "transactionType" => 4,
+            "dispatchFromGSTIN" => $company->gstin,
+            "dispatchFromTradeName" => $company->vname,
+            "shipToGSTIN" => $contact->gstin,
+            "shipToTradeName" =>$contact->vname,
+            "totalValue" => $this->total_taxable,
+            "totInvValue" =>$this->grand_total,
+            "transMode" =>  (string)($this->TransMode),
+            "transDistance" => $this->distance,
+            "transDocNo" => $this->Transdocno,
+            "transDocDate" => date('d/m/Y', strtotime($this->TransdocDt)),
+            "vehicleNo" =>  $this->Vehno,
+            "vehicleType" => $this->Vehtype,
+            "itemList" => []
+        ];
+        if ($this->sales_type == 'CGST-SGST') {
+            $bodyData["sgstValue"] = $this->total_gst/2;
+            $bodyData["cgstValue"] = $this->total_gst/2;
+            $bodyData["igstValue"] = 0;
+        } else {
+            $bodyData["igstValue"] = $this->total_gst;
+            $bodyData["sgstValue"] =0;
+            $bodyData["cgstValue"] = 0;
+        }
+        foreach ($this->itemList as $index => $row) {
+            $productData = Product::find($row['product_id']);
+            $itemData = [
+                "productName"=>$productData->vname,
+                "productDesc"=>$productData->vname,
+                "hsnCode" => Sale::commons($productData->hsncode_id),
+                "quantity" => (int)($row['qty']),
+                "qtyUnit" => Sale::commons($productData->unit_id),
+                "taxableAmount" => $row['taxable'],
+            ];
+            if ($this->sales_type == 'CGST-SGST') {
+                $itemData["sgstRate"] = $row['gst_amount'] / 2;
+                $itemData["cgstRate"] = $row['gst_amount'] / 2;
+                $itemData["igstRate"] = 0;
+            } else {
+                $itemData["igstRate"] = $row['gst_amount'];
+                $itemData["sgstRate"] =0;
+                $itemData["cgstRate"] = 0;
+            }
+
+            $bodyData["itemList"][] = $itemData;
+        }
+        $result=$this->masterGstApi->EwayBillGenerate(new Request(),$bodyData,$this->common->vid);
+
+        if (isset($result['data']['ewayBillNo'])) {
+            $this->successMessage = 'E-wayBill generated successfully: ' . $result['data']['ewayBillNo'];
+        } else {
+            $this->successMessage = 'Failed to generate E-wayBill.';
+        }
+        $this->dispatch('notify', ...['type' => 'success', 'content' => $this->successMessage]);
+        $this->getRoute();
+    }
+    #endregion
     #endregion
 
     #region[mount]

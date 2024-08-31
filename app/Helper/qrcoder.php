@@ -8,11 +8,15 @@ use chillerlan\QRCode\Output\QRMarkupHTML;
 
 class qrcoder
 {
-    public static function generate($qrcode)
+    public static function generate($qrcode,$version=null)
     {
         $options = new QROptions;
-
+        if ($version !== null) {
+        $options->version = $version;
+        }else{
         $options->version = 5;
+
+        }
         $options->outputInterface = QRMarkupHTML::class;
         $options->cssClass = 'qrcode';
         $options->moduleValues = [
