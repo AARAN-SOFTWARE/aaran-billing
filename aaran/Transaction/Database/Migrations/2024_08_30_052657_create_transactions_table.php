@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->string('deposit_on')->nullable();
             $table->string('realised_on')->nullable();
 
-            $table->foreignId('against_id')->references('id')->on('commons')->nullable();
+            $table->foreignId('against_id')->references('id')->on('commons');
             $table->string('ref_no')->nullable();
             $table->string('ref_amount')->nullable();
 
