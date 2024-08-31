@@ -1278,11 +1278,11 @@ class Upsert extends Component
                 "taxableAmount" => $row['taxable'],
             ];
             if ($this->sales_type == 'CGST-SGST') {
-                $itemData["sgstRate"] = $row['gst_amount'] / 2;
-                $itemData["cgstRate"] = $row['gst_amount'] / 2;
+                $itemData["sgstRate"] = $row['gst_percent'] / 2;
+                $itemData["cgstRate"] = $row['gst_percent'] / 2;
                 $itemData["igstRate"] = 0;
             } else {
-                $itemData["igstRate"] = $row['gst_amount'];
+                $itemData["igstRate"] = $row['gst_percent'];
                 $itemData["sgstRate"] =0;
                 $itemData["cgstRate"] = 0;
             }
