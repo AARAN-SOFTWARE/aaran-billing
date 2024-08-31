@@ -14,22 +14,17 @@
                 <x-table.header-serial></x-table.header-serial>
 
                 <x-table.header-text>Chq No</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Contact
-                    Name
+                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Contact Name
                 </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Receipt
-                    Type
+                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Receipt Type
                 </x-table.header-text>
-
                 <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Mode
                 </x-table.header-text>
-
                 <x-table.header-text>Status</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
 
             <x-slot:table_body name="table_body">
-
                 @foreach($list as $index=>$row)
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>

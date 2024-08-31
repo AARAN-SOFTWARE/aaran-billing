@@ -4,17 +4,18 @@
              class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
         <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
-            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4">Services</div>
+            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4 animate__animated wow bounceInDown" data-wow-duration="3s">Contact</div>
             <span
-                class="z-10 absolute top-6 py-5 px-[180px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]">&nbsp;</span>
-            <div class="w-6/12 mx-auto text-lg pb-4">We Design and develop Outstanding Digital products and digital -
+                class="z-10 absolute top-6 py-5 px-[165px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
+                animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
+            <div class="w-6/12 mx-auto text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>
         </div>
     </div>
     <div class="flex justify-center">
-        <div class="w-9/12 grid grid-cols-2 font-roboto tracking-wider my-24">
-            <div class="flex-col flex gap-y-4 bg-gray-50 p-10 mr-6 border border-gray-300 rounded-md">
+        <div class="w-9/12 grid grid-cols-2 font-roboto tracking-wider my-24 ">
+            <div class="flex-col flex gap-y-4 bg-gray-50 p-10 mr-6 border border-gray-300 rounded-md animate__animated wow animate__backInLeft" data-wow-duration="3s">
                 <div class="w-full flex items-center gap-x-3 ">
                     <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
                     <span class="text-[#5069F4] text-sm font-semibold">WORK PROCESS</span>
@@ -89,7 +90,7 @@
 
             <!-- Contact Form ---------------------------------------------------------------------------------------->
 
-            <div class="border border-gray-300 p-10 ml-6 rounded-md">
+            <div class="border border-gray-300 p-10 ml-6 rounded-md animate__animated wow animate__backInRight" data-wow-duration="3s">
                 <form class="flex-col flex gap-6">
 
                     <input type="text" placeholder="Your Name*" wire:model="common.vname"
@@ -134,7 +135,7 @@
         </div>
     </div>
 
-    <div class=" w-9/12 mx-auto shadow-md shadow-gray-300 mb-24 h-[35rem]">
+    <div class=" w-9/12 mx-auto shadow-md shadow-gray-300 mb-24 h-[35rem] animate__animated wow bounceInUp" data-wow-duration="3s">
         <section class="">
             <div class="container mx-auto px-4">
 

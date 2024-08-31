@@ -4,10 +4,11 @@
              class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
         <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
-            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4">Blog</div>
+            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4 animate__animated wow bounceInDown" data-wow-duration="3s">Blog</div>
             <span
-                class="z-10 absolute top-6 py-5 px-[92px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]">&nbsp;</span>
-            <div class="w-6/12 mx-auto text-lg pb-4">We Design and develop Outstanding Digital products and digital -
+                class="z-10 absolute top-6 py-5 px-[92px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
+                animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
+            <div class="w-6/12 mx-auto text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>
         </div>
@@ -15,14 +16,15 @@
 
     <div class="flex justify-center font-roboto tracking-wider my-16 gap-6 scroll-smooth">
         <div class="w-6/12 flex-col flex gap-y-8 border-r border-gray-200 pr-6 ">
-            @forelse($list->skip(1) as $row)
+            @forelse($list as $row)
                 <div class="group flex-col flex gap-y-4 border-b border-gray-300 pb-6 overflow-hidden">
-                    <div class="text-2xl font-semibold">{{$row->vname}}</div>
+                    <div class="text-2xl font-semibold animate__animated wow animate__backInLeft" data-wow-duration="3s"">{{$row->vname}}</div>
                     <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}" alt=""
-                         class="h-[30rem] object-cover transition duration-700 ease-out group-hover:scale-105">
-                    <div class="flex justify-between items-center gap-x-4 text-gray-600 text-sm">
+                         class="h-[30rem] object-cover transition duration-700 ease-out group-hover:scale-105
+                         animate__animated wow bounceInUp" data-wow-duration="3s">
+                    <div class="flex justify-between items-center gap-x-4 text-gray-600 text-sm animate__animated wow animate__backInLeft" data-wow-duration="3s">
                         <div class="flex items-center gap-x-4">
-                            <span class="inline-flex items-center gap-x-1">
+                            <span class="inline-flex items-center gap-x-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5"
                                      stroke="currentColor" class="size-4 text-gray-600">
@@ -31,7 +33,7 @@
                                 </svg>
                                 <span>{{ $row->created_at->diffForHumans() }}</span>
                             </span>
-                            <span class="inline-flex items-center gap-x-1">
+                            <span class="inline-flex items-center gap-x-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                      class="size-4 text-gray-600">
                                 <path fill-rule="evenodd"
@@ -41,7 +43,7 @@
                                 <span class="uppercase mt-1">POST BY : {{$row->user->name}}</span>
                             </span>
                         </div>
-                        <div class="flex items-center gap-x-4">
+                        <div class="flex items-center gap-x-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
                             <span class="text-blue-600">
                                 #{{ \Aaran\Blog\Models\Post::type($row->blogcategory_id) ?: 'posts'}}
                             </span>
@@ -50,7 +52,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="text-gray-600 text-sm">{{$row->body}}
+                    <div class="text-gray-600 text-sm animate__animated wow bounceInUp" data-wow-duration="3s">{{$row->body}}
                     </div>
                 </div>
             @empty
@@ -78,11 +80,11 @@
                 </label>
             </div>
 
-            <div class="text-2xl font-semibold my-6">Top Posts</div>
+            <div class="text-2xl font-semibold my-6 animate__animated wow bounceInRight" data-wow-duration="3s">Top Posts</div>
             <div class="flex-col flex gap-y-6">
                 <div class="bg-white flex-col flex gap-y-4 group ">
                     @foreach($topPost as $row)
-                        <div class="w-full h-auto flex gap-x-2 hover:bg-slate-100">
+                        <div class="w-full h-auto flex gap-x-2 hover:bg-slate-100 animate__animated wow animate__backInRight" data-wow-duration="3s">
                             <div class="w-2/6 ">
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}"
                                      class="w-full h-20">
@@ -111,11 +113,12 @@
 
             <!-- Blog Category ------------------------------------------------------------------------------------>
 
-            <div class="text-2xl font-semibold mt-9 scroll-smooth">Category</div>
+            <div class="text-2xl font-semibold mt-9 scroll-smooth animate__animated wow bounceInRight" data-wow-duration="3s">Category</div>
             <div class="flex-col flex justify-evenly h-64 w-full  overflow-y-auto py-2 ">
                 @foreach($BlogCategories as $blogcategory)
                     <button wire:click="getCategory_id({{$blogcategory->id}})"
-                            class="h-20 inline-flex items-center gap-x-4 py-2 my-1 bg-blue-50 text-blue-600 px-4 group hover:bg-blue-600 rounded-md mr-2 transition-all ease-linear duration-300">
+                            class="h-20 inline-flex items-center gap-x-4 py-2 my-1 bg-blue-50 text-blue-600 px-4 group hover:bg-blue-600 rounded-md mr-2 transition-all ease-linear duration-300
+                            animate__animated wow animate__backInRight" data-wow-duration="3s">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-blue-600 group-hover:text-white">
                             <path fill-rule="evenodd" d="M1.5 7.125c0-1.036.84-1.875 1.875-1.875h6c1.036 0 1.875.84 1.875 1.875v3.75c0 1.036-.84 1.875-1.875 1.875h-6A1.875 1.875 0 0 1 1.5 10.875v-3.75Zm12 1.5c0-1.036.84-1.875 1.875-1.875h5.25c1.035 0 1.875.84 1.875 1.875v8.25c0 1.035-.84 1.875-1.875 1.875h-5.25a1.875 1.875 0 0 1-1.875-1.875v-8.25ZM3 16.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875v2.25c0 1.035-.84 1.875-1.875 1.875h-5.25A1.875 1.875 0 0 1 3 18.375v-2.25Z" clip-rule="evenodd" />
