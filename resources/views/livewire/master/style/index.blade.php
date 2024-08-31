@@ -43,8 +43,11 @@
 
         <x-forms.create :id="$common->vid">
             <div class="flex flex-col  gap-3">
-                <x-input.model-text wire:model="common.vname" :label="'Name'"/>
-                <x-input.model-text wire:model="desc" :label="'Order Name'"/>
+
+                <x-input.floating wire:model="common.vname" label="Name"/>
+                <x-input.floating wire:model="desc" label="Order Name"/>
+{{--                <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
+{{--                <x-input.model-text wire:model="desc" :label="'Order Name'"/>--}}
                 <!-- Image -------------------------------------------------------------------------------------------->
                 <div class="flex flex-row gap-2 mt-4">
 
@@ -57,8 +60,8 @@
 
                             <div>
                                 @if($image)
-                                    <div class="flex-shrink-0 ">
-                                        <img class="h-24 w-full" src="{{ $image->temporaryUrl() }}"
+                                    <div class="flex-shrink-0 overflow-hidden">
+                                        <img class="h-24 w-full hover:scale-105 hover:brightness-110" src="{{ $image->temporaryUrl() }}"
                                              alt="{{$image?:''}}"/>
                                     </div>
                                 @endif
@@ -95,7 +98,7 @@
                             </label>
                         </div>
 
-                        <div wire:loading wire:target="image" class="z-10 absolute top-6 left-12">
+                        <div wire:loading wire:target="image" class="z-10 absolute top-6 left-[109px]">
                             <div class="w-14 h-14 rounded-full animate-spin
                                                         border-y-4 border-dashed border-green-500 border-t-transparent"></div>
                         </div>

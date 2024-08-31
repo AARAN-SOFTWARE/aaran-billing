@@ -53,12 +53,11 @@
         <x-forms.create :id="$common->vid">
 
             <div class="flex flex-col gap-3">
-                <x-input.model-text wire:model="common.vname" :label="'Name'"/>
-                <x-input.model-text wire:model="phone" :label="'Phone'"/>
-                <x-input.model-text wire:model="email" :label="'Email'"/>
-                <x-input.model-text wire:model="subject" :label="'Subject'"/>
-                <x-input.model-text wire:model="message" :label="'Message'"/>
-
+                <x-input.floating wire:model="common.vname" label="Name"/>
+                <x-input.floating wire:model="phone" label="Phone"/>
+                <x-input.floating wire:model="email" label="Email"/>
+                <x-input.floating wire:model="subject" label="Subject"/>
+                <x-input.floating wire:model="message" label="Message"/>
             </div>
 
         </x-forms.create>
