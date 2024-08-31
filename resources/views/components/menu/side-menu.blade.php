@@ -38,6 +38,10 @@
                 <x-menu.sub.entries/>
             @endif
 
+            @if(Aaran\Aadmin\Src\Customise::hasTransaction())
+                <x-menu.sub.transaction/>
+            @endif
+
 
             <x-menu.sub.logout/>
 

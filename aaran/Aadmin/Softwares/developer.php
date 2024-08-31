@@ -12,6 +12,7 @@ return [
         Customise::core(),
         Customise::blog(),
         Customise::gstapi(),
+        Customise::transaction(),
     ],
     'SalesEntry' => [
         SaleEntry::order(),
@@ -26,5 +27,6 @@ return [
         SaleEntry::productDescription(),
         SaleEntry::colour(),
         SaleEntry::size(),
+
     ],
 ];

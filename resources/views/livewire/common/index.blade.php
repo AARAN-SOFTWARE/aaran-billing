@@ -75,14 +75,14 @@
         <x-forms.create :id="$common->vid">
             <div class="flex flex-col  gap-3">
 
-                <x-input.model-text wire:model="common.vname" :label="'Name'"/>
+                <x-input.floating wire:model="common.vname" label="Name"/>
 
                 @if($module->cols === 2)
-                    <x-input.model-text wire:model="desc" :label="'desc'"/>
+                    <x-input.floating wire:model="desc" label="Description 1"/>
                 @endif
 
                 @if($module->cols === 3)
-                    <x-input.model-text wire:model="desc_1" :label="'desc 1'"/>
+                    <x-input.floating wire:model="desc_1" label="Description 2"/>
                 @endif
 
             </div>

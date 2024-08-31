@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->foreignId('mode_id')->references('id')->on('commons');
 
             $table->string('vdate');
-            $table->decimal('amount', 15, 2);
+            $table->decimal('vname', 15, 2);
 
             $table->foreignId('receipttype_id')->references('id')->on('commons');
             $table->string('remarks');
@@ -32,12 +32,15 @@ return new class extends Migration {
             $table->string('deposit_on')->nullable();
             $table->string('realised_on')->nullable();
 
-            $table->foreignId('against_id')->references('id')->on('commons');
+            $table->foreignId('against_id')->references('id')->on('commons')->nullable();
             $table->string('ref_no')->nullable();
             $table->string('ref_amount')->nullable();
 
             $table->string('verified_by')->nullable();
-            $table->string('verified_no')->nullable();
+            $table->string('verified_on')->nullable();
+
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('active_id', 10)->nullable();
 
             $table->timestamps();
         });

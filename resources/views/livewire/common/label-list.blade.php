@@ -41,7 +41,8 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$common->vid">
-            <x-input.model-text wire:model="common.vname" :label="'City Name'"/>
+{{--            <x-input.model-text wire:model="common.vname" :label="'City Name'"/>--}}
+            <x-input.floating wire:model="common.vname" label="City Name" />
         </x-forms.create>
 
     </x-forms.m-panel>
