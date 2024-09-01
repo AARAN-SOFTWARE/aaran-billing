@@ -2,6 +2,7 @@
 
 namespace Aaran\Transaction\Models;
 
+use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,5 +15,9 @@ class Transaction extends Model
     public function contact(): BelongsTo
     {
         return $this->belongsTo(Contact::class);
+    }
+    public static function common($id)
+    {
+        return Common::find($id)->vname;
     }
 }

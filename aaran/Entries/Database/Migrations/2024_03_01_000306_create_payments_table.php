@@ -18,10 +18,10 @@ return new class extends Migration {
                 $table->foreignId('contact_id')->references('id')->on('contacts');
                 $table->foreignId('receipttype_id')->references('id')->on('commons');
                 $table->foreignId('user_id')->references('id')->on('users');
-                $table->string('vname')->nullable();
+                $table->string('chq_no')->nullable();
                 $table->string('chq_date')->nullable();
                 $table->foreignId('bank_id')->nullable();
-                $table->decimal('amount', 11, 2);
+                $table->decimal('vname', 11, 2);
                 $table->string('active_id', 10)->nullable();
                 $table->timestamps();
             });

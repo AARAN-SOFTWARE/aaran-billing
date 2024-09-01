@@ -18,7 +18,7 @@ class Index extends Component
     public $mode;
     public $vdate;
     public $chq_date;
-    public $amount;
+    public $chq_no;
 
     public function mount($id)
     {
@@ -41,9 +41,9 @@ class Index extends Component
                     'contact_id' => $this->contact_id,
                     'receipttype_id' => $this->receipt_type_id,
                     'vdate' => $this->vdate,
+                    'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
-                    'bank_id' => $this->bank_id,
-                    'amount' => $this->amount,
+                    'bank_id' => $this->bank_id?:'21',
                     'user_id' => auth()->id(),
                     'acyear' => session()->get('acyear'),
                     'company_id' =>session()->get('company_id'),
@@ -56,10 +56,10 @@ class Index extends Component
                     'mode' => $this->mode,
                     'contact_id' => $this->contact_id,
                     'receipttype_id' => $this->receipt_type_id,
+                    'chq_no' => $this->chq_no,
                     'vdate' => $this->vdate,
                     'chq_date' => $this->chq_date,
                     'bank_id' => $this->bank_id,
-                    'amount' => $this->amount,
                     'user_id' => auth()->id(),
                     'acyear' => session()->get('acyear'),
                     'company_id' =>session()->get('company_id'),
@@ -286,6 +286,7 @@ class Index extends Component
             $this->common->vname = $Payment->vname;
             $this->common->active_id = $Payment->active_id;
             $this->mode = $Payment->mode;
+            $this->chq_no = $Payment->chq_no;
             $this->bank_id = $Payment->bank_id;
             $this->bank_name=$Payment->bank_id?Common::find($Payment->bank_id)->vname:'';
             $this->contact_id = $Payment->contact_id;
@@ -294,7 +295,6 @@ class Index extends Component
             $this->receipt_type_name = $Payment->receipttype_id?Common::find($Payment->receipttype_id)->vname:'';
             $this->chq_date = $Payment->chq_date;
             $this->vdate = $Payment->vdate;
-            $this->amount = $Payment->amount;
             return $Payment;
         }
         return null;
@@ -306,6 +306,7 @@ class Index extends Component
     {
         $this->common->vid = '';
         $this->common->vname = '-';
+        $this->common->chq_no = '-';
         $this->common->active_id = '1';
         $this->bank_id = '';
         $this->bank_name='';
@@ -314,7 +315,6 @@ class Index extends Component
         $this->receipt_type_id='';
         $this->receipt_type_name='';
         $this->chq_date='';
-        $this->amount = '';
         $this->vdate = Carbon::now()->format('Y-m-d');
     }
     #endregion

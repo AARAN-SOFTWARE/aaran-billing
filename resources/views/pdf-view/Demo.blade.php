@@ -5,22 +5,40 @@
 </head>
 <body class="bg-white-100 p-10">
 <div class="bg-white border-2 h-full border-gray-400">
-    <div class="p-6">
-        <h1 class="text-2xl font-bold text-gray-800">Invoice</h1>
-        <div class="flex justify-between mt-4">
-            <div>
-                <h2 class="text-lg font-semibold">From:</h2>
-                <p>Your Company Name</p>
-                <p>123 Your Street</p>
-                <p>Your City, ST 12345</p>
-                <p>Email: your@email.com</p>
+    <!------Top Company Area------------------------------------------------------------------------------------------>
+        <div class="flex flex-row  justify-evenly p-2">
+            <div class="flex justify-center items-center">
+                <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-[180px]"/>
+            </div>
+            <div class="w-full flex flex-col items-center justify-center">
+                <h1 class="text-2xl font-bold tracking-wider  uppercase">{{$cmp->get('company_name')}}</h1>
+                <p class="text-xs">{{$cmp->get('address_1')}},{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</p>
+                <p class="text-xs">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
+                <p class="text-xs">{{$cmp->get('gstin')}}</p>
             </div>
             <div>
-                <h2 class="text-lg font-semibold">To:</h2>
-                <p>Client Name</p>
-                <p>456 Client Street</p>
-                <p>Client City, ST 67890</p>
-                <p>Email: client@email.com</p>
+                <img class="w-[200px]" src="{{\App\Helper\qrcoder::generate($irn->signed_qrcode,22)}}" alt="{{$irn->signed_qrcode}}">
+            </div>
+        </div>
+    <!------Invoice Header Area--------------------------------------------------------------------------------------->
+    <div class="w-full bg-slate-500 flex">
+        <div class="w-10/12 text-white text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAX INVOICE</div>
+        <div class="w-2/12 text-white text-right ">Original Copy</div>
+    </div>
+    <!------Contact and invoice details--------------------------------------------------------------------------------------->
+        <div class="flex mt-2">
+            <div>
+                <span>M/s.{{$obj->contact_name}}</span>
+                <p>{{$billing_address->get('address_1')}}</p>
+                <p>{{$billing_address->get('address_2')}}</p>
+                <p>{{$billing_address->get('address_3')}}</p>
+                <p>{{$billing_address->get('gstcell')}}</p>
+            </div>
+            <div>
+                <p>Invoice No:&nbsp;&nbsp;{{$obj->invoice_no}}</p>
+                <p>Date:&nbsp;&nbsp;{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</p>
+                <p>PO No:&nbsp;&nbsp;{{ $obj->despatch_name }}</p>
+                <p>PO Date:&nbsp;&nbsp;{{ $obj->despatch_date }}</p>
             </div>
         </div>
         <div class="mt-6">
@@ -69,7 +87,6 @@
         <div class="mt-6">
             <p class="text-gray-600">Thank you for your business!</p>
         </div>
-    </div>
 </div>
 
 </body>

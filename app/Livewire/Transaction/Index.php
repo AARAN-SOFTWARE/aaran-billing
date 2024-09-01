@@ -17,6 +17,7 @@ class Index extends Component
 {
     use CommonTraitNew;
 
+    #region[Properties]
     public $paid_to;
     public $purpose;
     public $vdate;
@@ -31,29 +32,44 @@ class Index extends Component
     public $verified_by;
     public $verified_on;
     public $against_id;
+    #endregion
 
+    #region[Mount]
+    public function mount($id)
+    {
+        if($id == 1){
+           $this->trans_type_id = 90;
+           $this->trans_type_name=Common::find(90)->vname;
+           $this->receipt_type_id=33;
+           $this->receipt_type_name=Common::find(33)->vname;
+        }elseif($id == 2){
+            $this->trans_type_id =91;
+            $this->trans_type_name=Common::find(91)->vname;
+        }
+    }
+    #endregion
 
     #region[Get-Save]
     public function getSave(): void
     {
-        if ($this->contact_id != '') {
+        if ($this->common->vname != '') {
             if ($this->common->vid == '') {
                 $Transaction = new Transaction();
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' =>session()->get('company_id'),
-                    'contact_id' =>$this->contact_id,
+                    'contact_id' =>$this->contact_id?:'1',
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id?:'1',
-                    'trans_type_id' => $this->trans_type_id?:'1',
-                    'mode_id' => $this->mode_id?:'1',
+                    'trans_type_id' => $this->trans_type_id?:'90',
+                    'mode_id' => $this->mode_id?:'92',
                     'vdate' => $this->vdate,
-                    'receipttype_id' => $this->receipt_type_id?:'1',
+                    'receipttype_id' => $this->receipt_type_id?:'32',
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
-                    'bank_id' => $this->bank_id?:'1',
+                    'bank_id' => $this->bank_id?:'21',
                     'deposit_on' => $this->deposit_on,
                     'realised_on' => $this->realised_on,
                     'ref_no' => $this->ref_no,
@@ -78,7 +94,6 @@ class Index extends Component
                     'trans_type_id' => $this->trans_type_id,
                     'mode_id' => $this->mode_id,
                     'vdate' => $this->vdate,
-                    'amount' => $this->amount,
                     'receipttype_id' => $this->receipt_type_id,
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
@@ -301,8 +316,8 @@ class Index extends Component
     public function getReceiptTypeList(): void
     {
         $this->receipt_typeCollection = $this->receipt_type_name ?
-            Common::search(trim($this->receipt_type_name))->where('label_id', '=', '13')->get() :
-            Common::where('label_id', '=', '13')->get();
+            Common::search(trim($this->receipt_type_name))->where('label_id', '=', '13')->where('id', '!=', 33)->get() :
+            Common::where('label_id', '=', '13')->where('id', '!=', 33)->get();
     }
 #endregion
 
@@ -424,7 +439,7 @@ class Index extends Component
     public function transTypeSave($name)
     {
         $obj = Common::create([
-            'label_id' => 8,
+            'label_id' => 18,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -435,8 +450,8 @@ class Index extends Component
     public function getTransTypeList(): void
     {
         $this->trans_typeCollection = $this->trans_type_name ?
-            Common::search(trim($this->trans_type_name))->where('label_id', '=', '8')->get() :
-            Common::where('label_id', '=', '8')->get();
+            Common::search(trim($this->trans_type_name))->where('label_id', '=', '18')->get() :
+            Common::where('label_id', '=', '18')->get();
     }
 #endregion
 
@@ -494,7 +509,7 @@ class Index extends Component
     public function modeSave($name)
     {
         $obj = Common::create([
-            'label_id' => 8,
+            'label_id' => 19,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -505,8 +520,8 @@ class Index extends Component
     public function getModeList(): void
     {
         $this->modeCollection = $this->mode_name ?
-            Common::search(trim($this->mode_name))->where('label_id', '=', '8')->get() :
-            Common::where('label_id', '=', '8')->get();
+            Common::search(trim($this->mode_name))->where('label_id', '=', '19')->get() :
+            Common::where('label_id', '=', '19')->get();
     }
 #endregion
 
@@ -516,6 +531,7 @@ class Index extends Component
         if ($id) {
             $Transaction = Transaction::find($id);
             $this->common->vid = $Transaction->id;
+            $this->common->vname = $Transaction->vname;
             $this->common->active_id = $Transaction->active_id;
             $this->contact_id = $Transaction->contact_id;
             $this->contact_name = $Transaction->contact_id?Contact::find($Transaction->contact_id)->vname:'';
@@ -542,6 +558,7 @@ class Index extends Component
             $this->ref_amount = $Transaction->ref_amount;
             $this->verified_by = $Transaction->verified_by;
             $this->verified_on = $Transaction->verified_on;
+            $this->against_id = $Transaction->against_id;
             return $Transaction;
         }
         return null;
@@ -560,13 +577,13 @@ class Index extends Component
         $this->purpose ='';
         $this->order_id ='';
         $this->order_name ='';
-        $this->trans_type_id ='';
-        $this->trans_type_name ='';
         $this->mode_id ='';
         $this->mode_name ='';
         $this->amount = '';
-        $this->receipt_type_id ='';
-        $this->receipt_type_name ='';
+        if ( $this->trans_type_id!=90) {
+            $this->receipt_type_id = '';
+            $this->receipt_type_name = '';
+        }
         $this->remarks ='';
         $this->chq_no ='';
         $this->chq_date='';
@@ -582,17 +599,22 @@ class Index extends Component
     }
     #endregion
 
+    #region[Render]
     public function render()
     {
         $this->getBankList();
         $this->getContactList();
         $this->getReceiptTypeList();
         $this->getTransTypeList();
+        $this->getModeList();
+        $this->getOrderList();
 
         return view('livewire.transaction.index')->with([
             'list' => $this->getListForm->getList(Transaction::class,function ($query){
-                return $query;
+                return $query->where('trans_type_id',$this->trans_type_id);
             })
         ]);
     }
+    #endregion
+
 }
