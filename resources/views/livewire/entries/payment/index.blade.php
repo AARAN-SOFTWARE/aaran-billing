@@ -9,37 +9,43 @@
         </x-table.caption>
 
         <x-table.form>
+
+            <!-- Table Header  ---------------------------------------------------------------------------------------->
+
             <x-slot:table_header name="table_header" class="bg-green-100">
 
                 <x-table.header-serial></x-table.header-serial>
 
-                <x-table.header-text>Chq No</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Contact
-                    Name
+                <x-table.header-text wire:click.prevent="sortBy('contact_id')" sort-icon="{{$getListForm->sortAsc}}">
+                    Contact Name
                 </x-table.header-text>
+
+                <x-table.header-text wire:click.prevent="sortBy('vname')" sort-icon="{{$getListForm->sortAsc}}">Amount
+                </x-table.header-text>
+
                 <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Receipt
                     Type
                 </x-table.header-text>
 
-                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Mode
+                <x-table.header-text sort-icon="none">Mode
                 </x-table.header-text>
 
-                <x-table.header-text>Status</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
+
+            <!-- Table Body  ------------------------------------------------------------------------------------------>
 
             <x-slot:table_body name="table_body">
 
                 @foreach($list as $index=>$row)
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
                         <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
                         <x-table.cell-text>
                             {{\Aaran\Entries\Models\Payment::common($row->receipttype_id)}}
                         </x-table.cell-text>
                         <x-table.cell-text>{{$row->mode}}</x-table.cell-text>
-                        <x-table.cell-status active="{{$row->active_id}}"/>
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
                 @endforeach
@@ -57,7 +63,6 @@
 
                 <!-- Party Name --------------------------------------------------------------------------------------->
 
-                <!-- Party Name --------------------------------------------------------------------------------------->
                 <x-dropdown.wrapper label="Contact Name" type="contactTyped">
                     <div class="relative ">
                         <x-dropdown.input label="Contact Name" id="contact_name"
@@ -83,10 +88,9 @@
                     </div>
                 </x-dropdown.wrapper>
 
-
                 <x-input.model-date wire:model="vdate" :label="'Date'"/>
 
-                <x-input.floating wire:model="amount" label="Amount"/>
+                <x-input.floating wire:model="common.vname" label="Amount"/>
 
                 <!-- receipt type ------------------------------------------------------------------------------------->
 
@@ -116,39 +120,40 @@
                     </div>
                 </x-dropdown.wrapper>
 
-
                 <!-- bank --------------------------------------------------------------------------------------------->
 
+                @if($receipt_type_name =='Cheque')
+                    <x-dropdown.wrapper label="Bank" type="bankTyped">
+                        <div class="relative ">
+                            <x-dropdown.input label="Bank" id="bank_name"
+                                              wire:model.live="bank_name"
+                                              wire:keydown.arrow-up="decrementBank"
+                                              wire:keydown.arrow-down="incrementBank"
+                                              wire:keydown.enter="enterBank"/>
+                            <x-dropdown.select>
+                                @if($bankCollection)
+                                    @forelse ($bankCollection as $i => $bank)
+                                        <x-dropdown.option highlight="{{$highlightBank === $i  }}"
+                                                           wire:click.prevent="setBank('{{$bank->vname}}','{{$bank->id}}')">
+                                            {{ $bank->vname }}
+                                        </x-dropdown.option>
+                                    @empty
+                                        <button
+                                            wire:click.prevent="bankSave('{{$bank_name}}')"
+                                            class="text-white bg-green-500 text-center w-full">
+                                            create
+                                        </button>
+                                    @endforelse
+                                @endif
+                            </x-dropdown.select>
+                        </div>
+                    </x-dropdown.wrapper>
 
-                <x-dropdown.wrapper label="Bank" type="bankTyped">
-                    <div class="relative ">
-                        <x-dropdown.input label="Bank" id="bank_name"
-                                          wire:model.live="bank_name"
-                                          wire:keydown.arrow-up="decrementBank"
-                                          wire:keydown.arrow-down="incrementBank"
-                                          wire:keydown.enter="enterBank"/>
-                        <x-dropdown.select>
-                            @if($bankCollection)
-                                @forelse ($bankCollection as $i => $bank)
-                                    <x-dropdown.option highlight="{{$highlightBank === $i  }}"
-                                           wire:click.prevent="setBank('{{$bank->vname}}','{{$bank->id}}')">
-                                        {{ $bank->vname }}
-                                    </x-dropdown.option>
-                                @empty
-                                    <button
-                                        wire:click.prevent="bankSave('{{$bank_name}}')"
-                                        class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
-                                @endforelse
-                            @endif
-                        </x-dropdown.select>
-                    </div>
-                </x-dropdown.wrapper>
+                    <x-input.floating wire:model="chq_no" label="Cheque No"/>
 
-                <x-input.floating wire:model="common.vname" label="Cheque No"/>
+                    <x-input.model-date wire:model="chq_date" :label="'Chq.Date'"/>
 
-                <x-input.model-date :label="'date'"/>
+                @endif
 
             </div>
         </x-forms.create>
