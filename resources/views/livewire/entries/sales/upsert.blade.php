@@ -905,7 +905,8 @@
                                                             class="block w-full rounded-lg"
                                                         />
                                                         @error('transport_id')
-                                                        <span class="text-red-500">{{'The Transport is Required.'}}</span>
+                                                        <span
+                                                            class="text-red-500">{{'The Transport is Required.'}}</span>
                                                         @enderror
 
                                                         <div x-show="isTyped"
@@ -958,26 +959,26 @@
                             <x-tabs.content>
                                 <div class="flex  gap-3">
                                     <div class="flex flex-col gap-2">
-                                    <x-input.model-text wire:model="distance" :label="'Distance'"/>
-                                    <x-input.model-text wire:model="Transid" :label="'Transport Id'"/>
-                                    <x-input.model-text wire:model="Transname" :label="'Transport Name'"/>
-                                    <x-input.model-text wire:model="Transdocno" :label="'Transport No'"/>
+                                        <x-input.model-text wire:model="distance" :label="'Distance'"/>
+                                        <x-input.model-text wire:model="Transid" :label="'Transport Id'"/>
+                                        <x-input.model-text wire:model="Transname" :label="'Transport Name'"/>
+                                        <x-input.model-text wire:model="Transdocno" :label="'Transport No'"/>
                                     </div>
                                     <div class="flex flex-col gap-2">
-                                    <x-input.model-date wire:model="TransdocDt" :label="'Transport Date'"/>
-                                    <x-input.model-text wire:model="Vehno" :label="'Vechile No'"/>
-                                    <x-input.model-select wire:model="Vehtype" :label="'Vechile Type'">
-                                        <option value="">Choose..</option>
-                                        <option value="R">Regular</option>
-                                        <option value="O">ODC</option>
-                                    </x-input.model-select>
-                                    <x-input.model-select wire:model="TransMode" :label="'Transport Mode'">
-                                        <option value="">Choose..</option>
-                                        <option value="1">Road</option>
-                                        <option value="2">Rail</option>
-                                        <option value="3">Air</option>
-                                        <option value="4">ship</option>
-                                    </x-input.model-select>
+                                        <x-input.model-date wire:model="TransdocDt" :label="'Transport Date'"/>
+                                        <x-input.model-text wire:model="Vehno" :label="'Vechile No'"/>
+                                        <x-input.model-select wire:model="Vehtype" :label="'Vechile Type'">
+                                            <option value="">Choose..</option>
+                                            <option value="R">Regular</option>
+                                            <option value="O">ODC</option>
+                                        </x-input.model-select>
+                                        <x-input.model-select wire:model="TransMode" :label="'Transport Mode'">
+                                            <option value="">Choose..</option>
+                                            <option value="1">Road</option>
+                                            <option value="2">Rail</option>
+                                            <option value="3">Air</option>
+                                            <option value="4">ship</option>
+                                        </x-input.model-select>
                                     </div>
                                 </div>
                             </x-tabs.content>
@@ -1070,6 +1071,12 @@
     @if( $common->vid != "")
         <x-forms.m-panel-bottom-button save back print>
             <div class="flex gap-3">
+                <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
+            focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
+            transition-all linear duration-400 ' wire:click="EwayBill">
+                    <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
+                    <span>Save & Generate E-way</span>
+                </button>
                 @if(!isset($e_invoiceDetails->id))
                     <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
             focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
@@ -1089,18 +1096,28 @@
                     @endif
                 @endif
                 @if(!isset($e_wayDetails))
-                    <x-button.secondary class="bg-emerald-300 hover:bg-emerald-400" wire:click="E_wayGenerate">Generate E-way</x-button.secondary>
+                    <x-button.secondary class="bg-emerald-300 hover:bg-emerald-400" wire:click="E_wayGenerate">Generate
+                        E-way
+                    </x-button.secondary>
                 @endif
             </div>
         </x-forms.m-panel-bottom-button>
     @else
         <x-forms.m-panel-bottom-button save back>
-            <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
+            <div class="flex gap-3">
+                <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
             focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
             transition-all linear duration-400 ' wire:click="saveGenerate">
-                <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
-                <span>Save & Generate Irn</span>
-            </button>
+                    <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
+                    <span>Save & Generate Irn</span>
+                </button>
+                <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
+            focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
+            transition-all linear duration-400 ' wire:click="EwayBill">
+                    <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
+                    <span>Save & Generate E-way</span>
+                </button>
+            </div>
         </x-forms.m-panel-bottom-button>
     @endif
 </div>
