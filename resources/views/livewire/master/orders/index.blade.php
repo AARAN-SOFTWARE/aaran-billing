@@ -43,8 +43,10 @@
 
         <x-forms.create :id="$common->vid">
             <div class="flex flex-col  gap-3">
-                <x-input.model-text wire:model="common.vname" :label="'Name'"/>
-                <x-input.model-text wire:model="order_name" :label="'Order Name'"/>
+                <x-input.floating wire:model="common.vname" label="Name" />
+                <x-input.floating wire:model="order_name" label="Name" />
+{{--                <x-input.model-text wire:model="common.vname" :label="'Order Name'"/>--}}
+{{--                <x-input.model-text wire:model="order_name" :label="'Order Name'"/>--}}
             </div>
         </x-forms.create>
 

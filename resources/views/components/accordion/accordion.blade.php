@@ -1,7 +1,7 @@
 @props([
     'heading'=>null,
 ])
-<div class="{{$attributes}} w-full divide-y divide-slate-300 text-slate-700 dark:divide-slate-700 dark:text-slate-300">
+<div class="{{$attributes}} w-full divide-y divide-slate-300 text-slate-700 dark:divide-slate-700 dark:text-slate-300 animate__animated wow bounceInUp" data-wow-duration="3s">
     <div x-data="{ isExpanded: false }">
         <button id="controlsAccordionItemOne" type="button" class="flex w-full items-center justify-between gap-4 py-4 text-left underline-offset-2 focus-visible:underline focus-visible:outline-none" aria-controls="accordionItemOne" @click="isExpanded = ! isExpanded" :class="isExpanded ? 'text-onSurfaceStrong dark:text-onSurfaceDarkStrong font-bold'  : 'text-onSurface dark:text-onSurfaceDark font-medium'" :aria-expanded="isExpanded ? 'true' : 'false'">
            {{$heading}}

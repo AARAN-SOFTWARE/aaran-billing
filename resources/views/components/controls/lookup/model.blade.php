@@ -5,7 +5,7 @@
 ])
 <div>
     <button wire:click="$set('showModel',true); "
-            class="bg-green-500 w-full h-8 text-white">
+            class="bg-green-100 w-full h-8 text-green-600 font-bold hover:scale-105 ml-2 mr-2">
         Not found , Want to create new
     </button>
 

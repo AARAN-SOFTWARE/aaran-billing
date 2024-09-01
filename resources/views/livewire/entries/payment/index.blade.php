@@ -16,19 +16,14 @@
 
                 <x-table.header-serial></x-table.header-serial>
 
-                <x-table.header-text wire:click.prevent="sortBy('contact_id')" sort-icon="{{$getListForm->sortAsc}}">
-                    Contact Name
+                <x-table.header-text>Chq No</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Contact Name
                 </x-table.header-text>
-
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sort-icon="{{$getListForm->sortAsc}}">Amount
+                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Receipt Type
                 </x-table.header-text>
-
-                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Receipt
-                    Type
+                <x-table.header-text wire:click.prevent="sortBy('id')" sort-icon="{{$getListForm->sortAsc}}">Mode
                 </x-table.header-text>
-
-                <x-table.header-text sort-icon="none">Mode
-                </x-table.header-text>
+                <x-table.header-text>Status</x-table.header-text>
 
                 <x-table.header-action/>
             </x-slot:table_header>
@@ -36,7 +31,6 @@
             <!-- Table Body  ------------------------------------------------------------------------------------------>
 
             <x-slot:table_body name="table_body">
-
                 @foreach($list as $index=>$row)
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
@@ -79,7 +73,7 @@
                                     </x-dropdown.option>
                                 @empty
                                     <a href="{{route('contacts.upsert',['0'])}}" role="button"
-                                       class="flex items-center justify-center bg-green-500 w-full h-8 text-white text-center">
+                                       class="flex items-center justify-center bg-green-100 w-full h-8 text-green-600 font-bold hover:scale-105 text-center">
                                         Not found , Want to create new
                                     </a>
                                 @endforelse

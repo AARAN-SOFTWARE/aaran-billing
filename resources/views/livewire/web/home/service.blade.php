@@ -4,63 +4,64 @@
              class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
         <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
-            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4">Services</div>
+            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4 animate__animated wow bounceInDown" data-wow-duration="3s">Services</div>
             <span
-                class="z-10 absolute top-6 py-5 px-[180px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]">&nbsp;</span>
-            <div class="w-6/12 mx-auto text-lg pb-4">We Design and develop Outstanding Digital products and digital -
+                class="z-10 absolute top-6 py-5 px-[180px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
+                animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
+            <div class="w-6/12 mx-auto text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>
         </div>
     </div>
 
-    <div x-show="open" x-transition
-         class="sm:fixed top-24 right-8 font-roboto w-96 h-[36rem] tracking-wider rounded-md shadow-md shadow-gray-500">
-        <div class="h-1/4 bg-[#3F5AF3] text-xs rounded-t-md">
-            <div class="text-white p-3 w-1/2 mx-auto h-auto flex-col flex justify-center items-center gap-y-2">
-                <div class="max-w-max inline-flex items-center gap-2 px-2 py-1 rounded-md text-white bg-[#091d90]">
-                    <x-icons.icon icon="message-round" class="w-5 h-5"/>
-                    <span>chat</span>
-                </div>
-                <div class="flex">
-                    <img src="../../../../images/t1.webp" alt="" class="w-10 h-10 rounded-full">
-                    <img src="../../../../images/t3.webp" alt="" class="w-10 h-10 rounded-full">
-                    <img src="../../../../images/t4.webp" alt="" class="w-10 h-10 rounded-full">
-                    <img src="../../../../images/t5.webp" alt="" class="w-10 h-10 rounded-full">
-                </div>
-                <div class="">Questions? Chat with us!</div>
-                <div>Was last active 3 hours ago</div>
-            </div>
-        </div>
-        <div class="relative h-3/4 flex-col flex text-xs py-4 gap-2 px-2 bg-blue-50 rounded-b-md justify-between">
-            <div class="flex gap-2">
-                <div><img src="../../../../images/t1.webp" alt="" class="w-12 h-12 rounded-full"></div>
-                <div class="flex flex-col gap-2">
-                    <div class="text-gray-600 text-xs">User</div>
-                    <div class="text-white bg-[#3F5AF3] px-2 py-1 rounded-md">Lorem ipsum dolor sit amet, consectetur
-                        adipisicing elit.
-                    </div>
-                </div>
-            </div>
-            <div class="w-full">
-                <input type="text" class="w-full border-0 focus:ring-0 bg-blue-100 py-2 placeholder-gray-400 text-xs rounded-md" placeholder="Post your message">
-            </div>
-        </div>
+{{--    <div x-show="open" x-transition--}}
+{{--         class="sm:fixed top-24 right-8 font-roboto w-96 h-[36rem] tracking-wider rounded-md shadow-md shadow-gray-500">--}}
+{{--        <div class="h-1/4 bg-[#3F5AF3] text-xs rounded-t-md">--}}
+{{--            <div class="text-white p-3 w-1/2 mx-auto h-auto flex-col flex justify-center items-center gap-y-2">--}}
+{{--                <div class="max-w-max inline-flex items-center gap-2 px-2 py-1 rounded-md text-white bg-[#091d90]">--}}
+{{--                    <x-icons.icon icon="message-round" class="w-5 h-5"/>--}}
+{{--                    <span>chat</span>--}}
+{{--                </div>--}}
+{{--                <div class="flex">--}}
+{{--                    <img src="../../../../images/t1.webp" alt="" class="w-10 h-10 rounded-full">--}}
+{{--                    <img src="../../../../images/t3.webp" alt="" class="w-10 h-10 rounded-full">--}}
+{{--                    <img src="../../../../images/t4.webp" alt="" class="w-10 h-10 rounded-full">--}}
+{{--                    <img src="../../../../images/t5.webp" alt="" class="w-10 h-10 rounded-full">--}}
+{{--                </div>--}}
+{{--                <div class="">Questions? Chat with us!</div>--}}
+{{--                <div>Was last active 3 hours ago</div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <div class="relative h-3/4 flex-col flex text-xs py-4 gap-2 px-2 bg-blue-50 rounded-b-md justify-between">--}}
+{{--            <div class="flex gap-2">--}}
+{{--                <div><img src="../../../../images/t1.webp" alt="" class="w-12 h-12 rounded-full"></div>--}}
+{{--                <div class="flex flex-col gap-2">--}}
+{{--                    <div class="text-gray-600 text-xs">User</div>--}}
+{{--                    <div class="text-white bg-[#3F5AF3] px-2 py-1 rounded-md">Lorem ipsum dolor sit amet, consectetur--}}
+{{--                        adipisicing elit.--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="w-full">--}}
+{{--                <input type="text" class="w-full border-0 focus:ring-0 bg-blue-100 py-2 placeholder-gray-400 text-xs rounded-md" placeholder="Post your message">--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-    </div>
     <button x-show="open" x-transition x-on:click="open = ! open"
             class="sm:fixed bottom-8 right-8 bg-[#3F5AF3] text-white rounded-full inline-flex justify-center items-center w-12 h-12 shadow-md shadow-gray-500">
         <x-icons.icon icon="x-mark" class="w-10 h-10 "/>
     </button>
 
     <div class="font-roboto tracking-wider py-16 flex-col flex gap-y-6">
-        <div class="text-3xl font-semibold text-center">Plans Built for your needs</div>
-        <div class="text-sm text-gray-600 text-center">Advanced Acounting Solutions</div>
-        <div class="max-w-max mx-auto text-center flex gap-x-4 ">
+        <div class="text-3xl font-semibold text-center animate__animated wow bounceInDown" data-wow-duration="3s">Plans Built for your needs</div>
+        <div class="text-sm text-gray-600 text-center animate__animated wow animate__backInLeft" data-wow-duration="3s">Advanced Acounting Solutions</div>
+        <div class="max-w-max mx-auto text-center flex gap-x-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
             <button class="tab-button active px-4 py-2 bg-gray-200" onclick="showTab('tab1')">3 months</button>
             <button class="tab-button tab-button px-4 py-2 bg-gray-200" onclick="showTab('tab2')">1 year
             </button>
         </div>
-        <div id="tab1" class="tab-content w-9/12 mx-auto grid grid-cols-4 gap-6 ">
+        <div id="tab1" class="tab-content w-9/12 mx-auto grid grid-cols-4 gap-6 animate__animated wow bounceInUp" data-wow-duration="3s">
             @for($j=1; $j<=3; $j++)
                 <div class="border border-gray-200 p-5 flex-col flex gap-y-4 rounded-md">
                     <div class="text-md font-semibold">Basic</div>
@@ -180,7 +181,7 @@
     </div>
 
     <div class=" w-9/12 mx-auto grid grid-cols-2 gap-6 font-roboto tracking-wider">
-        <div class="bg-[#e7eafd] border border-[#3F5AF3] rounded-md p-5 flex-col flex gap-3">
+        <div class="bg-[#e7eafd] border border-[#3F5AF3] rounded-md p-5 flex-col flex gap-3 animate__animated wow animate__backInLeft" data-wow-duration="3s">
             <div class="w-full">
                 <x-icons.icon icon="user-group" class="w-7 h-7 text-[#3F5AF3]"/>
             </div>
@@ -191,7 +192,7 @@
             <button x-on:click="open = ! open" class="max-w-max px-6 py-4 bg-[#3F5AF3] text-xs text-white">Talk to us
             </button>
         </div>
-        <div class="bg-[#e7eafd] border border-[#3F5AF3] rounded-md p-5 flex-col flex gap-3">
+        <div class="bg-[#e7eafd] border border-[#3F5AF3] rounded-md p-5 flex-col flex gap-3 animate__animated wow animate__backInRight" data-wow-duration="3s">
             <div class="w-full">
                 <x-icons.icon icon="message-round" class="w-7 h-7 text-[#3F5AF3]"/>
             </div>
@@ -202,7 +203,7 @@
             <button x-on:click="open = ! open" class="max-w-max px-6 py-4 bg-[#3F5AF3] text-xs text-white">Talk to us
             </button>
         </div>
-        <div class="bg-[#e7eafd] border border-[#3F5AF3] rounded-md p-5 flex-col flex gap-3">
+        <div class="bg-[#e7eafd] border border-[#3F5AF3] rounded-md p-5 flex-col flex gap-3 animate__animated wow animate__backInLeft" data-wow-duration="3s">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="w-7 h-7 text-[#3F5AF3]">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -213,7 +214,7 @@
                 If cancelled within 7 days for annual plans and within 30 days for plans longer than 3 years.
             </div>
         </div>
-        <div class="bg-[#e7eafd] border border-[#3F5AF3] rounded-md p-5 flex-col flex gap-3">
+        <div class="bg-[#e7eafd] border border-[#3F5AF3] rounded-md p-5 flex-col flex gap-3 animate__animated wow animate__backInRight" data-wow-duration="3s">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor"
                  class="size-6">
@@ -229,7 +230,7 @@
 
 
     <div class="font-roboto tracking-wider my-16 flex-col flex gap-y-6">
-        <div class=" text-center text-6xl font-semibold">Frequently Asked Questions (FAQ)</div>
+        <div class=" text-center text-6xl font-semibold animate__animated wow bounceInDown" data-wow-duration="3s">Frequently Asked Questions (FAQ)</div>
         <div class="w-9/12 mx-auto">
             <x-accordion.accordion :heading="'Is the subscription fee refundable?'">
                 <div class="bg-gray-50 p-4 rounded-md text-xs">Yes, we offer a 100% refund on annual plans if requested
