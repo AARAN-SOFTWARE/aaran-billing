@@ -1,4 +1,4 @@
-<div class="bg-white border border-gray-200 shadow-lg shadow-black/10 p-6 rounded-md lg:col-span-2">
+<div class="bg-white border border-gray-200 p-6 rounded-md lg:col-span-2">
     <div class="flex justify-between mb-4 items-start">
         <div class="font-medium">Order Statistics</div>
         <div class="dropdown">
