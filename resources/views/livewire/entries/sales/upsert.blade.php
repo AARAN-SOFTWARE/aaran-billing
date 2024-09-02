@@ -4,7 +4,7 @@
         <section class="grid grid-cols-2">
 
             <!-- Top Left Area ------------------------------------------------------------------------------------------------>
-            <div class="mt-3 ">
+            <div class="mt-3 space-y-5">
                 <!-- Party Name --------------------------------------------------------------------------------------->
 
                 <x-dropdown.wrapper label="Party Name" type="contactTyped">
@@ -176,19 +176,12 @@
                 <!-- Despatch --------------------------------------------------------------------------------------------->
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasDespatch())
                     <x-dropdown.wrapper
-                        label=" @if(config('aadmin.app_type')==308)
-                                    Po No
-                                @else
-                                    Despatch No
-                                @endif"
+
+    label="Despatch No"
                         type="despatchTyped">
                         <div class="relative ">
                             <x-dropdown.input
-                                label=" @if(config('aadmin.app_type')==308)
-                                            Po No
-                                        @else
-                                            Despatch No
-                                        @endif"
+                                label="Despatch No"
                                 id="despatch_name"
                                 wire:model.live="despatch_name"
                                 wire:keydown.arrow-up="decrementDespatch"
@@ -198,7 +191,7 @@
                                 @if($despatchCollection)
                                     @forelse ($despatchCollection as $i => $despatch)
                                         <x-dropdown.option highlight="{{$highlightDespatch === $i  }}"
-                                           wire:click.prevent="setDespatch('{{$despatch->vname}}','{{$despatch->id}}')">
+                                                           wire:click.prevent="setDespatch('{{$despatch->vname}}','{{$despatch->id}}')">
                                             {{ $despatch->vname }}
                                         </x-dropdown.option>
                                     @empty
@@ -229,11 +222,12 @@
 
             @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())
                 <x-input.floating id="qty" wire:model.live="po_no" label="Quantity"/>
-            @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
-                <x-input.floating id="dc" wire:model.live="dc_no" label="DC No."/>
-1           @endif
+            @endif
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
+                    <x-input.floating id="dc" wire:model.live="dc_no" label="DC No."/>
+                    1           @endif
 
-            <!--Product Name ---------------------------------------------------------------------------------------------->
+                <!--Product Name ---------------------------------------------------------------------------------------------->
 
                 <x-dropdown.wrapper label="Product Name" type="productTyped">
                     <div class="relative ">
@@ -259,90 +253,90 @@
                     </div>
                 </x-dropdown.wrapper>
 
-            <!--Product Description --------------------------------------------------------------------------------------->
+                <!--Product Description --------------------------------------------------------------------------------------->
 
-            @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
-                <x-input.floating id="qty" wire:model.live="description" label="description"/>
-            @endif
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
+                    <x-input.floating id="qty" wire:model.live="description" label="description"/>
+                @endif
 
-            <!--No of rolls --------------------------------------------------------------------------------------->
-            @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
-                <x-input.floating id="no_of_roll" wire:model.live="no_of_roll" label="No of Roll"/>
-            @endif
+                <!--No of rolls --------------------------------------------------------------------------------------->
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
+                    <x-input.floating id="no_of_roll" wire:model.live="no_of_roll" label="No of Roll"/>
+                @endif
 
-            <!--Colour Name ----------------------------------------------------------------------------------------------->
+                <!--Colour Name ----------------------------------------------------------------------------------------------->
 
-            @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
-                <x-dropdown.wrapper label="Colour Name" type="colourTyped">
-                    <div class="relative ">
-                        <x-dropdown.input label="Colour Name" id="colour_name"
-                                          wire:model.live="colour_name"
-                                          wire:keydown.arrow-up="decrementColour"
-                                          wire:keydown.arrow-down="incrementColour"
-                                          wire:keydown.enter="enterColour"/>
-                        <x-dropdown.select>
-                            @if($colourCollection)
-                                @forelse ($colourCollection as $i => $colour)
-                                    <x-dropdown.option highlight="{{$highlightColour === $i  }}"
-                                                       wire:click.prevent="setColour('{{$colour->vname}}','{{$colour->id}}')">
-                                        {{ $colour->vname }}
-                                    </x-dropdown.option>
-                                @empty
-                                    <button wire:click.prevent="colourSave('{{$colour_name}}')"
-                                            class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
-                                @endforelse
-                            @endif
-                        </x-dropdown.select>
-                    </div>
-                </x-dropdown.wrapper>
-            @endif
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
+                    <x-dropdown.wrapper label="Colour Name" type="colourTyped">
+                        <div class="relative ">
+                            <x-dropdown.input label="Colour Name" id="colour_name"
+                                              wire:model.live="colour_name"
+                                              wire:keydown.arrow-up="decrementColour"
+                                              wire:keydown.arrow-down="incrementColour"
+                                              wire:keydown.enter="enterColour"/>
+                            <x-dropdown.select>
+                                @if($colourCollection)
+                                    @forelse ($colourCollection as $i => $colour)
+                                        <x-dropdown.option highlight="{{$highlightColour === $i  }}"
+                                                           wire:click.prevent="setColour('{{$colour->vname}}','{{$colour->id}}')">
+                                            {{ $colour->vname }}
+                                        </x-dropdown.option>
+                                    @empty
+                                        <button wire:click.prevent="colourSave('{{$colour_name}}')"
+                                                class="text-white bg-green-500 text-center w-full">
+                                            create
+                                        </button>
+                                    @endforelse
+                                @endif
+                            </x-dropdown.select>
+                        </div>
+                    </x-dropdown.wrapper>
+                @endif
 
-            <!--Size ------------------------------------------------------------------------------------------------------>
-            @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
-                <x-dropdown.wrapper label="Size Name" type="sizeTyped">
-                    <div class="relative ">
-                        <x-dropdown.input label="Size Name" id="size_name"
-                                          wire:model.live="size_name"
-                                          wire:keydown.arrow-up="decrementSize"
-                                          wire:keydown.arrow-down="incrementSize"
-                                          wire:keydown.enter="enterSize"/>
-                        @error('size_id')
-                        <span class="text-red-500">{{'The Size name is Required.'}}</span>
-                        @enderror
-                        <x-dropdown.select>
-                            @if($sizeCollection)
-                                @forelse ($sizeCollection as $i => $size)
-                                    <x-dropdown.option highlight="{{$highlightSize === $i  }}"
-                                                       wire:click.prevent="setSize('{{$size->vname}}','{{$size->id}}')">
-                                        {{ $size->vname }}
-                                    </x-dropdown.option>
-                                @empty
-                                    <button wire:click.prevent="sizeSave('{{$size_name}}')"
-                                            class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
-                                @endforelse
-                            @endif
-                        </x-dropdown.select>
-                    </div>
-                </x-dropdown.wrapper>
-            @endif
+                <!--Size ------------------------------------------------------------------------------------------------------>
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
+                    <x-dropdown.wrapper label="Size Name" type="sizeTyped">
+                        <div class="relative ">
+                            <x-dropdown.input label="Size Name" id="size_name"
+                                              wire:model.live="size_name"
+                                              wire:keydown.arrow-up="decrementSize"
+                                              wire:keydown.arrow-down="incrementSize"
+                                              wire:keydown.enter="enterSize"/>
+                            @error('size_id')
+                            <span class="text-red-500">{{'The Size name is Required.'}}</span>
+                            @enderror
+                            <x-dropdown.select>
+                                @if($sizeCollection)
+                                    @forelse ($sizeCollection as $i => $size)
+                                        <x-dropdown.option highlight="{{$highlightSize === $i  }}"
+                                                           wire:click.prevent="setSize('{{$size->vname}}','{{$size->id}}')">
+                                            {{ $size->vname }}
+                                        </x-dropdown.option>
+                                    @empty
+                                        <button wire:click.prevent="sizeSave('{{$size_name}}')"
+                                                class="text-white bg-green-500 text-center w-full">
+                                            create
+                                        </button>
+                                    @endforelse
+                                @endif
+                            </x-dropdown.select>
+                        </div>
+                    </x-dropdown.wrapper>
+                @endif
 
-            <!-- Quantity ------------------------------------------------------------------------------------------------->
-            <div class="w-full">
-                <x-input.floating  id="qty" wire:model.live="qty" label="Quantity"/>
-            </div>
+                <!-- Quantity ------------------------------------------------------------------------------------------------->
+                <div class="w-full">
+                    <x-input.floating  id="qty" wire:model.live="qty" label="Quantity"/>
+                </div>
 
-            <!-- Price ---------------------------------------------------------------------------------------------------->
-            <div class="w-full">
-                <x-input.floating id="price" wire:model.live="price" label="Price"/>
-            </div>
-            <button wire:click="addItems"
-                    class="px-3 justify-items-center py-1 md:px-3 bg-green-500 text-white font-semibold tracking-wider hover:bg-green-600 transition-colors duration-300 ease-out">
-                Add
-            </button>
+                <!-- Price ---------------------------------------------------------------------------------------------------->
+                <div class="w-full">
+                    <x-input.floating id="price" wire:model.live="price" label="Price"/>
+                </div>
+                <button wire:click="addItems"
+                        class="px-3 justify-items-center py-1 md:px-3 bg-green-500 text-white font-semibold tracking-wider hover:bg-green-600 transition-colors duration-300 ease-out">
+                    Add
+                </button>
         </section>
 
         <!-- Display Items ----------------------------------------------------------------------------------------------->
@@ -540,7 +534,6 @@
                                 <div class="mt-3 flex flex-col gap-2 ">
 
                                     @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
-
                                         <x-dropdown.wrapper label="Transport" type="transportTyped">
                                             <div class="relative ">
                                                 <x-dropdown.input label="Transport" id="transport_name"
@@ -567,7 +560,6 @@
                                                         @endforelse
                                                     @endif
                                                 </x-dropdown.select>
-                                      
                                             </div>
                                         </x-dropdown.wrapper>
                                     @endif
@@ -576,7 +568,7 @@
                                         <x-input.floating wire:model="destination" label="Destination" />
                                     @endif
                                     @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
-                                            <x-input.floating wire:model="bundle" label="Bundle" />
+                                        <x-input.floating wire:model="bundle" label="Bundle" />
                                     @endif
                                 </div>
                             </x-tabs.content>
@@ -584,7 +576,6 @@
                             <x-tabs.content>
                                 <div class="flex  gap-3">
                                     <div class="flex flex-col gap-2">
-
 
                                         <x-input.floating wire:model="distance" label="Distance"/>
                                         <x-input.floating wire:model="Transid" label="Transport Id"/>
@@ -596,22 +587,12 @@
                                         <x-input.model-date wire:model="TransdocDt" label="Transport Date"/>
                                         <x-input.floating wire:model="Vehno" label="Vechile No"/>
                                         <x-input.model-select wire:model="Vehtype" label="Vechile Type">
-                                    </div>
-                                    <div class="flex flex-col gap-2">
-                                        <x-input.model-date wire:model="TransdocDt" :label="'Transport Date'"/>
-                                        <x-input.model-text wire:model="Vehno" :label="'Vechile No'"/>
-                                        <x-input.model-select wire:model="Vehtype" :label="'Vechile Type'">
-
                                             <option value="">Choose..</option>
                                             <option value="R">Regular</option>
                                             <option value="O">ODC</option>
                                         </x-input.model-select>
 
-
                                         <x-input.model-select wire:model="TransMode" label="Transport Mode">
-
-
-
                                             <option value="">Choose..</option>
                                             <option value="1">Road</option>
                                             <option value="2">Rail</option>
@@ -709,12 +690,6 @@
     @if( $common->vid != "")
         <x-forms.m-panel-bottom-button save back print>
             <div class="flex gap-3">
-                <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
-            focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
-            transition-all linear duration-400 ' wire:click="EwayBill">
-                    <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
-                    <span>Save & Generate E-way</span>
-                </button>
                 @if(!isset($e_invoiceDetails->id))
                     <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
             focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
@@ -742,20 +717,12 @@
         </x-forms.m-panel-bottom-button>
     @else
         <x-forms.m-panel-bottom-button save back>
-            <div class="flex gap-3">
-                <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
+            <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
             focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
             transition-all linear duration-400 ' wire:click="saveGenerate">
-                    <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
-                    <span>Save & Generate Irn</span>
-                </button>
-                <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
-            focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
-            transition-all linear duration-400 ' wire:click="EwayBill">
-                    <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
-                    <span>Save & Generate E-way</span>
-                </button>
-            </div>
+                <x-icons.icon :icon="'save'" class="sm:h-5 h-3 w-auto"/>
+                <span>Save & Generate Irn</span>
+            </button>
         </x-forms.m-panel-bottom-button>
     @endif
 </div>
