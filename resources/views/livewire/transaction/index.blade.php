@@ -87,9 +87,9 @@
             <!-- Receipt & Payment  ----------------------------------------------------------------------------------->
 
             <div class="flex gap-3 w-full mb-3">
-                <x-radio.btn value="93" wire:model="mode_id">Receipt
+                <x-radio.btn value="85" wire:model="mode_id">Receipt
                 </x-radio.btn>
-                <x-radio.btn value="92" wire:model="mode_id">Payment
+                <x-radio.btn value="84" wire:model="mode_id">Payment
                 </x-radio.btn>
             </div>
 
@@ -153,7 +153,7 @@
                             <x-tabs.content>
                                 <div class="flex flex-col gap-3">
 
-                                    @if ( $trans_type_id!=90)
+                                    @if ( $trans_type_id!=82)
 
                                         <!-- receipt type ----------------------------------------------------------------->
 

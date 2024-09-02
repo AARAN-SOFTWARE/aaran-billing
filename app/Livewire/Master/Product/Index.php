@@ -24,10 +24,10 @@ class Index extends Component
             if ($this->common->vid == '') {
                 $Product = new Product();
                 $extraFields = [
-                    'producttype_id' => $this->producttype_id?:'39',
-                    'hsncode_id' => $this->hsncode_id?:'8',
-                    'unit_id' => $this->unit_id?:'43',
-                    'gstpercent_id' => $this->gstpercent_id?:'47',
+                    'producttype_id' => $this->producttype_id?:'66',
+                    'hsncode_id' => $this->hsncode_id?:'41',
+                    'unit_id' => $this->unit_id?:'71',
+                    'gstpercent_id' => $this->gstpercent_id?:'74',
                     'initial_quantity' => $this->quantity?:'0',
                     'initial_price' => $this->price?:'0',
                     'user_id' => auth()->id(),

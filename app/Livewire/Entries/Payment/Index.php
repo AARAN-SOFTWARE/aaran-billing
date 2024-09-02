@@ -38,12 +38,12 @@ class Index extends Component
                 $Payment = new Payment();
                 $extraFields = [
                     'mode' => $this->mode,
-                    'contact_id' => $this->contact_id,
-                    'receipttype_id' => $this->receipt_type_id,
+                    'contact_id' => $this->contact_id?:'1',
+                    'receipttype_id' => $this->receipt_type_id?:'1',
                     'vdate' => $this->vdate,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
-                    'bank_id' => $this->bank_id?:'21',
+                    'bank_id' => $this->bank_id?:'1',
                     'user_id' => auth()->id(),
                     'acyear' => session()->get('acyear'),
                     'company_id' =>session()->get('company_id'),
@@ -203,7 +203,7 @@ class Index extends Component
     {
         $this->bankCollection = $this->bank_name ?
             Common::search(trim($this->bank_name))->where('label_id', '=', '8')->get() :
-            Common::where('label_id', '=', '8')->get();
+            Common::where('label_id', '=', '8')->Orwhere('id', '=', '1')->get();
     }
 #endregion
 
@@ -273,7 +273,7 @@ class Index extends Component
     {
         $this->receipt_typeCollection = $this->receipt_type_name ?
             Common::search(trim($this->receipt_type_name))->where('label_id', '=', '13')->get() :
-            Common::where('label_id', '=', '13')->get();
+            Common::where('label_id', '=', '13')->Orwhere('id', '=', '1')->get();
     }
 #endregion
 
