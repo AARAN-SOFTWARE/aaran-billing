@@ -484,8 +484,10 @@ class Upsert extends Component
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
+    #endregion
 
 
+    #region[Save Item]
     public function saveItem($id): void
     {
         if ($this->itemList!=null) {
@@ -620,6 +622,7 @@ class Upsert extends Component
 
     #endregion
 
+    #region[Route]
     public function getRoute(): void
     {
         $this->redirect(route('contacts'));
@@ -633,4 +636,5 @@ class Upsert extends Component
         $this->getCountryList();
         return view('livewire.master.contact.upsert');
     }
+    #endregion
 }

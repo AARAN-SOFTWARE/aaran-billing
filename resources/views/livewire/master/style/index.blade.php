@@ -42,10 +42,9 @@
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
                         <x-table.cell-text>
-                            <div class="flex-shrink-0 h-10 w-10 mr-4 rounded-xl">
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->image) }}" alt="image"
+                                     class="flex w-10 h-10"
                                 />
-                            </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
