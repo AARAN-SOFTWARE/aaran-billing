@@ -1,10 +1,8 @@
 <div>
-    <div class="text-gray-800 font-inter">
-        <main class="min-h-screen transition-all main">
-            <button type="button" class="sidebar-toggle"></button>
-            <div class="sidebar-overlay"></div>
+    <div class="text-gray-800">
+        <div class="h-auto">
             {{$slot}}
-        </main>
+        </div>
         <x-web.dashboard.style/>
         <x-web.dashboard.script/>
     </div>

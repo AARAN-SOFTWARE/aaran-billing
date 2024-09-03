@@ -27,7 +27,7 @@
                 <x-menu.side-menu/>
 
                 <!-- Page Content -->
-                <main {{$attributes}} class="bg-white print:bg-white p-5">
+                <main {{$attributes}} class="bg-inherit print:bg-white p-5">
                     {{ $slot }}
                 </main>
 

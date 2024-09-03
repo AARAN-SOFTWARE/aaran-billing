@@ -18,7 +18,7 @@
         <div class="w-6/12 flex-col flex gap-y-8 border-r border-gray-200 pr-6 ">
             @forelse($list as $row)
                 <div class="group flex-col flex gap-y-4 border-b border-gray-300 pb-6 overflow-hidden">
-                    <div class="text-2xl font-semibold animate__animated wow animate__backInLeft" data-wow-duration="3s"">{{$row->vname}}</div>
+                    <div class="text-2xl font-semibold animate__animated wow animate__backInLeft" data-wow-duration="3s">{{$row->vname}}</div>
                     <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}" alt=""
                          class="h-[30rem] object-cover transition duration-700 ease-out group-hover:scale-105
                          animate__animated wow bounceInUp" data-wow-duration="3s">

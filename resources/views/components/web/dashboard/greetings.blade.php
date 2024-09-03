@@ -9,23 +9,61 @@
 {{--    </div>--}}
 {{--</div>--}}
 
-<div class=" font-roboto tracking-wider flex justify-between items-center p-5 ">
-    <div>
-        <div class="text-xl font-semibold">
-            <span class="">{{ App\Helper\Core::greetings() }}, </span>&nbsp;<span>{{Auth::user()->name}}</span>&nbsp;&nbsp;<span>👋</span>
+<div class="w-full h-[19.5rem] rounded-lg">
+    @if (App\Helper\Core::greetings() == 'Good morning')
+        <div class="relative h-full">
+            <img src="../../../../images/wall1.webp" alt="" class="w-full h-full brightness-50 rounded-lg">
+            <div class="absolute top-24 w-full text-center p-5 space-y-4">
+                <div class="w-full text-center font-semibold text-2xl text-white">
+                    <span class="w-full">{{ App\Helper\Core::greetings() }},
+                    </span>&nbsp;<span>{{ Auth::user()->name }}</span>&nbsp;&nbsp;<span>👋</span>
+                </div>
+                <div>
+                    <span class="text-base font-sans text-white">{!! App\Helper\Slogan::getRandomQuote() !!}</span>
+                </div>
+            </div>
         </div>
-        <div>
-            <span class="text-base text-sky-800">{!! App\Helper\Slogan::getRandomQuote() !!}</span>
+    @elseif (App\Helper\Core::greetings() == 'Good afternoon')
+        <div class="relative h-full">
+            <img src="../../../../images/wall2.webp" alt="" class="w-full h-full brightness-50 rounded-lg">
+            <div class="absolute top-24 w-full text-center p-5 space-y-4">
+                <div class="w-full text-center font-semibold text-2xl text-white">
+                    <span class="w-full">{{ App\Helper\Core::greetings() }},
+                    </span>&nbsp;<span>{{ Auth::user()->name }}</span>&nbsp;&nbsp;<span>👋</span>
+                </div>
+                <div>
+                    <span class="text-base font-sans text-white">{!! App\Helper\Slogan::getRandomQuote() !!}</span>
+                </div>
+            </div>
         </div>
-    </div>
-    <div>
-        <button class="inline-flex items-center gap-2 border border-sky-600 text-sky-600 px-2 py-1 rounded-md font-semibold hover:bg-sky-600 hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-            </svg>
-            <span>Export</span>
-        </button>
-    </div>
+    @elseif (App\Helper\Core::greetings() == 'Good evening')
+        <div class="relative h-full">
+            <img src="../../../../images/wall3.webp" alt="" class="w-full h-full brightness-50 rounded-lg">
+            <div class="absolute top-24 w-full text-center p-5 space-y-4">
+                <div class="w-full text-center font-semibold text-2xl text-white">
+                    <span class="w-full">{{ App\Helper\Core::greetings() }},
+                    </span>&nbsp;<span>{{ Auth::user()->name }}</span>&nbsp;&nbsp;<span>👋</span>
+                </div>
+                <div>
+                    <span class="text-base font-sans text-white">{!! App\Helper\Slogan::getRandomQuote() !!}</span>
+                </div>
+            </div>
+        </div>
+    @else
+        <div class="relative h-full">
+            <img src="../../../../images/wall4.webp" alt="" class="w-full h-full brightness-50 rounded-lg">
+            <div class="absolute top-24 w-full text-center p-5 space-y-4">
+                <div class="w-full text-center font-semibold text-2xl text-white">
+                    <span class="w-full">{{ App\Helper\Core::greetings() }},
+                    </span>&nbsp;<span>{{ Auth::user()->name }}</span>&nbsp;&nbsp;<span>👋</span>
+                </div>
+                <div>
+                    <span class="text-base font-sans text-white">{!! App\Helper\Slogan::getRandomQuote() !!}</span>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
+
 
 
