@@ -71,14 +71,14 @@
                                         <div
                                             class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
                                             <span class="h-1.5 w-1.5  rounded-full bg-emerald-500 "></span>
-                                            <h2 class=" font-normal text-emerald-500 ">{{$obj->status}}
+                                            <h2 class="font-normal text-emerald-500">{{$obj->status}}
                                             </h2>
                                         </div>
                                     @elseif($obj->status=='Canceled')
                                         <div
                                             class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-red-100/60 dark:bg-gray-800">
                                             <span class="h-1.5 w-1.5  rounded-full bg-red-500 "></span>
-                                            <h2 class=" font-normal text-red-500 ">{{$obj->status}}
+                                            <h2 class="font-normal text-red-500 ">{{$obj->status}}
                                             </h2>
                                         </div>
                                     @endif
@@ -87,7 +87,7 @@
                                         class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-purple-100/60 dark:bg-gray-800">
                                         <span
                                             class="h-1.5 w-1.5  rounded-full bg-purple-500 "></span>
-                                        <h2 class=" font-normal text-purple-500 ">
+                                        <h2 class="font-normal text-purple-500 ">
                                             Not-Generated
                                         </h2>
                                     </div>
@@ -97,23 +97,24 @@
 
                         <x-table.cell-text>
                             <x-icons.icon :icon="'printer'" wire:click="print({{$row->id}})"
-                                          class="mt-1 hover:rounded-sm hover:bg-purple-500 hover:text-white h-5 w-auto block"/>
+                                          class="block w-auto h-5 mt-1 hover:rounded-sm hover:bg-purple-500 hover:text-white"/>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <div class="w-full flex justify-center gap-3 print:hidden">
-                                <div class="group inline-block relative cursor-pointer max-w-fit min-w-fit">
+                            <div class="flex items-center justify-center w-full print:hidden">
+                                <div class="relative inline-block cursor-pointer group max-w-fit min-w-fit">
                                     <a href="{{route('sales.upsert',[$row->id])}}"
-                                       class="flex text-gray-600 truncate text-xl text-center">
+                                       class="flex text-xl text-center text-gray-600 truncate">
                                         <div
                                             class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
-                                            <div class="flex flex-col justify-start items-center -translate-y-full">
+                                            <div class="flex flex-col items-center justify-start -translate-y-full">
                                                 <div
-                                                    class="bg-blue-500  shadow-md text-white rounded-lg py-1 px-3 cursor-default text-base">
+                                                    class="px-3 py-1 text-base text-white bg-blue-500 rounded-lg shadow-md cursor-default">
                                                     Edit
                                                 </div>
                                                 <div
-                                                    class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-blue-500 -mt-[1px]"></div>
+                                                    class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent
+                                                    border-t-blue-500 -mt-[1px]"></div>
                                             </div>
                                         </div>
                                         <x-button.link>&nbsp;
@@ -125,13 +126,13 @@
                                         </x-button.link>
                                     </a>
                                 </div>
-                                <div class="group inline-block relative cursor-pointer max-w-fit min-w-fit">
+                                <div class="relative inline-block cursor-pointer group max-w-fit min-w-fit">
                                     <x-button.link wire:click="getDelete({{$row->id}})">&nbsp;
                                         <div
                                             class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
-                                            <div class="flex flex-col justify-start items-center -translate-y-full">
+                                            <div class="flex flex-col items-center justify-start -translate-y-full">
                                                 <div
-                                                    class="bg-red-500  shadow-md text-white rounded-lg py-1 px-3 cursor-default text-base">
+                                                    class="px-3 py-1 text-base text-white bg-red-500 rounded-lg shadow-md cursor-default">
                                                     delete
                                                 </div>
                                                 <div
@@ -144,6 +145,16 @@
                                                   d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
                                         </svg>
                                     </x-button.link>
+                                </div>
+                                <div>
+                                    <x-dropdown.icon>
+                                        <div class="hover:bg-gray-100 hover:text-violet-600 hover:font-bold">
+                                            <a href="{{ route('sales.einvoice',[$row->id]) }}">E-Incoice</a>
+                                        </div>
+                                        <div class="hover:bg-gray-100 hover:text-rose-600 hover:font-bold">
+                                            <a href="{{ route('sales.eway',[$row->id]) }}">E-Way Bill</a>
+                                        </div>
+                                    </x-dropdown.icon>
                                 </div>
                             </div>
                         </x-table.cell-text>

@@ -705,7 +705,7 @@
 
     </x-forms.m-panel>
     @if( $common->vid != "")
-        <x-forms.m-panel-bottom-button  back print>
+        <x-forms.m-panel-bottom-button save back print>
             <div class="flex gap-3">
                 @if(!isset($e_invoiceDetails->id))
                     <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
