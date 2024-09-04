@@ -169,7 +169,6 @@
 
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasJob_no())
                     <x-input.floating wire:model="job_no" label="Job No"/>
-                    {{--                    <x-input.model-text wire:model="job_no" :label="'Job No'"/>--}}
                 @endif
 
                 <!-- Style ------------------------------------------------------------------------------------------------>
@@ -236,6 +235,7 @@
                 @endif
             </div>
         </section>
+
         <x-forms.section-border/>
 
         <!-- Sale Items  -------------------------------------------------------------------------------------------------->
@@ -254,7 +254,6 @@
 
             @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
                 <x-input.floating id="dc" wire:model.live="dc_no" label="DC No."/>
-                1
             @endif
 
             <!--Product Name ---------------------------------------------------------------------------------------------->
@@ -290,56 +289,6 @@
             @endif
 
             <!--No of rolls --------------------------------------------------------------------------------------->
-            @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
-                <x-input.floating id="no_of_roll" wire:model.live="no_of_roll" label="No of Roll"/>
-            @endif
-
-            <!--Colour Name ----------------------------------------------------------------------------------------------->
-
-            @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
-                <x-dropdown.wrapper label="Colour Name" type="colourTyped">
-                    <div class="relative ">
-
-
-            @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
-                <x-input.floating id="dc" wire:model.live="dc_no" label="DC No."/>
-                1
-            @endif
-
-            <!--Product Name ---------------------------------------------------------------------------------------------->
-
-            <x-dropdown.wrapper label="Product Name" type="productTyped">
-                <div class="relative ">
-                    <x-dropdown.input label="Product Name" id="product_name"
-                                      wire:model.live="product_name"
-                                      wire:keydown.arrow-up="decrementProduct"
-                                      wire:keydown.arrow-down="incrementProduct"
-                                      wire:keydown.enter="enterProduct"/>
-                    <x-dropdown.select>
-                        @if($productCollection)
-                            @forelse ($productCollection as $i => $product)
-                                <x-dropdown.option highlight="{{$highlightProduct === $i  }}"
-                                                   wire:click.prevent="setProduct('{{$product->vname}}','{{$product->id}}','{{$product->gstpercent_id}}')">
-                                    {{ $product->vname }} &nbsp;-&nbsp; GST&nbsp;:
-                                    &nbsp;{{\Aaran\Entries\Models\Sale::commons($product->gstpercent_id)}}
-                                    %
-                                </x-dropdown.option>
-                            @empty
-                                @livewire('controls.model.product-model',[$product_name])
-                            @endforelse
-                        @endif
-                    </x-dropdown.select>
-                </div>
-            </x-dropdown.wrapper>
-
-            <!--Product Description --------------------------------------------------------------------------------------->
-
-            @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
-                <x-input.floating id="qty" wire:model.live="description" label="description"/>
-            @endif
-
-            <!--No of rolls --------------------------------------------------------------------------------------->
-
             @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
                 <x-input.floating id="no_of_roll" wire:model.live="no_of_roll" label="No of Roll"/>
             @endif
@@ -419,6 +368,7 @@
             <div class="w-full">
                 <x-input.floating id="price" wire:model.live="price" label="Price"/>
             </div>
+
             <button wire:click="addItems"
                     class="px-3 justify-items-center py-1 md:px-3 bg-green-500 text-white font-semibold tracking-wider hover:bg-green-600 transition-colors duration-300 ease-out">
                 Add
