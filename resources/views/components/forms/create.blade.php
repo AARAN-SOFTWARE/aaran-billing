@@ -6,7 +6,7 @@
 <form wire:submit.prevent="save">
     <div class="w-full h-auto">
         <x-jet.modal wire:model.defer="showEditModal" maxWidth="{{{$maxWidth}}}">
-            <div class="px-6  pt-4">
+            <div class="sm:px-6 px-2 pt-4">
                 <div class="text-lg">
                     {{$id === "" ? 'New Entry' : 'Edit Entry'}}
                 </div>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="mb-1">&nbsp;</div>
             </div>
-            <div class="px-6 py-3 bg-gray-100 text-right">
+            <div class="sm:px-6 px-3 py-3 bg-gray-100 text-right">
                 <div class="w-full flex justify-between gap-3">
                     <div class="py-2">
                         <label for="common.active_id" class="inline-flex relative items-center cursor-pointer">
@@ -29,7 +29,7 @@
                                          after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300
                                          after:border after:rounded-full after:h-4 after:w-4 after:transition-all
                                          peer-checked:bg-blue-600"></div>
-                            <span class="ml-3 text-sm font-medium text-gray-900">Active</span>
+                            <span class="ml-3 sm:text-sm text-xs font-medium text-gray-900">Active</span>
                         </label>
                     </div>
                     <div class="flex gap-3">

@@ -147,5 +147,6 @@
 
         </x-table.form>
         <x-modal.delete/>
+        <div class="pt-5">{{ $list->links() }}</div>
     </x-forms.m-panel>
 </div>

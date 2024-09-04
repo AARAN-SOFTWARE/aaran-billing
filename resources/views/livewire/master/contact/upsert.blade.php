@@ -16,11 +16,11 @@
 
                 <x-tabs.content>
 
-                    <div class="lg:flex">
+                    <div class="lg:flex-row flex flex-col sm:gap-8 gap-4">
 
                         <!-- Left area -------------------------------------------------------------------------------->
 
-                        <div class="lg:w-1/2 ml-2 px-8 flex flex-col gap-3">
+                        <div class="sm:w-1/2 w-full flex flex-col gap-3 ">
 
                             <x-input.floating wire:model="vname" label="Name"/>
                             <x-input.floating wire:model="mobile" label="Mobile"/>
@@ -39,12 +39,12 @@
                                     openTab: 0,
                                     activeClasses: 'border-l border-t border-r rounded-t text-blue-700',
                                     inactiveClasses: 'text-blue-500 hover:text-blue-700'
-                                }" class="">
-                                <ul class="flex border-b overflow-x-scroll py-2">
+                                }" class="space-y-1">
+                                <ul class="flex items-center border-b overflow-x-scroll space-x-2">
                                     <li x-on:click="$wire.sortSearch('{{0}}')" @click="openTab = 0"
-                                        :class="{ '-mb-px': openTab === 0 }" class="-mb-px mr-1">
+                                        :class="{ '-mb-px': openTab === 0 }" class="-mb-px">
                                         <a href="#" :class="openTab === 0 ? activeClasses : inactiveClasses"
-                                           class="bg-white inline-block py-2 px-4 font-semibold ">
+                                           class="bg-white inline-block py-3 px-4 font-semibold ">
                                             Primary
                                         </a>
                                     </li>
@@ -75,7 +75,7 @@
                                     </li>
                                 </ul>
                                 <div class="w-full">
-                                    <div x-show="openTab === 0" class="p-2">
+                                    <div x-show="openTab === 0" class="py-2">
                                         <div class="flex flex-col gap-3">
 
                                             <x-input.floating wire:model.live="itemList.{{0}}.address_1"
@@ -841,7 +841,7 @@
                 </x-tabs.content>
 
                 <x-tabs.content>
-                    <div class="ml-2 px-8 flex flex-col gap-3">
+                    <div class="flex flex-col gap-3">
 
                         <x-input.model-select wire:model="contact_type" :label="'Contact Type'">
                             <option class="text-gray-400"> choose ..</option>
@@ -868,5 +868,5 @@
     </x-forms.m-panel>
 
     <!-- Save Button area --------------------------------------------------------------------------------------------->
-    <x-forms.m-panel-bottom-button save back active/>
+    <x-forms.m-panel-bottom-button active save back />
 </div>

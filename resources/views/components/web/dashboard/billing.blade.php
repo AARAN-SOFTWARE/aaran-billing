@@ -1,13 +1,24 @@
-<div class="bg-white rounded-lg flex-col flex h-[37rem]">
-    <div
-        class="py-3.5 border-b border-gray-300 flex items-center justify-between px-2 text-lg font-semibold">
-        <span class="w-3/12 text-center">Billing</span>
-        <span class="w-3/12 text-center">Invoices</span>
-        <span class="w-3/12 text-center">Revenue</span>
-        <span class="w-3/12 text-center">Status</span>
+<div class="bg-white  rounded-lg flex-col flex h-[36rem]">
+    <div class="w-full h-[4rem] py-3 border-b border-gray-200 inline-flex items-center justify-between px-8">
+                         <span class="inline-flex items-center gap-2">
+                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-cyan-500">
+                          <path fill-rule="evenodd" d="M3.75 3.375c0-1.036.84-1.875 1.875-1.875H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375Zm10.5 1.875a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Zm-4.5 5.25a.75.75 0 0 0 0 1.5h.375c.769 0 1.43.463 1.719 1.125H9.75a.75.75 0 0 0 0 1.5h2.094a1.875 1.875 0 0 1-1.719 1.125H9.75a.75.75 0 0 0-.53 1.28l2.25 2.25a.75.75 0 0 0 1.06-1.06l-1.193-1.194a3.382 3.382 0 0 0 2.08-2.401h.833a.75.75 0 0 0 0-1.5h-.834A3.357 3.357 0 0 0 12.932 12h1.318a.75.75 0 0 0 0-1.5H10.5c-.04 0-.08.003-.12.01a3.425 3.425 0 0 0-.255-.01H9.75Z" clip-rule="evenodd" />
+                        </svg>
+                            <span class="font-semibold text-lg font-roboto">Entries</span>
+                        </span>
+        <a class="inline-flex items-center gap-1 text-gray-500 font-semibold hover:bg-cyan-50 hover:text-cyan-600 px-2 py-1 rounded-md transition-colors duration-300 ease-out">
+            <span class="text-xs ">View All </span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/>
+            </svg>
+        </a>
     </div>
-    <div class="flex-col flex h-full">
-        <div class="flex items-center justify-between p-3 border-b border-gray-200">
+    <div class="flex-col flex h-[32rem] px-2 overflow-y-auto">
+
+        <div class="flex items-center justify-between py-3 border-b border-gray-200">
             <div class=" w-3/12 flex-col flex gap-y-2 justify-center items-center">
                 <div class="w-10 h-10">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -47,6 +58,7 @@
                     class="max-w-max px-2 py-1 bg-sky-400 font-semibold text-white rounded-md">Processing</span></span>
 
         </div>
+
         <div class="flex items-center justify-between p-3 border-b border-gray-200">
             <div class=" w-3/12 flex-col flex gap-y-2 justify-center items-center">
                 <div class="w-10 h- \">
@@ -134,49 +146,51 @@
                     class="max-w-max px-2 py-1 bg-orange-500 font-semibold text-white rounded-md">Pending</span>
                         </span>
         </div>
-        <div class="flex items-center justify-between p-3 border-b border-gray-200">
-            <div class=" w-3/12 flex-col flex gap-y-2 justify-center items-center">
-                <div class="">
-                    <svg width="47px" height="47px" viewBox="0 0 24 24" fill="none"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M18.8086 6.25047H20.1686C19.9786 5.98047 19.7786 5.73047 19.5686 5.48047L18.8086 6.25047Z"
-                            fill="#F5B849"/>
-                        <path d="M18.52 4.42031C18.27 4.21031 18.02 4.01031 17.75 3.82031V5.18031L18.52 4.42031Z"
-                              fill="#F5B849"/>
-                        <path
-                            d="M19.5795 5.48141L22.5295 2.53141C22.8195 2.24141 22.8195 1.76141 22.5295 1.47141C22.2395 1.18141 21.7595 1.18141 21.4695 1.47141L18.5195 4.42141C18.8995 4.75141 19.2495 5.11141 19.5795 5.48141Z"
-                            fill="#F5B849"/>
-                        <path
-                            d="M17.7517 3C17.7517 2.59 17.4117 2.25 17.0017 2.25C16.6017 2.25 16.2817 2.57 16.2617 2.96C16.7817 3.21 17.2817 3.49 17.7517 3.82V3Z"
-                            fill="#F5B849"/>
-                        <path
-                            d="M21.7519 7C21.7519 6.59 21.4119 6.25 21.0019 6.25H20.1719C20.5019 6.72 20.7919 7.22 21.0319 7.74C21.4319 7.72 21.7519 7.4 21.7519 7Z"
-                            fill="#F5B849"/>
-                        <path
-                            d="M12.75 14.7508H13.05C13.44 14.7508 13.75 14.4008 13.75 13.9708C13.75 13.4308 13.6 13.3508 13.26 13.2308L12.75 13.0508V14.7508Z"
-                            fill="#F5B849"/>
-                        <path
-                            d="M21.04 7.74C21.03 7.74 21.02 7.75 21 7.75H17C16.9 7.75 16.81 7.73 16.71 7.69C16.53 7.61 16.38 7.47 16.3 7.28C16.27 7.19 16.25 7.1 16.25 7V3C16.25 2.99 16.26 2.98 16.26 2.96C14.96 2.35 13.52 2 12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 10.48 21.65 9.04 21.04 7.74ZM13.75 11.82C14.39 12.04 15.25 12.51 15.25 13.98C15.25 15.23 14.26 16.26 13.05 16.26H12.75V16.51C12.75 16.92 12.41 17.26 12 17.26C11.59 17.26 11.25 16.92 11.25 16.51V16.26H11.17C9.84 16.26 8.75 15.14 8.75 13.76C8.75 13.34 9.09 13 9.5 13C9.91 13 10.25 13.34 10.25 13.75C10.25 14.3 10.66 14.75 11.17 14.75H11.25V12.53L10.25 12.18C9.61 11.96 8.75 11.49 8.75 10.02C8.75 8.77 9.74 7.74 10.95 7.74H11.25V7.5C11.25 7.09 11.59 6.75 12 6.75C12.41 6.75 12.75 7.09 12.75 7.5V7.75H12.83C14.16 7.75 15.25 8.87 15.25 10.25C15.25 10.66 14.91 11 14.5 11C14.09 11 13.75 10.66 13.75 10.25C13.75 9.7 13.34 9.25 12.83 9.25H12.75V11.47L13.75 11.82Z"
-                            fill="#F5B849"/>
-                        <path
-                            d="M10.25 10.03C10.25 10.57 10.4 10.65 10.74 10.77L11.25 10.95V9.25H10.95C10.57 9.25 10.25 9.6 10.25 10.03Z"
-                            fill="#F5B849"/>
-                    </svg>
+        @for($i=1; $i<=9; $i++)
+            <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                <div class=" w-3/12 flex-col flex gap-y-2 justify-center items-center">
+                    <div class="">
+                        <svg width="47px" height="47px" viewBox="0 0 24 24" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M18.8086 6.25047H20.1686C19.9786 5.98047 19.7786 5.73047 19.5686 5.48047L18.8086 6.25047Z"
+                                fill="#F5B849"/>
+                            <path d="M18.52 4.42031C18.27 4.21031 18.02 4.01031 17.75 3.82031V5.18031L18.52 4.42031Z"
+                                  fill="#F5B849"/>
+                            <path
+                                d="M19.5795 5.48141L22.5295 2.53141C22.8195 2.24141 22.8195 1.76141 22.5295 1.47141C22.2395 1.18141 21.7595 1.18141 21.4695 1.47141L18.5195 4.42141C18.8995 4.75141 19.2495 5.11141 19.5795 5.48141Z"
+                                fill="#F5B849"/>
+                            <path
+                                d="M17.7517 3C17.7517 2.59 17.4117 2.25 17.0017 2.25C16.6017 2.25 16.2817 2.57 16.2617 2.96C16.7817 3.21 17.2817 3.49 17.7517 3.82V3Z"
+                                fill="#F5B849"/>
+                            <path
+                                d="M21.7519 7C21.7519 6.59 21.4119 6.25 21.0019 6.25H20.1719C20.5019 6.72 20.7919 7.22 21.0319 7.74C21.4319 7.72 21.7519 7.4 21.7519 7Z"
+                                fill="#F5B849"/>
+                            <path
+                                d="M12.75 14.7508H13.05C13.44 14.7508 13.75 14.4008 13.75 13.9708C13.75 13.4308 13.6 13.3508 13.26 13.2308L12.75 13.0508V14.7508Z"
+                                fill="#F5B849"/>
+                            <path
+                                d="M21.04 7.74C21.03 7.74 21.02 7.75 21 7.75H17C16.9 7.75 16.81 7.73 16.71 7.69C16.53 7.61 16.38 7.47 16.3 7.28C16.27 7.19 16.25 7.1 16.25 7V3C16.25 2.99 16.26 2.98 16.26 2.96C14.96 2.35 13.52 2 12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 10.48 21.65 9.04 21.04 7.74ZM13.75 11.82C14.39 12.04 15.25 12.51 15.25 13.98C15.25 15.23 14.26 16.26 13.05 16.26H12.75V16.51C12.75 16.92 12.41 17.26 12 17.26C11.59 17.26 11.25 16.92 11.25 16.51V16.26H11.17C9.84 16.26 8.75 15.14 8.75 13.76C8.75 13.34 9.09 13 9.5 13C9.91 13 10.25 13.34 10.25 13.75C10.25 14.3 10.66 14.75 11.17 14.75H11.25V12.53L10.25 12.18C9.61 11.96 8.75 11.49 8.75 10.02C8.75 8.77 9.74 7.74 10.95 7.74H11.25V7.5C11.25 7.09 11.59 6.75 12 6.75C12.41 6.75 12.75 7.09 12.75 7.5V7.75H12.83C14.16 7.75 15.25 8.87 15.25 10.25C15.25 10.66 14.91 11 14.5 11C14.09 11 13.75 10.66 13.75 10.25C13.75 9.7 13.34 9.25 12.83 9.25H12.75V11.47L13.75 11.82Z"
+                                fill="#F5B849"/>
+                            <path
+                                d="M10.25 10.03C10.25 10.57 10.4 10.65 10.74 10.77L11.25 10.95V9.25H10.95C10.57 9.25 10.25 9.6 10.25 10.03Z"
+                                fill="#F5B849"/>
+                        </svg>
+                    </div>
+                    <div class="text-center font-semibold text-[#F5B849] text-xs">Receipt</div>
                 </div>
-                <div class="text-center font-semibold text-[#F5B849] text-xs">Receipt</div>
-            </div>
-            <div class="w-3/12 text-center">
-                <span class="text-xs font-semibold ">INV A1-005</span>
-                <div class="text-xs text-gray-600">{{ date('d-M-y') }}</div>
-            </div>
-            <span class="w-3/12 text-sm font-semibold text-green-600 text-center">₹ 12900</span>
-            <span
-                class="w-3/12 text-xs text-center">
+                <div class="w-3/12 text-center">
+                    <span class="text-xs font-semibold ">INV A1-005</span>
+                    <div class="text-xs text-gray-600">{{ date('d-M-y') }}</div>
+                </div>
+                <span class="w-3/12 text-sm font-semibold text-green-600 text-center">₹ 12900</span>
+                <span
+                    class="w-3/12 text-xs text-center">
                             <span
                                 class="max-w-max px-2 py-1 bg-green-500 font-semibold text-white rounded-md">Sent</span>
                         </span>
-        </div>
+            </div>
+        @endfor
     </div>
 
 </div>

@@ -66,7 +66,6 @@
                     </x-table.row>
                 @endforeach
             </x-slot:table_body>
-
         </x-table.form>
         <x-modal.delete/>
         <div class="pt-5">{{ $list->links() }}</div>

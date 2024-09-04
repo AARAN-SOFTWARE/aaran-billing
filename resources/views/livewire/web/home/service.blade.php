@@ -291,7 +291,6 @@
 
 
 <script>
-
     function showTab(tabId) {
         const tabContents = document.querySelectorAll('.tab-content');
         tabContents.forEach((content) => {
@@ -314,6 +313,5 @@
             clickedButton.classList.add('active');
         }
     }
-
     showTab('tab1');
 </script>

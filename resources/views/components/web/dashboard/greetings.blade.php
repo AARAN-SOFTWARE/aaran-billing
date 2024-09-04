@@ -9,7 +9,7 @@
 {{--    </div>--}}
 {{--</div>--}}
 
-<div class="w-full h-[19.5rem] rounded-lg">
+<div class="w-full h-[20rem] rounded-lg">
     @if (App\Helper\Core::greetings() == 'Good morning')
         <div class="relative h-full">
             <img src="../../../../images/wall1.webp" alt="" class="w-full h-full brightness-50 rounded-lg">
