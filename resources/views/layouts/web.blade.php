@@ -21,8 +21,11 @@
 </head>
 <body class="">
 <div class="w-full">
-    <x-menu.new />
-    {{ $slot }}
+    <x-menu.new/>
+
+    <div class="w-full">
+        {{ $slot }}
+    </div>
 </div>
 
 @livewireScripts

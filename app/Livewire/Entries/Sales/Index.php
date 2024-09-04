@@ -16,6 +16,7 @@ class Index extends Component
     #region[create]
     public function create(): void
     {
+        ini_set('max_execution_time', 3600);
         $this->redirect(route('sales.upsert', ['0']));
     }
     #endregion

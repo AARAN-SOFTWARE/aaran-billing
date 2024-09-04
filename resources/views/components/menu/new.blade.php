@@ -13,27 +13,33 @@
     <ul class="hidden items-center gap-16 md:flex">
         <li><a href="{{route('home')}}"
                class="font-bold  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-white dark:hover:text-white"
-               aria-current="page">Home</a></li>
+               aria-current="page" wire:navigate>Home</a></li>
         <li><a href="{{route('about')}}"
-               class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">About</a>
+               class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white"
+               wire:navigate>About</a>
         </li>
         <li><a href="{{route('blog')}}"
-               class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Blog</a>
+               class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white"
+               wire:navigate>Blog</a>
         </li>
         <li><a href="{{route('service')}}"
-               class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Services</a>
+               class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white"
+               wire:navigate>Services</a>
         </li>
         <li><a href="{{route('contact')}}"
-               class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Contact</a>
+               class="font-medium  underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white"
+               wire:navigate>Contact</a>
         </li>
         @if (Route::has('login'))
             @auth
                 <li><a href="{{route('dashboard')}}"
-                       class="font-medium underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Dashboard</a>
+                       class="font-medium underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white"
+                       wire:navigate>Dashboard</a>
                 </li>
                 <li><a href="{{route('logout')}}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                       class="font-medium underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Logout</a>
+                       class="font-medium underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white"
+                       wire:navigate>Logout</a>
                 </li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                       style="display: none;">
@@ -41,7 +47,8 @@
                 </form>
             @else
                 <li><a href="{{route('login')}}"
-                       class="font-semibold underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white">Login</a>
+                       class="font-semibold underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-neutral-300 dark:hover:text-white"
+                       wire:navigate>Login</a>
                 </li>
             @endauth
         @endif
@@ -68,28 +75,29 @@
         x-transition:leave="transition motion-reduce:transition-none ease-out duration-300"
         x-transition:leave-start="translate-y-0" x-transition:leave-end="-translate-y-full" id="mobileMenu"
         class="fixed max-h-svh overflow-y-auto inset-x-0 top-0 z-20 flex flex-col divide-y divide-neutral-300 rounded-b-md border-b border-neutral-300 bg-neutral-50 px-6 pb-6 pt-20 dark:divide-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 md:hidden">
-        <li class="py-2"><a href="{{route('home')}}" class="w-full text-sm font-bold text-neutral-600 focus:underline dark:text-neutral-300"
-                            >Home</a></li>
+        <li class="py-2"><a href="{{route('home')}}"
+                            class="w-full text-sm font-bold text-neutral-600 focus:underline dark:text-neutral-300" wire:navigate
+            >Home</a></li>
         <li class="py-2"><a href="{{route('about')}}"
-                            class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">About</a>
+                            class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300" wire:navigate>About</a>
         </li>
         <li class="py-2"><a href="{{route('blog')}}"
-                            class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">Blog</a>
+                            class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300" wire:navigate>Blog</a>
         </li>
         <li class="py-2"><a href="{{route('service')}}"
-                            class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">Services</a>
+                            class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300" wire:navigate>Services</a>
         </li>
         <li class="py-2"><a href="{{route('contact')}}"
-                            class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">Contact</a>
+                            class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300" wire:navigate>Contact</a>
         </li>
         @if (Route::has('login'))
             @auth
                 <li class="py-2"><a href="{{route('dashboard')}}"
-                                    class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">Dashboard</a>
+                                    class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300" wire:navigate>Dashboard</a>
                 </li>
                 <li class="py-2"><a href="{{route('logout')}}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">Logout</a>
+                                    class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300" wire:navigate>Logout</a>
                 </li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                       style="display: none;">
@@ -97,7 +105,7 @@
                 </form>
             @else
                 <li class="py-2"><a href="{{route('login')}}"
-                                    class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300">Login</a>
+                                    class="w-full text-sm font-medium text-neutral-600 focus:underline dark:text-neutral-300" wire:navigate>Login</a>
                 </li>
             @endauth
         @endif
@@ -113,7 +121,7 @@
         transition: background-color 1s ease-out;
     }
 
-    .text-black{
+    .text-black {
         /*color: #157293 !important;*/
         /*color: #3F5AF3 !important;*/
         color: black !important;
@@ -125,7 +133,9 @@
     // Toggle the .pa-fixed-header class when the user
     // scroll 100px
 
-    window.onscroll = () => {scrollNavbar()};
+    window.onscroll = () => {
+        scrollNavbar()
+    };
 
     scrollNavbar = () => {
         // Target elements
