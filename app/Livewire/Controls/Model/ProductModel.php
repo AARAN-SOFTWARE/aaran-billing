@@ -20,13 +20,13 @@ class ProductModel extends Component
     public function mount($name): void
     {
         $this->vname = $name;
-        $this->producttype_id = 39;
+        $this->producttype_id = 66;
         $this->producttype_name=$this->producttype_id?Common::find($this->producttype_id)->vname:'';
-        $this->hsncode_id = 8;
+        $this->hsncode_id = 45;
         $this->hsncode_name=$this->hsncode_id?Common::find($this->hsncode_id)->vname:'';
-        $this->unit_id = 43;
+        $this->unit_id = 70;
         $this->unit_name=$this->unit_id?Common::find($this->unit_id)->vname:'';
-        $this->gstpercent_id = 47;
+        $this->gstpercent_id = 74;
         $this->gstpercent_name=$this->gstpercent_id?Common::find($this->gstpercent_id)->vname:'';
         $this->quantity=0;
         $this->price=0;
@@ -37,10 +37,10 @@ class ProductModel extends Component
         if ($this->vname != '') {
             $obj = Product::create([
                 'vname' => Str::ucfirst($this->vname),
-                'producttype_id' => $this->producttype_id?:'39',
-                'hsncode_id' => $this->hsncode_id?:'8',
-                'unit_id' => $this->unit_id?:'43',
-                'gstpercent_id' => $this->gstpercent_id?:'47',
+                'producttype_id' => $this->producttype_id?:'66',
+                'hsncode_id' => $this->hsncode_id?:'45',
+                'unit_id' => $this->unit_id?:'70',
+                'gstpercent_id' => $this->gstpercent_id?:'74',
                 'initial_quantity' => $this->quantity?:'0',
                 'initial_price' => $this->price?:'0',
                 'user_id' => Auth::id(),
@@ -209,6 +209,7 @@ class ProductModel extends Component
 #endregion
 
     #region[unit]
+
     public $unit_id = '';
     public $unit_name = '';
     public Collection $unitCollection;
@@ -279,6 +280,7 @@ class ProductModel extends Component
 #endregion
 
     #region[gstpercent]
+
     public $gstpercent_id = '';
     public $gstpercent_name = '';
     public Collection $gstpercentCollection;

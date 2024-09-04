@@ -253,7 +253,7 @@ class Upsert extends Component
     public function getTransportList(): void
     {
         $this->transportCollection = $this->transport_name ? Common::search(trim($this->transport_name))->where('label_id','=',10)
-            ->get() : Common::where('label_id','=',10)->get();
+            ->get() : Common::where('label_id','=',10)->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -327,7 +327,7 @@ class Upsert extends Component
     public function getLedgerList(): void
     {
         $this->ledgerCollection = $this->ledger_name ? Common::search(trim($this->ledger_name))->where('label_id','=',9)
-            ->get() : Common::where('label_id','=',9)->get();
+            ->get() : Common::where('label_id','=',9)->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -465,7 +465,7 @@ class Upsert extends Component
     public function getColourList(): void
     {
         $this->colourCollection = $this->colour_name ? Common::search(trim($this->colour_name))->where('label_id','=',6)
-            ->get() : Common::where('label_id','=',6)->get();
+            ->get() : Common::where('label_id','=',6)->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -538,7 +538,7 @@ class Upsert extends Component
     public function getSizeList(): void
     {
         $this->sizeCollection = $this->size_name ? Common::search(trim($this->size_name))->where('label_id','=',7)
-            ->get() : Common::where('label_id','=',7)->get();
+            ->get() : Common::where('label_id','=',7)->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -554,18 +554,18 @@ class Upsert extends Component
                         'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.$this->purchase_no,
                         'acyear' => session()->get('acyear'),
                         'company_id' => session()->get('company_id'),
-                        'contact_id' => $this->contact_id,
+                        'contact_id' => $this->contact_id?:1,
                         'purchase_no' => $this->purchase_no,
                         'purchase_date' => $this->purchase_date,
                         'entry_no' => $this->entry_no,
                         'order_id' => $this->order_id ?: 1,
                         'sales_type' => $this->sales_type,
-                        'transport_id' => $this->transport_id ?: 27,
+                        'transport_id' => $this->transport_id ?: 1,
                         'bundle' => $this->bundle,
                         'total_qty' => $this->total_qty,
                         'total_taxable' => $this->total_taxable,
                         'total_gst' => $this->total_gst,
-                        'ledger_id' => $this->ledger_id ?: 25,
+                        'ledger_id' => $this->ledger_id ?: 1,
                         'additional' => $this->additional,
                         'round_off' => $this->round_off,
                         'grand_total' => $this->grand_total,

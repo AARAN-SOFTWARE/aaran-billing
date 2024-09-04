@@ -1,46 +1,72 @@
 <div>
     <x-slot name="header">Contact</x-slot>
+
+    <!-- Top Controls --------------------------------------------------------------------------------------------->
+
     <x-forms.m-panel>
-        <!-- Top Controls --------------------------------------------------------------------------------------------->
+
         <x-forms.top-controls :show-filters="$showFilters"/>
+
         <!-- Top Controls --------------------------------------------------------------------------------------------->
+
         <x-table.caption :caption="'Contacts'">
             {{$list->count()}}
         </x-table.caption>
+
+        <!-- Table Header --------------------------------------------------------------------------------------------->
 
         <x-table.form>
 
             <x-slot:table_header name="table_header" class="bg-green-600">
                 <x-table.header-serial width="20%"/>
+
                 <x-table.header-text wire:click="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
                     Name
                 </x-table.header-text>
-                <x-table.header-text wire:click="sortBy('mobile')" sortIcon="{{$getListForm->sortAsc}}">
-                    Mobile
-                </x-table.header-text>
+
+                <x-table.header-text sortIcon="none">Mobile</x-table.header-text>
+
                 <x-table.header-text sortIcon="none">Contact Type</x-table.header-text>
+
                 <x-table.header-text sortIcon="none">Contact Person</x-table.header-text>
+
                 <x-table.header-action/>
+
             </x-slot:table_header>
 
+            <!-- Table Body ------------------------------------------------------------------------------------------->
+
             <x-slot:table_body name="table_body">
+
                 @foreach($list as $index=>$row)
+
                     <x-table.row>
+
                         <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$index+1}}</a>
                         </x-table.cell-text>
+
                         <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->vname}}</a>
                         </x-table.cell-text>
+
                         <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->mobile}}</a>
                         </x-table.cell-text>
+
                         <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_type}}</a>
                         </x-table.cell-text>
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_person}}</a>
+
+                        <x-table.cell-text><a
+                                href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_person}}</a>
                         </x-table.cell-text>
+
                         <x-table.cell-text>
+
                             <div class="w-full flex justify-center gap-3">
+
                                 <div class="group inline-block relative cursor-pointer max-w-fit min-w-fit">
+
                                     <a href="{{route('contacts.upsert',[$row->id])}}"
                                        class="flex text-gray-600 truncate text-xl text-center">
+
                                         <div
                                             class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
                                             <div class="flex flex-col justify-start items-center -translate-y-full">
@@ -52,6 +78,7 @@
                                                     class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-blue-500 -mt-[1px]"></div>
                                             </div>
                                         </div>
+
                                         <x-button.link>&nbsp;
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -59,10 +86,13 @@
                                                       d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
                                             </svg>
                                         </x-button.link>
+
                                     </a>
                                 </div>
+
                                 <div class="group inline-block relative cursor-pointer max-w-fit min-w-fit">
                                     <x-button.link wire:click="getDelete({{$row->id}})">&nbsp;
+
                                         <div
                                             class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
                                             <div class="flex flex-col justify-start items-center -translate-y-full">
@@ -74,6 +104,7 @@
                                                     class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-red-500 -mt-[1px]"></div>
                                             </div>
                                         </div>
+
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                              stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -82,9 +113,12 @@
                                     </x-button.link>
                                 </div>
                             </div>
+
                         </x-table.cell-text>
                     </x-table.row>
+
                 @endforeach
+
             </x-slot:table_body>
 
         </x-table.form>

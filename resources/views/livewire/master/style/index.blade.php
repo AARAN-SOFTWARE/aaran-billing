@@ -1,5 +1,8 @@
 <div>
+
     <x-slot name="header">Styles</x-slot>
+
+    <!-- Top Controls ------------------------------------------------------------------------------------------------->
 
     <x-forms.m-panel>
 
@@ -11,16 +14,25 @@
 
         <x-table.form>
 
+            <!-- Table Header ----------------------------------------------------------------------------------------->
+
             <x-slot:table_header name="table_header" class="bg-green-600">
+
                 <x-table.header-serial width="20%"/>
+
+                <x-table.header-text sortIcon="none">Image</x-table.header-text>
+
                 <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
                     Name
                 </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
-                    Description
-                </x-table.header-text>
+
+                <x-table.header-text sortIcon="none">Description</x-table.header-text>
+
+
                 <x-table.header-action/>
             </x-slot:table_header>
+
+            <!-- Table Body ------------------------------------------------------------------------------------------->
 
             <x-slot:table_body name="table_body">
 
@@ -28,8 +40,17 @@
 
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+
+                        <x-table.cell-text>
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->image) }}" alt="image"
+                                     class="flex w-10 h-10"
+                                />
+                        </x-table.cell-text>
+
                         <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
+
                         <x-table.cell-text>{{$row->desc}}</x-table.cell-text>
+
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
 
@@ -41,14 +62,16 @@
 
         <x-modal.delete/>
 
+        <!-- Create --------------------------------------------------------------------------------------------------->
+
         <x-forms.create :id="$common->vid">
             <div class="flex flex-col  gap-3">
 
                 <x-input.floating wire:model="common.vname" label="Name"/>
                 <x-input.floating wire:model="desc" label="Order Name"/>
-{{--                <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
-{{--                <x-input.model-text wire:model="desc" :label="'Order Name'"/>--}}
+
                 <!-- Image -------------------------------------------------------------------------------------------->
+
                 <div class="flex flex-row gap-2 mt-4">
 
                     <div class="flex">
@@ -61,7 +84,8 @@
                             <div>
                                 @if($image)
                                     <div class="flex-shrink-0 overflow-hidden">
-                                        <img class="h-24 w-full hover:scale-105 hover:brightness-110" src="{{ $image->temporaryUrl() }}"
+                                        <img class="h-24 w-full hover:scale-105 hover:brightness-110"
+                                             src="{{ $image->temporaryUrl() }}"
                                              alt="{{$image?:''}}"/>
                                     </div>
                                 @endif

@@ -480,7 +480,7 @@ class Upsert extends Component
     {
         $this->transportCollection = $this->transport_name ? Common::search(trim($this->transport_name))->where('label_id',
             '=', 10)
-            ->get() : Common::where('label_id', '=', 10)->get();
+            ->get() : Common::where('label_id', '=', 10)->Orwhere('id','=','1')->get();
     }
 
     #endregion
@@ -630,7 +630,7 @@ class Upsert extends Component
     {
         $this->ledgerCollection = $this->ledger_name ? Common::search(trim($this->ledger_name))->where('label_id', '=',
             9)
-            ->get() : Common::where('label_id', '=', 9)->get();
+            ->get() : Common::where('label_id', '=', 9)->Orwhere('id','=','1')->get();
     }
 
     #endregion
@@ -769,7 +769,7 @@ class Upsert extends Component
     {
         $this->colourCollection = $this->colour_name ? Common::search(trim($this->colour_name))->where('label_id', '=',
             6)
-            ->get() : Common::where('label_id', '=', 6)->get();
+            ->get() : Common::where('label_id', '=', 6)->Orwhere('id','=','1')->get();
     }
 
     #endregion
@@ -842,7 +842,7 @@ class Upsert extends Component
     public function getSizeList(): void
     {
         $this->sizeCollection = $this->size_name ? Common::search(trim($this->size_name))->where('label_id', '=', 7)
-            ->get() : Common::where('label_id', '=', 7)->get();
+            ->get() : Common::where('label_id', '=', 7)->Orwhere('id','=','1')->get();
     }
 
     #endregion
@@ -867,7 +867,7 @@ class Upsert extends Component
                         'despatch_id' => $this->despatch_id ?: 31,
                         'job_no' => $this->job_no,
                         'sales_type' => $this->sales_type,
-                        'transport_id' => $this->transport_id ?: 27,
+                        'transport_id' => $this->transport_id ?: 1,
                         'destination' => $this->destination,
                         'bundle' => $this->bundle,
                         'distance' => $this->distance,
@@ -881,7 +881,7 @@ class Upsert extends Component
                         'total_qty' => $this->total_qty,
                         'total_taxable' => $this->total_taxable,
                         'total_gst' => $this->total_gst,
-                        'ledger_id' => $this->ledger_id ?: 25,
+                        'ledger_id' => $this->ledger_id ?: 1,
                         'additional' => $this->additional,
                         'round_off' => $this->round_off,
                         'grand_total' => $this->grand_total,

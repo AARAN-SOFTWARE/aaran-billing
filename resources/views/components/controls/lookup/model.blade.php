@@ -24,7 +24,7 @@
                         <h3 class="font-bold text-lg border-b border-gray-400 text-gray-500 py-2">&nbsp;&nbsp;&nbsp;&nbsp;Create&nbsp;new</h3>
                     </header>
 
-                    <main class="px-5 mb-2">
+                    <main class="px-5 mb-2 space-y-4">
                         {{$slot}}
                     </main>
 

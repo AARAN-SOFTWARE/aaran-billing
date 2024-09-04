@@ -42,7 +42,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->contact_id}}</a>
+                            <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->contact->vname}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
