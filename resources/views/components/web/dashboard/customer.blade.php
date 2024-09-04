@@ -1,6 +1,5 @@
-<div class="w-full h-auto bg-white rounded-md">
-    <div class="">
-        <div class="w-full py-3 border-b border-gray-200 inline-flex items-center justify-between px-2">
+<div class="w-full h-[36rem] bg-white rounded-md">
+        <div class="h-[4rem] w-full py-3 border-b border-gray-200 inline-flex items-center justify-between px-4">
                          <span class="inline-flex items-center gap-2">
                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                               class="size-4 text-cyan-500">
@@ -9,7 +8,7 @@
                         </svg>
                             <span class="font-semibold text-lg font-roboto">Customer</span>
                         </span>
-            <div class="inline-flex items-center gap-1 text-gray-500 font-semibold">
+            <a class="inline-flex items-center gap-1 text-gray-500 font-semibold hover:bg-cyan-50 hover:text-cyan-600 px-2 py-1 rounded-md transition-colors duration-300 ease-out">
                 <span class="text-xs ">View All </span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke-width="1.5"
@@ -17,10 +16,10 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/>
                 </svg>
-            </div>
+            </a>
         </div>
-        <div class="p-2 space-y-5">
-            @for($i=1; $i<=9; $i++)
+        <div class="px-4 py-2 space-y-5 h-[32rem] overflow-y-auto ">
+            @for($i=1; $i<=16; $i++)
                 <div class="flex justify-between items-center">
                     <div class="inline-flex items-center gap-3">
                         <img src="../../../../images/t2.jpg" alt="" class="w-10 h-10 self-start rounded-lg">
@@ -36,5 +35,4 @@
                 </div>
             @endfor
         </div>
-    </div>
 </div>

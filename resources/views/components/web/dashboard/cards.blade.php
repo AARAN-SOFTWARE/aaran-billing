@@ -1,7 +1,7 @@
-<div class="space-y-5">
-    <div class="flex gap-5">
-        <div class="w-1/2 h-36 bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#845ADF]">
-            <div class="flex justify-between py-5 px-6">
+<div class="h-[20rem] flex flex-col gap-5">
+    <div class="flex h-1/2 gap-5">
+        <div class="w-1/2 bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#845ADF] ">
+            <div class="flex items-center justify-between py-5 px-6">
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md">Purchase</div>
@@ -44,8 +44,8 @@
                 </div>
             </div>
         </div>
-        <div class="w-1/2 h-36 bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#23B7E5]">
-            <div class="flex justify-between py-5 px-6">
+        <div class="w-1/2 bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#23B7E5]">
+            <div class="flex items-center justify-between py-5 px-6">
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Receivables</div>
@@ -98,9 +98,9 @@
             </div>
         </div>
     </div>
-    <div class="flex gap-5">
-        <div class="w-1/2 h-36 bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#E6533C]">
-            <div class="flex justify-between py-5 px-6">
+    <div class="flex h-1/2 gap-5">
+        <div class="w-1/2  bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#E6533C]">
+            <div class="flex items-center justify-between py-5 px-6">
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Payables</div>
@@ -164,8 +164,8 @@
                 </div>
             </div>
         </div>
-        <div class="w-1/2 h-36 bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#26BF94]">
-            <div class="flex justify-between py-5 px-6">
+        <div class="w-1/2 bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#26BF94]">
+            <div class="flex items-center justify-between py-5 px-6">
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Net Profit</div>

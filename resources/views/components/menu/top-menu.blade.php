@@ -1,33 +1,38 @@
-<header class="flex items-center px-4 py-3 text-semibold text-gray-800  border-b shadow-md print:hidden">
+<header class="flex  items-center sm:px-4 px-1 py-3 text-semibold text-gray-800  border-b shadow-md print:hidden">
 
-    <div class="w-full px-2 flex justify-between items-center">
+    <div class="w-full sm:px-2 px-0 flex flex-row  justify-between items-center">
 
-        <div class="p-1 cursor-pointer hover:bg-gray-200 "
-             @click="sidebarOpen = !sidebarOpen">
+        <div
+            class="w-3/12 flex sm:flex-row flex-col sm:justify-start sm:space-x-4 justify-between items-center sm:space-y-1.5 space-y-3">
+            <div class="p-1 cursor-pointer hover:bg-gray-200 self-start hover:rounded-sm"
+                 @click="sidebarOpen = !sidebarOpen">
 
-            <svg class="h-8 w-8" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path :class="{'hidden': sidebarOpen, 'inline-flex': ! sidebarOpen }" class="inline-flex"
-                      stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M4 6h16M4 12h16M4 18h16"/>
-                <path :class="{'hidden': ! sidebarOpen, 'inline-flex': sidebarOpen }" class="hidden"
-                      stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M6 18L18 6M6 6l12 12"/>
-            </svg>
+                <svg class="sm:h-8 sm:w-8 w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <path :class="{'hidden': sidebarOpen, 'inline-flex': ! sidebarOpen }" class="inline-flex"
+                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"/>
+                    <path :class="{'hidden': ! sidebarOpen, 'inline-flex': sidebarOpen }" class="hidden"
+                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12"/>
+                </svg>
 
-        </div>
-
-        <div class="w-full flex justify-between items-center">
-
+            </div>
             <!-- Page Heading -->
-            <div class="ml-4 font-semibold text-xl text-gray-800 leading-tight justify-start shrink-0 ">
+
+            <div
+                class=" font-semibold sm:text-xl text-md text-gray-800 leading-tight sm:px-0 px-2 self-start">
 
                 {{$slot}}
             </div>
+        </div>
 
-            <div class="flex w-full justify-end">
-{{--                @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3|| session()->get('role_id')==4 )--}}
+        <div class="w-5/12 flex sm:flex-row flex-col sm:justify-end justify-evenly items-center space-y-1">
+
+
+            <div class="flex max-w-max justify-center items-center">
+                {{--                @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3|| session()->get('role_id')==4 )--}}
                 <livewire:default-company.index/>
-{{--                @endif--}}
+                {{--                @endif--}}
                 {{-- @livewire('controls.searchbars.topsearch')--}}
                 {{-- @livewire('controls.searchbars.searchbar')--}}
                 {{-- @livewire('controls.searchbars.filters')--}}
@@ -35,7 +40,7 @@
             </div>
 
             {{-- login menu--}}
-            <div class="sm:flex sm:items-center sm:ml-3">
+            <div class="sm:flex sm:items-center ">
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet.dropdown align="right" width="48">
@@ -43,7 +48,7 @@
                             @auth
                                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                     <button
-                                        class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                        class="flex sm:text-sm text-xs border-2 border-gray-300 rounded-full focus:outline-none focus:border-gray-300 transition">
                                         <img class="h-10 w-12 rounded-full object-cover"
                                              src="{{ Auth::user()->profile_photo_url }}"
                                              alt="{{ Auth::user()->name }}"/>
@@ -51,7 +56,8 @@
                                 @else
                                     <span class="inline-flex rounded-md">
                                     <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                            class="inline-flex items-center sm:px-3 px-1 sm:py-2 py-1 border border-gray-300 sm:text-sm text-xs
+                                            leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
                                         {{ Auth::user()->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"

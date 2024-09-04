@@ -80,6 +80,8 @@
 
         <x-modal.delete/>
 
+        <div class="pt-5">{{ $list->links() }}</div>
+
         <!-- Create  -------------------------------------------------------------------------------------------------->
 
         <x-forms.create :id="$common->vid" :max-width="'6xl'">

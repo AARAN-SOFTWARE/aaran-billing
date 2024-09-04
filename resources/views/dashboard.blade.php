@@ -5,19 +5,19 @@
         </h2>
     </x-slot>
 
-    <div class="flex gap-5 tracking-wider p-5">
+    <div class="flex gap-10 tracking-wider p-5">
         <!-- Col 1 -->
-        <div class="w-3/12 h-auto flex-col flex gap-5">
+        <div class="w-3/12 h-auto flex-col flex space-y-16">
             <x-web.dashboard.greetings/>
             <x-web.dashboard.customer/>
         </div>
         <!-- Col 2 -->
-        <div class="w-3/12 h-auto bg-[#F0F1F7] border-t-2 border-[#23B7E5] rounded-lg space-y-5">
+        <div class="w-4/12 h-auto bg-[#F0F1F7] border-t-2 border-[#23B7E5] rounded-lg space-y-16">
             <x-web.dashboard.sales/>
             <x-web.dashboard.billing/>
         </div>
         <!-- Col 3 -->
-        <div class="w-6/12 h-auto bg-[#F0F1F7] space-y-5">
+        <div class="w-5/12 h-auto bg-[#F0F1F7] space-y-16">
             <x-web.dashboard.cards/>
             <x-jet.welcome>
                 <x-web.dashboard.statistics/>
