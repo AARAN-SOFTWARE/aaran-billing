@@ -43,7 +43,7 @@ class GetListForm extends Form
             return $query->where($this->searchField, 'like', '%' . $search . '%');
         })
             ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+            ->orderBy('id', $this->sortAsc ? 'asc' : 'desc');
 
         return $query->paginate($this->perPage);
     }

@@ -42,7 +42,29 @@
 
             <x-slot:table_body name="table_body">
 
+                @php
+                    $balance = 0;
+                    $OpenBalance = 0;
+                    $totalBalance = 0;
+                    $totalPayment = 0;
+                    $totalReceipt = 0;
+                @endphp
+
+
                 @foreach($list as $index=>$row)
+
+                    @php
+
+                        if ($row->mode_id ==84)
+                        {
+                            $totalPayment  += floatval($row->vname + 0);
+                        }
+                        elseif($row->mode_id ==85)
+                        {
+                            $totalReceipt  += floatval($row->vname + 0);
+                        }
+
+                    @endphp
 
                     <x-table.row>
 
@@ -67,12 +89,31 @@
                             <x-table.cell-text></x-table.cell-text>
                         @endif
 
-                        <x-table.cell-text></x-table.cell-text>
+                        <x-table.cell-text>
+                            {{  $balance  = $totalReceipt-$totalPayment}}
+                        </x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>
 
                     </x-table.row>
+
                 @endforeach
+
+                <x-table.row>
+                    <x-table.cell-text colspan="2">
+                        Total
+                    </x-table.cell-text>
+                    <x-table.cell-text>
+                        {{$totalPayment}}
+                    </x-table.cell-text>
+                    <x-table.cell-text>
+                        {{$totalReceipt}}
+                    </x-table.cell-text>
+                    <x-table.cell-text>
+                        {{$totalReceipt - $totalPayment }}
+                    </x-table.cell-text>
+                </x-table.row>
+
 
             </x-slot:table_body>
 
