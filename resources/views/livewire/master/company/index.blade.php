@@ -79,7 +79,6 @@
                         <!-- Tab 1 ------------------------------------------------------------------------------------>
 
                         <x-tabs.content>
-
                             <div class="flex flex-col gap-3" >
                                 <x-input.floating wire:model="common.vname" label="Name"/>
                                 <x-input.floating wire:model="display_name" label="Display-name"/>
@@ -90,7 +89,6 @@
                                 <x-input.floating wire:model="email" label="Email"/>
                                 <x-input.floating wire:model="website" label="Website"/>
                             </div>
-
                         </x-tabs.content>
 
                         <!-- Tab 2 ------------------------------------------------------------------------------------>

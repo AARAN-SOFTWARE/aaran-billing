@@ -1,11 +1,11 @@
 <div>
     <x-slot name="header">Sales</x-slot>
     <x-forms.m-panel>
-        <section class="grid grid-cols-2">
+        <section class="grid sm:grid-cols-2 grid-cols-1 sm:gap-5 py-3 sm:space-y-0 space-y-5">
 
             <!-- Top Left Area ------------------------------------------------------------------------------------------------>
 
-            <div class="mt-3 space-y-5">
+            <div class="space-y-5">
 
                 <!-- Party Name --------------------------------------------------------------------------------------->
 
@@ -155,7 +155,7 @@
 
             <!-- Top Right Area-------------------------------------------------------------------------------------------->
 
-            <div class="ml-5 mt-3 flex flex-col gap-5">
+            <div class="flex flex-col gap-5 ">
 
                 <x-input.floating wire:model="invoice_no" label="Invoice No"/>
 
@@ -244,7 +244,7 @@
             Sales Item
         </section>
 
-        <section class="md:flex md:flex-row w-full gap-0.5">
+        <section class="flex sm:flex-row flex-col  w-full sm:gap-0.5 gap-3">
 
             <!--PO/DC  -------------------------------------------------------------------------------------------------------->
 
@@ -369,10 +369,17 @@
                 <x-input.floating id="price" wire:model.live="price" label="Price"/>
             </div>
 
-            <button wire:click="addItems"
-                    class="px-3 justify-items-center py-1 md:px-3 bg-green-500 text-white font-semibold tracking-wider hover:bg-green-600 transition-colors duration-300 ease-out">
-                Add
+            <button  wire:click="addItems"
+                     class="px-8 py-2.5 relative rounded group overflow-hidden font-medium bg-emerald-500 inline-block text-center">
+                <span
+                    class="absolute top-0 left-0 flex h-full w-0 mr-0 transition-all
+                    duration-500 ease-out transform translate-x-0 bg-blue-600 group-hover:w-full opacity-90"></span>
+                <span class="relative block group-hover:hidden group-hover:text-white text-white right-3 font-semibold">Add</span>
+                <span class="relative hidden group-hover:block group-hover:text-white text-green-800 sm:right-2.5 sm:-left-3 left-24">
+                  <x-icons.add />
+                </span>
             </button>
+
         </section>
 
         <!-- Display Items ----------------------------------------------------------------------------------------------->
@@ -517,7 +524,34 @@
         </section>
         <x-forms.section-border/>
 
-        <section class="grid grid-cols-3 gap-2 ">
+        <section class="sm:hidden flex w-full ">
+
+            <div class="w-full flex justify-between items-center gap-5">
+                <div class="w-2/4 space-y-6 ">
+                    <div>Taxable No</div>
+                    <div>GST</div>
+                    <div>Round off</div>
+                    <div class="font-semibold">Grand Total</div>
+                </div>
+                <div class="w-1/4 text-center space-y-6 ">
+                    <div>:</div>
+                    <div>:</div>
+                    <div>:</div>
+                    <div>:</div>
+                </div>
+                <div class="w-1/4 text-end space-y-6 ">
+                    <div>{{$total_taxable}}</div>
+                    <div>{{$total_gst }}</div>
+                    <div>{{$round_off}}</div>
+                    <div  class="font-semibold">{{$grand_total}}</div>
+                </div>
+            </div>
+
+        </section>
+
+        <x-forms.section-border class="sm:hidden"/>
+
+        <section class="grid sm:grid-cols-3 grid-cols-1 gap-2 ">
             <!-- Bottom Left -------------------------------------------------------------------------------------------------->
             <section class="w-full">
                 <div class="w-full">
@@ -532,9 +566,7 @@
                         <x-slot name="content">
 
                             <x-tabs.content>
-
                                 <div class="space-y-2">
-
                                     <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"
                                                       label="Addition"/>
 
@@ -568,41 +600,6 @@
                                         </div>
                                     </x-dropdown.wrapper>
                                 </div>
-
-
-                                <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"
-                                                  label="Addition"/>
-
-                                <!-- Ledger ----------------------------------------------------------------------------------->
-                                <x-dropdown.wrapper label="Ledger" type="ledgerTyped">
-                                    <div class="relative ">
-                                        <x-dropdown.input label="Ledger" id="ledger_name"
-                                                          wire:model.live="ledger_name"
-                                                          wire:keydown.arrow-up="decrementLedger"
-                                                          wire:keydown.arrow-down="incrementLedger"
-                                                          wire:keydown.enter="enterLedger"/>
-                                        @error('ledger_id')
-                                        <span class="text-red-500">{{'The Ledger is Required.'}}</span>
-                                        @enderror
-                                        <x-dropdown.select>
-                                            @if($ledgerCollection)
-                                                @forelse ($ledgerCollection as $i => $ledger)
-                                                    <x-dropdown.option highlight="{{$highlightLedger === $i  }}"
-                                                                       wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')">
-                                                        {{ $ledger->vname }}
-                                                    </x-dropdown.option>
-                                                @empty
-                                                    <button
-                                                        wire:click.prevent="ledgerSave('{{$ledger_name}}')"
-                                                        class="text-white bg-green-500 text-center w-full">
-                                                        create
-                                                    </button>
-                                                @endforelse
-                                            @endif
-                                        </x-dropdown.select>
-                                    </div>
-                                </x-dropdown.wrapper>
-
                             </x-tabs.content>
 
                             <x-tabs.content>
@@ -650,7 +647,7 @@
                             </x-tabs.content>
 
                             <x-tabs.content>
-                                <div class="flex gap-3 w-full">
+                                <div class="flex sm:flex-row flex-col gap-3 w-full">
                                     <div class="flex flex-col gap-2 w-full">
 
                                         <x-input.floating wire:model="Transid" label="Transport Id"/>
@@ -686,11 +683,11 @@
 
             <section class="w-full mx-2">
                 @if(isset($e_invoiceDetails->id))
-                    <div class="flex flex-col items-center justify-center ">
+                    <div class="sm:w-full w-[300px] flex flex-col items-center justify-center ">
                         <img class="w-[200px]" src="{{\App\Helper\qrcoder::generate($e_invoiceDetails->signed_qrcode,22)}}" alt="{{$e_invoiceDetails->signed_qrcode}}">
-                        <div>Irn No : {{$e_invoiceDetails->irn}}</div>
+                        <div class="sm:w-full w-[300px]">Irn No : {{$e_invoiceDetails->irn}}</div>
                         @if(isset($e_wayDetails))
-                            <div>E-way Bill NO: {{$e_wayDetails->ewbno}}</div>
+                            <div class="sm:w-full w-[300px] ">E-way Bill NO: {{$e_wayDetails->ewbno}}</div>
                         @endif
                     </div>
                 @endif
@@ -698,41 +695,32 @@
 
             <!-- Bottom Right  -------------------------------------------------------------------------------------------->
 
-            <section class="w-full">
-                <div class="w-3/4 mr-3 ml-auto ">
-
-                    <div class="grid w-full md:grid-cols-2 pt-6">
-                        <label
-                            class="md:px-3 md:pb-2 text-left text-gray-600 text-md">Taxable&nbsp;Amount&nbsp;:&nbsp;&nbsp;</label>
-                        <label
-                            class="ml-8 md:px-3 md:pb-2 text-right text-gray-800 text-md">{{  $total_taxable }}</label>
+            <section class="hidden sm:flex w-full">
+                <div class="w-full flex justify-between items-center self-start">
+                    <div class="w-2/4 space-y-6 ">
+                        <div>Taxable No</div>
+                        <div>GST</div>
+                        <div>Round off</div>
+                        <div class="font-semibold">Grand Total</div>
                     </div>
-
-
-                    <div class="grid w-full grid-cols-2 pt-6">
-                        <label
-                            class="px-3 pb-2 text-left text-gray-600 text-md">Gst&nbsp;:&nbsp;&nbsp;</label>
-                        <label class="px-3 pb-2 text-right text-gray-800 text-md">{{  $total_gst }}</label>
+                    <div class="w-1/4 text-center space-y-6 ">
+                        <div>:</div>
+                        <div>:</div>
+                        <div>:</div>
+                        <div>:</div>
                     </div>
-
-
-                    <div class="grid w-full grid-cols-2 pt-6">
-                        <label
-                            class="px-3 pb-2 text-left text-gray-600 text-md">Round off&nbsp;:&nbsp;&nbsp;</label>
-                        <label class="px-3 pb-2 text-right text-gray-800 text-md">{{$round_off}}</label>
-                    </div>
-
-
-                    <div class="grid w-full grid-cols-2 pt-6">
-                        <label
-                            class="mr-3 md:px-3 md:pb-2 text-xl text-left  text-gray-600">Grand&nbsp;Total&nbsp;:&nbsp;&nbsp;</label>
-                        <label
-                            class="ml-8  px-3 pb-2  md:px-3 md:pb-2 text-xl font-extrabold text-right text-gray-800">{{$grand_total}}</label>
+                    <div class="w-1/4 text-end space-y-6 ">
+                        <div>{{$total_taxable}}</div>
+                        <div>{{$total_gst }}</div>
+                        <div>{{$round_off}}</div>
+                        <div>{{$grand_total}}</div>
                     </div>
                 </div>
+
             </section>
 
         </section>
+
         <x-jet.modal wire:model.defer="showModel">
             <div class="px-6  pt-4">
                 <div class="text-lg">
@@ -777,7 +765,7 @@
     </x-forms.m-panel>
     @if( $common->vid != "")
         <x-forms.m-panel-bottom-button save back print>
-            <div class="flex gap-3">
+            <div class="flex flex-wrap gap-3 justify-end">
                 @if(!isset($e_invoiceDetails->id))
                     <button class='max-w-max bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 focus:ring-2 focus:ring-offset-2
             focus:ring-green-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold

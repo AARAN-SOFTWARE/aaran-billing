@@ -29,7 +29,7 @@
         @keydown.end.prevent.stop="$focus.last()"
         @keydown.page-down.prevent.stop="$focus.last()"
         role="tablist"
-        class="-mb-px flex items-stretch"
+        class="-mb-px flex items-stretch py-2 overflow-x-auto"
     >
         <!-- Tab -->
 

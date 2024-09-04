@@ -5,9 +5,20 @@
     'active'=>false
 
 ])
-<div class="px-8 border border-gray-400 border-t-0 bg-gray-100 rounded-b-md shadow-lg w-full">
-    <div class="flex flex-row justify-between py-4">
-        <div class="flex gap-3">
+<div class="sm:px-8 px-2 border border-gray-400 border-t-0 bg-gray-100 rounded-b-md shadow-lg w-full">
+    <div class="flex flex-row justify-between py-4 gap-3" >
+        <div class="flex flex-wrap  gap-3">
+            @if($active)
+                <x-button.active/>
+            @endif
+            <div>
+                @if($print)
+                    <x-button.print/>
+                @endif
+            </div>
+        </div>
+        <div class="flex flex-wrap gap-3 justify-end ">
+
             @if($save)
 
                 <x-button.save/>
@@ -16,20 +27,9 @@
 
                 <x-button.back/>
             @endif
-                <div>
-                    {{$slot}}
-                </div>
+            <div>
+                {{$slot}}
+            </div>
         </div>
-        <div>
-            @if($print)
-                <x-button.print/>
-            @endif
-        </div>
-        <div>
-            @if($active)
-                <x-button.active/>
-            @endif
-        </div>
-
     </div>
 </div>
