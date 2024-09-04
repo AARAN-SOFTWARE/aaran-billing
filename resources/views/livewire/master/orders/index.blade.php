@@ -1,6 +1,8 @@
 <div>
     <x-slot name="header">Orders</x-slot>
 
+    <!-- Top Controls ------------------------------------------------------------------------------------------------->
+
     <x-forms.m-panel>
 
         <x-forms.top-controls :show-filters="$showFilters"/>
@@ -11,29 +13,36 @@
 
         <x-table.form>
 
+            <!-- Table Header ----------------------------------------------------------------------------------------->
+
             <x-slot:table_header name="table_header" class="bg-green-600">
                 <x-table.header-serial width="20%"/>
+
                 <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
                     Name
                 </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
+
+                <x-table.header-text wire:click.prevent="sortBy('order_name')" sortIcon="{{$getListForm->sortAsc}}">
                     Order
                 </x-table.header-text>
+
                 <x-table.header-action/>
             </x-slot:table_header>
 
+            <!-- Table Body ------------------------------------------------------------------------------------------->
+
             <x-slot:table_body name="table_body">
 
-                        @foreach($list as $index=>$row)
+                @foreach($list as $index=>$row)
 
-                                <x-table.row>
-                                    <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->order_name}}</x-table.cell-text>
-                                    <x-table.cell-action id="{{$row->id}}"/>
-                                </x-table.row>
+                    <x-table.row>
+                        <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->order_name}}</x-table.cell-text>
+                        <x-table.cell-action id="{{$row->id}}"/>
+                    </x-table.row>
 
-                        @endforeach
+                @endforeach
 
             </x-slot:table_body>
 
@@ -41,13 +50,14 @@
 
         <x-modal.delete/>
 
+        <!--Create ---------------------------------------------------------------------------------------------------->
         <x-forms.create :id="$common->vid">
+
             <div class="flex flex-col  gap-3">
-                <x-input.floating wire:model="common.vname" label="Name" />
-                <x-input.floating wire:model="order_name" label="Name" />
-{{--                <x-input.model-text wire:model="common.vname" :label="'Order Name'"/>--}}
-{{--                <x-input.model-text wire:model="order_name" :label="'Order Name'"/>--}}
+                <x-input.floating wire:model="common.vname" label="Name"/>
+                <x-input.floating wire:model="order_name" label="Order"/>
             </div>
+
         </x-forms.create>
 
     </x-forms.m-panel>

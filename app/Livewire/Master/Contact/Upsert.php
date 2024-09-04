@@ -259,7 +259,7 @@ class Upsert extends Component
     {
         $this->stateCollection =  $this->itemList[$this->openTab]['state_name']
             ? Common::search(trim($this->itemList[$this->openTab]['state_name'] ))->where('label_id','=','2')
-            ->get() : Common::where('label_id','=','2')->get();
+            ->get() : Common::where('label_id','=','2')->Orwhere('id', '=', '1')->get();
     }
     #endregion
 
@@ -337,7 +337,7 @@ class Upsert extends Component
     {
         $this->pincodeCollection = $this->itemList[$this->openTab]['pincode_name']
             ? Common::search(trim($this->itemList[$this->openTab]['pincode_name'] ))->where('label_id','=','3')
-            ->get() : Common::where('label_id','=','3')->get();
+            ->get() : Common::where('label_id','=','3')->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -416,7 +416,7 @@ class Upsert extends Component
     {
         $this->countryCollection = $this->itemList[$this->openTab]['country_name']
             ? Common::search(trim($this->itemList[$this->openTab]['country_name'] ))->where('label_id','=','4')
-            ->get() : Common::where('label_id','=','4')->get();
+            ->get() : Common::where('label_id','=','4')->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -484,8 +484,10 @@ class Upsert extends Component
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
+    #endregion
 
 
+    #region[Save Item]
     public function saveItem($id): void
     {
         if ($this->itemList!=null) {
@@ -497,9 +499,9 @@ class Upsert extends Component
                         'address_1' => $sub['address_1'],
                         'address_2' => $sub['address_2'],
                         'city_id' => $sub['city_id']?:1,
-                        'state_id' => $sub['state_id']?:4,
-                        'pincode_id' => $sub['pincode_id']?:6,
-                        'country_id' => $sub['country_id']?:7,
+                        'state_id' => $sub['state_id']?:1,
+                        'pincode_id' => $sub['pincode_id']?:1,
+                        'country_id' => $sub['country_id']?:1,
                     ]);
                 } elseif ($sub['contact_detail_id'] != 0&&$sub['address_1']!="") {
                     $detail = ContactDetail::find($sub['contact_detail_id']);
@@ -620,6 +622,7 @@ class Upsert extends Component
 
     #endregion
 
+    #region[Route]
     public function getRoute(): void
     {
         $this->redirect(route('contacts'));
@@ -633,4 +636,5 @@ class Upsert extends Component
         $this->getCountryList();
         return view('livewire.master.contact.upsert');
     }
+    #endregion
 }

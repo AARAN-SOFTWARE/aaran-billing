@@ -82,6 +82,7 @@ class Index extends Component
             $this->common->vname = $style->vname;
             $this->common->active_id = $style->active_id;
             $this->desc = $style->desc;
+            $this->image = $style->image;
             $this->old_image = $style->image;
             return $style;
         }

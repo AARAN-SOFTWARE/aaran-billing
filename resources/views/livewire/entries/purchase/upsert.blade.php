@@ -17,8 +17,11 @@
                                           wire:keydown.arrow-down="incrementContact"
                                           wire:keydown.enter="enterContact"/>
                         @error('contact_id')
+
                         <span class="text-red-500">{{'The Party Name is Required.'}}</span>
+
                         @enderror
+
                         <x-dropdown.select>
                             @if($contactCollection)
                                 @forelse ($contactCollection as $i => $contact)
@@ -26,7 +29,9 @@
                                                        wire:click.prevent="setContact('{{$contact->vname}}','{{$contact->id}}')">
                                         {{ $contact->vname }}
                                     </x-dropdown.option>
+
                                 @empty
+
                                     <a href="{{route('contacts.upsert',['0'])}}" role="button"
                                        class="flex items-center justify-center bg-green-100 w-full h-8 text-green-600 font-bold hover:scale-105 text-center">
                                         Not found , Want to create new
@@ -34,11 +39,14 @@
                                 @endforelse
                             @endif
                         </x-dropdown.select>
+
                     </div>
                 </x-dropdown.wrapper>
 
-                <!-- Order No --------------------------------------------------------------------------------------------->
+                <!-- Order No ----------------------------------------------------------------------------------------->
+
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasOrder())
+
                     <x-dropdown.wrapper label="Order NO" type="orderTyped">
                         <div class="relative ">
                             <x-dropdown.input label="Order NO" id="order_name"
@@ -47,8 +55,11 @@
                                               wire:keydown.arrow-down="incrementOrder"
                                               wire:keydown.enter="enterOrder"/>
                             @error('order_id')
+
                             <span class="text-red-500">{{'The Order is Required.'}}</span>
+
                             @enderror
+
                             <x-dropdown.select>
                                 @if($orderCollection)
                                     @forelse ($orderCollection as $i => $order)
@@ -68,7 +79,7 @@
                 <x-input.floating wire:model="purchase_no" label="Purchase No"/>
             </div>
 
-            <!-- Top Right Area-------------------------------------------------------------------------------------------->
+            <!-- Top Right Area---------------------------------------------------------------------------------------->
 
             <div class="ml-5 mt-3 flex flex-col gap-5">
 
@@ -84,7 +95,7 @@
         <x-forms.section-border/>
 
 
-        <!-- Purchase Items  -------------------------------------------------------------------------------------------------->
+        <!-- Purchase Items  ------------------------------------------------------------------------------------------>
 
         <section class="text-xl font-bold text-orange-400">
             Purchase Item
@@ -92,7 +103,8 @@
 
         <section class="md:flex md:flex-row w-full gap-0.5">
 
-            <!--Product Name ---------------------------------------------------------------------------------------------->
+            <!--Product Name ------------------------------------------------------------------------------------------>
+
             <x-dropdown.wrapper label="Product Name" type="productTyped">
                 <div class="relative ">
                     <x-dropdown.input label="Product Name" id="product_name"
@@ -101,8 +113,11 @@
                                       wire:keydown.arrow-down="incrementProduct"
                                       wire:keydown.enter="enterProduct"/>
                     @error('product_id')
+
                     <span class="text-red-500">{{'The Product Name is Required.'}}</span>
+
                     @enderror
+
                     <x-dropdown.select>
                         @if($productCollection)
                             @forelse ($productCollection as $i => $product)
@@ -120,15 +135,17 @@
                 </div>
             </x-dropdown.wrapper>
 
-            <!--Product Description --------------------------------------------------------------------------------------->
+            <!--Product Description ----------------------------------------------------------------------------------->
 
             @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
                 <x-input.floating wire:model.live="description" label="Description"/>
             @endif
 
-            <!--Colour Name ----------------------------------------------------------------------------------------------->
+            <!--Colour Name ------------------------------------------------------------------------------------------->
+
             @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
                 <x-dropdown.wrapper label="Color Name" type="colourTyped">
+
                     <div class="relative ">
                         <x-dropdown.input label="Color Name" id="colour_name"
                                           wire:model.live="colour_name"
@@ -136,8 +153,10 @@
                                           wire:keydown.arrow-down="incrementColour"
                                           wire:keydown.enter="enterColour"/>
                         @error('color_id')
+
                         <span class="text-red-500">{{'The Color Name is Required.'}}</span>
                         @enderror
+
                         <x-dropdown.select>
                             @if($colourCollection)
                                 @forelse ($colourCollection as $i => $colour)
@@ -157,10 +176,13 @@
                 </x-dropdown.wrapper>
             @endif
 
-            <!--Size ------------------------------------------------------------------------------------------------------>
+            <!--Size -------------------------------------------------------------------------------------------------->
+
             @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
+
                 <x-dropdown.wrapper label="Size Name" type="sizeTyped">
                     <div class="relative ">
+
                         <x-dropdown.input label="Size Name" id="size_name"
                                           wire:model.live="size_name"
                                           wire:keydown.arrow-up="decrementSize"
@@ -169,11 +191,12 @@
                         @error('size_id')
                         <span class="text-red-500">{{'The Size name is Required.'}}</span>
                         @enderror
+
                         <x-dropdown.select>
                             @if($sizeCollection)
                                 @forelse ($sizeCollection as $i => $size)
                                     <x-dropdown.option highlight="{{$highlightSize === $i  }}"
-                                           wire:click.prevent="setSize('{{$size->vname}}','{{$size->id}}')">
+                                                       wire:click.prevent="setSize('{{$size->vname}}','{{$size->id}}')">
                                         {{ $size->vname }}
                                     </x-dropdown.option>
                                 @empty
@@ -188,22 +211,27 @@
                 </x-dropdown.wrapper>
             @endif
 
-            <!-- Quantity ------------------------------------------------------------------------------------------------->
+            <!-- Quantity --------------------------------------------------------------------------------------------->
 
             <x-input.floating wire:model.live="qty" label="Quantity" autocomplete="false"/>
+
             <x-input.floating wire:model.live="price" label="Price" autocomplete="false"/>
+
             <button wire:click="addItems"
                     class="px-3 justify-items-center py-1 md:px-3 bg-green-500 text-white font-semibold tracking-wider hover:bg-green-600 transition-colors duration-300 ease-out">
                 Add
             </button>
+
         </section>
 
-        <!-- Display Items ----------------------------------------------------------------------------------------------->
+        <!-- Display Items -------------------------------------------------------------------------------------------->
+
         <section>
             <div class="py-2 mt-5 overflow-x-auto">
-
                 <table class="overflow-x-auto md:w-full ">
+
                     <thead>
+
                     <tr class="h-8 text-xs bg-gray-100 border border-gray-300">
 
                         <th class="w-12 px-2 text-center border border-gray-300">#</th>
@@ -241,6 +269,7 @@
                     </thead>
 
                     <!--Display Table Items ------------------------------------------------------------------------------->
+
                     <tbody>
 
                     @if ($itemList)
@@ -280,31 +309,35 @@
 
                                 <td class="px-2 text-center border border-gray-300 cursor-pointer"
                                     wire:click.prevent="changeItems({{$index}})">{{$row['qty']}}</td>
+
                                 <td class="px-2 text-right border border-gray-300 cursor-pointer"
                                     wire:click.prevent="changeItems({{$index}})">{{$row['price']}}</td>
+
                                 <td class="px-2 text-right border border-gray-300 cursor-pointer"
                                     wire:click.prevent="changeItems({{$index}})">{{$row['taxable']}}</td>
+
                                 <td class="px-2 text-center border border-gray-300 cursor-pointer"
                                     wire:click.prevent="changeItems({{$index}})">{{$row['gst_percent']}}</td>
+
                                 <td class="px-2 text-right border border-gray-300 cursor-pointer"
                                     wire:click.prevent="changeItems({{$index}})">{{$row['gst_amount']}}</td>
+
                                 <td class="px-2 text-right border border-gray-300 cursor-pointer"
                                     wire:click.prevent="changeItems({{$index}})">{{$row['subtotal']}}</td>
-                                <td class="text-center border border-gray-300">
-{{--                                    <button wire:click.prevent="removeItems({{$index}})"--}}
-{{--                                            class="py-1.5 w-full text-red-500 items-center ">--}}
-{{--                                        <x-icons.icon icon="trash" class="block w-auto h-6"/>--}}
-{{--                                    </button>--}}
 
-                                    <x-button.delete wire:click.prevent="removeItems({{$index}})" />
+                                <td class="text-center border border-gray-300">
+                                    <x-button.delete wire:click.prevent="removeItems({{$index}})"/>
                                 </td>
+
                             </tr>
                         @endforeach
                     @endif
                     </tbody>
 
                     <!-- Table Bottom ------------------------------------------------------------------------------------->
+
                     <tfoot class="mt-2">
+
                     <tr class="h-8 text-sm border border-gray-400 bg-cyan-50">
 
                         @if(\Aaran\Aadmin\Src\SaleEntry::hasSize() or \Aaran\Aadmin\Src\SaleEntry::hasColour())
@@ -321,54 +354,72 @@
                         <td class="px-2 text-right border border-gray-300">{{$grandtotalBeforeRound}}</td>
                         <td class="px-2 text-center border border-gray-300">&nbsp;</td>
                     </tr>
+
                     </tfoot>
                 </table>
-
             </div>
-
         </section>
         <x-forms.section-border/>
 
         <section class="grid grid-cols-2 gap-2 ">
-            <!-- Bottom Left -------------------------------------------------------------------------------------------------->
+
+            <!-- Bottom Left ------------------------------------------------------------------------------------------>
+
             <section class="w-full">
                 <div class="w-3/4">
-                    <x-accordion.accordion :heading="'Additional Charges'">
-                        <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal" label="Additional" />
-                        <!-- Ledger ----------------------------------------------------------------------------------->
-                        <x-dropdown.wrapper label="Ledger" type="ledgerTyped">
-                            <div class="relative ">
-                                <x-dropdown.input label="Ledger" id="ledger_name"
-                                                  wire:model.live="ledger_name"
-                                                  wire:keydown.arrow-up="decrementLedger"
-                                                  wire:keydown.arrow-down="incrementLedger"
-                                                  wire:keydown.enter="enterLedger"/>
-                                @error('ledger_id')
-                                <span class="text-red-500">{{'The Ledger is Required.'}}</span>
-                                @enderror
-                                <x-dropdown.select>
-                                    @if($ledgerCollection)
-                                        @forelse ($ledgerCollection as $i => $ledger)
-                                            <x-dropdown.option highlight="{{$highlightLedger === $i  }}"
-                                                               wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')">
-                                                {{ $ledger->vname }}
-                                            </x-dropdown.option>
-                                        @empty
-                                            <button
-                                                wire:click.prevent="ledgerSave('{{$ledger_name}}')"
-                                                class="text-white bg-green-500 text-center w-full">
-                                                create
-                                            </button>
-                                        @endforelse
-                                    @endif
-                                </x-dropdown.select>
-                            </div>
-                        </x-dropdown.wrapper>
 
+                    <x-accordion.accordion :heading="'Additional Charges'">
+
+                        <div class="flex flex-col gap-y-3">
+
+                            <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"
+                                              label="Additional"/>
+
+                            <!-- Ledger ----------------------------------------------------------------------------------->
+
+                            <x-dropdown.wrapper label="Ledger" type="ledgerTyped">
+
+                                <div class="relative ">
+
+                                    <x-dropdown.input label="Ledger" id="ledger_name"
+                                                      wire:model.live="ledger_name"
+                                                      wire:keydown.arrow-up="decrementLedger"
+                                                      wire:keydown.arrow-down="incrementLedger"
+                                                      wire:keydown.enter="enterLedger"/>
+                                    @error('ledger_id')
+
+                                    <span class="text-red-500">{{'The Ledger is Required.'}}</span>
+
+                                    @enderror
+
+                                    <x-dropdown.select>
+                                        @if($ledgerCollection)
+                                            @forelse ($ledgerCollection as $i => $ledger)
+                                                <x-dropdown.option highlight="{{$highlightLedger === $i  }}"
+                                                                   wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')">
+                                                    {{ $ledger->vname }}
+                                                </x-dropdown.option>
+                                            @empty
+                                                <button
+                                                    wire:click.prevent="ledgerSave('{{$ledger_name}}')"
+                                                    class="text-white bg-green-500 text-center w-full">
+                                                    create
+                                                </button>
+                                            @endforelse
+                                        @endif
+                                    </x-dropdown.select>
+
+                                </div>
+                            </x-dropdown.wrapper>
+
+                        </div>
                     </x-accordion.accordion>
-                    <!-- Transport ---------------------------------------------------------------------------------------->
+
+                    <!-- Transport ------------------------------------------------------------------------------------>
+
                     <x-accordion.accordion :heading="'Others'">
                         <div class="mt-3 flex flex-col gap-2 ">
+
                             @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
                                 <x-dropdown.wrapper label="Transport" type="transportTyped">
                                     <div class="relative ">
@@ -380,6 +431,7 @@
                                         @error('transport_id')
                                         <span class="text-red-500">{{'The Transport is Required.'}}</span>
                                         @enderror
+
                                         <x-dropdown.select>
                                             @if($transportCollection)
                                                 @forelse ($transportCollection as $i => $transport)
@@ -388,6 +440,7 @@
                                                         {{ $transport->vname }}
                                                     </x-dropdown.option>
                                                 @empty
+
                                                     <button
                                                         wire:click.prevent="transportSave('{{$transport_name}}')"
                                                         class="text-white bg-green-500 text-center w-full">
@@ -401,17 +454,17 @@
                             @endif
 
                             @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())
-                                <x-input.floating  wire:model="destination" label="Destination"/>
+                                <x-input.floating wire:model="destination" label="Destination"/>
                             @endif
                             @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
-                                <x-input.floating wire:model="bundle" label="Bundle" />
+                                <x-input.floating wire:model="bundle" label="Bundle"/>
                             @endif
                         </div>
                     </x-accordion.accordion>
                 </div>
             </section>
 
-            <!-- Bottom Right  -------------------------------------------------------------------------------------------->
+            <!-- Bottom Right  ---------------------------------------------------------------------------------------->
 
             <section class="w-full">
                 <div class="w-3/4 mr-3 ml-auto ">
