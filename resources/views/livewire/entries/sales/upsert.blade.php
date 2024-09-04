@@ -206,7 +206,6 @@
 
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasDespatch())
                     <x-dropdown.wrapper label="Despatch No" type="despatchTyped">
-
                         <div class="relative ">
                             <x-dropdown.input
                                 label="Despatch No"
@@ -291,6 +290,55 @@
             @endif
 
             <!--No of rolls --------------------------------------------------------------------------------------->
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
+                <x-input.floating id="no_of_roll" wire:model.live="no_of_roll" label="No of Roll"/>
+            @endif
+
+            <!--Colour Name ----------------------------------------------------------------------------------------------->
+
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
+                <x-dropdown.wrapper label="Colour Name" type="colourTyped">
+                    <div class="relative ">
+
+
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
+                <x-input.floating id="dc" wire:model.live="dc_no" label="DC No."/>
+                1
+            @endif
+
+            <!--Product Name ---------------------------------------------------------------------------------------------->
+
+            <x-dropdown.wrapper label="Product Name" type="productTyped">
+                <div class="relative ">
+                    <x-dropdown.input label="Product Name" id="product_name"
+                                      wire:model.live="product_name"
+                                      wire:keydown.arrow-up="decrementProduct"
+                                      wire:keydown.arrow-down="incrementProduct"
+                                      wire:keydown.enter="enterProduct"/>
+                    <x-dropdown.select>
+                        @if($productCollection)
+                            @forelse ($productCollection as $i => $product)
+                                <x-dropdown.option highlight="{{$highlightProduct === $i  }}"
+                                                   wire:click.prevent="setProduct('{{$product->vname}}','{{$product->id}}','{{$product->gstpercent_id}}')">
+                                    {{ $product->vname }} &nbsp;-&nbsp; GST&nbsp;:
+                                    &nbsp;{{\Aaran\Entries\Models\Sale::commons($product->gstpercent_id)}}
+                                    %
+                                </x-dropdown.option>
+                            @empty
+                                @livewire('controls.model.product-model',[$product_name])
+                            @endforelse
+                        @endif
+                    </x-dropdown.select>
+                </div>
+            </x-dropdown.wrapper>
+
+            <!--Product Description --------------------------------------------------------------------------------------->
+
+            @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
+                <x-input.floating id="qty" wire:model.live="description" label="description"/>
+            @endif
+
+            <!--No of rolls --------------------------------------------------------------------------------------->
 
             @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
                 <x-input.floating id="no_of_roll" wire:model.live="no_of_roll" label="No of Roll"/>
@@ -302,6 +350,7 @@
 
                 <x-dropdown.wrapper label="Colour Name" type="colourTyped">
                     <div class="relative ">
+
 
                         <x-dropdown.input label="Colour Name" id="colour_name"
                                           wire:model.live="colour_name"
@@ -329,10 +378,8 @@
             @endif
 
             <!--Size ------------------------------------------------------------------------------------------------------>
-
             @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
                 <x-dropdown.wrapper label="Size Name" type="sizeTyped">
-
                     <div class="relative ">
 
                         <x-dropdown.input label="Size Name" id="size_name"
@@ -520,7 +567,7 @@
         </section>
         <x-forms.section-border/>
 
-        <section class="grid grid-cols-2 gap-2 ">
+        <section class="grid grid-cols-3 gap-2 ">
             <!-- Bottom Left -------------------------------------------------------------------------------------------------->
             <section class="w-full">
                 <div class="w-full">
@@ -535,6 +582,43 @@
                         <x-slot name="content">
 
                             <x-tabs.content>
+
+                                <div class="space-y-2">
+
+                                    <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"
+                                                      label="Addition"/>
+
+                                    <!-- Ledger ----------------------------------------------------------------------------------->
+                                    <x-dropdown.wrapper label="Ledger" type="ledgerTyped">
+                                        <div class="relative ">
+                                            <x-dropdown.input label="Ledger" id="ledger_name"
+                                                              wire:model.live="ledger_name"
+                                                              wire:keydown.arrow-up="decrementLedger"
+                                                              wire:keydown.arrow-down="incrementLedger"
+                                                              wire:keydown.enter="enterLedger"/>
+                                            @error('ledger_id')
+                                            <span class="text-red-500">{{'The Ledger is Required.'}}</span>
+                                            @enderror
+                                            <x-dropdown.select>
+                                                @if($ledgerCollection)
+                                                    @forelse ($ledgerCollection as $i => $ledger)
+                                                        <x-dropdown.option highlight="{{$highlightLedger === $i  }}"
+                                                                           wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')">
+                                                            {{ $ledger->vname }}
+                                                        </x-dropdown.option>
+                                                    @empty
+                                                        <button
+                                                            wire:click.prevent="ledgerSave('{{$ledger_name}}')"
+                                                            class="text-white bg-green-500 text-center w-full">
+                                                            create
+                                                        </button>
+                                                    @endforelse
+                                                @endif
+                                            </x-dropdown.select>
+                                        </div>
+                                    </x-dropdown.wrapper>
+                                </div>
+
 
                                 <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"
                                                   label="Addition"/>
@@ -568,6 +652,7 @@
                                         </x-dropdown.select>
                                     </div>
                                 </x-dropdown.wrapper>
+
                             </x-tabs.content>
 
                             <x-tabs.content>
@@ -615,17 +700,17 @@
                             </x-tabs.content>
 
                             <x-tabs.content>
-                                <div class="flex  gap-3">
-                                    <div class="flex flex-col gap-2">
+                                <div class="flex gap-3 w-full">
+                                    <div class="flex flex-col gap-2 w-full">
 
-                                        <x-input.floating wire:model="distance" label="Distance"/>
                                         <x-input.floating wire:model="Transid" label="Transport Id"/>
                                         <x-input.floating wire:model="Transname" label="Transport Name"/>
                                         <x-input.floating wire:model="Transdocno" label="Transport No"/>
+                                        <x-input.model-date wire:model="TransdocDt" label="Transport Date"/>
 
                                     </div>
-                                    <div class="flex flex-col gap-2">
-                                        <x-input.model-date wire:model="TransdocDt" label="Transport Date"/>
+                                    <div class="flex flex-col gap-2 w-full">
+                                        <x-input.floating wire:model="distance" label="Distance"/>
                                         <x-input.floating wire:model="Vehno" label="Vechile No"/>
                                         <x-input.model-select wire:model="Vehtype" label="Vechile Type">
                                             <option value="">Choose..</option>
@@ -647,6 +732,18 @@
                         </x-slot>
                     </x-tabs.tab-panel>
                 </div>
+            </section>
+
+            <section class="w-full mx-2">
+                @if(isset($e_invoiceDetails->id))
+                    <div class="flex flex-col items-center justify-center ">
+                        <img class="w-[200px]" src="{{\App\Helper\qrcoder::generate($e_invoiceDetails->signed_qrcode,22)}}" alt="{{$e_invoiceDetails->signed_qrcode}}">
+                        <div>Irn No : {{$e_invoiceDetails->irn}}</div>
+                        @if(isset($e_wayDetails))
+                            <div>E-way Bill NO: {{$e_wayDetails->ewbno}}</div>
+                        @endif
+                    </div>
+                @endif
             </section>
 
             <!-- Bottom Right  -------------------------------------------------------------------------------------------->

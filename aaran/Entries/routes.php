@@ -7,6 +7,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/sales', App\Livewire\Entries\Sales\Index::class)->name('sales');
     Route::get('/sales/{id}/upsert', App\Livewire\Entries\Sales\Upsert::class)->name('sales.upsert');
+    Route::get('/sales/{id}/eway', App\Livewire\Entries\Sales\EwayBill::class)->name('sales.eway');
+    Route::get('/sales/{id}/einvoice', App\Livewire\Entries\Sales\Einvoice::class)->name('sales.einvoice');
     Route::get('/sales/{id}/print', App\Http\Controllers\Entries\Sales\InvoiceController::class)->name('sales.print');
     Route::get('/sales/{id}/demo', App\Http\Controllers\Entries\Sales\DemoController::class)->name('sales.demo');
 
