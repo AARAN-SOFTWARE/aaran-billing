@@ -1,40 +1,59 @@
 <div class="mt-10">
     <div class="relative">
+
         <div style="background-image: url('/../../../images/wp1.webp')"
-             class="h-screen bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
+             class="lg:h-screen h-[35rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
-        <div class="w-full absolute top-24 py-6">
-            <div class="w-6/12 mx-auto flex-col flex gap-y-7 text-white font-roboto tracking-wider">
-                <div class="text-2xl text-center w-5/6 mx-auto animate__animated wow animate__backInLeft"
+
+        <div class="w-full absolute lg:top-24 top-2 lg:py-6 py-2.5 ">
+
+            <div class="w-6/12 mx-auto flex-col flex lg:gap-y-7 gap-y-3 text-white font-roboto tracking-wider">
+
+                <div class="lg:text-2xl text-xs text-center w-5/6 mx-auto animate__animated wow animate__backInLeft"
                      data-wow-duration="2s">
                     Ready to Transform Your Business? Take the First Step Today!
                 </div>
-                <div class="grid grid-cols-3 gap-3 animate__animated wow animate__bounceInUp" data-wow-duration="2s">
+
+                <div
+                    class="grid lg:grid-cols-3 grid-cols-1 gap-3 lg:text-xl text-xs animate__animated wow animate__bounceInUp"
+                    data-wow-duration="2s">
+
                     <input type="text" placeholder="Name*"
                            class="py-2 bg-transparent border border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
+
                     <input type="text" placeholder="E-mail*"
                            class="py-2 bg-transparent border border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
+
                     <button class="border border-white py-2 hover:bg-[#3F5AF3]/60 duration-700">
                         Subscribe
                     </button>
+
                 </div>
-                <div class="text-xl text-center text-gray-300 animate__animated wow animate__backInRight"
-                     data-wow-duration="2s">
+
+                <div
+                    class="text-xl text-center text-gray-300 md:block hidden animate__animated wow animate__backInRight"
+                    data-wow-duration="2s">
                     Stay updated and compliant with the online GST software for accounting,
                     Manage your finances, and file GST online for your business—all from one platform.
                 </div>
+
             </div>
+
         </div>
 
         <div class="absolute bottom-0">
             <div
                 class="w-screen h-[20rem] bg-[#F1F1F1] flex-col flex justify-evenly items-center font-roboto tracking-wider">
+
                 <div
-                    class="w-6/12 mx-auto text-center text-2xl text-gray-600 border-b border-black pb-6 animate__animated wow animate__bounceInDown"
+                    class="lg:w-6/12 mx-auto text-center lg:text-2xl text-sm text-gray-600 border-b border-black lg:pb-6 pb-2.5 animate__animated wow animate__bounceInDown"
                     data-wow-duration="2s">Trusted By The Best Companies all around global
                 </div>
-                <div class="flex grayscale-0 w-6/12 mx-auto justify-between animate__animated wow animate__bounceInUp"
-                     data-wow-duration="2s">
+
+                <div
+                    class="md:flex grid grid-cols-4 gap-y-4 grayscale-0 lg:w-6/12 mx-auto justify-between animate__animated wow animate__bounceInUp"
+                    data-wow-duration="2s">
+
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -46,6 +65,7 @@
                         </svg>
                         <span class="text-xs">Tagged</span>
                     </div>
+
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -57,6 +77,7 @@
                         </svg>
                         <span class="text-xs">BeReal</span>
                     </div>
+
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -72,6 +93,7 @@
 
                         <span class="text-xs">BigCommerce</span>
                     </div>
+
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_897_5214)">
@@ -88,6 +110,7 @@
                         </svg>
                         <span class="text-xs">CodePen</span>
                     </div>
+
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="5" y="5" width="80" height="80" rx="8" fill="#000008"/>
@@ -100,6 +123,7 @@
                         </svg>
                         <span class="text-xs">Editor X</span>
                     </div>
+
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="5" y="5" width="80" height="80" rx="8" fill="#000008"/>
@@ -110,6 +134,7 @@
 
                         <span class="text-xs">Framer</span>
                     </div>
+
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -118,6 +143,7 @@
                         </svg>
                         <span class="text-xs">InterCom</span>
                     </div>
+
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -133,6 +159,7 @@
             </div>
         </div>
     </div>
+
     <div>
     </div>
 

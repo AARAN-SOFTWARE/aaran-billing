@@ -1,20 +1,27 @@
 <div class="font-roboto tracking-wider">
+
     <div class="relative font-roboto tracking-wider">
+
         <div style="background-image: url('/../../../images/wp1.webp')"
              class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
+
         <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
-            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4 animate__animated wow bounceInDown"
+
+            <div class="z-20 w-6/12 mx-auto lg:text-8xl font-semibold pb-4 animate__animated wow bounceInDown"
                  data-wow-duration="3s">About us
             </div>
+
             <span
                 class="z-10 absolute top-6 py-5 px-[180px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
                 animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
+
             <div class="w-6/12 mx-auto text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
                 We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>
         </div>
+
     </div>
 
     <div class=" grid grid-cols-2 gap-16 h-[48rem] py-28 font-roboto tracking-wider px-16">
