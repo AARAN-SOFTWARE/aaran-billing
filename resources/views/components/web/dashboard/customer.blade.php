@@ -1,4 +1,4 @@
-<div class="w-full h-[36rem] bg-white rounded-md">
+<div class="sm:w-3/12 w-full h-[36rem] bg-white rounded-md ">
         <div class="h-[4rem] w-full py-3 border-b border-gray-200 inline-flex items-center justify-between px-4">
                          <span class="inline-flex items-center gap-2">
                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -18,7 +18,7 @@
                 </svg>
             </a>
         </div>
-        <div class="px-4 py-2 space-y-5 h-[32rem] overflow-y-auto ">
+        <div class=" py-2 space-y-5 h-[32rem] overflow-y-auto px-4">
             @for($i=1; $i<=16; $i++)
                 <div class="flex justify-between items-center">
                     <div class="inline-flex items-center gap-3">

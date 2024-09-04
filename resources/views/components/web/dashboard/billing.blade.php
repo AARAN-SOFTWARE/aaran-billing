@@ -1,4 +1,4 @@
-<div class="bg-white  rounded-lg flex-col flex h-[36rem]">
+<div class="sm:w-4/12 w-full bg-white  rounded-lg flex-col flex h-[36rem]">
     <div class="w-full h-[4rem] py-3 border-b border-gray-200 inline-flex items-center justify-between px-8">
                          <span class="inline-flex items-center gap-2">
                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-cyan-500">

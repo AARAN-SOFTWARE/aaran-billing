@@ -1,5 +1,5 @@
-<div class="bg-white border border-gray-200 p-6 rounded-lg lg:col-span-2">
-    <div class="flex justify-between mb-4 items-start">
+<div class="sm:w-5/12 w-full bg-white border border-gray-200 p-5 rounded-lg">
+    <div class="flex justify-between items-start">
         <div class="font-medium">Statistics</div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
@@ -31,4 +31,7 @@
     <div>
         <canvas id="order-chart"></canvas>
     </div>
+    <x-web.dashboard.style/>
+    <x-web.dashboard.script/>
 </div>
+
