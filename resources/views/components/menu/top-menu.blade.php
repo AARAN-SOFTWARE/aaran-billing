@@ -18,17 +18,13 @@
 
             </div>
             <!-- Page Heading -->
-
             <div
                 class=" font-semibold sm:text-xl text-md text-gray-800 leading-tight sm:px-0 px-2 self-start">
-
                 {{$slot}}
             </div>
         </div>
 
         <div class="w-5/12 flex sm:flex-row flex-col sm:justify-end justify-evenly items-center space-y-1">
-
-
             <div class="flex max-w-max justify-center items-center">
                 {{--                @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3|| session()->get('role_id')==4 )--}}
                 <livewire:default-company.index/>

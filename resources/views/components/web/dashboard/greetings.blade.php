@@ -1,5 +1,5 @@
 
-<div class="sm:w-3/12 w-full h-[20rem] rounded-lg">
+<div class="sm:w-3/12 w-full h-[20rem] rounded-lg bg-gray-50">
     @if (App\Helper\Core::greetings() == 'Good morning')
         <div class="relative h-full">
             <img src="../../../../images/wall1.webp" alt="" class="w-full h-full brightness-50 rounded-lg">
