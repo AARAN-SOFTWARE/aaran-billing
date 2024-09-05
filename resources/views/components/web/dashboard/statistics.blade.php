@@ -1,4 +1,4 @@
-<div class="sm:w-5/12 w-full bg-white border border-gray-200 p-5 rounded-lg">
+<div class="sm:w-5/12 w-auto hover:shadow-md bg-white p-5 rounded-lg">
     <div class="flex justify-between items-start">
         <div class="font-medium">Statistics</div>
     </div>

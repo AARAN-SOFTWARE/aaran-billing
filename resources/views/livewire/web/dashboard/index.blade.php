@@ -10,7 +10,7 @@
         <!-- Col 2 -->
         <div class=" bg-[#F8F8FF] gap-10 flex sm:flex-row flex-col tracking-wider rounded-lg ">
             <x-web.dashboard.customer/>
-            <x-web.dashboard.billing/>
+            <x-web.dashboard.entries/>
             <x-web.dashboard.statistics />
         </div>
     </div>

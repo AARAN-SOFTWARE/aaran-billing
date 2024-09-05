@@ -1,11 +1,11 @@
 @props([
     'id',
-    'maxWidth' => '2xl'
+    'maxWidth' => '2xl',
 ])
 
 <form wire:submit.prevent="save">
     <div class="w-full h-auto">
-        <x-jet.modal wire:model.defer="showEditModal" maxWidth="{{{$maxWidth}}}">
+        <x-jet.modal wire:model.defer="showEditModal" maxWidth="{{{$maxWidth}}}" >
             <div class="sm:px-6 px-2 pt-4">
                 <div class="text-lg">
                     {{$id === "" ? 'New Entry' : 'Edit Entry'}}

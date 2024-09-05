@@ -1,5 +1,4 @@
-
-<div class="sm:w-3/12 w-full h-[20rem] rounded-lg bg-gray-50">
+<div class="sm:w-3/12 w-auto h-[20rem] rounded-lg bg-gray-50 hover:shadow-md">
     @if (App\Helper\Core::greetings() == 'Good morning')
         <div class="relative h-full">
             <img src="../../../../images/wall1.webp" alt="" class="w-full h-full brightness-50 rounded-lg">

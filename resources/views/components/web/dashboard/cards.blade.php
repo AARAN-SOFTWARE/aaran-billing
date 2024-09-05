@@ -1,6 +1,6 @@
-<div class="sm:w-5/12 w-full sm:h-[20rem] h-auto flex flex-col gap-5">
-    <div class="flex sm:flex-row flex-col h-1/2 sm:gap-5 gap-10">
-        <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#845ADF] ">
+<div class="sm:w-5/12 sm:h-[20rem] h-auto flex flex-col gap-5">
+    <div class="w-full flex sm:flex-row flex-col h-1/2 sm:gap-5 gap-10">
+        <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow-md border-t-2 border-[#845ADF] ">
             <div class="flex items-center justify-between py-5 px-6">
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#23B7E5]">
+        <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow-md border-t-2 border-[#23B7E5]">
             <div class="flex items-center justify-between py-5 px-6">
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
@@ -99,7 +99,7 @@
         </div>
     </div>
     <div class="flex sm:flex-row flex-col h-1/2 gap-5">
-        <div class="sm:w-1/2 w-full  bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#E6533C]">
+        <div class="sm:w-1/2 w-full  bg-white rounded-lg hover:bg-white hover:shadow-md border-t-2 border-[#E6533C]">
             <div class="flex items-center justify-between py-5 px-6">
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
@@ -164,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow border-t-2 border-[#26BF94]">
+        <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow-md border-t-2 border-[#26BF94]">
             <div class="flex items-center justify-between py-5 px-6">
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
