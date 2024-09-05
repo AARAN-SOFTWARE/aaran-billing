@@ -13,6 +13,6 @@
             @break
 
         @default
-            Default case...
+            CODEXSUN
     @endswitch
     </span>

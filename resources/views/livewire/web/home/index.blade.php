@@ -9,8 +9,4 @@
     <x-web.home.footer-address />
     <x-web.home.copyright />
 
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js">
-        new WOW().init();
-    </script>
 </div>
