@@ -1,15 +1,5 @@
-{{--<div class="w-full h-40 pattern_1 bg-blue-50">--}}
-{{--    <div class="flex-col flex relative py-12 font-roboto tracking-wider">--}}
-{{--        <div class=" ml-5 font-semibold text-2xl text-black">--}}
-{{--            <span class="w-full">{{ App\Helper\Core::greetings() }}, </span>&nbsp;<span>{{Auth::user()->name}}</span>&nbsp;&nbsp;<span>👋</span>--}}
-{{--        </div>--}}
-{{--        <div>--}}
-{{--            <span class="text-base font-sans text-blue-800 ml-5">{!! App\Helper\Slogan::getRandomQuote() !!}</span>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
 
-<div class="w-full h-[20rem] rounded-lg">
+<div class="sm:w-3/12 w-full h-[20rem] rounded-lg">
     @if (App\Helper\Core::greetings() == 'Good morning')
         <div class="relative h-full">
             <img src="../../../../images/wall1.webp" alt="" class="w-full h-full brightness-50 rounded-lg">

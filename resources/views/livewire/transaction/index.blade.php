@@ -136,11 +136,11 @@
                 </x-radio.btn>
             </div>
 
-            <div class="flex gap-x-5 gap-y-3">
+            <div class="flex sm:flex-row flex-col gap-x-5 gap-y-3">
 
                 <!-- Left Area  --------------------------------------------------------------------------------------->
 
-                <div class="w-1/2 space-y-3">
+                <div class="sm:w-1/2 w-full space-y-3">
 
                     <!-- Party Name ----------------------------------------------------------------------------------->
 
@@ -180,7 +180,7 @@
 
                 <!-- Right Area  -------------------------------------------------------------------------------------->
 
-                <div class="w-1/2 space-y-3">
+                <div class="sm:w-1/2 w-full space-y-3">
 
                     <x-tabs.tab-panel>
 

@@ -1,4 +1,4 @@
-<div class=" h-[20rem] bg-white p-5 rounded-lg ">
+<div class="sm:w-4/12 w-full sm:h-[20rem] h-auto bg-white p-5 rounded-lg border-t-2 border-[#23B7E5] ">
     <div class="flex justify-between">
         <div class="space-y-2">
             <div class="flex-col gap-1 font-semibold">
@@ -38,36 +38,35 @@
         </div>
     </div>
 
-    <div class="flex gap-1 relative">
-        <div class="flex-col flex justify-between py-4 text-gray-400">
-            <span class="text-[9px]">200K</span>
-            <span class="text-[9px]">100K</span>
-            <span class="text-[9px]">50K</span>
-            <span class="text-[9px]">10K</span>
-            <span class="text-[9px]">2K</span>
+    <div class="flex items-center gap-1 relative">
+        <div class="flex-col flex justify-between py-4 text-gray-400 sm:space-y-0 space-y-2">
+            <span class="sm:text-[9px] text-[8px]">200K</span>
+            <span class="sm:text-[9px] text-[8px]">100K</span>
+            <span class="sm:text-[9px] text-[8px]">50K</span>
+            <span class="sm:text-[9px] text-[8px]">10K</span>
+            <span class="sm:text-[9px] text-[8px]">2K</span>
         </div>
         <img
             src="data:image/svg+xml;utf8,%3Csvg id=%22chart%22 width=%22100%25%22 height=%22auto%22 viewBox=%220 0 2000 667%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 %3E %3Cpath d=%22 M0%2C667 h80 v-523.2730176240119 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M100%2C667 h80 v-241.022970461162 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M200%2C667 h80 v-526.5725545025396 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M300%2C667 h80 v-459.7107594359473 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M400%2C667 h80 v-318.3340877964327 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M500%2C667 h80 v-468.37983435390487 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M600%2C667 h80 v-460.80198400409165 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M700%2C667 h80 v-180.09158234088017 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M800%2C667 h80 v-353.2611634122885 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M900%2C667 h80 v-467.71473829037427 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1000%2C667 h80 v-430.9692439965401 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1100%2C667 h80 v-259.7537390462223 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1200%2C667 h80 v-338.244489854812 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1300%2C667 h80 v-577.7198457692656 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1400%2C667 h80 v-590.7733580030005 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1500%2C667 h80 v-277.8159952036458 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1600%2C667 h80 v-277.28917947846827 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1700%2C667 h80 v-400.34606977084474 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1800%2C667 h80 v-480.6682577395727 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1900%2C667 h80 v-392.18952336316966 q0%2C-4 -4%2C-4 h-72 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3C%2Fsvg%3E"
             alt="" class="w-full">
-        <div class="absolute w-16 h-12 bg-gray"></div>
+        <div class="absolute w-16 sm:h-12 h-16 bg-gray"></div>
     </div>
-    <divc class="flex items-center justify-between py-1 text-gray-400">
-                    <span class="text-[9px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="currentColor" class="size-4">
-                          <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>
-                        </svg>
-
-                    </span>
-        <span class="text-[9px]">APL</span>
-        <span class="text-[9px]">MAY</span>
-        <span class="text-[9px]">JUN</span>
-        <span class="text-[9px]">JUL</span>
-        <span class="text-[9px]">AUG</span>
-        <span class="text-[9px]">SEP</span>
-        <span class="text-[9px]">OCT</span>
-        <span class="text-[9px]">NOV</span>
-        <span class="text-[9px]">DEC</span>
+    <divc class="flex items-center justify-between sm:py-1 py-0 text-gray-400">
+        <span class="sm:text-[9px] text-[8px]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="size-4">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>
+            </svg>
+        </span>
+        <span class="sm:text-[9px] text-[8px]">APL</span>
+        <span class="sm:text-[9px] text-[8px]">MAY</span>
+        <span class="sm:text-[9px] text-[8px]">JUN</span>
+        <span class="sm:text-[9px] text-[8px]">JUL</span>
+        <span class="sm:text-[9px] text-[8px]">AUG</span>
+        <span class="sm:text-[9px] text-[8px]">SEP</span>
+        <span class="sm:text-[9px] text-[8px]">OCT</span>
+        <span class="sm:text-[9px] text-[8px]">NOV</span>
+        <span class="sm:text-[9px] text-[8px]">DEC</span>
     </divc>
 </div>

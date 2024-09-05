@@ -3,9 +3,9 @@
 
     <x-forms.m-panel>
 
-        <section class="grid grid-cols-2">
+        <section class="grid sm:grid-cols-2 grid-cols-1 sm:space-y-0 space-y-5 sm:gap-5 py-5">
 
-            <div class="mt-3 flex flex-col gap-5 ">
+            <div class="flex flex-col gap-5 ">
 
                 <!-- Party Name --------------------------------------------------------------------------------------->
 
@@ -81,7 +81,7 @@
 
             <!-- Top Right Area---------------------------------------------------------------------------------------->
 
-            <div class="ml-5 mt-3 flex flex-col gap-5">
+            <div class="flex flex-col gap-5">
 
                 <x-input.floating wire:model="entry_no" label="Entry No"/>
                 <x-input.floating wire:model="purchase_date" label="Purchase Date" type="date"/>
@@ -101,7 +101,7 @@
             Purchase Item
         </section>
 
-        <section class="md:flex md:flex-row w-full gap-0.5">
+        <section class="flex sm:flex-row flex-col w-full sm:gap-0.5 gap-y-3">
 
             <!--Product Name ------------------------------------------------------------------------------------------>
 
@@ -218,8 +218,15 @@
             <x-input.floating wire:model.live="price" label="Price" autocomplete="false"/>
 
             <button wire:click="addItems"
-                    class="px-3 justify-items-center py-1 md:px-3 bg-green-500 text-white font-semibold tracking-wider hover:bg-green-600 transition-colors duration-300 ease-out">
-                Add
+                    class="px-8 py-2.5 relative rounded group overflow-hidden font-medium bg-emerald-500 inline-block text-center">
+                <span
+                    class="absolute top-0 left-0 flex h-full w-0 mr-0 transition-all
+                    duration-500 ease-out transform translate-x-0 bg-blue-600 group-hover:w-full opacity-90"></span>
+                <span class="relative block group-hover:hidden group-hover:text-white text-white right-3 font-semibold">Add</span>
+                <span
+                    class="relative hidden group-hover:block group-hover:text-white text-green-800 sm:right-2.5 sm:-left-3 left-24">
+                  <x-icons.add/>
+                </span>
             </button>
 
         </section>
@@ -361,140 +368,225 @@
         </section>
         <x-forms.section-border/>
 
-        <section class="grid grid-cols-2 gap-2 ">
+
+        <section class="grid sm:grid-cols-2 grid-cols-1 sm:gap-5 ">
 
             <!-- Bottom Left ------------------------------------------------------------------------------------------>
 
             <section class="w-full">
-                <div class="w-3/4">
+                <div class="w-full">
+                    <x-tabs.tab-panel>
+                        <x-slot name="tabs">
+                            <x-tabs.tab>Additional Charges</x-tabs.tab>
+                            <x-tabs.tab>Others</x-tabs.tab>
+                        </x-slot>
+                        <x-slot name="content">
+                            <x-tabs.content>
+                                <div class="space-y-2 w-full">
+                                    <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"
+                                                      label="Addition"/>
 
-                    <x-accordion.accordion :heading="'Additional Charges'">
-
-                        <div class="flex flex-col gap-y-3">
-
-                            <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"
-                                              label="Additional"/>
-
-                            <!-- Ledger ----------------------------------------------------------------------------------->
-
-                            <x-dropdown.wrapper label="Ledger" type="ledgerTyped">
-
-                                <div class="relative ">
-
-                                    <x-dropdown.input label="Ledger" id="ledger_name"
-                                                      wire:model.live="ledger_name"
-                                                      wire:keydown.arrow-up="decrementLedger"
-                                                      wire:keydown.arrow-down="incrementLedger"
-                                                      wire:keydown.enter="enterLedger"/>
-                                    @error('ledger_id')
-
-                                    <span class="text-red-500">{{'The Ledger is Required.'}}</span>
-
-                                    @enderror
-
-                                    <x-dropdown.select>
-                                        @if($ledgerCollection)
-                                            @forelse ($ledgerCollection as $i => $ledger)
-                                                <x-dropdown.option highlight="{{$highlightLedger === $i  }}"
-                                                                   wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')">
-                                                    {{ $ledger->vname }}
-                                                </x-dropdown.option>
-                                            @empty
-                                                <button
-                                                    wire:click.prevent="ledgerSave('{{$ledger_name}}')"
-                                                    class="text-white bg-green-500 text-center w-full">
-                                                    create
-                                                </button>
-                                            @endforelse
-                                        @endif
-                                    </x-dropdown.select>
-
+                                    <!-- Ledger ----------------------------------------------------------------------------------->
+                                    <x-dropdown.wrapper label="Ledger" type="ledgerTyped">
+                                        <div class="relative ">
+                                            <x-dropdown.input label="Ledger" id="ledger_name"
+                                                              wire:model.live="ledger_name"
+                                                              wire:keydown.arrow-up="decrementLedger"
+                                                              wire:keydown.arrow-down="incrementLedger"
+                                                              wire:keydown.enter="enterLedger"/>
+                                            @error('ledger_id')
+                                            <span class="text-red-500">{{'The Ledger is Required.'}}</span>
+                                            @enderror
+                                            <x-dropdown.select>
+                                                @if($ledgerCollection)
+                                                    @forelse ($ledgerCollection as $i => $ledger)
+                                                        <x-dropdown.option highlight="{{$highlightLedger === $i  }}"
+                                                                           wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')">
+                                                            {{ $ledger->vname }}
+                                                        </x-dropdown.option>
+                                                    @empty
+                                                        <button
+                                                            wire:click.prevent="ledgerSave('{{$ledger_name}}')"
+                                                            class="text-white bg-green-500 text-center w-full">
+                                                            create
+                                                        </button>
+                                                    @endforelse
+                                                @endif
+                                            </x-dropdown.select>
+                                        </div>
+                                    </x-dropdown.wrapper>
                                 </div>
-                            </x-dropdown.wrapper>
+                            </x-tabs.content>
 
-                        </div>
-                    </x-accordion.accordion>
+                            <x-tabs.content>
+                                <div class="mt-3 flex flex-col gap-2 ">
 
-                    <!-- Transport ------------------------------------------------------------------------------------>
+                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
+                                        <x-dropdown.wrapper label="Transport" type="transportTyped">
+                                            <div class="relative ">
+                                                <x-dropdown.input label="Transport" id="transport_name"
+                                                                  wire:model.live="transport_name"
+                                                                  wire:keydown.arrow-up="decrementTransport"
+                                                                  wire:keydown.arrow-down="incrementTransport"
+                                                                  wire:keydown.enter="enterTransport"/>
+                                                @error('transport_id')
+                                                <span class="text-red-500">{{'The Transport is Required.'}}</span>
+                                                @enderror
+                                                <x-dropdown.select>
+                                                    @if($transportCollection)
+                                                        @forelse ($transportCollection as $i => $transport)
+                                                            <x-dropdown.option
+                                                                highlight="{{$highlightTransport === $i  }}"
+                                                                wire:click.prevent="setTransport('{{$transport->vname}}','{{$transport->id}}')">
+                                                                {{ $transport->vname }}
+                                                            </x-dropdown.option>
+                                                        @empty
+                                                            <button
+                                                                wire:click.prevent="transportSave('{{$transport_name}}')"
+                                                                class="text-white bg-green-500 text-center w-full">
+                                                                create
+                                                            </button>
+                                                        @endforelse
+                                                    @endif
+                                                </x-dropdown.select>
+                                            </div>
+                                        </x-dropdown.wrapper>
+                                    @endif
 
-                    <x-accordion.accordion :heading="'Others'">
-                        <div class="mt-3 flex flex-col gap-2 ">
-
-                            @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
-                                <x-dropdown.wrapper label="Transport" type="transportTyped">
-                                    <div class="relative ">
-                                        <x-dropdown.input label="Transport" id="transport_name"
-                                                          wire:model.live="transport_name"
-                                                          wire:keydown.arrow-up="decrementTransport"
-                                                          wire:keydown.arrow-down="incrementTransport"
-                                                          wire:keydown.enter="enterTransport"/>
-                                        @error('transport_id')
-                                        <span class="text-red-500">{{'The Transport is Required.'}}</span>
-                                        @enderror
-
-                                        <x-dropdown.select>
-                                            @if($transportCollection)
-                                                @forelse ($transportCollection as $i => $transport)
-                                                    <x-dropdown.option highlight="{{$highlightTransport === $i  }}"
-                                                                       wire:click.prevent="setTransport('{{$transport->vname}}','{{$transport->id}}')">
-                                                        {{ $transport->vname }}
-                                                    </x-dropdown.option>
-                                                @empty
-
-                                                    <button
-                                                        wire:click.prevent="transportSave('{{$transport_name}}')"
-                                                        class="text-white bg-green-500 text-center w-full">
-                                                        create
-                                                    </button>
-                                                @endforelse
-                                            @endif
-                                        </x-dropdown.select>
-                                    </div>
-                                </x-dropdown.wrapper>
-                            @endif
-
-                            @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())
-                                <x-input.floating wire:model="destination" label="Destination"/>
-                            @endif
-                            @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
-                                <x-input.floating wire:model="bundle" label="Bundle"/>
-                            @endif
-                        </div>
-                    </x-accordion.accordion>
+                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())
+                                        <x-input.floating wire:model="destination" label="Destination"/>
+                                    @endif
+                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
+                                        <x-input.floating wire:model="bundle" label="Bundle"/>
+                                    @endif
+                                </div>
+                            </x-tabs.content>
+                        </x-slot>
+                    </x-tabs.tab-panel>
                 </div>
+                {{--                <div class="w-3/4">--}}
+
+                {{--                    <x-accordion.accordion :heading="'Additional Charges'">--}}
+
+                {{--                        <div class="flex flex-col gap-y-3">--}}
+
+                {{--                            <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"--}}
+                {{--                                              label="Additional"/>--}}
+
+                {{--                            <!-- Ledger ----------------------------------------------------------------------------------->--}}
+
+                {{--                            <x-dropdown.wrapper label="Ledger" type="ledgerTyped">--}}
+
+                {{--                                <div class="relative ">--}}
+
+                {{--                                    <x-dropdown.input label="Ledger" id="ledger_name"--}}
+                {{--                                                      wire:model.live="ledger_name"--}}
+                {{--                                                      wire:keydown.arrow-up="decrementLedger"--}}
+                {{--                                                      wire:keydown.arrow-down="incrementLedger"--}}
+                {{--                                                      wire:keydown.enter="enterLedger"/>--}}
+                {{--                                    @error('ledger_id')--}}
+
+                {{--                                    <span class="text-red-500">{{'The Ledger is Required.'}}</span>--}}
+
+                {{--                                    @enderror--}}
+
+                {{--                                    <x-dropdown.select>--}}
+                {{--                                        @if($ledgerCollection)--}}
+                {{--                                            @forelse ($ledgerCollection as $i => $ledger)--}}
+                {{--                                                <x-dropdown.option highlight="{{$highlightLedger === $i  }}"--}}
+                {{--                                                                   wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')">--}}
+                {{--                                                    {{ $ledger->vname }}--}}
+                {{--                                                </x-dropdown.option>--}}
+                {{--                                            @empty--}}
+                {{--                                                <button--}}
+                {{--                                                    wire:click.prevent="ledgerSave('{{$ledger_name}}')"--}}
+                {{--                                                    class="text-white bg-green-500 text-center w-full">--}}
+                {{--                                                    create--}}
+                {{--                                                </button>--}}
+                {{--                                            @endforelse--}}
+                {{--                                        @endif--}}
+                {{--                                    </x-dropdown.select>--}}
+
+                {{--                                </div>--}}
+                {{--                            </x-dropdown.wrapper>--}}
+
+                {{--                        </div>--}}
+                {{--                    </x-accordion.accordion>--}}
+
+                {{--                    <!-- Transport ------------------------------------------------------------------------------------>--}}
+
+                {{--                    <x-accordion.accordion :heading="'Others'">--}}
+                {{--                        <div class="mt-3 flex flex-col gap-2 ">--}}
+
+                {{--                            @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())--}}
+                {{--                                <x-dropdown.wrapper label="Transport" type="transportTyped">--}}
+                {{--                                    <div class="relative ">--}}
+                {{--                                        <x-dropdown.input label="Transport" id="transport_name"--}}
+                {{--                                                          wire:model.live="transport_name"--}}
+                {{--                                                          wire:keydown.arrow-up="decrementTransport"--}}
+                {{--                                                          wire:keydown.arrow-down="incrementTransport"--}}
+                {{--                                                          wire:keydown.enter="enterTransport"/>--}}
+                {{--                                        @error('transport_id')--}}
+                {{--                                        <span class="text-red-500">{{'The Transport is Required.'}}</span>--}}
+                {{--                                        @enderror--}}
+
+                {{--                                        <x-dropdown.select>--}}
+                {{--                                            @if($transportCollection)--}}
+                {{--                                                @forelse ($transportCollection as $i => $transport)--}}
+                {{--                                                    <x-dropdown.option highlight="{{$highlightTransport === $i  }}"--}}
+                {{--                                                                       wire:click.prevent="setTransport('{{$transport->vname}}','{{$transport->id}}')">--}}
+                {{--                                                        {{ $transport->vname }}--}}
+                {{--                                                    </x-dropdown.option>--}}
+                {{--                                                @empty--}}
+
+                {{--                                                    <button--}}
+                {{--                                                        wire:click.prevent="transportSave('{{$transport_name}}')"--}}
+                {{--                                                        class="text-white bg-green-500 text-center w-full">--}}
+                {{--                                                        create--}}
+                {{--                                                    </button>--}}
+                {{--                                                @endforelse--}}
+                {{--                                            @endif--}}
+                {{--                                        </x-dropdown.select>--}}
+                {{--                                    </div>--}}
+                {{--                                </x-dropdown.wrapper>--}}
+                {{--                            @endif--}}
+
+                {{--                            @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())--}}
+                {{--                                <x-input.floating wire:model="destination" label="Destination"/>--}}
+                {{--                            @endif--}}
+                {{--                            @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())--}}
+                {{--                                <x-input.floating wire:model="bundle" label="Bundle"/>--}}
+                {{--                            @endif--}}
+                {{--                        </div>--}}
+                {{--                    </x-accordion.accordion>--}}
+                {{--                </div>--}}
             </section>
 
             <!-- Bottom Right  ---------------------------------------------------------------------------------------->
 
-            <section class="w-full">
-                <div class="w-3/4 mr-3 ml-auto ">
+            <section class="flex w-full sm:my-0 my-5">
 
-                    <div class="grid w-full md:grid-cols-2 pt-6">
-                        <label
-                            class="md:px-3 md:pb-2 text-left text-gray-600 text-md">Taxable&nbsp;Amount&nbsp;:&nbsp;&nbsp;</label>
-                        <label
-                            class="ml-8 md:px-3 md:pb-2 text-right text-gray-800 text-md">{{  $total_taxable }}</label>
+                <div class="w-full flex justify-between items-center gap-5">
+                    <div class="w-2/4 sm:text-end space-y-6 ">
+                        <div>Taxable No</div>
+                        <div>GST</div>
+                        <div>Round off</div>
+                        <div class="font-semibold">Grand Total</div>
                     </div>
-
-                    <div class="grid w-full grid-cols-2 pt-6">
-                        <label
-                            class="px-3 pb-2 text-left text-gray-600 text-md">Gst&nbsp;:&nbsp;&nbsp;</label>
-                        <label class="px-3 pb-2 text-right text-gray-800 text-md">{{  $total_gst }}</label>
+                    <div class="w-1/4 sm:text-end text-center space-y-6 ">
+                        <div>:</div>
+                        <div>:</div>
+                        <div>:</div>
+                        <div>:</div>
                     </div>
-
-                    <div class="grid w-full grid-cols-2 pt-6">
-                        <label
-                            class="px-3 pb-2 text-left text-gray-600 text-md">Round off&nbsp;:&nbsp;&nbsp;</label>
-                        <label class="px-3 pb-2 text-right text-gray-800 text-md">{{$round_off}}</label>
-                    </div>
-
-                    <div class="grid w-full grid-cols-2 pt-6">
-                        <label
-                            class="mr-3 md:px-3 md:pb-2 text-xl text-left  text-gray-600">Grand&nbsp;Total&nbsp;:&nbsp;&nbsp;</label>
-                        <label
-                            class="ml-8  px-3 pb-2  md:px-3 md:pb-2 text-xl font-extrabold text-right text-gray-800">{{$grand_total}}</label>
+                    <div class="w-1/4 text-end space-y-6 ">
+                        <div>{{$total_taxable}}</div>
+                        <div>{{$total_gst }}</div>
+                        <div>{{$round_off}}</div>
+                        <div class="font-semibold">{{$grand_total}}</div>
                     </div>
                 </div>
+
             </section>
 
         </section>

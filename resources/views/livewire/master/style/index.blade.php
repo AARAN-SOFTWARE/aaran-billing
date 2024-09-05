@@ -76,17 +76,17 @@
 
                 <div class="flex flex-row gap-2 mt-4">
 
-                    <div class="flex">
+                    <div class="flex-col flex sm:flex-row">
 
                         <label for="logo_in"
-                               class="w-[10rem] text-zinc-500 tracking-wide py-2">Image</label>
+                               class="w-[10rem] text-zinc-500 tracking-wide sm:py-2 py-1">Image</label>
 
                         <div class="flex-shrink-0">
 
                             <div>
                                 @if($image)
                                     <div class="flex-shrink-0 overflow-hidden">
-                                        <img class="h-24 w-full hover:scale-105 hover:brightness-110"
+                                        <img class="sm:h-24 h-[94px] w-full hover:scale-105 hover:brightness-110"
                                              src="{{ $image->temporaryUrl() }}"
                                              alt="{{$image?:''}}"/>
                                     </div>
@@ -124,7 +124,7 @@
                             </label>
                         </div>
 
-                        <div wire:loading wire:target="image" class="z-10 absolute top-6 left-[109px]">
+                        <div wire:loading wire:target="image" class="z-10 absolute top-6 sm:left-[109px] left-[35px]">
                             <div class="w-14 h-14 rounded-full animate-spin
                                                         border-y-4 border-dashed border-green-500 border-t-transparent"></div>
                         </div>
