@@ -3,7 +3,7 @@
     <div class="w-full sm:px-2 px-0 flex flex-row  justify-between items-center">
 
         <div
-            class="w-3/12 flex sm:flex-row flex-col sm:justify-start sm:space-x-4 justify-between items-center sm:space-y-1.5 space-y-3">
+            class="w-3/12 flex sm:flex-row flex-col sm:justify-start sm:space-x-4  items-center sm:space-y-1.5 space-y-3">
             <div class="p-1 cursor-pointer hover:bg-gray-200 self-start hover:rounded-sm"
                  @click="sidebarOpen = !sidebarOpen">
 
@@ -20,7 +20,8 @@
             <!-- Page Heading -->
             <div
                 class=" font-semibold sm:text-xl text-md text-gray-800 leading-tight sm:px-0 px-2 self-start">
-                {{$slot}}
+
+                {{$slot ?? 'Dashboard'}}
             </div>
         </div>
 
