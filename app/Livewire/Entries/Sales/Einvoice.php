@@ -27,6 +27,11 @@ class Einvoice extends Component
     public $token;
     public $irnData;
     public $successMessage;
+    public $e_invoiceDetails;
+    public $showModel=false;
+    public $CnlRsn;
+    public $CnlRem;
+    public $Irn_no;
     #endregion
 
     #region[Properties]
@@ -41,6 +46,7 @@ class Einvoice extends Component
     public function mount($id): void
     {
         $this->apiAuthenticate();
+        $this->e_invoiceDetails=MasterGstIrn::where('sales_id',$id)->first();
         if ($id != 0) {
             $obj = Sale::find($id);
             $this->salesData=$obj;
@@ -236,6 +242,27 @@ class Einvoice extends Component
         $this->getRoute();
      }
      #endregion
+
+    #region[cancelIrn]
+    public function cancelIrn(): void
+    {
+        $this->showModel=true;
+        $obj=MasterGstIrn::where('sales_id',$this->salesData->id)->first();
+        $this->Irn_no=$obj->irn;
+        $this->CnlRsn=1;
+        $this->CnlRem="Wrong entry";
+    }
+    public function getCancelIrn(): void
+    {
+        $IrnCancel=[
+            'Irn'=>$this->Irn_no,
+            'CnlRsn'=> (string)($this->CnlRsn),
+            'CnlRem'=>$this->CnlRem,
+        ];
+        $this->masterGstApi->getIrnCancel(new Request(),$IrnCancel,$this->token,$this->salesData->id);
+        $this->getRoute();
+    }
+    #endregion
 
     #region[render]
     public function getRoute():void

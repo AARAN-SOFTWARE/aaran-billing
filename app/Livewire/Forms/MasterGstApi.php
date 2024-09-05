@@ -257,7 +257,6 @@ class MasterGstApi extends Form
                 'gstin' => '05AAACH6188F1ZM',
             ])->post('https://api.mastergst.com/ewaybillapi/v1.03/ewayapi/genewaybill?email=aaranoffice@gmail.com',
                 $jsonData);
-            dd($response->json());
             if ($response->successful()) {
                 $data = $response->json();
                 EwayBill::create([
@@ -284,6 +283,51 @@ class MasterGstApi extends Form
             return response()->json(['error' => 'An error occurred: '.$e->getMessage()], 500);
         }
 
+    }
+    #endregion
+
+    #region[EwayBillCancel]
+    public function EwayBillCancel(Request $request,$jsonData=null,$salesID=null)
+    {
+        $auth= Http::withHeaders([
+            'ip_address' => '103.231.117.198',
+            'client_id' => 'b569cf9a-72ba-4bc2-9558-3a94821c1ea4',
+            'client_secret' => 'ee72ff2e-c441-4d77-be67-ebb960001a8b',
+            'gstin' => '05AAACH6188F1ZM',
+        ])->get('https://api.mastergst.com/ewaybillapi/v1.03/authenticate', [
+            'email' => 'aaranoffice@gmail.com','username'=>'05AAACH6188F1ZM','password'=>'abc123@@'
+        ]);
+        $auth->json();
+        try {
+            $response = Http::withHeaders([
+                'ip_address' => '103.231.117.201',
+                'client_id' => 'b569cf9a-72ba-4bc2-9558-3a94821c1ea4',
+                'client_secret' => 'ee72ff2e-c441-4d77-be67-ebb960001a8b',
+                'gstin' => '05AAACH6188F1ZM',
+            ])->post('https://api.mastergst.com/ewaybillapi/v1.03/ewayapi/canewb?email=aaranoffice@gmail.com',
+                $jsonData);
+            if ($response->successful()) {
+                $data = $response->json();
+                $obj=EwayBill::where('sales_id', $salesID)->first();
+                $obj->status='Cancelled';
+                $obj->cancelDate=$data['data']['cancelDate'];
+                $obj->save();
+                return $data;
+            } else {
+                Log::error('API Request Failed', [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                    'headers' => $response->headers(),
+                ]);
+                return response()->json([
+                    'error' => 'Request failed with status code: '.$response->status(),
+                    'message' => $response->body(),
+                ], $response->status());
+            }
+        } catch (\Exception $e) {
+            Log::error('An error occurred while fetching IRN', ['exception' => $e->getMessage()]);
+            return response()->json(['error' => 'An error occurred: '.$e->getMessage()], 500);
+        }
     }
     #endregion
 }
