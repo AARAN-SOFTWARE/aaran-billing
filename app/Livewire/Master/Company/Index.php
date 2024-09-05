@@ -112,8 +112,8 @@ class Index extends Component
     public function getCityList(): void
     {
         $this->cityCollection = $this->city_name ?
-            Common::search(trim($this->city_name))->where('label_id','=','1')->get() :
-            Common::where('label_id','=','1')->get();
+            Common::search(trim($this->city_name))->where('label_id','=','2')->get() :
+            Common::where('label_id','=','2')->Orwhere('label_id','=','1')->get();
     }
     #endregion
 
@@ -183,8 +183,8 @@ class Index extends Component
 
     public function getStateList(): void
     {
-        $this->stateCollection = $this->state_name ? Common::search(trim($this->state_name))->where('label_id','=',2)
-            ->get() : Common::where('label_id','=',2)->get();
+        $this->stateCollection = $this->state_name ? Common::search(trim($this->state_name))->where('label_id','=',3)
+            ->get() : Common::where('label_id','=',3)->Orwhere('label_id','=','1')->get();
     }
     #endregion
 
@@ -254,8 +254,8 @@ class Index extends Component
     public function getPincodeList(): void
     {
         $this->pincodeCollection = $this->pincode_name ? Common::search(trim($this->pincode_name))
-            ->where('label_id','=','3')
-            ->get() : Common::where('label_id','=','3')->get();
+            ->where('label_id','=','4')
+            ->get() : Common::where('label_id','=','4')->Orwhere('label_id','=','1')->get();
     }
     #endregion
 

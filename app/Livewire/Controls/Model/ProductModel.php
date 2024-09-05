@@ -20,13 +20,13 @@ class ProductModel extends Component
     public function mount($name): void
     {
         $this->vname = $name;
-        $this->producttype_id = 66;
+        $this->producttype_id = 64;
         $this->producttype_name=$this->producttype_id?Common::find($this->producttype_id)->vname:'';
         $this->hsncode_id = 45;
         $this->hsncode_name=$this->hsncode_id?Common::find($this->hsncode_id)->vname:'';
-        $this->unit_id = 70;
+        $this->unit_id = 66;
         $this->unit_name=$this->unit_id?Common::find($this->unit_id)->vname:'';
-        $this->gstpercent_id = 74;
+        $this->gstpercent_id = 72;
         $this->gstpercent_name=$this->gstpercent_id?Common::find($this->gstpercent_id)->vname:'';
         $this->quantity=0;
         $this->price=0;
@@ -37,10 +37,10 @@ class ProductModel extends Component
         if ($this->vname != '') {
             $obj = Product::create([
                 'vname' => Str::ucfirst($this->vname),
-                'producttype_id' => $this->producttype_id?:'66',
+                'producttype_id' => $this->producttype_id?:'64',
                 'hsncode_id' => $this->hsncode_id?:'45',
-                'unit_id' => $this->unit_id?:'70',
-                'gstpercent_id' => $this->gstpercent_id?:'74',
+                'unit_id' => $this->unit_id?:'66',
+                'gstpercent_id' => $this->gstpercent_id?:'72',
                 'initial_quantity' => $this->quantity?:'0',
                 'initial_price' => $this->price?:'0',
                 'user_id' => Auth::id(),
@@ -69,6 +69,7 @@ class ProductModel extends Component
     }
 
     #region[hsncode]
+
     public $hsncode_id = '';
     public $hsncode_name = '';
     public Collection $hsncodeCollection;
@@ -133,12 +134,13 @@ class ProductModel extends Component
     public function getHsncodeList(): void
     {
         $this->hsncodeCollection = $this->hsncode_name ?
-            Common::search(trim($this->hsncode_name))->where('label_id', '=', '5')->get() :
-            Common::where('label_id', '=', '5')->get();
+            Common::search(trim($this->hsncode_name))->where('label_id', '=', '6')->get() :
+            Common::where('label_id', '=', '6')->get();
     }
 #endregion
 
     #region[producttype]
+
     public $producttype_id = '';
     public $producttype_name = '';
     public Collection $producttypeCollection;
@@ -203,8 +205,8 @@ class ProductModel extends Component
     public function getProductTypeList(): void
     {
         $this->producttypeCollection = $this->producttype_name ?
-            Common::search(trim($this->producttype_name))->where('label_id', '=', '14')->get() :
-            Common::where('label_id', '=', '14')->get();
+            Common::search(trim($this->producttype_name))->where('label_id', '=', '15')->get() :
+            Common::where('label_id', '=', '15')->get();
     }
 #endregion
 
@@ -274,8 +276,8 @@ class ProductModel extends Component
     public function getUnitList(): void
     {
         $this->unitCollection = $this->unit_name ?
-            Common::search(trim($this->unit_name))->where('label_id', '=', '15')->get() :
-            Common::where('label_id', '=', '15')->get();
+            Common::search(trim($this->unit_name))->where('label_id', '=', '16')->get() :
+            Common::where('label_id', '=', '16')->get();
     }
 #endregion
 
@@ -345,8 +347,8 @@ class ProductModel extends Component
     public function getGstPercentList(): void
     {
         $this->gstpercentCollection = $this->gstpercent_name ?
-            Common::search(trim($this->gstpercent_name))->where('label_id', '=', '16')->get() :
-            Common::where('label_id', '=', '16')->get();
+            Common::search(trim($this->gstpercent_name))->where('label_id', '=', '17')->get() :
+            Common::where('label_id', '=', '17')->get();
     }
 #endregion
 

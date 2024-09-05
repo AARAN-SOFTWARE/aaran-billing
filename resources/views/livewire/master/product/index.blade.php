@@ -7,7 +7,7 @@
 
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-        <x-table.caption :caption="'Master'">
+        <x-table.caption :caption="'Products'">
             {{$list->count()}}
         </x-table.caption>
 
@@ -45,8 +45,8 @@
                         <x-table.cell-text>
                             {{\Aaran\Master\Models\Product::common($row->hsncode_id)}}
                         </x-table.cell-text>
-                        <x-table.cell-text>{{$row->gstpercent}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->quantity}}</x-table.cell-text>
+                        <x-table.cell-text>{{\Aaran\Master\Models\Product::common($row->gstpercent_id)}} %</x-table.cell-text>
+                        <x-table.cell-text>{{$row->initial_quantity}}</x-table.cell-text>
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
 

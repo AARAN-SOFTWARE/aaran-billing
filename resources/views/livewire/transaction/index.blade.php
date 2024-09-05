@@ -23,15 +23,15 @@
                     Contact
                 </x-table.header-text>
 
-                @if( $trans_type_id != 82)
+                <x-table.header-text sort-icon="none">Payment</x-table.header-text>
+
+                <x-table.header-text sort-icon="none">Receipt</x-table.header-text>
+
+                @if( $trans_type_id != 80)
                     <x-table.header-text wire:click.prevent="sortBy('contact_id')"
                                          sort-icon="{{$getListForm->sortAsc}}">Type
                     </x-table.header-text>
                 @endif
-
-                <x-table.header-text sort-icon="none">Payment</x-table.header-text>
-
-                <x-table.header-text sort-icon="none">Receipt</x-table.header-text>
 
                 <x-table.header-text sort-icon="none">Balance</x-table.header-text>
 
@@ -55,11 +55,11 @@
 
                     @php
 
-                        if ($row->mode_id ==84)
+                        if ($row->mode_id ==82)
                         {
                             $totalPayment  += floatval($row->vname + 0);
                         }
-                        elseif($row->mode_id ==85)
+                        elseif($row->mode_id ==83)
                         {
                             $totalReceipt  += floatval($row->vname + 0);
                         }
@@ -72,21 +72,21 @@
 
                         <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
 
-                        @if( $trans_type_id != 82)
+                        @if($row->mode_id == 82)
+                            <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
+                        @else
+                            <x-table.cell-text></x-table.cell-text>
+
+                        @endif
+
+                        @if($row->mode_id == 83)
+                            <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
+                        @else
+                            <x-table.cell-text></x-table.cell-text>
+                        @endif
+
+                        @if( $trans_type_id != 80)
                             <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
-                        @endif
-
-                        @if($row->mode_id == 84)
-                            <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
-                        @else
-                            <x-table.cell-text></x-table.cell-text>
-
-                        @endif
-
-                        @if($row->mode_id == 85)
-                            <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
-                        @else
-                            <x-table.cell-text></x-table.cell-text>
                         @endif
 
                         <x-table.cell-text>
@@ -109,7 +109,7 @@
                     <x-table.cell-text>
                         {{$totalReceipt}}
                     </x-table.cell-text>
-                    <x-table.cell-text>
+                    <x-table.cell-text colspan="2" class=" text-right">
                         {{$totalReceipt - $totalPayment }}
                     </x-table.cell-text>
                 </x-table.row>
@@ -130,9 +130,9 @@
             <!-- Receipt & Payment  ----------------------------------------------------------------------------------->
 
             <div class="flex gap-3 w-full mb-3">
-                <x-radio.btn value="85" wire:model="mode_id">Receipt
+                <x-radio.btn value="83" wire:model="mode_id">Receipt
                 </x-radio.btn>
-                <x-radio.btn value="84" wire:model="mode_id">Payment
+                <x-radio.btn value="82" wire:model="mode_id">Payment
                 </x-radio.btn>
             </div>
 
