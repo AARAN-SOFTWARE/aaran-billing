@@ -22,13 +22,11 @@
                 <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Product
                 </x-table.header-text>
 
-                <x-table.header-text sortIcon="none">Product Type</x-table.header-text>
+                <x-table.header-text sortIcon="none">Product&nbsp;Type</x-table.header-text>
 
-                <x-table.header-text wire:click.prevent="sortBy('hsncode_id')" sortIcon="{{$getListForm->sortAsc}}">HSN
-                    Code
-                </x-table.header-text>
-
-                <x-table.header-text sortIcon="none">Status</x-table.header-text>
+                <x-table.header-text sortIcon="none">HSN&nbsp;Code</x-table.header-text>
+                <x-table.header-text sortIcon="none">Gst&nbsp;Percent</x-table.header-text>
+                <x-table.header-text sortIcon="none">Opening&nbsp;qty</x-table.header-text>
 
                 <x-table.header-action/>
 
@@ -47,7 +45,8 @@
                         <x-table.cell-text>
                             {{\Aaran\Master\Models\Product::common($row->hsncode_id)}}
                         </x-table.cell-text>
-                        <x-table.cell-status active="{{$row->active_id}}"/>
+                        <x-table.cell-text>{{$row->gstpercent}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->quantity}}</x-table.cell-text>
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
 
@@ -65,7 +64,6 @@
         <x-forms.create :id="$common->vid">
 
             <div class="flex flex-col gap-3">
-                {{--                <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
 
                 <!-- Product ------------------------------------------------------------------------------------------>
 
@@ -268,8 +266,8 @@
 
                 </x-dropdown.wrapper>
 
-                <x-input.floating wire:model="quantity" label="Quantity"/>
-                <x-input.floating wire:model="price" label="Price"/>
+                <x-input.floating wire:model="quantity" label="Opening Quantity"/>
+                <x-input.floating wire:model="price" label="Opening Price"/>
 
             </div>
 

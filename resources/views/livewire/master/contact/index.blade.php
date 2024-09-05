@@ -1,5 +1,5 @@
 <div>
-    <x-slot name="header">Contact</x-slot>
+    <x-slot name="header">Contacts</x-slot>
 
     <!-- Top Controls --------------------------------------------------------------------------------------------->
 

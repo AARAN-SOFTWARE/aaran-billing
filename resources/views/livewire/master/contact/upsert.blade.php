@@ -8,8 +8,8 @@
         <x-tabs.tab-panel>
 
             <x-slot name="tabs">
-                <x-tabs.tab>Necessary</x-tabs.tab>
-                <x-tabs.tab>Other Deatils</x-tabs.tab>
+                <x-tabs.tab>Mandatory</x-tabs.tab>
+                <x-tabs.tab>Detailing</x-tabs.tab>
             </x-slot>
 
             <x-slot name="content">
