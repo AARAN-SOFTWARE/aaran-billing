@@ -9,7 +9,7 @@
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
 
-        <x-table.caption :caption="'Contacts'">
+        <x-table.caption :caption="'Company'">
             {{$list->count()}}
         </x-table.caption>
 
