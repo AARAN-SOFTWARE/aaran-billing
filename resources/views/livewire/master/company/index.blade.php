@@ -20,17 +20,16 @@
 
                 <x-table.header-serial width="20%"/>
 
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Company
-                    Name
-                </x-table.header-text>
-
-                <x-table.header-text sortIcon="none">
-                    Mobile
-                </x-table.header-text>
-
                 <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">
-                    GST
+                    Company&nbsp;Name
                 </x-table.header-text>
+
+                <x-table.header-text sortIcon="none">GST</x-table.header-text>
+
+                <x-table.header-text sortIcon="none">Mobile</x-table.header-text>
+
+                <x-table.header-text sortIcon="none">Address</x-table.header-text>
+
 
                 <x-table.header-action/>
             </x-slot:table_header>
@@ -42,9 +41,10 @@
                 @foreach($list as $index=>$row)
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->mobile}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
                         <x-table.cell-text>{{$row->gstin}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->mobile}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->address_1.', '.$row->address_1}}</x-table.cell-text>
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
                 @endforeach
