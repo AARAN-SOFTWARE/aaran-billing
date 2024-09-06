@@ -48,15 +48,7 @@
 @stack('custom-scripts')
 
 @if (\Route::current()->getName() == 'dashboard')
-    <div class="relative w-full  h-12 bg-white flex justify-center items-center text-sm text-gray-600 tracking-wider gap-2">
-        <span> <b>Aaran InfoTech</b> © 2020 - 2024 — All Rights Reserved.</span>
-        <div class="absolute right-4">
-            v-{{config('aadmin.soft_version')}}&nbsp;-&nbsp;m-{{config('aadmin.soft_version')}}
-            &nbsp;-&nbsp;{{config('aadmin.git_version')}}
-            &nbsp;-&nbsp;
-            {{\Livewire\str()->ucfirst(config('aadmin.app_type'))}}
-        </div>
-    </div>
+    <x-web.dashboard.copyright />
 @endif
 </body>
 </html>

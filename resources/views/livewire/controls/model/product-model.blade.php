@@ -1,5 +1,5 @@
 <div>
-    <x-controls.lookup.model :show-model="$showModel" :height="'h-[40rem]'" :width="'w-3/5'" >
+    <x-controls.lookup.model :show-model="$showModel" :height="'h-[40rem]'" :width="'w-3/5'" label="Product">
         <div class="flex flex-col  gap-3">
 
             <x-input.floating wire:model="vname" label="Name" />

@@ -7,7 +7,7 @@
         <div class="block py-2 shadow-md w-full
                                 rounded-lg border-transparent flex-1 appearance-none border
                                  bg-white text-gray-800 ring-1 ring-blue-600">
-            <ul class="overflow-y-scroll h-44">
+            <ul class="overflow-y-scroll h-44 ">
                 {{$slot}}
             </ul>
         </div>

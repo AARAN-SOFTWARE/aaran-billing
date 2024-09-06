@@ -1,5 +1,5 @@
 <nav x-data="{ mobileMenuIsOpen: false }" @click.away="mobileMenuIsOpen = false" id="navBar"
-     class="sm:fixed sm:z-30 sm:w-full flex items-center justify-between border-b border-neutral-300 sm:px-32 tracking-wider
+     class="sm:fixed sm:z-40 sm:w-full flex items-center justify-between border-b border-neutral-300 sm:px-32 tracking-wider
      px-6 py-4 dark:border-neutral-700 text-white"
      aria-label="penguin ui menu">
     <!-- Brand Logo -->
@@ -55,7 +55,7 @@
     </ul>
     <!-- Mobile Menu Button -->
     <button @click="mobileMenuIsOpen = !mobileMenuIsOpen" :aria-expanded="mobileMenuIsOpen"
-            :class="mobileMenuIsOpen ? 'fixed top-6 right-6 z-20' : null" type="button"
+            :class="mobileMenuIsOpen ? 'fixed top-6 right-6 z-50' : null" type="button"
             class="flex text-neutral-600 dark:text-neutral-300 md:hidden" aria-label="mobile menu"
             aria-controls="mobileMenu">
         <svg x-cloak x-show="!mobileMenuIsOpen" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"
@@ -74,7 +74,9 @@
         x-transition:enter-end="translate-y-0"
         x-transition:leave="transition motion-reduce:transition-none ease-out duration-300"
         x-transition:leave-start="translate-y-0" x-transition:leave-end="-translate-y-full" id="mobileMenu"
-        class="fixed max-h-svh overflow-y-auto inset-x-0 top-0 z-20 flex flex-col divide-y divide-neutral-300 rounded-b-md border-b border-neutral-300 bg-neutral-50 px-6 pb-6 pt-20 dark:divide-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 md:hidden">
+        class="fixed max-h-svh overflow-y-auto inset-x-0 top-0 z-20 flex flex-col divide-y divide-neutral-300 rounded-b-md border-b border-neutral-300
+        bg-neutral-50 px-6 pb-6 pt-20 dark:divide-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 md:hidden">
+
         <li class="py-2"><a href="{{route('home')}}"
                             class="w-full text-sm font-bold text-neutral-600 focus:underline dark:text-neutral-300 " wire:navigate
             >Home</a></li>
