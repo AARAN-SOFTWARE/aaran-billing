@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">Sales</x-slot>
     <x-forms.m-panel>
-        <section class="grid sm:grid-cols-2 grid-cols-1 sm:gap-5 py-3 sm:space-y-0 space-y-5">
+        <section class="grid sm:grid-cols-2 grid-cols-1 sm:gap-5 py-8 sm:space-y-0 space-y-5">
 
             <!-- Top Left Area ------------------------------------------------------------------------------------------------>
 
@@ -27,36 +27,26 @@
                                         {{ $contact->vname }}
                                     </x-dropdown.option>
                                 @empty
-                                    <a href="{{route('contacts.upsert',['0'])}}" role="button"
-                                       class="flex items-center justify-center bg-green-500 w-full h-8 text-white text-center">
-                                        Not found , Want to create new
-                                    </a>
+                                    <x-dropdown.new href="{{route('contacts.upsert',['0'])}}" label="Party"/>
                                 @endforelse
                             @endif
                         </x-dropdown.select>
                     </div>
                 </x-dropdown.wrapper>
 
-
                 <!-- Order No --------------------------------------------------------------------------------------------->
 
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasOrder())
-
                     <x-dropdown.wrapper label="Order NO" type="orderTyped">
-
                         <div class="relative ">
-
                             <x-dropdown.input label="Order NO" id="order_name"
                                               wire:model.live="order_name"
                                               wire:keydown.arrow-up="decrementOrder"
                                               wire:keydown.arrow-down="incrementOrder"
                                               wire:keydown.enter="enterOrder"/>
                             @error('order_id')
-
                             <span class="text-red-500">{{'The Order is Required.'}}</span>
-
                             @enderror
-
                             <x-dropdown.select>
                                 @if($orderCollection)
                                     @forelse ($orderCollection as $i => $order)
@@ -69,7 +59,6 @@
                                     @endforelse
                                 @endif
                             </x-dropdown.select>
-
                         </div>
                     </x-dropdown.wrapper>
                 @endif
@@ -77,7 +66,6 @@
                 <!-- Billing Address -------------------------------------------------------------------------------------->
 
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasBillingAddress())
-
                     <x-dropdown.wrapper label="Billing Address" type="orderTyped">
                         <div class="relative ">
                             <x-dropdown.input label="Billing Address" id="billing_address"
@@ -86,7 +74,6 @@
                                               wire:keydown.arrow-down="incrementBilling_address"
                                               wire:keydown.enter="enterBilling_address"/>
                             <x-dropdown.select>
-
                                 @if($billing_addressCollection)
                                     @forelse ($billing_addressCollection as $i => $billing_address)
                                         <x-dropdown.option highlight="{{$highlightBilling_address === $i  }}"
@@ -96,16 +83,10 @@
                                             {{ $billing_address->address_2 }}&nbsp;-&nbsp;
                                             {{ $billing_address->gstin }}
                                         </x-dropdown.option>
-
                                     @empty
-                                        <a href="{{route('contacts.upsert',[$contact_id])}}"
-                                           role="button"
-                                           class="flex items-center  justify-center bg-green-100 w-full h-8 text-green-600 hover:scale-105 hover:font-semibold text-center">
-                                            Not found , Want to create new
-                                        </a>
+                                        <x-dropdown.new href="{{route('contacts.upsert',[$contact_id])}}" label="Billing Address"/>
                                     @endforelse
                                 @endif
-
                             </x-dropdown.select>
                         </div>
                     </x-dropdown.wrapper>
@@ -114,18 +95,14 @@
                 <!-- Shipping Address ------------------------------------------------------------------------------------->
 
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasShippingAddress())
-
                     <x-dropdown.wrapper label="Shipping Address" type="shipping_addressTyped">
                         <div class="relative ">
-
                             <x-dropdown.input label="Shipping Address" id="shipping_address"
                                               wire:model.live="shipping_address"
                                               wire:keydown.arrow-up="decrementShipping_address"
                                               wire:keydown.arrow-down="incrementShipping_address"
                                               wire:keydown.enter="enterShipping_address"/>
-
                             <x-dropdown.select>
-
                                 @if($shipping_addressCollection)
                                     @forelse ($shipping_addressCollection as $i => $shipping_address)
                                         <x-dropdown.option highlight="{{$highlightShipping_address === $i  }}"
@@ -135,22 +112,14 @@
                                             {{ $shipping_address->address_2 }}&nbsp;-&nbsp;
                                             {{ $shipping_address->gstin }}
                                         </x-dropdown.option>
-
                                     @empty
-
-                                        <a href="{{route('contacts.upsert',[$contact_id])}}"
-                                           role="button"
-                                           class="flex items-center  justify-center bg-green-100 w-full h-8 text-green-600 hover:scale-105 hover:font-semibold text-center">
-
-                                            Not found , Want to create new
-                                        </a>
+                                        <x-dropdown.new href="{{route('contacts.upsert',[$contact_id])}}" label="Shipping Address"/>
                                     @endforelse
                                 @endif
                             </x-dropdown.select>
                         </div>
                     </x-dropdown.wrapper>
                 @endif
-
             </div>
 
             <!-- Top Right Area-------------------------------------------------------------------------------------------->
@@ -299,14 +268,11 @@
 
                 <x-dropdown.wrapper label="Colour Name" type="colourTyped">
                     <div class="relative ">
-
-
                         <x-dropdown.input label="Colour Name" id="colour_name"
                                           wire:model.live="colour_name"
                                           wire:keydown.arrow-up="decrementColour"
                                           wire:keydown.arrow-down="incrementColour"
                                           wire:keydown.enter="enterColour"/>
-
                         <x-dropdown.select>
                             @if($colourCollection)
                                 @forelse ($colourCollection as $i => $colour)
@@ -315,10 +281,7 @@
                                         {{ $colour->vname }}
                                     </x-dropdown.option>
                                 @empty
-                                    <button wire:click.prevent="colourSave('{{$colour_name}}')"
-                                            class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
+                                    <x-dropdown.create  wire:click.prevent="colourSave('{{$colour_name}}')" label="Colour" />
                                 @endforelse
                             @endif
                         </x-dropdown.select>
@@ -331,7 +294,6 @@
             @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
                 <x-dropdown.wrapper label="Size Name" type="sizeTyped">
                     <div class="relative ">
-
                         <x-dropdown.input label="Size Name" id="size_name"
                                           wire:model.live="size_name"
                                           wire:keydown.arrow-up="decrementSize"
@@ -340,7 +302,6 @@
                         @error('size_id')
                         <span class="text-red-500">{{'The Size name is Required.'}}</span>
                         @enderror
-
                         <x-dropdown.select>
                             @if($sizeCollection)
                                 @forelse ($sizeCollection as $i => $size)
@@ -349,10 +310,7 @@
                                         {{ $size->vname }}
                                     </x-dropdown.option>
                                 @empty
-                                    <button wire:click.prevent="sizeSave('{{$size_name}}')"
-                                            class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
+                                    <x-dropdown.create wire:click.prevent="sizeSave('{{$size_name}}')" label="Size"/>
                                 @endforelse
                             @endif
                         </x-dropdown.select>
@@ -371,16 +329,7 @@
                 <x-input.floating id="price" wire:model.live="price" label="Price"/>
             </div>
 
-            <button  wire:click="addItems"
-                     class="px-8 py-2.5 relative rounded group overflow-hidden font-medium bg-emerald-500 inline-block text-center">
-                <span
-                    class="absolute top-0 left-0 flex h-full w-0 mr-0 transition-all
-                    duration-500 ease-out transform translate-x-0 bg-blue-600 group-hover:w-full opacity-90"></span>
-                <span class="relative block group-hover:hidden group-hover:text-white text-white right-3 font-semibold">Add</span>
-                <span class="relative hidden group-hover:block group-hover:text-white text-green-800 sm:right-2.5 sm:-left-3 left-24">
-                  <x-icons.add />
-                </span>
-            </button>
+        <x-button.add wire:click="addItems"  />
 
         </section>
 
@@ -546,7 +495,7 @@
                     <div>{{$total_taxable}}</div>
                     <div>{{$total_gst }}</div>
                     <div>{{$round_off}}</div>
-                    <div  class="font-semibold">{{$grand_total}}</div>
+                    <div class="font-semibold">{{$grand_total}}</div>
                 </div>
             </div>
 
@@ -572,7 +521,6 @@
                                 <div class="space-y-2">
                                     <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"
                                                       label="Addition"/>
-
                                     <!-- Ledger ----------------------------------------------------------------------------------->
                                     <x-dropdown.wrapper label="Ledger" type="ledgerTyped">
                                         <div class="relative ">
@@ -592,11 +540,7 @@
                                                             {{ $ledger->vname }}
                                                         </x-dropdown.option>
                                                     @empty
-                                                        <button
-                                                            wire:click.prevent="ledgerSave('{{$ledger_name}}')"
-                                                            class="text-white bg-green-500 text-center w-full">
-                                                            create
-                                                        </button>
+                                                        <x-dropdown.create wire:click.prevent="ledgerSave('{{$ledger_name}}')" label="Ledger" />
                                                     @endforelse
                                                 @endif
                                             </x-dropdown.select>
@@ -628,11 +572,7 @@
                                                                 {{ $transport->vname }}
                                                             </x-dropdown.option>
                                                         @empty
-                                                            <button
-                                                                wire:click.prevent="transportSave('{{$transport_name}}')"
-                                                                class="text-white bg-green-500 text-center w-full">
-                                                                create
-                                                            </button>
+                                                            <x-dropdown.create wire:click.prevent="transportSave('{{$transport_name}}')" label="Transport" />
                                                         @endforelse
                                                     @endif
                                                 </x-dropdown.select>
@@ -652,12 +592,10 @@
                             <x-tabs.content>
                                 <div class="flex sm:flex-row flex-col gap-3 w-full">
                                     <div class="flex flex-col gap-2 w-full">
-
                                         <x-input.floating wire:model="Transid" label="Transport Id"/>
                                         <x-input.floating wire:model="Transname" label="Transport Name"/>
                                         <x-input.floating wire:model="Transdocno" label="Transport No"/>
                                         <x-input.model-date wire:model="TransdocDt" label="Transport Date"/>
-
                                     </div>
                                     <div class="flex flex-col gap-2 w-full">
                                         <x-input.floating wire:model="distance" label="Distance"/>
@@ -687,7 +625,9 @@
             <section class="w-full mx-2">
                 @if(isset($e_invoiceDetails->id))
                     <div class="sm:w-full w-[300px] flex flex-col items-center justify-center ">
-                        <img class="w-[200px]" src="{{\App\Helper\qrcoder::generate($e_invoiceDetails->signed_qrcode,22)}}" alt="{{$e_invoiceDetails->signed_qrcode}}">
+                        <img class="w-[200px]"
+                             src="{{\App\Helper\qrcoder::generate($e_invoiceDetails->signed_qrcode,22)}}"
+                             alt="{{$e_invoiceDetails->signed_qrcode}}">
                         <div class="sm:w-full w-[300px]">Irn No : {{$e_invoiceDetails->irn}}</div>
                         @if(isset($e_wayDetails))
                             <div class="sm:w-full w-[300px] ">E-way Bill NO: {{$e_wayDetails->ewbno}}</div>

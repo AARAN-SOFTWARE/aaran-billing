@@ -1,4 +1,4 @@
-<div class="sm:w-3/12 w-full h-[36rem] bg-white rounded-md ">
+<div class="sm:w-3/12 w-auto h-[28rem] bg-white rounded-md hover:shadow-md ">
         <div class="h-[4rem] w-full py-3 border-b border-gray-200 inline-flex items-center justify-between px-4">
                          <span class="inline-flex items-center gap-2">
                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -18,9 +18,9 @@
                 </svg>
             </a>
         </div>
-        <div class=" py-2 space-y-5 h-[32rem] overflow-y-auto px-4">
-            @for($i=1; $i<=16; $i++)
-                <div class="flex justify-between items-center">
+        <div class=" h-[24rem] overflow-y-auto">
+            @for($i=1; $i<=6; $i++)
+                <div class="flex justify-between items-center hover:bg-[#FFFFF0] p-4">
                     <div class="inline-flex items-center gap-3">
                         <img src="../../../../images/t2.jpg" alt="" class="w-10 h-10 self-start rounded-lg">
                         <div class="text-xs flex-col flex gap-1">

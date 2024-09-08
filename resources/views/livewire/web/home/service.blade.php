@@ -1,17 +1,26 @@
 <div class="relative" x-data="{ open: false }">
     <div class="relative font-roboto tracking-wider">
+
         <div style="background-image: url('/../../../images/wp1.webp')"
              class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
+
         <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
-            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4 animate__animated wow bounceInDown" data-wow-duration="3s">Services</div>
+
+            <div class="z-20 w-6/12 mx-auto sm:text-8xl text-4xl font-semibold pb-4 animate__animated wow bounceInDown"
+                 data-wow-duration="3s">Services
+            </div>
+
             <span
-                class="z-10 absolute top-6 py-5 px-[180px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
+                class="z-10 absolute sm:top-6 top-1 sm:py-5 py-1.5 sm:px-[180px] px-[70px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
                 animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
-            <div class="w-6/12 mx-auto text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">We Design and develop Outstanding Digital products and digital -
+
+            <div class="sm:w-6/12 w-auto mx-auto sm:text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
+                We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>
         </div>
+
     </div>
 
 {{--    <div x-show="open" x-transition--}}
@@ -61,7 +70,7 @@
             <button class="tab-button tab-button px-4 py-2 bg-gray-200" onclick="showTab('tab2')">1 year
             </button>
         </div>
-        <div id="tab1" class="tab-content w-9/12 mx-auto grid grid-cols-4 gap-6 animate__animated wow bounceInUp" data-wow-duration="3s">
+        <div id="tab1" class="tab-content sm:w-9/12 w-auto mx-auto grid sm:grid-cols-4 grid-cols-1 gap-6 sm:px-0 px-2 animate__animated wow bounceInUp" data-wow-duration="3s">
             @for($j=1; $j<=3; $j++)
                 <div class="border border-gray-200 p-5 flex-col flex gap-y-4 rounded-md">
                     <div class="text-md font-semibold">Basic</div>
@@ -180,7 +189,7 @@
         <div class="text-center text-gray-400 text-sm">*All prices are exclusive of GST</div>
     </div>
 
-    <div class=" w-9/12 mx-auto grid grid-cols-2 gap-6 font-roboto tracking-wider">
+    <div class=" sm:w-9/12 w-auto mx-auto grid sm:grid-cols-2 grid-cols-1 gap-6 font-roboto tracking-wider sm:px-0 px-2">
         <div class="bg-[#e7eafd] border border-[#3F5AF3] rounded-md p-5 flex-col flex gap-3 animate__animated wow animate__backInLeft" data-wow-duration="3s">
             <div class="w-full">
                 <x-icons.icon icon="user-group" class="w-7 h-7 text-[#3F5AF3]"/>
@@ -230,8 +239,8 @@
 
 
     <div class="font-roboto tracking-wider my-16 flex-col flex gap-y-6">
-        <div class=" text-center text-6xl font-semibold animate__animated wow bounceInDown" data-wow-duration="3s">Frequently Asked Questions (FAQ)</div>
-        <div class="w-9/12 mx-auto">
+        <div class=" text-center sm:text-6xl text-2xl font-semibold animate__animated wow bounceInDown" data-wow-duration="3s">Frequently Asked Questions (FAQ)</div>
+        <div class="sm:w-9/12 w-auto mx-auto sm:px-0 px-2">
             <x-accordion.accordion :heading="'Is the subscription fee refundable?'">
                 <div class="bg-gray-50 p-4 rounded-md text-xs">Yes, we offer a 100% refund on annual plans if requested
                     for cancellation within the first 7 days.

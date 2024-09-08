@@ -2,11 +2,11 @@
 
 return [
 
-    'soft_version' => '1.0.2',
+    'soft_version' => '1.0.0',
 
-    'db_version' => '1.0.2',
+    'db_version' => '1.0.0',
 
-    'git_version' => '#539',
+    'git_version' => '#92',
 
     'current_acyear' => '2024_25',
 

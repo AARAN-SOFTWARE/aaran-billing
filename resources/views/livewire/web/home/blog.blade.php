@@ -1,21 +1,30 @@
 <div>
-    <div class="relative font-roboto tracking-wider scroll-smooth">
+    <div class="relative font-roboto tracking-wider">
+
         <div style="background-image: url('/../../../images/wp1.webp')"
              class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
+
         <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
-            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4 animate__animated wow bounceInDown" data-wow-duration="3s">Blog</div>
+
+            <div class="z-20 w-6/12 mx-auto sm:text-8xl text-4xl font-semibold pb-4 animate__animated wow bounceInDown"
+                 data-wow-duration="3s">Blog
+            </div>
+
             <span
-                class="z-10 absolute top-6 py-5 px-[92px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
+                class="z-10 absolute sm:top-6 top-1 sm:py-5 py-1.5 sm:px-[180px] px-[40px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
                 animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
-            <div class="w-6/12 mx-auto text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">We Design and develop Outstanding Digital products and digital -
+
+            <div class="sm:w-6/12 w-auto mx-auto sm:text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
+                We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>
         </div>
+
     </div>
 
-    <div class="flex justify-center font-roboto tracking-wider my-16 gap-6 scroll-smooth">
-        <div class="w-6/12 flex-col flex gap-y-8 border-r border-gray-200 pr-6 ">
+    <div class="flex sm:flex-row flex-col-reverse justify-center font-roboto tracking-wider my-16 gap-6 scroll-smooth">
+        <div class="sm:w-6/12 w-auto flex-col flex gap-y-8 border-r border-gray-200 sm:pr-6 sm:px-0 px-2">
             @forelse($list as $row)
                 <div class="group flex-col flex gap-y-4 border-b border-gray-300 pb-6 overflow-hidden">
                     <div class="text-2xl font-semibold animate__animated wow animate__backInLeft" data-wow-duration="3s">{{$row->vname}}</div>
@@ -61,7 +70,7 @@
 
             <div class="pt-5">{{ $list->links() }}</div>
         </div>
-        <div class="w-3/12 scroll-smooth">
+        <div class="sm:w-3/12 w-auto scroll-smooth sm:px-0 px-2">
             <div class="relative w-full">
                 <label for="">
                 <span class="w-full">

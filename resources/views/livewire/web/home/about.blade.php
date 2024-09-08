@@ -8,15 +8,15 @@
 
         <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
 
-            <div class="z-20 w-6/12 mx-auto lg:text-8xl font-semibold pb-4 animate__animated wow bounceInDown"
+            <div class="z-20 w-6/12 mx-auto sm:text-8xl text-4xl font-semibold pb-4 animate__animated wow bounceInDown"
                  data-wow-duration="3s">About us
             </div>
 
             <span
-                class="z-10 absolute top-6 py-5 px-[180px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
+                class="z-10 absolute sm:top-6 top-1 sm:py-5 py-1.5 sm:px-[180px] px-[70px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
                 animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
 
-            <div class="w-6/12 mx-auto text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
+            <div class="sm:w-6/12 w-auto mx-auto sm:text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
                 We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>
@@ -24,26 +24,26 @@
 
     </div>
 
-    <div class=" grid grid-cols-2 gap-16 h-[48rem] py-28 font-roboto tracking-wider px-16">
+    <div class=" grid sm:grid-cols-2 grid-cols-1 sm:gap-16 sm:h-[48rem] h-auto sm:py-28 py-12 font-roboto tracking-wider sm:px-16 px-2">
         <div class="flex justify-center">
-            <div class="relative w-[40rem] h-[33rem] flex justify-center group">
-                <img src="../../../../images/about-shape-2.png" alt="" class="absolute z-0 top-7 left-10 w-72 h-auto
-                group-hover:translate-x-28 group-hover:translate-y-10 transition-all duration-300 ease-linear">
+            <div class="relative sm:w-[40rem] sm:h-[33rem] w-auto flex sm:justify-center justify-start group">
+                <img src="../../../../images/about-shape-2.png" alt="" class="absolute z-0 top-7 sm:left-10 -right-8 sm:w-72 w-24 h-auto
+                sm:group-hover:translate-x-28 group-hover:-translate-x-8 sm:group-hover:translate-y-10 group-hover:translate-y-2  transition-all duration-300 ease-linear">
                 <img src="../../../../images/about-img-2.jpg" alt=""
-                     class="w-auto z-10 h-[400px] animate__animated wow animate__backInLeft" data-wow-duration="3s">
+                     class="w-auto z-10 sm:h-[400px]  h-40 animate__animated wow animate__backInLeft" data-wow-duration="3s">
                 <img src="../../../../images/about-img-3.jpg" alt=""
-                     class="absolute z-20 bottom-0 right-0 w-auto  h-80 border-t-8 border-l-8 border-black animate__animated wow animate__backInLeft"
+                     class="absolute z-20 sm:bottom-0 -bottom-6 sm:right-0 -right-4 w-auto  sm:h-80 h-24 border-t-8 border-l-8 border-black animate__animated wow animate__backInLeft"
                      data-wow-duration="3s">
             </div>
         </div>
-        <div class=" flex-col flex gap-y-8 py-8">
+        <div class=" flex-col flex sm:gap-y-8 gap-y-6 sm:py-8 pt-12">
             <div class="flex items-center gap-x-3">
                 <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
                 <span class="text-[#5069F4] text-sm font-semibold animate__animated wow bounceInDown"
                       data-wow-duration="3s">ABOUT OUR COMPANY</span>
-                <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
+                <span class="hidden sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
             </div>
-            <div class="text-5xl font-semibold animate__animated wow animate__backInRight" data-wow-duration="3s">We
+            <div class="sm:text-5xl text-xl font-semibold animate__animated wow animate__backInRight" data-wow-duration="3s">We
                 Design and develop Outstanding Digital products and digital - first
                 Brands
             </div>
@@ -53,7 +53,7 @@
                 molestiae neque nostrum nulla obcaecati quidem recusandae reprehenderit tempore temporibus voluptate.
                 Asperiores magni minima nihil!
             </div>
-            <div class="grid grid-cols-2">
+            <div class="grid sm:grid-cols-2 grid-cols-1 sm:gap-1 gap-y-3">
                 <div class="inline-flex items-center gap-x-2 animate__animated wow bounceInDown" data-wow-duration="3s">
                     <svg height="50px" width="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -113,7 +113,7 @@
 		c-5.44,0-9.726-4.451-9.726-9.726C288.144,258.472,292.595,254.187,297.87,254.187z"/>
                         </g>
 </svg>
-                    <span>Professional Creative Team Members</span>
+                    <span class="sm:text-lg text-xs" >Professional Creative Team Members</span>
                 </div>
                 <div class="inline-flex items-center gap-x-2 animate__animated wow bounceInDown" data-wow-duration="3s">
                     <span>
@@ -156,31 +156,31 @@
                         <rect x="77.913" y="321.67" style="fill:#FFFFFF;" width="178.087" height="44.522"/>
                         </svg>
                     </span>
-                    <span>Provide Market Standard Service for Client's</span>
+                    <span  class="sm:text-lg text-xs">Provide Market Standard Service for Client's</span>
                 </div>
             </div>
             <x-button.animate1>Get Started</x-button.animate1>
         </div>
     </div>
 
-    <div class=" font-roboto tracking-wider">
-        <div class="flex items-center gap-x-3 justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
+    <div class=" font-roboto tracking-wider sm:py-0 sm:py-2 sm:px-0 px-2">
+        <div class="flex items-center gap-x-3 sm:justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
             <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
             <span class="text-[#5069F4] text-sm font-semibold ">WORK PROCESS</span>
-            <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
+            <span class="hidden sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
         </div>
         <div class="relative">
             <div
-                class="text-gray-50 text-9xl font-bold drop-shadow-md text-center tracking-widest animate__animated wow animate__backInRight"
-                data-wow-duration="3s">TECH
+                class="text-gray-50 sm:text-9xl text-6xl font-bold drop-shadow-md text-center tracking-widest animate__animated wow animate__backInRight"
+                data-wow-duration="3s">BILLING
             </div>
             <div
-                class="absolute bottom-0 left-96 w-6/12 text-5xl text-center font-semibold text-gray-600 animate__animated wow animate__backInLeft"
+                class="absolute sm:bottom-0 sm:left-96 -bottom-2 sm:w-6/12 w-auto sm:text-5xl text-xl text-center font-semibold text-gray-600 animate__animated wow animate__backInLeft"
                 data-wow-duration="3s">Quality
                 services For Growth Your Branding Identity
             </div>
         </div>
-        <div class="w-8/12 mx-auto gap-6 grid grid-cols-3 pt-16">
+        <div class="sm:w-8/12 w-auto mx-auto gap-6 grid sm:grid-cols-3 grid-cols-1 sm:pt-16 pt-6">
             @for($i=1; $i<=3; $i++)
                 <div class="bg-gray-100 h-auto flex-col flex p-5 gap-y-6 animate__animated wow bounceInUp"
                      data-wow-duration="3s">
@@ -199,52 +199,52 @@
     </div>
 
     <!-- Counter -->
-    <div class="grid grid-cols-4 h-40 px-16 justify-center items-center my-16">
+    <div class="grid sm:grid-cols-4 grid-cols-2 sm:h-40 sm:space-y-0 space-y-5 h-auto sm:px-16 px-0 justify-center items-center sm:my-16 my-6">
         <div class="flex-col flex justify-center items-center gap-y-3 animate__animated wow animate__backInLeft"
              data-wow-duration="3s">
             <div class="relative flex items-center">
                 <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="1"
-                      class="counter-number purecounter text-9xl font-bold text-[#E4E8FD]"></span>
-                <span class="text-lg text-gray-500"> <span class="text-5xl font-bold text-[#E4E8FD]">/7</span>
-                <span class="absolute top-14 -right-12">Support</span></span>
+                      class="counter-number purecounter sm:text-9xl text-xlxl font-bold text-[#E4E8FD]"></span>
+                <span class="text-lg text-gray-500"> <span class="text-xlxl font-bold text-[#E4E8FD]">/7</span>
+                <span class="absolute sm:top-14 top-3 -right-12 sm:text-lg text-sm">Support</span></span>
             </div>
         </div>
         <div class="flex-col  flex justify-center items-center gap-y-3 animate__animated wow animate__backInLeft"
              data-wow-duration="3s">
             <div class="relative flex items-center">
             <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1"
-                  class="counter-number purecounter text-9xl font-bold text-[#E4E8FD]"></span>
-                <span class="absolute left-28 text-lg text-gray-500">&nbsp; Year of Experience</span>
+                  class="counter-number purecounter sm:text-9xl text-xlxl font-bold text-[#E4E8FD]"></span>
+                <span class="absolute sm:left-28 left-12 sm:text-lg text-sm text-gray-500">&nbsp; Year of Experience</span>
             </div>
         </div>
         <div class="flex-col flex justify-center items-center gap-y-3 animate__animated wow animate__backInRight"
              data-wow-duration="3s">
             <div class="relative flex items-center ">
                 <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1"
-                      class="counter-number purecounter text-9xl font-bold text-[#E4E8FD]"></span>
-                <span class="absolute left-28 text-lg text-gray-500">&nbsp;Employees</span>
+                      class="counter-number purecounter sm:text-9xl text-xlxl font-bold text-[#E4E8FD]"></span>
+                <span class="absolute sm:left-28 left-12 sm:text-lg text-sm text-gray-500">&nbsp;Employees</span>
             </div>
         </div>
         <div class="flex-col flex justify-center items-center gap-y-3 animate__animated wow animate__backInRight"
              data-wow-duration="3s">
             <div class=" relative flex items-center ">
                 <span data-purecounter-start="0" data-purecounter-end="78" data-purecounter-duration="1"
-                      class="counter-number purecounter text-9xl font-bold text-[#E4E8FD]"></span>
-                <span class=" absolute -right-10 text-lg text-gray-500">&nbsp; Projects</span>
+                      class="counter-number purecounter sm:text-9xl text-xlxl font-bold text-[#E4E8FD]"></span>
+                <span class=" absolute sm:-right-10 -right-12 sm:text-lg text-sm text-gray-500">&nbsp; Projects</span>
             </div>
         </div>
     </div>
 
 
-    <div class=" grid grid-cols-2 gap-12 h-[40rem] font-roboto tracking-wider pl-40">
-        <div class=" flex-col flex gap-y-8 py-8">
+    <div class=" grid sm:grid-cols-2 grid-cols-1 gap-12 sm:h-[40rem] h-auto font-roboto tracking-wider sm:pl-40 sm:px-0 px-2">
+        <div class=" flex-col flex sm:gap-y-8 gap-y-4 py-8">
             <div class="flex items-center gap-x-3 animate__animated wow bounceInDown" data-wow-duration="3s">
                 <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA]">&nbsp;</span>
                 <span
                     class="text-[#5069F4] text-sm font-semibold ">ABOUT COMPANY</span>
                 <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
             </div>
-            <div class="text-5xl font-semibold leading-[50px] animate__animated wow animate__backInLeft"
+            <div class="sm:text-5xl text-2xl font-semibold sm:leading-[50px] animate__animated wow animate__backInLeft"
                  data-wow-duration="3s">Our Main Goal to Satisfied Local & Global Clients.
             </div>
             <div class="text-sm text-gray-600 animate__animated wow animate__backInLeft" data-wow-duration="3s">Lorem
@@ -253,7 +253,7 @@
                 molestiae neque nostrum nulla obcaecati quidem recusandae reprehenderit tempore temporibus voluptate.
                 Asperiores magni minima nihil!
             </div>
-            <div class="w-4/6 grid grid-cols-3 gap-6 animate__animated wow bounceInUp" data-wow-duration="3s">
+            <div class="sm:w-4/6 w-auto grid grid-cols-3 gap-6 animate__animated wow bounceInUp" data-wow-duration="3s">
                 <x-button.animate2 class="tab-button" onclick="showTab('tab1')">Button 1</x-button.animate2>
                 <x-button.animate2 class="tab-button" onclick="showTab('tab2')">Button 2</x-button.animate2>
                 <x-button.animate2 class="tab-button" onclick="showTab('tab3')">Button 3</x-button.animate2>
@@ -273,7 +273,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-center">
+        <div class="sm:flex sm:justify-center hidden">
             <div class="relative w-[40rem] h-[33rem] flex justify-start group">
                 <img src="../../../../images/about-img-2.jpg" alt="" class="w-auto z-10 h-[400px] animate__animated wow animate__backInRight" data-wow-duration="3s">
                 <img src="../../../../images/about-shape-2.png" alt="" class="absolute z-0 top-7 right-32 w-72 h-auto
@@ -284,44 +284,44 @@
         </div>
     </div>
 
-    <div class="flex flex-col gap-y-8">
-        <div class="flex items-center gap-x-3 justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
+    <div class="flex flex-col sm:gap-y-8 gap-y-4 sm:pb-0 pb-8">
+        <div class="flex items-center gap-x-3 sm:justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
             <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
             <span class="text-[#5069F4] text-sm font-semibold">TEAM MEMBERS</span>
             <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
         </div>
-        <div class="w-6/12 mx-auto text-center text-5xl font-semibold animate__animated wow bounceInUp" data-wow-duration="3s">Quality Expert Team Would Like To Hear From You
+        <div class="sm:w-6/12 w-auto mx-auto text-center sm:text-5xl text-2xl font-semibold animate__animated wow bounceInUp" data-wow-duration="3s">Quality Expert Team Would Like To Hear From You
         </div>
-        <div class="w-10/12 mx-auto grid grid-cols-4 gap-3 p-3 bg-[#F3F4F6]">
+        <div class="sm:w-10/12 w-auto mx-auto grid sm:grid-cols-4 grid-cols-2 sm:gap-3 gap-2 sm:p-3 p-2 bg-[#F3F4F6]">
             <div class="flex-col flex gap-y-2">
                 <img src="../../../../images/t1.webp" alt="" class="animate__animated wow animate__backInLeft"
                      data-wow-duration="3s">
-                <div class="flex-col flex gap-y-2 animate__animated wow bounceInUp" data-wow-duration="3s">
-                    <div class="text-2xl font-semibold">Mac Rayonds</div>
+                <div class="flex-col flex sm:gap-y-2 animate__animated wow bounceInUp" data-wow-duration="3s">
+                    <div class="sm:text-2xl text-md font-semibold">Mac Rayonds</div>
                     <div class=" text-sm font-semibold text-[#3F5AF3]">UI/UX Design</div>
                 </div>
             </div>
             <div class="flex-col flex gap-y-2">
                 <img src="../../../../images/t3.webp" alt="" class="animate__animated wow animate__backInLeft"
                      data-wow-duration="3s">
-                <div class="flex-col flex gap-y-2 animate__animated wow bounceInUp" data-wow-duration="3s">
-                    <div class="text-2xl font-semibold">Lara Williams</div>
+                <div class="flex-col flex sm:gap-y-2 animate__animated wow bounceInUp" data-wow-duration="3s">
+                    <div class="sm:text-2xl text-md font-semibold">Lara Williams</div>
                     <div class=" text-sm font-semibold text-[#3F5AF3]">Web Developer</div>
                 </div>
             </div>
             <div class="flex-col flex gap-y-2">
                 <img src="../../../../images/t4.webp" alt="" class="animate__animated wow animate__backInRight"
                      data-wow-duration="3s">
-                <div class="flex-col flex gap-y-2 animate__animated wow bounceInUp" data-wow-duration="3s">
-                    <div class="text-2xl font-semibold">Shilph Adams</div>
+                <div class="flex-col flex sm:gap-y-2 animate__animated wow bounceInUp" data-wow-duration="3s">
+                    <div class="sn:text-2xl text-md font-semibold">Shilph Adams</div>
                     <div class=" text-sm font-semibold text-[#3F5AF3]">Accounts</div>
                 </div>
             </div>
             <div class="flex-col flex gap-y-2">
                 <img src="../../../../images/t5.webp" alt="" class="animate__animated wow animate__backInRight"
                      data-wow-duration="3s">
-                <div class="flex-col flex gap-y-2 animate__animated wow bounceInUp" data-wow-duration="3s">
-                    <div class="text-2xl font-semibold">Mana Green</div>
+                <div class="flex-col flex sm:gap-y-2 animate__animated wow bounceInUp" data-wow-duration="3s">
+                    <div class="sm:text-2xl text-md font-semibold">Mana Green</div>
                     <div class=" text-sm font-semibold text-[#3F5AF3]">Senior Executive</div>
                 </div>
             </div>
@@ -329,8 +329,8 @@
         </div>
     </div>
 
-    <div class="w-8/12 h-72 mx-auto grid grid-cols-2 gap-4 justify-center items-center ">
-        <div class="flex-col flex gap-y-6">
+    <div class="sm:w-8/12 sm:h-72 w-auto h-auto mx-auto grid sm:grid-cols-2 grid-cols-1 sm:gap-4 gap-2 justify-center items-center sm:px-0 px-2">
+        <div class="flex-col flex sm:gap-y-6 gap-y-2">
             <div class="text-3xl animate__animated wow animate__backInLeft" data-wow-duration="3s">How it started…</div>
             <div class="text-sm text-gray-600 leading-5 animate__animated wow animate__backInLeftt" data-wow-duration="3s">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
@@ -339,7 +339,7 @@
                 Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
             </div>
         </div>
-        <div class="flex-col flex gap-y-6">
+        <div class="flex-col flex sm:gap-y-6 gap-y-2">
             <div class="text-3xl animate__animated wow animate__backInRight" data-wow-duration="3s">Our Philosophy…</div>
             <div class="text-sm text-gray-600 leading-5 animate__animated wow animate__backInRight" data-wow-duration="3s">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
@@ -350,14 +350,14 @@
         </div>
     </div>
 
-    <div class="flex-col flex gap-6">
-        <div class="flex items-center gap-x-3 justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
+    <div class="flex-col flex gap-6 sm:py-0 py-8">
+        <div class="flex items-center gap-x-3 sm:justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
             <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
             <span class="text-[#5069F4] text-sm font-semibold">TESTIMONIALS</span>
             <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
         </div>
-        <div class="text-5xl text-center font-semibold animate__animated wow bounceInUp" data-wow-duration="3s">CLIENTS FEEDBACK</div>
-        <div class="w-9/12 mx-auto grid grid-cols-3 gap-4 my-16">
+        <div class="sm:text-5xl text-2xl text-center font-semibold animate__animated wow bounceInUp" data-wow-duration="3s">CLIENTS FEEDBACK</div>
+        <div class="sm:w-9/12 w-auto mx-auto grid sm:grid-cols-3 grid-cols-1 sm:gap-4 gap-20 gap my-16 sm:px-0 px-2">
             @for($i=1; $i<=3; $i++)
                 <div class="relative animate__animated wow bounceInUp" data-wow-duration="3s">
                     <div class="z-10 bg-[#F2F3F4] flex-col flex justify-center items-center gap-y-3 pt-28 p-5">
@@ -372,7 +372,7 @@
                             laboriosam nemo quisquam suscipit temporibus voluptates. Hic!
                         </div>
                     </div>
-                    <div class="absolute -top-16 left-28 z-20">
+                    <div class="absolute -top-16 sm:left-28 left-20 z-20">
                         <div class="w-40 h-40 p-2 bg-white rounded-full">
                             <img src="../../../../images/a1.png" alt="" class="w-full h-full bg-[#F2F3F4] rounded-full">
                         </div>

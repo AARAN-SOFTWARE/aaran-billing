@@ -1,21 +1,30 @@
 <div>
     <div class="relative font-roboto tracking-wider">
+
         <div style="background-image: url('/../../../images/wp1.webp')"
              class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
+
         <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
-            <div class="z-20 w-6/12 mx-auto text-8xl font-semibold pb-4 animate__animated wow bounceInDown" data-wow-duration="3s">Contact</div>
+
+            <div class="z-20 w-6/12 mx-auto sm:text-8xl text-4xl font-semibold pb-4 animate__animated wow bounceInDown"
+                 data-wow-duration="3s">Contact
+            </div>
+
             <span
-                class="z-10 absolute top-6 py-5 px-[165px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
+                class="z-10 absolute sm:top-6 top-1 sm:py-5 py-1.5 sm:px-[180px] px-[70px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
                 animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
-            <div class="w-6/12 mx-auto text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">We Design and develop Outstanding Digital products and digital -
+
+            <div class="sm:w-6/12 w-auto mx-auto sm:text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
+                We Design and develop Outstanding Digital products and digital -
                 first Brands
             </div>
         </div>
+
     </div>
-    <div class="flex justify-center">
-        <div class="w-9/12 grid grid-cols-2 font-roboto tracking-wider my-24 ">
-            <div class="flex-col flex gap-y-4 bg-gray-50 p-10 mr-6 border border-gray-300 rounded-md animate__animated wow animate__backInLeft" data-wow-duration="3s">
+    <div class="flex sm:flex-row flex-col sm:justify-center">
+        <div class="sm:w-9/12 w-auto grid sm:grid-cols-2 grid-cols-1 sm:gap-0 gap-5 font-roboto tracking-wider sm:my-24 my-8 sm:px-0 px-2">
+            <div class="flex-col flex gap-y-4 bg-gray-50 sm:p-10 p-4  sm:mr-6 border border-gray-300 rounded-md animate__animated wow animate__backInLeft" data-wow-duration="3s">
                 <div class="w-full flex items-center gap-x-3 ">
                     <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
                     <span class="text-[#5069F4] text-sm font-semibold">WORK PROCESS</span>
@@ -26,8 +35,8 @@
                     from you and discuss...
                 </div>
                 <div class="flex-col flex gap-y-4">
-                    <div class=" flex items-center gap-4 group">
-                        <div class="w-28 h-full  flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
+                    <div class=" flex items-center sm:gap-4 gap-2 group">
+                        <div class="sm:w-28 w-40 h-full  flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="w-8 h-8 text-blue-600 group-hover:text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -46,8 +55,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-28 h-full flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
+                    <div class="flex items-center sm:gap-4 gap-2 group">
+                        <div class="sm:w-28 w-40 h-full flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="w-8 h-8 text-blue-600 group-hover:text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -65,8 +74,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-28 h-full flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
+                    <div class="flex items-center sm:gap-4 gap-2 group">
+                        <div class="sm:w-28 w-40 h-full flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="w-8 h-8 text-blue-600 group-hover:text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -90,7 +99,7 @@
 
             <!-- Contact Form ---------------------------------------------------------------------------------------->
 
-            <div class="border border-gray-300 p-10 ml-6 rounded-md animate__animated wow animate__backInRight" data-wow-duration="3s">
+            <div class="border border-gray-300 sm:p-10 p-4  sm:ml-6 rounded-md animate__animated wow animate__backInRight" data-wow-duration="3s">
                 <form class="flex-col flex gap-6">
 
                     <input type="text" placeholder="Your Name*" wire:model="common.vname"
@@ -102,7 +111,7 @@
                     </div>
                     @enderror
 
-                    <div class="grid-cols-2 grid gap-2">
+                    <div class="sm:grid-cols-2 grid-cols-1 grid sm:gap-2 gap-6">
                         <input type="text" placeholder="Phone Number" wire:model="phone"
                                class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4">
 
@@ -127,17 +136,16 @@
                            class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4">
                     <textarea name="" id="" cols="30" rows="5" placeholder="Message*" wire:model="message"
                               class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm"></textarea>
-                    <button type="submit" wire:click.prevent="getSave"
-                            class="bg-[#3F5AF3] max-w-max text-white text-sm px-6 py-4">Submit Message
-                    </button>
+
+                    <x-button.animate2 type="submit" wire:click.prevent="getSave">Submit Message</x-button.animate2>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class=" w-9/12 mx-auto shadow-md shadow-gray-300 mb-24 h-[35rem] animate__animated wow bounceInUp" data-wow-duration="3s">
+    <div class=" sm:w-9/12 w-auto mx-auto shadow-md shadow-gray-300 mb-24 sm:h-[35rem] h-auto animate__animated wow bounceInUp" data-wow-duration="3s">
         <section class="">
-            <div class="container mx-auto px-4">
+            <div class="container mx-auto sm:px-4 px-2">
 
                 <!-- Responsive Google Map -->
                 <div class="relative h-[35rem] overflow-hidden mb-6" style="padding-bottom: 56.25%;">

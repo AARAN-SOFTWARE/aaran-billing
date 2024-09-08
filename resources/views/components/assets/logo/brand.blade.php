@@ -1,6 +1,6 @@
 @props(['logo'])
 
-<span class="inline-flex justify-center items-center">
+<span class="inline-flex justify-center items-center hover:scale-110 duration-300 transition-all ease-out">
 
     @switch($logo)
 
