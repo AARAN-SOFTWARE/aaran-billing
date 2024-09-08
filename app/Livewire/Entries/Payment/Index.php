@@ -40,13 +40,13 @@ class Index extends Component
     public function mount($id)
     {
         if ($id == 1) {
-            $this->mode_id = 85;
-            $this->mode_name = Common::find(85)->vname;
+            $this->mode_id = 83;
+            $this->mode_name = Common::find(83)->vname;
         } elseif ($id == 2) {
-            $this->mode_id = 84;
-            $this->mode_name = Common::find(84)->vname;
+            $this->mode_id = 82;
+            $this->mode_name = Common::find(82)->vname;
         }
-        $this->trans_type_id = 83;
+        $this->trans_type_id = 81;
 //        $this->receipt_type_id = 60;
 //        $this->receipt_type_name = Common::find(60)->vname;
     }
@@ -65,8 +65,8 @@ class Index extends Component
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
-                    'trans_type_id' => $this->trans_type_id ?: '82',
-                    'mode_id' => $this->mode_id ?: '84',
+                    'trans_type_id' => $this->trans_type_id ?: '81',
+                    'mode_id' => $this->mode_id ?: '83',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '1',
                     'remarks' => $this->remarks,
@@ -249,8 +249,8 @@ class Index extends Component
     public function getBankList(): void
     {
         $this->bankCollection = $this->bank_name ?
-            Common::search(trim($this->bank_name))->where('label_id', '=', '8')->get() :
-            Common::where('label_id', '=', '8')
+            Common::search(trim($this->bank_name))->where('label_id', '=', '9')->get() :
+            Common::where('label_id', '=', '9')
                 ->Orwhere('id', '=', '1')
                 ->get();
 
@@ -322,8 +322,8 @@ class Index extends Component
     public function getReceiptTypeList(): void
     {
         $this->receipt_typeCollection = $this->receipt_type_name ?
-            Common::search(trim($this->receipt_type_name))->where('label_id', '=', '13')->get() :
-            Common::where('label_id', '=', '13')->Orwhere('id', '=', '1')->get();
+            Common::search(trim($this->receipt_type_name))->where('label_id', '=', '14')->get() :
+            Common::where('label_id', '=', '14')->Orwhere('id', '=', '1')->get();
     }
 #endregion
 
@@ -456,8 +456,8 @@ class Index extends Component
     public function getTransTypeList(): void
     {
         $this->trans_typeCollection = $this->trans_type_name ?
-            Common::search(trim($this->trans_type_name))->where('label_id', '=', '18')->get() :
-            Common::where('label_id', '=', '18')->get();
+            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
+            Common::where('label_id', '=', '19')->get();
     }
 #endregion
 
@@ -526,8 +526,8 @@ class Index extends Component
     public function getModeList(): void
     {
         $this->modeCollection = $this->mode_name ?
-            Common::search(trim($this->mode_name))->where('label_id', '=', '19')->get() :
-            Common::where('label_id', '=', '19')->get();
+            Common::search(trim($this->mode_name))->where('label_id', '=', '20')->get() :
+            Common::where('label_id', '=', '20')->get();
     }
 #endregion
 
@@ -584,7 +584,7 @@ class Index extends Component
         $this->order_id = '';
         $this->order_name = '';
         $this->amount = '';
-        $this->trans_type_id = 83;
+        $this->trans_type_id = 80;
         $this->remarks = '';
         $this->chq_no = '';
         $this->chq_date = '';

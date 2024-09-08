@@ -7,7 +7,7 @@
 
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-        <x-table.caption :caption="'Transaction'">
+        <x-table.caption :caption="$mode_name">
             {{$list->count()}}
         </x-table.caption>
 

@@ -38,13 +38,13 @@ class Index extends Component
     public function mount($id)
     {
         if ($id == 1) {
-            $this->trans_type_id = 82;
-            $this->trans_type_name = Common::find(82)->vname;
+            $this->trans_type_id = 80;
+            $this->trans_type_name = Common::find(80)->vname;
             $this->receipt_type_id = 60;
             $this->receipt_type_name = Common::find(60)->vname;
         } elseif ($id == 2) {
-            $this->trans_type_id = 83;
-            $this->trans_type_name = Common::find(83)->vname;
+            $this->trans_type_id = 81;
+            $this->trans_type_name = Common::find(81)->vname;
         }
     }
     #endregion
@@ -62,8 +62,8 @@ class Index extends Component
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
-                    'trans_type_id' => $this->trans_type_id ?: '82',
-                    'mode_id' => $this->mode_id ?: '84',
+                    'trans_type_id' => $this->trans_type_id ?: '80',
+                    'mode_id' => $this->mode_id ?: '83',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '1',
                     'remarks' => $this->remarks,
@@ -319,8 +319,8 @@ class Index extends Component
     public function getReceiptTypeList(): void
     {
         $this->receipt_typeCollection = $this->receipt_type_name ?
-            Common::search(trim($this->receipt_type_name))->where('label_id', '=', '13')->where('id', '!=', 60)->get() :
-            Common::where('label_id', '=', '13')->where('id', '!=', 60)->Orwhere('id', '=', '1')->get();
+            Common::search(trim($this->receipt_type_name))->where('label_id', '=', '14')->where('id', '!=', 80)->get() :
+            Common::where('label_id', '=', '14')->where('id', '!=', 80)->Orwhere('id', '=', '1')->get();
     }
 #endregion
 
@@ -527,7 +527,6 @@ class Index extends Component
             Common::where('label_id', '=', '19')->get();
     }
 #endregion
-
 
     #region[Get-Obj]
     public function getObj($id)

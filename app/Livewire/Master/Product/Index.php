@@ -24,10 +24,10 @@ class Index extends Component
             if ($this->common->vid == '') {
                 $Product = new Product();
                 $extraFields = [
-                    'producttype_id' => $this->producttype_id?:'66',
-                    'hsncode_id' => $this->hsncode_id?:'41',
-                    'unit_id' => $this->unit_id?:'71',
-                    'gstpercent_id' => $this->gstpercent_id?:'74',
+                    'producttype_id' => $this->producttype_id?:'64',
+                    'hsncode_id' => $this->hsncode_id?:'44',
+                    'unit_id' => $this->unit_id?:'66',
+                    'gstpercent_id' => $this->gstpercent_id?:'72',
                     'initial_quantity' => $this->quantity?:'0',
                     'initial_price' => $this->price?:'0',
                     'user_id' => auth()->id(),
@@ -56,6 +56,7 @@ class Index extends Component
     #endregion
 
     #region[hsncode]
+
     public $hsncode_id = '';
     public $hsncode_name = '';
     public Collection $hsncodeCollection;
@@ -120,8 +121,8 @@ class Index extends Component
     public function getHsncodeList(): void
     {
         $this->hsncodeCollection = $this->hsncode_name ?
-            Common::search(trim($this->hsncode_name))->where('label_id', '=', '5')->get() :
-            Common::where('label_id', '=', '5')->get();
+            Common::search(trim($this->hsncode_name))->where('label_id', '=', '6')->get() :
+            Common::where('label_id', '=', '6')->get();
     }
 #endregion
 
@@ -190,8 +191,8 @@ class Index extends Component
     public function getProductTypeList(): void
     {
         $this->producttypeCollection = $this->producttype_name ?
-            Common::search(trim($this->producttype_name))->where('label_id', '=', '14')->get() :
-            Common::where('label_id', '=', '14')->get();
+            Common::search(trim($this->producttype_name))->where('label_id', '=', '15')->get() :
+            Common::where('label_id', '=', '15')->get();
     }
 #endregion
 
@@ -260,8 +261,8 @@ class Index extends Component
     public function getUnitList(): void
     {
         $this->unitCollection = $this->unit_name ?
-            Common::search(trim($this->unit_name))->where('label_id', '=', '15')->get() :
-            Common::where('label_id', '=', '15')->get();
+            Common::search(trim($this->unit_name))->where('label_id', '=', '16')->get() :
+            Common::where('label_id', '=', '16')->get();
     }
 #endregion
 
@@ -330,8 +331,8 @@ class Index extends Component
     public function getGstPercentList(): void
     {
         $this->gstpercentCollection = $this->gstpercent_name ?
-            Common::search(trim($this->gstpercent_name))->where('label_id', '=', '16')->get() :
-            Common::where('label_id', '=', '16')->get();
+            Common::search(trim($this->gstpercent_name))->where('label_id', '=', '17')->get() :
+            Common::where('label_id', '=', '17')->get();
     }
 #endregion
 
@@ -390,6 +391,7 @@ class Index extends Component
         $this->getProductTypeList();
         $this->getUnitList();
         $this->getGstPercentList();
+
         return view('livewire.master.product.index')->with([
             'list' => $this->getListForm->getList(Product::class, function ($query) {
                 return $query->where('id', '>', '');

@@ -181,8 +181,8 @@ class Upsert extends Component
     public function getCityList(): void
     {
         $this->cityCollection = $this->itemList[$this->openTab]['city_name']
-            ? Common::search(trim($this->itemList[$this->openTab]['city_name'] ))->where('label_id','=','1')->get()
-            : Common::where('label_id','=','1')->get();
+            ? Common::search(trim($this->itemList[$this->openTab]['city_name'] ))->where('label_id','=','2')->get()
+            : Common::where('label_id','=','2')->Orwhere('label_id','=','1')->get();
     }
     #endregion
 
@@ -258,8 +258,8 @@ class Upsert extends Component
     public function getStateList(): void
     {
         $this->stateCollection =  $this->itemList[$this->openTab]['state_name']
-            ? Common::search(trim($this->itemList[$this->openTab]['state_name'] ))->where('label_id','=','2')
-            ->get() : Common::where('label_id','=','2')->Orwhere('id', '=', '1')->get();
+            ? Common::search(trim($this->itemList[$this->openTab]['state_name'] ))->where('label_id','=','3')
+            ->get() : Common::where('label_id','=','3')->Orwhere('id', '=', '1')->get();
     }
     #endregion
 
@@ -336,8 +336,8 @@ class Upsert extends Component
     public function getPincodeList(): void
     {
         $this->pincodeCollection = $this->itemList[$this->openTab]['pincode_name']
-            ? Common::search(trim($this->itemList[$this->openTab]['pincode_name'] ))->where('label_id','=','3')
-            ->get() : Common::where('label_id','=','3')->Orwhere('id', '=', '1')->get();
+            ? Common::search(trim($this->itemList[$this->openTab]['pincode_name'] ))->where('label_id','=','4')
+            ->get() : Common::where('label_id','=','4')->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -415,8 +415,8 @@ class Upsert extends Component
     public function getCountryList(): void
     {
         $this->countryCollection = $this->itemList[$this->openTab]['country_name']
-            ? Common::search(trim($this->itemList[$this->openTab]['country_name'] ))->where('label_id','=','4')
-            ->get() : Common::where('label_id','=','4')->Orwhere('id', '=', '1')->get();
+            ? Common::search(trim($this->itemList[$this->openTab]['country_name'] ))->where('label_id','=','5')
+            ->get() : Common::where('label_id','=','5')->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -485,7 +485,6 @@ class Upsert extends Component
         }
     }
     #endregion
-
 
     #region[Save Item]
     public function saveItem($id): void

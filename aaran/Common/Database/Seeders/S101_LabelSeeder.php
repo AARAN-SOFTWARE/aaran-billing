@@ -11,113 +11,139 @@ class S101_LabelSeeder extends Seeder
     {
         #1
         Label::create([
+            'vname' => '-',
+            'cols' => 1,
+            'active_id' => '1'
+        ]);
+
+        #2
+        Label::create([
             'vname' => 'City ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #2
+
+        #3
         Label::create([
             'vname' => 'State ',
             'cols' => 2,
             'active_id' => '1'
         ]);
-        #3
+
+        #4
         Label::create([
             'vname' => 'PinCode ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #4
+
+        #5
         Label::create([
             'vname' => 'Country ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #5
+
+        #6
         Label::create([
             'vname' => 'HsnCode ',
             'cols' => 2,
             'active_id' => '1'
         ]);
-        #6
+
+        #7
         Label::create([
             'vname' => 'Colour ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #7
+
+        #8
         Label::create([
             'vname' => 'Size ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #8
+
+        #9
         Label::create([
             'vname' => 'Bank ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #9
+
+        #10
         Label::create([
             'vname' => 'Ledger ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #10
+
+        #11
         Label::create([
             'vname' => 'Transport ',
             'cols' => 2,
             'active_id' => '1'
         ]);
-        #11
+
+        #12
         Label::create([
             'vname' => 'Department ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #12
+
+        #13
         Label::create([
             'vname' => 'Dispatch ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #13
+
+        #14
         Label::create([
             'vname' => 'Receipt Type ',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #14
+
+        #15
         Label::create([
             'vname' => 'Product Type',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #15
+
+        #16
         Label::create([
             'vname' => 'Units',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #16
+
+
+        #17
         Label::create([
             'vname' => 'GST Percent',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #17
+
+        #18
         Label::create([
             'vname' => 'Blog Category',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #18
+
+        #19
         Label::create([
             'vname' => 'Transaction Type',
             'cols' => 1,
             'active_id' => '1'
         ]);
-        #19
+
+        #20
         Label::create([
             'vname' => 'Mode of Payment',
             'cols' => 1,

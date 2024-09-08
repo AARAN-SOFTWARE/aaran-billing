@@ -327,6 +327,7 @@
             @endif
 
             <!--Size ------------------------------------------------------------------------------------------------------>
+
             @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
                 <x-dropdown.wrapper label="Size Name" type="sizeTyped">
                     <div class="relative ">
@@ -365,6 +366,7 @@
             </div>
 
             <!-- Price ---------------------------------------------------------------------------------------------------->
+
             <div class="w-full">
                 <x-input.floating id="price" wire:model.live="price" label="Price"/>
             </div>
@@ -383,6 +385,7 @@
         </section>
 
         <!-- Display Items ----------------------------------------------------------------------------------------------->
+
         <section>
             <div class="py-2 mt-5 overflow-x-auto">
 
