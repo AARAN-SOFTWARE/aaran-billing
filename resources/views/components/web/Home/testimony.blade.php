@@ -5,9 +5,9 @@
         <div class="flex-col flex justify-center sm:gap-y-10 gap-y-3 items-center sm:px-16 px-4">
 
             <div class="w-full flex items-center gap-x-3 justify-center py-6">
-                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r from-white to-[#B7C1FA] hidden">&nbsp;</span>
+                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
                 <span class="text-[#5069F4] text-xl font-semibold ">Run your business from anywhere.</span>
-                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r from-[#B7C1FA] to-white hidden">&nbsp;</span>
+                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r from-[#B7C1FA] to-white ">&nbsp;</span>
             </div>
 
             <div class="sm:text-5xl text-md font-bold pb-6 border-b border-black animate__animated wow animate__bounceInDown"

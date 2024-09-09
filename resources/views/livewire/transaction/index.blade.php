@@ -161,10 +161,7 @@
                                             {{ $contact->vname }}
                                         </x-dropdown.option>
                                     @empty
-                                        <a href="{{route('contacts.upsert',['0'])}}" role="button"
-                                           class="flex items-center justify-center bg-green-500 w-full h-8 text-white text-center">
-                                            Not found , Want to create new
-                                        </a>
+                                        <x-dropdown.new href="{{route('contacts.upsert',['0'])}}" label="Contact" />
                                     @endforelse
                                 @endif
 
@@ -220,11 +217,7 @@
                                                                 {{ $receipt_type->vname }}
                                                             </x-dropdown.option>
                                                         @empty
-                                                            <button
-                                                                wire:click.prevent="receiptTypeSave('{{$receipt_type_name}}')"
-                                                                class="text-white bg-green-500 text-center w-full">
-                                                                create
-                                                            </button>
+                                                            <x-dropdown.new wire:click.prevent="receiptTypeSave('{{$receipt_type_name}}')" label="Receipt" />
                                                         @endforelse
                                                     @endif
 
@@ -254,11 +247,7 @@
                                                                 {{ $bank->vname }}
                                                             </x-dropdown.option>
                                                         @empty
-                                                            <button
-                                                                wire:click.prevent="bankSave('{{$bank_name}}')"
-                                                                class="text-white bg-green-500 text-center w-full">
-                                                                create
-                                                            </button>
+                                                            <x-dropdown.new wire:click.prevent="bankSave('{{$bank_name}}')" label="Bank Details" />
                                                         @endforelse
                                                     @endif
 
@@ -288,20 +277,15 @@
                                     <!-- Order No ----------------------------------------------------------------------------------------->
 
                                     <x-dropdown.wrapper label="Order NO" type="orderTyped">
-
                                         <div class="relative">
-
                                             <x-dropdown.input label="Order NO" id="order_name"
                                                               wire:model.live="order_name"
                                                               wire:keydown.arrow-up="decrementOrder"
                                                               wire:keydown.arrow-down="incrementOrder"
                                                               wire:keydown.enter="enterOrder"/>
                                             <x-dropdown.select>
-
                                                 @if($orderCollection)
-
                                                     @forelse ($orderCollection as $i => $order)
-
                                                         <x-dropdown.option highlight="{{$highlightOrder === $i  }}"
                                                                            wire:click.prevent="setOrder('{{$order->vname}}','{{$order->id}}')">
                                                             {{ $order->vname }}
@@ -311,7 +295,6 @@
                                                         @livewire('controls.model.order-model',[$order_name])
                                                     @endforelse
                                                 @endif
-
                                             </x-dropdown.select>
                                         </div>
                                     </x-dropdown.wrapper>
@@ -358,6 +341,5 @@
                 </div>
             </div>
         </x-forms.create>
-
     </x-forms.m-panel>
 </div>

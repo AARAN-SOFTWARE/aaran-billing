@@ -1,3 +1,7 @@
+@props([
+'transactions' => [],
+])
+
 <div class="sm:w-5/12 sm:h-[20rem] h-auto flex flex-col gap-5">
     <div class="w-full flex sm:flex-row flex-col h-1/2 sm:gap-5 gap-10">
         <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow-md border-t-2 border-[#845ADF] ">
@@ -5,11 +9,11 @@
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md">Purchase</div>
-                        <div class="text-xl text-[#845ADF]">₹ 14,00,000</div>
+                        <div class="text-xl text-[#845ADF]">₹ {{$transactions['total_purchase']}}</div>
                     </div>
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
-                        <span class="text-[#845ADF] text-sm ">₹ 63,890</span>
+                        <span class="text-[#845ADF] text-sm ">₹ {{$transactions['month_purchase']}}</span>
                     </div>
                 </div>
                 <div class="flex-col flex space-y-4">
@@ -32,7 +36,8 @@
                             </g>
                         </svg>
                     </div>
-                    <div class="inline-flex items-center gap-2 text-[#845ADF] font-semibold hover:bg-[#efeafb] p-1 rounded-md transition-colors duration-300 ease-out">
+                    <div class="inline-flex items-center gap-2 text-[#845ADF] font-semibold hover:bg-[#efeafb] p-1 rounded-md
+                    transition-colors duration-300 ease-out">
                         <span class="text-sm">View All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke-width="1.5"
@@ -49,11 +54,13 @@
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Receivables</div>
-                        <div class="text-xl text-[#F5B849]">₹ 6,00,000</div>
+                        <div class="text-xl text-[#F5B849]">₹ 4,00,000</div>
+{{--                        <div class="text-xl text-[#F5B849]">₹ {{$transactions['total_receivable']}}</div>--}}
                     </div>
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
-                        <span class="text-[#F5B849] text-sm ">₹ 48,000</span>
+                        <span class="text-[#F5B849] text-sm ">₹ 24,000</span>
+{{--                        <span class="text-[#F5B849] text-sm ">₹ {{$transactions['month_receivable']}}</span>--}}
                     </div>
                 </div>
                 <div class="flex-col flex space-y-4">
@@ -104,11 +111,13 @@
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Payables</div>
-                        <div class="text-xl text-[#E6533C]">₹ 4,00,000</div>
+                        <div class="text-xl text-[#E6533C]">₹ 5,00,000</div>
+{{--                        <div class="text-xl text-[#E6533C]">₹ {{$transactions['total_payable']}}</div>--}}
                     </div>
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
-                        <span class="text-[#E6533C] text-sm ">₹ 90,000</span>
+                        <span class="text-[#E6533C] text-sm ">₹ 41,300</span>
+{{--                        <span class="text-[#E6533C] text-sm ">₹ {{$transactions['month_payable']}}</span>--}}
                     </div>
                 </div>
                 <div class="flex-col flex space-y-4">

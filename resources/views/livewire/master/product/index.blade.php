@@ -45,7 +45,8 @@
                         <x-table.cell-text>
                             {{\Aaran\Master\Models\Product::common($row->hsncode_id)}}
                         </x-table.cell-text>
-                        <x-table.cell-text>{{\Aaran\Master\Models\Product::common($row->gstpercent_id)}} %</x-table.cell-text>
+                        <x-table.cell-text>{{\Aaran\Master\Models\Product::common($row->gstpercent_id)}}%
+                        </x-table.cell-text>
                         <x-table.cell-text>{{$row->initial_quantity}}</x-table.cell-text>
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
@@ -88,13 +89,8 @@
                                     </x-dropdown.option>
 
                                 @empty
-
-                                    <button
-                                        wire:click.prevent="productTypeSave('{{$producttype_name}}')"
-                                        class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
-
+                                    <x-dropdown.new wire:click.prevent="productTypeSave('{{$producttype_name}}')"
+                                                       label="Product"/>
                                 @endforelse
                             @endif
 
@@ -181,13 +177,8 @@
                                     </x-dropdown.option>
 
                                 @empty
-
-                                    <button
-                                        wire:click.prevent="hsncodeSave('{{$hsncode_name}}')"
-                                        class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
-
+                                    <x-dropdown.new wire:click.prevent="hsncodeSave('{{$hsncode_name}}')"
+                                                       label="HSN Code"/>
                                 @endforelse
                             @endif
 
@@ -199,33 +190,22 @@
 
                 <x-dropdown.wrapper label="Unit" type="unitTyped">
                     <div class="relative ">
-
                         <x-dropdown.input label="Unit" id="unit_name"
                                           wire:model.live="unit_name"
                                           wire:keydown.arrow-up="decrementUnit"
                                           wire:keydown.arrow-down="incrementUnit"
                                           wire:keydown.enter="enterUnit"/>
-
                         <x-dropdown.select>
                             @if($unitCollection)
                                 @forelse ($unitCollection as $i => $unit)
-
                                     <x-dropdown.option highlight="{{$highlightUnit === $i  }}"
                                                        wire:click.prevent="setUnit('{{$unit->vname}}','{{$unit->id}}')">
                                         {{ $unit->vname }}
                                     </x-dropdown.option>
-
                                 @empty
-
-                                    <button
-                                        wire:click.prevent="unitSave('{{$unit_name}}')"
-                                        class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
-
+                                    <x-dropdown.new wire:click.prevent="unitSave('{{$unit_name}}')" label="Units"/>
                                 @endforelse
                             @endif
-
                         </x-dropdown.select>
                     </div>
                 </x-dropdown.wrapper>
@@ -234,41 +214,29 @@
 
                 <x-dropdown.wrapper label="GST Percent" type="gstpercentTyped">
                     <div class="relative ">
-
                         <x-dropdown.input label="GST Percent" id="gstpercent_name"
                                           wire:model.live="gstpercent_name"
                                           wire:keydown.arrow-up="decrementGstPercent"
                                           wire:keydown.arrow-down="incrementGstPercent"
                                           wire:keydown.enter="enterGstPercent"/>
                         <x-dropdown.select>
-
                             @if($gstpercentCollection)
                                 @forelse ($gstpercentCollection as $i => $gstpercent)
-
                                     <x-dropdown.option highlight="{{$highlightGstPercent === $i}}"
                                                        wire:click.prevent="setGstPercent('{{$gstpercent->vname}}','{{$gstpercent->id}}')">
                                         {{ $gstpercent->vname }}
                                     </x-dropdown.option>
-
                                 @empty
-
-                                    <button
-                                        wire:click.prevent="gstPercentSave('{{$gstpercent_name}}')"
-                                        class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
-
+                                    <x-dropdown.new wire:click.prevent="gstPercentSave('{{$gstpercent_name}}')"
+                                                       label="GST Percent"/>
                                 @endforelse
                             @endif
 
                         </x-dropdown.select>
                     </div>
-
                 </x-dropdown.wrapper>
-
                 <x-input.floating wire:model="quantity" label="Opening Quantity"/>
                 <x-input.floating wire:model="price" label="Opening Price"/>
-
             </div>
 
         </x-forms.create>

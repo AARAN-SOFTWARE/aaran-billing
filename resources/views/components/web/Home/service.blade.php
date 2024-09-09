@@ -16,7 +16,7 @@
 
                 <div class="text-center font-semibold sm:text-2xl text-md">/SW DEVELOPMENT</div>
 
-                <img src="../../../../images/softwareDev.png" alt="" class="brightness-50">
+                <img src="../../../../images/swdev.jpg" alt="" class="brightness-50 h-full w-full">
 
                 <div
                     class="sm:w-[60px] sm:h-[60px] w-[40px] h-[40px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9

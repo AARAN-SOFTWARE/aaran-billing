@@ -5,7 +5,7 @@
         <div class="flex items-center gap-x-3 justify-center">
             <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
             <span class="text-[#5069F4] sm:text-sm text-xs font-semibold">Billing Made Simple and Efficient</span>
-            <span class="hidden sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
+            <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
         </div>
 
         <div class="text-center md:text-6xl text-lg font-semibold">Try India’s easiest GST billing platform</div>
@@ -17,11 +17,8 @@
                 <div class="relative inline-flex items-center justify-center group">
                     <span
                         class="z-10 absolute bottom-6 right-12 group-hover:translate-x-11 group-hover:translate-y-3 duration-700 transition-all ease-in-out">
-                                               <div
-                                                   class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
-
+                           <div class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
                     </span>
-
                     <span
                         class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center cursor-pointer">
                         <svg fill="#2846f0"
@@ -33,9 +30,7 @@
                                 d="M983.151 92.251l-.307 101.827c-.034 11.311 9.107 20.508 20.418 20.542s20.508-9.107 20.542-20.418l.307-101.827c.034-11.311-9.107-20.508-20.418-20.542s-20.508 9.107-20.542 20.418z"/></svg>
                        </span>
                 </div>
-
                 <div class="text-2xl font-semibold py-4">Sales & Purchase</div>
-
                 <div class="text-gray-600 text-sm">Create sleek invoices with the click of a button.
                     From adding your company logo to changing fonts, customize invoice templates to reflect your brand.
                     Streamlines the sales order processing, Facilitates the purchase order management, Provides a better
@@ -176,7 +171,8 @@
                         class="z-10 absolute bottom-6 right-12 group-hover:translate-x-11 group-hover:translate-y-3 duration-700 transition-all ease-in-out">
                         <div class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
                     </span>
-                    <span class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center p-12  cursor-pointer">
+                    <span
+                        class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center p-12  cursor-pointer">
 
 <svg class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear" version="1.1" id="Layer_1"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
