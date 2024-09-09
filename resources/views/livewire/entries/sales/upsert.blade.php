@@ -281,7 +281,7 @@
                                         {{ $colour->vname }}
                                     </x-dropdown.option>
                                 @empty
-                                    <x-dropdown.create  wire:click.prevent="colourSave('{{$colour_name}}')" label="Colour" />
+                                    <x-dropdown.new  wire:click.prevent="colourSave('{{$colour_name}}')" label="Colour" />
                                 @endforelse
                             @endif
                         </x-dropdown.select>
@@ -310,7 +310,7 @@
                                         {{ $size->vname }}
                                     </x-dropdown.option>
                                 @empty
-                                    <x-dropdown.create wire:click.prevent="sizeSave('{{$size_name}}')" label="Size"/>
+                                    <x-dropdown.new wire:click.prevent="sizeSave('{{$size_name}}')" label="Size"/>
                                 @endforelse
                             @endif
                         </x-dropdown.select>
@@ -540,7 +540,7 @@
                                                             {{ $ledger->vname }}
                                                         </x-dropdown.option>
                                                     @empty
-                                                        <x-dropdown.create wire:click.prevent="ledgerSave('{{$ledger_name}}')" label="Ledger" />
+                                                        <x-dropdown.new wire:click.prevent="ledgerSave('{{$ledger_name}}')" label="Ledger" />
                                                     @endforelse
                                                 @endif
                                             </x-dropdown.select>
@@ -572,7 +572,7 @@
                                                                 {{ $transport->vname }}
                                                             </x-dropdown.option>
                                                         @empty
-                                                            <x-dropdown.create wire:click.prevent="transportSave('{{$transport_name}}')" label="Transport" />
+                                                            <x-dropdown.new wire:click.prevent="transportSave('{{$transport_name}}')" label="Transport" />
                                                         @endforelse
                                                     @endif
                                                 </x-dropdown.select>

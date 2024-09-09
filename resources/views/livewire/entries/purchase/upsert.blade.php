@@ -21,7 +21,6 @@
                         <span class="text-red-500">{{'The Party Name is Required.'}}</span>
 
                         @enderror
-
                         <x-dropdown.select>
                             @if($contactCollection)
                                 @forelse ($contactCollection as $i => $contact)
@@ -29,13 +28,8 @@
                                                        wire:click.prevent="setContact('{{$contact->vname}}','{{$contact->id}}')">
                                         {{ $contact->vname }}
                                     </x-dropdown.option>
-
                                 @empty
-
-                                    <a href="{{route('contacts.upsert',['0'])}}" role="button"
-                                       class="flex items-center justify-center bg-green-100 w-full h-8 text-green-600 font-bold hover:scale-105 text-center">
-                                        Not found , Want to create new
-                                    </a>
+                                    <x-dropdown.new href="{{route('contacts.upsert',['0'])}}" label="Contact"/>
                                 @endforelse
                             @endif
                         </x-dropdown.select>
@@ -55,11 +49,8 @@
                                               wire:keydown.arrow-down="incrementOrder"
                                               wire:keydown.enter="enterOrder"/>
                             @error('order_id')
-
                             <span class="text-red-500">{{'The Order is Required.'}}</span>
-
                             @enderror
-
                             <x-dropdown.select>
                                 @if($orderCollection)
                                     @forelse ($orderCollection as $i => $order)
@@ -82,7 +73,6 @@
             <!-- Top Right Area---------------------------------------------------------------------------------------->
 
             <div class="flex flex-col gap-5">
-
                 <x-input.floating wire:model="entry_no" label="Entry No"/>
                 <x-input.floating wire:model="purchase_date" label="Purchase Date" type="date"/>
                 <x-input.model-select wire:model="sales_type" :label="'Sales Type'">
@@ -93,7 +83,6 @@
             </div>
         </section>
         <x-forms.section-border/>
-
 
         <!-- Purchase Items  ------------------------------------------------------------------------------------------>
 
@@ -165,10 +154,8 @@
                                         {{ $colour->vname }}
                                     </x-dropdown.option>
                                 @empty
-                                    <button wire:click.prevent="colourSave('{{$colour_name}}')"
-                                            class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
+                                    <x-dropdown.new wire:click.prevent="colourSave('{{$colour_name}}')"
+                                                       label="Colour"/>
                                 @endforelse
                             @endif
                         </x-dropdown.select>
@@ -179,10 +166,8 @@
             <!--Size -------------------------------------------------------------------------------------------------->
 
             @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
-
                 <x-dropdown.wrapper label="Size Name" type="sizeTyped">
                     <div class="relative ">
-
                         <x-dropdown.input label="Size Name" id="size_name"
                                           wire:model.live="size_name"
                                           wire:keydown.arrow-up="decrementSize"
@@ -191,7 +176,6 @@
                         @error('size_id')
                         <span class="text-red-500">{{'The Size name is Required.'}}</span>
                         @enderror
-
                         <x-dropdown.select>
                             @if($sizeCollection)
                                 @forelse ($sizeCollection as $i => $size)
@@ -200,10 +184,7 @@
                                         {{ $size->vname }}
                                     </x-dropdown.option>
                                 @empty
-                                    <button wire:click.prevent="sizeSave('{{$size_name}}')"
-                                            class="text-white bg-green-500 text-center w-full">
-                                        create
-                                    </button>
+                                    <x-dropdown.new wire:click.prevent="sizeSave('{{$size_name}}')" label="Size"/>
                                 @endforelse
                             @endif
                         </x-dropdown.select>
@@ -217,7 +198,7 @@
 
             <x-input.floating wire:model.live="price" label="Price" autocomplete="false"/>
 
-            <x-button.add wire:click="addItems"  />
+            <x-button.add wire:click="addItems"/>
 
         </section>
 
@@ -395,11 +376,9 @@
                                                             {{ $ledger->vname }}
                                                         </x-dropdown.option>
                                                     @empty
-                                                        <button
+                                                        <x-dropdown.new
                                                             wire:click.prevent="ledgerSave('{{$ledger_name}}')"
-                                                            class="text-white bg-green-500 text-center w-full">
-                                                            create
-                                                        </button>
+                                                            label="Ledger"/>
                                                     @endforelse
                                                 @endif
                                             </x-dropdown.select>
@@ -431,11 +410,7 @@
                                                                 {{ $transport->vname }}
                                                             </x-dropdown.option>
                                                         @empty
-                                                            <button
-                                                                wire:click.prevent="transportSave('{{$transport_name}}')"
-                                                                class="text-white bg-green-500 text-center w-full">
-                                                                create
-                                                            </button>
+                                                            <x-dropdown.new wire:click.prevent="transportSave('{{$transport_name}}')" label="Transport" />
                                                         @endforelse
                                                     @endif
                                                 </x-dropdown.select>

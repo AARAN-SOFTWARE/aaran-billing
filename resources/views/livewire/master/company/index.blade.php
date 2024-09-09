@@ -115,11 +115,7 @@
                                                         {{ $city->vname }}
                                                     </x-dropdown.option>
                                                 @empty
-                                                    <button
-                                                        wire:click.prevent="citySave('{{$city_name}}')"
-                                                        class="text-white bg-green-500 text-center w-full">
-                                                        create
-                                                    </button>
+                                                    <x-dropdown.create  wire:click.prevent="citySave('{{$city_name}}')" label="City" />
                                                 @endforelse
                                             @endif
                                         </x-dropdown.select>
@@ -143,11 +139,7 @@
                                                         {{ $states->vname }}
                                                     </x-dropdown.option>
                                                 @empty
-                                                    <button
-                                                        wire:click.prevent="stateSave('{{ $state_name }}')"
-                                                        class="text-white bg-green-500 text-center w-full">
-                                                        create
-                                                    </button>
+                                                    <x-dropdown.create wire:click.prevent="stateSave('{{ $state_name }}')" label="State" />
                                                 @endforelse
                                             @endif
                                         </x-dropdown.select>
@@ -172,11 +164,7 @@
                                                         {{ $pincode->vname }}
                                                     </x-dropdown.option>
                                                 @empty
-                                                    <button
-                                                        wire:click.prevent="pincodeSave('{{$pincode_name}}')"
-                                                        class="text-white bg-green-500 text-center w-full">
-                                                        create
-                                                    </button>
+                                                    <x-dropdown.create wire:click.prevent="pincodeSave('{{$pincode_name}}')" label="Pincode" />
                                                 @endforelse
                                             @endif
                                         </x-dropdown.select>
@@ -196,7 +184,6 @@
                                 <div class="flex flex-wrap sm:gap-6 gap-2">
                                     <div class="flex-shrink-0">
                                         <div>
-
                                             @if($logo)
                                                 <div
                                                     class=" flex-shrink-0 bg-blue-100 p-1 rounded-lg overflow-hidden">
