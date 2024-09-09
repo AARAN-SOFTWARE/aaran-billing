@@ -2,7 +2,9 @@
     <x-slot name="header">Common</x-slot>
 
     <x-forms.m-panel>
+
         <!-- Top Controls --------------------------------------------------------------------------------------------->
+
         <x-forms.top-controls :show-filters="$showFilters"/>
 
         <div class="flex gap-3">
@@ -23,11 +25,16 @@
                 {{--                    </div>--}}
                 {{--                </div>--}}
             </div>
+
             <x-table.caption :caption="'Common'">
                 {{$list->count()}}
             </x-table.caption>
         </div>
+
         <x-table.form>
+
+            <!-- Table Header ----------------------------------------------------------------------------------------->
+
             <x-slot:table_header name="table_header" class="bg-green-600">
                 <x-table.header-serial width="20%"/>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Common
@@ -42,6 +49,9 @@
                 <x-table.header-text>Status</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
+
+            <!-- Table Body ------------------------------------------------------------------------------------------->
+
             <x-slot:table_body name="table_body">
                 @foreach($labelData as $data)
                     <x-table.row>
@@ -50,6 +60,7 @@
                                     {{$data->vname}}
                                 </span>
                         </x-table.cell-text>
+
                         @foreach($list as $index=>$row)
                             @if($data->id==$row->label_id)
                                 <x-table.row>
@@ -70,6 +81,7 @@
         <x-modal.delete/>
         <div class="pt-5">{{ $list->links() }}</div>
 
+        <!-- Form ----------------------------------------------------------------------------------------------------->
 
         <x-forms.create :id="$common->vid">
             <div class="flex flex-col  gap-3">
@@ -79,12 +91,12 @@
                         <option value="{{$value->id}}">{{$value->vname}}</option>
                     @endforeach
                 </x-input.model-select>
-{{--                <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
-                <x-input.floating  wire:model="common.vname" label="Name"/>
-                <x-input.floating  wire:model="desc" label="Description 1"/>
-                <x-input.floating  wire:model="desc_1" label="Description 2"/>
-{{--                <x-input.model-text wire:model="desc" :label="'desc'"/>--}}
-{{--                <x-input.model-text wire:model="desc_1" :label="'desc 1'"/>--}}
+                {{--                <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
+                <x-input.floating wire:model="common.vname" label="Name"/>
+                <x-input.floating wire:model="desc" label="Description 1"/>
+                <x-input.floating wire:model="desc_1" label="Description 2"/>
+                {{--                <x-input.model-text wire:model="desc" :label="'desc'"/>--}}
+                {{--                <x-input.model-text wire:model="desc_1" :label="'desc 1'"/>--}}
             </div>
         </x-forms.create>
     </x-forms.m-panel>

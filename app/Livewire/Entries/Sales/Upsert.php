@@ -757,7 +757,7 @@ class Upsert extends Component
     public function colourSave($name)
     {
         $obj = Common::create([
-            'label_id' => 6,
+            'label_id' => 7,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -831,7 +831,7 @@ class Upsert extends Component
     public function sizeSave($name)
     {
         $obj = Common::create([
-            'label_id' => '7',
+            'label_id' => '8',
             'vname' => $name,
             'active_id' => '1'
         ]);

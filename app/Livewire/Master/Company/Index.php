@@ -101,7 +101,7 @@ class Index extends Component
     public function citySave($name)
     {
         $obj= Common::create([
-            'label_id'=>1,
+            'label_id'=>2,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -173,7 +173,7 @@ class Index extends Component
     public function stateSave($name):void
     {
         $obj=Common::create([
-            'label_id'=>2,
+            'label_id'=>3,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -243,7 +243,7 @@ class Index extends Component
     public function pincodeSave($name)
     {
         $obj = Common::create([
-            'label_id'=>3,
+            'label_id'=>4,
             'vname' => $name,
             'active_id' => '1'
         ]);

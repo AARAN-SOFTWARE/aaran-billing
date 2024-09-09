@@ -319,6 +319,7 @@
             @endif
 
             <!-- Quantity ------------------------------------------------------------------------------------------------->
+
             <div class="w-full">
                 <x-input.floating id="qty" wire:model.live="qty" label="Quantity"/>
             </div>
@@ -474,6 +475,7 @@
             </div>
 
         </section>
+
         <x-forms.section-border/>
 
         <section class="sm:hidden flex w-full ">

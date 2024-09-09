@@ -44,7 +44,7 @@
                         <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
                         <x-table.cell-text>{{$row->gstin}}</x-table.cell-text>
                         <x-table.cell-text>{{$row->mobile}}</x-table.cell-text>
-                        <x-table.cell-text left>{{$row->address_1.', '.$row->address_1}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->address_1}}</x-table.cell-text>
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
                 @endforeach

@@ -11,12 +11,15 @@ class CommonList extends Component
 {
     use CommonTraitNew;
 
+    #region[Properties]
     public $desc;
     public $desc_1;
     public $label_id;
     public $labelData;
     public array $filter = [];
+    #endregion
 
+    #region[Mount]
     public function mount($id = null)
     {
         if ($id != null) {
@@ -27,7 +30,9 @@ class CommonList extends Component
         });
 
     }
+    #endregion
 
+    #region[getSave]
     public function getSave(): void
     {
         if ($this->common->vid == '') {
@@ -53,7 +58,9 @@ class CommonList extends Component
         }
         $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
     }
+    #endregion
 
+    #region[getObj]
     public function getObj($id)
     {
         if ($id) {
@@ -68,7 +75,9 @@ class CommonList extends Component
         }
         return null;
     }
+    #endregion
 
+    #region[clear Fields]
     public function clearFields(): void
     {
         $this->common->vid = '';
@@ -78,7 +87,9 @@ class CommonList extends Component
         $this->desc_1 = '';
         $this->label_id = '';
     }
+    #endregion
 
+    #region[getRoute]
     public function getRoute()
     {
         return route('commons');
@@ -96,4 +107,5 @@ class CommonList extends Component
             }),
         ]);
     }
+    #endregion
 }

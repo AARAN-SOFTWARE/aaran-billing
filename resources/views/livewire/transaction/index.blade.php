@@ -198,7 +198,7 @@
                             <x-tabs.content>
                                 <div class="flex flex-col gap-3">
 
-                                    @if ( $trans_type_id!=82)
+                                    @if ( $trans_type_id != 80)
 
                                         <!-- receipt type ----------------------------------------------------------------->
 
