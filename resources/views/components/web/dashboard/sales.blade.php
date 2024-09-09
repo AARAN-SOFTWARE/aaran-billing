@@ -1,13 +1,16 @@
+@props([
+'transactions' => [],
+])
 <div class="sm:w-4/12 w-auto sm:h-[20rem] h-auto bg-white p-5 rounded-lg border-t-2 border-[#23B7E5] hover:shadow-md">
     <div class="flex justify-between">
         <div class="space-y-2">
             <div class="flex-col gap-1 font-semibold">
                 <div class="text-md ">Sales</div>
-                <div class="text-2xl text-[#23B7E5]">₹ 39,00,000</div>
+                <div class="text-2xl text-[#23B7E5]">₹ {{$transactions['total_sales']}}</div>
             </div>
             <div class="flex-col flex gap-1 font-semibold">
                 <span class="text-xs text-gray-500 ">this month</span>
-                <span class="text-[#23B7E5] text-sm ">₹ 48,000</span>
+                <span class="text-[#23B7E5] text-sm ">₹ {{$transactions['month_sales']}}</span>
             </div>
         </div>
         <div class="w-16 h-16 mr-5 mt-1">

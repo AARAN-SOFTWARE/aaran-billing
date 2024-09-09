@@ -4,14 +4,19 @@
         <!-- Col 1 -->
         <div class=" bg-[#F8F8FF] gap-10 flex sm:flex-row flex-col tracking-wider rounded-lg">
             <x-web.dashboard.greetings/>
-            <x-web.dashboard.sales/>
-            <x-web.dashboard.cards/>
+            @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3 )
+                {{--                @if(Aaran\Aadmin\Src\DbMigration::hasEntry())--}}
+                <x-web.dashboard.sales :transactions="$transactions"/>
+                <x-web.dashboard.cards :transactions="$transactions"/>
+                {{--                @endif--}}
+            @endif
+            {{--            <x-web.dashboard.cards/>--}}
         </div>
         <!-- Col 2 -->
         <div class=" bg-[#F8F8FF] gap-10 flex sm:flex-row flex-col tracking-wider rounded-lg ">
-            <x-web.dashboard.customer/>
+            <x-web.dashboard.customer />
             <x-web.dashboard.entries/>
-            <x-web.dashboard.statistics />
+            <x-web.dashboard.statistics/>
         </div>
     </div>
 </div>
