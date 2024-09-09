@@ -105,11 +105,7 @@
                                                                     {{ $city->vname }}
                                                                 </x-dropdown.option>
                                                             @empty
-                                                                <button
-                                                                    wire:click.prevent="citySave('{{ $itemList[0]['city_name'] }}','{{0}}')"
-                                                                    class="text-white bg-green-500 text-center w-full">
-                                                                    create
-                                                                </button>
+                                                                <x-dropdown.create  wire:click.prevent="citySave('{{ $itemList[0]['city_name'] }}','{{0}}')" label="City" />
                                                             @endforelse
                                                         @endif
                                                     </x-dropdown.select>
@@ -195,11 +191,7 @@
                                                                     {{ $states->vname }}
                                                                 </x-dropdown.option>
                                                             @empty
-                                                                <button
-                                                                    wire:click.prevent="stateSave('{{ $itemList[0]['state_name'] }}','{{0}}')"
-                                                                    class="text-white bg-green-500 text-center w-full">
-                                                                    create
-                                                                </button>
+                                                                <x-dropdown.create wire:click.prevent="stateSave('{{ $itemList[0]['state_name'] }}','{{0}}')" label="State"/>
                                                             @endforelse
                                                         @endif
                                                     </x-dropdown.select>
@@ -287,11 +279,7 @@
                                                                     {{ $pincode->vname }}
                                                                 </x-dropdown.option>
                                                             @empty
-                                                                <button
-                                                                    wire:click.prevent="pincodeSave('{{$itemList[0]['pincode_name'] }}','{{0}}')"
-                                                                    class="text-white bg-green-500 text-center w-full">
-                                                                    create
-                                                                </button>
+                                                                <x-dropdown.create  wire:click.prevent="pincodeSave('{{$itemList[0]['pincode_name'] }}','{{0}}')" label="Pincode"/>
                                                             @endforelse
                                                         @endif
                                                     </x-dropdown.select>
@@ -376,11 +364,7 @@
                                                                     {{ $country->vname }}
                                                                 </x-dropdown.option>
                                                             @empty
-                                                                <button
-                                                                    wire:click.prevent="countrySave('{{$itemList[0]['country_name']}}','{{0}}')"
-                                                                    class="text-white bg-green-500 text-center w-full">
-                                                                    create
-                                                                </button>
+                                                                <x-dropdown.create  wire:click.prevent="countrySave('{{$itemList[0]['country_name']}}','{{0}}')" label="Country" />
                                                             @endforelse
                                                         @endif
                                                     </x-dropdown.select>
@@ -448,7 +432,6 @@
                                             {{--                                                    </div>--}}
                                             {{--                                                </div>--}}
                                             {{--                                            </div>--}}
-
                                         </div>
 
                                     </div>

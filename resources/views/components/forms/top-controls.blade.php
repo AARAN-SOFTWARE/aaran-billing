@@ -15,5 +15,4 @@
         <x-button.new/>
     </div>
 </div>
-
 <x-input.advance-search :show-filters="$showFilters"/>
