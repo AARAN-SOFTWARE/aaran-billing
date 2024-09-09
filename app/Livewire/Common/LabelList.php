@@ -12,6 +12,7 @@ class LabelList extends Component
   use CommonTraitNew;
   use WithPagination;
 
+    #region[getSave]
     public function getSave(): void
     {
         if ($this->common->vid == '') {
@@ -26,7 +27,9 @@ class LabelList extends Component
         }
         $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
     }
+    #endregion
 
+    #region[getObj]
     public function getObj($id)
     {
         if ($id) {
@@ -38,13 +41,14 @@ class LabelList extends Component
         }
         return null;
     }
+    #endregion
 
+    #region[render]
     public function getRoute()
     {
         return route('labels');
     }
 
-    #region[render]
     public function render()
     {
         return view('livewire.common.label-list')

@@ -170,7 +170,7 @@ class Upsert extends Component
     public function citySave($name,$index)
     {
         $obj= Common::create([
-            'label_id'=>1,
+            'label_id'=>2,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -247,7 +247,7 @@ class Upsert extends Component
     public function stateSave($name,$index):void
     {
         $obj=Common::create([
-            'label_id'=>2,
+            'label_id'=>3,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -325,7 +325,7 @@ class Upsert extends Component
     public function pincodeSave($name,$index)
     {
         $obj= Common::create([
-            'label_id'=>3,
+            'label_id'=>4,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -404,7 +404,7 @@ class Upsert extends Component
     public function countrySave($name,$index)
     {
         $obj= Common::create([
-            'label_id'=>4,
+            'label_id'=>5,
             'vname' => $name,
             'active_id' => '1'
         ]);

@@ -12,8 +12,8 @@
         </x-table.caption>
 
         <!-- Table Data ----------------------------------------------------------------------------------------------->
-        <x-table.form>
 
+        <x-table.form>
             <x-slot:table_header>
                 <x-table.header-serial/>
                 <x-table.header-text wire:click.prevent="sortBy('vname')"  sortIcon="{{$getListForm->sortAsc}}">
@@ -34,12 +34,14 @@
                 @endforeach
             </x-slot:table_body>
         </x-table.form>
+
         <!-- Delete Modal --------------------------------------------------------------------------------------------->
         <x-modal.delete/>
 
         <div class="pt-5">{{ $list->links() }}</div>
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
+
         <x-forms.create :id="$common->vid">
 {{--            <x-input.model-text wire:model="common.vname" :label="'City Name'"/>--}}
             <x-input.floating wire:model="common.vname" label="City Name" />

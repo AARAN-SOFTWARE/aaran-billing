@@ -11,7 +11,7 @@ class Index extends Component
     use CommonTraitNew;
 
     #region[properties]
-    public $order_name;
+    public $order_name = '';
     #endregion
 
     #region[getSave]

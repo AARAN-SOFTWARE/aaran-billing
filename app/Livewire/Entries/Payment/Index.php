@@ -65,7 +65,7 @@ class Index extends Component
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
-                    'trans_type_id' => $this->trans_type_id ?: '81',
+                    'trans_type_id' => $this->trans_type_id ?: '80',
                     'mode_id' => $this->mode_id ?: '83',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '1',
@@ -238,7 +238,7 @@ class Index extends Component
     public function bankSave($name)
     {
         $obj = Common::create([
-            'label_id' => 8,
+            'label_id' => 9,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -311,7 +311,7 @@ class Index extends Component
     public function receiptTypeSave($name)
     {
         $obj = Common::create([
-            'label_id' => 13,
+            'label_id' => 14,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -445,7 +445,7 @@ class Index extends Component
     public function transTypeSave($name)
     {
         $obj = Common::create([
-            'label_id' => 18,
+            'label_id' => 19,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -515,7 +515,7 @@ class Index extends Component
     public function modeSave($name)
     {
         $obj = Common::create([
-            'label_id' => 19,
+            'label_id' => 20,
             'vname' => $name,
             'active_id' => '1'
         ]);

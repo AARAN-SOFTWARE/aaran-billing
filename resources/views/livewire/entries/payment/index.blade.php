@@ -72,9 +72,9 @@
             <!-- Receipt & Payment  ----------------------------------------------------------------------------------->
 
             <div class="flex gap-3 w-full mb-3">
-                <x-radio.btn value="82" wire:model.live="trans_type_id">Cash Book
+                <x-radio.btn value="80" wire:model.live="trans_type_id">Cash Book
                 </x-radio.btn>
-                <x-radio.btn value="83" wire:model.live="trans_type_id">Bank Book
+                <x-radio.btn value="81" wire:model.live="trans_type_id">Bank Book
                 </x-radio.btn>
             </div>
 

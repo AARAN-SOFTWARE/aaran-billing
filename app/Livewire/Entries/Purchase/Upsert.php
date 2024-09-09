@@ -241,7 +241,7 @@ class Upsert extends Component
     {
         if ($name){
             $obj= Common::create([
-                'label_id'=>'10',
+                'label_id'=>'11',
                 'vname'=>$name,
                 'active_id'=>'1',
             ]);
@@ -315,7 +315,7 @@ class Upsert extends Component
     {
         if ($name){
             $obj=Common::create([
-                'label_id'=>'9',
+                'label_id'=>'10',
                 'vname'=>$name,
                 'active_id'=>'1',
             ]);
@@ -454,7 +454,7 @@ class Upsert extends Component
     public function colourSave($name)
     {
         $obj = Common::create([
-            'label_id'=>6,
+            'label_id'=>7,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -527,7 +527,7 @@ class Upsert extends Component
     public function sizeSave($name)
     {
         $obj = Common::create([
-            'label_id'=>'7',
+            'label_id'=>'8',
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -618,8 +618,8 @@ class Upsert extends Component
                 'purchase_id' => $id,
                 'product_id' => $sub['product_id'],
                 'description' => $sub['description'],
-                'colour_id' => $sub['colour_id'] ?: '11',
-                'size_id' => $sub['size_id'] ?: '14',
+                'colour_id' => $sub['colour_id'] ?: '46',
+                'size_id' => $sub['size_id'] ?: '50',
                 'qty' => $sub['qty'],
                 'price' => $sub['price'],
                 'gst_percent' => $sub['gst_percent'],

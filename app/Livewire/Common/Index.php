@@ -13,14 +13,17 @@ class Index extends Component
 {
     use CommonTraitNew;
 
+    #region[Properties]
     public mixed $module;
-    public mixed $desc;
-    public mixed $desc_1;
+    public mixed $desc = '';
+    public mixed $desc_1 = '';
     public mixed $label_id;
     public mixed $labelData;
 
     public array $filter = [];
+    #endregion
 
+    #region[Mount]
     public function mount($id)
     {
         if ($id != null) {
@@ -28,7 +31,9 @@ class Index extends Component
             $this->module = Label::find($id);
         }
     }
+    #endregion
 
+    #region[getSave]
     public function getSave(): void
     {
         if ($this->common->vname != '') {
@@ -56,7 +61,9 @@ class Index extends Component
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
+    #endregion
 
+    #region[getObj]
     public function getObj($id)
     {
         if ($id) {
@@ -71,7 +78,9 @@ class Index extends Component
         }
         return null;
     }
+    #endregion
 
+    #region[Clear Fields]
     public function clearFields(): void
     {
         $this->common->vid = '';
@@ -81,7 +90,9 @@ class Index extends Component
         $this->desc_1 = '';
         $this->label_id = '';
     }
+    #endregion
 
+    #region[Render]
     public function getRoute()
     {
         return route('commons');
@@ -99,4 +110,5 @@ class Index extends Component
             }),
         ]);
     }
+    #endregion
 }
