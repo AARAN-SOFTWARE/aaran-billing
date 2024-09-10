@@ -1,5 +1,6 @@
 <div class="scroll-smooth">
-    <x-slider.home :list="$slides"/>
+{{--    <x-slider.home :list="$slides"/>--}}
+    <x-slider.home/>
     <x-web.home.cover-details />
     <x-web.home.testimony />
     <x-web.home.service />

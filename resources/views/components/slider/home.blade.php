@@ -54,25 +54,25 @@
             <ul x-ref="slider" @scroll="updateCurrentSlide"
                 class="flex w-full md:h-screen h-52 overflow-x-hidden snap-x snap-mandatory">
 
-                @if($list)
-                    @forelse($list as $row)
-                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start relative">
+{{--                @if($list)--}}
+{{--                    @forelse($list as $row)--}}
+{{--                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start relative">--}}
 
-                            <div style="background-image: url('/../../../storage/images/{{$row->bg_image}}');"
-                                 class=" w-full md:h-screen h-80 bg-cover bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">
-                            </div>
-                            <div
-                                class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
+{{--                            <div style="background-image: url('/../../../storage/images/{{$row->bg_image}}');"--}}
+{{--                                 class=" w-full md:h-screen h-80 bg-cover bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">--}}
+{{--                            </div>--}}
+{{--                            <div--}}
+{{--                                class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">--}}
 
-                                <div
-                                    class=" sm:text-6xl text-xs capitalize drop-shadow-lg">{{$row->vname}}</div>
-                                <div
-                                    class="sm:text-2xl text-xs mt-3 text-white">{{$row->description}}</div>
+{{--                                <div--}}
+{{--                                    class=" sm:text-6xl text-xs capitalize drop-shadow-lg">{{$row->vname}}</div>--}}
+{{--                                <div--}}
+{{--                                    class="sm:text-2xl text-xs mt-3 text-white">{{$row->description}}</div>--}}
 {{--                                <div--}}
 {{--                                    class="text-md mt-3 text-white">{{$row->created_at}}</div>--}}
-                            </div>
-                        </li>
-                    @empty
+{{--                            </div>--}}
+{{--                        </li>--}}
+{{--                    @empty--}}
                         <li class="flex flex-col items-center justify-center w-full sm:h-screen h-full shrink-0 snap-start relative">
 
                             <div style="background-image: url('/../../../images/w3.webp');"
@@ -134,8 +134,8 @@
 {{--                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>--}}
 {{--                            </div>--}}
 {{--                        </li>--}}
-                    @endforelse
-                @endif
+{{--                    @endforelse--}}
+{{--                @endif--}}
             </ul>
 
         </div>
