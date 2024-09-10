@@ -1,0 +1,2 @@
+<x-menu.base.li-menuitem :routes="'receviables'" :label="'Receivables'"/>
+<x-menu.base.li-menuitem :routes="'payables'" :label="'Payables'"/>

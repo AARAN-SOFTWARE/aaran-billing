@@ -2,7 +2,7 @@
     <x-slot name="header">Receivables</x-slot>
 
     <x-forms.m-panel>
-        <div class="flex w-full gap-3">
+        <div class="flex justify-between w-full gap-3">
 
             <div class="w-[40rem]">
                 <x-input.model-select wire:model.live="byParty" :label="'Party Name'">
@@ -18,7 +18,7 @@
             <x-input.model-date wire:model.live="end_date" :label="'To Date'"/>
 
 
-            <div class="pt-4">
+            <div class="">
                 <button class="bg-cyan-700 rounded-lg shadow-2xl px-2 py-1 text-white" wire:click="print">Print
                 </button>
             </div>

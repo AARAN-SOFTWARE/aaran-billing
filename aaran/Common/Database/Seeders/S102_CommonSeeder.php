@@ -26,6 +26,7 @@ class S102_CommonSeeder extends Seeder
         self::salesType();
         self::transaction();
         self::mode();
+        self::accyear();
     }
 
     #region[noRecord]
@@ -707,6 +708,82 @@ class S102_CommonSeeder extends Seeder
         Common::create([
             'label_id' => '20',
             'vname' => 'Receipt',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+    }
+    #endregion
+
+    #region[accyear]
+    private static function accyear(): void
+    {
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2020_2021',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2021_2022',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2022_2023',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2023_2024',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2024_2025',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2025_2026',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2026_2027',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2027_2028',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2028_2029',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2029_2030',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'

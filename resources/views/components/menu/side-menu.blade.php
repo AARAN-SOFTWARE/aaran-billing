@@ -40,6 +40,7 @@
 
             @if(Aaran\Aadmin\Src\Customise::hasTransaction())
                 <x-menu.sub.transaction/>
+                <x-menu.sub.reports/>
             @endif
 
 
