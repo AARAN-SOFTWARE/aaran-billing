@@ -235,7 +235,7 @@ class Index extends Component
     public function bankSave($name)
     {
         $obj = Common::create([
-            'label_id' => 8,
+            'label_id' => 9,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -246,8 +246,8 @@ class Index extends Component
     public function getBankList(): void
     {
         $this->bankCollection = $this->bank_name ?
-            Common::search(trim($this->bank_name))->where('label_id', '=', '8')->get() :
-            Common::where('label_id', '=', '8')
+            Common::search(trim($this->bank_name))->where('label_id', '=', '9')->get() :
+            Common::where('label_id', '=', '9')
                 ->Orwhere('id', '=', '1')
                 ->get();
 

@@ -68,7 +68,7 @@ class Index extends Component
                     'trans_type_id' => $this->trans_type_id ?: '80',
                     'mode_id' => $this->mode_id ?: '83',
                     'vdate' => $this->vdate,
-                    'receipttype_id' => $this->receipt_type_id ?: '1',
+                    'receipttype_id' => $this->receipt_type_id ?: '58',
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
