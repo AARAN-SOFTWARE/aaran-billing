@@ -30,7 +30,7 @@ class Payables extends Component
     #region[Contact]
     public function getContact()
     {
-        $this->contacts = Contact::where('company_id', '=', session()->get('company_id'))->get();
+        $this->contacts = Contact::where('company_id', '=', session()->get('company_id'))->where('contact_type','Creditor')->get();
     }
     #endregion
 
@@ -85,7 +85,7 @@ class Payables extends Component
             'purchases.company_id',
             'purchases.contact_id',
             DB::raw("'invoice' as mode"),
-            "purchases.Entry_no as vno",
+            "purchases.purchase_no as vno",
             'purchases.purchase_date as vdate',
             'purchases.grand_total',
             DB::raw("'' as transaction_amount"),
@@ -105,7 +105,7 @@ class Payables extends Component
     {
 
         if ($this->byParty != null) {
-            $this->redirect(route('receviables.print',
+            $this->redirect(route('payables.print',
                 [
                     'party' => $this->byParty, 'start_date' => $this->start_date ?: $this->invoiceDate_first,
                     'end_date' => $this->end_date ?: Carbon::now()->format('Y-m-d'),
