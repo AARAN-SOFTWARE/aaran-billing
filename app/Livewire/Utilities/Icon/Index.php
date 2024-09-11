@@ -288,7 +288,8 @@ class Index extends Component
             'turn-down-r',
             'cube',
             'hand-right',
-
+            'list-menu',
+            'tag-menu',
         ]);
     }
 
