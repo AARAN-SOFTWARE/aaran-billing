@@ -162,7 +162,7 @@ class Index extends Component
             'r-turn-up',
             'chevrons-double-r',
             'forward',
-
+            'e-way'
 
         ]);
     }
@@ -288,7 +288,12 @@ class Index extends Component
             'turn-down-r',
             'cube',
             'hand-right',
-
+            'list-menu',
+            'tag-menu',
+            'folder-rupee',
+            'e-inv',
+            'e-way',
+            'print',
         ]);
     }
 

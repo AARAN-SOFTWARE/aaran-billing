@@ -4,13 +4,13 @@
     <div
         @click="selected !== 6 ? selected = 6 : selected = null"
         class="relative flex flex-row justify-between items-center h-11 focus:outline-none hover:bg-gray-700
-                                text-gray-500 hover:text-gray-200 border-l-4 border-transparent hover:border-blue-500 pr-3">
+                                text-gray-500 hover:text-gray-200 border-l-4 border-transparent hover:border-blue-500 px-4 group">
 
-                        <span class="inline-flex justify-center items-center ml-4">
-                            <x-icons.icon-fill :iconfill="'home'" class="w-5 h-auto block" :colour="'#656d7b'"/>
+                        <span class="inline-flex justify-center items-center space-x-3">
+                            <x-icons.icon-fill iconfill="tag-menu" class="w-4 h-auto block fill-gray-500 group-hover:fill-blue-500"/>
 
                             <span
-                                class="ml-3 flex font-semibold text-sm tracking-wide truncate my-4 font-sans uppercase">
+                                class="flex font-semibold text-sm tracking-wide truncate my-4 font-sans uppercase">
                                 Common
                             </span>
 

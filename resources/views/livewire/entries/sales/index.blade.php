@@ -25,6 +25,7 @@
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Total Gst</x-table.header-text>
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Grand Total</x-table.header-text>
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">E-Invoice</x-table.header-text>
+                <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none" class="w-28">E-Generate</x-table.header-text>
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Print</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
@@ -38,7 +39,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->invoice_date}}</a>
+                            <a href="{{route('sales.upsert',[$row->id])}}"> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
@@ -96,8 +97,15 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <x-icons.icon :icon="'printer'" wire:click="print({{$row->id}})"
-                                          class="block w-auto h-5 mt-1 hover:rounded-sm hover:bg-purple-500 hover:text-white"/>
+                                <div class="inline-flex items-center gap-x-4">
+                                    <a href="{{ route('sales.einvoice',[$row->id]) }}" class="pt-1"><x-button.e-inv /></a>
+                                    <a href="{{ route('sales.eway',[$row->id]) }}" class="pt-1"><x-button.e-way /></a>
+                                </div>
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <x-button.print-icon wire:click="print({{$row->id}})"/>
+{{--                            <x-icons.icon :icon="'printer'" wire:click="print({{$row->id}})"--}}
+{{--                                          class="block w-auto h-5 mt-1 hover:rounded-sm hover:bg-purple-500 hover:text-white"/>--}}
                         </x-table.cell-text>
 
                         <td class="max-w-max print:hidden">
@@ -106,14 +114,7 @@
                                     <x-button.edit  />
                                 </a>
                                 <x-button.delete wire:click="getDelete({{$row->id}})"/>
-                                <x-dropdown.icon>
-                                    <div class="font-roboto tracking-wider text-gray-600 hover:bg-gray-100 hover:text-violet-600 ">
-                                        <a href="{{ route('sales.einvoice',[$row->id]) }}">E-Invoice</a>
-                                    </div>
-                                    <div class="font-roboto tracking-wider  text-gray-600 hover:bg-gray-100 hover:text-rose-600 ">
-                                        <a href="{{ route('sales.eway',[$row->id]) }}">E-Way Bill</a>
-                                    </div>
-                                </x-dropdown.icon>
+
                             </div>
                         </td>
 
