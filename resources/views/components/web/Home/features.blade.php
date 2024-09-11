@@ -5,12 +5,12 @@
              data-wow-duration="3s">A Software packed with great features
         </div>
 
-        <div style="background-image: url('/../../../images/dashboard.png')"
+        <div style="background-image: url('/../../../images/d1.jpg')"
              class="relative mt-4 w-full mx-auto bg-no-repeat bg-cover h-[30rem] md:block hidden rounded-xl shadow-lg shadow-gray-300 animate__animated wow bounceInDown"
              data-wow-duration="3s">
 
             <div
-                class="absolute -top-12 -left-6 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInLeft"
+                class="absolute top-16 -left-6 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInLeft"
                 data-wow-duration="3s">
                 <div
                     class="w-60 p-3 text-white text-xs font-roboto tracking-wider bg-[#2846f0]/80 shadow shadow-gray-200 rounded-md">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div
-                class="absolute bottom-16 left-48 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInLeft"
+                class="absolute -top-4 left-96 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInLeft"
                 data-wow-duration="3s">
                 <div
                     class="w-60 p-3 text-white text-xs font-roboto tracking-wider bg-[#2846f0]/80 shadow shadow-gray-200 rounded-md">
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div
-                class="absolute bottom-64 right-56 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInRight"
+                class="absolute bottom-24 left-56 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInRight"
                 data-wow-duration="3s">
                 <div
                     class="w-60 px-3 py-4 text-white text-xs font-roboto tracking-wider bg-[#2846f0]/80 shadow shadow-gray-200 rounded-md">
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div
-                class="absolute bottom-28 right-80 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInRight"
+                class="absolute bottom-28 right-24 flex-col flex justify-center items-center gap-4 animate__animated wow animate__backInRight"
                 data-wow-duration="3s">
                 <div
                     class="w-60 p-3 text-white text-xs font-roboto tracking-wider bg-[#2846f0]/80 shadow shadow-gray-200 rounded-md">

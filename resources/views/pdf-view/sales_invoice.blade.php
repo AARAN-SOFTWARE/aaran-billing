@@ -246,8 +246,10 @@
         </td>
         <td>
             <div style="width: 120px; height: auto;">
-                <img style="height: auto;width:120px;"
-                     src="{{\App\Helper\qrcoder::generate($irn->irn)}}" alt="{{$irn->irn}}">
+                @if(isset($irn))
+                    <img style="height: auto;width:120px;"
+                         src="{{\App\Helper\qrcoder::generate($irn->irn)}}" alt="{{$irn->irn}}">
+                @endif
             </div>
         </td> {{-- td - empty div  --}}
     </tr>

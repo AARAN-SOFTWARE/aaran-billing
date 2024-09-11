@@ -2,9 +2,9 @@
 
     <div class="lg:flex mx-auto lg:w-11/12 lg:justify-between w-8/12">
 
-        <div class="flex flex-col mt-10">
+        <div class="flex flex-col my-6">
             <!-- address, socialmedia-->
-            <div class="lg:text-white lg:text-xl text-lg text-red-700">AARAN INFO TECH
+            <div class="lg:text-red-500 lg:text-xl text-lg text-red-500">AARAN INFO TECH
             </div>
 
             <div class="mt-3">
@@ -22,47 +22,63 @@
         </div>
 
         <!-- link -->
-        <div class="my-3 flex flex-col gap-2 shrink-0">
-            <a class="lg:text-white lg:text-2xl text-red-700 text-lg lg:my-2 my-1 cursor-pointer hover:text-green-500">Aaran</a>
-            <a class="text-white lg:text-sm text-xs tracking-widest cursor-pointer hover:text-orange-500">About</a>
-            <a class="text-white lg:text-sm text-xs tracking-widest cursor-pointer hover:text-orange-500">Contact Us</a>
-            <a class="text-white lg:text-sm text-xs tracking-widest cursor-pointer hover:text-orange-500">We are Hiring</a>
-            <a class="text-white lg:text-sm text-xs tracking-widest cursor-pointer hover:text-orange-500">Blog</a>
-            <a class="text-white lg:text-sm text-xs tracking-widest cursor-pointer hover:text-orange-500">Careers</a>
-            <a class="text-white lg:text-sm text-xs tracking-widest cursor-pointer hover:text-orange-500">Finance</a>
+        <div class="my-3 flex flex-col shrink-0">
+            <a class="sm:text-white text-red-500 lg:text-2xl  text-lg lg:my-2 my-1 cursor-pointer hover:text-red-500">Aaran</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('about') }}">About</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('contact') }}">Contact
+                Us</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('about') }}">We
+                are Hiring</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('blog') }}">Blog</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('about') }}">Careers</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('contact') }}">Finance</a>
         </div>
 
 
-        <div class="lg:my-3 my-5">
-            <div class="lg:text-white lg:text-2xl text-red-700 text-lg font-nunito lg:my-2 my-4">Links</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">FAQ</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">Pricing</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">Feedback</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">Terms of Service</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">Privacy and Policy</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">Help and Support</div>
+        <div class="lg:my-3 flex flex-col shrink-0">
+            <a class="sm:text-white text-red-500 lg:text-2xl  text-lg font-nunito lg:my-2 my-4 hover:text-red-500">Links</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('service') }}">FAQ</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('service') }}">Pricing</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('contact') }}">Feedback</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('service') }}">Terms
+                of Service</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('service') }}">Privacy
+                and Policy</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500" href="{{ route('contact') }}">Help
+                and Support</a>
         </div>
 
 
-        <div class="lg:my-3 my-5 ">
-            <div class="lg:text-white lg:text-2xl text-red-700 text-lg font-nunito my-2">Products</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">GST Billing Software</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">ERP Software</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">Marketing software</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">Task Management Software</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5 cursor-pointer">Auditor Software</div>
+        <div class="lg:my-3 flex flex-col shrink-0 ">
+            <a class="sm:text-white text-red-500 lg:text-2xl  text-lg font-nunito my-2 hover:text-red-500">Products</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500 {{ route('dashboard') }}">GST
+                Billing Software</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500 {{ route('dashboard') }}">ERP
+                Software</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500 {{ route('dashboard') }}">Marketing
+                software</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500 {{ route('dashboard') }}">Task
+                Management Software</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 cursor-pointer hover:text-yellow-500 {{ route('dashboard') }}">Auditor
+                Software</a>
 
         </div>
 
-        <div class="lg:my-3 my-5">
-            <div class="lg:text-white lg:text-2xl text-red-700 text-lg font-nunito my-2">Templates</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5">Invoice Templates</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5">GST Invoice Format</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5">Quotation Templates</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5">Word and Excel Invoice Templates</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5">Consulting Invoice</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5">Tax Invoice</div>
-            <div class="text-white lg:text-sm text-xs tracking-widest lg:my-4 my-2.5">Estimate Template</div>
+        <div class="lg:my-3 flex flex-col shrink-0">
+            <a class="sm:text-white text-red-500 lg:text-2xl  text-lg font-nunito my-2 hover:text-red-500">Templates</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 hover:text-yellow-500" {{ route('dashboard') }}">Invoice
+                Templates</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 hover:text-yellow-500" {{ route('dashboard') }}">GST Invoice
+                Format</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 hover:text-yellow-500" {{ route('dashboard') }}">Quotation
+                Templates</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 hover:text-yellow-500" {{ route('dashboard') }}">Word and Excel
+                Invoice Templates</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 hover:text-yellow-500" {{ route('dashboard') }}">Consulting
+                Invoice</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 hover:text-yellow-500" {{ route('dashboard') }}">Tax Invoice</a>
+            <a class="text-white lg:text-sm text-xs tracking-widest    my-2.5 hover:text-yellow-500" {{ route('dashboard') }}">Estimate
+                Template</a>
         </div>
     </div>
 </div>
