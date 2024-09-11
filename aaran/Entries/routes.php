@@ -19,6 +19,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/receviables', App\Livewire\Reports\Statement\Receivables::class)->name('receviables');
     Route::get('/payables', App\Livewire\Reports\Statement\Payables::class)->name('payables');
+
+    Route::get('/receviables/print/{party}/{start_date?}/{end_date?}', App\Http\Controllers\Report\ReceivablesController::class)->name('receviables.print');
+    Route::get('/payables/print/{party}/{start_date?}/{end_date?}', App\Http\Controllers\Report\PayablesController::class)->name('payables.print');
 //
 //    Route::get('/purchases', App\Livewire\Entries\Purchase\Index::class)->name('purchases');
 //    Route::get('/purchases/{id}/upsert', App\Livewire\Entries\Purchase\Upsert::class)->name('purchases.upsert');

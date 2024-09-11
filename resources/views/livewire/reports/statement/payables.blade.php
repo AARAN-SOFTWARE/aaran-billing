@@ -1,5 +1,5 @@
 <div>
-    <x-slot name="header">Payabiles</x-slot>
+    <x-slot name="header">Payables</x-slot>
 
     <x-forms.m-panel>
         <div class="flex justify-between w-full gap-3">
@@ -25,20 +25,21 @@
 
         </div>
 
-        <x-forms.table>
-            <x-slot name="table_header">
-                <x-table.header-serial/>
+        <x-table.form>
+            <x-slot:table_header name="table_header">
+                <x-table.header-serial width="20%"/>
                 <x-table.header-text center>Type</x-table.header-text>
                 <x-table.header-text left>Particulars</x-table.header-text>
                 <x-table.header-text>Invoice Amount</x-table.header-text>
-                <x-table.header-text>Receipt Amount</x-table.header-text>
-            </x-slot>
+                <x-table.header-text>Payment Amount</x-table.header-text>
+                <x-table.header-text>Balance</x-table.header-text>
+            </x-slot:table_header>
 
 
-            <x-slot name="table_body">
+            <x-slot:table_body name="table_body">
 
                 @php
-                    $totalpurchase = 0;
+                    $totalpurchase = 0+$opening_balance;
                     $totalpayment = 0;
                 @endphp
                 <x-table.row>
@@ -55,10 +56,20 @@
                                 {{ $opening_balance}}
                             </div>
                         </x-table.cell-text>
+                        <x-table.cell-text colspan="1">
+                        </x-table.cell-text>
+                        <x-table.cell-text colspan="1">
+                            {{$opening_balance}}
+                        </x-table.cell-text>
                     @endif
                 </x-table.row>
 
                 @forelse ($list as $index =>  $row)
+                    @php
+                        $totalpurchase += floatval($row->grand_total);
+                        $totalpayment += floatval($row->transaction_amount);
+                    @endphp
+
                     <x-table.row>
                         <x-table.cell-text center>
                             {{ $index + 1 }}
@@ -69,7 +80,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text left>
-                            {{ $row->vno}}&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;{{date('d-m-Y', strtotime($row->vdate))}}
+                            {{$row->mode=='invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
@@ -79,34 +90,38 @@
                         <x-table.cell-text right>
                             {{ $row->transaction_amount }}
                         </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            {{  $balance  = $totalpurchase-$totalpayment}}
+                        </x-table.cell-text>
+
                     </x-table.row>
 
-                    @php
-                        $totalpurchase += floatval($row->grand_total);
-                        $totalpayment += floatval($row->transaction_amount);
-                    @endphp
+
 
                 @empty
                 @endforelse
 
 
                 <x-table.row>
-                    <td colspan="3" class="px-2 text-md text-right text-gray-400 border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td class="px-2 text-right  text-md border text-zinc-500 border-gray-300">{{$totalpurchase+$opening_balance}}</td>
-                    <td class="px-2 text-right  text-md border text-zinc-500 border-gray-300">{{ $totalpayment}}</td>
+                    <x-table.cell-text colspan="3" class="text-md text-right text-gray-400 ">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
+                    </x-table.cell-text>
+                    <x-table.cell-text class="text-right  text-md ">{{$totalpurchase+$opening_balance}}</x-table.cell-text>
+                    <x-table.cell-text class="text-right  text-md ">{{ $totalpayment}}</x-table.cell-text>
+                    <x-table.cell-text></x-table.cell-text>
                 </x-table.row>
 
                 <x-table.row>
-                    <td colspan="3" class="px-2 text-md text-right text-gray-400 border border-gray-300">&nbsp;Balance&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td class="px-2 text-right  text-md border text-blue-500 border-gray-300">{{ $totalpurchase+$opening_balance-$totalpayment}}</td>
-                    <td class="px-2 text-right  text-md border text-blue-500 border-gray-300"></td>
+                    <x-table.cell-text colspan="3" class="text-md text-right text-gray-400 ">&nbsp;Balance&nbsp;&nbsp;&nbsp;
+                    </x-table.cell-text>
+                    <x-table.cell-text class="text-right  text-md text-blue-500">{{ $totalpurchase-$totalpayment}}</x-table.cell-text>
+                    <x-table.cell-text></x-table.cell-text>
+                    <x-table.cell-text></x-table.cell-text>
                 </x-table.row>
-            </x-slot>
+            </x-slot:table_body>
             <x-slot name="table_pagination">
                 {{ $list->links() }}
             </x-slot>
-        </x-forms.table>
+        </x-table.form>
     </x-forms.m-panel>
 </div>
