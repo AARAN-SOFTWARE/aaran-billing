@@ -293,6 +293,7 @@ class Index extends Component
             'folder-rupee',
             'e-inv',
             'e-way',
+            'print',
         ]);
     }
 

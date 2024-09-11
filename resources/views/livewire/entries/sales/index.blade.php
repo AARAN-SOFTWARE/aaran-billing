@@ -39,7 +39,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->invoice_date}}</a>
+                            <a href="{{route('sales.upsert',[$row->id])}}"> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
