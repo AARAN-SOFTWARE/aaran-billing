@@ -3,10 +3,15 @@
 namespace App\Livewire\Web\Forms\Home;
 
 use Aaran\Web\Models\Home;
+use Aaran\Web\Models\HomeImage;
+use App\Livewire\Trait\CommonTraitNew;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Index extends Component
 {
+    use CommonTraitNew;
+    use WithFileUploads;
 
     public $desc;
     public $cover_title;
@@ -16,6 +21,10 @@ class Index extends Component
     public $serve_title;
     public $feats_title;
     public $feats_desc;
+
+    public mixed $image;
+    public $isUploaded = false;
+    public array $photos = [];
 
 
     #region[Get-Save]
@@ -95,6 +104,28 @@ class Index extends Component
     }
     #endregion
 
+    public function save_item($id, $images)
+    {
+        foreach ($images as $image) {
+            HomeImage::create([
+                'home_id' => $id,
+                'vname' => $image->vname,
+                'desc' => $image->desc,
+                'image' => $this->save_image($image),
+            ]);
+        }
+    }
+
+    public function save_image($image)
+    {
+        if ($image == '') {
+            return $image = 'empty';
+        } else {
+            $image_name = $image->getClientOriginalName();
+            return $image->storeAs('photos', $image_name, 'public');
+        }
+    }
+    #endregion
     public function render()
     {
         return view('livewire.web.forms.home.index');

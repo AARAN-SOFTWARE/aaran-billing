@@ -1,8 +1,10 @@
 <html lang="en">
+
 <head>
     <title>Invoice</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-white-100 p-10">
 <div class="bg-white border-2 h-full border-gray-400">
     <!------Top Company Area------------------------------------------------------------------------------------------>
@@ -20,11 +22,13 @@
                 <img class="w-[200px]" src="{{\App\Helper\qrcoder::generate($irn->signed_qrcode,22)}}" alt="{{$irn->signed_qrcode}}">
             </div>
         </div>
+
     <!------Invoice Header Area--------------------------------------------------------------------------------------->
     <div class="w-full bg-slate-500 flex">
         <div class="w-10/12 text-white text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAX INVOICE</div>
         <div class="w-2/12 text-white text-right ">Original Copy</div>
     </div>
+
     <!------Contact and invoice details--------------------------------------------------------------------------------------->
         <div class="flex mt-2">
             <div>
@@ -41,6 +45,7 @@
                 <p>PO Date:&nbsp;&nbsp;{{ $obj->despatch_date }}</p>
             </div>
         </div>
+
         <div class="mt-6">
             <table class="min-w-full border-collapse border border-gray-300">
                 <thead>
@@ -84,6 +89,7 @@
                 </tfoot>
             </table>
         </div>
+
         <div class="mt-6">
             <p class="text-gray-600">Thank you for your business!</p>
         </div>

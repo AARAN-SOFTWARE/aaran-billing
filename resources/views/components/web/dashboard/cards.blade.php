@@ -54,13 +54,13 @@
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Receivables</div>
-                        <div class="text-xl text-[#F5B849]">₹ 4,00,000</div>
-{{--                        <div class="text-xl text-[#F5B849]">₹ {{$transactions['total_receivable']}}</div>--}}
+{{--                        <div class="text-xl text-[#F5B849]">₹ 4,00,000</div>--}}
+                        <div class="text-xl text-[#F5B849]"> {{$transactions['total_receivable']}}</div>
                     </div>
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
-                        <span class="text-[#F5B849] text-sm ">₹ 24,000</span>
-{{--                        <span class="text-[#F5B849] text-sm ">₹ {{$transactions['month_receivable']}}</span>--}}
+{{--                        <span class="text-[#F5B849] text-sm ">₹ 24,000</span>--}}
+                        <span class="text-[#F5B849] text-sm ">{{$transactions['month_receivable']}}</span>
                     </div>
                 </div>
                 <div class="flex-col flex space-y-4">
@@ -111,13 +111,13 @@
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Payables</div>
-                        <div class="text-xl text-[#E6533C]">₹ 5,00,000</div>
-{{--                        <div class="text-xl text-[#E6533C]">₹ {{$transactions['total_payable']}}</div>--}}
+{{--                        <div class="text-xl text-[#E6533C]">₹ 5,00,000</div>--}}
+                        <div class="text-xl text-[#E6533C]"> {{$transactions['total_payable']}}</div>
                     </div>
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
-                        <span class="text-[#E6533C] text-sm ">₹ 41,300</span>
-{{--                        <span class="text-[#E6533C] text-sm ">₹ {{$transactions['month_payable']}}</span>--}}
+{{--                        <span class="text-[#E6533C] text-sm ">₹ 41,300</span>--}}
+                        <span class="text-[#E6533C] text-sm ">{{$transactions['month_payable']}}</span>
                     </div>
                 </div>
                 <div class="flex-col flex space-y-4">
@@ -178,11 +178,11 @@
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Net Profit</div>
-                        <div class="text-xl text-[#26BF94]">₹ 13,00,000</div>
+                        <div class="text-xl text-[#26BF94]"> {{$transactions['net_profit']}}</div>
                     </div>
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
-                        <span class="text-[#26BF94] text-sm ">₹ 65,560</span>
+                        <span class="text-[#26BF94] text-sm ">{{$transactions['month_profit']}}</span>
                     </div>
                 </div>
                 <div class="flex-col flex space-y-4">
