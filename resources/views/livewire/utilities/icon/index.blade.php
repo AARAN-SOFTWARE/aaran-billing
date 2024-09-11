@@ -19,11 +19,9 @@
 
         <div class="bg-white">
             <div class="lg:grid lg:grid-cols-12 gap-2 md:grid md:grid-cols-8">
-
                 @foreach($fill as $row)
                     <x-icons.utilities-fill :icon="$row" :colour="'#E90074'"/>
                 @endforeach
-
             </div>
         </div>
     </x-forms.m-panel>
