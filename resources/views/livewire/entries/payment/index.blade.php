@@ -7,9 +7,21 @@
 
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-        <x-table.caption :caption="$mode_name">
-            {{$list->count()}}
-        </x-table.caption>
+        <div class="flex w-full">
+
+            <x-table.caption :caption="$mode_name">
+                {{$list->count()}}
+            </x-table.caption>
+
+            <div class="flex justify-end w-full">
+
+                <a href="{{route('transactions.print',[$mode_id == 83 ? 1 : 2 ])}}">
+                    <button class="w-16 bg-cyan-700 rounded-lg shadow-2xl px-2 py-1 text-white">Print
+                    </button>
+                </a>
+
+            </div>
+        </div>
 
         <x-table.form>
 
@@ -32,6 +44,7 @@
                 <x-table.header-text sort-icon="none">Amount</x-table.header-text>
 
                 <x-table.header-action/>
+
             </x-slot:table_header>
 
             <!-- Table Body  ------------------------------------------------------------------------------------------>
@@ -95,6 +108,7 @@
                                               wire:keydown.arrow-down="incrementContact"
                                               wire:keydown.enter="enterContact"/>
                             <x-dropdown.select>
+
                                 @if($contactCollection)
                                     @forelse ($contactCollection as $i => $contact)
                                         <x-dropdown.option highlight="{{ $highlightContact === $i }}"
@@ -106,6 +120,7 @@
                                     @endforelse
                                 @endif
                             </x-dropdown.select>
+
                         </div>
                     </x-dropdown.wrapper>
 
@@ -133,20 +148,23 @@
                             <!-- Tab 1  ------------------------------------------------------------------------------->
 
                             <x-tabs.content>
-                                <div class="flex flex-col gap-3">
 
+                                <div class="flex flex-col gap-3">
 
                                     <!-- receipt type ----------------------------------------------------------------->
 
                                     @if($trans_type_id == 81)
 
                                         <x-dropdown.wrapper label="Type" type="receipt_typeTyped">
+
                                             <div class="relative ">
+
                                                 <x-dropdown.input label="Type" id="receipt_type_name"
                                                                   wire:model.live="receipt_type_name"
                                                                   wire:keydown.arrow-up="decrementReceiptType"
                                                                   wire:keydown.arrow-down="incrementReceiptType"
                                                                   wire:keydown.enter="enterReceiptType"/>
+
                                                 <x-dropdown.select>
                                                     @if($receipt_typeCollection)
                                                         @forelse ($receipt_typeCollection as $i => $receipt_type)
@@ -162,127 +180,134 @@
                                                         @endforelse
                                                     @endif
                                                 </x-dropdown.select>
+
                                             </div>
+
                                         </x-dropdown.wrapper>
                                     @endif
 
-                                <!-- bank --------------------------------------------------------------------------------------------->
+                                    <!-- bank ------------------------------------------------------------------------->
 
-                                @if($receipt_type_name =='Cheque')
+                                    @if($receipt_type_name =='Cheque')
 
-                                    <x-dropdown.wrapper label="Bank" type="bankTyped">
-                                        <div class="relative ">
+                                        <x-dropdown.wrapper label="Bank" type="bankTyped">
+                                            <div class="relative ">
 
-                                            <x-dropdown.input label="Bank" id="bank_name"
-                                                              wire:model.live="bank_name"
-                                                              wire:keydown.arrow-up="decrementBank"
-                                                              wire:keydown.arrow-down="incrementBank"
-                                                              wire:keydown.enter="enterBank"/>
+                                                <x-dropdown.input label="Bank" id="bank_name"
+                                                                  wire:model.live="bank_name"
+                                                                  wire:keydown.arrow-up="decrementBank"
+                                                                  wire:keydown.arrow-down="incrementBank"
+                                                                  wire:keydown.enter="enterBank"/>
+
+                                                <x-dropdown.select>
+
+                                                    @if($bankCollection)
+                                                        @forelse ($bankCollection as $i => $bank)
+                                                            <x-dropdown.option highlight="{{$highlightBank === $i  }}"
+                                                                               wire:click.prevent="setBank('{{$bank->vname}}','{{$bank->id}}')">
+                                                                {{ $bank->vname }}
+                                                            </x-dropdown.option>
+                                                        @empty
+                                                            <x-dropdown.new
+                                                                wire:click.prevent="bankSave('{{$bank_name}}')"
+                                                                label="Bank Details"/>
+                                                        @endforelse
+                                                    @endif
+
+                                                </x-dropdown.select>
+                                            </div>
+
+                                        </x-dropdown.wrapper>
+
+                                        <x-input.model-date :label="'Chq.Date'"/>
+                                        <x-input.floating wire:model="chq_no" :label="'Chq_no'"/>
+                                        <x-input.model-date wire:model="deposit_on" :label="'Deposit On'"/>
+                                        <x-input.model-date wire:model="realised_on" :label="'Realised On'"/>
+                                    @endif
+
+                                    <x-input.floating wire:model="remarks" :label="'Remarks'"/>
+
+                                </div>
+
+                            </x-tabs.content>
+
+                            <!-- Tab 2  ------------------------------------------------------------------------------->
+
+                            <x-tabs.content>
+
+                                <div class="flex flex-col gap-3">
+
+                                    <!-- Order No --------------------------------------------------------------------->
+
+                                    <x-dropdown.wrapper label="Order NO" type="orderTyped">
+
+                                        <div class="relative">
+                                            <x-dropdown.input label="Order NO" id="order_name"
+                                                              wire:model.live="order_name"
+                                                              wire:keydown.arrow-up="decrementOrder"
+                                                              wire:keydown.arrow-down="incrementOrder"
+                                                              wire:keydown.enter="enterOrder"/>
+
                                             <x-dropdown.select>
-                                                @if($bankCollection)
-                                                    @forelse ($bankCollection as $i => $bank)
-                                                        <x-dropdown.option highlight="{{$highlightBank === $i  }}"
-                                                                           wire:click.prevent="setBank('{{$bank->vname}}','{{$bank->id}}')">
-                                                            {{ $bank->vname }}
+                                                @if($orderCollection)
+
+                                                    @forelse ($orderCollection as $i => $order)
+
+                                                        <x-dropdown.option highlight="{{$highlightOrder === $i  }}"
+                                                                           wire:click.prevent="setOrder('{{$order->vname}}','{{$order->id}}')">
+                                                            {{ $order->vname }}
                                                         </x-dropdown.option>
                                                     @empty
-                                                        <x-dropdown.new
-                                                            wire:click.prevent="bankSave('{{$bank_name}}')"
-                                                            label="Bank Details"/>
+                                                        @livewire('controls.model.order-model',[$order_name])
                                                     @endforelse
                                                 @endif
-
                                             </x-dropdown.select>
                                         </div>
 
                                     </x-dropdown.wrapper>
 
-                                    <x-input.model-date :label="'Chq.Date'"/>
-                                    <x-input.floating wire:model="chq_no" :label="'Chq_no'"/>
-                                    <x-input.model-date wire:model="deposit_on" :label="'Deposit On'"/>
-                                    <x-input.model-date wire:model="realised_on" :label="'Realised On'"/>
-                                @endif
+                                    <x-input.floating wire:model="ref_no" :label="'Against'"/>
 
-                                <x-input.floating wire:model="remarks" :label="'Remarks'"/>
+                                    <x-input.floating wire:model="ref_amount" :label="'Ref Amount'"/>
+
+                                </div>
+
+                            </x-tabs.content>
+
+                            <!-- Tab 3  ------------------------------------------------------------------------------->
+
+                            <x-tabs.content>
+
+                                <div class="flex flex-col gap-3">
+
+                                    <x-input.floating wire:model="paid_to" :label="'Paid To'"/>
+
+                                    <x-input.floating wire:model="purpose" :label="'Purpose'"/>
+
+                                </div>
+
+                            </x-tabs.content>
+
+                            <!-- Tab 4  ------------------------------------------------------------------------------->
+
+                            <x-tabs.content>
+
+                                <div class="flex flex-col gap-3">
+
+                                    <x-input.floating wire:model="verified_by" :label="'Verified_by'"/>
+
+                                    <x-input.model-date wire:model="verified_on" :label="'Verified_On'"/>
+
+                                </div>
+
+                            </x-tabs.content>
+
+                        </x-slot>
+                    </x-tabs.tab-panel>
 
                 </div>
-
-                </x-tabs.content>
-
-                <!-- Tab 2  ------------------------------------------------------------------------------->
-
-                <x-tabs.content>
-
-                    <div class="flex flex-col gap-3">
-
-                        <!-- Order No ----------------------------------------------------------------------------------------->
-
-                        <x-dropdown.wrapper label="Order NO" type="orderTyped">
-                            <div class="relative">
-                                <x-dropdown.input label="Order NO" id="order_name"
-                                                  wire:model.live="order_name"
-                                                  wire:keydown.arrow-up="decrementOrder"
-                                                  wire:keydown.arrow-down="incrementOrder"
-                                                  wire:keydown.enter="enterOrder"/>
-                                <x-dropdown.select>
-                                    @if($orderCollection)
-
-                                        @forelse ($orderCollection as $i => $order)
-
-                                            <x-dropdown.option highlight="{{$highlightOrder === $i  }}"
-                                                               wire:click.prevent="setOrder('{{$order->vname}}','{{$order->id}}')">
-                                                {{ $order->vname }}
-                                            </x-dropdown.option>
-                                        @empty
-                                            @livewire('controls.model.order-model',[$order_name])
-                                        @endforelse
-                                    @endif
-                                </x-dropdown.select>
-                            </div>
-                        </x-dropdown.wrapper>
-
-                        <x-input.floating wire:model="ref_no" :label="'Against'"/>
-
-                        <x-input.floating wire:model="ref_amount" :label="'Ref Amount'"/>
-
-                    </div>
-
-                </x-tabs.content>
-
-                <!-- Tab 3  ------------------------------------------------------------------------------->
-
-                <x-tabs.content>
-
-                    <div class="flex flex-col gap-3">
-
-                        <x-input.floating wire:model="paid_to" :label="'Paid To'"/>
-
-                        <x-input.floating wire:model="purpose" :label="'Purpose'"/>
-
-                    </div>
-
-                </x-tabs.content>
-
-                <!-- Tab 4  ------------------------------------------------------------------------------->
-
-                <x-tabs.content>
-
-                    <div class="flex flex-col gap-3">
-
-                        <x-input.floating wire:model="verified_by" :label="'Verified_by'"/>
-
-                        <x-input.model-date wire:model="verified_on" :label="'Verified_On'"/>
-
-                    </div>
-
-                </x-tabs.content>
-
-                </x-slot>
-                </x-tabs.tab-panel>
-
             </div>
-</div>
-</x-forms.create>
+        </x-forms.create>
 
-</x-forms.m-panel>
+    </x-forms.m-panel>
 </div>

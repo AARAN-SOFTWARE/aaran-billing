@@ -6,6 +6,7 @@ use Aaran\Entries\Models\Payment;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
+use Aaran\Transaction\Models\Transaction;
 use App\Helper\ConvertTo;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Collection;
@@ -54,28 +55,32 @@ class Index extends Component
             ->WhereBetween('purchase_date', [$first, $last])
             ->firstOrFail();
 
-        $total_receivable = Payment::select(
+        $total_receivable = Transaction::select(
             DB::raw("SUM(vname) as receipt_amount"),
         )->where('acyear', '=', session()->get('acyear'))
+            ->where('mode_id','=',83)
             ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
-        $month_receivable = Payment::select(
+        $month_receivable = Transaction::select(
             DB::raw("SUM(vname) as receipt_amount"),
         )->where('acyear', '=', session()->get('acyear'))
+            ->where('mode_id','=',83)
             ->WhereBetween('vdate', [$first, $last])
             ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
-        $total_payable = Payment::select(
+        $total_payable = Transaction::select(
             DB::raw("SUM(vname) as payment_amount"),
         )->where('acyear', '=', session()->get('acyear'))
+            ->where('mode_id','=',82)
             ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
-        $month_payable = Payment::select(
+        $month_payable = Transaction::select(
             DB::raw("SUM(vname) as payment_amount"),
         )->where('acyear', '=', session()->get('acyear'))
+            ->where('mode_id','=',82)
             ->where('company_id', '=', session()->get('company_id'))
             ->WhereBetween('vdate', [$first, $last])
             ->firstOrFail();
@@ -89,6 +94,8 @@ class Index extends Component
             'month_receivable' => ConvertTo::rupeesFormat($month_receivable->receipt_amount),
             'total_payable' => ConvertTo::rupeesFormat($total_payable->payment_amount),
             'month_payable' => ConvertTo::rupeesFormat($month_payable->payment_amount),
+            'net_profit' =>  ConvertTo::rupeesFormat($total_sales->grand_total-$total_purchase->grand_total),
+            'month_profit' =>  ConvertTo::rupeesFormat($month_sales->grand_total-$month_purchase->grand_total),
         ]);
     }
 

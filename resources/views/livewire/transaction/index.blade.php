@@ -7,9 +7,19 @@
 
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-        <x-table.caption :caption="'Transaction'">
-            {{$list->count()}}
-        </x-table.caption>
+        <div class="flex w-full">
+
+            <x-table.caption :caption="'Transaction'">
+                {{$list->count()}}
+            </x-table.caption>
+
+            <div class="flex justify-end w-full">
+                <a href="{{route('trans.print',[$trans_type_id == 80 ? 1 : 2 ])}}">
+                    <button class="w-16 bg-cyan-700 rounded-lg shadow-2xl px-2 py-1 text-white">Print
+                    </button>
+                </a>
+            </div>
+        </div>
 
         <x-table.form>
 
@@ -161,7 +171,7 @@
                                             {{ $contact->vname }}
                                         </x-dropdown.option>
                                     @empty
-                                        <x-dropdown.new href="{{route('contacts.upsert',['0'])}}" label="Contact" />
+                                        <x-dropdown.new href="{{route('contacts.upsert',['0'])}}" label="Contact"/>
                                     @endforelse
                                 @endif
 
@@ -217,7 +227,9 @@
                                                                 {{ $receipt_type->vname }}
                                                             </x-dropdown.option>
                                                         @empty
-                                                            <x-dropdown.new wire:click.prevent="receiptTypeSave('{{$receipt_type_name}}')" label="Receipt" />
+                                                            <x-dropdown.new
+                                                                wire:click.prevent="receiptTypeSave('{{$receipt_type_name}}')"
+                                                                label="Receipt"/>
                                                         @endforelse
                                                     @endif
 
@@ -247,7 +259,9 @@
                                                                 {{ $bank->vname }}
                                                             </x-dropdown.option>
                                                         @empty
-                                                            <x-dropdown.new wire:click.prevent="bankSave('{{$bank_name}}')" label="Bank Details" />
+                                                            <x-dropdown.new
+                                                                wire:click.prevent="bankSave('{{$bank_name}}')"
+                                                                label="Bank Details"/>
                                                         @endforelse
                                                     @endif
 

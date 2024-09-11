@@ -8,6 +8,7 @@
                 {{--                @if(Aaran\Aadmin\Src\DbMigration::hasEntry())--}}
                 <x-web.dashboard.sales :transactions="$transactions"/>
                 <x-web.dashboard.cards :transactions="$transactions"/>
+
                 {{--                @endif--}}
             @endif
             {{--            <x-web.dashboard.cards/>--}}
