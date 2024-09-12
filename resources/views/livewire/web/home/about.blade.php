@@ -41,7 +41,7 @@
                 <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
                 <span class="text-[#5069F4] text-sm font-semibold animate__animated wow bounceInDown"
                       data-wow-duration="3s">ABOUT OUR COMPANY</span>
-                <span class="hidden sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
+                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
             </div>
             <div class="sm:text-5xl text-xl font-semibold animate__animated wow animate__backInRight" data-wow-duration="3s">We
                 Design and develop Outstanding Digital products and digital - first
@@ -167,7 +167,7 @@
         <div class="flex items-center gap-x-3 sm:justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
             <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
             <span class="text-[#5069F4] text-sm font-semibold ">WORK PROCESS</span>
-            <span class="hidden sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
+            <span class=" sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
         </div>
         <div class="relative">
             <div

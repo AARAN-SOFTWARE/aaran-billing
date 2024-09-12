@@ -294,6 +294,9 @@ class Index extends Component
             'e-inv',
             'e-way',
             'print',
+            'location',
+            'envelope',
+            'bulletin',
         ]);
     }
 

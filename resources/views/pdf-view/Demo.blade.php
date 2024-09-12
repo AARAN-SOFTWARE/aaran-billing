@@ -18,9 +18,11 @@
                 <p class="text-xs">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
                 <p class="text-xs">{{$cmp->get('gstin')}}</p>
             </div>
+            @if($irn)
             <div>
                 <img class="w-[200px]" src="{{\App\Helper\qrcoder::generate($irn->signed_qrcode,22)}}" alt="{{$irn->signed_qrcode}}">
             </div>
+            @endif
         </div>
 
     <!------Invoice Header Area--------------------------------------------------------------------------------------->
