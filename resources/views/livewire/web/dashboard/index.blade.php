@@ -15,8 +15,8 @@
         </div>
         <!-- Col 2 -->
         <div class=" bg-[#F8F8FF] gap-10 flex sm:flex-row flex-col tracking-wider rounded-lg ">
-            <x-web.dashboard.customer />
-            <x-web.dashboard.entries/>
+            <x-web.dashboard.customer :contacts="$contacts"/>
+            <x-web.dashboard.entries :entries="$entries"/>
             <x-web.dashboard.statistics/>
         </div>
     </div>
