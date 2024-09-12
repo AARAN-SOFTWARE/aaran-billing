@@ -1,7 +1,7 @@
-<div class="sm:mt-10 mt-4">
+<div class="sm:mt-10 mt-8">
     <div class="w-8/12 lg:h-screen mx-auto flex-col flex lg:gap-6 gap-0.5 justify-evenly items-center">
 
-        <div class="font-roboto sm:text-4xl font-bold flex justify-center py-2 animate__animated wow bounceInDown"
+        <div class="font-roboto sm:text-4xl font-bold flex justify-center py-6 animate__animated wow bounceInDown"
              data-wow-duration="3s">A Software packed with great features
         </div>
 
@@ -84,7 +84,7 @@
 
         </div>
 
-        <div class="grid lg:grid-cols-2 sm:grid-cols-1 sm:gap-12 gap-5 sm:text-sm text-xs text-gray-500 font-roboto tracking-wider py-2">
+        <div class="grid lg:grid-cols-2 sm:grid-cols-1 sm:gap-12 gap-5 sm:text-sm text-xs text-zinc-600 font-roboto tracking-wider py-5">
 
             <div class="animate__animated wow animate__backInLeft" data-wow-duration="3s">
                 Codexsun is the best rated top seller for a reason. It comes with a lot of great features

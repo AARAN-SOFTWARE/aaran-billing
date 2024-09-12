@@ -1,11 +1,11 @@
-<div class="py-8">
+<div class="py-8 mt-5">
 
     <div class=" font-roboto tracking-wider grid gap-10 sm:pt-20 pt-0">
 
         <div class="flex items-center gap-x-3 justify-center">
-            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-            <span class="text-[#5069F4] sm:text-sm text-xs font-semibold">Billing Made Simple and Efficient</span>
-            <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
+            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#070609] ">&nbsp;</span>
+            <span class="text-[#070609] sm:text-sm text-xs font-semibold">Billing Made Simple and Efficient</span>
+            <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#070609] sm:to-white">&nbsp;</span>
         </div>
 
         <div class="text-center md:text-6xl text-lg font-semibold">Try India’s easiest GST billing platform</div>
@@ -17,11 +17,11 @@
                 <div class="relative inline-flex items-center justify-center group">
                     <span
                         class="z-10 absolute bottom-6 right-12 group-hover:translate-x-11 group-hover:translate-y-3 duration-700 transition-all ease-in-out">
-                           <div class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
+                           <div class="w-[135px] h-[135px] rounded-full border-2 border-[#66C25F]"></div>
                     </span>
                     <span
-                        class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center cursor-pointer">
-                        <svg fill="#2846f0"
+                        class="z-20 bg-[#66C25F] w-40 h-40 rounded-full flex justify-center items-center cursor-pointer">
+                        <svg fill="#FFFFFF"
                              class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"
                              width="60px"
                              height="60px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path
@@ -44,13 +44,13 @@
                     <span
                         class="z-10 absolute bottom-6 right-12 group-hover:translate-x-11 group-hover:translate-y-3 duration-700 transition-all ease-in-out">
                                               <div
-                                                  class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
+                                                  class="w-[135px] h-[135px] rounded-full border-2 border-[#FEBA35]"></div>
 
                     </span>
                     <span
-                        class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center  cursor-pointer">
+                        class="z-20 bg-[#FEBA35] w-40 h-40 rounded-full flex justify-center items-center  cursor-pointer">
 
-                        <svg fill="#2846f0" height="60px" width="60px" version="1.1" id="Capa_1"
+                        <svg fill="#FFFFFF" height="60px" width="60px" version="1.1" id="Capa_1"
                              class="group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"
                              xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -124,22 +124,23 @@
                     enabling direct portal-based payments...
                 </div>
             </div>
+
             <div class="h-96 flex-col">
                 <div class="relative inline-flex items-center justify-center group">
                     <span
                         class="z-10 absolute bottom-6 right-12 group-hover:translate-x-11 group-hover:translate-y-3 duration-700 transition-all ease-in-out">
                                                <div
-                                                   class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
+                                                   class="w-[135px] h-[135px] rounded-full border-2 border-[#464B8B]"></div>
 
                     </span>
                     <span
-                        class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center  cursor-pointer">
+                        class="z-20 bg-[#464B8B] w-40 h-40 rounded-full flex justify-center items-center  cursor-pointer">
 
                         <svg class="group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"
                              height="60px" width="60px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink"
                              viewBox="0 0 505 505" xml:space="preserve">
-                        <circle style="fill:#2846f0;" cx="252.5" cy="252.5" r="252.5"/>
+                        <circle style="fill:#464B8B;" cx="252.5" cy="252.5" r="252.5"/>
                         <polygon style="fill:#FFFFFF;"
                                  points="325.6,86.1 325.6,139.7 379.1,139.7 379.1,418.9 125.9,418.9 125.9,86.1 "/>
                         <polygon style="fill:#E6E9EE;" points="325.6,86.1 379.1,139.7 325.6,139.7 "/>
@@ -148,7 +149,7 @@
                             c1.2,5.3,3.3,10.3,6.1,14.8l-4.2,8.7l10,10l8.7-4.2c4.5,2.8,9.4,4.9,14.8,6.1l3.2,9.1h14.2l3.2-9.1c5.3-1.2,10.3-3.3,14.7-6.1
                             l8.7,4.2l10-10l-4.2-8.7c2.8-4.5,4.9-9.4,6.1-14.8l9.1-3.2v-14.2L243.7,221.7z M198,252.8c-11.5,0-20.7-9.3-20.7-20.7
                             c0-11.5,9.3-20.7,20.7-20.7c11.5,0,20.7,9.3,20.7,20.7C218.8,243.5,209.5,252.8,198,252.8z"/>
-                        <path style="fill:#2846f0;" d="M354.2,358.2l7.6-19.8l-13.8-6.9c1.2-7.6,1-15.2-0.7-22.5l13.5-7.7l-8.6-19.3l-14.7,4.9
+                        <path style="fill:#464B8B;" d="M354.2,358.2l7.6-19.8l-13.8-6.9c1.2-7.6,1-15.2-0.7-22.5l13.5-7.7l-8.6-19.3l-14.7,4.9
                             c-4.3-6-9.8-11.3-16.3-15.5l4.1-14.9l-19.8-7.6l-6.9,13.8c-7.6-1.2-15.2-1-22.5,0.7l-7.7-13.5l-19.3,8.6l4.9,14.7
                             c-6,4.3-11.3,9.8-15.5,16.3l-14.9-4.1l-7.6,19.8l13.8,6.9c-1.2,7.6-1,15.2,0.7,22.5l-13.5,7.7l8.6,19.3l14.7-4.9
                             c4.3,6,9.8,11.3,16.3,15.5l-4.1,14.9l19.8,7.6l6.9-13.8c7.6,1.2,15.2,1,22.5-0.7l7.7,13.5l19.3-8.6l-4.9-14.7
@@ -165,40 +166,41 @@
                     up-to-date business plans...
                 </div>
             </div>
+
             <div class="h-96">
                 <div class="relative inline-flex items-center justify-center group">
                     <span
                         class="z-10 absolute bottom-6 right-12 group-hover:translate-x-11 group-hover:translate-y-3 duration-700 transition-all ease-in-out">
-                        <div class="w-[135px] h-[135px] rounded-full border border-[#2846f0]"></div>
+                        <div class="w-[135px] h-[135px] rounded-full border-2 border-[#8E9BA3]"></div>
                     </span>
                     <span
-                        class="z-20 bg-gray-100 w-40 h-40 rounded-full flex justify-center items-center p-12  cursor-pointer">
+                        class="z-20 bg-[#8E9BA3] w-40 h-40 rounded-full flex justify-center items-center p-12  cursor-pointer">
 
-<svg class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear" version="1.1" id="Layer_1"
+    <svg class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear" version="1.1" id="Layer_1"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      viewBox="0 0 512 512" xml:space="preserve">
-<path style="fill:#2846f0;" d="M499.449,176.668C466.054,74.12,369.691,0,256,0C114.615,0,0,114.616,0,256
-	c0,113.691,74.12,210.055,176.667,243.45L499.449,176.668z"/>
-<path style="fill:#2846f0;" d="M512,256c0-27.694-4.415-54.353-12.551-79.332L395.13,72.348L116.87,439.652l59.797,59.798
-	C201.647,507.585,228.306,512,256,512C397.385,512,512,397.384,512,256z"/>
-<polygon style="fill:#6FAEE8;" points="395.13,372.87 306.087,350.609 328.348,439.652 395.13,439.652 "/>
-<polygon style="fill:#F2F2F2;" points="395.13,72.348 395.13,372.87 353.202,395.13 328.348,439.652 256,439.652 189.217,254.887
-	256,72.348 "/>
-<g>
-	<polygon style="fill:#FFFFFF;" points="256,72.348 256,395.129 244.87,406.261 256,417.391 256,439.652 116.87,439.652
-		116.87,72.348 	"/>
-	<polygon style="fill:#FFFFFF;" points="328.348,439.652 328.348,372.87 395.13,372.87 	"/>
-</g>
-<polygon style="fill:#2846f0;" points="256,94.609 244.87,105.739 256,116.87 372.87,116.87 372.87,94.609 "/>
-<rect x="139.13" y="395.13" style="fill:#2846f0;" width="116.87" height="22.261"/>
-<path style="fill:#2846f0;" d="M372.87,139.13v211.478H256l-11.13-11.13l11.13-11.13h36.174V205.913H256l-11.13-11.13l11.13-11.13
-	h94.609v-22.261H256l-11.13-11.13L256,139.13H372.87z M350.609,328.348V205.913h-36.174v122.435H350.609z"/>
-<g>
-	<polygon style="fill:#2846f0;" points="256,328.348 256,350.609 139.13,350.609 139.13,139.13 256,139.13 256,161.391
-		161.391,161.391 161.391,183.652 256,183.652 256,205.913 161.391,205.913 161.391,328.348 	"/>
-	<rect x="139.13" y="94.609" style="fill:#2846f0;" width="116.87" height="22.261"/>
-</g>
-</svg>
+                    <path style="fill:#8E9BA3;" d="M499.449,176.668C466.054,74.12,369.691,0,256,0C114.615,0,0,114.616,0,256
+                        c0,113.691,74.12,210.055,176.667,243.45L499.449,176.668z"/>
+                    <path style="fill:#8E9BA3;" d="M512,256c0-27.694-4.415-54.353-12.551-79.332L395.13,72.348L116.87,439.652l59.797,59.798
+                        C201.647,507.585,228.306,512,256,512C397.385,512,512,397.384,512,256z"/>
+                    <polygon style="fill:#FFFFFF;" points="395.13,372.87 306.087,350.609 328.348,439.652 395.13,439.652 "/>
+                    <polygon style="fill:#FFFFFF;" points="395.13,72.348 395.13,372.87 353.202,395.13 328.348,439.652 256,439.652 189.217,254.887
+                        256,72.348 "/>
+                    <g>
+                        <polygon style="fill:#FFFFFF;" points="256,72.348 256,395.129 244.87,406.261 256,417.391 256,439.652 116.87,439.652
+                            116.87,72.348 	"/>
+                        <polygon style="fill:#FFFFFF;" points="328.348,439.652 328.348,372.87 395.13,372.87 	"/>
+                    </g>
+                    <polygon style="fill:#8E9BA3;" points="256,94.609 244.87,105.739 256,116.87 372.87,116.87 372.87,94.609 "/>
+                    <rect x="139.13" y="395.13" style="fill:#8E9BA3;" width="116.87" height="22.261"/>
+                    <path style="fill:#8E9BA3;" d="M372.87,139.13v211.478H256l-11.13-11.13l11.13-11.13h36.174V205.913H256l-11.13-11.13l11.13-11.13
+                        h94.609v-22.261H256l-11.13-11.13L256,139.13H372.87z M350.609,328.348V205.913h-36.174v122.435H350.609z"/>
+                    <g>
+                        <polygon style="fill:#8E9BA3;" points="256,328.348 256,350.609 139.13,350.609 139.13,139.13 256,139.13 256,161.391
+                            161.391,161.391 161.391,183.652 256,183.652 256,205.913 161.391,205.913 161.391,328.348 	"/>
+                        <rect x="139.13" y="94.609" style="fill:#8E9BA3;" width="116.87" height="22.261"/>
+                    </g>
+                    </svg>
                     </span>
                 </div>
                 <div class="text-2xl font-semibold py-4">e-Invoice</div>
@@ -208,6 +210,7 @@
                     hassle-free process...
                 </div>
             </div>
+
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="mt-10">
+<div class="mt-12">
     <div class="relative">
 
         <div style="background-image: url('/../../../images/wp1.webp')"
@@ -7,7 +7,7 @@
 
         <div class="w-full absolute lg:top-24 top-2 lg:py-6 py-2.5 ">
 
-            <div class="w-6/12 mx-auto flex-col flex lg:gap-y-7 gap-y-3 text-white font-roboto tracking-wider">
+            <div class="w-6/12 mx-auto flex-col flex lg:gap-y-7 gap-y-6 text-white font-roboto tracking-wider">
 
                 <div class="lg:text-2xl text-xs text-center w-5/6 mx-auto animate__animated wow animate__backInLeft"
                      data-wow-duration="2s">
@@ -19,12 +19,12 @@
                     data-wow-duration="2s">
 
                     <input type="text" placeholder="Name*"
-                           class="py-2 bg-transparent border border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
+                           class="py-2 bg-transparent border-2 border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
 
                     <input type="text" placeholder="E-mail*"
-                           class="py-2 bg-transparent border border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
+                           class="py-2 bg-transparent border-2 border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
 
-                    <button class="border border-white py-2 hover:bg-[#3F5AF3]/60 duration-700">
+                    <button class="bg-orange-500 py-2 hover:bg-white hover:text-orange-500 duration-700">
                         Subscribe
                     </button>
 

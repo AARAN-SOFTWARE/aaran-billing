@@ -1,11 +1,11 @@
 <div>
 
-    <div class="font-roboto  flex-col flex gap-6 my-16">
+    <div class="font-roboto  flex-col flex gap-8 my-28">
 
         <div class="flex items-center gap-x-3 justify-center">
-            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-            <span class="text-[#5069F4] text-xl font-semibold">Get real-time Collaborate</span>
-            <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
+            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#070609] ">&nbsp;</span>
+            <span class="text-[#070609] text-xl font-semibold">Get real-time Collaborate</span>
+            <span class="h-2 px-4 bg-gradient-to-r from-[#070609] to-white">&nbsp;</span>
         </div>
 
         <div class="text-center sm:text-4xl font-semibold">How Codexsun can improve your business:</div>
@@ -14,15 +14,15 @@
 
             <div class="relative group flex-col flex gap-4">
 
-                <div class="text-center font-semibold sm:text-2xl text-md">/SW DEVELOPMENT</div>
+                <div class="text-center font-semibold sm:text-xl text-md">/SW DEVELOPMENT</div>
 
                 <img src="../../../../images/swdev.jpg" alt="" class="brightness-50 h-full w-full">
 
                 <div
                     class="sm:w-[60px] sm:h-[60px] w-[40px] h-[40px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
-                    group-hover:opacity-90 ease-linear transition-all duration-200 bg-white/90 inline-flex justify-center items-center rounded-md">
+                    group-hover:opacity-90 ease-linear transition-all duration-200 bg-white inline-flex justify-center items-center rounded-md">
 
-                    <svg fill="#2846f0" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                    <svg fill="#F31A49" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink"
                          width="40px" height="40px" viewBox="0 0 419.931 419.931"
                          xml:space="preserve">
@@ -80,8 +80,8 @@
                 </div>
 
                 <button
-                    class="absolute bottom-1 left-8 bg-[#2846f0] text-white inline-flex items-center max-w-max px-5 py-4
-                    invisible group-hover:visible group-hover:-translate-y-6 group-hover:opacity-90 ease-linear transition-all duration-200">
+                    class="absolute bottom-1 left-8 bg-[#F31A49] text-white inline-flex items-center max-w-max px-5 py-4
+                    invisible group-hover:visible group-hover:-translate-y-6 font-semibold tracking-wider group-hover:opacity-90 ease-linear transition-all duration-200">
 
                     <span><a href="{{route('service')}}">Read Details</a></span>
 
@@ -100,14 +100,14 @@
 
             <div class="relative group flex-col flex gap-4">
 
-                <div class="text-center font-semibold sm:text-2xl">/GST BILLING</div>
+                <div class="text-center font-semibold sm:text-xl">/GST BILLING</div>
 
                 <img src="../../../../images/gstBilling.png" alt="" class="brightness-50">
 
                 <div
                     class="sm:w-[60px] sm:h-[60px] w-[40px] h-[40px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
-                    group-hover:opacity-90 ease-linear transition-all duration-200 bg-white/90 inline-flex justify-center items-center p-2 rounded-md">
-                    <svg fill="#2846f0" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                    group-hover:opacity-90 ease-linear transition-all duration-200 bg-white inline-flex justify-center items-center p-2 rounded-md">
+                    <svg fill="#F31A49" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink"
                          viewBox="0 0 496 496" xml:space="preserve">
                         <g>
@@ -165,7 +165,7 @@
 
 
                 <button
-                    class="absolute bottom-1 left-8 bg-[#2846f0] text-white inline-flex items-center max-w-max px-5 py-4
+                    class="absolute bottom-1 left-8 bg-[#F31A49] font-semibold tracking-wider text-white inline-flex items-center max-w-max px-5 py-4
                     invisible group-hover:visible group-hover:-translate-y-6 group-hover:opacity-90 ease-linear transition-all duration-200">
 
                     <span><a href="{{route('service')}}">Read Details</a></span>
@@ -184,14 +184,14 @@
 
             <div class="relative group flex-col flex gap-4">
 
-                <div class="text-center font-semibold sm:text-2xl">/USER EXPERIENCE</div>
+                <div class="text-center font-semibold sm:text-xl">/USER EXPERIENCE</div>
 
                 <img src="../../../../images/userExperience.png" alt="" class="brightness-50">
 
                 <div
                     class="sm:w-[60px] sm:h-[60px] w-[40px] h-[40px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
-                    group-hover:opacity-90 ease-linear transition-all duration-200 bg-white/90 inline-flex justify-center items-center rounded-md">
-                    <svg fill="#2846f0" width="40px" height="40px" viewBox="0 -64 640 640"
+                    group-hover:opacity-90 ease-linear transition-all duration-200 bg-white inline-flex justify-center items-center rounded-md">
+                    <svg fill="#F31A49" width="40px" height="40px" viewBox="0 -64 640 640"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M610.5 341.3c2.6-14.1 2.6-28.5 0-42.6l25.8-14.9c3-1.7 4.3-5.2 3.3-8.5-6.7-21.6-18.2-41.2-33.2-57.4-2.3-2.5-6-3.1-9-1.4l-25.8 14.9c-10.9-9.3-23.4-16.5-36.9-21.3v-29.8c0-3.4-2.4-6.4-5.7-7.1-22.3-5-45-4.8-66.2 0-3.3.7-5.7 3.7-5.7 7.1v29.8c-13.5 4.8-26 12-36.9 21.3l-25.8-14.9c-2.9-1.7-6.7-1.1-9 1.4-15 16.2-26.5 35.8-33.2 57.4-1 3.3.4 6.8 3.3 8.5l25.8 14.9c-2.6 14.1-2.6 28.5 0 42.6l-25.8 14.9c-3 1.7-4.3 5.2-3.3 8.5 6.7 21.6 18.2 41.1 33.2 57.4 2.3 2.5 6 3.1 9 1.4l25.8-14.9c10.9 9.3 23.4 16.5 36.9 21.3v29.8c0 3.4 2.4 6.4 5.7 7.1 22.3 5 45 4.8 66.2 0 3.3-.7 5.7-3.7 5.7-7.1v-29.8c13.5-4.8 26-12 36.9-21.3l25.8 14.9c2.9 1.7 6.7 1.1 9-1.4 15-16.2 26.5-35.8 33.2-57.4 1-3.3-.4-6.8-3.3-8.5l-25.8-14.9zM496 368.5c-26.8 0-48.5-21.8-48.5-48.5s21.8-48.5 48.5-48.5 48.5 21.8 48.5 48.5-21.7 48.5-48.5 48.5zM96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm224 32c1.9 0 3.7-.5 5.6-.6 8.3-21.7 20.5-42.1 36.3-59.2 7.4-8 17.9-12.6 28.9-12.6 6.9 0 13.7 1.8 19.6 5.3l7.9 4.6c.8-.5 1.6-.9 2.4-1.4 7-14.6 11.2-30.8 11.2-48 0-61.9-50.1-112-112-112S208 82.1 208 144c0 61.9 50.1 112 112 112zm105.2 194.5c-2.3-1.2-4.6-2.6-6.8-3.9-8.2 4.8-15.3 9.8-27.5 9.8-10.9 0-21.4-4.6-28.9-12.6-18.3-19.8-32.3-43.9-40.2-69.6-10.7-34.5 24.9-49.7 25.8-50.3-.1-2.6-.1-5.2 0-7.8l-7.9-4.6c-3.8-2.2-7-5-9.8-8.1-3.3.2-6.5.6-9.8.6-24.6 0-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h255.4c-3.7-6-6.2-12.8-6.2-20.3v-9.2zM173.1 274.6C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z"/>
@@ -199,7 +199,7 @@
                 </div>
 
                 <button
-                    class="absolute bottom-1 left-8 bg-[#2846f0] text-white inline-flex items-center max-w-max px-5 py-4
+                    class="absolute bottom-1 left-8 bg-[#F31A49] font-semibold tracking-wider text-white inline-flex items-center max-w-max px-5 py-4
                     invisible group-hover:visible group-hover:-translate-y-6 group-hover:opacity-90 ease-linear transition-all duration-200">
                     <span><a href="{{route('service')}}">Read Details</a></span>
                     <span>
@@ -216,14 +216,14 @@
 
             <div class="relative group flex-col flex gap-4">
 
-                <div class="text-center font-semibold sm:text-2xl">/RAPID SOLUTION</div>
+                <div class="text-center font-semibold sm:text-xl">/RAPID SOLUTION</div>
 
                 <img src="../../../../images/about-img-2.jpg" alt="" class="brightness-50">
 
                 <div
                     class="sm:w-[60px] sm:h-[60px] w-[40px] h-[40px] absolute top-20 -left-1 invisible group-hover:visible group-hover:translate-x-9
-                    group-hover:opacity-90 ease-linear transition-all duration-200 bg-white/90 inline-flex justify-center items-center rounded-md">
-                    <svg fill="#2846f0" height="40px" width="40px" version="1.2" baseProfile="tiny" id="Layer_1"
+                    group-hover:opacity-90 ease-linear transition-all duration-200 bg-white inline-flex justify-center items-center rounded-md">
+                    <svg fill="#F31A49" height="40px" width="40px" version="1.2" baseProfile="tiny" id="Layer_1"
                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                          viewBox="-63 65 128 128" xml:space="preserve">
                         <path d="M-32.6,131.7l-2.1,2.2l4,3.7l2.1-2.2c0.9,0.5,1.9,0.9,2.8,1l0.1,3l5.4-0.2l-0.1-3c1-0.2,1.9-0.7,2.7-1.2l2.2,2.1l3.7-4
@@ -247,7 +247,7 @@
                 </div>
 
                 <button
-                    class="absolute bottom-1 left-8 bg-[#2846f0] text-white inline-flex items-center max-w-max px-5 py-4
+                    class="absolute bottom-1 left-8 bg-[#F31A49] font-semibold tracking-wider text-white inline-flex items-center max-w-max px-5 py-4
                     invisible group-hover:visible group-hover:-translate-y-6 group-hover:opacity-90 ease-linear transition-all duration-200">
 
                     <span><a href="{{route('service')}}">Read Details</a></span>
