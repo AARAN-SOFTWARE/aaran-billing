@@ -20,9 +20,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/receviables', App\Livewire\Reports\Statement\Receivables::class)->name('receviables');
     Route::get('/payables', App\Livewire\Reports\Statement\Payables::class)->name('payables');
+    Route::get('/salesMonthly', App\Livewire\Reports\Sales\MonthlyReport::class)->name('salesMonthly');
+    Route::get('/gstReport', App\Livewire\Reports\Sales\GstReport::class)->name('gstReport');
 
     Route::get('/receviables/print/{party}/{start_date?}/{end_date?}', App\Http\Controllers\Report\ReceivablesController::class)->name('receviables.print');
     Route::get('/payables/print/{party}/{start_date?}/{end_date?}', App\Http\Controllers\Report\PayablesController::class)->name('payables.print');
+
+    Route::get('/monthlyReport/print/{month?}/{year?}', App\Http\Controllers\Report\Sales\MOnthlyReportController::class)->name('monthlyReport.print');
+    Route::get('/gstReport/print/{month?}/{year?}', App\Http\Controllers\Report\Sales\GstReportController::class)->name('gstReport.print');
+
 //
 //    Route::get('/purchases', App\Livewire\Entries\Purchase\Index::class)->name('purchases');
 //    Route::get('/purchases/{id}/upsert', App\Livewire\Entries\Purchase\Upsert::class)->name('purchases.upsert');
