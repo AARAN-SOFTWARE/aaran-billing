@@ -7,6 +7,7 @@ use Aaran\Common\Database\Seeders\S102_CommonSeeder;
 use Aaran\Master\Database\Seeders\S201_CompanySeeder;
 use Aaran\Master\Database\Seeders\S202_ContactSeeder;
 use Aaran\Master\Database\Seeders\S204_OrderSeeder;
+use Aaran\Master\Database\Seeders\S205_StyleSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         S201_CompanySeeder::run();
         S202_ContactSeeder::run();
         S204_OrderSeeder::run();
+        S205_StyleSeeder::run();
     }
 }
