@@ -411,7 +411,7 @@
                 <div class="rupees"><b>{{$rupees}}Only</b></div>
             </td>
             <td class="total-col-1 total" colspan="4"><b>GRAND TOTAL</b></td>
-            <td class="total-col-2 total" colspan="2"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
+            <td class="total-col-2 total" colspan="2"><b></b></td>
         </tr>
     @else
         <tr>

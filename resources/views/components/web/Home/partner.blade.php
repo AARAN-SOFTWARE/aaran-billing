@@ -5,7 +5,7 @@
              class="lg:h-screen h-[35rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
 
-        <div class="w-full absolute lg:top-24 top-2 lg:py-6 py-2.5 ">
+        <div class="w-full absolute lg:top-48 top-2 lg:py-6 py-2.5 ">
 
             <div class="w-6/12 mx-auto flex-col flex lg:gap-y-7 gap-y-6 text-white font-roboto tracking-wider">
 

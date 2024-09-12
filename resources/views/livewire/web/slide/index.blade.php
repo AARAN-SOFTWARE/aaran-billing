@@ -130,7 +130,7 @@
 
                             <div wire:loading wire:target="bg_image" class="z-10 absolute top-6 left-12">
                                 <div class="w-14 h-14 rounded-full animate-spin
-                                                        border-y-4 border-dashed border-green-500 border-t-transparent"></div>
+                                                         border-y-4 border-dashed border-green-500 border-t-transparent"></div>
                             </div>
                         </div>
                     </div>

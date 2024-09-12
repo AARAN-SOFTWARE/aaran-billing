@@ -17,7 +17,7 @@ class DemoController extends Controller
     public function __invoke($vid)
     {
         $sale = $this->getSales($vid);
-        return pdf('pdf-view.Demo', [
+        return pdf('pdf-view.template1', [
             'obj' => $sale,
             'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
             'list' => $this->getSaleItems($vid),
