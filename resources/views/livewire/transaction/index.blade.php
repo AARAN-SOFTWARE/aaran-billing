@@ -15,8 +15,7 @@
 
             <div class="flex justify-end w-full">
                 <a href="{{route('trans.print',[$trans_type_id == 80 ? 1 : 2 ])}}">
-                    <button class="w-16 bg-cyan-700 rounded-lg shadow-2xl px-2 py-1 text-white">Print
-                    </button>
+                    <x-button.print-x />
                 </a>
             </div>
         </div>

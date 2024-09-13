@@ -33,8 +33,10 @@
                         </label>
                     </div>
                     <div class="flex gap-3">
-                        <x-button.cancel/>
-                        <x-button.save/>
+{{--                        <x-button.cancel/>--}}
+                        <x-button.cancel-x wire:click.prevent="$set('showEditModal', false)" />
+{{--                        <x-button.save/>--}}
+                        <x-button.save-x  wire:click.prevent="save" />
                     </div>
                 </div>
             </div>

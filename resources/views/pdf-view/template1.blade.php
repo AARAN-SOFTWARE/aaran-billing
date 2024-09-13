@@ -85,7 +85,7 @@
 
     <!-- Item Table -->
     <div>
-        <table class="w-full border-t-2 border-b-2 border-black ">
+        <table class="w-full border-t-2 border-b-2 border-black">
             <thead class="font-semibold text-xs bg-gray-50">
             <tr class="py-2 border-b border-r border-gray-300">
                 <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300">S.No</th>
@@ -126,19 +126,19 @@
                     <td class="py-2 text-end px-4 border-r border-gray-300">{{number_format($row['sub_total'],2,'.','')}}</td>
                 </tr>
             @endforeach
-            @for($i = 0; $i < 9-$list->count(); $i++)
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+            @for($i = 0; $i < 9 - $list->count(); $i++)
+                <tr class="text-xs border-b border-r border-gray-300">
+                    <td class="py-2 text-center border-l border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
+                    <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
                 </tr>
             @endfor
 
