@@ -29,6 +29,23 @@ class GstReport extends Component
             ->where('company_id','=',session()->get('company_id'))->get();
     }
 
+    public function salesReport()
+    {
+        return $this->redirect(route('monthlySalesReport.print',['month'=>$this->month?:Carbon::now()->format('m'),'year'=>$this->year?:Carbon::now()->format('Y')]));
+    }
+
+    public function purchaseReport()
+    {
+        return $this->redirect(route('monthlyPurchaseReport.print',['month'=>$this->month?:Carbon::now()->format('m'),'year'=>$this->year?:Carbon::now()->format('Y')]));
+
+    }
+
+    public function GstPrint()
+    {
+        return $this->redirect(route('gstReport.print',['month'=>$this->month?:Carbon::now()->format('m'),'year'=>$this->year?:Carbon::now()->format('Y')]));
+
+    }
+
     public function render()
     {
         return view('livewire.reports.sales.gst-report')->with([
