@@ -12,7 +12,7 @@
             </div>
 
             <span
-                class="z-10 absolute sm:top-6 top-1 sm:py-5 py-1.5 sm:px-[180px] px-[70px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
+                class="z-10 absolute sm:top-6 top-1 sm:py-5 py-1.5 sm:px-[180px] px-[70px] bg-gradient-to-r from-transparent rounded-xl via-[#716f6c] to-[#1e1405]
                 animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
 
             <div class="sm:w-6/12 w-auto mx-auto sm:text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
