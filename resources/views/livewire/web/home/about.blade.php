@@ -13,7 +13,7 @@
             </div>
 
             <span
-                class="z-10 absolute sm:top-6 top-1 sm:py-5 py-1.5 sm:px-[180px] px-[70px] bg-gradient-to-r from-transparent via-[#6f83f6] to-[#2746f1]
+                class="z-10 absolute rounded-xl sm:top-6 -top-2 sm:py-6 py-3 sm:px-[180px] px-[70px] bg-gradient-to-r from-transparent via-[#716f6c] to-[#1e1405]
                 animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
 
             <div class="sm:w-6/12 w-auto mx-auto sm:text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
@@ -38,10 +38,10 @@
         </div>
         <div class=" flex-col flex sm:gap-y-8 gap-y-6 sm:py-8 pt-12">
             <div class="flex items-center gap-x-3">
-                <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-                <span class="text-[#5069F4] text-sm font-semibold animate__animated wow bounceInDown"
+                <span class="h-2 px-4 bg-gradient-to-r from-white to-[#ff7233] ">&nbsp;</span>
+                <span class="text-[#ff7233] text-sm font-semibold animate__animated wow bounceInDown"
                       data-wow-duration="3s">ABOUT OUR COMPANY</span>
-                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
+                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#ff7233] sm:to-white">&nbsp;</span>
             </div>
             <div class="sm:text-5xl text-xl font-semibold animate__animated wow animate__backInRight" data-wow-duration="3s">We
                 Design and develop Outstanding Digital products and digital - first
@@ -165,9 +165,9 @@
 
     <div class=" font-roboto tracking-wider sm:py-0 sm:py-2 sm:px-0 px-2">
         <div class="flex items-center gap-x-3 sm:justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
-            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-            <span class="text-[#5069F4] text-sm font-semibold ">WORK PROCESS</span>
-            <span class=" sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#B7C1FA] sm:to-white">&nbsp;</span>
+            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#ff7233] ">&nbsp;</span>
+            <span class="text-[#ff7233] text-sm font-semibold ">WORK PROCESS</span>
+            <span class=" sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#ff7233] sm:to-white">&nbsp;</span>
         </div>
         <div class="relative">
             <div
@@ -239,10 +239,10 @@
     <div class=" grid sm:grid-cols-2 grid-cols-1 gap-12 sm:h-[40rem] h-auto font-roboto tracking-wider sm:pl-40 sm:px-0 px-2">
         <div class=" flex-col flex sm:gap-y-8 gap-y-4 py-8">
             <div class="flex items-center gap-x-3 animate__animated wow bounceInDown" data-wow-duration="3s">
-                <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA]">&nbsp;</span>
+                <span class="h-2 px-4 bg-gradient-to-r from-white to-[#ff7233]">&nbsp;</span>
                 <span
-                    class="text-[#5069F4] text-sm font-semibold ">ABOUT COMPANY</span>
-                <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
+                    class="text-[#ff7233] text-sm font-semibold ">ABOUT COMPANY</span>
+                <span class="h-2 px-4 bg-gradient-to-r from-[#ff7233] to-white">&nbsp;</span>
             </div>
             <div class="sm:text-5xl text-2xl font-semibold sm:leading-[50px] animate__animated wow animate__backInLeft"
                  data-wow-duration="3s">Our Main Goal to Satisfied Local & Global Clients.
@@ -286,9 +286,9 @@
 
     <div class="flex flex-col sm:gap-y-8 gap-y-4 sm:pb-0 pb-8">
         <div class="flex items-center gap-x-3 sm:justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
-            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-            <span class="text-[#5069F4] text-sm font-semibold">TEAM MEMBERS</span>
-            <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
+            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#ff7233] ">&nbsp;</span>
+            <span class="text-[#ff7233] text-sm font-semibold">TEAM MEMBERS</span>
+            <span class="h-2 px-4 bg-gradient-to-r from-[#ff7233] to-white">&nbsp;</span>
         </div>
         <div class="sm:w-6/12 w-auto mx-auto text-center sm:text-5xl text-2xl font-semibold animate__animated wow bounceInUp" data-wow-duration="3s">Quality Expert Team Would Like To Hear From You
         </div>
@@ -352,9 +352,9 @@
 
     <div class="flex-col flex gap-6 sm:py-0 py-8">
         <div class="flex items-center gap-x-3 sm:justify-center animate__animated wow bounceInDown" data-wow-duration="3s">
-            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
-            <span class="text-[#5069F4] text-sm font-semibold">TESTIMONIALS</span>
-            <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
+            <span class="h-2 px-4 bg-gradient-to-r from-white to-[#ff7233] ">&nbsp;</span>
+            <span class="text-[#ff7233] text-sm font-semibold">TESTIMONIALS</span>
+            <span class="h-2 px-4 bg-gradient-to-r from-[#ff7233] to-white">&nbsp;</span>
         </div>
         <div class="sm:text-5xl text-2xl text-center font-semibold animate__animated wow bounceInUp" data-wow-duration="3s">CLIENTS FEEDBACK</div>
         <div class="sm:w-9/12 w-auto mx-auto grid sm:grid-cols-3 grid-cols-1 sm:gap-4 gap-20 gap my-16 sm:px-0 px-2">
