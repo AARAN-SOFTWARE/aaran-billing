@@ -128,6 +128,6 @@ class Index extends Component
     #endregion
     public function render()
     {
-        return view('livewire.web.forms.home.index');
+        return view('livewire.web.forms.home.index')->layout('layouts.web');
     }
 }

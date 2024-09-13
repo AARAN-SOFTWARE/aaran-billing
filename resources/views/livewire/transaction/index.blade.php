@@ -353,6 +353,7 @@
                     </x-tabs.tab-panel>
 
                 </div>
+
             </div>
         </x-forms.create>
     </x-forms.m-panel>
