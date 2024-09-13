@@ -4,18 +4,21 @@
 
 <div class="sm:w-5/12 sm:h-[20rem] h-auto flex flex-col gap-5">
     <div class="w-full flex sm:flex-row flex-col h-1/2 sm:gap-5 gap-10">
+
         <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow-md border-t-2 border-[#845ADF] ">
             <div class="flex items-center justify-between py-5 px-6">
+
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md">Purchase</div>
-                        <div class="text-xl text-[#845ADF]">₹ {{$transactions['total_purchase']}}</div>
+                        <div class="text-xl text-[#845ADF]">{{$transactions['total_purchase']}}</div>
                     </div>
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
-                        <span class="text-[#845ADF] text-sm ">₹ {{$transactions['month_purchase']}}</span>
+                        <span class="text-[#845ADF] text-sm ">{{$transactions['month_purchase']}}</span>
                     </div>
                 </div>
+
                 <div class="flex-col flex space-y-4">
                     <div class="w-16 h-16 ml-3">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -36,6 +39,7 @@
                             </g>
                         </svg>
                     </div>
+
                     <div class="inline-flex items-center gap-2 text-[#845ADF] font-semibold hover:bg-[#efeafb] p-1 rounded-md
                     transition-colors duration-300 ease-out">
                         <span class="text-sm">View All </span>
@@ -49,20 +53,26 @@
                 </div>
             </div>
         </div>
+
         <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow-md border-t-2 border-[#23B7E5]">
             <div class="flex items-center justify-between py-5 px-6">
+
                 <div class="space-y-3">
+
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Receivables</div>
-{{--                        <div class="text-xl text-[#F5B849]">₹ 4,00,000</div>--}}
+                        {{--                        <div class="text-xl text-[#F5B849]">₹ 4,00,000</div>--}}
                         <div class="text-xl text-[#F5B849]"> {{$transactions['total_receivable']}}</div>
                     </div>
+
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
-{{--                        <span class="text-[#F5B849] text-sm ">₹ 24,000</span>--}}
+                        {{--                        <span class="text-[#F5B849] text-sm ">₹ 24,000</span>--}}
                         <span class="text-[#F5B849] text-sm ">{{$transactions['month_receivable']}}</span>
                     </div>
+
                 </div>
+
                 <div class="flex-col flex space-y-4">
                     <div class="w-16 h-16 ml-3">
                         <svg width="70px" height="70px" viewBox="0 0 24 24" fill="none"
@@ -92,7 +102,9 @@
                                 fill="#F5B849"/>
                         </svg>
                     </div>
-                    <div class="inline-flex items-center gap-2 text-[#F5B849] font-semibold hover:bg-[#fef6e7] p-1 rounded-md transition-colors duration-300 ease-out">
+
+                    <div
+                        class="inline-flex items-center gap-2 text-[#F5B849] font-semibold hover:bg-[#fef6e7] p-1 rounded-md transition-colors duration-300 ease-out">
                         <span class="text-sm">View All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke-width="1.5"
@@ -105,21 +117,24 @@
             </div>
         </div>
     </div>
+
     <div class="flex sm:flex-row flex-col h-1/2 gap-5">
         <div class="sm:w-1/2 w-full  bg-white rounded-lg hover:bg-white hover:shadow-md border-t-2 border-[#E6533C]">
             <div class="flex items-center justify-between py-5 px-6">
+
                 <div class="space-y-3">
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Payables</div>
-{{--                        <div class="text-xl text-[#E6533C]">₹ 5,00,000</div>--}}
+                        {{--                        <div class="text-xl text-[#E6533C]">₹ 5,00,000</div>--}}
                         <div class="text-xl text-[#E6533C]"> {{$transactions['total_payable']}}</div>
                     </div>
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
-{{--                        <span class="text-[#E6533C] text-sm ">₹ 41,300</span>--}}
+                        {{--                        <span class="text-[#E6533C] text-sm ">₹ 41,300</span>--}}
                         <span class="text-[#E6533C] text-sm ">{{$transactions['month_payable']}}</span>
                     </div>
                 </div>
+
                 <div class="flex-col flex space-y-4">
                     <div class="w-16 h-16 ml-3">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +176,9 @@
                                     282.978,234.509 291.502,225.985 "/>
                                 </svg>
                     </div>
-                    <div class="inline-flex items-center gap-2 text-[#E6533C] font-semibold hover:bg-[#fcebe8] p-1 rounded-md transition-colors duration-300 ease-out">
+
+                    <div
+                        class="inline-flex items-center gap-2 text-[#E6533C] font-semibold hover:bg-[#fcebe8] p-1 rounded-md transition-colors duration-300 ease-out">
                         <span class="text-sm">View All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke-width="1.5"
@@ -170,22 +187,30 @@
                                   d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/>
                         </svg>
                     </div>
+
                 </div>
             </div>
         </div>
+
         <div class="sm:w-1/2 w-full bg-white rounded-lg hover:bg-white hover:shadow-md border-t-2 border-[#26BF94]">
             <div class="flex items-center justify-between py-5 px-6">
+
                 <div class="space-y-3">
+
                     <div class="flex-col gap-1 font-semibold">
                         <div class="text-md ">Net Profit</div>
                         <div class="text-xl text-[#26BF94]"> {{$transactions['net_profit']}}</div>
                     </div>
+
                     <div class="flex-col flex gap-1 font-semibold">
                         <span class="text-xs text-gray-500 ">this month</span>
                         <span class="text-[#26BF94] text-sm ">{{$transactions['month_profit']}}</span>
                     </div>
+
                 </div>
+
                 <div class="flex-col flex space-y-4">
+
                     <div class="w-16 h-16 ml-3">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -206,7 +231,9 @@
                                 330,195.2 374,209.6 359.6,253.6 "/>
                             </svg>
                     </div>
-                    <div class="inline-flex items-center gap-2 text-[#26BF94] font-semibold hover:bg-[#eafbf6] p-1 rounded-md transition-colors duration-300 ease-out">
+
+                    <div
+                        class="inline-flex items-center gap-2 text-[#26BF94] font-semibold hover:bg-[#eafbf6] p-1 rounded-md transition-colors duration-300 ease-out">
                         <span class="text-sm">View All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke-width="1.5"
@@ -215,6 +242,7 @@
                                   d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/>
                         </svg>
                     </div>
+
                 </div>
             </div>
         </div>

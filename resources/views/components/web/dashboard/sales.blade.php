@@ -2,17 +2,19 @@
 'transactions' => [],
 ])
 <div class="sm:w-4/12 w-auto sm:h-[20rem] h-auto bg-white p-5 rounded-lg border-t-2 border-[#23B7E5] hover:shadow-md">
+
     <div class="flex justify-between">
         <div class="space-y-2">
             <div class="flex-col gap-1 font-semibold">
                 <div class="text-md ">Sales</div>
-                <div class="text-2xl text-[#23B7E5]">₹ {{$transactions['total_sales']}}</div>
+                <div class="text-2xl text-[#23B7E5]">{{$transactions['total_sales']}}</div>
             </div>
             <div class="flex-col flex gap-1 font-semibold">
                 <span class="text-xs text-gray-500 ">this month</span>
-                <span class="text-[#23B7E5] text-sm ">₹ {{$transactions['month_sales']}}</span>
+                <span class="text-[#23B7E5] text-sm ">{{$transactions['month_sales']}}</span>
             </div>
         </div>
+
         <div class="w-16 h-16 mr-5 mt-1">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -51,11 +53,13 @@
             <span class="sm:text-[9px] text-[8px]">
         </span>
         </div>
+
         <img
             src="data:image/svg+xml;utf8,%3Csvg id=%22chart%22 width=%22100%25%22 height=%22auto%22 viewBox=%220 0 2000 667%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 %3E %3Cpath d=%22 M0%2C667 h177.7777777777778 v-175.80921382948958 q0%2C-4 -4%2C-4 h-169.7777777777778 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M222.22222222222223%2C667 h177.7777777777778 v-437.17852143398136 q0%2C-4 -4%2C-4 h-169.7777777777778 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M444.44444444444446%2C667 h177.7777777777778 v-405.7777144779144 q0%2C-4 -4%2C-4 h-169.7777777777778 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M666.6666666666667%2C667 h177.7777777777778 v-440.32452565857 q0%2C-4 -4%2C-4 h-169.7777777777778 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M888.8888888888889%2C667 h177.7777777777778 v-369.35505499123775 q0%2C-4 -4%2C-4 h-169.7777777777778 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1111.111111111111%2C667 h177.7777777777778 v-426.3804196273479 q0%2C-4 -4%2C-4 h-169.7777777777778 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1333.3333333333335%2C667 h177.7777777777778 v-304.1694788844118 q0%2C-4 -4%2C-4 h-169.7777777777778 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1555.5555555555557%2C667 h177.7777777777778 v-492.8082174097499 q0%2C-4 -4%2C-4 h-169.7777777777778 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3Cpath d=%22 M1777.7777777777778%2C667 h177.7777777777778 v-442.5968829256109 q0%2C-4 -4%2C-4 h-169.7777777777778 q-4%2C0 -4%2C4 Z%22 fill=%22%2323B7E5%22 %2F%3E %3C%2Fsvg%3E"
             alt="" class="w-full">
         <div class="absolute w-16 sm:h-12 h-16 bg-gray"></div>
     </div>
+
     <divc class="flex items-center justify-between sm:py-1 py-0 text-gray-400 pr-6">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
              stroke="currentColor" class="size-4">

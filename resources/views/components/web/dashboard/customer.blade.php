@@ -54,7 +54,7 @@
                 </div>
                 <div
                     class="text-sm inline-flex items-center text-green-600 font-bold space-x-2 self-center">
-                    <span>₹</span> <span>20,670</span></div>
+                    <span>₹</span> <span>{{\App\Livewire\Web\Dashboard\Index::getCustomer($contact->id)}}</span></div>
             </div>
         @endforeach
     </div>
