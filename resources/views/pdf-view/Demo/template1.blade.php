@@ -8,7 +8,7 @@
     <title>Template</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white p-10 ">
+<body class="bg-white p-5 ">
 <div class="">
     <!-- Company Logo , Address, QR Code -->
     <div class="flex items-center justify-between border-b-2 border-black pb-4 px-4">
@@ -32,12 +32,10 @@
                 </div>
             </div>
         </div>
-        <div class="border border-gray-500 h-24 w-24 rounded-sm p-4">
-            @if($irn)
-                <img class="w-full h-full rounded-sm" src="{{\App\Helper\qrcoder::generate($irn->signed_qrcode,22)}}"
-                     alt="{{$irn->signed_qrcode}}">
-            @endif
-        </div>
+        @if($irn)
+            <img class="w-[145px] h-auto rounded-sm" src="{{\App\Helper\qrcoder::generate($irn->signed_qrcode,22)}}"
+                 alt="{{$irn->signed_qrcode}}">
+        @endif
     </div>
 
     {{--    <div class="w-full inline-flex items-center justify-center pt-3">--}}
@@ -155,6 +153,7 @@
             </tbody>
         </table>
     </div>
+
     <div class="w-full flex justify-between py-3 border-b-2 border-black">
         <div class="w-2/3 text-xs pr-4 space-y-1">
             <div class="leading-1 text-gray-600">
@@ -241,7 +240,7 @@
         </div>
         <div class="flex-col flex h-full items-center justify-between">
             <div class="inline-flex items-center">
-            <span>For&nbsp;</span><b>{{$cmp->get('company_name')}}</b>
+                <span>For&nbsp;</span><b>{{$cmp->get('company_name')}}</b>
             </div>
             <div>
                 Authorised Signatory

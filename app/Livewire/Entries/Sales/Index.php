@@ -46,7 +46,7 @@ class Index extends Component
     public function print($id)
     {
 
-        $this->redirect(route('sales.print', [$id]));
+        $this->redirect(route('sales.invoice', [$id]));
     }
     #endregion
 
