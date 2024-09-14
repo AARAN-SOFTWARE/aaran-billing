@@ -4,56 +4,42 @@
         <div style="background-image: url('/../../../images/wp1.webp')"
              class="lg:h-screen h-[35rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
         </div>
-
         <div class="w-full absolute lg:top-48 top-2 lg:py-6 py-2.5 ">
-
             <div class="w-6/12 mx-auto flex-col flex lg:gap-y-7 gap-y-6 text-white font-roboto tracking-wider">
-
                 <div class="lg:text-2xl text-xs text-center w-5/6 mx-auto animate__animated wow animate__backInLeft"
                      data-wow-duration="2s">
                     Ready to Transform Your Business? Take the First Step Today!
                 </div>
-
                 <div
                     class="grid lg:grid-cols-3 grid-cols-1 gap-3 lg:text-xl text-xs animate__animated wow animate__bounceInUp"
                     data-wow-duration="2s">
-
                     <input type="text" placeholder="Name*"
                            class="py-2 bg-transparent border-2 border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
-
                     <input type="text" placeholder="E-mail*"
                            class="py-2 bg-transparent border-2 border-orange-500 focus:border-0 focus:ring-red-500 placeholder-white">
-
                     <button class="bg-orange-500 py-2 hover:bg-white hover:text-orange-500 duration-700">
                         Subscribe
                     </button>
-
                 </div>
-
                 <div
                     class="text-xl text-center text-gray-300 md:block hidden animate__animated wow animate__backInRight"
                     data-wow-duration="2s">
                     Stay updated and compliant with the online GST software for accounting,
                     Manage your finances, and file GST online for your business—all from one platform.
                 </div>
-
             </div>
-
         </div>
 
         <div class="absolute bottom-0">
             <div
                 class="w-screen h-[20rem] bg-[#F1F1F1] flex-col flex justify-evenly items-center font-roboto tracking-wider">
-
                 <div
                     class="lg:w-6/12 mx-auto text-center lg:text-2xl text-sm text-gray-600 border-b border-black lg:pb-6 pb-2.5 animate__animated wow animate__bounceInDown"
                     data-wow-duration="2s">Trusted By The Best Companies all around global
                 </div>
-
                 <div
                     class="md:flex grid grid-cols-4 gap-y-4 grayscale-0 lg:w-6/12 mx-auto justify-between animate__animated wow animate__bounceInUp"
                     data-wow-duration="2s">
-
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -65,7 +51,6 @@
                         </svg>
                         <span class="text-xs">Tagged</span>
                     </div>
-
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -77,7 +62,6 @@
                         </svg>
                         <span class="text-xs">BeReal</span>
                     </div>
-
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -90,10 +74,8 @@
                                 d="M83.8781 4.81635L54.0344 34.5645H58.9127C66.5171 34.5645 71.0128 39.3471 71.0128 44.5602C71.0128 48.6733 68.2388 51.6864 65.2736 53.0255C64.7953 53.2168 64.7953 53.8864 65.3214 54.0777C68.7649 55.4169 71.2041 59.0038 71.2041 63.2126C71.2041 69.1431 67.2345 73.8779 59.5344 73.8779H38.3951C38.0603 73.8779 37.7733 73.5909 37.7733 73.304V50.7777L5.01215 83.3954C4.58171 83.8258 4.86867 84.5911 5.49042 84.5911H84.2607C84.5477 84.5911 84.7868 84.3519 84.7868 84.065V5.24679C84.9303 4.72069 84.2607 4.43374 83.8781 4.81635Z"
                                 fill="#34313F"/>
                         </svg>
-
                         <span class="text-xs">BigCommerce</span>
                     </div>
-
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_897_5214)">
@@ -110,7 +92,6 @@
                         </svg>
                         <span class="text-xs">CodePen</span>
                     </div>
-
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="5" y="5" width="80" height="80" rx="8" fill="#000008"/>
@@ -123,7 +104,6 @@
                         </svg>
                         <span class="text-xs">Editor X</span>
                     </div>
-
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="5" y="5" width="80" height="80" rx="8" fill="#000008"/>
@@ -131,10 +111,8 @@
                                 d="M61.6694 21.5V38.1667H45.0007L28.332 21.5H61.6694ZM28.332 38.1667H45.0007L61.6694 54.8333H45.0007V71.5L28.332 54.8333V38.1667Z"
                                 fill="white"/>
                         </svg>
-
                         <span class="text-xs">Framer</span>
                     </div>
-
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -143,7 +121,6 @@
                         </svg>
                         <span class="text-xs">InterCom</span>
                     </div>
-
                     <div class="flex-col flex gap-y-4 justify-center items-center">
                         <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
