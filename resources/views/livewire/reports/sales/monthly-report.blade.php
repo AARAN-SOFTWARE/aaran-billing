@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">Sales Report</x-slot>
     <x-forms.m-panel>
-        <div x-data="{ open: 3}" class="flex flex-col items-center w-full">
+        <div x-data="{ open: 1 }" class="flex flex-col items-center w-full">
             <div class="flex items-center mb-4 ">
                 <button @click="open = 1"
                         :class="open === 1 ? 'bg-yellow-500 text-white' : 'bg-gray-200 hover:bg-gray-300'"
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div>
-                            <x-button.secondary wire:click="prit">Print</x-button.secondary>
+                            <x-button.secondary wire:click="printSummary">Print</x-button.secondary>
                         </div>
                     </div>
                     <?php
@@ -91,7 +91,7 @@
                             </x-input.model-select>
                         </div>
                         <div>
-                            <x-button.secondary wire:click="prit">Print</x-button.secondary>
+                            <x-button.secondary wire:click="printMonthly">Print</x-button.secondary>
                         </div>
                     </div>
                     <?php
@@ -170,28 +170,28 @@
 
             <div x-show="open === 3" class="w-full" x-cloak>
               <div>
-                  <div>
+                  <div class="my-2 flex justify-between">
                     <div class="flex">
-                        <select class="bg-gray-100 border-l rounded-l-lg w-36 border-r-0" wire:model.live="filterField">
+                        <select class="bg-gray-100 border-l rounded-l-lg w-36 border-r-0" wire:model.live="filterField" wire:change="clearFilter">
                             <option value="">Select...</option>
                             <option value="invoice_no"> Invoice NO</option>
                             <option value="invoice_date"> Invoice Date</option>
                             <option value="contact_id"> Party Name</option>
                         </select>
                         @if($filterField=='contact_id')
-                            <select wire:model.live="filterValue" class="rounded-r-lg">
+                            <select wire:model.live="filterValue" class="rounded-r-lg w-96"  wire:keydown.escape="$set('filterValue', '')">
                                 <option value="">Choose...</option>
                                 @foreach($contects as $contact)
                                     <option value="{{$contact->id}}">{{$contact->vname}}</option>
                                 @endforeach
                             </select>
                         @elseif($filterField=='invoice_date')
-                        <input type="date" wire:model.live="filterValue" class="rounded-r-lg">
+                        <input type="date" wire:model.live="filterValue" class="rounded-r-lg w-96"  wire:keydown.escape="$set('filterValue', '')">
                         @else
-                        <input wire:model.live="filterValue" class="rounded-r-lg">
+                        <input wire:model.live="filterValue" class="rounded-r-lg w-96"  wire:keydown.escape="$set('filterValue', '')">
                         @endif
                     </div>
-
+                    <x-button.new/>
 
                   </div>
                   <x-table.form>

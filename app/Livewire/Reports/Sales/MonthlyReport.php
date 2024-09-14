@@ -22,6 +22,14 @@ class MonthlyReport extends Component
     public $contects;
     #endregion
 
+    #region[create]
+    public function create(): void
+    {
+        ini_set('max_execution_time', 3600);
+        $this->redirect(route('sales.upsert', ['0']));
+    }
+    #endregion
+
     public function getPercent($id,$salesType)
     {
        $obj=DB::table('saleitems')
@@ -65,6 +73,22 @@ class MonthlyReport extends Component
     public function getContects()
     {
         $this->contects=Contact::where('company_id','=',session()->get('company_id'))->get();
+    }
+
+    public function clearFilter():void
+    {
+        $this->filterValue='';
+    }
+
+    public function printMonthly()
+    {
+        return $this->redirect(route('monthlySalesReport.print',
+            ['month'=>$this->month?:Carbon::now()->format('m'),'year'=>$this->year?:Carbon::now()->format('Y')]));
+    }
+
+    public function printSummary()
+    {
+        return $this->redirect(route('summary.print',['year'=>$this->year?:Carbon::now()->format('Y')]));
     }
 
     public function render()
