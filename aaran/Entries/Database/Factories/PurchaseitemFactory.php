@@ -2,8 +2,7 @@
 
 namespace Aaran\Entries\Database\Factories;
 
-use Aaran\Common\Models\Colour;
-use Aaran\Common\Models\Size;
+use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Purchaseitem;
 use Aaran\Master\Models\Product;
@@ -15,8 +14,8 @@ class PurchaseitemFactory extends Factory
     public function definition(): array
     {
         $product=Product::pluck('id');
-        $colour=Colour::pluck('id');
-        $size=Size::pluck('id');
+        $colour=Common::pluck('id')->where('label_id','=','7');
+        $size=Common::pluck('id')->where('label_id','=','8');
         return [
             'product_id'=>$product->random(),
             'description'=>$this->faker->text(25),

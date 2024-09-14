@@ -22,4 +22,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dispatches/{id}', App\Livewire\Common\Index::class)->name('dispatches');
     Route::get('/receipt-types/{id}', App\Livewire\Common\Index::class)->name('receipt-types');
 
+    Route::get('productFactory', App\Livewire\Demo\Data\Product\Index::class)->name('productFactory');
+
 });

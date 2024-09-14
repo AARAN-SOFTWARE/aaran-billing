@@ -5,6 +5,7 @@ namespace App\Livewire\Web\Dashboard;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Contact;
+use Aaran\Master\Models\Product;
 use Aaran\Transaction\Models\Transaction;
 use App\Helper\ConvertTo;
 use App\Livewire\Trait\CommonTraitNew;
@@ -146,6 +147,7 @@ class Index extends Component
     {
         $this->contacts = Contact::all();
     }
+
 
 
     public function render()

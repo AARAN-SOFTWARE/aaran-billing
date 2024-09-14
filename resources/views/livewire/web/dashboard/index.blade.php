@@ -20,4 +20,5 @@
             <x-web.dashboard.statistics/>
         </div>
     </div>
+
 </div>
