@@ -90,7 +90,7 @@
                 <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300">S.No</th>
                 <th class="py-2 w-[8%] border-r border-gray-300">HSN Code</th>
                 <th class="py-2 border-r border-gray-300">Particulars</th>
-                <th class="py-2 w-[5%] border-r border-gray-300">Size</th>
+                <th class="py-2 w-[4%] border-r border-gray-300">Size</th>
                 <th class="py-2 w-[6%] border-r px-1 border-gray-300">colours</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Qty</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Price</th>
@@ -108,7 +108,7 @@
                 <tr class="text-xs border-r border-gray-300">
                     <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['hsncode']}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">
+                    <td class="py-2 text-start px-0.5 border-r border-gray-300">
                         @if($row['description'])
                             {{$row['product_name'].' - '.$row['description']}}
                         @else
@@ -117,12 +117,12 @@
                     </td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['size_name']}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['colour_name']}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{$row['qty']+0}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row['qty']+0}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['gst_percent']*2}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>
-                    <td class="py-2 text-end px-4 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>
                 </tr>
             @endforeach
             @for($i = 0; $i < 9 - $list->count(); $i++)
@@ -144,12 +144,12 @@
             <tr class="text-xs py-2 font-semibold border-t border-r border-l border-gray-300">
                 <td colspan="3" class="py-2 px-4">E&OE</td>
                 <td colspan="2" class="py-2 border-r border-gray-300 text-end px-4">Total</td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{$obj->total_qty+0}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{$obj->total_qty+0}}</td>
                 <td class="py-2"></td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{number_format($obj->total_taxable,2,'.','')}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{number_format($obj->total_taxable,2,'.','')}}</td>
                 <td class="py-2"></td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{number_format($obj->total_gst,2,'.','')}}</td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{number_format($obj->grand_total-$obj->additional,2,'.','')}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{number_format($obj->total_gst,2,'.','')}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{number_format($obj->grand_total-$obj->additional,2,'.','')}}</td>
             </tr>
             </tbody>
         </table>
@@ -195,56 +195,56 @@
             </div>
         </div>
         <div class="w-1/3 flex-col flex justify-between  text-xs h-[195px]">
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 <span class="w-1/3">Taxable Value</span><span class="w-1/3 text-center">:</span><span
-                    class="pr-3 w-1/3 text-end ">{{number_format($obj->total_taxable,2,'.','')}}</span>
+                    class="w-1/3 text-end ">{{number_format($obj->total_taxable,2,'.','')}}</span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 @if($obj->sales_type=='CGST-SGST')
                     <span class="w-1/3">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
-                    <span class="pr-3 w-1/3 text-end
+                    <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
                 @else
                     <span>&nbsp;</span>
                 @endif
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 @if($obj->sales_type=='CGST-SGST')
                     <span class="w-1/3">SGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
-                    <span class="pr-3 w-1/3 text-end
+                    <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
                 @else
                     <span class="w-1/3">IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</span><span
                         class="w-1/3 text-center">:</span>
-                    <span class="pr-3 w-1/3 text-end
+                    <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst,2,'.','')}}</span>
                 @endif
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
-                <span class="w-1/3">Total GST</span><span class="w-1/3 text-center">:</span><span class="pr-3 w-1/3 text-end
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
+                <span class="w-1/3">Total GST</span><span class="w-1/3 text-center">:</span><span class="w-1/3 text-end
             ">{{number_format($obj->total_gst,2,'.','')}}</span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 @if($obj->additional!=0)
-                    <span class="w-1/3 inline-flex items-center">Add - <span
-                            text-[10px]>{{ $obj->ledger_name }}</span></span>
+                    <span class="w-1/3 inline-flex items-center space-x-1"><span>Add</span><span
+                            class="text-[8px] text-gray-600">({{ $obj->ledger_name }})</span></span>
                 @else
                     <span class="w-1/3">Add</span>
                 @endif
-                <span class="w-1/3 text-start pl-2">:</span>
+                <span class="w-1/3 text-start pl-4">:</span>
                 <span>@if($obj->additional!=0)
-                        <span class="pr-3 w-1/3 text-end">{{ number_format($obj->additional,2,'.','') }}</span>
+                        <span class=" w-1/3 text-end">{{ number_format($obj->additional,2,'.','') }}</span>
                     @else
-                        <span class="pr-3 w-1/3 text-end"> - </span>
+                        <span class=" w-1/3 text-end"> - </span>
                     @endif
             </span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
-                <span class="w-1/3">Round Off</span><span class="w-1/3 text-center">:</span><span class="pr-3 w-1/3 text-end
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
+                <span class="w-1/3">Round Off</span><span class="w-1/3 text-center">:</span><span class="w-1/3 text-end
             ">{{number_format($obj->round_off,2,'.','')}}</span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1 py-2 font-bold">
-                <span class="w-1/3">GRAND TOTAL</span><span class="w-1/3 text-center">:</span><span class="pr-3 w-1/3 text-end
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5 font-bold">
+                <span class="w-1/3">GRAND TOTAL</span><span class="w-1/3 text-center">:</span><span class="w-1/3 text-end
             ">{{number_format($obj->grand_total,2,'.','')}}</span>
             </div>
         </div>
@@ -346,7 +346,7 @@
                 <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300">S.No</th>
                 <th class="py-2 w-[8%] border-r border-gray-300">HSN Code</th>
                 <th class="py-2 border-r border-gray-300">Particulars</th>
-                <th class="py-2 w-[5%] border-r border-gray-300">Size</th>
+                <th class="py-2 w-[4%] border-r border-gray-300">Size</th>
                 <th class="py-2 w-[6%] border-r px-1 border-gray-300">colours</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Qty</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Price</th>
@@ -364,7 +364,7 @@
                 <tr class="text-xs border-r border-gray-300">
                     <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['hsncode']}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">
+                    <td class="py-2 text-start px-0.5 border-r border-gray-300">
                         @if($row['description'])
                             {{$row['product_name'].' - '.$row['description']}}
                         @else
@@ -373,12 +373,12 @@
                     </td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['size_name']}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['colour_name']}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{$row['qty']+0}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row['qty']+0}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['gst_percent']*2}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>
-                    <td class="py-2 text-end px-4 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>
                 </tr>
             @endforeach
             @for($i = 0; $i < 9 - $list->count(); $i++)
@@ -400,12 +400,12 @@
             <tr class="text-xs py-2 font-semibold border-t border-r border-l border-gray-300">
                 <td colspan="3" class="py-2 px-4">E&OE</td>
                 <td colspan="2" class="py-2 border-r border-gray-300 text-end px-4">Total</td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{$obj->total_qty+0}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{$obj->total_qty+0}}</td>
                 <td class="py-2"></td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{number_format($obj->total_taxable,2,'.','')}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{number_format($obj->total_taxable,2,'.','')}}</td>
                 <td class="py-2"></td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{number_format($obj->total_gst,2,'.','')}}</td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{number_format($obj->grand_total-$obj->additional,2,'.','')}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{number_format($obj->total_gst,2,'.','')}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{number_format($obj->grand_total-$obj->additional,2,'.','')}}</td>
             </tr>
             </tbody>
         </table>
@@ -451,56 +451,56 @@
             </div>
         </div>
         <div class="w-1/3 flex-col flex justify-between  text-xs h-[195px]">
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 <span class="w-1/3">Taxable Value</span><span class="w-1/3 text-center">:</span><span
-                    class="pr-3 w-1/3 text-end ">{{number_format($obj->total_taxable,2,'.','')}}</span>
+                    class="w-1/3 text-end ">{{number_format($obj->total_taxable,2,'.','')}}</span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 @if($obj->sales_type=='CGST-SGST')
                     <span class="w-1/3">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
-                    <span class="pr-3 w-1/3 text-end
+                    <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
                 @else
                     <span>&nbsp;</span>
                 @endif
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 @if($obj->sales_type=='CGST-SGST')
                     <span class="w-1/3">SGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
-                    <span class="pr-3 w-1/3 text-end
+                    <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
                 @else
                     <span class="w-1/3">IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</span><span
                         class="w-1/3 text-center">:</span>
-                    <span class="pr-3 w-1/3 text-end
+                    <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst,2,'.','')}}</span>
                 @endif
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
-                <span class="w-1/3">Total GST</span><span class="w-1/3 text-center">:</span><span class="pr-3 w-1/3 text-end
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
+                <span class="w-1/3">Total GST</span><span class="w-1/3 text-center">:</span><span class="w-1/3 text-end
             ">{{number_format($obj->total_gst,2,'.','')}}</span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 @if($obj->additional!=0)
-                    <span class="w-1/3 inline-flex items-center">Add - <span
-                            text-[10px]>{{ $obj->ledger_name }}</span></span>
+                    <span class="w-1/3 inline-flex items-center space-x-1"><span>Add</span><span
+                            class="text-[8px] text-gray-600">({{ $obj->ledger_name }})</span></span>
                 @else
                     <span class="w-1/3">Add</span>
                 @endif
-                <span class="w-1/3 text-start pl-2">:</span>
+                <span class="w-1/3 text-start pl-4">:</span>
                 <span>@if($obj->additional!=0)
-                        <span class="pr-3 w-1/3 text-end">{{ number_format($obj->additional,2,'.','') }}</span>
+                        <span class=" w-1/3 text-end">{{ number_format($obj->additional,2,'.','') }}</span>
                     @else
-                        <span class="pr-3 w-1/3 text-end"> - </span>
+                        <span class=" w-1/3 text-end"> - </span>
                     @endif
             </span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
-                <span class="w-1/3">Round Off</span><span class="w-1/3 text-center">:</span><span class="pr-3 w-1/3 text-end
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
+                <span class="w-1/3">Round Off</span><span class="w-1/3 text-center">:</span><span class="w-1/3 text-end
             ">{{number_format($obj->round_off,2,'.','')}}</span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1 py-2 font-bold">
-                <span class="w-1/3">GRAND TOTAL</span><span class="w-1/3 text-center">:</span><span class="pr-3 w-1/3 text-end
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5 font-bold">
+                <span class="w-1/3">GRAND TOTAL</span><span class="w-1/3 text-center">:</span><span class="w-1/3 text-end
             ">{{number_format($obj->grand_total,2,'.','')}}</span>
             </div>
         </div>
@@ -520,6 +520,7 @@
     </div>
     <div class="text-center text-[10px] text-gray-600">This is a Computer generated Invoice</div>
 </div>
+
 <div class="p-5">
     <div class="text-end text-xs text-gray-500 p-0.5">Triplicate Copy</div>
     <div class="border border-gray-300">
@@ -601,7 +602,7 @@
                 <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300">S.No</th>
                 <th class="py-2 w-[8%] border-r border-gray-300">HSN Code</th>
                 <th class="py-2 border-r border-gray-300">Particulars</th>
-                <th class="py-2 w-[5%] border-r border-gray-300">Size</th>
+                <th class="py-2 w-[4%] border-r border-gray-300">Size</th>
                 <th class="py-2 w-[6%] border-r px-1 border-gray-300">colours</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Qty</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Price</th>
@@ -619,7 +620,7 @@
                 <tr class="text-xs border-r border-gray-300">
                     <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['hsncode']}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">
+                    <td class="py-2 text-start px-0.5 border-r border-gray-300">
                         @if($row['description'])
                             {{$row['product_name'].' - '.$row['description']}}
                         @else
@@ -628,12 +629,12 @@
                     </td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['size_name']}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['colour_name']}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{$row['qty']+0}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row['qty']+0}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['gst_percent']*2}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>
-                    <td class="py-2 text-end px-4 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>
+                    <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>
                 </tr>
             @endforeach
             @for($i = 0; $i < 9 - $list->count(); $i++)
@@ -655,12 +656,12 @@
             <tr class="text-xs py-2 font-semibold border-t border-r border-l border-gray-300">
                 <td colspan="3" class="py-2 px-4">E&OE</td>
                 <td colspan="2" class="py-2 border-r border-gray-300 text-end px-4">Total</td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{$obj->total_qty+0}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{$obj->total_qty+0}}</td>
                 <td class="py-2"></td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{number_format($obj->total_taxable,2,'.','')}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{number_format($obj->total_taxable,2,'.','')}}</td>
                 <td class="py-2"></td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{number_format($obj->total_gst,2,'.','')}}</td>
-                <td class="text-center py-2 border-r border-l border-gray-300">{{number_format($obj->grand_total-$obj->additional,2,'.','')}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{number_format($obj->total_gst,2,'.','')}}</td>
+                <td class="text-end px-0.5 py-2 border-r border-l border-gray-300">{{number_format($obj->grand_total-$obj->additional,2,'.','')}}</td>
             </tr>
             </tbody>
         </table>
@@ -706,56 +707,56 @@
             </div>
         </div>
         <div class="w-1/3 flex-col flex justify-between  text-xs h-[195px]">
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 <span class="w-1/3">Taxable Value</span><span class="w-1/3 text-center">:</span><span
-                    class="pr-3 w-1/3 text-end ">{{number_format($obj->total_taxable,2,'.','')}}</span>
+                    class="w-1/3 text-end ">{{number_format($obj->total_taxable,2,'.','')}}</span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 @if($obj->sales_type=='CGST-SGST')
                     <span class="w-1/3">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
-                    <span class="pr-3 w-1/3 text-end
+                    <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
                 @else
                     <span>&nbsp;</span>
                 @endif
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 @if($obj->sales_type=='CGST-SGST')
                     <span class="w-1/3">SGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
-                    <span class="pr-3 w-1/3 text-end
+                    <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
                 @else
                     <span class="w-1/3">IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</span><span
                         class="w-1/3 text-center">:</span>
-                    <span class="pr-3 w-1/3 text-end
+                    <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst,2,'.','')}}</span>
                 @endif
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
-                <span class="w-1/3">Total GST</span><span class="w-1/3 text-center">:</span><span class="pr-3 w-1/3 text-end
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
+                <span class="w-1/3">Total GST</span><span class="w-1/3 text-center">:</span><span class="w-1/3 text-end
             ">{{number_format($obj->total_gst,2,'.','')}}</span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
                 @if($obj->additional!=0)
-                    <span class="w-1/3 inline-flex items-center">Add - <span
-                            text-[10px]>{{ $obj->ledger_name }}</span></span>
+                    <span class="w-1/3 inline-flex items-center space-x-1"><span>Add</span><span
+                            class="text-[8px] text-gray-600">({{ $obj->ledger_name }})</span></span>
                 @else
                     <span class="w-1/3">Add</span>
                 @endif
-                <span class="w-1/3 text-start pl-2">:</span>
+                <span class="w-1/3 text-start pl-4">:</span>
                 <span>@if($obj->additional!=0)
-                        <span class="pr-3 w-1/3 text-end">{{ number_format($obj->additional,2,'.','') }}</span>
+                        <span class=" w-1/3 text-end">{{ number_format($obj->additional,2,'.','') }}</span>
                     @else
-                        <span class="pr-3 w-1/3 text-end"> - </span>
+                        <span class=" w-1/3 text-end"> - </span>
                     @endif
             </span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1">
-                <span class="w-1/3">Round Off</span><span class="w-1/3 text-center">:</span><span class="pr-3 w-1/3 text-end
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
+                <span class="w-1/3">Round Off</span><span class="w-1/3 text-center">:</span><span class="w-1/3 text-end
             ">{{number_format($obj->round_off,2,'.','')}}</span>
             </div>
-            <div class="flex items-center justify-between border-b border-gray-300 p-1 py-2 font-bold">
-                <span class="w-1/3">GRAND TOTAL</span><span class="w-1/3 text-center">:</span><span class="pr-3 w-1/3 text-end
+            <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5 font-bold">
+                <span class="w-1/3">GRAND TOTAL</span><span class="w-1/3 text-center">:</span><span class="w-1/3 text-end
             ">{{number_format($obj->grand_total,2,'.','')}}</span>
             </div>
         </div>
