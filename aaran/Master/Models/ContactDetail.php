@@ -7,6 +7,7 @@ use Aaran\Master\Database\Factories\ContactDetailFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 
 class ContactDetail extends Model
@@ -46,6 +47,10 @@ class ContactDetail extends Model
         return new ContactDetailFactory();
     }
 
+    public function contect():HasMany
+    {
+        return $this->hasMany(Contact::class);
+    }
     public function common(): BelongsTo
     {
         return $this->belongsTo(Common::class);

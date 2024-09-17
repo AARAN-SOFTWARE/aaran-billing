@@ -3,6 +3,7 @@
 namespace Aaran\Entries\Models;
 
 use Aaran\Common\Models\Colour;
+use Aaran\Common\Models\Common;
 use Aaran\Common\Models\Size;
 use Aaran\Entries\Database\Factories\PurchaseitemFactory;
 use Aaran\Master\Models\Product;
@@ -28,18 +29,17 @@ class Purchaseitem extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function colour(): BelongsTo
+    public function common(): BelongsTo
     {
-        return $this->belongsTo(Colour::class);
+        return $this->belongsTo(Common::class);
     }
-
-    public function size(): BelongsTo
-    {
-        return $this->belongsTo(Size::class);
-    }
-
     protected static function newFactory(): PurchaseitemFactory
     {
         return new PurchaseitemFactory();
+    }
+
+    public function purchase():BelongsTo
+    {
+        return $this->belongsTo(Purchase::class);
     }
 }

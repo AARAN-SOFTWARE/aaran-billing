@@ -14,13 +14,13 @@ class ContactDetailFactory extends Factory
 
     public function definition(): array
     {
-        $contacts = Contact::pluck('id');
-        $cities = Common::pluck('id')->where('label_id','=','2')->random();
-        $states = Common::pluck('id')->where('label_id','=','3')->random();
-        $pincodes = Common::pluck('id')->where('label_id','=','4')->random();
-        $countries = Common::pluck('id')->where('label_id','=','5')->random();
+        $contacts = Contact::pluck('id')->random();
+        $cities = Common::where('label_id','=','2')->pluck('id')->random();
+        $states = Common::where('label_id','=','3')->pluck('id')->random();
+        $pincodes = Common::where('label_id','=','4')->pluck('id')->random();
+        $countries = Common::where('label_id','=','5')->pluck('id')->random();
         return [
-            'contact_id' => Contact::factory(),
+            'contact_id' =>Contact::factory(),
             'address_type' => 'Primary',
             'address_1'=> $this->faker->address(),
             'address_2'=> $this->faker->address,
@@ -28,7 +28,6 @@ class ContactDetailFactory extends Factory
             'state_id' => $states,
             'pincode_id' => $pincodes,
             'country_id' => $countries,
-            'gstin'=> $this->faker->creditCardNumber(),
 
         ];
     }

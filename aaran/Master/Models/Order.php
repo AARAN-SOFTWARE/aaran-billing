@@ -23,4 +23,5 @@ class Order extends Model
     {
         return new OrderFactory();
     }
+
 }

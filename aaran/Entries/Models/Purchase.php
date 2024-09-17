@@ -2,8 +2,7 @@
 
 namespace Aaran\Entries\Models;
 
-use Aaran\Common\Models\Ledger;
-use Aaran\Common\Models\Transport;
+use Aaran\Common\Models\Common;
 use Aaran\Entries\Database\Factories\PurchaseFactory;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\Contact;
@@ -12,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Purchase extends Model
 {
@@ -45,18 +45,20 @@ class Purchase extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function transport(): BelongsTo
+    public function common(): BelongsTo
     {
-        return $this->belongsTo(Transport::class);
-    }
-
-    public function ledger(): BelongsTo
-    {
-        return $this->belongsTo(Ledger::class);
+        return $this->belongsTo(Common::class);
     }
 
     protected static function newFactory(): PurchaseFactory
     {
         return new PurchaseFactory();
     }
+
+    public function purchaseItems():HasMany
+    {
+        return $this->hasMany(Purchaseitem::class);
+    }
+
+
 }

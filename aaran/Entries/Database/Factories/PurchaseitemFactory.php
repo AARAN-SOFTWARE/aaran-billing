@@ -11,20 +11,22 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class PurchaseitemFactory extends Factory
 {
     protected $model = Purchaseitem::class;
+
     public function definition(): array
     {
-        $product=Product::pluck('id');
-        $colour=Common::pluck('id')->where('label_id','=','7');
-        $size=Common::pluck('id')->where('label_id','=','8');
+        $product = Product::pluck('id')->random();
+        $colour = Common::where('label_id', '=', '7')->pluck('id')->random();
+        $size = Common::where('label_id', '=', '8')->pluck('id')->random();
+
         return [
-            'product_id'=>$product->random(),
-            'description'=>$this->faker->text(25),
-            'colour_id'=>$colour->random(),
-            'size_id'=>$size->random(),
-            'qty'=>$this->faker->numberBetween(1,1000),
-            'price'=>$this->faker->numberBetween(1,500),
-            'gst_percent'=>5,
             'purchase_id' => Purchase::factory(),
+            'product_id' => $product,
+            'description' => $this->faker->text(25),
+            'colour_id' => $colour,
+            'size_id' => $size,
+            'qty' => $this->faker->numberBetween(1, 1000),
+            'price' => $this->faker->numberBetween(1, 500),
+            'gst_percent' => 5,
         ];
     }
 }

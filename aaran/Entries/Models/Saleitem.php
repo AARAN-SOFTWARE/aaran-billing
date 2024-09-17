@@ -2,8 +2,7 @@
 
 namespace Aaran\Entries\Models;
 
-use Aaran\Common\Models\Colour;
-use Aaran\Common\Models\Size;
+use Aaran\Common\Models\Common;
 use Aaran\Entries\Database\Factories\SaleitemFactory;
 use Aaran\Master\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,16 +27,10 @@ class Saleitem extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function colour(): BelongsTo
+    public function common(): BelongsTo
     {
-        return $this->belongsTo(Colour::class);
+        return $this->belongsTo(Common::class);
     }
-
-    public function size(): BelongsTo
-    {
-        return $this->belongsTo(Size::class);
-    }
-
     protected static function newFactory(): SaleitemFactory
     {
         return new SaleitemFactory();
