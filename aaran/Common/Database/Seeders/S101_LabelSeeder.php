@@ -82,7 +82,7 @@ class S101_LabelSeeder extends Seeder
         #11
         Label::create([
             'vname' => 'Transport ',
-            'cols' => 2,
+            'cols' => 3,
             'active_id' => '1'
         ]);
 
