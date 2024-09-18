@@ -16,9 +16,9 @@ return new class extends Migration {
                 $table->string('mobile')->nullable();
                 $table->string('whatsapp')->nullable();
                 $table->string('contact_person')->nullable();
-                $table->string('contact_type')->nullable();
+                $table->foreignId('contact_type_id')->references('id')->on('commons');
                 $table->string('msme_no')->nullable();
-                $table->string('msme_type')->nullable();
+                $table->foreignId('msme_type_id')->references('id')->on('commons');
                 $table->decimal('opening_balance')->nullable();
                 $table->string('effective_from')->nullable();
                 $table->string('gstin')->nullable();

@@ -266,7 +266,31 @@
 
                             <div class="flex flex-col gap-3">
                                 <x-input.floating wire:model="msme_no" label="MSME No" />
-                                <x-input.floating wire:model="msme_type" label="MSME Type" />
+
+                                <x-dropdown.wrapper label="MSME Type" type="MsmeTypeTyped">
+                                    <div class="relative ">
+                                        <x-dropdown.input label="MSME Type" id="msme_type_name"
+                                                          wire:model.live="msme_type_name"
+                                                          wire:keydown.arrow-up="decrementMsmeType"
+                                                          wire:keydown.arrow-down="incrementMsmeType"
+                                                          wire:keydown.enter="enterMsmeType"/>
+                                        <x-dropdown.select>
+                                            @if($msmeTypeCollection)
+                                                @forelse ($msmeTypeCollection as $i => $msmeType)
+                                                    <x-dropdown.option highlight="{{$highlightMsmeType === $i  }}"
+                                                                       wire:click.prevent="setMsmeType('{{$msmeType->vname}}','{{$msmeType->id}}')">
+                                                        {{ $msmeType->vname }}
+                                                    </x-dropdown.option>
+                                                @empty
+                                                    <x-dropdown.create wire:click.prevent="msmeTypeSave('{{$msme_type_name}}')"
+                                                                       label="Msme Type"/>
+                                                @endforelse
+                                            @endif
+                                        </x-dropdown.select>
+                                    </div>
+                                </x-dropdown.wrapper>
+
+{{--                                <x-input.floating wire:model="msme_type" label="MSME Type" />--}}
                             </div>
                         </x-tabs.content>
 

@@ -830,6 +830,50 @@ class S102_CommonSeeder extends Seeder
             'desc_1' => '-',
             'active_id' => '1'
         ]);
+        #endregion
+
+        #region[Contact Type]
+        Common::create([
+            'label_id' => '22',
+            'vname' => 'Creditor',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '22',
+            'vname' => 'Debtor',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        #endregion
+
+        #region[MSME Type]
+
+        Common::create([
+            'label_id' => '23',
+            'vname' => 'Micro',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '23',
+            'vname' => 'Small',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '23',
+            'vname' => 'Medium',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        #endregion
+
+
     }
-    #endregion
 }

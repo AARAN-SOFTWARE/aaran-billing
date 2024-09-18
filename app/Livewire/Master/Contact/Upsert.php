@@ -32,7 +32,6 @@ class Upsert extends Component
     public string $contact_person = '';
     public mixed $contact_type = '';
     public string $msme_no = '';
-    public string $msme_type = '';
     public mixed $opening_balance = 0;
     public string $effective_from = '';
     public mixed $route;
@@ -474,6 +473,150 @@ class Upsert extends Component
 
     #endregion
 
+    #region[Contact Type]
+    public $contact_type_id = '';
+    public $contact_type_name = '';
+    public Collection $contactTypeCollection;
+    public $highlightContactType = 0;
+    public $contactTypeTyped = false;
+
+    public function decrementContactType(): void
+    {
+        if ($this->highlightContactType === 0) {
+            $this->highlightContactType = count($this->contactTypeCollection) - 1;
+            return;
+        }
+        $this->highlightContactType--;
+    }
+
+    public function incrementContactType(): void
+    {
+        if ($this->highlightContactType === count($this->contactTypeCollection) - 1) {
+            $this->highlightContactType = 0;
+            return;
+        }
+        $this->highlightContactType++;
+    }
+
+    public function setContactType($name, $id): void
+    {
+        $this->contact_type_name = $name;
+        $this->contact_type_id = $id;
+        $this->getContactTypeList();
+    }
+
+    public function enterContactType(): void
+    {
+        $obj = $this->contactTypeCollection[$this->highlightContactType] ?? null;
+
+        $this->contact_type_name = '';
+        $this->contactTypeCollection = Collection::empty();
+        $this->highlightContactType = 0;
+
+        $this->contact_type_name = $obj['vname'] ?? '';
+        $this->contact_type_id = $obj['id'] ?? '';
+    }
+
+    #[On('refresh-contact-type')]
+    public function refreshContactType($v): void
+    {
+        $this->contact_type_id = $v['id'];
+        $this->contact_type_name = $v['name'];
+        $this->contactTypeTyped = false;
+    }
+
+    public function contactTypeSave($name)
+    {
+        $obj = Common::create([
+            'label_id' => 22,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshContactType($v);
+    }
+
+    public function getContactTypeList(): void
+    {
+        $this->contactTypeCollection = !empty($this->contact_type_name) ?
+            Common::search(trim($this->contact_type_name))->where('label_id', '=', '22')->get() :
+            Common::where('label_id', '=', '22')->orWhere('label_id', '=', '1')->get();
+    }
+#endregion
+
+    #region[MSME Type]
+    public $msme_type_id = '';
+    public $msme_type_name = '';
+    public Collection $msmeTypeCollection;
+    public $highlightMsmeType = 0;
+    public $msmeTypeTyped = false;
+
+    public function decrementMsmeType(): void
+    {
+        if ($this->highlightMsmeType === 0) {
+            $this->highlightMsmeType = count($this->msmeTypeCollection) - 1;
+            return;
+        }
+        $this->highlightMsmeType--;
+    }
+
+    public function incrementMsmeType(): void
+    {
+        if ($this->highlightMsmeType === count($this->msmeTypeCollection) - 1) {
+            $this->highlightMsmeType = 0;
+            return;
+        }
+        $this->highlightMsmeType++;
+    }
+
+    public function setMsmeType($name, $id): void
+    {
+        $this->msme_type_name = $name;
+        $this->msme_type_id = $id;
+        $this->getMsmeTypeList();
+    }
+
+    public function enterMsmeType(): void
+    {
+        $obj = $this->msmeTypeCollection[$this->highlightMsmeType] ?? null;
+
+        $this->msme_type_name = '';
+        $this->msmeTypeCollection = Collection::empty();
+        $this->highlightMsmeType = 0;
+
+        $this->msme_type_name = $obj['vname'] ?? '';
+        $this->msme_type_id = $obj['id'] ?? '';
+    }
+
+    #[On('refresh-msme-type')]
+    public function refreshMsmeType($v): void
+    {
+        $this->msme_type_id = $v['id'];
+        $this->msme_type_name = $v['name'];
+        $this->msmeTypeTyped = false;
+    }
+
+    public function msmeTypeSave($name)
+    {
+        $obj = Common::create([
+            'label_id' => 23,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshMsmeType($v);
+    }
+
+    public function getMsmeTypeList(): void
+    {
+        $this->msmeTypeCollection = !empty($this->msme_type_name) ?
+            Common::search(trim($this->msme_type_name))->where('label_id', '=', '23')->get() :
+            Common::where('label_id', '=', '23')->orWhere('label_id', '=', '1')->get();
+    }
+#endregion
+
     #region[Save]
     public function save(): void
     {
@@ -486,9 +629,9 @@ class Upsert extends Component
                     'mobile' => $this->mobile,
                     'whatsapp' => $this->whatsapp,
                     'contact_person' => $this->contact_person,
-                    'contact_type' => $this->contact_type ?: 'Debtor',
+                    'contact_type_id' => $this->contact_type_id ?: 'Debtor',
                     'msme_no' => $this->msme_no,
-                    'msme_type' => $this->msme_type,
+                    'msme_type_id' => $this->msme_type_id,
                     'opening_balance' => $this->opening_balance ?: 0,
                     'effective_from' => $this->effective_from,
                     'active_id' => $this->active_id,
@@ -508,9 +651,9 @@ class Upsert extends Component
                 $obj->mobile = $this->mobile;
                 $obj->whatsapp = $this->whatsapp;
                 $obj->contact_person = $this->contact_person;
-                $obj->contact_type = $this->contact_type;
+                $obj->contact_type_id = $this->contact_type_id;
                 $obj->msme_no = $this->msme_no;
-                $obj->msme_type = $this->msme_type;
+                $obj->msme_type_id = $this->msme_type_id;
                 $obj->opening_balance = $this->opening_balance ?: 0;
                 $obj->effective_from = $this->effective_from;
                 $obj->gstin = $this->gstin;
@@ -529,14 +672,16 @@ class Upsert extends Component
             $this->mobile = '';
             $this->whatsapp = '';
             $this->contact_person = '';
-            $this->contact_type = '';
+            $this->contact_type_id = '';
             $this->msme_no = '';
-            $this->msme_type = '';
+            $this->msme_type_id = '';
             $this->opening_balance = '';
             $this->effective_from = '';
             $this->gstin = '';
             $this->email = '';
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
+
+          $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+
         }
     }
     #endregion
@@ -597,9 +742,11 @@ class Upsert extends Component
             $this->mobile = $obj->mobile;
             $this->whatsapp = $obj->whatsapp;
             $this->contact_person = $obj->contact_person;
-            $this->contact_type = $obj->contact_type;
+            $this->contact_type_id = $obj->contact_type_id;
+            $this->contact_type_name = Common::find($obj->contact_type_id)->vname;
             $this->msme_no = $obj->msme_no;
-            $this->msme_type = $obj->msme_type;
+            $this->msme_type_id = $obj->msme_type_id;
+            $this->msme_type_name = Common::find($obj->msme_type_id)->vname;
             $this->opening_balance = $obj->opening_balance;
             $this->effective_from = $obj->effective_from;
             $this->gstin = $obj->gstin;
@@ -688,6 +835,8 @@ class Upsert extends Component
         $this->getStateList();
         $this->getPincodeList();
         $this->getCountryList();
+        $this->getMsmeTypeList();
+        $this->getContactTypeList();
         return view('livewire.master.contact.upsert');
     }
     #endregion

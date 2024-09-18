@@ -597,23 +597,59 @@
                 </x-tabs.content>
 
                 <x-tabs.content>
+
                     <div class="flex flex-col gap-3">
 
-                        <x-input.model-select wire:model="contact_type" :label="'Contact Type'">
-                            <option class="text-gray-400"> choose ..</option>
-                            <option value="Creditor">Creditor</option>
-                            <option value="Debtor">Debtor</option>
-                        </x-input.model-select>
+                        <x-dropdown.wrapper label="Contact Type" type="contactTypeTyped">
+                            <div class="relative ">
+                                <x-dropdown.input label="Contact Type" id="contact_type_name"
+                                                  wire:model.live="contact_type_name"
+                                                  wire:keydown.arrow-up="decrementContactType"
+                                                  wire:keydown.arrow-down="incrementContactType"
+                                                  wire:keydown.enter="enterContactType"/>
+                                <x-dropdown.select>
+                                    @if($contactTypeCollection)
+                                        @forelse ($contactTypeCollection as $i => $contactType)
+                                            <x-dropdown.option highlight="{{$highlightContactType === $i  }}"
+                                                               wire:click.prevent="setContactType('{{$contactType->vname}}','{{$contactType->id}}')">
+                                                {{ $contactType->vname }}
+                                            </x-dropdown.option>
+                                        @empty
+                                            <x-dropdown.create
+                                                wire:click.prevent="contactTypeSave('{{$contact_type_name}}')"
+                                                label="Contact Type"/>
+                                        @endforelse
+                                    @endif
+                                </x-dropdown.select>
+                            </div>
+                        </x-dropdown.wrapper>
 
                         <x-input.floating wire:model="msme_no" label="MSME No"/>
-                        <x-input.floating wire:model="msme_type" label="MSME Type"/>
+
+                        <x-dropdown.wrapper label="MSME Type" type="MsmeTypeTyped">
+                            <div class="relative ">
+                                <x-dropdown.input label="MSME Type" id="msme_type_name"
+                                                  wire:model.live="msme_type_name"
+                                                  wire:keydown.arrow-up="decrementMsmeType"
+                                                  wire:keydown.arrow-down="incrementMsmeType"
+                                                  wire:keydown.enter="enterMsmeType"/>
+                                <x-dropdown.select>
+                                    @if($msmeTypeCollection)
+                                        @forelse ($msmeTypeCollection as $i => $msmeType)
+                                            <x-dropdown.option highlight="{{$highlightMsmeType === $i  }}"
+                                                               wire:click.prevent="setMsmeType('{{$msmeType->vname}}','{{$msmeType->id}}')">
+                                                {{ $msmeType->vname }}
+                                            </x-dropdown.option>
+                                        @empty
+                                            <x-dropdown.create wire:click.prevent="msmeTypeSave('{{$msme_type_name}}')"
+                                                               label="Msme Type"/>
+                                        @endforelse
+                                    @endif
+                                </x-dropdown.select>
+                            </div>
+                        </x-dropdown.wrapper>
+
                         <x-input.floating wire:model="opening_balance" label="Opening Balance"/>
-
-                        {{--                        <x-input.model-text wire:model="msme_no" :label="'MSME No'"/>--}}
-
-                        {{--                        <x-input.model-text wire:model="msme_type" :label="'MSME Type'"/>--}}
-
-                        {{--                        <x-input.model-text wire:model="opening_balance" :label="'Opening Balance'"/>--}}
 
                         <x-input.model-date wire:model="effective_from" :label="'Opening Date'"/>
                     </div>
