@@ -17,7 +17,7 @@ class InvController extends Controller
     public function __invoke($vid)
     {
         $sale = $this->getSales($vid);
-        return pdf('pdf-view.sales.offset', [
+        return pdf('pdf-view.sales.e-way', [
             'obj' => $sale,
             'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
             'list' => $this->getSaleItems($vid),
