@@ -21,18 +21,18 @@ class SaleFactory extends Factory
         $contact = Contact::pluck('id')->random();
         $company = Company::pluck('id')->random();
         $order = Order::pluck('id')->random();
-        $billing = ContactDetail::where('contact_id','=', $contact)->pluck('id')->random();
-        $shipping = ContactDetail::where('contact_id','=', $contact)->pluck('id')->random();
+        $billing = ContactDetail::where('contact_id', '=', $contact)->pluck('id')->random();
+        $shipping = ContactDetail::where('contact_id', '=', $contact)->pluck('id')->random();
         $style = Style::pluck('id')->random();
         $despatch = Common::where('label_id', '=', '1')->pluck('id')->random();
         $transport = Common::where('label_id', '=', '1')->pluck('id')->random();
 
         return [
-            'uniqueno' => $this->faker->unique()->numberBetween(1, 9999),
+            'uniqueno' => $this->faker->unique()->randomNumber(),
             'acyear' => '2024_25',
             'company_id' => $company,
             'contact_id' => $contact,
-            'invoice_no' => $this->faker->unique()->numberBetween(1, 9999),
+            'invoice_no' => $this->faker->unique()->randomNumber(),
             'invoice_date' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
             'sales_type' => 'CGST-SGST',
             'order_id' => $order,
@@ -41,10 +41,10 @@ class SaleFactory extends Factory
             'style_id' => $style,
             'despatch_id' => $despatch,
             'transport_id' => $transport,
-            'total_qty' => $this->faker->numberBetween(1, 9999),
-            'total_taxable' => $this->faker->numberBetween(1, 9999),
-            'total_gst' => $this->faker->numberBetween(1, 9999),
-            'grand_total' => $this->faker->numberBetween(1, 9999),
+            'total_qty' => $this->faker->randomNumber(),
+            'total_taxable' => $this->faker->randomNumber(),
+            'total_gst' => $this->faker->randomNumber(),
+            'grand_total' => $this->faker->randomNumber(),
             'active_id' => 1,
         ];
     }
