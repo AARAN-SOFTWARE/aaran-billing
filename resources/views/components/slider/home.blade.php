@@ -77,19 +77,15 @@
                 {{--                        </li>--}}
                 {{--                    @empty--}}
                 <li class="flex flex-col items-center justify-center w-full sm:h-screen h-full shrink-0 snap-start relative">
-
                     <div style="background-image: url('/../../../images/w3.webp');"
                          class=" w-full md:h-screen h-full sm:bg-cover bg-contain bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">
                     </div>
-
                     <div
                         class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
-
                         <div
                             class="sm:text-6xl sm:capitalize sm:drop-shadow-lg">GST Billing Software Online
                             in India
                         </div>
-
                         <div
                             class="sm:text-2xl text-xs mt-3 text-white">
                             {{\Illuminate\Support\Str::words('Create, manage & track invoices, e-invoices, and
@@ -98,51 +94,46 @@
                             100% safe, reliable, and secure GST-compliant billing software.
                             Aaran for invoicing, quotations, inventory, eWay bills & more!',15)}}
                         </div>
-                        {{--                                <div--}}
-                        {{--                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>--}}
+
                     </div>
                 </li>
-                {{--                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start relative">--}}
+                <li class="flex flex-col items-center justify-center w-full sm:h-screen h-full shrink-0 snap-start relative">
+                    <div style="background-image: url('/../../../images/wp2.webp');"
+                         class=" w-full md:h-screen h-full sm:bg-cover bg-contain bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">
+                    </div>
+                    <div
+                        class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
+                        <div
+                            class="sm:text-6xl sm:capitalize sm:drop-shadow-lg">Only GST Billing Software You Need For
+                            Your Business
+                        </div>
+                        <div
+                            class="sm:text-2xl text-xs mt-3 text-white">
+                            {{\Illuminate\Support\Str::words('Streamline your invoicing with Refrens GST billing software:
+                            effortlessly create GST-compliant invoices in minutes. Seamlessly share invoices via WhatsApp,
+                            Email, PDF, and shareable links.',15)}}
+                        </div>
 
-                {{--                            <div style="background-image: url('/../../../images/wp2.webp');"--}}
-                {{--                                 class=" w-full md:h-screen h-80 bg-cover bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">--}}
-                {{--                            </div>--}}
-                {{--                            <div--}}
-                {{--                                class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">--}}
-
-                {{--                                <div--}}
-                {{--                                    class=" md:text-6xl text-xl capitalize drop-shadow-lg">Only GST Billing Software You Need For Your Business--}}
-                {{--                                </div>--}}
-                {{--                                <div--}}
-                {{--                                    class="text-2xl mt-3 text-white">Streamline your invoicing with Refrens GST billing software: effortlessly create GST-compliant--}}
-                {{--                                    invoices in minutes. Seamlessly share invoices via WhatsApp, Email, PDF, and shareable links.--}}
-                {{--                                </div>--}}
-                {{--                                <div--}}
-                {{--                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>--}}
-                {{--                            </div>--}}
-                {{--                        </li>--}}
-                {{--                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start relative">--}}
-
-                {{--                            <div style="background-image: url('/../../../images/wp1.webp');"--}}
-                {{--                                 class=" w-full md:h-screen h-80 bg-cover bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">--}}
-                {{--                            </div>--}}
-                {{--                            <div--}}
-                {{--                                class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">--}}
-
-                {{--                                <div--}}
-                {{--                                    class=" md:text-6xl text-xl capitalize drop-shadow-lg">Empower your business with our streamlined GST billing software</div>--}}
-                {{--                                <div--}}
-                {{--                                    class="text-2xl mt-3 text-white">--}}
-                {{--                                    Automate payment reminders for quicker settlements. Enjoy one-click IRN & QR Code generation for enhanced compliance.--}}
-                {{--                                    Experience the simplicity, reliability, and security of our user-friendly platform.</div>--}}
-                {{--                                <div--}}
-                {{--                                    class="text-md mt-3 text-white">{{ date('Y-m-d H:i:s') }}</div>--}}
-                {{--                            </div>--}}
-                {{--                        </li>--}}
-                {{--                    @endforelse--}}
-                {{--                @endif--}}
+                    </div>
+                </li>
+                <li class="flex flex-col items-center justify-center w-full sm:h-screen h-full shrink-0 snap-start relative">
+                    <div style="background-image: url('/../../../images/wp1.webp');"
+                         class=" w-full md:h-screen h-full sm:bg-cover bg-contain bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">
+                    </div>
+                    <div
+                        class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
+                        <div
+                            class="sm:text-6xl sm:capitalize sm:drop-shadow-lg">Empower your business with our streamlined GST billing software
+                        </div>
+                        <div
+                            class="sm:text-2xl text-xs mt-3 text-white">
+                            {{\Illuminate\Support\Str::words('Automate payment reminders for quicker settlements. Enjoy
+                            one-click IRN & QR Code generation for enhanced compliance.
+                            Experience the simplicity, reliability, and security of our user-friendly platform.',15)}}
+                        </div>
+                    </div>
+                </li>
             </ul>
-
         </div>
 
         <!-- Prev / Next Buttons ---------------------------------------------------------------------------------->

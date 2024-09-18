@@ -5,102 +5,45 @@ namespace App\Livewire\Web\Todo;
 use Aaran\Web\Models\Todo;
 use App\Livewire\Trait\CommonTraitNew;
 use Carbon\Carbon;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use CommonTraitNew;
-    use WithFileUploads;
+    use WithPagination;
 
-    #region[Properties]
-    public $slno = '';
-    public $vdate = '';
-    public $ename = '';
-    public bool $completed = false;
-    public bool $editmode = false;
-    public $subjective = false;
-    public $active_id = '1';
-    #endregion
-    public function mount()
-    {
-        $this->slno=Todo::nextNo( );
-        $this->vdate = Carbon::parse(Carbon::now());
-    }
+    #[Rule('required|min:4|max:60')]
+    public mixed $name;
+    public $search;
 
-    public function saveTodo()
+    public function create()
     {
-        $this->slno=Todo::nextNo();
+        $validated = $this->validateOnly('name');
+
         Todo::create([
-            'slno' => $this->slno,
-            'vdate' => $this->vdate,
-
+            'name' => $validated['name'],
         ]);
+//        dd($validated);
+        $this->reset('name');
+        $this->name='';
+        session()->flash('success', 'Created');
+//        $this->redirect(route('todos'));
     }
 
-    public function clearFields(): void
+    public function delete(Todo $todoId)
     {
-        $this->slno = '1';
-        $this->vdate = Carbon::parse(Carbon::now());
-        $this->common->vname = '';
-        $this->ename = '';
-        $this->completed = false;
-        $this->common->active_id = '1';
-
-    }
-
-    public function isChecked($id): void
-    {
-        $todo = Todo::find($id);
-        $todo->completed = !$todo->completed;
-        $todo->save();
-        $this->clearFields();
-        $this->refreshComponent();
-    }
-    public function edit($id)
-    {
-        $this->ename = $id;
-    }
-
-    public function updateTodo($id)
-    {
-        $todo = Todo::find($id);
-        $todo->slno = $this->slno;
-        $todo->common->vname = $this->ename;
-        $todo->save();
-        $this->clearFields();
-        $this->refreshComponent();
-
-        $this->ename = '';
-    }
-    public function markAsPublic($id): void
-    {
-        $todo = Todo::find($id);
-        $todo->subjective = !$todo->subjective;
-        $todo->save();
-        $this->clearFields();
-        $this->refreshComponent();
-    }
-
-    public function getDelete($id)
-    {
-        $todo = Todo::find($id);
-        $todo->delete();
-        $this->clearFields();
-        $this->refreshComponent();
-    }
-    protected function refreshComponent(): void
-    {
-        $this->dispatch('$refresh');
+        $todoId->delete();
     }
 
     public function render()
     {
-        return view('livewire.web.todo.index')->with([
-            'list' => $this->getListForm->getList(Todo::class, function ($query) {
-                return $query->where('user_id','=',auth()->id())
-                    ->orwhere('subjective','=',true);
-            }),
+        return view('livewire.web.todo.index', [
+            'todo' => Todo::latest()
+                ->where('name', 'like', '%' . $this->search . '%')
+                ->paginate(5)
         ]);
     }
+
 }
