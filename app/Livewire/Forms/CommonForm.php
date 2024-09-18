@@ -24,7 +24,7 @@ class CommonForm extends Form
     {
         return [
             'vname.required' => 'The :attribute are missing.',
-            'vname.unique' => 'The :attribute is already taken.',
+            'vname.unique' => 'The :attribute is already created.',
         ];
     }
 
