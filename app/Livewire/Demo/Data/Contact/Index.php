@@ -5,6 +5,7 @@ namespace App\Livewire\Demo\Data\Contact;
 use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
+use Faker\Factory;
 use Livewire\Component;
 
 class Index extends Component
@@ -16,6 +17,7 @@ class Index extends Component
 
     private function Contact()
     {
+
         $contact_name = [
             'A BLUES CLOTHING',
             'A . D . S APPARELS',
@@ -75,11 +77,11 @@ class Index extends Component
                 'contact_person' => '-',
                 'contact_type' => 'Debtor',
                 'msme_no' => $phone_number,
-                'msme_type' => 'Creditor',
+                'msme_type' => 'Micro',
                 'opening_balance' => 0,
                 'effective_from' => date('Y-m-d'),
                 'gstin' => $gst_number,
-                'email' => '-',
+                'email' => fake()->email,
                 'user_id' => auth()->id(),
                 'company_id' => session()->get('company_id'),
                 'active_id' => 1,
@@ -93,8 +95,8 @@ class Index extends Component
 
             ContactDetail::create([
                 'contact_id' => $obj->id,
-                'address_1' => 'NO.'.$address,
-                'address_2' => 'kuvempu layout',
+                'address_1' => 'NO.'.$address.', '.fake()->streetName(),
+                'address_2' => fake()->streetName(),
                 'city_id' => $city,
                 'state_id' => $state,
                 'country_id' => $country,
