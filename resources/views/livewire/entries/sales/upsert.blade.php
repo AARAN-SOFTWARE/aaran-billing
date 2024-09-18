@@ -244,7 +244,7 @@
                                     %
                                 </x-dropdown.option>
                             @empty
-                                @livewire('controls.model.product-model',[$product_name])
+                                @livewire('controls.model.factory-model',[$product_name])
                             @endforelse
                         @endif
                     </x-dropdown.select>

@@ -47,7 +47,7 @@ class ProductModel extends Component
                 'company_id'=>session()->get('company_id'),
                 'active_id' => '1'
             ]);
-            $this->dispatch('refresh-product', ['name' => $this->vname, 'id' => $obj->id,'gstpercent_id'=>$this->gstpercent_id]);
+            $this->dispatch('refresh-factory', ['name' => $this->vname, 'id' => $obj->id,'gstpercent_id'=>$this->gstpercent_id]);
             $this->clearAll();
         }
     }

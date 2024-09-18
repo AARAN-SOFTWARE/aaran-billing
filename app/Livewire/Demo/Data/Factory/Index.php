@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Demo\Data\Product;
+namespace App\Livewire\Demo\Data\Factory;
 
 use Aaran\Entries\Models\Purchaseitem;
 use Aaran\Entries\Models\Saleitem;
@@ -72,6 +72,6 @@ class Index extends Component
     }
     public function render()
     {
-        return view('livewire.demo.data.product.index');
+        return view('livewire.demo.data.factory.index');
     }
 }
