@@ -46,6 +46,50 @@ class Index extends Component
     public Collection $tenants;
     #endregion
 
+    #region[rules]
+    public function rules(): array
+    {
+        return [
+            'common.vname' => 'required|unique:companies,vname',
+            'gstin' => 'required|unique:companies,gstin',
+            'address_1' => 'required',
+            'address_2' => 'required',
+            'city_name' => 'required',
+            'state_name' => 'required',
+            'pincode_name' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'common.vname.required' => 'The :attribute is required.',
+            'gstin.required' => 'The :attribute is required.',
+            'vname.unique' => 'The :attribute is already taken.',
+            'gstin.unique' => 'The :attribute is already taken.',
+            'address_1.required' => 'The :attribute  is required.',
+            'address_2.required' => 'The :attribute  is required.',
+            'city_name.required' => 'The :attribute  is required.',
+            'state_name.required' => 'The :attribute  is required.',
+            'pincode_name.required' => 'The :attribute  is required.',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'common.vname' => 'company name',
+            'gstin' => 'GST no',
+            'address_1' => 'address',
+            'address_2' => 'area Road',
+            'city_name' => 'city name',
+            'state_name' => 'state name',
+            'pincode_name' => 'pincode name',
+        ];
+    }
+    #endregion
+
+
     #region[city]
     public $city_id = '';
     public $city_name = '';
@@ -264,6 +308,7 @@ class Index extends Component
     {
         if ($this->common->vname!=''){
             if ($this->common->vid==''){
+                $this->validate($this->rules());
                 $company=new Company();
                 $extraFields=[
                     'display_name' => $this->display_name,
