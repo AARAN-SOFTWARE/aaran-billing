@@ -6,6 +6,7 @@ use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Product;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Index extends Component
@@ -17,11 +18,43 @@ class Index extends Component
     public $price;
     #endregion
 
+    public function rules(): array
+    {
+        return [
+            'common.vname' => 'required|unique:products,vname',
+            'hsncode_name' => 'required',
+            'unit_name' => 'required',
+            'gstpercent_name' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'common.vname.required' => 'The :attribute are missing.',
+            'common.vname.unique' => 'The :attribute is already taken.',
+            'hsncode_name.required' => 'The :attribute is required.',
+            'unit_name.required' => 'The :attribute is required.',
+            'gstpercent_name.required' => 'The :attribute is required.',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'common.vname' => 'name',
+            'hsncode_name' => 'hsncode name',
+            'unit_name' => 'unit name',
+            'gstpercent_name' => 'gst percent name',
+        ];
+    }
+
     #region[Get-Save]
     public function getSave(): void
     {
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
+                $this->validate($this->rules());
                 $Product = new Product();
                 $extraFields = [
                     'producttype_id' => $this->producttype_id?:'64',
@@ -56,9 +89,9 @@ class Index extends Component
     #endregion
 
     #region[hsncode]
-
-    public $hsncode_id = '';
+    #[validate]
     public $hsncode_name = '';
+    public $hsncode_id = '';
     public Collection $hsncodeCollection;
     public $highlightHsncode = 0;
     public $hsncodeTyped = false;
@@ -197,8 +230,9 @@ class Index extends Component
 #endregion
 
     #region[unit]
-    public $unit_id = '';
+    #[validate]
     public $unit_name = '';
+    public $unit_id = '';
     public Collection $unitCollection;
     public $highlightUnit = 0;
     public $unitTyped = false;
@@ -267,8 +301,9 @@ class Index extends Component
 #endregion
 
     #region[gstpercent]
-    public $gstpercent_id = '';
+    #[validate]
     public $gstpercent_name = '';
+    public $gstpercent_id = '';
     public Collection $gstpercentCollection;
     public $highlightGstPercent = 0;
     public $gstpercentTyped = false;

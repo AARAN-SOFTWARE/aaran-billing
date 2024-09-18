@@ -79,7 +79,10 @@
         <x-forms.create :id="$common->vid">
             <div class="flex flex-col  gap-3">
 
-                <x-input.floating wire:model="common.vname" label="Name"/>
+                <x-input.floating wire:model.live="common.vname" label="Name"/>
+                @error('common.vname')
+                <span class="text-red-400">{{$message}}</span>
+                @enderror
 
                 @if($module->cols === 2)
                     <x-input.floating wire:model="desc" label="Description 1"/>
@@ -90,8 +93,8 @@
                         <x-input.floating wire:model="desc" label="Transport ID"/>
                         <x-input.floating wire:model="desc_1" label="Transport NO"/>
                     @else
-                    <x-input.floating wire:model="desc" label="Description 1"/>
-                    <x-input.floating wire:model="desc_1" label="Description 2"/>
+                        <x-input.floating wire:model="desc" label="Description 1"/>
+                        <x-input.floating wire:model="desc_1" label="Description 2"/>
                     @endif
                 @endif
 

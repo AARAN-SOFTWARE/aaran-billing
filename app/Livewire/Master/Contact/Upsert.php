@@ -11,8 +11,10 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Upsert extends Component
@@ -20,6 +22,7 @@ class Upsert extends Component
     use CommonTraitNew;
 
     #region[Contact properties]
+    #[Validate]
     public $vname;
     public $active_id;
     public $vid;
@@ -27,6 +30,7 @@ class Upsert extends Component
     public string $mobile = '';
     public string $whatsapp = '';
     public string $contact_person = '';
+    public mixed $contact_type = '';
     public string $msme_no = '';
     public mixed $opening_balance = 0;
     public string $effective_from = '';
@@ -34,13 +38,61 @@ class Upsert extends Component
     #endregion
 
     #region[Address Properties]
-    public $address_type;
+    #[validate]
     public $gstin = '';
     public $email = '';
+    public $address_type;
 
     #endregion
 
+    #region[rules]
+    public function rules(): array
+    {
+        return [
+            'vname' => 'required|unique:contacts,vname',
+            'gstin' => 'required|unique:contacts,gstin',
+            'itemList.0.address_1' => 'required',
+            'itemList.0.address_2' => 'required',
+            'itemList.0.city_name' => 'required',
+            'itemList.0.state_name' => 'required',
+            'itemList.0.pincode_name' => 'required',
+            'itemList.0.country_name' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'vname.required' => 'The :attribute is required.',
+            'gstin.required' => 'The :attribute is required.',
+            'vname.unique' => 'The :attribute is already taken.',
+            'gstin.unique' => 'The :attribute is already taken.',
+            'itemList.0.address_1.required' => 'The :attribute  is required.',
+            'itemList.0.address_2.required' => 'The :attribute  is required.',
+            'itemList.0.city_name.required' => 'The :attribute  is required.',
+            'itemList.0.state_name.required' => 'The :attribute  is required.',
+            'itemList.0.pincode_name.required' => 'The :attribute  is required.',
+            'itemList.0.country_name' => 'The :attribute  is required.',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'vname' => 'contact name',
+            'gstin' => 'GST no',
+            'itemList.0.address_1' => 'address',
+            'itemList.0.address_2' => 'area Road',
+            'itemList.0.city_name' => 'city name',
+            'itemList.0.state_name' => 'state name',
+            'itemList.0.pincode_name' => 'pincode name',
+            'itemList.0.country_name' => 'country name',
+        ];
+    }
+    #endregion
+
     #region[array]
+    #[validate]
     public $itemList = [];
     public mixed $itemIndex = '';
     public $secondaryAddress = [];
@@ -104,8 +156,9 @@ class Upsert extends Component
     #endregion
 
     #region[City]
-    public $city_id = '';
+    #[validate]
     public $city_name = '';
+    public $city_id = '';
     public Collection $cityCollection;
     public $highlightCity = 0;
     public $cityTyped = false;
@@ -185,8 +238,9 @@ class Upsert extends Component
     #endregion
 
     #region[State]
-    public $state_id = '';
+    #[validate]
     public $state_name = '';
+    public $state_id = '';
     public Collection $stateCollection;
     public $highlightState = 0;
     public $stateTyped = false;
@@ -262,9 +316,9 @@ class Upsert extends Component
     #endregion
 
     #region[Pincode]
-
-    public $pincode_id = '';
+    #[validate]
     public $pincode_name = '';
+    public $pincode_id = '';
     public Collection $pincodeCollection;
     public $highlightPincode = 0;
     public $pincodeTyped = false;
@@ -341,9 +395,9 @@ class Upsert extends Component
     #endregion
 
     #region[Country]
-
-    public $country_id = '';
+    #[validate]
     public $country_name = '';
+    public $country_id = '';
     public Collection $countryCollection;
     public $highlightCountry = 0;
     public $countryTyped = false;
@@ -568,6 +622,8 @@ class Upsert extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate($this->rules());
+
                 $obj = Contact::create([
                     'vname' => Str::upper($this->vname),
                     'mobile' => $this->mobile,
@@ -623,7 +679,9 @@ class Upsert extends Component
             $this->effective_from = '';
             $this->gstin = '';
             $this->email = '';
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+
+          $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+
         }
     }
     #endregion
