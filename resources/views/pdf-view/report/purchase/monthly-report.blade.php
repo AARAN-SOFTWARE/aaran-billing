@@ -36,11 +36,11 @@ $CGSTTotal = 0;
         <x-table.header-text sortIcon="none">Date</x-table.header-text>
         <x-table.header-text sortIcon="none">Invoice Amount</x-table.header-text>
         <x-table.header-text sortIcon="none">Taxable Value</x-table.header-text>
-        <x-table.header-text sortIcon="none" width="20%">CGST %</x-table.header-text>
+        <x-table.header-text sortIcon="none">CGST %</x-table.header-text>
         <x-table.header-text sortIcon="none">CGST TAX</x-table.header-text>
-        <x-table.header-text sortIcon="none" width="20%">SGST %</x-table.header-text>
+        <x-table.header-text sortIcon="none">SGST %</x-table.header-text>
         <x-table.header-text sortIcon="none">SGST TAX</x-table.header-text>
-        <x-table.header-text sortIcon="none" width="20%">IGST %</x-table.header-text>
+        <x-table.header-text sortIcon="none">IGST %</x-table.header-text>
         <x-table.header-text sortIcon="none">IGST TAX</x-table.header-text>
     </x-slot:table_header>
 
@@ -59,20 +59,20 @@ $CGSTTotal = 0;
                 <x-table.cell-text>{{$index+1}}</x-table.cell-text>
                 <x-table.cell-text>{{$row->contact->gstin}}</x-table.cell-text>
                 <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
-                <x-table.cell-text>{{$row->invoice_no}}</x-table.cell-text>
-                <x-table.cell-text> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</x-table.cell-text>
+                <x-table.cell-text>{{$row->Entry_no}}</x-table.cell-text>
+                <x-table.cell-text> {{ date('d-m-Y', strtotime( $row->purchase_date))}}</x-table.cell-text>
                 <x-table.cell-text>{{$row->grand_total}}</x-table.cell-text>
                 <x-table.cell-text>{{$row->total_taxable}}</x-table.cell-text>
                 <x-table.cell-text>
-                    {{$row->sales_type=='CGST-SGST'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
+                    {{$row->sales_type=='CGST-SGST'?\App\Http\Controllers\Report\Purchase\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
                 </x-table.cell-text>
                 <x-table.cell-text>{{$row->sales_type=='CGST-SGST'?$row->total_gst/2:0}}</x-table.cell-text>
                 <x-table.cell-text>
-                    {{$row->sales_type=='CGST-SGST'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
+                    {{$row->sales_type=='CGST-SGST'?\App\Http\Controllers\Report\Purchase\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
                 </x-table.cell-text>
                 <x-table.cell-text>{{$row->sales_type=='CGST-SGST'?$row->total_gst/2:0}}</x-table.cell-text>
                 <x-table.cell-text>
-                    {{$row->sales_type!='CGST-SGST'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
+                    {{$row->sales_type!='CGST-SGST'?\App\Http\Controllers\Report\Purchase\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
                 </x-table.cell-text>
                 <x-table.cell-text>
                     {{$row->sales_type!='CGST-SGST'?$row->total_gst:0}}

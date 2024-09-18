@@ -27,6 +27,8 @@ class S102_CommonSeeder extends Seeder
         self::transaction();
         self::mode();
         self::accyear();
+        self::Transport();
+        self::GstApiData();
     }
 
     #region[noRecord]
@@ -784,6 +786,46 @@ class S102_CommonSeeder extends Seeder
         Common::create([
             'label_id' => '21',
             'vname' => '2029_2030',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+    }
+    #endregion
+
+    #region[Transport]
+    private static function Transport(): void
+    {
+        Common::create([
+            'label_id' => '11',
+            'vname' => 'XYZ EXPORTS',
+            'desc' => '12AWGPV7107B1Z1',
+            'desc_1' => 'DOC01',
+            'active_id' => '1'
+        ]);
+    }
+    #endregion
+
+    #region[GstApiData]
+    private static function GstApiData(): void
+    {
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'GANDHINAGAR',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '4',
+            'vname' => '560001',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '6',
+            'vname' => '1001',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'

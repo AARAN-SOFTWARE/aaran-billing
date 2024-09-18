@@ -4,6 +4,7 @@ namespace App\Livewire\Reports\Sales;
 
 use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Sale;
+use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Product;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Carbon;
@@ -16,6 +17,17 @@ class MonthlyReport extends Component
     #region[properties]
     public $month;
     public $year;
+    public $filterField;
+    public $filterValue;
+    public $contects;
+    #endregion
+
+    #region[create]
+    public function create(): void
+    {
+        ini_set('max_execution_time', 3600);
+        $this->redirect(route('sales.upsert', ['0']));
+    }
     #endregion
 
     public function getPercent($id,$salesType)
@@ -42,16 +54,48 @@ class MonthlyReport extends Component
     }
     #endregion
 
-    public function prit()
+    #region[monthlySales]
+    public function monthlySales($month)
     {
-        return $this->redirect(route('monthlyReport.print',['month'=>$this->month?:Carbon::now()->format('m'),'year'=>$this->year?:Carbon::now()->format('Y')]));
+        return Sale::whereMonth('invoice_date','=',$month)
+            ->whereYear('invoice_date','=',$this->year?:Carbon::now()->format('Y'))
+            ->where('company_id','=',session()->get('company_id'))->sum('grand_total');
+    }
+    #endregion
+
+    public function getSales()
+    {
+        return Sale::where('company_id','=',session()->get('company_id'))->when($this->filterValue,function ($query,$filterValue){
+            return $query->where($this->filterField?:'invoice_no','=',$filterValue);
+        })->get();
     }
 
+    public function getContects()
+    {
+        $this->contects=Contact::where('company_id','=',session()->get('company_id'))->get();
+    }
+
+    public function clearFilter():void
+    {
+        $this->filterValue='';
+    }
+
+    public function printMonthly()
+    {
+        return $this->redirect(route('monthlySalesReport.print',
+            ['month'=>$this->month?:Carbon::now()->format('m'),'year'=>$this->year?:Carbon::now()->format('Y')]));
+    }
+
+    public function printSummary()
+    {
+        return $this->redirect(route('summary.print',['year'=>$this->year?:Carbon::now()->format('Y')]));
+    }
 
     public function render()
     {
+        $this->getContects();
         return view('livewire.reports.sales.monthly-report')->with([
-            'list'=>$this->getList(),
+            'list'=>$this->getList(),'salesAll'=>$this->getSales(),
         ]);
     }
 }

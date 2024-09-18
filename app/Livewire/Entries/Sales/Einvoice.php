@@ -95,6 +95,7 @@ class Einvoice extends Component
          $contact = Contact::find($this->salesData->contact_id);
          $contactDetail = ContactDetail::where('contact_id', $contact->id)->first();
          $documentDate = date('d/m/Y', strtotime($this->salesData->invoice_date));
+         $transport=Common::find($this->salesData->transport_id);
          $jsonData = [
              "Version" => "1.1",
              "TranDtls" => [
@@ -150,10 +151,10 @@ class Einvoice extends Component
 
 
              "EwbDtls" => [
-                 "Transid" =>$this->salesData->Transid,
-                 "Transname" => $this->salesData->Transname,
+                 "Transid" =>$transport->desc,
+                 "Transname" => $transport->vname,
                  "Distance" => $this->salesData->distance,
-                 "Transdocno" => $this->salesData->Transdocno,
+                 "Transdocno" => $transport->desc_1,
                  "TransdocDt" =>  date('d/m/Y', strtotime($this->salesData->TransdocDt)),
                  "Vehno" => $this->salesData->Vehno,
                  "Vehtype" => $this->salesData->Vehtype,

@@ -92,6 +92,7 @@ class EwayBill extends Component
         $company = Company::find(session()->get('company_id'));
         $contact = Contact::find($this->salesData->contact_id);
         $contactDetail = ContactDetail::find($this->salesData->billing_id);
+        $transport=Common::find($this->salesData->transport_id);
         $bodyData = [
             "supplyType" => "O",
             "subSupplyType" => "1",
@@ -124,7 +125,7 @@ class EwayBill extends Component
             "totInvValue" =>(int)($this->salesData->grand_total),
             "transMode" =>  (string)($this->salesData->TransMode),
             "transDistance" => $this->salesData->distance,
-            "transDocNo" => $this->salesData->Transdocno,
+            "transDocNo" => $transport->desc_1,
             "transDocDate" => date('d/m/Y', strtotime($this->salesData->TransdocDt)),
             "vehicleNo" =>  $this->salesData->Vehno,
             "vehicleType" => $this->salesData->Vehtype,

@@ -39,7 +39,10 @@
 
         <div class="flex flex-row gap-5">
             <div class="w-full">
-                <div class="text-xl text-center py-2 font-bold tracking-wider">Sales Report</div>
+                <div class="py-2 flex justify-evenly">
+                    <div class="text-xl text-center  font-bold tracking-wider">Sales Report</div>
+                    <x-button.secondary wire:click="salesReport">Print</x-button.secondary>
+                </div>
                 <x-table.form>
                     <x-slot:table_header name="table_header" class="bg-green-600">
                         <x-table.header-serial width="20%"/>
@@ -76,7 +79,10 @@
                 </x-table.form>
             </div>
             <div class="w-full">
-                <div class="text-xl text-center py-2 font-bold tracking-wider">Purchase Report</div>
+                <div class="py-2 flex justify-evenly">
+                    <div class="text-xl text-center  font-bold tracking-wider">Purchase Report</div>
+                    <x-button.secondary wire:click="purchaseReport">Print</x-button.secondary>
+                </div>
                 <x-table.form>
                     <x-slot:table_header name="table_header" class="bg-green-600">
                         <x-table.header-serial width="20%"/>
@@ -125,13 +131,27 @@
                         <x-table.cell-text>{{\App\Helper\ConvertTo::rupeesFormat($purchase_gstTotal)}}</x-table.cell-text>
                     </x-table.row>
                     <x-table.row>
-                        <x-table.cell-text colspan="2" right><div class="font-bold">Difference (Sales-Purchase)</div></x-table.cell-text>
-                        <x-table.cell-text><div class="font-bold">{{\App\Helper\ConvertTo::rupeesFormat($invoiceTotal-$purchaseTotal)}}</div></x-table.cell-text>
-                        <x-table.cell-text colspan="2" right><div class="font-bold">GST (Sales-Purchase)</div></x-table.cell-text>
-                        <x-table.cell-text><div class="font-bold">{{\App\Helper\ConvertTo::rupeesFormat($sales_gstTotal-$purchase_gstTotal)}}</div></x-table.cell-text>
+                        <x-table.cell-text colspan="2" right>
+                            <div class="font-bold">Difference (Sales-Purchase)</div>
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <div
+                                class="font-bold">{{\App\Helper\ConvertTo::rupeesFormat($invoiceTotal-$purchaseTotal)}}</div>
+                        </x-table.cell-text>
+                        <x-table.cell-text colspan="2" right>
+                            <div class="font-bold">GST (Sales-Purchase)</div>
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <div
+                                class="font-bold">{{\App\Helper\ConvertTo::rupeesFormat($sales_gstTotal-$purchase_gstTotal)}}</div>
+                        </x-table.cell-text>
                     </x-table.row>
                 </x-slot:table_body>
             </x-table.form>
+        </div>
+
+        <div class="w-full flex justify-end items-end">
+            <x-button.secondary wire:click="GstPrint">Print</x-button.secondary>
         </div>
 
     </x-forms.m-panel>

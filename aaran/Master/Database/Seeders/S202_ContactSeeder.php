@@ -28,10 +28,10 @@ class S202_ContactSeeder extends Seeder
             'contact_id'=>'1',
             'address_1'=>'7th block',
             'address_2'=>'kuvempu layout',
-            'city_id'=>'1',
-            'state_id'=>'4',
-            'country_id'=>'7',
-            'pincode_id'=>'5',
+            'city_id'=>'95',
+            'state_id'=>'34',
+            'country_id'=>'43',
+            'pincode_id'=>'96',
         ]);
     }
 }

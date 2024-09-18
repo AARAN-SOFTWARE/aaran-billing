@@ -86,7 +86,13 @@
                 @endif
 
                 @if($module->cols === 3)
+                    @if($module->id==11)
+                        <x-input.floating wire:model="desc" label="Transport ID"/>
+                        <x-input.floating wire:model="desc_1" label="Transport NO"/>
+                    @else
+                    <x-input.floating wire:model="desc" label="Description 1"/>
                     <x-input.floating wire:model="desc_1" label="Description 2"/>
+                    @endif
                 @endif
 
             </div>
