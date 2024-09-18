@@ -1,15 +1,16 @@
 <div class="relative mt-5">
 
     <div
-        class="grid lg:grid-cols-2 h-[38rem] font-roboto tracking-wider bg-[#F4F5FA] mt-12 py-3 sm:h-[40rem] sm:grid-cols-1">
+        class="grid lg:grid-cols-2 h-[28rem]  font-roboto tracking-wider bg-[#F4F5FA] mt-12 py-3 sm:h-[40rem] sm:grid-cols-1">
         <div class="flex-col flex justify-center sm:gap-y-10 gap-y-3 items-center sm:px-16 px-4">
 
-            <div class="w-full flex items-center gap-x-3 justify-center py-6">
-                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r from-white to-[#070609] ">&nbsp;</span>
-                <span class="text-[#070609] text-xl font-semibold ">Run your business from anywhere.</span>
-                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r from-[#070609] to-white ">&nbsp;</span>
-            </div>
+{{--            <div class="w-full flex items-center gap-x-3 justify-center py-6">--}}
+{{--                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r from-white to-[#070609] ">&nbsp;</span>--}}
+{{--                <span class="text-[#070609] text-xl font-semibold ">Run your business from anywhere.</span>--}}
+{{--                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r from-[#070609] to-white ">&nbsp;</span>--}}
+{{--            </div>--}}
 
+            <x-web.home.items.heading label="Run your business from anywhere." />
             <div class="sm:text-5xl text-md font-bold pb-6 border-b border-black animate__animated wow animate__bounceInDown"
                  data-wow-duration="3s">
                 More than 500+ Business Owner Trust our GST Software.

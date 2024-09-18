@@ -19,8 +19,7 @@
 
 
             <div class="">
-                <button class="bg-cyan-700 rounded-lg shadow-2xl px-2 py-1 text-white" wire:click="print">Print
-                </button>
+                <x-button.print-x wire:click="print" />
             </div>
 
         </div>

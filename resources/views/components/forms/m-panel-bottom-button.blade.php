@@ -13,7 +13,8 @@
             @endif
             <div>
                 @if($print)
-                    <x-button.print/>
+{{--                    <x-button.print/>--}}
+                    <x-button.print-x wire:click="print" />
                 @endif
             </div>
         </div>
@@ -21,11 +22,13 @@
 
             @if($save)
 
-                <x-button.save/>
+{{--                <x-button.save/>--}}
+                <x-button.save-x wire:click.prevent="save" />
             @endif
             @if($back)
 
-                <x-button.back/>
+{{--                <x-button.back/>--}}
+                <x-button.back-x wire:click="getRoute" />
             @endif
             <div>
                 {{$slot}}

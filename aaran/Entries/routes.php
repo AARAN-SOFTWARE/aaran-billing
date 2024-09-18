@@ -10,7 +10,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/sales/{id}/eway', App\Livewire\Entries\Sales\EwayBill::class)->name('sales.eway');
     Route::get('/sales/{id}/einvoice', App\Livewire\Entries\Sales\Einvoice::class)->name('sales.einvoice');
     Route::get('/sales/{id}/print', App\Http\Controllers\Entries\Sales\InvoiceController::class)->name('sales.print');
-    Route::get('/sales/{id}/demo', App\Http\Controllers\Entries\Sales\DemoController::class)->name('sales.demo');
+    Route::get('/sales/{id}/invoice', App\Http\Controllers\Entries\Sales\InvController::class)->name('sales.invoice');
 
     Route::get('/purchase', App\Livewire\Entries\Purchase\Index::class)->name('purchase');
     Route::get('/purchase/{id}/upsert', App\Livewire\Entries\Purchase\Upsert::class)->name('purchase.upsert');

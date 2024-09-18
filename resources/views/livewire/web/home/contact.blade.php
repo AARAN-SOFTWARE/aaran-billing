@@ -1,27 +1,14 @@
 <div>
-    <div class="relative font-roboto tracking-wider">
 
-        <div style="background-image: url('/../../../images/wp1.webp')"
-             class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
-        </div>
 
-        <div class="w-full absolute text-white top-[120px] text-center flex-col flex items-center justify-center">
+    <x-web.Home.items.banner
+        label="Contact"
+        desc=" We Design and develop Outstanding Digital products and digital -
+                first Brands"
+        padding="sm:px-[160px]"
+        padding_mob="px-[70px]"
+    />
 
-            <div class="z-20 w-6/12 mx-auto sm:text-8xl text-4xl font-semibold pb-4 animate__animated wow bounceInDown"
-                 data-wow-duration="3s">Contact
-            </div>
-
-            <span
-                class="z-10 absolute sm:top-6 top-1 sm:py-5 py-1.5 sm:px-[180px] px-[70px] bg-gradient-to-r from-transparent rounded-xl via-[#716f6c] to-[#1e1405]
-                animate__animated wow animate__backInLeft" data-wow-duration="3s">&nbsp;</span>
-
-            <div class="sm:w-6/12 w-auto mx-auto sm:text-lg pb-4 animate__animated wow animate__backInRight" data-wow-duration="3s">
-                We Design and develop Outstanding Digital products and digital -
-                first Brands
-            </div>
-        </div>
-
-    </div>
     <div class="flex sm:flex-row flex-col sm:justify-center">
         <div class="sm:w-9/12 w-auto grid sm:grid-cols-2 grid-cols-1 sm:gap-0 gap-5 font-roboto tracking-wider sm:my-24 my-8 sm:px-0 px-2">
             <div class="flex-col flex gap-y-4 bg-gray-50 sm:p-10 p-4  sm:mr-6 border border-gray-300 rounded-md animate__animated wow animate__backInLeft" data-wow-duration="3s">

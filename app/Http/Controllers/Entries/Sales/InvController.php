@@ -12,12 +12,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use function Spatie\LaravelPdf\Support\pdf;
 
-class DemoController extends Controller
+class InvController extends Controller
 {
     public function __invoke($vid)
     {
         $sale = $this->getSales($vid);
-        return pdf('pdf-view.template1', [
+        return pdf('pdf-view.sales.offset', [
             'obj' => $sale,
             'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
             'list' => $this->getSaleItems($vid),

@@ -258,20 +258,22 @@
             <div class="flex gap-3">
                 <x-button.back/>
                 @if(!isset($e_wayBillDetails))
-                    <x-button.secondary wire:click="EwayBill"
-                                        class=" bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600
-                                    focus:ring-2 focus:ring-offset-2 focus:ring-green-600 text-white ">
-                        Generate E-WayBill
-                    </x-button.secondary>
+{{--                    <x-button.secondary wire:click="EwayBill"--}}
+{{--                                        class=" bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600--}}
+{{--                                    focus:ring-2 focus:ring-offset-2 focus:ring-green-600 text-white ">--}}
+{{--                        Generate E-WayBill--}}
+{{--                    </x-button.secondary>--}}
+                    <x-button.e-way-x wire:click="EwayBill" />
                 @endif
                 @if(isset($e_wayBillDetails))
                     @if($e_wayBillDetails->status!='Cancelled')
-                        <button class='max-w-max bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 focus:ring-2 focus:ring-offset-2
-            focus:ring-red-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold
-            transition-all linear duration-400 ' wire:click="cancelEway">
-                            <x-icons.icon :icon="'x-mark'" class="sm:h-5 h-3 w-auto"/>
-                            <span>Cancel  E-WayBill</span>
-                        </button>
+{{--                        <button class='max-w-max bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 focus:ring-2 focus:ring-offset-2--}}
+{{--            focus:ring-red-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold--}}
+{{--            transition-all linear duration-400 ' wire:click="cancelEway">--}}
+{{--                            <x-icons.icon :icon="'x-mark'" class="sm:h-5 h-3 w-auto"/>--}}
+{{--                            <span>Cancel  E-WayBill</span>--}}
+{{--                        </button>--}}
+                            <x-button.e-cancel-x wire:click="cancelEway" />
                     @endif
                 @endif
             </div>
@@ -298,10 +300,13 @@
                 <div class="w-full flex justify-between gap-3">
                     <div class="py-2">&nbsp;</div>
                     <div class="flex gap-3">
-                        <x-button.secondary wire:click.prevent="$set('showModel', false)">Cancel</x-button.secondary>
-                        <x-button.secondary wire:click="getCancelEway" class="bg-red-500 hover:bg-red-700">E-WayBill
-                            Cancel
-                        </x-button.secondary>
+{{--                        <x-button.secondary wire:click.prevent="$set('showModel', false)">Cancel</x-button.secondary>--}}
+{{--                        <x-button.secondary wire:click="getCancelEway" class="bg-red-500 hover:bg-red-700">E-WayBill--}}
+{{--                            Cancel--}}
+{{--                        </x-button.secondary>--}}
+
+                        <x-button.cancel-x  wire:click.prevent="$set('showModel', false)" />
+                        <x-button.e-cancel-x wire:click="getCancelEway" />
                     </div>
                 </div>
             </div>
