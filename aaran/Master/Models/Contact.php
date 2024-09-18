@@ -28,4 +28,9 @@ class Contact extends Model
     {
         return $this->belongsTo(Common::class);
     }
+
+    public function contectdetail(): BelongsTo
+    {
+        return $this->belongsTo(ContactDetail::class);
+    }
 }

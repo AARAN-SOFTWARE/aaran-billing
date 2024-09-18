@@ -13,11 +13,11 @@ use Aaran\MasterGst\Models\MasterGstIrn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Sale extends Model
 {
     use HasFactory;
-
 
     protected $guarded = [];
 
@@ -37,6 +37,12 @@ class Sale extends Model
 //                ->where('acyear', '=', session()->get('acyear'))
 //                ->max('invoice_no') + 1
     ;
+    }
+
+
+    public function saleItems():HasMany
+    {
+        return $this->hasMany(SaleItem::class);
     }
 
     public function contactDetail(): BelongsTo

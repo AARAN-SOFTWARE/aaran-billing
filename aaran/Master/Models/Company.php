@@ -3,6 +3,7 @@
 namespace Aaran\Master\Models;
 
 use Aaran\Common\Models\Common;
+use Aaran\Master\Database\Factories\CompanyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -48,6 +49,16 @@ class Company extends Model
         return $this->hasOne(Common::class, 'id', 'city_id')
             ->orWhere('id', 'state_id')
             ->orWhere('id', 'pincode_id');
+    }
+
+    public static function common($id)
+    {
+        return Common::find($id)->vname;
+    }
+
+    protected static function newFactory(): CompanyFactory
+    {
+        return new CompanyFactory();
     }
 
 }

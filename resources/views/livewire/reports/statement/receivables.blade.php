@@ -28,11 +28,11 @@
         <x-forms.table>
             <x-slot:table_header name="table_header">
                 <x-table.header-serial width="20%"/>
-                <x-table.header-text center>Type</x-table.header-text>
-                <x-table.header-text left>Particulars</x-table.header-text>
-                <x-table.header-text>Invoice Amount</x-table.header-text>
-                <x-table.header-text>Receipt Amount</x-table.header-text>
-                <x-table.header-text>Balance</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'" center>Type</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'" left>Particulars</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'">Invoice Amount</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'">Receipt Amount</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'">Balance</x-table.header-text>
             </x-slot:table_header>
 
 

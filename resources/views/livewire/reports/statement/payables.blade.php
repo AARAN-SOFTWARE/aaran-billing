@@ -28,11 +28,11 @@
         <x-table.form>
             <x-slot:table_header name="table_header">
                 <x-table.header-serial width="20%"/>
-                <x-table.header-text center>Type</x-table.header-text>
-                <x-table.header-text left>Particulars</x-table.header-text>
-                <x-table.header-text>Invoice Amount</x-table.header-text>
-                <x-table.header-text>Payment Amount</x-table.header-text>
-                <x-table.header-text>Balance</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'" center>Type</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'" left>Particulars</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'">Invoice Amount</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'">Payment Amount</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'">Balance</x-table.header-text>
             </x-slot:table_header>
 
 
@@ -42,6 +42,7 @@
                     $totalpurchase = 0+$opening_balance;
                     $totalpayment = 0;
                 @endphp
+
                 <x-table.row>
                     @if($byParty !=null)
 
@@ -97,8 +98,6 @@
 
                     </x-table.row>
 
-
-
                 @empty
                 @endforelse
 
@@ -106,7 +105,8 @@
                 <x-table.row>
                     <x-table.cell-text colspan="3" class="text-md text-right text-gray-400 ">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
                     </x-table.cell-text>
-                    <x-table.cell-text class="text-right  text-md ">{{$totalpurchase+$opening_balance}}</x-table.cell-text>
+                    <x-table.cell-text
+                        class="text-right  text-md ">{{$totalpurchase+$opening_balance}}</x-table.cell-text>
                     <x-table.cell-text class="text-right  text-md ">{{ $totalpayment}}</x-table.cell-text>
                     <x-table.cell-text></x-table.cell-text>
                 </x-table.row>
@@ -114,14 +114,17 @@
                 <x-table.row>
                     <x-table.cell-text colspan="3" class="text-md text-right text-gray-400 ">&nbsp;Balance&nbsp;&nbsp;&nbsp;
                     </x-table.cell-text>
-                    <x-table.cell-text class="text-right  text-md text-blue-500">{{ $totalpurchase-$totalpayment}}</x-table.cell-text>
+                    <x-table.cell-text
+                        class="text-right  text-md text-blue-500">{{ $totalpurchase-$totalpayment}}</x-table.cell-text>
                     <x-table.cell-text></x-table.cell-text>
                     <x-table.cell-text></x-table.cell-text>
                 </x-table.row>
             </x-slot:table_body>
+
             <x-slot name="table_pagination">
                 {{ $list->links() }}
             </x-slot>
+
         </x-table.form>
     </x-forms.m-panel>
 </div>

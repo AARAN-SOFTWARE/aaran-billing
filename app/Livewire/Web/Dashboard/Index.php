@@ -5,6 +5,7 @@ namespace App\Livewire\Web\Dashboard;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Contact;
+use Aaran\Master\Models\Product;
 use Aaran\Transaction\Models\Transaction;
 use App\Helper\ConvertTo;
 use App\Livewire\Trait\CommonTraitNew;
@@ -90,16 +91,16 @@ class Index extends Component
             ->firstOrFail();
 
         return Collection::make([
-            'total_sales' => ConvertTo::rupeesFormat($total_sales->grand_total),
-            'month_sales' => ConvertTo::rupeesFormat($month_sales->grand_total),
-            'total_purchase' => ConvertTo::rupeesFormat($total_purchase->grand_total),
-            'month_purchase' => ConvertTo::rupeesFormat($month_purchase->grand_total),
-            'total_receivable' => ConvertTo::rupeesFormat($total_receivable->receipt_amount),
-            'month_receivable' => ConvertTo::rupeesFormat($month_receivable->receipt_amount),
-            'total_payable' => ConvertTo::rupeesFormat($total_payable->payment_amount),
-            'month_payable' => ConvertTo::rupeesFormat($month_payable->payment_amount),
-            'net_profit' => ConvertTo::rupeesFormat($total_sales->grand_total - $total_purchase->grand_total),
-            'month_profit' => ConvertTo::rupeesFormat($month_sales->grand_total - $month_purchase->grand_total),
+            'total_sales' => ConvertTo::rupeesFormat($total_sales->grand_total ?? 0 ),
+            'month_sales' => ConvertTo::rupeesFormat($month_sales->grand_total ?? 0),
+            'total_purchase' => ConvertTo::rupeesFormat($total_purchase->grand_total ?? 0 ),
+            'month_purchase' => ConvertTo::rupeesFormat($month_purchase->grand_tota ?? 0 ),
+            'total_receivable' => ConvertTo::rupeesFormat($total_receivable->receipt_amount ?? 0 ),
+            'month_receivable' => ConvertTo::rupeesFormat($month_receivable->receipt_amount ?? 0 ),
+            'total_payable' => ConvertTo::rupeesFormat($total_payable->payment_amount ?? 0 ),
+            'month_payable' => ConvertTo::rupeesFormat($month_payable->payment_amount ?? 0),
+            'net_profit' => ConvertTo::rupeesFormat($total_sales->grand_total - $total_purchase->grand_total ?? 0),
+            'month_profit' => ConvertTo::rupeesFormat($month_sales->grand_total - $month_purchase->grand_total ?? 0),
         ]);
     }
 
@@ -111,23 +112,42 @@ class Index extends Component
         $receipt = Transaction::latest()->where('mode_id', '=', 83)->first();
 
         return Collection::make([
-            'sales' => ConvertTo::rupeesFormat($sales->grand_total),
-            'sales_no' => $sales->invoice_no,
-            'sales_date' => $sales->invoice_date,
-            'purchase' => ConvertTo::rupeesFormat($purchase->grand_total),
-            'purchase_no' => $purchase->purchase_no,
-            'purchase_date' => $purchase->purchase_date,
-            'payment' => ConvertTo::rupeesFormat($payment->vname),
-            'payment_date' => $payment->vdate,
-            'receipt' => ConvertTo::rupeesFormat($receipt->vname),
-            'receipt_date' => $receipt->vdate,
+            'sales' => ConvertTo::rupeesFormat($sales->grand_total ?? 0),
+            'sales_no' => $sales->invoice_no ?? 0,
+            'sales_date' => $sales->invoice_date ?? '-',
+            'purchase' => ConvertTo::rupeesFormat($purchase->grand_total ?? 0),
+            'purchase_no' => $purchase->purchase_no ?? 0,
+            'purchase_date' => $purchase->purchase_date ?? '-',
+            'payment' => ConvertTo::rupeesFormat($payment->vname ?? 0),
+            'payment_date' => $payment->vdate ?? '-',
+            'receipt' => ConvertTo::rupeesFormat($receipt->vname ??0),
+            'receipt_date' => $receipt->vdate ?? '-',
         ]);
+    }
+
+    public function getCustomer($id)
+    {
+        $openingbalance = Contact::find($id)->opening_balance;
+
+        $sales = Sale::select(DB::raw("SUM(grand_total) as grand_total"))
+            ->where('contact_id', '=', $id)
+            ->where('company_id', '=', session()->get('company_id'))
+            ->firstOrFail();
+
+        $transactions = Transaction::select(DB::raw("SUM(vname) as receipt_total"))
+            ->where('contact_id', '=', $id)
+            ->where('company_id', '=', session()->get('company_id'))
+            ->where('mode_id', '=', 83)
+            ->firstOrFail();
+
+        return $sales->grand_total - $transactions->receipt_total + $openingbalance;
     }
 
     public function getContact()
     {
         $this->contacts = Contact::all();
     }
+
 
 
     public function render()
