@@ -33,6 +33,8 @@
                         </x-dropdown.select>
                     </div>
                 </x-dropdown.wrapper>
+                @error('contact_name')
+                <span class="text-red-400">{{$message}}</span>@enderror
 
                 <!-- Order No --------------------------------------------------------------------------------------------->
 
@@ -250,6 +252,7 @@
                     </x-dropdown.select>
                 </div>
             </x-dropdown.wrapper>
+
 
             <!--Product Description --------------------------------------------------------------------------------------->
 
@@ -592,6 +595,8 @@
                                                             @endforelse
                                                         @endif
                                                     </x-dropdown.select>
+                                                    @error('transport_name')
+                                                    <span class="text-red-400">{{$message}}</span>@enderror
                                                 </div>
                                             </x-dropdown.wrapper>
                                         @endif
@@ -605,8 +610,12 @@
                                             </x-input.model-select>
                                     </div>
                                     <div class="flex flex-col gap-2 w-full">
-                                        <x-input.floating wire:model="distance" label="Distance"/>
-                                        <x-input.floating wire:model="Vehno" label="Vechile No"/>
+                                        <x-input.floating wire:model.live="distance" label="Distance"/>
+                                        @error('distance')
+                                        <span class="text-red-400">{{$message}}</span>@enderror
+                                        <x-input.floating wire:model.live="Vehno" label="Vechile No"/>
+                                        @error('Vehno')
+                                        <span class="text-red-400">{{$message}}</span>@enderror
                                         <x-input.model-select wire:model="Vehtype" label="Vechile Type">
                                             <option value="">Choose..</option>
                                             <option value="R">Regular</option>
