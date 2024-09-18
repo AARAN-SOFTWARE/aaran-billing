@@ -16,6 +16,7 @@ class S201_CompanySeeder extends Seeder
             'address_2' => 'kuvempu layout',
             'mobile' => '-',
             'landline' => '-',
+            'msme_type_id' => 1,
             'gstin' => '29AABCT1332L000',
             'pan' => '-',
             'email' => '-',

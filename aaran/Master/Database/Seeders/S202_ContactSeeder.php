@@ -16,11 +16,12 @@ class S202_ContactSeeder extends Seeder
             'company_id'=>'1',
             'user_id'=>'1',
             'active_id'=>'1',
+            'contact_type_id'=>'1',
             'whatsapp'=>'0123456789',
             'mobile'=>'0123456789',
             'contact_person'=>'123',
             'msme_no'=>'123456789',
-            'msme_type'=>'1',
+            'msme_type_id'=>'1',
             'effective_from'=>'2024-08-22',
             'opening_balance'=>0,
         ]);

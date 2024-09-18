@@ -379,7 +379,7 @@ class Upsert extends Component
         $this->gst_percent1 = Sale::commons($obj['gstpercent_id'])?? '';
     }
 
-    #[On('refresh-factory')]
+    #[On('refresh-product')]
     public function refreshProduct($v): void
     {
         $this->product_id = $v['id'];

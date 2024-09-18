@@ -29,7 +29,7 @@ return new class extends Migration {
                 $table->string('ifsc_code')->nullable();
                 $table->string('branch')->nullable();
                 $table->string('msme_no')->nullable();
-                $table->string('msme_type')->nullable();
+                $table->foreignId('msme_type_id')->references('id')->on('commons');
                 $table->string('active_id', 3)->nullable();
                 $table->foreignId('user_id')->references('id')->on('users');
                 $table->foreignId('tenant_id')->references('id')->on('tenants');

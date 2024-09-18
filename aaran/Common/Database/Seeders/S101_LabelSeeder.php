@@ -156,5 +156,19 @@ class S101_LabelSeeder extends Seeder
             'cols' => 1,
             'active_id' => '1'
         ]);
+
+        #22
+        Label::create([
+            'vname' => 'Contact Type',
+            'cols' => 1,
+            'active_id' => '1'
+        ]);
+
+        #23
+        Label::create([
+            'vname' => 'MSME Type',
+            'cols' => 1,
+            'active_id' => '1'
+        ]);
     }
 }
