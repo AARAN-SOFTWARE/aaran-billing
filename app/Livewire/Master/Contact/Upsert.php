@@ -63,16 +63,16 @@ class Upsert extends Component
     public function messages()
     {
         return [
-            'vname.required' => 'The :attribute is required.',
-            'gstin.required' => 'The :attribute is required.',
-            'vname.unique' => 'The :attribute is already taken.',
-            'gstin.unique' => 'The :attribute is already taken.',
-            'itemList.0.address_1.required' => 'The :attribute  is required.',
-            'itemList.0.address_2.required' => 'The :attribute  is required.',
-            'itemList.0.city_name.required' => 'The :attribute  is required.',
-            'itemList.0.state_name.required' => 'The :attribute  is required.',
-            'itemList.0.pincode_name.required' => 'The :attribute  is required.',
-            'itemList.0.country_name' => 'The :attribute  is required.',
+            'vname.required' => ' :attribute is required.',
+            'gstin.required' => ' :attribute is required.',
+            'vname.unique' => ' :attribute is already taken.',
+            'gstin.unique' => ' :attribute is already taken.',
+            'itemList.0.address_1.required' => ' :attribute  is required.',
+            'itemList.0.address_2.required' => ' :attribute  is required.',
+            'itemList.0.city_name.required' => ' :attribute  is required.',
+            'itemList.0.state_name.required' => ' :attribute  is required.',
+            'itemList.0.pincode_name.required' => ' :attribute  is required.',
+            'itemList.0.country_name' => ' :attribute  is required.',
         ];
     }
 
@@ -80,13 +80,13 @@ class Upsert extends Component
     {
         return [
             'vname' => 'contact name',
-            'gstin' => 'GST no',
-            'itemList.0.address_1' => 'address',
-            'itemList.0.address_2' => 'area Road',
-            'itemList.0.city_name' => 'city name',
-            'itemList.0.state_name' => 'state name',
-            'itemList.0.pincode_name' => 'pincode name',
-            'itemList.0.country_name' => 'country name',
+            'gstin' => 'GST No',
+            'itemList.0.address_1' => 'Address',
+            'itemList.0.address_2' => 'Area Road',
+            'itemList.0.city_name' => 'City name',
+            'itemList.0.state_name' => 'State name',
+            'itemList.0.pincode_name' => 'Pincode name',
+            'itemList.0.country_name' => 'Country name',
         ];
     }
     #endregion
@@ -629,9 +629,9 @@ class Upsert extends Component
                     'mobile' => $this->mobile,
                     'whatsapp' => $this->whatsapp,
                     'contact_person' => $this->contact_person,
-                    'contact_type_id' => $this->contact_type_id ?: 'Debtor',
-                    'msme_no' => $this->msme_no,
-                    'msme_type_id' => $this->msme_type_id,
+                    'contact_type_id' => $this->contact_type_id ?: '124',
+                    'msme_no' => $this->msme_no ?: '-',
+                    'msme_type_id' => $this->msme_type_id ?: '125',
                     'opening_balance' => $this->opening_balance ?: 0,
                     'effective_from' => $this->effective_from,
                     'active_id' => $this->active_id,
@@ -680,7 +680,7 @@ class Upsert extends Component
             $this->gstin = '';
             $this->email = '';
 
-          $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
 
         }
     }

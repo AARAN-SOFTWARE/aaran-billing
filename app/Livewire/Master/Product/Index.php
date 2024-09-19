@@ -31,21 +31,21 @@ class Index extends Component
     public function messages()
     {
         return [
-            'common.vname.required' => 'The :attribute are missing.',
-            'common.vname.unique' => 'The :attribute is already taken.',
-            'hsncode_name.required' => 'The :attribute is required.',
-            'unit_name.required' => 'The :attribute is required.',
-            'gstpercent_name.required' => 'The :attribute is required.',
+            'common.vname.required' => ' :attribute are missing.',
+            'common.vname.unique' => ' :attribute is already created.',
+            'hsncode_name.required' => ' :attribute is required.',
+            'unit_name.required' => ' :attribute is required.',
+            'gstpercent_name.required' => ' :attribute is required.',
         ];
     }
 
     public function validationAttributes()
     {
         return [
-            'common.vname' => 'name',
-            'hsncode_name' => 'hsncode name',
-            'unit_name' => 'unit name',
-            'gstpercent_name' => 'gst percent name',
+            'common.vname' => 'Name',
+            'hsncode_name' => 'Hsncode',
+            'unit_name' => 'Unit',
+            'gstpercent_name' => 'Gst percent',
         ];
     }
 
@@ -57,10 +57,10 @@ class Index extends Component
                 $this->validate($this->rules());
                 $Product = new Product();
                 $extraFields = [
-                    'producttype_id' => $this->producttype_id?:'64',
-                    'hsncode_id' => $this->hsncode_id?:'44',
-                    'unit_id' => $this->unit_id?:'66',
-                    'gstpercent_id' => $this->gstpercent_id?:'72',
+                    'producttype_id' => $this->producttype_id?:'92',
+                    'hsncode_id' => $this->hsncode_id?:'62',
+                    'unit_id' => $this->unit_id?:'97',
+                    'gstpercent_id' => $this->gstpercent_id?:'99',
                     'initial_quantity' => $this->quantity?:'0',
                     'initial_price' => $this->price?:'0',
                     'user_id' => auth()->id(),

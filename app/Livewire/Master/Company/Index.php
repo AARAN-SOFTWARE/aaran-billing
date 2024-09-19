@@ -63,28 +63,28 @@ class Index extends Component
     public function messages()
     {
         return [
-            'common.vname.required' => 'The :attribute is required.',
-            'gstin.required' => 'The :attribute is required.',
-            'vname.unique' => 'The :attribute is already taken.',
-            'gstin.unique' => 'The :attribute is already taken.',
-            'address_1.required' => 'The :attribute  is required.',
-            'address_2.required' => 'The :attribute  is required.',
-            'city_name.required' => 'The :attribute  is required.',
-            'state_name.required' => 'The :attribute  is required.',
-            'pincode_name.required' => 'The :attribute  is required.',
+            'common.vname.required' => ' :attribute is required.',
+            'gstin.required' => ' :attribute is required.',
+            'vname.unique' => ' :attribute is already taken.',
+            'gstin.unique' => ' :attribute is already taken.',
+            'address_1.required' => ' :attribute  is required.',
+            'address_2.required' => ' :attribute  is required.',
+            'city_name.required' => ' :attribute  is required.',
+            'state_name.required' => ' :attribute  is required.',
+            'pincode_name.required' => ' :attribute  is required.',
         ];
     }
 
     public function validationAttributes()
     {
         return [
-            'common.vname' => 'company name',
-            'gstin' => 'GST no',
-            'address_1' => 'address',
-            'address_2' => 'area Road',
-            'city_name' => 'city name',
-            'state_name' => 'state name',
-            'pincode_name' => 'pincode name',
+            'common.vname' => 'Company name',
+            'gstin' => 'GST No',
+            'address_1' => 'Address',
+            'address_2' => 'Area Road',
+            'city_name' => 'City',
+            'state_name' => 'State',
+            'pincode_name' => 'Pincode',
         ];
     }
     #endregion
@@ -390,8 +390,8 @@ class Index extends Component
                     'mobile' => $this->mobile,
                     'landline' => $this->landline,
                     'gstin' => Str::upper($this->gstin),
-                    'msme_no' => $this->msme_no,
-                    'msme_type_id' => $this->msme_type_id,
+                    'msme_no' => $this->msme_no ?: '-',
+                    'msme_type_id' => $this->msme_type_id ?: '1',
                     'pan' => Str::upper($this->pan),
                     'email' => $this->email,
                     'website' => $this->website,
