@@ -6,6 +6,7 @@ use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Product;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Index extends Component
@@ -17,17 +18,49 @@ class Index extends Component
     public $price;
     #endregion
 
+    public function rules(): array
+    {
+        return [
+            'common.vname' => 'required|unique:products,vname',
+            'hsncode_name' => 'required',
+            'unit_name' => 'required',
+            'gstpercent_name' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'common.vname.required' => ' :attribute are missing.',
+            'common.vname.unique' => ' :attribute is already created.',
+            'hsncode_name.required' => ' :attribute is required.',
+            'unit_name.required' => ' :attribute is required.',
+            'gstpercent_name.required' => ' :attribute is required.',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'common.vname' => 'Name',
+            'hsncode_name' => 'Hsncode',
+            'unit_name' => 'Unit',
+            'gstpercent_name' => 'Gst percent',
+        ];
+    }
+
     #region[Get-Save]
     public function getSave(): void
     {
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
+                $this->validate($this->rules());
                 $Product = new Product();
                 $extraFields = [
-                    'producttype_id' => $this->producttype_id?:'64',
-                    'hsncode_id' => $this->hsncode_id?:'44',
-                    'unit_id' => $this->unit_id?:'66',
-                    'gstpercent_id' => $this->gstpercent_id?:'72',
+                    'producttype_id' => $this->producttype_id?:'92',
+                    'hsncode_id' => $this->hsncode_id?:'62',
+                    'unit_id' => $this->unit_id?:'97',
+                    'gstpercent_id' => $this->gstpercent_id?:'99',
                     'initial_quantity' => $this->quantity?:'0',
                     'initial_price' => $this->price?:'0',
                     'user_id' => auth()->id(),
@@ -56,9 +89,9 @@ class Index extends Component
     #endregion
 
     #region[hsncode]
-
-    public $hsncode_id = '';
+    #[validate]
     public $hsncode_name = '';
+    public $hsncode_id = '';
     public Collection $hsncodeCollection;
     public $highlightHsncode = 0;
     public $hsncodeTyped = false;
@@ -197,8 +230,9 @@ class Index extends Component
 #endregion
 
     #region[unit]
-    public $unit_id = '';
+    #[validate]
     public $unit_name = '';
+    public $unit_id = '';
     public Collection $unitCollection;
     public $highlightUnit = 0;
     public $unitTyped = false;
@@ -267,8 +301,9 @@ class Index extends Component
 #endregion
 
     #region[gstpercent]
-    public $gstpercent_id = '';
+    #[validate]
     public $gstpercent_name = '';
+    public $gstpercent_id = '';
     public Collection $gstpercentCollection;
     public $highlightGstPercent = 0;
     public $gstpercentTyped = false;

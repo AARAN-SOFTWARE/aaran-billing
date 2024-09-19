@@ -18,12 +18,12 @@ class Index extends Component
 {
     use WithFileUploads;
     use CommonTraitNew;
+
     #region[properties]
     public string $mobile = '';
     public string $email = '';
     public string $gstin = '';
     public mixed $msme_no = '';
-    public mixed $msme_type = '';
     public string $address_1 = '';
     public string $address_2 = '';
     public string $display_name = '';
@@ -45,6 +45,50 @@ class Index extends Component
     public $tenant_id;
     public Collection $tenants;
     #endregion
+
+    #region[rules]
+    public function rules(): array
+    {
+        return [
+            'common.vname' => 'required|unique:companies,vname',
+            'gstin' => 'required|unique:companies,gstin',
+            'address_1' => 'required',
+            'address_2' => 'required',
+            'city_name' => 'required',
+            'state_name' => 'required',
+            'pincode_name' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'common.vname.required' => ' :attribute is required.',
+            'gstin.required' => ' :attribute is required.',
+            'vname.unique' => ' :attribute is already taken.',
+            'gstin.unique' => ' :attribute is already taken.',
+            'address_1.required' => ' :attribute  is required.',
+            'address_2.required' => ' :attribute  is required.',
+            'city_name.required' => ' :attribute  is required.',
+            'state_name.required' => ' :attribute  is required.',
+            'pincode_name.required' => ' :attribute  is required.',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'common.vname' => 'Company name',
+            'gstin' => 'GST No',
+            'address_1' => 'Address',
+            'address_2' => 'Area Road',
+            'city_name' => 'City',
+            'state_name' => 'State',
+            'pincode_name' => 'Pincode',
+        ];
+    }
+    #endregion
+
 
     #region[city]
     public $city_id = '';
@@ -98,22 +142,23 @@ class Index extends Component
         $this->cityTyped = false;
 
     }
+
     public function citySave($name)
     {
-        $obj= Common::create([
-            'label_id'=>2,
+        $obj = Common::create([
+            'label_id' => 2,
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshCity($v);
     }
 
     public function getCityList(): void
     {
         $this->cityCollection = $this->city_name ?
-            Common::search(trim($this->city_name))->where('label_id','=','2')->get() :
-            Common::where('label_id','=','2')->Orwhere('label_id','=','1')->get();
+            Common::search(trim($this->city_name))->where('label_id', '=', '2')->get() :
+            Common::where('label_id', '=', '2')->Orwhere('label_id', '=', '1')->get();
     }
     #endregion
 
@@ -170,21 +215,21 @@ class Index extends Component
 
     }
 
-    public function stateSave($name):void
+    public function stateSave($name): void
     {
-        $obj=Common::create([
-            'label_id'=>3,
+        $obj = Common::create([
+            'label_id' => 3,
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshState($v);
     }
 
     public function getStateList(): void
     {
-        $this->stateCollection = $this->state_name ? Common::search(trim($this->state_name))->where('label_id','=',3)
-            ->get() : Common::where('label_id','=',3)->Orwhere('label_id','=','1')->get();
+        $this->stateCollection = $this->state_name ? Common::search(trim($this->state_name))->where('label_id', '=', 3)
+            ->get() : Common::where('label_id', '=', 3)->Orwhere('label_id', '=', '1')->get();
     }
     #endregion
 
@@ -243,7 +288,7 @@ class Index extends Component
     public function pincodeSave($name)
     {
         $obj = Common::create([
-            'label_id'=>4,
+            'label_id' => 4,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -254,16 +299,89 @@ class Index extends Component
     public function getPincodeList(): void
     {
         $this->pincodeCollection = $this->pincode_name ? Common::search(trim($this->pincode_name))
-            ->where('label_id','=','4')
-            ->get() : Common::where('label_id','=','4')->Orwhere('label_id','=','1')->get();
+            ->where('label_id', '=', '4')
+            ->get() : Common::where('label_id', '=', '4')->Orwhere('label_id', '=', '1')->get();
     }
     #endregion
 
+    #region[MSME Type]
+    public $msme_type_id = '';
+    public $msme_type_name = '';
+    public Collection $msmeTypeCollection;
+    public $highlightMsmeType = 0;
+    public $msmeTypeTyped = false;
+
+    public function decrementMsmeType(): void
+    {
+        if ($this->highlightMsmeType === 0) {
+            $this->highlightMsmeType = count($this->msmeTypeCollection) - 1;
+            return;
+        }
+        $this->highlightMsmeType--;
+    }
+
+    public function incrementMsmeType(): void
+    {
+        if ($this->highlightMsmeType === count($this->msmeTypeCollection) - 1) {
+            $this->highlightMsmeType = 0;
+            return;
+        }
+        $this->highlightMsmeType++;
+    }
+
+    public function setMsmeType($name, $id): void
+    {
+        $this->msme_type_name = $name;
+        $this->msme_type_id = $id;
+        $this->getMsmeTypeList();
+    }
+
+    public function enterMsmeType(): void
+    {
+        $obj = $this->msmeTypeCollection[$this->highlightMsmeType] ?? null;
+
+        $this->msme_type_name = '';
+        $this->msmeTypeCollection = Collection::empty();
+        $this->highlightMsmeType = 0;
+
+        $this->msme_type_name = $obj['vname'] ?? '';
+        $this->msme_type_id = $obj['id'] ?? '';
+    }
+
+    #[On('refresh-msme-type')]
+    public function refreshMsmeType($v): void
+    {
+        $this->msme_type_id = $v['id'];
+        $this->msme_type_name = $v['name'];
+        $this->msmeTypeTyped = false;
+    }
+
+    public function msmeTypeSave($name)
+    {
+        $obj = Common::create([
+            'label_id' => 23,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshMsmeType($v);
+    }
+
+    public function getMsmeTypeList(): void
+    {
+        $this->msmeTypeCollection = !empty($this->msme_type_name) ?
+            Common::search(trim($this->msme_type_name))->where('label_id', '=', '23')->get() :
+            Common::where('label_id', '=', '23')->orWhere('label_id', '=', '1')->get();
+    }
+#endregion
+
     #region[save]
-    public function getSave():void
+    public function getSave(): void
     {
         if ($this->common->vname!=''){
             if ($this->common->vid==''){
+                $this->validate($this->rules());
                 $company=new Company();
                 $extraFields=[
                     'display_name' => $this->display_name,
@@ -272,8 +390,8 @@ class Index extends Component
                     'mobile' => $this->mobile,
                     'landline' => $this->landline,
                     'gstin' => Str::upper($this->gstin),
-                    'msme_no' => $this->msme_no,
-                    'msme_type' => $this->msme_type,
+                    'msme_no' => $this->msme_no ?: '-',
+                    'msme_type_id' => $this->msme_type_id ?: '1',
                     'pan' => Str::upper($this->pan),
                     'email' => $this->email,
                     'website' => $this->website,
@@ -288,9 +406,9 @@ class Index extends Component
                     'tenant_id' => $this->tenant_id ?: '1',
                     'logo' => $this->save_logo(),
                 ];
-                $this->common->save($company,$extraFields);
+                $this->common->save($company, $extraFields);
                 $message = "Saved";
-            }else {
+            } else {
                 $company = Company::find($this->common->vid);
                 $extraFields = [
                     'display_name' => $this->display_name,
@@ -300,7 +418,7 @@ class Index extends Component
                     'landline' => $this->landline,
                     'gstin' => Str::upper($this->gstin),
                     'msme_no' => $this->msme_no,
-                    'msme_type' => $this->msme_type,
+                    'msme_type_id' => $this->msme_type_id,
                     'pan' => Str::upper($this->pan),
                     'email' => $this->email,
                     'website' => $this->website,
@@ -336,7 +454,8 @@ class Index extends Component
         $this->landline = '';
         $this->gstin = '';
         $this->msme_no = '';
-        $this->msme_type = '';
+        $this->msme_type_id = '';
+        $this->msme_type_name = '';
         $this->pan = '';
         $this->email = '';
         $this->website = '';
@@ -350,8 +469,8 @@ class Index extends Component
         $this->acc_no = '';
         $this->ifsc_code = '';
         $this->branch = '';
-        $this->logo='';
-        $this->old_logo='';
+        $this->logo = '';
+        $this->old_logo = '';
     }
     #endregion
 
@@ -395,7 +514,8 @@ class Index extends Component
             $this->landline = $obj->landline;
             $this->gstin = $obj->gstin;
             $this->msme_no = $obj->msme_no;
-            $this->msme_type = $obj->msme_type;
+            $this->msme_type_id = $obj->msme_type_id;
+            $this->msme_type_name = Common::find($obj->msme_type_id)->vname;
             $this->pan = $obj->pan;
             $this->email = $obj->email;
             $this->website = $obj->website;
@@ -425,7 +545,7 @@ class Index extends Component
     #endregion
 
     #region[tenants]
-    public function getTenants():void
+    public function getTenants(): void
     {
         $this->tenants = Tenant::all();
 
@@ -439,8 +559,9 @@ class Index extends Component
         $this->getStateList();
         $this->getPincodeList();
         $this->getTenants();
+        $this->getMsmeTypeList();
         return view('livewire.master.company.index')->with([
-            'list'=>$this->getListForm->getList(Company::class),
+            'list' => $this->getListForm->getList(Company::class),
         ]);
     }
     #endregion

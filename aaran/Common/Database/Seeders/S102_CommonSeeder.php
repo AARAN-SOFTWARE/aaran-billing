@@ -28,7 +28,8 @@ class S102_CommonSeeder extends Seeder
         self::mode();
         self::accyear();
         self::Transport();
-        self::GstApiData();
+        self::contactType();
+        self::msmeType();
     }
 
     #region[noRecord]
@@ -64,6 +65,97 @@ class S102_CommonSeeder extends Seeder
         Common::create([
             'label_id' => '2',
             'vname' => 'Salem',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Coimbatore',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Chennai',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Kanchipuram',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Madurai',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Thanjavur',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Tiruchirappalli',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Vellore',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Tirunelveli',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Thoothukkudi',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Dindigul',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Rajapalayam',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Pudukkottai',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'Karaikkudi',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
@@ -335,7 +427,7 @@ class S102_CommonSeeder extends Seeder
     {
         Common::create([
             'label_id' => '4',
-            'vname' => '641666',
+            'vname' => '641601',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
@@ -348,6 +440,34 @@ class S102_CommonSeeder extends Seeder
             'desc_1' => '-',
             'active_id' => '1'
         ]);
+        Common::create([
+            'label_id' => '4',
+            'vname' => '641603',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '4',
+            'vname' => '641604',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '4',
+            'vname' => '641605',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '4',
+            'vname' => '641606',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
     }
     #endregion
 
@@ -356,7 +476,7 @@ class S102_CommonSeeder extends Seeder
     {
         Common::create([
             'label_id' => '5',
-            'vname' => 'India',
+            'vname' => 'INDIA',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
@@ -369,15 +489,15 @@ class S102_CommonSeeder extends Seeder
     {
         Common::create([
             'label_id' => '6',
-            'vname' => '489653',
-            'desc' => '-',
+            'vname' => '61099090',
+            'desc' => 'T-shirts, singlets and other vests, knitted or crocheted -of other textile materials : other.',
             'desc_1' => '-',
             'active_id' => '1'
         ]);
         Common::create([
             'label_id' => '6',
-            'vname' => '146610',
-            'desc' => '-',
+            'vname' => '61091000',
+            'desc' => 'T-shirts, singlets and other vests, knitted or crocheted - of cotton.',
             'desc_1' => '-',
             'active_id' => '1'
         ]);
@@ -397,6 +517,34 @@ class S102_CommonSeeder extends Seeder
         Common::create([
             'label_id' => '7',
             'vname' => 'Pink',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '7',
+            'vname' => 'Black',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '7',
+            'vname' => 'Navy',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '7',
+            'vname' => 'White',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '7',
+            'vname' => 'Orange',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
@@ -457,21 +605,42 @@ class S102_CommonSeeder extends Seeder
     {
         Common::create([
             'label_id' => '9',
-            'vname' => 'SBI BANK',
+            'vname' => 'State Bank Of India',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
         ]);
         Common::create([
             'label_id' => '9',
-            'vname' => 'AXIS BANK',
+            'vname' => 'AXIS Bank',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
         ]);
         Common::create([
             'label_id' => '9',
-            'vname' => 'ICICI',
+            'vname' => 'ICICI Bank',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '9',
+            'vname' => 'Indusind Bank',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '9',
+            'vname' => 'Indian Overseas Bank',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '9',
+            'vname' => 'Hdfc Bank',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
@@ -485,6 +654,27 @@ class S102_CommonSeeder extends Seeder
         Common::create([
             'label_id' => '10',
             'vname' => 'Auto Charges',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '10',
+            'vname' => 'Loading & Unloading Charges',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '10',
+            'vname' => 'Courier Charges',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '10',
+            'vname' => 'Discount',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
@@ -511,20 +701,6 @@ class S102_CommonSeeder extends Seeder
         ]);
         Common::create([
             'label_id' => '14',
-            'vname' => 'PhonePe',
-            'desc' => '-',
-            'desc_1' => '-',
-            'active_id' => '1'
-        ]);
-        Common::create([
-            'label_id' => '14',
-            'vname' => 'GPay',
-            'desc' => '-',
-            'desc_1' => '-',
-            'active_id' => '1'
-        ]);
-        Common::create([
-            'label_id' => '14',
             'vname' => 'RTGS',
             'desc' => '-',
             'desc_1' => '-',
@@ -537,6 +713,28 @@ class S102_CommonSeeder extends Seeder
             'desc_1' => '-',
             'active_id' => '1'
         ]);
+        Common::create([
+            'label_id' => '14',
+            'vname' => 'IMPS',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '14',
+            'vname' => 'PhonePe',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '14',
+            'vname' => 'GPay',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+
     }
     #endregion
 
@@ -806,26 +1004,46 @@ class S102_CommonSeeder extends Seeder
     }
     #endregion
 
-    #region[GstApiData]
-    private static function GstApiData(): void
+    #region[Contact Type]
+    private static function contactType(): void
     {
         Common::create([
-            'label_id' => '2',
-            'vname' => 'GANDHINAGAR',
+            'label_id' => '22',
+            'vname' => 'Creditor',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
         ]);
         Common::create([
-            'label_id' => '4',
-            'vname' => '560001',
+            'label_id' => '22',
+            'vname' => 'Debtor',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+    }
+    #endregion
+
+    #region[MSME Type]
+    private static function msmeType(): void
+    {
+        Common::create([
+            'label_id' => '23',
+            'vname' => 'Micro',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
         ]);
         Common::create([
-            'label_id' => '6',
-            'vname' => '1001',
+            'label_id' => '23',
+            'vname' => 'Small',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '23',
+            'vname' => 'Medium',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'

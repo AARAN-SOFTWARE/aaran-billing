@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Upsert extends Component
@@ -39,6 +40,7 @@ class Upsert extends Component
     public $Irn_no;
     public $CnlRsn;
     public $CnlRem;
+    #[validate]
     public $distance=0;
     public $showModel=false;
     public $successMessage='';
@@ -46,6 +48,7 @@ class Upsert extends Component
     public $Transname;
     public $Transdocno;
     public $TransdocDt;
+    #[validate]
     public $Vehno;
     public $Vehtype;
     public $TransMode;
@@ -69,6 +72,7 @@ class Upsert extends Component
     public mixed $price = '';
     public string $gst_percent = '';
     public string $itemIndex = "";
+    #[validate]
     public $itemList = [];
     public $description;
 
@@ -88,10 +92,42 @@ class Upsert extends Component
     public $no_of_roll;
     #endregion
 
-    #region[Contact]
+    #region[rules]
+    public function rules(): array
+    {
+        return [
+            'contact_name' => 'required',
+            'transport_name' => 'required',
+            'distance' => 'required',
+            'Vehno' => 'required',
+        ];
+    }
 
-    public $contact_id = '';
+    public function messages()
+    {
+        return [
+            'contact_name.required' => 'The :attribute is required.',
+            'transport_name.required' => 'The :attribute is required.',
+            'distance.required' => 'The :attribute is required.',
+            'Vehno.required' => 'The :attribute is required.',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'contact_name' => 'party name',
+            'transport_name' => 'transport name',
+            'distance' => 'distance ',
+            'Vehno' => 'Vechile no',
+        ];
+    }
+    #endregion
+
+    #region[Contact]
+    #[validate]
     public $contact_name = '';
+    public $contact_id = '';
     public Collection $contactCollection;
     public $highlightContact = 0;
     public $contactTyped = false;
@@ -411,9 +447,9 @@ class Upsert extends Component
     #endregion
 
     #region[Transport]
-
-    public $transport_id = '';
+    #[validate]
     public $transport_name = '';
+    public $transport_id = '';
     public Collection $transportCollection;
     public $highlightTransport = 0;
     public $transportTyped = false;
@@ -637,8 +673,8 @@ class Upsert extends Component
 
     #region[Product]
 
-    public $product_id = '';
     public $product_name = '';
+    public $product_id = '';
     public mixed $gst_percent1 = '';
     public Collection $productCollection;
     public $highlightProduct = 0;
@@ -682,7 +718,7 @@ class Upsert extends Component
         $this->gst_percent1 = Sale::commons($obj['gstpercent_id']) ?? '';
     }
 
-    #[On('refresh-factory')]
+    #[On('refresh-product')]
     public function refreshProduct($v): void
     {
         $this->product_id = $v['id'];
@@ -702,9 +738,8 @@ class Upsert extends Component
     #endregion
 
     #region[Colour]
-
-    public $colour_id = '';
     public $colour_name = '';
+    public $colour_id = '';
     public Collection $colourCollection;
     public $highlightColour = 0;
     public $colourTyped = false;
@@ -775,9 +810,8 @@ class Upsert extends Component
     #endregion
 
     #region[size]
-
-    public $size_id = '';
     public $size_name = '';
+    public $size_id = '';
     public Collection $sizeCollection;
     public $highlightSize = 0;
     public $sizeTyped = false;
@@ -850,9 +884,11 @@ class Upsert extends Component
     #region[Save]
     public function saveExit(): void
     {
-        try {
             if ($this->uniqueno != '') {
                 if ($this->common->vid == "") {
+
+                    $this->validate($this->rules());
+
                     $obj = Sale::create([
                         'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no,
                         'acyear' => session()->get('acyear'),
@@ -942,9 +978,7 @@ class Upsert extends Component
                 $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
 
             }
-        } catch (\Exception $exception) {
-            echo($exception->getMessage());
-        }
+
     }
     public function save()
     {

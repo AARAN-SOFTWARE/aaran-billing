@@ -80,11 +80,17 @@
 
                         <x-tabs.content>
                             <div class="flex flex-col gap-3" >
-                                <x-input.floating wire:model="common.vname" label="Name"/>
+                                <x-input.floating wire:model.live="common.vname" label="Name"/>
+                                @error('common.vname')
+                                <span class="text-red-400">{{$message}}</span>
+                                @enderror
                                 <x-input.floating wire:model="display_name" label="Display-name"/>
                                 <x-input.floating wire:model="mobile" label="Mobile"/>
                                 <x-input.floating wire:model="landline" label="Landline"/>
-                                <x-input.floating wire:model="gstin" label="GSTin"/>
+                                <x-input.floating wire:model.live="gstin" label="GSTin"/>
+                                @error('gstin')
+                                <span class="text-red-400">{{$message}}</span>
+                                @enderror
                                 <x-input.floating wire:model="pan" label="Pan"/>
                                 <x-input.floating wire:model="email" label="Email"/>
                                 <x-input.floating wire:model="website" label="Website"/>
@@ -95,9 +101,14 @@
 
                         <x-tabs.content>
                             <div class="flex flex-col gap-3">
-                                <x-input.floating wire:model="address_1" label="Address" />
-                                <x-input.floating wire:model="address_2" label="Area-Road" />
-
+                                <x-input.floating wire:model.live="address_1" label="Address" />
+                                @error('address_1')
+                                <span class="text-red-400">{{$message}}</span>
+                                @enderror
+                                <x-input.floating wire:model.live="address_2" label="Area-Road" />
+                                @error('address_2')
+                                <span class="text-red-400">{{$message}}</span>
+                                @enderror
                                 <!-- City ----------------------------------------------------------------------------->
 
                                 <x-dropdown.wrapper label="City" type="cityTyped">
@@ -121,7 +132,9 @@
                                         </x-dropdown.select>
                                     </div>
                                 </x-dropdown.wrapper>
-
+                                @error('city_name')
+                                <span class="text-red-400">{{$message}}</span>
+                                @enderror
                                 <!-- State ---------------------------------------------------------------------------->
 
                                 <x-dropdown.wrapper label="State" type="stateTyped">
@@ -146,7 +159,9 @@
                                     </div>
                                 </x-dropdown.wrapper>
 
-
+                                @error('state_name')
+                                <span class="text-red-400">{{$message}}</span>
+                                @enderror
                                 <!-- Pin-code ------------------------------------------------------------------------->
 
                                 <x-dropdown.wrapper label="Pincode" type="pincodeTyped">
@@ -170,7 +185,9 @@
                                         </x-dropdown.select>
                                     </div>
                                 </x-dropdown.wrapper>
-
+                                @error('pincode_name')
+                                <span class="text-red-400">{{$message}}</span>
+                                @enderror
                             </div>
                         </x-tabs.content>
 
@@ -249,7 +266,31 @@
 
                             <div class="flex flex-col gap-3">
                                 <x-input.floating wire:model="msme_no" label="MSME No" />
-                                <x-input.floating wire:model="msme_type" label="MSME Type" />
+
+                                <x-dropdown.wrapper label="MSME Type" type="MsmeTypeTyped">
+                                    <div class="relative ">
+                                        <x-dropdown.input label="MSME Type" id="msme_type_name"
+                                                          wire:model.live="msme_type_name"
+                                                          wire:keydown.arrow-up="decrementMsmeType"
+                                                          wire:keydown.arrow-down="incrementMsmeType"
+                                                          wire:keydown.enter="enterMsmeType"/>
+                                        <x-dropdown.select>
+                                            @if($msmeTypeCollection)
+                                                @forelse ($msmeTypeCollection as $i => $msmeType)
+                                                    <x-dropdown.option highlight="{{$highlightMsmeType === $i  }}"
+                                                                       wire:click.prevent="setMsmeType('{{$msmeType->vname}}','{{$msmeType->id}}')">
+                                                        {{ $msmeType->vname }}
+                                                    </x-dropdown.option>
+                                                @empty
+                                                    <x-dropdown.create wire:click.prevent="msmeTypeSave('{{$msme_type_name}}')"
+                                                                       label="Msme Type"/>
+                                                @endforelse
+                                            @endif
+                                        </x-dropdown.select>
+                                    </div>
+                                </x-dropdown.wrapper>
+
+{{--                                <x-input.floating wire:model="msme_type" label="MSME Type" />--}}
                             </div>
                         </x-tabs.content>
 

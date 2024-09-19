@@ -10,11 +10,11 @@ class S203_ProductSeeder extends Seeder
     public static function run(): void
     {
         Product::create([
-            'vname' => 'Wheat',
-            'producttype_id' => '64',
-            'hsncode_id' => '97',
-            'unit_id' => '69',
-            'gstpercent_id' => '72',
+            'vname' => 'T-SHIRT',
+            'producttype_id' => '92',
+            'hsncode_id' => '62',
+            'unit_id' => '96',
+            'gstpercent_id' => '100',
             'initial_quantity' => 0,
             'initial_price' => 0,
             'active_id' => '1',

@@ -68,7 +68,10 @@
 
                 <!-- Product ------------------------------------------------------------------------------------------>
 
-                <x-input.floating wire:model="common.vname" label="Product Name"/>
+                <x-input.floating wire:model.live="common.vname" label="Product Name"/>
+                @error('common.vname')
+                <span class="text-red-400">{{$message}}</span>
+                @enderror
 
                 <x-dropdown.wrapper label="Product Type" type="producttypeTyped">
 
@@ -98,62 +101,6 @@
                     </div>
                 </x-dropdown.wrapper>
 
-                {{--                <div class="flex flex-row py-3 gap-3">--}}
-                {{--                    <div class="xl:flex w-full gap-2">--}}
-                {{--                        <label for="producttype_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Product Type</label>--}}
-                {{--                        <div x-data="{isTyped: @entangle('producttypeTyped')}" @click.away="isTyped = false" class="w-full relative">--}}
-                {{--                            <div>--}}
-                {{--                                <input--}}
-                {{--                                    id="producttype_name"--}}
-                {{--                                    type="search"--}}
-                {{--                                    wire:model.live="producttype_name"--}}
-                {{--                                    autocomplete="off"--}}
-                {{--                                    placeholder="Product Type Name.."--}}
-                {{--                                    @focus="isTyped = true"--}}
-                {{--                                    @keydown.escape.window="isTyped = false"--}}
-                {{--                                    @keydown.tab.window="isTyped = false"--}}
-                {{--                                    @keydown.enter.prevent="isTyped = false"--}}
-                {{--                                    wire:keydown.arrow-up="decrementProductType"--}}
-                {{--                                    wire:keydown.arrow-down="incrementProductType"--}}
-                {{--                                    wire:keydown.enter="enterProductType"--}}
-                {{--                                    class="block w-full purple-textbox"--}}
-                {{--                                />--}}
-
-                {{--                                <!-- Product Type Dropdown -->--}}
-                {{--                                <div x-show="isTyped"--}}
-                {{--                                     x-transition:leave="transition ease-in duration-100"--}}
-                {{--                                     x-transition:leave-start="opacity-100"--}}
-                {{--                                     x-transition:leave-end="opacity-0"--}}
-                {{--                                     x-cloak--}}
-                {{--                                >--}}
-                {{--                                    <div class="absolute z-20 w-full mt-2">--}}
-                {{--                                        <div class="block py-1 shadow-md w-full rounded-lg border-transparent flex-1 appearance-none border--}}
-                {{--                             bg-white text-gray-800 ring-1 ring-purple-600">--}}
-                {{--                                            <ul class="overflow-y-scroll h-96">--}}
-                {{--                                                @if($producttypeCollection)--}}
-                {{--                                                    @forelse ($producttypeCollection as $i => $producttype)--}}
-                {{--                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
-                {{--                                            {{ $highlightProductType === $i ? 'bg-yellow-100' : '' }}"--}}
-                {{--                                                            wire:click.prevent="setProductType('{{$producttype->vname}}','{{$producttype->id}}')"--}}
-                {{--                                                            x-on:click="isTyped = false">--}}
-                {{--                                                            {{ $producttype->vname }}--}}
-                {{--                                                        </li>--}}
-                {{--                                                    @empty--}}
-                {{--                                                        <button--}}
-                {{--                                                            wire:click.prevent="productTypeSave('{{$producttype_name}}')"--}}
-                {{--                                                            class="text-white bg-green-500 text-center w-full">--}}
-                {{--                                                            create--}}
-                {{--                                                        </button>--}}
-                {{--                                                    @endforelse--}}
-                {{--                                                @endif--}}
-                {{--                                            </ul>--}}
-                {{--                                        </div>--}}
-                {{--                                    </div>--}}
-                {{--                                </div>--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
 
                 <!-- HSN Code ----------------------------------------------------------------------------------------->
 
@@ -185,6 +132,9 @@
                         </x-dropdown.select>
                     </div>
                 </x-dropdown.wrapper>
+                @error('hsncode_name')
+                <span class="text-red-400">{{$message}}</span>
+                @enderror
 
                 <!-- Unit Type ---------------------------------------------------------------------------------------->
 
@@ -209,6 +159,9 @@
                         </x-dropdown.select>
                     </div>
                 </x-dropdown.wrapper>
+                @error('unit_name')
+                <span class="text-red-400">{{$message}}</span>
+                @enderror
 
                 <!-- GST Percent -------------------------------------------------------------------------------------->
 
@@ -233,6 +186,9 @@
                             @endif
 
                         </x-dropdown.select>
+                        @error('gstpercent_name')
+                        <span class="text-red-400">{{$message}}</span>
+                        @enderror
                     </div>
                 </x-dropdown.wrapper>
                 <x-input.floating wire:model="quantity" label="Opening Quantity"/>

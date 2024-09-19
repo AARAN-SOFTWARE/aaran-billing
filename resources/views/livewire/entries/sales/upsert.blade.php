@@ -33,6 +33,8 @@
                         </x-dropdown.select>
                     </div>
                 </x-dropdown.wrapper>
+                @error('contact_name')
+                <span class="text-red-400">{{$message}}</span>@enderror
 
                 <!-- Order No --------------------------------------------------------------------------------------------->
 
@@ -244,12 +246,13 @@
                                     %
                                 </x-dropdown.option>
                             @empty
-                                @livewire('controls.model.factory-model',[$product_name])
+                                @livewire('controls.model.product-model',[$product_name])
                             @endforelse
                         @endif
                     </x-dropdown.select>
                 </div>
             </x-dropdown.wrapper>
+
 
             <!--Product Description --------------------------------------------------------------------------------------->
 
@@ -512,12 +515,71 @@
                     <x-tabs.tab-panel>
 
                         <x-slot name="tabs">
+                            <x-tabs.tab>E-way Bill Details</x-tabs.tab>
                             <x-tabs.tab>Additional Charges</x-tabs.tab>
                             <x-tabs.tab>Others</x-tabs.tab>
-                            <x-tabs.tab>E-way Bill Details</x-tabs.tab>
                         </x-slot>
 
                         <x-slot name="content">
+
+                            <x-tabs.content>
+                                <div class="flex sm:flex-row flex-col gap-3 w-full">
+                                    <div class="flex flex-col gap-2 w-full">
+                                        @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
+                                            <x-dropdown.wrapper label="Transport" type="transportTyped">
+                                                <div class="relative ">
+                                                    <x-dropdown.input label="Transport" id="transport_name"
+                                                                      wire:model.live="transport_name"
+                                                                      wire:keydown.arrow-up="decrementTransport"
+                                                                      wire:keydown.arrow-down="incrementTransport"
+                                                                      wire:keydown.enter="enterTransport"/>
+                                                    @error('transport_id')
+                                                    <span class="text-red-500">{{'The Transport is Required.'}}</span>
+                                                    @enderror
+                                                    <x-dropdown.select>
+                                                        @if($transportCollection)
+                                                            @forelse ($transportCollection as $i => $transport)
+                                                                <x-dropdown.option
+                                                                    highlight="{{$highlightTransport === $i  }}"
+                                                                    wire:click.prevent="setTransport('{{$transport->vname}}','{{$transport->id}}')">
+                                                                    {{ $transport->vname. '|'. $transport->desc.'|' .$transport->desc_1 }}
+                                                                </x-dropdown.option>
+                                                            @empty
+                                                                <x-dropdown.new wire:click.prevent="transportSave('{{$transport_name}}')" label="Transport" />
+                                                            @endforelse
+                                                        @endif
+                                                    </x-dropdown.select>
+                                                    @error('transport_name')
+                                                    <span class="text-red-400">{{$message}}</span>@enderror
+                                                </div>
+                                            </x-dropdown.wrapper>
+                                        @endif
+                                        <x-input.model-date wire:model="TransdocDt" label="Transport Date"/>
+                                        <x-input.model-select wire:model="TransMode" label="Transport Mode">
+                                            <option value="">Choose..</option>
+                                            <option value="1">Road</option>
+                                            <option value="2">Rail</option>
+                                            <option value="3">Air</option>
+                                            <option value="4">ship</option>
+                                        </x-input.model-select>
+                                    </div>
+                                    <div class="flex flex-col gap-2 w-full">
+                                        <x-input.floating wire:model.live="distance" label="Distance"/>
+                                        @error('distance')
+                                        <span class="text-red-400">{{$message}}</span>@enderror
+                                        <x-input.floating wire:model.live="Vehno" label="Vechile No"/>
+                                        @error('Vehno')
+                                        <span class="text-red-400">{{$message}}</span>@enderror
+                                        <x-input.model-select wire:model="Vehtype" label="Vechile Type">
+                                            <option value="">Choose..</option>
+                                            <option value="R">Regular</option>
+                                            <option value="O">ODC</option>
+                                        </x-input.model-select>
+
+
+                                    </div>
+                                </div>
+                            </x-tabs.content>
 
                             <x-tabs.content>
                                 <div class="space-y-2">
@@ -562,59 +624,6 @@
                                     @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
                                         <x-input.floating wire:model="bundle" label="Bundle"/>
                                     @endif
-                                </div>
-                            </x-tabs.content>
-
-                            <x-tabs.content>
-                                <div class="flex sm:flex-row flex-col gap-3 w-full">
-                                    <div class="flex flex-col gap-2 w-full">
-                                        @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
-                                            <x-dropdown.wrapper label="Transport" type="transportTyped">
-                                                <div class="relative ">
-                                                    <x-dropdown.input label="Transport" id="transport_name"
-                                                                      wire:model.live="transport_name"
-                                                                      wire:keydown.arrow-up="decrementTransport"
-                                                                      wire:keydown.arrow-down="incrementTransport"
-                                                                      wire:keydown.enter="enterTransport"/>
-                                                    @error('transport_id')
-                                                    <span class="text-red-500">{{'The Transport is Required.'}}</span>
-                                                    @enderror
-                                                    <x-dropdown.select>
-                                                        @if($transportCollection)
-                                                            @forelse ($transportCollection as $i => $transport)
-                                                                <x-dropdown.option
-                                                                    highlight="{{$highlightTransport === $i  }}"
-                                                                    wire:click.prevent="setTransport('{{$transport->vname}}','{{$transport->id}}')">
-                                                                    {{ $transport->vname. '|'. $transport->desc.'|' .$transport->desc_1 }}
-                                                                </x-dropdown.option>
-                                                            @empty
-                                                                <x-dropdown.new wire:click.prevent="transportSave('{{$transport_name}}')" label="Transport" />
-                                                            @endforelse
-                                                        @endif
-                                                    </x-dropdown.select>
-                                                </div>
-                                            </x-dropdown.wrapper>
-                                        @endif
-                                        <x-input.model-date wire:model="TransdocDt" label="Transport Date"/>
-                                            <x-input.model-select wire:model="TransMode" label="Transport Mode">
-                                                <option value="">Choose..</option>
-                                                <option value="1">Road</option>
-                                                <option value="2">Rail</option>
-                                                <option value="3">Air</option>
-                                                <option value="4">ship</option>
-                                            </x-input.model-select>
-                                    </div>
-                                    <div class="flex flex-col gap-2 w-full">
-                                        <x-input.floating wire:model="distance" label="Distance"/>
-                                        <x-input.floating wire:model="Vehno" label="Vechile No"/>
-                                        <x-input.model-select wire:model="Vehtype" label="Vechile Type">
-                                            <option value="">Choose..</option>
-                                            <option value="R">Regular</option>
-                                            <option value="O">ODC</option>
-                                        </x-input.model-select>
-
-
-                                    </div>
                                 </div>
                             </x-tabs.content>
 

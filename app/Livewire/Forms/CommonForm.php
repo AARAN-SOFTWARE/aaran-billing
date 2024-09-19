@@ -3,11 +3,12 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class CommonForm extends Form
 {
-    #[Rule('required')]
+    #[Validate]
     public $vname = '';
     public bool $active_id = false;
     public $vid='';
@@ -15,12 +16,28 @@ class CommonForm extends Form
     public function rules(): array
     {
         return [
-            'vname' => 'required',
+            'vname' => 'required|unique:commons,vname',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'vname.required' => 'The :attribute are missing.',
+            'vname.unique' => 'The :attribute is already created.',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'vname' => 'name',
         ];
     }
 
     public function save($model, $extraFields = [])
     {
+        $this->validate();
         $model->vname = $this->vname;
         $model->active_id = $this->active_id;
         foreach ($extraFields as $key => $value) {
