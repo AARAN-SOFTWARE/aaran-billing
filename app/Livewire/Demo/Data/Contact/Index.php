@@ -5,7 +5,6 @@ namespace App\Livewire\Demo\Data\Contact;
 use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
-use Faker\Factory;
 use Livewire\Component;
 
 class Index extends Component
@@ -69,15 +68,17 @@ class Index extends Component
 
             $phone_number = substr(str_shuffle("0123456789"), 0, 8);
             $gst_number = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 15);
+            $contact_type = Common::where('label_id','=','22')->pluck('id')->random();
+            $msme_type = Common::where('label_id','=','23')->pluck('id')->random();
             $obj = Contact::create([
 
                 'vname' => $contact_name[$i],
                 'mobile' => '91' . $phone_number,
                 'whatsapp' => '63' . $phone_number,
                 'contact_person' => '-',
-                'contact_type' => 'Debtor',
+                'contact_type_id' => $contact_type,
                 'msme_no' => $phone_number,
-                'msme_type' => 'Micro',
+                'msme_type_id' => $msme_type,
                 'opening_balance' => 0,
                 'effective_from' => date('Y-m-d'),
                 'gstin' => $gst_number,
