@@ -64,11 +64,11 @@
 
                     @php
 
-                        if ($row->mode_id ==82)
+                        if ($row->mode_id ==110)
                         {
                             $totalPayment  += floatval($row->vname + 0);
                         }
-                        elseif($row->mode_id ==83)
+                        elseif($row->mode_id ==111)
                         {
                             $totalReceipt  += floatval($row->vname + 0);
                         }
@@ -81,20 +81,20 @@
 
                         <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
 
-                        @if($row->mode_id == 82)
+                        @if($row->mode_id == 110)
                             <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
                         @else
                             <x-table.cell-text></x-table.cell-text>
 
                         @endif
 
-                        @if($row->mode_id == 83)
+                        @if($row->mode_id == 111)
                             <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
                         @else
                             <x-table.cell-text></x-table.cell-text>
                         @endif
 
-                        @if( $trans_type_id != 80)
+                        @if( $trans_type_id != 85)
                             <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
                         @endif
 
@@ -139,9 +139,9 @@
             <!-- Receipt & Payment  ----------------------------------------------------------------------------------->
 
             <div class="flex gap-3 w-full mb-3">
-                <x-radio.btn value="83" wire:model="mode_id">Receipt
+                <x-radio.btn value="111" wire:model="mode_id">Receipt
                 </x-radio.btn>
-                <x-radio.btn value="82" wire:model="mode_id">Payment
+                <x-radio.btn value="110" wire:model="mode_id">Payment
                 </x-radio.btn>
             </div>
 
@@ -204,7 +204,7 @@
                             <x-tabs.content>
                                 <div class="flex flex-col gap-3">
 
-                                    @if ( $trans_type_id != 80)
+                                    @if ( $trans_type_id != 85)
 
                                         <!-- receipt type ----------------------------------------------------------------->
 
@@ -312,7 +312,31 @@
                                         </div>
                                     </x-dropdown.wrapper>
 
-                                    <x-input.floating wire:model="ref_no" :label="'Against'"/>
+{{--                                    <x-input.floating wire:model="ref_no" :label="'Against'"/>--}}
+                                    <x-dropdown.wrapper label="Against" type="salesTyped">
+                                        <div class="relative">
+
+                                            <x-dropdown.input label="Against" id="sales_no"
+                                                              wire:model.live="sales_no"
+                                                              wire:keydown.arrow-up="decrementSales"
+                                                              wire:keydown.arrow-down="incrementSales"
+                                                              wire:keydown.enter="enterSales"/>
+                                            <x-dropdown.select>
+
+                                                @if($salesCollection)
+                                                    @forelse ($salesCollection as $i => $sale)
+                                                        <x-dropdown.option highlight="{{ $highlightSales === $i }}"
+                                                                           wire:click.prevent="setSales('{{$sale->invoice_no}}','{{$sale->id}}')">
+                                                            {{ $sale->invoice_no }}
+                                                        </x-dropdown.option>
+                                                    @empty
+                                                        <x-dropdown.new href="{{ route('sales.upsert', ['0']) }}" label="Sales"/>
+                                                    @endforelse
+                                                @endif
+
+                                            </x-dropdown.select>
+                                        </div>
+                                    </x-dropdown.wrapper>
 
                                     <x-input.floating wire:model="ref_amount" :label="'Ref Amount'"/>
 
