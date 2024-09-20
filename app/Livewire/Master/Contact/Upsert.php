@@ -721,9 +721,9 @@ class Upsert extends Component
                 'address_1' => '-',
                 'address_2' => '-',
                 'city_id' => 1,
-                'state_id' => 4,
-                'pincode_id' => 6,
-                'country_id' => 7,
+                'state_id' => 1,
+                'pincode_id' => 1,
+                'country_id' => 1,
             ]);
         }
     }

@@ -40,13 +40,13 @@ class Index extends Component
     public function mount($id)
     {
         if ($id == 1) {
-            $this->mode_id = 83;
-            $this->mode_name = Common::find(83)->vname;
+            $this->mode_id = 111;
+            $this->mode_name = Common::find(111)->vname;
         } elseif ($id == 2) {
-            $this->mode_id = 82;
-            $this->mode_name = Common::find(82)->vname;
+            $this->mode_id = 110;
+            $this->mode_name = Common::find(110)->vname;
         }
-        $this->trans_type_id = 81;
+        $this->trans_type_id = 108;
 //        $this->receipt_type_id = 60;
 //        $this->receipt_type_name = Common::find(60)->vname;
     }
@@ -65,10 +65,10 @@ class Index extends Component
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
-                    'trans_type_id' => $this->trans_type_id ?: '80',
-                    'mode_id' => $this->mode_id ?: '83',
+                    'trans_type_id' => $this->trans_type_id ?: '108',
+                    'mode_id' => $this->mode_id ?: '111',
                     'vdate' => $this->vdate,
-                    'receipttype_id' => $this->receipt_type_id ?: '58',
+                    'receipttype_id' => $this->receipt_type_id ?: '85',
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
@@ -584,7 +584,7 @@ class Index extends Component
         $this->order_id = '';
         $this->order_name = '';
         $this->amount = '';
-        $this->trans_type_id = 80;
+        $this->trans_type_id = 108;
         $this->remarks = '';
         $this->chq_no = '';
         $this->chq_date = '';

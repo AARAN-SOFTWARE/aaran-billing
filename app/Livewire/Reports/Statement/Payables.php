@@ -30,7 +30,7 @@ class Payables extends Component
     #region[Contact]
     public function getContact()
     {
-        $this->contacts = Contact::where('company_id', '=', session()->get('company_id'))->where('contact_type','Creditor')->get();
+        $this->contacts = Contact::where('company_id', '=', session()->get('company_id'))->where('contact_type_id','123')->get();
     }
     #endregion
 
