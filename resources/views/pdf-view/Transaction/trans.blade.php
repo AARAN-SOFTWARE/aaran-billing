@@ -42,7 +42,7 @@
 
         <x-table.header-text sort-icon="none">Receipt</x-table.header-text>
 
-        @if( $trans_type_id != 80)
+        @if( $trans_type_id != 108)
             <x-table.header-text sort-icon="none">Type</x-table.header-text>
         @endif
 
@@ -67,11 +67,11 @@
 
             @php
 
-                if ($row->mode_id ==82)
+                if ($row->mode_id ==110)
                 {
                     $totalPayment  += floatval($row->vname + 0);
                 }
-                elseif($row->mode_id ==83)
+                elseif($row->mode_id ==111)
                 {
                     $totalReceipt  += floatval($row->vname + 0);
                 }
@@ -86,20 +86,20 @@
 
                 <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
 
-                @if($row->mode_id == 82)
+                @if($row->mode_id == 110)
                     <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
                 @else
                     <x-table.cell-text></x-table.cell-text>
 
                 @endif
 
-                @if($row->mode_id == 83)
+                @if($row->mode_id == 111)
                     <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
                 @else
                     <x-table.cell-text></x-table.cell-text>
                 @endif
 
-                @if( $trans_type_id != 80)
+                @if( $trans_type_id != 108)
                     <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
                 @endif
 

@@ -45,7 +45,7 @@ class PayablesController extends Controller
 
         $this->receipt_total = Transaction::whereDate('vdate', '<', $start_date)
             ->where('contact_id','=',$party)
-            ->where('mode_id','=',82)
+            ->where('mode_id','=',110)
             ->sum('vname');
 
         $this->opening_balance = $this->opening_balance + $this->sale_total - $this->receipt_total;
@@ -70,7 +70,7 @@ class PayablesController extends Controller
         ])
             ->where('contact_id', '=', $party)
             ->whereBetween('vdate', [$start_date, $end_date])
-            ->where('mode_id','=',82)
+            ->where('mode_id','=',110)
             ->where('company_id', '=', session()->get('company_id'));
 
         return Purchase::select([

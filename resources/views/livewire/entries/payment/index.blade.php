@@ -15,7 +15,7 @@
 
             <div class="flex justify-end w-full">
 
-                <a href="{{route('transactions.print',[$mode_id == 83 ? 1 : 2 ])}}">
+                <a href="{{route('transactions.print',[$mode_id == 111 ? 1 : 2 ])}}">
                     <x-button.print-x />
                 </a>
 
