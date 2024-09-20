@@ -1,89 +1,74 @@
 <?php
 
-namespace App\Livewire\Demo\Data\Sales;
+namespace App\Livewire\Demo\Data\Purchase;
 
 use Aaran\Common\Models\Common;
-use Aaran\Entries\Models\Sale;
-use Aaran\Entries\Models\Saleitem;
+use Aaran\Entries\Models\Purchase;
+use Aaran\Entries\Models\Purchaseitem;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\Contact;
-use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
-use Aaran\Master\Models\Style;
 use Livewire\Component;
 
 class Index extends Component
 {
-
     public $count = 25;
 
     public function loadDummy()
     {
-        $this->Sale();
+        $this->Purchase();
     }
 
-    private function Sale()
+    private function Purchase()
     {
         for ($i = 0; $i < $this->count; $i++) {
 
             $contact = Contact::pluck('id')->random();
             $company = Company::pluck('id')->random();
             $order = Order::pluck('id')->random();
-            $billing = ContactDetail::where('contact_id', '=', $contact)->pluck('id')->random();
-            $shipping = ContactDetail::where('contact_id', '=', $contact)->pluck('id')->random();
-            $style = Style::pluck('id')->random();
-            $despatch = Common::where('label_id', '=', '1')->pluck('id')->random();
-            $transport = Common::where('label_id', '=', '1')->pluck('id')->random();
             $product = Product::pluck('id')->random();
+            $transport = Common::where('label_id', '=', '1')->pluck('id')->random();
             $colour = Common::where('label_id', '=', '7')->pluck('id')->random();
             $size = Common::where('label_id', '=', '8')->pluck('id')->random();
             $this->quantity = substr(str_shuffle("0123456789"), 0, 4);
             $this->price = substr(str_shuffle("0123456789"), 0, 2);
             $this->gst_percent = Common::find(Product::find($product)->gstpercent_id)->vname;
-            $salesValue = $this->calculateTotal();
+            $purchaseValue = $this->calculateTotal();
 
-            $obj = Sale::create([
-                'uniqueno' => session()->get('company_id') . '~' . session()->get('acyear') . '~' . Sale::nextNo(),
+            $obj = Purchase::create([
+                'uniqueno' => session()->get('company_id') . '~' . session()->get('acyear') . '~' . Purchase::nextNo(),
                 'acyear' => session()->get('acyear'),
                 'company_id' => $company,
                 'contact_id' => $contact,
-                'invoice_no' => Sale::nextNo(),
-                'invoice_date' => date('Y-m-d'),
-                'sales_type' => 'CGST-SGST',
                 'order_id' => $order,
-                'billing_id' => $billing,
-                'shipping_id' => $shipping,
-                'style_id' => $style,
-                'despatch_id' => $despatch,
-                'destination' => '-',
-                'bundle' => '-',
-                'distance' => '0',
+                'purchase_no' => fake()->numberBetween(1, 9),
+                'purchase_date' => date('Y-m-d'),
+                'Entry_no' =>Purchase::nextNo() ,
+                'sales_type' => 'CGST-SGST',
                 'transport_id' => $transport,
-                'total_qty' => $salesValue['total_quantity'],
-                'total_taxable' => $salesValue['total_taxable'],
-                'total_gst' => $salesValue['total_gst'],
-                'grand_total' => $salesValue['grand_total'],
+                'bundle' => '1',
+                'total_qty' => $purchaseValue['total_quantity'],
+                'total_taxable' => $purchaseValue['total_taxable'],
+                'total_gst' => $purchaseValue['total_gst'],
+                'grand_total' => $purchaseValue['grand_total'],
                 'active_id' => 1,
 
             ]);
 
-            Saleitem::create([
-                'sale_id' => $obj->id,
-                'po_no' => '-',
-                'dc_no' => '-',
-                'no_of_roll' => '-',
+            Purchaseitem::create([
+                'purchase_id' => $obj->id,
                 'product_id' => $product,
                 'colour_id' => $colour,
                 'size_id' => $size,
                 'qty' => $this->quantity,
                 'price' => $this->price,
                 'gst_percent' => $this->gst_percent,
+
             ]);
         }
-        $successMessage = 'Sale Create Successfully.';
+        $successMessage = 'Purchase Create Successfully.';
         $this->dispatch('notify', ...['type' => 'success', 'content' => $successMessage]);
-
     }
 
     public $quantity;
@@ -117,14 +102,13 @@ class Index extends Component
             'total_gst' => $total_gst,
             'round_off' => $round_off,
             'grand_total' => $grand_total,
-
+            ''
         ];
 
     }
 
-
     public function render()
     {
-        return view('livewire.demo.data.sales.index');
+        return view('livewire.demo.data.purchase.index');
     }
 }

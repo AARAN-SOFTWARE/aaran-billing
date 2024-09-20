@@ -16,5 +16,6 @@ return [
     Aaran\MasterGst\Providers\MasterGstServiceProvider::class,
 
     Aaran\Transaction\Providers\TransactionServiceProvider::class,
+    Aaran\Demodata\Providers\DemodataServiceProvider::class,
 
 ];

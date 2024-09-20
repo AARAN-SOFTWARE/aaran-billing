@@ -43,6 +43,10 @@
                 <x-menu.sub.reports/>
             @endif
 
+                @if(Aaran\Aadmin\Src\Customise::hasDemodata())
+                    <x-menu.sub.demodata/>
+                @endif
+
 
             <x-menu.sub.logout/>
 

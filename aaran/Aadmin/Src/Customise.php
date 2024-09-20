@@ -113,4 +113,16 @@ class Customise
         return 'transaction';
     }
     #endregion
+
+    #region[Demo data]
+    public static function hasDemodata(): bool
+    {
+        return static::enabled(static::demodata());
+    }
+
+    public static function demodata(): string
+    {
+        return 'demodata';
+    }
+    #endregion
 }
