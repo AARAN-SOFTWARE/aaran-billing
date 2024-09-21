@@ -47,7 +47,7 @@
                                 />
                         </x-table.cell-text>
 
-                        <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
 
                         <x-table.cell-text>{{$row->desc}}</x-table.cell-text>
 

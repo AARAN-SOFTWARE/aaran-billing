@@ -79,17 +79,17 @@
 
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
-                        <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
 
                         @if($row->mode_id == 110)
-                            <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
+                            <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
                         @else
                             <x-table.cell-text></x-table.cell-text>
 
                         @endif
 
                         @if($row->mode_id == 111)
-                            <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
+                            <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
                         @else
                             <x-table.cell-text></x-table.cell-text>
                         @endif
@@ -98,7 +98,7 @@
                             <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
                         @endif
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             {{  $balance  = $totalReceipt-$totalPayment}}
                         </x-table.cell-text>
 

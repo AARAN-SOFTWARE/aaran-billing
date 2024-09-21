@@ -42,23 +42,23 @@
                             <a href="{{route('sales.upsert',[$row->id])}}"> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text left>
                             <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->contact->vname}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_qty}}</a>
+                            <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_qty+0}}</a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_taxable}}</a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_gst}}</a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->grand_total}}</a>
                         </x-table.cell-text>
 
