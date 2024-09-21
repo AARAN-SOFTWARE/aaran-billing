@@ -47,7 +47,7 @@ class InvoiceController extends Controller
             'sales.*',
             'contacts.vname as contact_name',
             'contacts.msme_no as msme_no',
-            'contacts.msme_type as msme_type',
+            'contacts.msme_type_id as msme_type',
             'orders.vname as order_no',
             'orders.order_name as order_name',
             'styles.vname as style_name',

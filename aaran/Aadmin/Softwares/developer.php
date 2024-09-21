@@ -13,6 +13,7 @@ return [
         Customise::blog(),
         Customise::gstapi(),
         Customise::transaction(),
+        Customise::demodata(),
     ],
     'SalesEntry' => [
         SaleEntry::order(),

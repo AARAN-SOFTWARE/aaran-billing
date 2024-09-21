@@ -3,6 +3,7 @@
 namespace App\Livewire\Transaction;
 
 use Aaran\Common\Models\Common;
+use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
 use Aaran\Transaction\Models\Transaction;
@@ -38,13 +39,13 @@ class Index extends Component
     public function mount($id)
     {
         if ($id == 1) {
-            $this->trans_type_id = 80;
-            $this->trans_type_name = Common::find(80)->vname;
-            $this->receipt_type_id = 60;
-            $this->receipt_type_name = Common::find(60)->vname;
+            $this->trans_type_id = 108;
+            $this->trans_type_name = Common::find(108)->vname;
+            $this->receipt_type_id = 85;
+            $this->receipt_type_name = Common::find(85)->vname;
         } elseif ($id == 2) {
-            $this->trans_type_id = 81;
-            $this->trans_type_name = Common::find(81)->vname;
+            $this->trans_type_id = 109;
+            $this->trans_type_name = Common::find(109)->vname;
         }
     }
     #endregion
@@ -62,8 +63,8 @@ class Index extends Component
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
-                    'trans_type_id' => $this->trans_type_id ?: '80',
-                    'mode_id' => $this->mode_id ?: '83',
+                    'trans_type_id' => $this->trans_type_id ?: '108',
+                    'mode_id' => $this->mode_id ?: '111',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '1',
                     'remarks' => $this->remarks,
@@ -76,7 +77,7 @@ class Index extends Component
                     'ref_amount' => $this->ref_amount,
                     'verified_by' => $this->verified_by,
                     'verified_on' => $this->verified_on,
-                    'against_id' => $this->against_id ?: '1',
+                    'against_id' => $this->sales_id ?: '1',
                     'user_id' => auth()->id(),
 
                 ];
@@ -105,7 +106,7 @@ class Index extends Component
                     'ref_amount' => $this->ref_amount,
                     'verified_by' => $this->verified_by,
                     'verified_on' => $this->verified_on,
-                    'against_id' => $this->against_id,
+                    'against_id' => $this->sales_id,
                     'user_id' => auth()->id(),
                 ];
                 $this->common->edit($Transaction, $extraFields);
@@ -562,6 +563,8 @@ class Index extends Component
             $this->verified_by = $Transaction->verified_by;
             $this->verified_on = $Transaction->verified_on;
             $this->against_id = $Transaction->against_id;
+            $this->sales_id = $Transaction->against_id;
+            $this->sales_no = $Transaction->against_id ? Sale::find($Transaction->against_id)->invoice_no : '';
             return $Transaction;
         }
         return null;
@@ -583,7 +586,7 @@ class Index extends Component
         $this->mode_id = '';
         $this->mode_name = '';
         $this->amount = '';
-        if ($this->trans_type_id != 90) {
+        if ($this->trans_type_id != 108) {
             $this->receipt_type_id = '';
             $this->receipt_type_name = '';
         }
@@ -598,6 +601,8 @@ class Index extends Component
         $this->ref_amount = '';
         $this->verified_by = '';
         $this->verified_on = '';
+        $this->sales_no='';
+        $this->sales_id='';
         $this->vdate = Carbon::now()->format('Y-m-d');
     }
     #endregion
@@ -611,6 +616,7 @@ class Index extends Component
         $this->getTransTypeList();
         $this->getModeList();
         $this->getOrderList();
+        $this->getSalesList();
 
         return view('livewire.transaction.index')->with([
             'list' => $this->getListForm->getList(Transaction::class, function ($query) {
@@ -619,5 +625,67 @@ class Index extends Component
         ]);
     }
     #endregion
+
+    #region[Sales]
+
+    public $sales_id = '';
+    public $sales_no = '';
+    public Collection $salesCollection;
+    public $highlightSales = 0;
+    public $salesTyped = false;
+
+    public function decrementSales(): void
+    {
+        if ($this->highlightSales === 0) {
+            $this->highlightSales = count($this->salesCollection) - 1;
+            return;
+        }
+        $this->highlightSales--;
+    }
+
+    public function incrementSales(): void
+    {
+        if ($this->highlightSales === count($this->salesCollection) - 1) {
+            $this->highlightSales = 0;
+            return;
+        }
+        $this->highlightSales++;
+    }
+
+    public function setSales($no, $id): void
+    {
+        $this->sales_no = $no;
+        $this->sales_id = $id;
+        $this->getSalesList();
+    }
+
+    public function enterSales(): void
+    {
+        $obj = $this->salesCollection[$this->highlightSales] ?? null;
+
+        $this->sales_no = '';
+        $this->salesCollection = Collection::empty();
+        $this->highlightSales = 0;
+
+        $this->sales_no = $obj['vname'] ?? '';
+        $this->sales_id = $obj['id'] ?? '';
+    }
+
+    #[On('refresh-sales')]
+    public function refreshSales($v): void
+    {
+        $this->sales_id = $v['id'];
+        $this->sales_no = $v['no'];
+        $this->salesTyped = false;
+    }
+
+    public function getSalesList(): void
+    {
+        $this->salesCollection = $this->sales_no ? Sale::search(trim($this->sales_no))
+        ->where('company_id', '=', session()->get('company_id'))
+            ->get() : Sale::where('company_id', '=', session()->get('company_id'))->get();
+    }
+
+#endregion
 
 }
