@@ -61,7 +61,7 @@
                             @endforeach
                             <x-table.row>
                                 <x-table.cell-text right>Total</x-table.cell-text>
-                                <x-table.cell-text>{{$totalSales}}</x-table.cell-text>
+                                <x-table.cell-text>{{\App\Helper\ConvertTo::rupeesFormat($totalSales)}}</x-table.cell-text>
                             </x-table.row>
                         </x-slot:table_body>
 
@@ -122,30 +122,32 @@
 
                         <x-slot:table_body name="table_body">
                             @foreach($list as $index=>$row)
-                                    <?php
-                                    $invoiceTotal += $row->grand_total;
-                                    $taxableValueTotal += $row->total_taxable;
-                                    $gstTotal += $row->sales_type == 'CGST-SGST' ? $row->total_gst : 0;
-                                    $CGSTTotal += $row->sales_type != 'CGST-SGST' ? $row->total_gst : 0;
-                                    ?>
 
+                                    <?php
+                                    $invoiceTotal += $row['sale']['grand_total'];
+                                    $taxableValueTotal += $row['sale']['total_taxable'];
+                                    $gstTotal += $row['sale']['sales_type'] == 'CGST-SGST' ? $row['sale']['total_gst'] : 0;
+                                    $CGSTTotal += $row['sale']['sales_type'] != 'CGST-SGST' ? $row['sale']['total_gst'] : 0;
+                                    ?>
+{{--                                {{dd($row['sale']['sales_type'])}}--}}
                                 <x-table.row>
                                     <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->contact->gstin}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->invoice_no}}</x-table.cell-text>
-                                    <x-table.cell-text> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->grand_total}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->total_taxable}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->sales_type=='CGST-SGST'?\App\Livewire\Reports\Sales\MonthlyReport::getPercent($row->id,$row->sales_type):0}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->sales_type=='CGST-SGST'?$row->total_gst/2:0}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->sales_type=='CGST-SGST'?\App\Livewire\Reports\Sales\MonthlyReport::getPercent($row->id,$row->sales_type):0}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->sales_type=='CGST-SGST'?$row->total_gst/2:0}}</x-table.cell-text>
+
+                                    <x-table.cell-text>{{$row['contact_gstin']}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['contact_name']}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['invoice_no']}}</x-table.cell-text>
+                                    <x-table.cell-text> {{ date('d-m-Y', strtotime( $row['sale']['invoice_date']))}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['grand_total']}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['total_taxable']}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['sales_type']=='CGST-SGST'?$row['percent']:0}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['sales_type']=='CGST-SGST'?$row['sale']['total_gst']/2:0}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['sales_type']=='CGST-SGST'?$row['percent']:0}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['sales_type']=='CGST-SGST'?$row['sale']['total_gst']/2:0}}</x-table.cell-text>
                                     <x-table.cell-text>
-                                        {{$row->sales_type!='CGST-SGST'?\App\Livewire\Reports\Sales\MonthlyReport::getPercent($row->id,$row->sales_type):0}}
+                                        {{$row['sale']['sales_type']!='CGST-SGST'?$row['percent']:0}}
                                     </x-table.cell-text>
                                     <x-table.cell-text>
-                                        {{$row->sales_type!='CGST-SGST'?$row->total_gst:0}}
+                                        {{$row['sale']['sales_type']!='CGST-SGST'?$row['sale']['total_gst']:0}}
                                     </x-table.cell-text>
                                 </x-table.row>
 

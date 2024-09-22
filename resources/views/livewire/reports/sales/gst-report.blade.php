@@ -38,7 +38,7 @@
         ?>
 
         <div class="flex flex-row gap-5">
-            <div class="w-full">
+            <div class="w-full h-screen overflow-y-auto">
                 <div class="py-2 flex justify-evenly">
                     <div class="text-xl text-center  font-bold tracking-wider">Sales Report</div>
                     <x-button.secondary wire:click="salesReport">Print</x-button.secondary>
@@ -78,7 +78,7 @@
                     </x-slot:table_body>
                 </x-table.form>
             </div>
-            <div class="w-full">
+            <div class="w-full h-screen overflow-y-auto">
                 <div class="py-2 flex justify-evenly">
                     <div class="text-xl text-center  font-bold tracking-wider">Purchase Report</div>
                     <x-button.secondary wire:click="purchaseReport">Print</x-button.secondary>

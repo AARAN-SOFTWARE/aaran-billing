@@ -77,7 +77,7 @@ class Index extends Component
                     'ref_amount' => $this->ref_amount,
                     'verified_by' => $this->verified_by,
                     'verified_on' => $this->verified_on,
-                    'against_id' => $this->sales_id ?: '1',
+                    'against_id' => $this->sales_id ?: '0',
                     'user_id' => auth()->id(),
 
                 ];

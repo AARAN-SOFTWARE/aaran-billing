@@ -22,6 +22,11 @@ class Common extends Model
             : static::where('vname', 'like', '%' . $searches . '%');
     }
 
+    public static function name($id)
+    {
+        return self::find($id)->vname;
+    }
+
     protected static function newFactory(): CommonFactory
     {
         return new CommonFactory();
