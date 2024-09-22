@@ -13,7 +13,7 @@
 
             <x-slot:table_header name="table_header" class="bg-green-600">
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="{{$getListForm->sortAsc}}">
-                    Invoice NO
+                    Invoice No
                 </x-table.header-text>
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="{{$getListForm->sortAsc}}">
                     Invoice Date
