@@ -65,7 +65,7 @@ class Index extends Component
         for ($i = 0; $i < count($product_name); $i++) {
 
             $users = User::pluck('id');
-            $product_type = Product::pluck('id')->random();
+            $product_type = Common::where('label_id','=','15')->pluck('id')->random();
             $hsncodes = Common::where('label_id', '=', '6')->pluck('id')->random();
             $units = Common::where('label_id', '=', '16')->pluck('id')->random();
             $gstpercents = Common::where('label_id', '=', '17')->pluck('id')->random();

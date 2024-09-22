@@ -20,15 +20,39 @@ class Contact extends Component
         $this->common->active_id = 1;
     }
 
+    public function rules(): array
+    {
+        return [
+            'common.vname' => 'required|min:3',
+            'email' => 'required|email|unique:demo_requests,email',
+            'phone' => 'required|numeric|digits:10|unique:demo_requests,phone',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'common.vname.required' => ' :attribute is required.',
+            'email.required' => ' :attribute is required.',
+            'phone.required' => ' :attribute is required.',
+
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'common.vname' => 'User name',
+            'email' => 'Email Id',
+            'phone' => 'Phone No',
+        ];
+    }
+
     #region[Get-Save]
     public function getSave(): void
     {
-        $this->validate([
-                'common.vname' => 'required|min:3',
-                'email' => 'required|email|unique:demo_requests,email',
-                'phone' => 'required|numeric|digits:10|unique:demo_requests,phone',
-            ]
-        );
+        $this->validate($this->rules());
+
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
                 $DemoRequest = new DemoRequest();
