@@ -380,13 +380,13 @@ class Index extends Component
             $this->common->vname = $Product->vname;
             $this->common->active_id = $Product->active_id;
             $this->hsncode_id = $Product->hsncode_id;
-            $this->hsncode_name=$Product->hsncode_id?Common::find($Product->hsncode_id)->vname:'';
+//            $this->hsncode_name=$Product->hsncode_id?Common::find($Product->hsncode_id)->vname:'';
             $this->producttype_id = $Product->producttype_id;
-            $this->producttype_name=$Product->producttype_id?Common::find($Product->producttype_id)->vname:'';
+//            $this->producttype_name=$Product->producttype_id?Common::find($Product->producttype_id)->vname:'';
             $this->unit_id = $Product->unit_id;
-            $this->unit_name=$Product->unit_id?Common::find($Product->unit_id)->vname:'';
+//            $this->unit_name=$Product->unit_id?Common::find($Product->unit_id)->vname:'';
             $this->gstpercent_id = $Product->gstpercent_id;
-            $this->gstpercent_name=$Product->gstpercent_id?Common::find($Product->gstpercent_id)->vname:'';
+//            $this->gstpercent_name=$Product->gstpercent_id?Common::find($Product->gstpercent_id)->vname:'';
             $this->quantity = $Product->initial_quantity;
             $this->price = $Product->initial_price;
             return $Product;

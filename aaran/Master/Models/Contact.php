@@ -13,6 +13,7 @@ class Contact extends Model
     use HasFactory;
 
     protected $guarded = [];
+
     protected static function newFactory(): ContactFactory
     {
         return new ContactFactory();
@@ -24,13 +25,9 @@ class Contact extends Model
             : static::where('vname', 'like', '%' . $searches . '%');
     }
 
-    public function common(): BelongsTo
+    public function contact_type(): BelongsTo
     {
         return $this->belongsTo(Common::class);
     }
 
-    public function contectdetail(): BelongsTo
-    {
-        return $this->belongsTo(ContactDetail::class);
-    }
 }

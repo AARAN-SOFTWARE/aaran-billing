@@ -24,7 +24,7 @@ class ContactDetail extends Model
 
     public static function getId(mixed $contact_id)
     {
-        $obj = self::where('contact_id','=', $contact_id)->firstOrFail();;
+        $obj = self::where('contact_id', '=', $contact_id)->firstOrFail();;
         return $obj->id;
     }
 
@@ -33,12 +33,12 @@ class ContactDetail extends Model
         $obj = self::find($ids);
 
         return collect([
-            'address_1' => $obj->address_1 ,
+            'address_1' => $obj->address_1,
             'address_2' => $obj->address_2,
             'address_3' => Common::find($obj->city_id)->vname . ' - ' . Common::find($obj->pincode_id)->vname . '.  ' . Common::find($obj->state_id)->state_code,
-            'gstcell' =>  'GSTin : '.$obj->gstin,
-            'gstContact' =>  $obj->gstin,
-            'email'=>$obj->email,
+            'gstcell' => 'GSTin : ' . $obj->gstin,
+            'gstContact' => $obj->gstin,
+            'email' => $obj->email,
         ]);
     }
 
@@ -47,10 +47,11 @@ class ContactDetail extends Model
         return new ContactDetailFactory();
     }
 
-    public function contect():HasMany
+    public function contact(): BelongsTo
     {
-        return $this->hasMany(Contact::class);
+        return $this->belongsTo(Contact::class);
     }
+
     public function common(): BelongsTo
     {
         return $this->belongsTo(Common::class);

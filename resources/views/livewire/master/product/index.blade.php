@@ -41,11 +41,11 @@
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
                         <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
-                        <x-table.cell-text>{{\Aaran\Master\Models\Product::common($row->producttype_id)}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->producttype->vname}}</x-table.cell-text>
                         <x-table.cell-text>
-                            {{\Aaran\Master\Models\Product::common($row->hsncode_id)}}
+                            {{  $row->hsncode->vname }}
                         </x-table.cell-text>
-                        <x-table.cell-text>{{\Aaran\Master\Models\Product::common($row->gstpercent_id)}}%
+                        <x-table.cell-text>{{  $row->gstpercent->vname }}%
                         </x-table.cell-text>
                         <x-table.cell-text>{{$row->initial_quantity+0}}</x-table.cell-text>
                         <x-table.cell-action id="{{$row->id}}"/>
@@ -93,7 +93,7 @@
 
                                 @empty
                                     <x-dropdown.new wire:click.prevent="productTypeSave('{{$producttype_name}}')"
-                                                       label="Product"/>
+                                                    label="Product"/>
                                 @endforelse
                             @endif
 
@@ -125,7 +125,7 @@
 
                                 @empty
                                     <x-dropdown.new wire:click.prevent="hsncodeSave('{{$hsncode_name}}')"
-                                                       label="HSN Code"/>
+                                                    label="HSN Code"/>
                                 @endforelse
                             @endif
 
@@ -181,7 +181,7 @@
                                     </x-dropdown.option>
                                 @empty
                                     <x-dropdown.new wire:click.prevent="gstPercentSave('{{$gstpercent_name}}')"
-                                                       label="GST Percent"/>
+                                                    label="GST Percent"/>
                                 @endforelse
                             @endif
 
