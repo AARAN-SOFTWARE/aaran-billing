@@ -96,7 +96,7 @@ class Receivables extends Component
             ->where('company_id', '=', session()->get('company_id'))
             ->union($sales)
             ->orderBy('vdate')
-            ->orderBy('mode')->paginate(50);
+            ->orderBy('mode')->get();
     }
 
     #endregion

@@ -24,6 +24,14 @@ class MonthlyReport extends Component
     #endregion
 
     #region[create]
+    public function monthlyReport($month)
+    {
+        $this->month = $month;
+        $this->year = $this->year?:Carbon::now()->format('Y');
+    }
+    #endregion
+
+    #region[create]
     public function create(): void
     {
         ini_set('max_execution_time', 3600);

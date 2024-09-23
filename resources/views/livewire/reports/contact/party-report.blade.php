@@ -1,26 +1,17 @@
 <div>
-    <x-slot name="header">Payables</x-slot>
+    <x-slot name="header">Party Report</x-slot>
 
     <x-forms.m-panel>
         <div class="flex justify-between w-full gap-3">
-
-            <div class="w-[40rem]">
-                <x-input.model-select wire:model.live="byParty" :label="'Party Name'">
-                    <option value="">choose</option>
-                    @foreach($contacts as $contact)
-                        <option value="{{$contact->id}}">{{$contact->vname}}</option>
-                    @endforeach
-                </x-input.model-select>
+            <div class="text-xl font-bold tracking-wider w-full">Party Name
+                : {{\Aaran\Master\Models\Contact::find($byParty)->vname}}</div>
+            <div class="w-full">
+                <x-input.model-date wire:model.live="start_date" :label="'From Date'"/>
             </div>
-
-            <x-input.model-date wire:model.live="start_date" :label="'From Date'"/>
-
-            <x-input.model-date wire:model.live="end_date" :label="'To Date'"/>
-
-
-            <div class="">
-                <x-button.print-x wire:click="print" />
+            <div class="w-full">
+                <x-input.model-date wire:model.live="end_date" :label="'To Date'"/>
             </div>
+            <div class="w-full">&nbsp;</div>
 
         </div>
 
@@ -30,7 +21,7 @@
                 <x-table.header-text :sort-icon="'none'" center>Type</x-table.header-text>
                 <x-table.header-text :sort-icon="'none'" left>Particulars</x-table.header-text>
                 <x-table.header-text :sort-icon="'none'">Invoice Amount</x-table.header-text>
-                <x-table.header-text :sort-icon="'none'">Payment Amount</x-table.header-text>
+                <x-table.header-text :sort-icon="'none'">Receipt Amount</x-table.header-text>
                 <x-table.header-text :sort-icon="'none'">Balance</x-table.header-text>
             </x-slot:table_header>
 
@@ -38,10 +29,9 @@
             <x-slot:table_body name="table_body">
 
                 @php
-                    $totalpurchase = 0+$opening_balance;
-                    $totalpayment = 0;
+                    $totalSales = 0+$opening_balance;
+                    $totalReceipt = 0;
                 @endphp
-
                 <x-table.row>
                     @if($byParty !=null)
 
@@ -65,9 +55,10 @@
                 </x-table.row>
 
                 @forelse ($list as $index =>  $row)
+
                     @php
-                        $totalpurchase += floatval($row->grand_total);
-                        $totalpayment += floatval($row->transaction_amount);
+                        $totalSales += floatval($row->grand_total);
+                        $totalReceipt += floatval($row->transaction_amount);
                     @endphp
 
                     <x-table.row>
@@ -80,7 +71,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text left>
-                            {{$row->mode=='invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}
+                            {{$row->mode=='Purchase Invoice'||$row->mode=='Sales Invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
@@ -92,7 +83,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{  $balance  = $totalpurchase-$totalpayment}}
+                            {{  $balance  = $totalSales-$totalReceipt}}
                         </x-table.cell-text>
 
                     </x-table.row>
@@ -102,20 +93,21 @@
 
 
                 <x-table.row>
-                    <x-table.cell-text colspan="3" class="text-md text-right text-gray-400 ">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
+                    <x-table.cell-text colspan="3" class=" text-md text-right text-gray-400">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
                     </x-table.cell-text>
                     <x-table.cell-text
-                        class="text-right  text-md ">{{$totalpurchase+$opening_balance}}</x-table.cell-text>
-                    <x-table.cell-text class="text-right  text-md ">{{ $totalpayment}}</x-table.cell-text>
+                        class=" text-right  text-md  text-zinc-500 ">{{$totalSales+$opening_balance}}</x-table.cell-text>
+                    <x-table.cell-text
+                        class=" text-right  text-md  text-zinc-500 ">{{ $totalReceipt}}</x-table.cell-text>
                     <x-table.cell-text></x-table.cell-text>
                 </x-table.row>
 
                 <x-table.row>
-                    <x-table.cell-text colspan="3" class="text-md text-right text-gray-400 ">&nbsp;Balance&nbsp;&nbsp;&nbsp;
+                    <x-table.cell-text colspan="3" class=" text-md text-right text-gray-400 ">&nbsp;Balance&nbsp;&nbsp;&nbsp;
                     </x-table.cell-text>
                     <x-table.cell-text
-                        class="text-right  text-md text-blue-500">{{ $totalpurchase-$totalpayment}}</x-table.cell-text>
-                    <x-table.cell-text></x-table.cell-text>
+                        class=" text-right  text-md  text-blue-500 ">{{ $totalSales-$totalReceipt}}</x-table.cell-text>
+                    <x-table.cell-text class=" text-right  text-md  text-blue-500 "></x-table.cell-text>
                     <x-table.cell-text></x-table.cell-text>
                 </x-table.row>
             </x-slot:table_body>
