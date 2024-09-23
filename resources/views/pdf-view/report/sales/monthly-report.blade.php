@@ -51,8 +51,8 @@ $CGSTTotal = 0;
                 <?php
                 $invoiceTotal += $row->grand_total;
                 $taxableValueTotal += $row->total_taxable;
-                $gstTotal += $row->sales_type == 'CGST-SGST' ? $row->total_gst : 0;
-                $CGSTTotal += $row->sales_type != 'CGST-SGST' ? $row->total_gst : 0;
+                $gstTotal += $row->sales_type == '1' ? $row->total_gst : 0;
+                $CGSTTotal += $row->sales_type != '1' ? $row->total_gst : 0;
                 ?>
 
             <x-table.row>
@@ -64,18 +64,18 @@ $CGSTTotal = 0;
                 <x-table.cell-text>{{$row->grand_total}}</x-table.cell-text>
                 <x-table.cell-text>{{$row->total_taxable}}</x-table.cell-text>
                 <x-table.cell-text>
-                    {{$row->sales_type=='CGST-SGST'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
+                    {{$row->sales_type=='1'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
                 </x-table.cell-text>
-                <x-table.cell-text>{{$row->sales_type=='CGST-SGST'?$row->total_gst/2:0}}</x-table.cell-text>
+                <x-table.cell-text>{{$row->sales_type=='1'?$row->total_gst/2:0}}</x-table.cell-text>
                 <x-table.cell-text>
-                    {{$row->sales_type=='CGST-SGST'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
+                    {{$row->sales_type=='1'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
                 </x-table.cell-text>
-                <x-table.cell-text>{{$row->sales_type=='CGST-SGST'?$row->total_gst/2:0}}</x-table.cell-text>
+                <x-table.cell-text>{{$row->sales_type=='1'?$row->total_gst/2:0}}</x-table.cell-text>
                 <x-table.cell-text>
-                    {{$row->sales_type!='CGST-SGST'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
+                    {{$row->sales_type!='1'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}
                 </x-table.cell-text>
                 <x-table.cell-text>
-                    {{$row->sales_type!='CGST-SGST'?$row->total_gst:0}}
+                    {{$row->sales_type!='1'?$row->total_gst:0}}
                 </x-table.cell-text>
             </x-table.row>
 

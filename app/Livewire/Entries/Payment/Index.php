@@ -614,7 +614,9 @@ class Index extends Component
 
         return view('livewire.entries.payment.index')->with([
             'list' => $this->getListForm->getList(Transaction::class, function ($query) {
-                return $query->where('mode_id', $this->mode_id);
+                return $query->where('mode_id', $this->mode_id)
+                    ->where('acyear',session()->get('acyear'))
+                    ->where('company_id',session()->get('company_id'));
             })
         ]);
     }

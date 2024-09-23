@@ -686,7 +686,7 @@ class Upsert extends Component
         } else {
             $this->uniqueno = "{$this->contact_id}~{$this->purchase_no}~{$this->purchase_date}";
             $this->common->active_id = true;
-            $this->sales_type = 'CGST-SGST';
+            $this->sales_type = '1';
             $this->gst_percent = 5;
             $this->additional = 0;
             $this->grand_total = 0;

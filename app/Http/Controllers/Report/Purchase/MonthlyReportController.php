@@ -29,7 +29,7 @@ class MonthlyReportController extends Controller
             ->distinct()->get();
         foreach ($obj as $item) {
             $product=Product::find($item->product_id);
-            $data[]= $salesType=='CGST-SGST'?
+            $data[]= $salesType=='1'?
                 (Common::find($product->gstpercent_id)->vname/2).'%':
                 Common::find($product->gstpercent_id)->vname.'%';
         }

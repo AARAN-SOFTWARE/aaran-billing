@@ -34,12 +34,13 @@ class Index extends Component
             $shipping = ContactDetail::where('contact_id', '=', $contact)->pluck('id')->random();
             $style = Style::pluck('id')->random();
             $despatch = Common::where('label_id', '=', '1')->pluck('id')->random();
-            $transport = Common::where('label_id', '=', '1')->pluck('id')->random();
+            $transport = '122';
             $product = Product::pluck('id')->random();
             $colour = Common::where('label_id', '=', '7')->pluck('id')->random();
             $size = Common::where('label_id', '=', '8')->pluck('id')->random();
             $this->quantity = substr(str_shuffle("0123456789"), 0, 4);
             $this->price = substr(str_shuffle("0123456789"), 0, 2);
+            $distance = substr(str_shuffle("0123456789"), 0, 2);
             $this->gst_percent = Common::find(Product::find($product)->gstpercent_id)->vname;
             $salesValue = $this->calculateTotal();
             $invoice_no = Sale::nextNo();
@@ -51,7 +52,7 @@ class Index extends Component
                 'contact_id' => $contact,
                 'invoice_no' => $invoice_no,
                 'invoice_date' => date('Y-m-d'),
-                'sales_type' => 'CGST-SGST',
+                'sales_type' => '1',
                 'order_id' => $order,
                 'billing_id' => $billing,
                 'shipping_id' => $shipping,
@@ -61,14 +62,14 @@ class Index extends Component
                 'transport_id' => $transport,
                 'destination' => '-',
                 'bundle' => '-',
-                'distance' => '0',
-                'TransMode' => 'Road',
+                'distance' => $distance,
+                'TransMode' => '1',
                 'Transid' => '1',
                 'Transname' => '-',
                 'Transdocno' => $invoice_no,
                 'TransdocDt' => date('Y-m-d'),
-                'Vehno' => 'TN39DC5455',
-                'Vehtype' => 'Regular',
+                'Vehno' => 'ka123456',
+                'Vehtype' => 'R',
                 'total_qty' => $salesValue['total_quantity'],
                 'total_taxable' => $salesValue['total_taxable'],
                 'total_gst' => $salesValue['total_gst'],

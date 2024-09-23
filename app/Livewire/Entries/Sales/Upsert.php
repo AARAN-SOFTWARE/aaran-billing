@@ -1109,7 +1109,7 @@ class Upsert extends Component
         } else {
             $this->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
             $this->common->active_id = true;
-            $this->sales_type = 'CGST-SGST';
+            $this->sales_type = '1';
             $this->gst_percent = 5;
             $this->additional = 0;
             $this->grand_total = 0;
@@ -1265,6 +1265,11 @@ class Upsert extends Component
     #endregion
 
     #region[Render]
+
+    public function print(): void
+    {
+        $this->redirect(route('sales.invoice', [$this->common->vid]));
+    }
 
     public function getRoute(): void
     {

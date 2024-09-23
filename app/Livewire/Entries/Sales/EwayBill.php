@@ -131,7 +131,7 @@ class EwayBill extends Component
             "vehicleType" => $this->salesData->Vehtype,
             "itemList" => []
         ];
-        if ($this->salesData->sales_type == 'CGST-SGST') {
+        if ($this->salesData->sales_type == '1') {
             $bodyData["sgstValue"] = $this->salesData->total_gst/2;
             $bodyData["cgstValue"] = $this->salesData->total_gst/2;
             $bodyData["igstValue"] = 0;
@@ -150,7 +150,7 @@ class EwayBill extends Component
                 "qtyUnit" => Sale::commons($productData->unit_id),
                 "taxableAmount" => $row['taxable'],
             ];
-            if ($this->salesData->sales_type == 'CGST-SGST') {
+            if ($this->salesData->sales_type == '1') {
                 $itemData["sgstRate"] = $row['gst_percent'] / 2;
                 $itemData["cgstRate"] = $row['gst_percent'] / 2;
                 $itemData["igstRate"] = 0;

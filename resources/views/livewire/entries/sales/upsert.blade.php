@@ -134,8 +134,8 @@
 
                 <x-input.model-select wire:model="sales_type" :label="'Sales Type'">
                     <option class="text-gray-400"> choose ..</option>
-                    <option value="CGST-SGST">CGST-SGST</option>
-                    <option value="IGST">IGST</option>
+                    <option value="1">CGST-SGST</option>
+                    <option value="2">IGST</option>
                 </x-input.model-select>
 
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasJob_no())

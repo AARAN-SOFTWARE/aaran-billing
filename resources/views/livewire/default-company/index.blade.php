@@ -2,8 +2,7 @@
     <button type="button" wire:click="create"
             class="text-gray-600 bg-white focus:outline-none hover:bg-gray-100 font-semibold sm:px-2 px-0.5 sm:py-2 py-1 rounded-lg text-xs">
         {{$defaultCompany->company->vname ?:'Select Company' }}
-        &nbsp;-&nbsp;{{$defaultCompany->acyear}}
-        {{--        {{\App\Enums\AcYear::tryFrom($defaultCompany->acyear)->getName()?:'' }}--}}
+        &nbsp;-&nbsp;{{\Aaran\Common\Models\Common::name($defaultCompany->acyear)}}
     </button>
 
     <x-jet.modal wire:model.defer="showEditModal">
@@ -12,7 +11,7 @@
             class=" flex flex-row justify-between px-6 pt-4 text-xl font-semibold text-blue-600/100 dark:text-blue-500/100 ">
             <div class="text-xl ">Choose Company</div>
             <div>
-                {{--                <livewire:controls.select.acyear-select/>--}}
+                                <livewire:controls.select.acyear-select/>
             </div>
         </div>
 

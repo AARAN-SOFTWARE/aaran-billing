@@ -11,7 +11,7 @@ class S202_ContactSeeder extends Seeder
     public static function run(): void
     {
         Contact::create([
-            'vname'=>'ABC Company pvt ltd',
+            'vname'=>'XYZ company pvt ltd',
             'gstin'=>'29AWGPV7107B1Z1',
             'company_id'=>'1',
             'user_id'=>'1',
@@ -29,10 +29,10 @@ class S202_ContactSeeder extends Seeder
             'contact_id'=>'1',
             'address_1'=>'7th block',
             'address_2'=>'kuvempu layout',
-            'city_id'=>'2',
+            'city_id'=>'128',
             'state_id'=>'47',
             'country_id'=>'60',
-            'pincode_id'=>'54',
+            'pincode_id'=>'129',
         ]);
     }
 }

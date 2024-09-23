@@ -164,10 +164,11 @@
     </div>
     <div class="flex text-xs border-b border-gray-300">
         <div class="w-1/3 flex-col border-l border-r border-gray-300 px-0.5 py-1 space-y-1">
-            <div class="w-full inline-flex justify-between"><span class="w-2/5 ">Tot. Taxable Amt</span><span
-                    class="w-1/5">:</span><span
-                    class="w-w-2/5 text-end font-bold">  {{number_format($obj->total_taxable,2,'.','')}}</span></div>
-            @if($obj->sales_type=='CGST-SGST')
+
+            <div class="w-full inline-flex justify-between"><span class="w-1/3 ">Taxable Value</span><span
+                    class="w-1/3">:</span><span
+                    class="w-1/3 text-end font-semibold">  {{number_format($obj->total_taxable,2,'.','')}}</span></div>
+            @if($obj->sales_type=='1')
                 <div class="w-full inline-flex justify-between"><span
                         class="w-2/5">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/5">:</span><span
                         class="w-2/5 text-end font-bold">{{number_format($obj->total_gst/2,2,'.','')}}</span></div>
@@ -187,7 +188,7 @@
                 <div class="w-full inline-flex justify-between"><span class="w-2/5"></span><span
                         class="w-1/5"></span><span class="w-2/5 text-end font-semibold"></span></div>
             @endif
-            @if($obj->sales_type=='CGST-SGST')
+            @if($obj->sales_type=='1')
                 <div class="w-full inline-flex justify-between"><span
                         class="Other Amt">SGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/5">:</span><span
                         class="w-2/5 text-end font-bold">{{number_format($obj->total_gst/2,2,'.','')}}</span></div>

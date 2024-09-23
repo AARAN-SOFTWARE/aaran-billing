@@ -200,7 +200,7 @@
                     class="w-1/3 text-end ">{{number_format($obj->total_taxable,2,'.','')}}</span>
             </div>
             <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
-                @if($obj->sales_type=='CGST-SGST')
+                @if($obj->sales_type=='1')
                     <span class="w-1/3">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
                     <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
@@ -209,7 +209,7 @@
                 @endif
             </div>
             <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
-                @if($obj->sales_type=='CGST-SGST')
+                @if($obj->sales_type=='1')
                     <span class="w-1/3">SGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
                     <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
@@ -456,7 +456,7 @@
                     class="w-1/3 text-end ">{{number_format($obj->total_taxable,2,'.','')}}</span>
             </div>
             <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
-                @if($obj->sales_type=='CGST-SGST')
+                @if($obj->sales_type=='1')
                     <span class="w-1/3">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
                     <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
@@ -465,7 +465,7 @@
                 @endif
             </div>
             <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
-                @if($obj->sales_type=='CGST-SGST')
+                @if($obj->sales_type=='1')
                     <span class="w-1/3">SGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
                     <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
@@ -712,7 +712,7 @@
                     class="w-1/3 text-end ">{{number_format($obj->total_taxable,2,'.','')}}</span>
             </div>
             <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
-                @if($obj->sales_type=='CGST-SGST')
+                @if($obj->sales_type=='1')
                     <span class="w-1/3">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
                     <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>
@@ -721,7 +721,7 @@
                 @endif
             </div>
             <div class="flex items-center justify-between border-b border-gray-300 py-1 px-0.5">
-                @if($obj->sales_type=='CGST-SGST')
+                @if($obj->sales_type=='1')
                     <span class="w-1/3">SGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3 text-center">:</span>
                     <span class="w-1/3 text-end
             ">{{number_format($obj->total_gst/2,2,'.','')}}</span>

@@ -429,7 +429,7 @@ class Index extends Component
 
         return view('livewire.master.product.index')->with([
             'list' => $this->getListForm->getList(Product::class, function ($query) {
-                return $query->where('id', '>', '');
+                return $query->where('company_id',session()->get('company_id'));
             }),
         ]);
     }

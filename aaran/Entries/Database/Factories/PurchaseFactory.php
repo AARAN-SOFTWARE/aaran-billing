@@ -31,7 +31,7 @@ class PurchaseFactory extends Factory
             'purchase_no' => $this->faker->unique()->numberBetween(1, 9999),
             'purchase_date' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
             'Entry_no' => $this->faker->unique()->numberBetween(1, 9999),
-            'sales_type' => 'CGST-SGST',
+            'sales_type' => '1',
             'transport_id' =>  $transport,
             'bundle' => 5,
             'total_qty' => $this->faker->numberBetween(1, 9999),
