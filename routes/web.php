@@ -19,4 +19,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/elements', App\Livewire\Utilities\UiElements\Index::class)->name('elements');
     Route::get('/icons', App\Livewire\Utilities\Icon\Index::class)->name('icons');
     Route::get('/test', App\Livewire\Test\Index::class)->name('test');
+
+    Route::get('sys', App\Livewire\Sys\Artisan\Migration::class)->name('sys');
 });
