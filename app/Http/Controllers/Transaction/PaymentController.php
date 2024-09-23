@@ -16,11 +16,11 @@ class PaymentController extends Controller
     public function __invoke($id)
     {
         if ($id == 1) {
-            $this->mode_id = 83;
-            $this->mode_name = Common::find(83)->vname;
+            $this->mode_id = 111;
+            $this->mode_name = Common::find(111)->vname;
         } elseif ($id == 2) {
-            $this->mode_id = 82;
-            $this->mode_name = Common::find(82)->vname;
+            $this->mode_id = 110;
+            $this->mode_name = Common::find(110)->vname;
         }
 
 

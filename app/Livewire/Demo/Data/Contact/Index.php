@@ -18,17 +18,17 @@ class Index extends Component
     {
 
         $contact_name = [
-            'A BLUES CLOTHING',
-            'A . D . S APPARELS',
-            'ANISHKA FASHIONS',
+            'AARAN INDIA FASHION',
+            'SK ENTERPRISES',
+            'FASHION FABRICS',
             'APPAREL KINGDOM PVT LTD',
             'ATTIRE CREATION CO',
             'CACTUS FASHIONS',
             'CHAWLA EXPORTS',
             'CHERISH KNITS',
             'DOLLAR EXPORTSS',
-            'EASTMAN EXPORTS GLOBAL CLOTHING PRIVATE LIMITED',
-            'EASTMAN EXPORTS GLOBAL CLOTHING PRIVATE LIMITED-DOMESTIC DIVISION',
+            'GLOBAL CLOTHING PRIVATE LIMITED',
+            'SUNRISE CLOTHING',
             'EMEL ENTERPRISES LLP',
             'ESHAA APPARELS',
             'FIBRA GARMENTS',
@@ -52,7 +52,7 @@ class Index extends Component
             'THE RAJLAKSHMI COTTON MILLS PVT.LTD',
             'VKNP DESIGNS PRIVATE LIMITED',
             'YUVA KNITS',
-            'YUVA TEX',
+            'VIJAY GARMENTS',
             'KPM PAPER BOARDS',
             'SHRIRAAM TRADINGS',
             'SS LABELS',
@@ -67,7 +67,7 @@ class Index extends Component
         for ($i = 0; $i < count($contact_name); $i++) {
 
             $phone_number = substr(str_shuffle("0123456789"), 0, 8);
-            $gst_number = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 15);
+            $gst_number = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 13);
             $contact_type = Common::where('label_id','=','22')->pluck('id')->random();
             $msme_type = Common::where('label_id','=','23')->pluck('id')->random();
             $obj = Contact::create([
@@ -81,7 +81,7 @@ class Index extends Component
                 'msme_type_id' => $msme_type,
                 'opening_balance' => 0,
                 'effective_from' => date('Y-m-d'),
-                'gstin' => $gst_number,
+                'gstin' => '33'.$gst_number,
                 'email' => fake()->email,
                 'user_id' => auth()->id(),
                 'company_id' => session()->get('company_id'),

@@ -16,11 +16,11 @@ class TransController extends Controller
     public function __invoke($id)
     {
         if ($id == 1) {
-            $this->trans_type_id = 80;
-            $this->trans_type_name = Common::find(80)->vname;
+            $this->trans_type_id = 108;
+            $this->trans_type_name = Common::find(108)->vname;
         } elseif ($id == 2) {
-            $this->trans_type_id = 81;
-            $this->trans_type_name = Common::find(81)->vname;
+            $this->trans_type_id = 109;
+            $this->trans_type_name = Common::find(109)->vname;
         }
 
         return pdf('pdf-view.Transaction.trans', [

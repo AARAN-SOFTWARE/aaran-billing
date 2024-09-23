@@ -26,7 +26,11 @@ class Index extends Component
             $order = Order::pluck('id')->random();
             $trans_type = Common::where('label_id', '=', '19')->pluck('id')->random();
             $mode = Common::where('label_id', '=', '20')->pluck('id')->random();
-            $receipttype = Common::where('label_id', '=', '14')->pluck('id')->random();
+            if ($trans_type == 108) {
+                $receipttype = 85;
+            } else {
+                $receipttype = Common::where('label_id', '=', '14')->where('id', '!=', '85')->pluck('id')->random();
+            }
             $bank = Common::where('label_id', '=', '9')->pluck('id')->random();
 
             Transaction::create([

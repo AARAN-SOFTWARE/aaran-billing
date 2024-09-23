@@ -45,13 +45,13 @@
                         <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$index+1}}</a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->vname}}</a>
+                        <x-table.cell-text left><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->vname}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->mobile}}</a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_type}}</a>
+                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_type_id}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text><a

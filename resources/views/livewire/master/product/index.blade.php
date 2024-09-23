@@ -40,14 +40,14 @@
 
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
                         <x-table.cell-text>{{\Aaran\Master\Models\Product::common($row->producttype_id)}}</x-table.cell-text>
                         <x-table.cell-text>
                             {{\Aaran\Master\Models\Product::common($row->hsncode_id)}}
                         </x-table.cell-text>
                         <x-table.cell-text>{{\Aaran\Master\Models\Product::common($row->gstpercent_id)}}%
                         </x-table.cell-text>
-                        <x-table.cell-text>{{$row->initial_quantity}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->initial_quantity+0}}</x-table.cell-text>
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
 

@@ -63,14 +63,14 @@ class Index extends Component
         $total_receivable = Transaction::select(
             DB::raw("SUM(vname) as receipt_amount"),
         )->where('acyear', '=', session()->get('acyear'))
-            ->where('mode_id', '=', 83)
+            ->where('mode_id', '=', 111)
             ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
         $month_receivable = Transaction::select(
             DB::raw("SUM(vname) as receipt_amount"),
         )->where('acyear', '=', session()->get('acyear'))
-            ->where('mode_id', '=', 83)
+            ->where('mode_id', '=', 111)
             ->WhereBetween('vdate', [$first, $last])
             ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
@@ -78,14 +78,14 @@ class Index extends Component
         $total_payable = Transaction::select(
             DB::raw("SUM(vname) as payment_amount"),
         )->where('acyear', '=', session()->get('acyear'))
-            ->where('mode_id', '=', 82)
+            ->where('mode_id', '=', 110)
             ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
         $month_payable = Transaction::select(
             DB::raw("SUM(vname) as payment_amount"),
         )->where('acyear', '=', session()->get('acyear'))
-            ->where('mode_id', '=', 82)
+            ->where('mode_id', '=', 110)
             ->where('company_id', '=', session()->get('company_id'))
             ->WhereBetween('vdate', [$first, $last])
             ->firstOrFail();
@@ -108,8 +108,8 @@ class Index extends Component
     {
         $sales = Sale::latest()->first();
         $purchase = Purchase::latest()->first();
-        $payment = Transaction::latest()->where('mode_id', '=', 82)->first();
-        $receipt = Transaction::latest()->where('mode_id', '=', 83)->first();
+        $payment = Transaction::latest()->where('mode_id', '=', 110)->first();
+        $receipt = Transaction::latest()->where('mode_id', '=', 111)->first();
 
         return Collection::make([
             'sales' => ConvertTo::rupeesFormat($sales->grand_total ?? 0),
@@ -137,7 +137,7 @@ class Index extends Component
         $transactions = Transaction::select(DB::raw("SUM(vname) as receipt_total"))
             ->where('contact_id', '=', $id)
             ->where('company_id', '=', session()->get('company_id'))
-            ->where('mode_id', '=', 83)
+            ->where('mode_id', '=', 111)
             ->firstOrFail();
 
         return $sales->grand_total - $transactions->receipt_total + $openingbalance;

@@ -42,13 +42,14 @@ class Index extends Component
             $this->price = substr(str_shuffle("0123456789"), 0, 2);
             $this->gst_percent = Common::find(Product::find($product)->gstpercent_id)->vname;
             $salesValue = $this->calculateTotal();
+            $invoice_no = Sale::nextNo();
 
             $obj = Sale::create([
                 'uniqueno' => session()->get('company_id') . '~' . session()->get('acyear') . '~' . Sale::nextNo(),
                 'acyear' => session()->get('acyear'),
                 'company_id' => $company,
                 'contact_id' => $contact,
-                'invoice_no' => Sale::nextNo(),
+                'invoice_no' => $invoice_no,
                 'invoice_date' => date('Y-m-d'),
                 'sales_type' => 'CGST-SGST',
                 'order_id' => $order,
@@ -56,14 +57,25 @@ class Index extends Component
                 'shipping_id' => $shipping,
                 'style_id' => $style,
                 'despatch_id' => $despatch,
+                'job_no' => '',
+                'transport_id' => $transport,
                 'destination' => '-',
                 'bundle' => '-',
                 'distance' => '0',
-                'transport_id' => $transport,
+                'TransMode' => 'Road',
+                'Transid' => '1',
+                'Transname' => '-',
+                'Transdocno' => $invoice_no,
+                'TransdocDt' => date('Y-m-d'),
+                'Vehno' => 'TN39DC5455',
+                'Vehtype' => 'Regular',
                 'total_qty' => $salesValue['total_quantity'],
                 'total_taxable' => $salesValue['total_taxable'],
                 'total_gst' => $salesValue['total_gst'],
+                'ledger_id' => '1',
+                'additional' => '0',
                 'grand_total' => $salesValue['grand_total'],
+                'received_by' => 'office',
                 'active_id' => 1,
 
             ]);

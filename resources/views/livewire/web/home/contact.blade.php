@@ -10,20 +10,27 @@
     />
 
     <div class="flex sm:flex-row flex-col sm:justify-center">
-        <div class="sm:w-9/12 w-auto grid sm:grid-cols-2 grid-cols-1 sm:gap-0 gap-5 font-roboto tracking-wider sm:my-24 my-8 sm:px-0 px-2">
-            <div class="flex-col flex gap-y-4 bg-gray-50 sm:p-10 p-4  sm:mr-6 border border-gray-300 rounded-md animate__animated wow animate__backInLeft" data-wow-duration="3s">
+        <div
+            class="sm:w-9/12 w-auto grid sm:grid-cols-2 grid-cols-1 sm:gap-0 gap-5 font-roboto tracking-wider sm:my-24 my-8 sm:px-0 px-2">
+
+            <div
+                class="flex-col flex gap-y-4 bg-gray-50 sm:p-10 p-4  sm:mr-6 border border-gray-300 rounded-md animate__animated wow animate__backInLeft"
+                data-wow-duration="3s">
                 <div class="w-full flex items-center gap-x-3 ">
                     <span class="h-2 px-4 bg-gradient-to-r from-white to-[#B7C1FA] ">&nbsp;</span>
                     <span class="text-[#5069F4] text-sm font-semibold">WORK PROCESS</span>
                     <span class="h-2 px-4 bg-gradient-to-r from-[#B7C1FA] to-white">&nbsp;</span>
                 </div>
+
                 <div class="text-3xl font-semibold">Let's working together</div>
                 <div class="text-sm text-gray-600">Thank you for your interest in Aaran Infitech. We're excited to hear
                     from you and discuss...
                 </div>
+
                 <div class="flex-col flex gap-y-4">
                     <div class=" flex items-center sm:gap-4 gap-2 group">
-                        <div class="sm:w-28 w-40 h-full  flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
+                        <div
+                            class="sm:w-28 w-40 h-full  flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="w-8 h-8 text-blue-600 group-hover:text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -42,8 +49,10 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="flex items-center sm:gap-4 gap-2 group">
-                        <div class="sm:w-28 w-40 h-full flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
+                        <div
+                            class="sm:w-28 w-40 h-full flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="w-8 h-8 text-blue-600 group-hover:text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -61,15 +70,15 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="flex items-center sm:gap-4 gap-2 group">
-                        <div class="sm:w-28 w-40 h-full flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
+                        <div
+                            class="sm:w-28 w-40 h-full flex justify-center items-center bg-white group-hover:bg-[#3F5AF3] ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="w-8 h-8 text-blue-600 group-hover:text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                       d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                             </svg>
-
-
                         </div>
                         <div class="flex-col flex gap-y-2">
                             <div class="text-lg font-semibold">Our Address</div>
@@ -86,8 +95,10 @@
 
             <!-- Contact Form ---------------------------------------------------------------------------------------->
 
-            <div class="border border-gray-300 sm:p-10 p-4  sm:ml-6 rounded-md animate__animated wow animate__backInRight" data-wow-duration="3s">
-                <form class="flex-col flex gap-6">
+            <div
+                class="border border-gray-300 sm:p-10 p-4 sm:ml-6 rounded-md animate__animated wow animate__backInRight"
+                data-wow-duration="3s">
+                <form class="flex-col flex gap-4">
 
                     <input type="text" placeholder="Your Name*" wire:model="common.vname"
                            class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4">
@@ -99,23 +110,30 @@
                     @enderror
 
                     <div class="sm:grid-cols-2 grid-cols-1 grid sm:gap-2 gap-6">
-                        <input type="text" placeholder="Phone Number" wire:model="phone"
-                               class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4">
 
-                        @error('phone')
-                        <div class="text-xs text-red-500">
-                            {{$message}}
+                        <div class="flex-col flex gap-2">
+
+                            <input type="text" placeholder="Phone Number" wire:model="phone"
+                                   class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4 ">
+
+                            @error('phone')
+                            <div class="text-xs text-red-500">
+                                {{$message}}
+                            </div>
+                            @enderror
                         </div>
-                        @enderror
 
-                        <input type="email" name="email" placeholder="Email*" wire:model="email"
-                               class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4">
 
-                        @error('email')
-                        <div class="text-xs text-red-500">
-                            {{$message}}
+                        <div class="flex-col flex gap-2">
+                            <input type="email" name="email" placeholder="Email*" wire:model="email"
+                                   class="bg-gray-100 placeholder-gray-500 border-0 focus:border-gray-400 focus:border focus:ring-0 text-sm py-4">
+
+                            @error('email')
+                            <div class="text-xs text-red-500">
+                                {{$message}}
+                            </div>
+                            @enderror
                         </div>
-                        @enderror
 
                     </div>
 
@@ -130,7 +148,9 @@
         </div>
     </div>
 
-    <div class=" sm:w-9/12 w-auto mx-auto shadow-md shadow-gray-300 mb-24 sm:h-[35rem] h-auto animate__animated wow bounceInUp" data-wow-duration="3s">
+    <div
+        class=" sm:w-9/12 w-auto mx-auto shadow-md shadow-gray-300 mb-24 sm:h-[35rem] h-auto animate__animated wow bounceInUp"
+        data-wow-duration="3s">
         <section class="">
             <div class="container mx-auto sm:px-4 px-2">
 

@@ -37,7 +37,7 @@
 
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->vname}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
                         <x-table.cell-text>{{$row->order_name}}</x-table.cell-text>
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>

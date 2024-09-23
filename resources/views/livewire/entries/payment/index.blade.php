@@ -15,7 +15,7 @@
 
             <div class="flex justify-end w-full">
 
-                <a href="{{route('transactions.print',[$mode_id == 83 ? 1 : 2 ])}}">
+                <a href="{{route('transactions.print',[$mode_id == 111 ? 1 : 2 ])}}">
                     <x-button.print-x />
                 </a>
 
@@ -38,7 +38,7 @@
                                      sort-icon="{{$getListForm->sortAsc}}">Type
                 </x-table.header-text>
 
-                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>
+{{--                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>--}}
 
                 <x-table.header-text sort-icon="none">Amount</x-table.header-text>
 
@@ -56,13 +56,13 @@
 
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
-                        <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
 
                         <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
 
-                        <x-table.cell-text>{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</x-table.cell-text>
+{{--                        <x-table.cell-text>{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</x-table.cell-text>--}}
 
-                        <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
+                        <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>
 

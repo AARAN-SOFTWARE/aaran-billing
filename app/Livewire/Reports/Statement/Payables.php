@@ -50,7 +50,7 @@ class Payables extends Component
 
             $this->receipt_total = Transaction::whereDate('vdate', '<', $this->start_date?:$this->invoiceDate_first)
                 ->where('contact_id','=',$this->byParty)
-                ->where('mode_id','=',82)
+                ->where('mode_id','=',110)
                 ->sum('vname');
 
             $this->opening_balance = $this->opening_balance + $this->sale_total - $this->receipt_total;
@@ -77,7 +77,7 @@ class Payables extends Component
         ])
             ->where('active_id', '=', 1)
             ->where('contact_id', '=', $this->byParty)
-            ->where('mode_id','=',82)
+            ->where('mode_id','=',110)
             ->whereDate('vdate', '>=', $this->start_date ?: $this->invoiceDate_first)
             ->whereDate('vdate', '<=', $this->end_date ?: carbon::now()->format('Y-m-d'))
             ->where('company_id', '=', session()->get('company_id'));

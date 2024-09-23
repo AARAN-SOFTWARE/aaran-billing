@@ -17,6 +17,20 @@ class Index extends Component
     private function Product()
     {
         $product_name = [
+            '100% Cotton Hosier Fabric',
+            '100% Cotton Knitted Dyed Fabric ',
+            '100% Cotton Pique Dyed Fabric ',
+            '100% Cotton T-shirt',
+            '100% Cotton Jogger Pant',
+            '100% Cotton Polo T-shirt',
+            '100% Cotton Men s Collar T-shirt',
+            '100% Cotton Women s Collar T-shirt',
+            '100% Cotton Round Neck T-shirt',
+            '100% Cotton V Neck T-shirt',
+            '20s Combed Cotton Yarn',
+            '30s Combed Cotton Yarn',
+            '25s Combed Cotton Yarn',
+            '30s Semi Combed Cotton Yarn',
             '40 x 25 Walz Sticker',
             '100 x 150 mm Sticker',
             'A8 Carton Silp',
@@ -65,7 +79,7 @@ class Index extends Component
         for ($i = 0; $i < count($product_name); $i++) {
 
             $users = User::pluck('id');
-            $product_type = Product::pluck('id')->random();
+            $product_type = Common::where('label_id','=','15')->pluck('id')->random();
             $hsncodes = Common::where('label_id', '=', '6')->pluck('id')->random();
             $units = Common::where('label_id', '=', '16')->pluck('id')->random();
             $gstpercents = Common::where('label_id', '=', '17')->pluck('id')->random();

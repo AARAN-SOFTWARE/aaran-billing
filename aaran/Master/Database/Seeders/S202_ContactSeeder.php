@@ -11,7 +11,7 @@ class S202_ContactSeeder extends Seeder
     public static function run(): void
     {
         Contact::create([
-            'vname'=>'XYZ company pvt ltd',
+            'vname'=>'ABC Company pvt ltd',
             'gstin'=>'29AWGPV7107B1Z1',
             'company_id'=>'1',
             'user_id'=>'1',

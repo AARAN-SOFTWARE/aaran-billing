@@ -42,10 +42,10 @@ class Index extends Component
         $this->showDeleteModal = false;
     }
     #endregon
-    #region[print]
-    public function print($id)
-    {
 
+    #region[print]
+    public function print($id): void
+    {
         $this->redirect(route('sales.invoice', [$id]));
     }
     #endregion

@@ -14,7 +14,7 @@
             </x-table.caption>
 
             <div class="flex justify-end w-full">
-                <a href="{{route('trans.print',[$trans_type_id == 80 ? 1 : 2 ])}}">
+                <a href="{{route('trans.print',[$trans_type_id == 108 ? 1 : 2 ])}}">
                     <x-button.print-x />
                 </a>
             </div>
@@ -79,17 +79,17 @@
 
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
-                        <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
 
                         @if($row->mode_id == 110)
-                            <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
+                            <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
                         @else
                             <x-table.cell-text></x-table.cell-text>
 
                         @endif
 
                         @if($row->mode_id == 111)
-                            <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
+                            <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
                         @else
                             <x-table.cell-text></x-table.cell-text>
                         @endif
@@ -98,7 +98,7 @@
                             <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
                         @endif
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             {{  $balance  = $totalReceipt-$totalPayment}}
                         </x-table.cell-text>
 
@@ -204,7 +204,7 @@
                             <x-tabs.content>
                                 <div class="flex flex-col gap-3">
 
-                                    @if ( $trans_type_id != 85)
+                                    @if ( $trans_type_id != 108)
 
                                         <!-- receipt type ----------------------------------------------------------------->
 
