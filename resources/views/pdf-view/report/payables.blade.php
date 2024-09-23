@@ -5,126 +5,85 @@
 </head>
 <body class="bg-white-100 p-10">
 <!------Top Company Area------------------------------------------------------------------------------------------>
-<div class="flex flex-row  justify-evenly p-2">
-    <div class="flex justify-center items-center">
-        <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-[120px]"/>
+<div class="flex items-center justify-center gap-x-6 border border-gray-300 py-2">
+    <div class="">
+        @if($cmp->get('logo')!='no_image')
+            <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-[90px]"/>
+        @else
+            <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" class="w-[90px]">
+        @endif
     </div>
-    <div class="w-full flex flex-col items-center justify-center">
+
+    <div class="flex-col">
         <h1 class="text-2xl font-bold tracking-wider  uppercase">{{$cmp->get('company_name')}}</h1>
         <p class="text-xs">{{$cmp->get('address_1')}},{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</p>
         <p class="text-xs">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
         <p class="text-xs">{{$cmp->get('gstin')}}</p>
     </div>
-    <div>
-    </div>
 </div>
 
-<div class="w-full border-b border-gray-300 my-2">&nbsp;</div>
 
-<div class="flex p-2">
-    <div>
-        <span class="text-xl">M/s.{{$contact->vname}}</span>
-        <p class="text-xs">{{$billing_address->get('address_1')}}</p>
-        <p class="text-xs">{{$billing_address->get('address_2')}}</p>
-        <p class="text-xs">{{$billing_address->get('address_3')}}</p>
-        <p class="text-xs">GST IN : {{$contact->gstin}}</p>
-    </div>
+<div class="text-xs space-y-1 border-l  border-r border-gray-300 p-1">
+    <div class="text-xl font-semibold">M/s.{{$contact->vname}}</div>
+    <div class="">{{$billing_address->get('address_1')}}</div>
+    <div class="">{{$billing_address->get('address_2')}}</div>
+    <div class="">{{$billing_address->get('address_3')}}</div>
+    <div class="">GST IN : {{$contact->gstin}}</div>
 </div>
-<x-table.form>
-    <x-slot:table_header name="table_header">
-        <x-table.header-serial width="20%"/>
-        <x-table.header-text center :sort-icon="'none'">Type</x-table.header-text>
-        <x-table.header-text left :sort-icon="'none'">Particulars</x-table.header-text>
-        <x-table.header-text :sort-icon="'none'">Invoice Amount</x-table.header-text>
-        <x-table.header-text :sort-icon="'none'">Payment Amount</x-table.header-text>
-        <x-table.header-text :sort-icon="'none'">Balance</x-table.header-text>
-    </x-slot:table_header>
 
-
-    <x-slot:table_body name="table_body">
-
+<table class="w-full border-b border-t border-gray-300">
+    <thead class="font-semibold text-[10px] bg-gray-50">
+    <tr class="py-2 border-b border-r border-gray-300 tracking-wider">
+        <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300 text-center">S.No</th>
+        <th class="py-2 w-[12%] border-r border-gray-300">Type</th>
+        <th class="py-2 border-r border-gray-300">Particulars</th>
+        <th class="py-2 w-[10%] border-r border-gray-300">Invoice Amount</th>
+        <th class="py-2 w-[10%] border-r border-gray-300">Receipt Amount</th>
+        <th class="py-2 w-[10%] border-r px-1 border-gray-300">Balance</th>
+    </tr>
+    </thead>
+    <tbody>
+    @php
+        $totalPurchase = 0+$opening_balance;
+        $totalPayment = 0;
+    @endphp
+    <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
+        @if($party !=null)
+            <td class="py-2 text-center px-0.5 border-l border-r border-gray-300" colspan="3">Opening Balance</td>
+            <td class="py-2 text-end px-0.5 border-r border-gray-300">{{ $opening_balance}}</td>
+            <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
+            <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$opening_balance}}</td>
+        @endif
+    </tr>
+    @foreach($list as $index=>$row)
         @php
-            $totalPurchase = 0+$opening_balance;
-            $totalPayment = 0;
+            $totalPurchase += floatval($row->grand_total);
+            $totalPayment += floatval($row->transaction_amount);
         @endphp
-        <x-table.row>
-            @if($party !=null)
 
-                <x-table.cell-text colspan="3">
-                    <div class="text-right font-bold">
-                        Opening Balance
-                    </div>
-                </x-table.cell-text>
+        <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
+            <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
+            <td class="py-2 text-center border-r border-gray-300">{{ $row->mode }}</td>
+            <td class="py-2 text-center px-0.5 border-r border-gray-300">{{$row->mode=='invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}</td>
+            <td class="py-2 text-end px-0.5 border-r border-gray-300"> {{ $row->grand_total }}</td>
+            <td class="py-2 text-end px-0.5 border-r border-gray-300">{{ $row->transaction_amount }}</td>
+            <td class="py-2 text-end px-0.5 border-r border-gray-300">{{  $balance  = $totalPurchase-$totalPayment}}</td>
+        </tr>
+    @endforeach
+    <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
+        <td class="py-2 text-center border-l border-r border-gray-300" colspan="3">TOTALS</td>
+        <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$totalPurchase+$opening_balance}}</td>
+        <td class="py-2 text-end px-0.5 border-r border-gray-300">{{ $totalPayment}}</td>
+        <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
+    </tr>
+    <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
+        <td class="py-2 text-center border-l border-r border-gray-300" colspan="3">Balance</td>
+        <td class="py-2 text-end px-0.5 border-r border-gray-300">{{ $totalPurchase-$totalPayment}}</td>
+        <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
+        <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
+    </tr>
+    </tbody>
+</table>
 
-                <x-table.cell-text colspan="1">
-                    <div class="text-right font-bold">
-                        {{ $opening_balance}}
-                    </div>
-                </x-table.cell-text>
-                <x-table.cell-text colspan="1">
-                </x-table.cell-text>
-                <x-table.cell-text colspan="1">
-                    {{$opening_balance}}
-                </x-table.cell-text>
-            @endif
-        </x-table.row>
-
-        @forelse ($list as $index =>  $row)
-
-            @php
-                $totalPurchase += floatval($row->grand_total);
-                $totalPayment += floatval($row->transaction_amount);
-            @endphp
-
-            <x-table.row>
-                <x-table.cell-text center>
-                    {{ $index + 1 }}
-                </x-table.cell-text>
-
-                <x-table.cell-text center>
-                    {{ $row->mode }}
-                </x-table.cell-text>
-
-                <x-table.cell-text left>
-                    {{$row->mode=='invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}
-                </x-table.cell-text>
-
-                <x-table.cell-text right>
-                    {{ $row->grand_total }}
-                </x-table.cell-text>
-
-                <x-table.cell-text right>
-                    {{ $row->transaction_amount }}
-                </x-table.cell-text>
-
-                <x-table.cell-text>
-                    {{  $balance  = $totalPurchase-$totalPayment}}
-                </x-table.cell-text>
-
-            </x-table.row>
-
-
-
-        @empty
-        @endforelse
-
-
-        <x-table.row>
-            <x-table.cell-text colspan="3" class=" text-md text-right text-gray-400">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
-            </x-table.cell-text>
-            <x-table.cell-text class=" text-right  text-md  text-zinc-500 ">{{$totalPurchase+$opening_balance}}</x-table.cell-text>
-            <x-table.cell-text class=" text-right  text-md  text-zinc-500 ">{{ $totalPayment}}</x-table.cell-text>
-            <x-table.cell-text></x-table.cell-text>
-        </x-table.row>
-
-        <x-table.row>
-            <x-table.cell-text colspan="3" class=" text-md text-right text-gray-400 ">&nbsp;Balance&nbsp;&nbsp;&nbsp;
-            </x-table.cell-text>
-            <x-table.cell-text class=" text-right  text-md  text-blue-500 ">{{ $totalPurchase-$totalPayment}}</x-table.cell-text>
-            <x-table.cell-text class=" text-right  text-md  text-blue-500 "></x-table.cell-text>
-            <x-table.cell-text></x-table.cell-text>
-        </x-table.row>
-    </x-slot:table_body>
-</x-table.form>
 </body>
 </html>

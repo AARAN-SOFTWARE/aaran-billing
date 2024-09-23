@@ -27,7 +27,7 @@ class S201_CompanySeeder extends Seeder
             'active_id' => '1',
             'user_id' => '1',
             'tenant_id' => '1',
-            'logo' => '-'
+            'logo' => 'no_image'
         ]);
     }
 }

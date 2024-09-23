@@ -1,7 +1,7 @@
 <div class="font-roboto tracking-wider">
 
     <!-- Banner -->
-    <x-web.Home.items.banner
+    <x-web.home-new.items.banner
         label="About us"
         desc=" We Design and develop Outstanding Digital products and digital -
                 first Brands"
@@ -15,8 +15,8 @@
     <x-web.about.goal/>
     <x-web.about.team/>
     <x-web.about.feedback/>
-    <x-web.home.footer/>
-    <x-web.home.copyright/>
+    <x-web.home-new.footer/>
+    <x-web.home-new.copyright/>
 
     <style>
         .tab-button.active {

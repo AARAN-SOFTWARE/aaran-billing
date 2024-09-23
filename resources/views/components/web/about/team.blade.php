@@ -1,5 +1,5 @@
 <div class="flex flex-col sm:gap-y-8 gap-y-4 sm:pb-0 pb-8">
-    <x-web.Home.items.heading label="TEAM MEMBERS"/>
+    <x-web.home-new.items.heading label="TEAM MEMBERS"/>
     <div
         class="sm:w-6/12 w-auto mx-auto text-center sm:text-5xl text-2xl font-semibold animate__animated wow bounceInUp"
         data-wow-duration="3s">Quality Expert Team Would Like To Hear From You

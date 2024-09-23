@@ -1,4 +1,5 @@
-<button
+
+<a  target="_blank"
     class="tab-button sm:px-6 px-4 sm:py-[7px] py-[6px] relative rounded group overflow-hidden font-medium
     bg-gradient-to-r from-purple-600 to-purple-400 inline-block text-center" {{$attributes}}>
                 <span
@@ -15,4 +16,4 @@
                         clip-rule="evenodd"/>
                 </svg>
             </span>
-</button>
+</a>

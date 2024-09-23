@@ -20,7 +20,7 @@
         {{--                  data-wow-duration="3s">ABOUT OUR COMPANY</span>--}}
         {{--            <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r sm:from-[#ff7233] sm:to-white">&nbsp;</span>--}}
         {{--        </div>--}}
-        <x-web.Home.items.heading label="ABOUT OUR COMPANY"/>
+        <x-web.home-new.items.heading label="ABOUT OUR COMPANY"/>
         <div class="sm:text-5xl text-xl font-semibold animate__animated wow animate__backInRight"
              data-wow-duration="3s">We
             Design and develop Outstanding Digital products and digital - first

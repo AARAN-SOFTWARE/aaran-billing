@@ -5,20 +5,23 @@
 </head>
 <body class="bg-white-100 p-5">
 <!------Top Company Area------------------------------------------------------------------------------------------>
-<div class="flex flex-row  justify-evenly p-2">
-    <div class="flex justify-center items-center">
-        <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-[120px]"/>
+<div class="flex items-center justify-center gap-x-6 border border-gray-300 py-2">
+    <div class="">
+        @if($cmp->get('logo')!='no_image')
+            <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-[90px]"/>
+        @else
+            <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" class="w-[90px]">
+        @endif
     </div>
-    <div class="w-full flex flex-col items-center justify-center">
+
+    <div class="flex-col">
         <h1 class="text-2xl font-bold tracking-wider  uppercase">{{$cmp->get('company_name')}}</h1>
         <p class="text-xs">{{$cmp->get('address_1')}},{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</p>
         <p class="text-xs">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
         <p class="text-xs">{{$cmp->get('gstin')}}</p>
     </div>
-    <div>
-    </div>
 </div>
-<div class="w-full border-b border-gray-300 my-2">&nbsp;</div>
+
 <?php
 $invoiceTotal = 0;
 $sales_gstTotal = 0;
@@ -26,6 +29,42 @@ $purchase_gstTotal = 0;
 $purchaseTotal = 0
 ?>
 
+<div class="bg-gray-100 font-bold text-xl text-center w-full grid grid-cols-2 gap-1">
+    <div>Sales Report</div>
+    <div>Purchase Report</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+    <table class="w-full border-b border-t border-gray-300">
+        <thead class="font-semibold text-[10px] bg-gray-50">
+        <tr class="py-2 border-b border-r border-gray-300 tracking-wider">
+            <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300 text-center">S.No</th>
+            <th class="py-2  border-r border-gray-300">Party Name</th>
+            <th class="py-2 w-[10%] border-r border-gray-300">Bill No</th>
+            <th class="py-2 w-[10%] border-r border-gray-300">Invoice Amount</th>
+            <th class="py-2 w-[10%] border-r border-gray-300">Receipt Amount</th>
+            <th class="py-2 w-[10%] border-r px-1 border-gray-300">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <table class="w-full border-b border-t border-gray-300">
+        <thead class="font-semibold text-[10px] bg-gray-50">
+        <tr class="py-2 border-b border-r border-gray-300 tracking-wider">
+            <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300 text-center">S.No</th>
+            <th class="py-2 border-r border-gray-300">Party Name</th>
+            <th class="py-2  w-[10%] border-r border-gray-300">Bill No</th>
+            <th class="py-2 w-[10%] border-r px-1 border-gray-300">Date</th>
+            <th class="py-2 w-[10%] border-r border-gray-300">Invoice Amount</th>
+            <th class="py-2 w-[10%] border-r border-gray-300">Receipt Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
 <div class="flex flex-row gap-3">
     <div class="w-full">
         <div class="text-xl text-center py-2 font-bold tracking-wider">Sales Report</div>

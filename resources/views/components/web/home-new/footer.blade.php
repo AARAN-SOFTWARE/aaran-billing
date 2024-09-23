@@ -12,6 +12,6 @@
                 Aenean massa. Cum sociis natoque penatibus et magnis disies nec, pellentesque eu, pretium quis, sem.
             </div>
         </div>
-        <x-web.home.footer-address/>
+        <x-web.home-new.footer-address/>
     </div>
 </div>

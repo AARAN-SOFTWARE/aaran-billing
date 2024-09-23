@@ -1,5 +1,5 @@
 <div class="flex-col flex gap-6 sm:py-0 py-8">
-     <x-web.Home.items.heading label="TESTIMONIALS" />
+     <x-web.home-new.items.heading label="TESTIMONIALS" />
     <div class="sm:text-5xl text-2xl text-center font-semibold animate__animated wow bounceInUp"
          data-wow-duration="3s">CLIENTS FEEDBACK
     </div>

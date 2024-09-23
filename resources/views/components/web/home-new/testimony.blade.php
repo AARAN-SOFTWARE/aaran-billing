@@ -10,7 +10,7 @@
 {{--                <span class="sm:h-2 sm:px-4 sm:bg-gradient-to-r from-[#070609] to-white ">&nbsp;</span>--}}
 {{--            </div>--}}
 
-            <x-web.home.items.heading label="Run your business from anywhere." />
+            <x-web.home-new.items.heading label="Run your business from anywhere." />
             <div class="sm:text-5xl text-md font-bold pb-6 border-b border-black animate__animated wow animate__bounceInDown"
                  data-wow-duration="3s">
                 More than 500+ Business Owner Trust our GST Software.

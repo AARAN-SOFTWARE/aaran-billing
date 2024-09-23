@@ -1,6 +1,6 @@
 <div>
 
-    <x-web.Home.items.banner
+    <x-web.home-new.items.banner
         label="Blog"
         desc=" We Design and develop Outstanding Digital products and digital -
                 first Brands"
@@ -183,5 +183,5 @@
         </div>
     </div>
 
-    <x-web.home.footer/>
+    <x-web.home-new.footer/>
 </div>

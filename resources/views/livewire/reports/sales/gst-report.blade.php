@@ -38,85 +38,90 @@
         ?>
 
         <div class="flex flex-row gap-5">
-            <div class="w-full h-screen overflow-y-auto">
+            <div class="w-full h-auto">
                 <div class="py-2 flex justify-evenly">
                     <div class="text-xl text-center  font-bold tracking-wider">Sales Report</div>
                     <x-button.secondary wire:click="salesReport">Print</x-button.secondary>
                 </div>
-                <x-table.form>
-                    <x-slot:table_header name="table_header" class="bg-green-600">
-                        <x-table.header-serial width="20%"/>
-                        <x-table.header-text sortIcon="none">Party Name</x-table.header-text>
-                        <x-table.header-text sortIcon="none">Bill No</x-table.header-text>
-                        <x-table.header-text sortIcon="none">Date</x-table.header-text>
-                        <x-table.header-text sortIcon="none">Invoice Amount</x-table.header-text>
-                        <x-table.header-text sortIcon="none">GST Amount</x-table.header-text>
-                    </x-slot:table_header>
+                <div class="h-screen overflow-y-auto pr-2">
+                    <x-table.form>
+                        <x-slot:table_header name="table_header" class="bg-green-600">
+                            <x-table.header-serial width="20%"/>
+                            <x-table.header-text sortIcon="none">Party Name</x-table.header-text>
+                            <x-table.header-text sortIcon="none">Bill No</x-table.header-text>
+                            <x-table.header-text sortIcon="none">Date</x-table.header-text>
+                            <x-table.header-text sortIcon="none">Invoice Amount</x-table.header-text>
+                            <x-table.header-text sortIcon="none">GST Amount</x-table.header-text>
+                        </x-slot:table_header>
 
-                    <!-- Table Body ------------------------------------------------------------------------------------------->
+                        <!-- Table Body ------------------------------------------------------------------------------------------->
 
-                    <x-slot:table_body name="table_body">
-                        @foreach($sales as $index=>$row)
-                                <?php
-                                $invoiceTotal += $row->grand_total;
-                                $sales_gstTotal += $row->total_gst;
-                                ?>
+                        <x-slot:table_body name="table_body">
+                            @foreach($sales as $index=>$row)
+                                    <?php
+                                    $invoiceTotal += $row->grand_total;
+                                    $sales_gstTotal += $row->total_gst;
+                                    ?>
 
-                            <x-table.row>
-                                <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                                <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
-                                <x-table.cell-text>{{$row->invoice_no}}</x-table.cell-text>
-                                <x-table.cell-text> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</x-table.cell-text>
-                                <x-table.cell-text>{{$row->grand_total}}</x-table.cell-text>
-                                <x-table.cell-text>
-                                    {{$row->total_gst}}
-                                </x-table.cell-text>
-                            </x-table.row>
+                                <x-table.row>
+                                    <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row->invoice_no}}</x-table.cell-text>
+                                    <x-table.cell-text> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row->grand_total}}</x-table.cell-text>
+                                    <x-table.cell-text>
+                                        {{$row->total_gst}}
+                                    </x-table.cell-text>
+                                </x-table.row>
 
-                        @endforeach
+                            @endforeach
 
-                    </x-slot:table_body>
-                </x-table.form>
+                        </x-slot:table_body>
+                    </x-table.form>
+                </div>
             </div>
-            <div class="w-full h-screen overflow-y-auto">
+            <div class="w-full h-auto">
                 <div class="py-2 flex justify-evenly">
                     <div class="text-xl text-center  font-bold tracking-wider">Purchase Report</div>
                     <x-button.secondary wire:click="purchaseReport">Print</x-button.secondary>
                 </div>
-                <x-table.form>
-                    <x-slot:table_header name="table_header" class="bg-green-600">
-                        <x-table.header-serial width="20%"/>
-                        <x-table.header-text sortIcon="none">Party Name</x-table.header-text>
-                        <x-table.header-text sortIcon="none">Bill No</x-table.header-text>
-                        <x-table.header-text sortIcon="none">Date</x-table.header-text>
-                        <x-table.header-text sortIcon="none">Invoice Amount</x-table.header-text>
-                        <x-table.header-text sortIcon="none">GST Amount</x-table.header-text>
-                    </x-slot:table_header>
+                <div class="h-screen overflow-y-auto pr-2">
 
-                    <!-- Table Body ------------------------------------------------------------------------------------------->
+                    <x-table.form>
+                        <x-slot:table_header name="table_header" class="bg-green-600">
+                            <x-table.header-serial width="20%"/>
+                            <x-table.header-text sortIcon="none">Party Name</x-table.header-text>
+                            <x-table.header-text sortIcon="none">Bill No</x-table.header-text>
+                            <x-table.header-text sortIcon="none">Date</x-table.header-text>
+                            <x-table.header-text sortIcon="none">Invoice Amount</x-table.header-text>
+                            <x-table.header-text sortIcon="none">GST Amount</x-table.header-text>
+                        </x-slot:table_header>
 
-                    <x-slot:table_body name="table_body">
-                        @foreach($purchase as $index=>$row)
-                                <?php
-                                $purchaseTotal += $row->grand_total;
-                                $purchase_gstTotal += $row->total_gst;
-                                ?>
+                        <!-- Table Body ------------------------------------------------------------------------------------------->
 
-                            <x-table.row>
-                                <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                                <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
-                                <x-table.cell-text>{{$row->purchase_no}}</x-table.cell-text>
-                                <x-table.cell-text> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</x-table.cell-text>
-                                <x-table.cell-text>{{$row->grand_total}}</x-table.cell-text>
-                                <x-table.cell-text>
-                                    {{$row->total_gst}}
-                                </x-table.cell-text>
-                            </x-table.row>
+                        <x-slot:table_body name="table_body">
+                            @foreach($purchase as $index=>$row)
+                                    <?php
+                                    $purchaseTotal += $row->grand_total;
+                                    $purchase_gstTotal += $row->total_gst;
+                                    ?>
 
-                        @endforeach
+                                <x-table.row>
+                                    <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row->purchase_no}}</x-table.cell-text>
+                                    <x-table.cell-text> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row->grand_total}}</x-table.cell-text>
+                                    <x-table.cell-text>
+                                        {{$row->total_gst}}
+                                    </x-table.cell-text>
+                                </x-table.row>
 
-                    </x-slot:table_body>
-                </x-table.form>
+                            @endforeach
+
+                        </x-slot:table_body>
+                    </x-table.form>
+                </div>
             </div>
         </div>
         <div>

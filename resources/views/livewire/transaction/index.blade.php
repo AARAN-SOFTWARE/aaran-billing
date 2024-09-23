@@ -14,9 +14,7 @@
             </x-table.caption>
 
             <div class="flex justify-end w-full">
-                <a href="{{route('trans.print',[$trans_type_id == 108 ? 1 : 2 ])}}">
-                    <x-button.print-x />
-                </a>
+                    <x-button.print-x href="{{route('trans.print',[$trans_type_id == 108 ? 1 : 2 ])}}" />
             </div>
         </div>
 
