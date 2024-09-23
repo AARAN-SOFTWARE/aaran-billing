@@ -112,7 +112,9 @@ class Index extends Component
     public function render()
     {
         return view('livewire.master.style.index')->with([
-            'list' => $this->getListForm->getList(Style::class),
+            'list' => $this->getListForm->getList(Style::class,function ($query){
+                return $query->where('company_id',session()->get('company_id'));
+            }),
         ]);
     }
     #endregion

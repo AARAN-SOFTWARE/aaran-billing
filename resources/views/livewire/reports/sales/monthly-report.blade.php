@@ -126,8 +126,8 @@
                                     <?php
                                     $invoiceTotal += $row['sale']['grand_total'];
                                     $taxableValueTotal += $row['sale']['total_taxable'];
-                                    $gstTotal += $row['sale']['sales_type'] == 'CGST-SGST' ? $row['sale']['total_gst'] : 0;
-                                    $CGSTTotal += $row['sale']['sales_type'] != 'CGST-SGST' ? $row['sale']['total_gst'] : 0;
+                                    $gstTotal += $row['sale']['sales_type'] == '1' ? $row['sale']['total_gst'] : 0;
+                                    $CGSTTotal += $row['sale']['sales_type'] != '1' ? $row['sale']['total_gst'] : 0;
                                     ?>
 {{--                                {{dd($row['sale']['sales_type'])}}--}}
                                 <x-table.row>
@@ -139,15 +139,15 @@
                                     <x-table.cell-text> {{ date('d-m-Y', strtotime( $row['sale']['invoice_date']))}}</x-table.cell-text>
                                     <x-table.cell-text>{{$row['sale']['grand_total']}}</x-table.cell-text>
                                     <x-table.cell-text>{{$row['sale']['total_taxable']}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row['sale']['sales_type']=='CGST-SGST'?$row['percent']:0}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row['sale']['sales_type']=='CGST-SGST'?$row['sale']['total_gst']/2:0}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row['sale']['sales_type']=='CGST-SGST'?$row['percent']:0}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row['sale']['sales_type']=='CGST-SGST'?$row['sale']['total_gst']/2:0}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['sales_type']=='1'?$row['percent']:0}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['sales_type']=='1'?$row['percent']:0}}</x-table.cell-text>
+                                    <x-table.cell-text>{{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</x-table.cell-text>
                                     <x-table.cell-text>
-                                        {{$row['sale']['sales_type']!='CGST-SGST'?$row['percent']:0}}
+                                        {{$row['sale']['sales_type']!='1'?$row['percent']:0}}
                                     </x-table.cell-text>
                                     <x-table.cell-text>
-                                        {{$row['sale']['sales_type']!='CGST-SGST'?$row['sale']['total_gst']:0}}
+                                        {{$row['sale']['sales_type']!='1'?$row['sale']['total_gst']:0}}
                                     </x-table.cell-text>
                                 </x-table.row>
 

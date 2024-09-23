@@ -30,6 +30,8 @@ class S102_CommonSeeder extends Seeder
         self::Transport();
         self::contactType();
         self::msmeType();
+        self::GstApiData();
+        self::AddNew();
     }
 
     #region[noRecord]
@@ -1050,4 +1052,56 @@ class S102_CommonSeeder extends Seeder
         ]);
     }
     #endregion
+    #region[GstApiData]
+    private static function GstApiData(): void
+    {
+        Common::create([
+            'label_id' => '2',
+            'vname' => 'GANDHINAGAR',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '4',
+            'vname' => '560001',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '6',
+            'vname' => '1001',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+    }
+
+    #endregion
+
+    public static function AddNew()
+    {
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2017_2018',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2018_2019',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '21',
+            'vname' => '2019_2020',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+    }
 }

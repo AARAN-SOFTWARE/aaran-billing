@@ -34,7 +34,7 @@ class SaleFactory extends Factory
             'contact_id' => $contact,
             'invoice_no' => $this->faker->unique()->randomNumber(),
             'invoice_date' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
-            'sales_type' => 'CGST-SGST',
+            'sales_type' => '1',
             'order_id' => $order,
             'billing_id' => $billing,
             'shipping_id' => $shipping,

@@ -167,7 +167,7 @@
             <div class="w-full inline-flex justify-between"><span class="w-1/3 ">Taxable Value</span><span
                     class="w-1/3">:</span><span
                     class="w-1/3 text-end font-semibold">  {{number_format($obj->total_taxable,2,'.','')}}</span></div>
-            @if($obj->sales_type=='CGST-SGST')
+            @if($obj->sales_type=='1')
                 <div class="w-full inline-flex justify-between"><span
                         class="w-1/3">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3">:</span><span
                         class="w-1/3 text-end font-semibold">{{number_format($obj->total_gst/2,2,'.','')}}</span></div>
@@ -187,7 +187,7 @@
                 <div class="w-full inline-flex justify-between"><span class="w-1/3"></span><span
                         class="w-1/3"></span><span class="w-1/3 text-end font-semibold"></span></div>
             @endif
-            @if($obj->sales_type=='CGST-SGST')
+            @if($obj->sales_type=='1')
                 <div class="w-full inline-flex justify-between"><span
                         class="w-1/3">SGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/3">:</span><span
                         class="w-1/3 text-end font-semibold">{{number_format($obj->total_gst/2,2,'.','')}}</span></div>

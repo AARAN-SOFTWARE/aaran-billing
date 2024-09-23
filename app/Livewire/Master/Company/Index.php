@@ -561,7 +561,9 @@ class Index extends Component
         $this->getTenants();
         $this->getMsmeTypeList();
         return view('livewire.master.company.index')->with([
-            'list' => $this->getListForm->getList(Company::class),
+            'list' => $this->getListForm->getList(Company::class,function ($query){
+                return $query->where('tenant_id',session()->get('tenant_id'));
+            }),
         ]);
     }
     #endregion

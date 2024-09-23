@@ -47,7 +47,7 @@ class Index extends Component
         $this->getListForm->sortField = 'purchase_no';
         return view('livewire.entries.purchase.index')->with([
             'list' => $this->getListForm->getList(Purchase::class, function ($query) {
-                return $query->where('company_id', '=', session()->get('company_id'));
+                return $query->where('company_id', '=', session()->get('company_id'))->where('acyear',session()->get('acyear'));
             }),
         ]);
     }
