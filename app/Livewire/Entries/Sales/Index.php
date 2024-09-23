@@ -57,7 +57,7 @@ class Index extends Component
         $this->getListForm->sortField='invoice_no';
         return view('livewire.entries.sales.index')->with([
             'list'=>$this->getListForm->getList(Sale::class,function ($query){
-                return  $query->where('company_id','=',session()->get('company_id'));
+                return  $query->where('company_id','=',session()->get('company_id'))->where('acyear',session()->get('acyear'));
             }),
         ]);
     }

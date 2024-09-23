@@ -45,7 +45,7 @@ class Index extends Component
                 'purchase_no' => fake()->numberBetween(1, 9),
                 'purchase_date' => date('Y-m-d'),
                 'Entry_no' =>Purchase::nextNo() ,
-                'sales_type' => 'CGST-SGST',
+                'sales_type' => '1',
                 'transport_id' => $transport,
                 'bundle' => '1',
                 'total_qty' => $purchaseValue['total_quantity'],

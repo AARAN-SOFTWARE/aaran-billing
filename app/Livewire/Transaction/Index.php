@@ -620,7 +620,9 @@ class Index extends Component
 
         return view('livewire.transaction.index')->with([
             'list' => $this->getListForm->getList(Transaction::class, function ($query) {
-                return $query->where('trans_type_id', $this->trans_type_id);
+                return $query->where('trans_type_id', $this->trans_type_id)
+                    ->where('acyear',session()->get('acyear'))
+                    ->where('company_id',session()->get('company_id'));
             })
         ]);
     }

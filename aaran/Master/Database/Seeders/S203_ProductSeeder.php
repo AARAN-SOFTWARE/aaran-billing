@@ -12,8 +12,8 @@ class S203_ProductSeeder extends Seeder
         Product::create([
             'vname' => 'T-SHIRT',
             'producttype_id' => '92',
-            'hsncode_id' => '62',
-            'unit_id' => '96',
+            'hsncode_id' => '130',
+            'unit_id' => '97',
             'gstpercent_id' => '100',
             'initial_quantity' => 0,
             'initial_price' => 0,

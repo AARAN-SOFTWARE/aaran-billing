@@ -78,7 +78,9 @@ class Index extends Component
         $this->getListForm->searchField = 'order_name';
 
         return view('livewire.master.orders.index')->with([
-            'list' => $this->getListForm->getList(Order::class),
+            'list' => $this->getListForm->getList(Order::class,function ($query){
+                return $query->where('company_id',session()->get('company_id'));
+            }),
         ]);
     }
     #endregion

@@ -65,7 +65,7 @@ class MonthlyReport extends Component
                 ->where('id', $item->product_id)
                 ->first();
             if ($product) {
-                $data[] = $salesType == 'CGST-SGST'
+                $data[] = $salesType == '1'
                     ? 'HSN Code - '.Common::name($product->hsncode_id).' - '.(Common::name($product->gstpercent_id) / 2).'%'
                     : 'HSN Code - '.Common::name($product->hsncode_id).' - '.Common::name($product->gstpercent_id).'%';
             }

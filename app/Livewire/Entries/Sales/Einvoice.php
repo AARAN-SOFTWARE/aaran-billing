@@ -183,7 +183,7 @@ class Einvoice extends Component
              } else {
                  $itemData["IsServc"] = 'Y';
              }
-             if ($this->salesData->sales_type == 'CGST-SGST') {
+             if ($this->salesData->sales_type == '1') {
                  $itemData["SgstAmt"] = $row['gst_amount'] / 2;
                  $itemData["CgstAmt"] = $row['gst_amount'] / 2;
                  $itemData["IgstAmt"] = 0;
@@ -196,7 +196,7 @@ class Einvoice extends Component
              $jsonData["ItemList"][] = $itemData;
          }
 
-         if ($this->salesData->sales_type == 'CGST-SGST') {
+         if ($this->salesData->sales_type == '1') {
              $jsonData["ValDtls"]["CgstVal"] = $this->salesData->total_gst / 2;
              $jsonData["ValDtls"]["SgstVal"] = $this->salesData->total_gst / 2;
              $jsonData["ValDtls"]["IgstVal"] = 0;
