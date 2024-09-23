@@ -1,6 +1,6 @@
 <div class=" font-roboto tracking-wider sm:py-0 py-2 sm:px-0 px-2">
 
-    <x-web.Home.items.heading label="WORK PROCESS"/>
+    <x-web.home-new.items.heading label="WORK PROCESS"/>
 
     <div class="relative">
         <div

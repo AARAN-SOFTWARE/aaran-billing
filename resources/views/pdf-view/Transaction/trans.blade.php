@@ -9,127 +9,99 @@
 
 <!-- Address  --------------------------------------------------------------------------------------------------------->
 
-<div class="flex flex-row  justify-evenly p-2">
-    <div class="flex justify-center items-center">
-        <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-[120px]"/>
+
+<div class="flex items-center justify-center gap-x-6 border border-gray-300 py-2">
+    <div class="">
+        @if($cmp->get('logo')!='no_image')
+            <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-[90px]"/>
+        @else
+            <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" class="w-[90px]">
+        @endif
     </div>
 
-    <div class="w-full flex flex-col items-center justify-start gap-y-1.5 ">
+    <div class="flex-col">
         <h1 class="text-2xl font-bold tracking-wider  uppercase">{{$cmp->get('company_name')}}</h1>
         <p class="text-xs">{{$cmp->get('address_1')}},{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</p>
         <p class="text-xs">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
         <p class="text-xs">{{$cmp->get('gstin')}}</p>
     </div>
+
 </div>
 
-<div class="border-b border-gray-200 my-2 w-full">&nbsp;</div>
-
-<div class="my-2">
+<div class=" w-full bg-gray-100 text-sm py-2 px-1 font-bold border-l border-b border-r border-gray-300">
     {{$trans_type_name}}
 </div>
 
-<x-table.form>
+<table class="w-full border-b border-gray-300">
 
-    <!-- Table Header  ------------------------------------------------------------------------------------------------>
 
-    <x-slot:table_header name="table_header" class="bg-green-100">
-
-        <x-table.header-serial></x-table.header-serial>
-
-        <x-table.header-text sort-icon="none">Contact</x-table.header-text>
-
-        <x-table.header-text sort-icon="none">Payment</x-table.header-text>
-
-        <x-table.header-text sort-icon="none">Receipt</x-table.header-text>
-
+    <thead class="font-semibold text-[10px] bg-gray-50">
+    <tr class="py-2 border-b border-r border-gray-300 tracking-wider">
+        <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300 text-center">S.No</th>
+        <th class="py-2  border-r border-gray-300">Contact</th>
+        <th class="py-2 w-[5%] border-r border-gray-300">Payment</th>
+        <th class="py-2 w-[20%] border-r border-gray-300">Receipt</th>
         @if( $trans_type_id != 108)
-            <x-table.header-text sort-icon="none">Type</x-table.header-text>
+        <th class="py-2 w-[20%] border-r border-gray-300">Type</th>
         @endif
+        <th class="py-2 w-[10%] border-r px-1 border-gray-300">Balance</th>
+    </tr>
+    </thead>
+    <tbody>
+    @php
+        $balance = 0;
+        $OpenBalance = 0;
+        $totalBalance = 0;
+        $totalPayment = 0;
+        $totalReceipt = 0;
+    @endphp
 
-        <x-table.header-text sort-icon="none">Balance</x-table.header-text>
 
-    </x-slot:table_header>
-
-    <!-- Table Body  -------------------------------------------------------------------------------------------------->
-
-    <x-slot:table_body name="table_body">
-
+    @foreach($list as $index=>$row)
         @php
-            $balance = 0;
-            $OpenBalance = 0;
-            $totalBalance = 0;
-            $totalPayment = 0;
-            $totalReceipt = 0;
+            if ($row->mode_id ==110)
+            {
+                $totalPayment  += floatval($row->vname + 0);
+            }
+            elseif($row->mode_id ==111)
+            {
+                $totalReceipt  += floatval($row->vname + 0);
+            }
         @endphp
+        <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
+            <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
+            <td class="py-2 text-start border-r border-gray-300">{{$row->contact->vname}}</td>
+            @if($row->mode_id == 110)
+                 <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row->vname+0}}</td>
+            @else
+                <td class="py-2 text-center px-0.5 border-r border-gray-300"></td>
+            @endif
+
+            @if($row->mode_id == 111)
+                <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row->vname+0}}</td>
+            @else
+                <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
+            @endif
+
+            @if( $trans_type_id != 108)
+                <td class="py-2 text-end px-0.5 border-r border-gray-300">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
+                <x-table.cell-text></x-table.cell-text>
+            @endif
+
+            <td class="py-2 text-end px-0.5 border-r border-gray-300">  {{  $balance  = $totalReceipt-$totalPayment}}</td>
+        </tr>
+    @endforeach
+
+        <tr class="text-[10px] border-r border-gray-300 font-semibold">
+            <td class="py-2 text-end border-l border-r border-gray-300 px-0.5" colspan="2">Total</td>
+            <td class="py-2 text-end border-r border-gray-300 px-0.5">{{$totalPayment}}</td>
+            <td class="py-2 text-end border-r border-gray-300 px-0.5">{{$totalReceipt}}</td>
+            <td class="py-2 text-end border-r border-gray-300 px-0.5 text-blue-600"> {{$totalReceipt - $totalPayment }}</td>
+        </tr>
+    </tbody>
+</table>
 
 
-        @foreach($list as $index=>$row)
-
-            @php
-
-                if ($row->mode_id ==110)
-                {
-                    $totalPayment  += floatval($row->vname + 0);
-                }
-                elseif($row->mode_id ==111)
-                {
-                    $totalReceipt  += floatval($row->vname + 0);
-                }
-
-            @endphp
-
-                <!-- Table Row  --------------------------------------------------------------------------------------->
-
-            <x-table.row>
-
-                <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-
-                <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
-
-                @if($row->mode_id == 110)
-                    <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
-                @else
-                    <x-table.cell-text></x-table.cell-text>
-
-                @endif
-
-                @if($row->mode_id == 111)
-                    <x-table.cell-text>{{$row->vname+0}}</x-table.cell-text>
-                @else
-                    <x-table.cell-text></x-table.cell-text>
-                @endif
-
-                @if( $trans_type_id != 108)
-                    <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
-                @endif
-
-                <x-table.cell-text>
-                    {{  $balance  = $totalReceipt-$totalPayment}}
-                </x-table.cell-text>
-
-            </x-table.row>
-
-        @endforeach
-
-        <x-table.row>
-            <x-table.cell-text colspan="2">
-                Total
-            </x-table.cell-text>
-            <x-table.cell-text>
-                {{$totalPayment}}
-            </x-table.cell-text>
-            <x-table.cell-text>
-                {{$totalReceipt}}
-            </x-table.cell-text>
-            <x-table.cell-text colspan="2" class="text-center text-blue-600">
-                Bal&nbsp;: {{$totalReceipt - $totalPayment }}
-            </x-table.cell-text>
-        </x-table.row>
-
-
-    </x-slot:table_body>
-
-</x-table.form>
 
 
 </body>

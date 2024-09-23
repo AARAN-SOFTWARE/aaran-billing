@@ -108,9 +108,14 @@ class Receivables extends Component
                 [
                     'party' => $this->byParty, 'start_date' => $this->start_date ?: $this->invoiceDate_first,
                     'end_date' => $this->end_date ?: Carbon::now()->format('Y-m-d'),
+
                 ]));
         }
     }
+
+
+
+
 
     #region[Render]
     public function render()

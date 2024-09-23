@@ -1266,10 +1266,10 @@ class Upsert extends Component
 
     #region[Render]
 
-    public function print(): void
-    {
-        $this->redirect(route('sales.invoice', [$this->common->vid]));
-    }
+//    public function print()
+//    {
+//        $this->redirect(route('sales.invoice', [$this->common->vid]));
+//    }
 
     public function getRoute(): void
     {

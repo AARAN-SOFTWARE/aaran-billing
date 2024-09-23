@@ -10,6 +10,7 @@
 
 </head>
 <body class="bg-white">
+
 <div class="p-5 ">
     <div class="text-end text-xs text-gray-500 p-0.5">Original Copy</div>
         <div class="w-full ">
@@ -96,7 +97,6 @@
             </div>
         </div>
     </div>
-
     <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1">
         <span class="">3. Good Details</span>
     </div>
@@ -242,5 +242,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

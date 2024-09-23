@@ -1,6 +1,6 @@
 <div class="relative" x-data="{ open: false }">
 
-    <x-web.Home.items.banner
+    <x-web.home-new.items.banner
         label="Services"
         desc=" We Design and develop Outstanding Digital products and digital -
                 first Brands"
@@ -10,8 +10,8 @@
     <x-web.services.pricing />
     <x-web.services.terms />
     <x-web.services.faq />
-    <x-web.home.footer/>
-    <x-web.home.copyright/>
+    <x-web.home-new.footer/>
+    <x-web.home-new.copyright/>
 
     {{--    <div x-show="open" x-transition--}}
     {{--         class="sm:fixed top-24 right-8 font-roboto w-96 h-[36rem] tracking-wider rounded-md shadow-md shadow-gray-500">--}}
@@ -51,12 +51,6 @@
     {{--            class="sm:fixed bottom-8 right-8 bg-[#3F5AF3] text-white rounded-full inline-flex justify-center items-center w-12 h-12 shadow-md shadow-gray-500">--}}
     {{--        <x-icons.icon icon="x-mark" class="w-10 h-10 "/>--}}
     {{--    </button>--}}
-
-
-
-
-
-
 
     <style>
         .tab-button.active {

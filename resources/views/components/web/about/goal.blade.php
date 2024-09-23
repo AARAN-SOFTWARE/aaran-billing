@@ -2,7 +2,7 @@
     class=" grid sm:grid-cols-2 grid-cols-1 gap-12 sm:h-[40rem] h-auto font-roboto tracking-wider sm:pl-40 sm:px-0 px-2">
     <div class=" flex-col flex sm:gap-y-8 gap-y-4 py-8">
 
-        <x-web.Home.items.heading label="ABOUT COMPANY" />
+        <x-web.home-new.items.heading label="ABOUT COMPANY" />
 
         <div class="sm:text-5xl text-2xl font-semibold sm:leading-[50px] animate__animated wow animate__backInLeft"
              data-wow-duration="3s">Our Main Goal to Satisfied Local & Global Clients.

@@ -99,12 +99,8 @@
 
                         <x-table.cell-text>
                             <div class="inline-flex items-center gap-x-4">
-                                <a href="{{ route('sales.einvoice',[$row->id]) }}" class="pt-1">
-                                    <x-button.e-inv/>
-                                </a>
-                                <a href="{{ route('sales.eway',[$row->id]) }}" class="pt-1">
-                                    <x-button.e-way/>
-                                </a>
+                                    <x-button.e-inv routes="{{route('sales.einvoice',[$row->id]) }}"/>
+                                    <x-button.e-way routes="{{ route('sales.eway',[$row->id]) }}" />
                             </div>
                         </x-table.cell-text>
                         <x-table.cell-text>

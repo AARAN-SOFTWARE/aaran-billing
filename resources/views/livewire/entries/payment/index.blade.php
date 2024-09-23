@@ -14,11 +14,7 @@
             </x-table.caption>
 
             <div class="flex justify-end w-full">
-
-                <a href="{{route('transactions.print',[$mode_id == 111 ? 1 : 2 ])}}">
-                    <x-button.print-x />
-                </a>
-
+                    <x-button.print-x href="{{ route('transactions.print',[$mode_id == 111 ? 1 : 2 ]) }}" />
             </div>
         </div>
 

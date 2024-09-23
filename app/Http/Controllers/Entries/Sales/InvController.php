@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Entries\Sales;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\ContactDetail;
+use Aaran\MasterGst\Models\MasterGstEway;
 use Aaran\MasterGst\Models\MasterGstIrn;
 use App\Helper\ConvertTo;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Spatie\LaravelPdf\Facades\Pdf;
 use function Spatie\LaravelPdf\Support\pdf;
 
 class InvController extends Controller
@@ -25,6 +27,7 @@ class InvController extends Controller
             'billing_address' => ContactDetail::printDetails($sale->billing_id),
             'shipping_address' => ContactDetail::printDetails($sale->shipping_id),
             'irn'=>$this->getIrn($vid),
+            'eWay'=>$this->getEway($vid),
         ]);
     }
     public function getSales($vid): ?Sale
@@ -97,5 +100,9 @@ class InvController extends Controller
     public function getIrn($vid)
     {
         return MasterGstIrn::where('sales_id',$vid)->first();
+    }
+    public function getEway($vid)
+    {
+        return MasterGstEway::where('sales_id',$vid)->first();
     }
 }

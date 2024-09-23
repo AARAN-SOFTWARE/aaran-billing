@@ -1,7 +1,7 @@
 <div>
 
 
-    <x-web.Home.items.banner
+    <x-web.home-new.items.banner
         label="Contact"
         desc=" We Design and develop Outstanding Digital products and digital -
                 first Brands"
@@ -172,7 +172,7 @@
         </section>
     </div>
 
-    <x-web.home.footer-address/>
-    <x-web.home.copyright/>
+    <x-web.home-new.footer-address/>
+    <x-web.home-new.copyright/>
 
 </div>

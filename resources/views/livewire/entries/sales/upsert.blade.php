@@ -676,7 +676,7 @@
 
     </x-forms.m-panel>
     @if( $common->vid != "")
-        <x-forms.m-panel-bottom-button save back print />
+        <x-forms.m-panel-bottom-button routes="{{ route('sales.invoice', [$this->common->vid])}}" save back print />
     @else
         <x-forms.m-panel-bottom-button save back />
     @endif

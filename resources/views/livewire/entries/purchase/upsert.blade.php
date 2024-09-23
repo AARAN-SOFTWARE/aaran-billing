@@ -557,7 +557,7 @@
         </section>
     </x-forms.m-panel>
     @if( $common->vid != "")
-        <x-forms.m-panel-bottom-button save back print/>
+        <x-forms.m-panel-bottom-button  save back />
     @else
         <x-forms.m-panel-bottom-button save back/>
     @endif
