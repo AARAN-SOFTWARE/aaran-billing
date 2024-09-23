@@ -119,9 +119,6 @@
                     <x-table.cell-text></x-table.cell-text>
                 </x-table.row>
             </x-slot:table_body>
-            <x-slot name="table_pagination">
-                {{ $list->links() }}
-            </x-slot>
         </x-forms.table>
     </x-forms.m-panel>
 </div>

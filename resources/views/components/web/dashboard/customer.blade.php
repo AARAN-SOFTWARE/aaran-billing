@@ -35,20 +35,20 @@
             <div class="flex justify-between items-center hover:bg-[#FFFFF0] p-4">
                 <div class="inline-flex items-center gap-3">
 
-
                     <div
                         class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-slate-600 rounded-full dark:bg-gray-600 outline outline-2 outline-offset-2 outline-blue-900">
+                        <a href="{{route('contactReport',[$contact->id])}}">
                         <span
-                            class=" font-medium text-white dark:text-gray-400">{{substr($contact->vname,0,2)}}</span>
+                            class=" font-medium text-white dark:text-gray-400">{{substr($contact->vname,0,2)}}</span></a>
                     </div>
 
                     {{--                    <img src="../../../../images/t2.jpg" alt="" class="w-10 h-10 self-start rounded-lg">--}}
 
                     <div class="text-xs flex-col flex gap-1">
 
-                        <div class="font-bold">{{$contact->vname}}</div>
+                        <div class="font-bold"><a href="{{route('contactReport',[$contact->id])}}">{{$contact->vname}}</a></div>
                         {{--                                        <div class="text-emerald-950 font-bold">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci eos!</div>--}}
-                        <div class="text-gray-600 text-xs">{{ date('d-M') }}</div>
+                        <div class="text-gray-600 text-xs"><a href="{{route('contactReport',[$contact->id])}}">{{ date('d-M') }}</a></div>
                     </div>
 
                 </div>
