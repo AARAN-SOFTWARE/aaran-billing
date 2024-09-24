@@ -4,10 +4,10 @@
 
 <a href="{{$routes}}" target="_blank"
    class="relative group text-gray-500 transition-colors duration-200 dark:hover:text-purple-500
-        dark:text-gray-300 hover:text-purple-600 focus:outline-none animate group">
+        dark:text-gray-300 hover:text-purple-600 focus:outline-none animate group pt-1">
     <x-icons.icon-fill iconfill="print"
                        class="w-5 h-5 fill-gray-600 group-hover:fill-purple-500"/>
-    <div class="absolute invisible group-hover:visible -top-9 -right-2">
+    <div class="absolute invisible group-hover:visible -top-9 -right-1">
         <div class="bg-purple-600 text-white text-xs px-2 py-1 rounded-md">
             Print
         </div>
