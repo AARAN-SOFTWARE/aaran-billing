@@ -1,9 +1,10 @@
 <button
     class="tab-button sm:px-6 px-4 sm:py-[7px] py-[6px] relative rounded group overflow-hidden font-medium
-    bg-gradient-to-r from-teal-600 to-teal-400 inline-block text-center" {{$attributes}}>
+    bg-teal-500 inline-block text-center" {{$attributes}}>
                 <span
                     class="absolute top-0 left-0 flex h-full w-0 mr-0 transition-all
-                    duration-500 ease-out transform translate-x-0 group-hover:w-full opacity-90 bg-gradient-to-r from-teal-400 to-teal-600"></span>
+                    duration-500 ease-out transform translate-x-0 group-hover:w-full opacity-90
+                    bg-teal-600"></span>
     <span class="relative group-hover:hidden text-white sm:text-lg text-sm">
                Generate-E-Way
             </span>

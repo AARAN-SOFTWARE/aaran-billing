@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div>
-                            <x-button.secondary wire:click="printSummary">Print</x-button.secondary>
+                            <x-button.print-x wire:click="printSummary">Print</x-button.print-x>
                         </div>
                     </div>
                     <?php
@@ -91,7 +91,7 @@
                             </x-input.model-select>
                         </div>
                         <div>
-                            <x-button.secondary wire:click="printMonthly">Print</x-button.secondary>
+                            <x-button.print-x wire:click="printMonthly">Print</x-button.print-x>
                         </div>
                     </div>
                     <?php
@@ -193,7 +193,7 @@
                         <input wire:model.live="filterValue" class="rounded-r-lg w-96"  wire:keydown.escape="$set('filterValue', '')">
                         @endif
                     </div>
-                    <x-button.new/>
+                    <x-button.new-x wire:click="create"/>
 
                   </div>
                   <x-table.form>
