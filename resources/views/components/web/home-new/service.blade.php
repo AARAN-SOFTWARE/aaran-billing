@@ -1,12 +1,12 @@
 <div>
 
-    <div class="font-roboto  flex-col flex gap-8 my-28">
+    <div class="font-roboto  flex-col flex gap-8 sm:my-28 my-8">
 
         <x-web.home-new.items.heading label="Get real-time Collaborate" />
 
         <div class="text-center sm:text-4xl font-semibold">How Codexsun can improve your business:</div>
 
-        <div class="grid lg:grid-cols-4 sm:grid-cols-1 gap-6 sm:w-10/12 w-9/12 mx-auto">
+        <div class="grid lg:grid-cols-4 sm:grid-cols-1 gap-6 sm:w-10/12 w-11/12 mx-auto">
 
             <x-web.home-new.items.service-card
                 title="/SW DEVELOPMENT"

@@ -1,6 +1,6 @@
 <div class="py-8 mt-5">
 
-    <div class=" font-roboto tracking-wider grid gap-10 sm:pt-20 pt-0">
+    <div class="font-roboto tracking-wider grid sm:gap-10 gap-5 sm:pt-20 pt-0">
         <x-web.home-new.items.heading label="Billing Made Simple and Efficient" />
 
         <div class="text-center md:text-6xl text-lg font-semibold">Try India’s easiest GST billing platform</div>
