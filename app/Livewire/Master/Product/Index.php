@@ -420,6 +420,25 @@ class Index extends Component
         return route('products');
     }
 
+    public function getList()
+    {
+        return Product::select(
+            'products.*',
+            'producttype.vname as producttype_name',
+            'unit.vname as unit_name',
+            'hsncode.vname as hsncode_name',
+            'gstpercent.vname as gstpercent_name',
+            )
+            ->where('products.company_id',session()->get('company_id'))
+            ->where('products.active_id',$this->getListForm->activeRecord)
+            ->join('commons as producttype', 'producttype.id', '=', 'products.producttype_id')
+            ->join('commons as unit', 'unit.id', '=', 'products.unit_id')
+            ->join('commons as hsncode', 'hsncode.id', '=', 'products.hsncode_id')
+            ->join('commons as gstpercent', 'gstpercent.id', '=', 'products.gstpercent_id')
+            ->orderBy('products.id',$this->getListForm->sortAsc ? 'asc' : 'desc')
+            ->paginate($this->getListForm->perPage);
+    }
+
     public function render()
     {
         $this->getHsncodeList();
@@ -428,9 +447,7 @@ class Index extends Component
         $this->getGstPercentList();
 
         return view('livewire.master.product.index')->with([
-            'list' => $this->getListForm->getList(Product::class, function ($query) {
-                return $query->where('company_id',session()->get('company_id'));
-            }),
+            'list' => $this->getList()
         ]);
     }
     #endregion
