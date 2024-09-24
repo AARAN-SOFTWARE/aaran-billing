@@ -20,16 +20,16 @@ class ProductModel extends Component
     public function mount($name): void
     {
         $this->vname = $name;
-        $this->producttype_id = 64;
-        $this->producttype_name=$this->producttype_id?Common::find($this->producttype_id)->vname:'';
-        $this->hsncode_id = 45;
-        $this->hsncode_name=$this->hsncode_id?Common::find($this->hsncode_id)->vname:'';
-        $this->unit_id = 66;
-        $this->unit_name=$this->unit_id?Common::find($this->unit_id)->vname:'';
-        $this->gstpercent_id = 72;
-        $this->gstpercent_name=$this->gstpercent_id?Common::find($this->gstpercent_id)->vname:'';
-        $this->quantity=0;
-        $this->price=0;
+        $this->producttype_id = 92;
+        $this->producttype_name = $this->producttype_id ? Common::find($this->producttype_id)->vname : '';
+        $this->hsncode_id = 61;
+        $this->hsncode_name = $this->hsncode_id ? Common::find($this->hsncode_id)->vname : '';
+        $this->unit_id = 94;
+        $this->unit_name = $this->unit_id ? Common::find($this->unit_id)->vname : '';
+        $this->gstpercent_id = 100;
+        $this->gstpercent_name = $this->gstpercent_id ? Common::find($this->gstpercent_id)->vname : '';
+        $this->quantity = 0;
+        $this->price = 0;
     }
 
     public function save(): void
@@ -37,17 +37,17 @@ class ProductModel extends Component
         if ($this->vname != '') {
             $obj = Product::create([
                 'vname' => Str::ucfirst($this->vname),
-                'producttype_id' => $this->producttype_id?:'64',
-                'hsncode_id' => $this->hsncode_id?:'45',
-                'unit_id' => $this->unit_id?:'66',
-                'gstpercent_id' => $this->gstpercent_id?:'72',
-                'initial_quantity' => $this->quantity?:'0',
-                'initial_price' => $this->price?:'0',
+                'producttype_id' => $this->producttype_id ?: '92',
+                'hsncode_id' => $this->hsncode_id ?: '61',
+                'unit_id' => $this->unit_id ?: '94',
+                'gstpercent_id' => $this->gstpercent_id ?: '100',
+                'initial_quantity' => $this->quantity ?: '0',
+                'initial_price' => $this->price ?: '0',
                 'user_id' => Auth::id(),
-                'company_id'=>session()->get('company_id'),
+                'company_id' => session()->get('company_id'),
                 'active_id' => '1'
             ]);
-            $this->dispatch('refresh-factory', ['name' => $this->vname, 'id' => $obj->id,'gstpercent_id'=>$this->gstpercent_id]);
+            $this->dispatch('refresh-factory', ['name' => $this->vname, 'id' => $obj->id, 'gstpercent_id' => $this->gstpercent_id]);
             $this->clearAll();
         }
     }
@@ -56,16 +56,16 @@ class ProductModel extends Component
     {
         $this->showModel = false;
         $this->vname = "";
-        $this->hsncode_id='';
-        $this->hsncode_name='';
-        $this->gstpercent_name='';
-        $this->gstpercent_id='';
-        $this->unit_name='';
-        $this->unit_id='';
-        $this->producttype_id='';
-        $this->producttype_name='';
+        $this->hsncode_id = '';
+        $this->hsncode_name = '';
+        $this->gstpercent_name = '';
+        $this->gstpercent_id = '';
+        $this->unit_name = '';
+        $this->unit_id = '';
+        $this->producttype_id = '';
+        $this->producttype_name = '';
         $this->quantity = '';
-        $this->price='';
+        $this->price = '';
     }
 
     #region[hsncode]
@@ -350,6 +350,7 @@ class ProductModel extends Component
             Common::search(trim($this->gstpercent_name))->where('label_id', '=', '17')->get() :
             Common::where('label_id', '=', '17')->get();
     }
+
 #endregion
 
     public function render()

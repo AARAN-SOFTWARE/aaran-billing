@@ -107,13 +107,13 @@
                 @endforeach
 
                 <x-table.row>
-                    <x-table.cell-text colspan="2">
+                    <x-table.cell-text right colspan="2">
                         Total
                     </x-table.cell-text>
-                    <x-table.cell-text>
+                    <x-table.cell-text right>
                         {{$totalPayment}}
                     </x-table.cell-text>
-                    <x-table.cell-text>
+                    <x-table.cell-text right>
                         {{$totalReceipt}}
                     </x-table.cell-text>
                     <x-table.cell-text colspan="2" class=" text-right">
