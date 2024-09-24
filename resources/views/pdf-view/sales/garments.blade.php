@@ -14,7 +14,12 @@
     <div class="text-end text-xs text-gray-500 p-0.5">Original Copy</div>
     <div class="border border-gray-300">
         <div class="flex justify-center p-2 gap-x-6">
-            <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-24 h-auto"/>
+                @if($cmp->get('logo')!='no_image')
+                    <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo"
+                         class="w-24 h-auto"/>
+                @else
+                    <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" class="w-24 h-auto">
+                @endif
             <div class="flex-col flex gap-1 ">
                 <div class="text-3xl uppercase font-bold">{{$cmp->get('company_name')}}</div>
                 <div class="flex-col flex text-xs space-y-0.5 text-gray-600 justify-center items-center">
