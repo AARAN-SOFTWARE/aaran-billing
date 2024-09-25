@@ -181,7 +181,7 @@ class Upsert extends Component
         $this->highlightCity++;
     }
 
-    public function setCity($name, $id, $index): void
+    public function setCity($name, $id, $index=null): void
     {
         $this->city_name = $name;
         $this->city_id = $id;
@@ -317,8 +317,8 @@ class Upsert extends Component
 
     #region[Pincode]
     #[validate]
-    public $pincode_name = '';
     public $pincode_id = '';
+    public $pincode_name = '';
     public Collection $pincodeCollection;
     public $highlightPincode = 0;
     public $pincodeTyped = false;
@@ -365,12 +365,12 @@ class Upsert extends Component
     }
 
     #[On('refresh-pincode')]
-    public function refreshPincode($v, $index): void
+    public function refreshPincode($v): void
     {
         $this->pincode_id = $v['id'];
         $this->pincode_name = $v['name'];
-        Arr::set($this->itemList[$index], 'pincode_name', $v['name']);
-        Arr::set($this->itemList[$index], 'pincode_id', $v['id']);
+        Arr::set($this->itemList[$v['index']], 'pincode_name', $v['name']);
+        Arr::set($this->itemList[$v['index']], 'pincode_id', $v['id']);
         $this->pincodeTyped = false;
     }
 
@@ -381,8 +381,8 @@ class Upsert extends Component
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v = ['name' => $name, 'id' => $obj->id];
-        $this->refreshPincode($v, $index);
+        $v = ['name' => $name, 'id' => $obj->id,'index' => $index];
+        $this->refreshPincode($v);
     }
 
     public function getPincodeList(): void

@@ -1,6 +1,6 @@
 <div>
     <x-slot name="header">Demo Data</x-slot>
-    <div>
+    <div class="flex flex-col gap-3">
         <livewire:demo.data.contact.index/>
         <livewire:demo.data.product.index/>
         <livewire:demo.data.sales.index/>
