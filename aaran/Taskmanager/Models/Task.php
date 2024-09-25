@@ -2,9 +2,7 @@
 
 namespace Aaran\Taskmanager\Models;
 
-use Aaran\Audit\Models\Client;
 use Aaran\Taskmanager\Database\Factories\TaskFactory;
-use App\Models\Image;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -33,20 +31,12 @@ class Task extends Model
         return User::find($str)->name;
     }
 
-    public function client()
-    {
-        return $this->belongsTo(Client::class);
-    }
 
     public function reply() :HasMany
     {
         return $this->hasMany(Reply::class);
     }
 
-    public function image() :HasMany
-    {
-        return $this->hasMany(Image::class);
-    }
 
     protected static function newFactory(): TaskFactory
     {

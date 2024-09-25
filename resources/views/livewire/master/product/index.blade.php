@@ -41,11 +41,11 @@
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
                         <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->producttype->vname}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->producttype_name}}</x-table.cell-text>
                         <x-table.cell-text>
-                            {{  $row->hsncode->vname }}
+                            {{  $row->hsncode_name }}
                         </x-table.cell-text>
-                        <x-table.cell-text>{{  $row->gstpercent->vname }}%
+                        <x-table.cell-text>{{  $row->gstpercent_name }}%
                         </x-table.cell-text>
                         <x-table.cell-text>{{$row->initial_quantity+0}}</x-table.cell-text>
                         <x-table.cell-action id="{{$row->id}}"/>

@@ -17,5 +17,6 @@ return [
 
     Aaran\Transaction\Providers\TransactionServiceProvider::class,
     Aaran\Demodata\Providers\DemodataServiceProvider::class,
+    Aaran\Taskmanager\Providers\TaskmanagerServiceProvider::class,
 
 ];

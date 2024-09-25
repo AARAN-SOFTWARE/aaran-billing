@@ -43,9 +43,13 @@
                 <x-menu.sub.reports/>
             @endif
 
-                @if(Aaran\Aadmin\Src\Customise::hasDemodata())
-                    <x-menu.sub.demodata/>
-                @endif
+            @if(Aaran\Aadmin\Src\Customise::hasDemodata())
+                <x-menu.sub.demodata/>
+            @endif
+
+            @if(Aaran\Aadmin\Src\Customise::hasTaskManager())
+                <x-menu.sub.task/>
+            @endif
 
 
             <x-menu.sub.logout/>

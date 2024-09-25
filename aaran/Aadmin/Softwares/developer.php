@@ -14,6 +14,7 @@ return [
         Customise::gstapi(),
         Customise::transaction(),
         Customise::demodata(),
+        Customise::taskManager(),
     ],
     'SalesEntry' => [
         SaleEntry::order(),
