@@ -30,6 +30,7 @@ class Company extends Model
             'address_1' => $obj->address_1,
             'address_2' => $obj->address_2,
             'city' => Common::find($obj->city_id)->vname . ' - ' .  Common::find($obj->pincode_id)->vname,
+            'city_name' => Common::find($obj->city_id)->vname ,
             'state' =>  Common::find($obj->state_id)->vname . ' - ' .  Common::find($obj->state_id)->desc,
             'contact' => ' Contact : ' . $obj->mobile,
             'email' => 'Email : ' . $obj->email,

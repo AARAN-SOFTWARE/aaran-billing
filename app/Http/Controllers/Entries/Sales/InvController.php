@@ -44,6 +44,8 @@ class InvController extends Controller
             'despatches.vname as despatch_name',
 //            'despatches.vdate as despatch_date',
             'transports.vname as transport_name',
+            'transports.desc as transport_id',
+            'transports.desc_1 as transport_no',
             'ledgers.vname as ledger_name',
         )
             ->join('contacts', 'contacts.id', '=', 'sales.contact_id')
