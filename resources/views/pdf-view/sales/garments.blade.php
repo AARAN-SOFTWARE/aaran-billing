@@ -271,9 +271,7 @@
 </div>
 
 
-
 @pageBreak
-
 
 <div class="p-5 ">
     <div class="text-end text-xs text-gray-500 p-0.5">Original Copy</div>
@@ -282,7 +280,7 @@
             <span class="">e-Way Bill</span>
         </div>
         <div class="w-full text-xs  tracking-wider flex items-center justify-between py-2 px-0.5">
-            <div><span>Doc No:</span> <span class="font-semibold">Tax Invoice - 43</span></div>
+            <div><span>Invoice  No:</span> <span class="font-semibold">{{$obj->invoice_no}}</span></div>
             <div><span>Date:</span> <span class="font-semibold">{{date('y-m-d')}}</span></div>
         </div>
     </div>
@@ -320,10 +318,10 @@
             </div>
         </div>
         <div class="w-[20%] h-[160px] border-l border-gray-300 flex items-center justify-center">
-            @if($irn)
+            @if($eWay)
                 <img class="w-[145px] h-auto rounded-sm"
-                     src="{{\App\Helper\qrcoder::generate($irn->signed_qrcode,22)}}"
-                     alt="{{$irn->signed_qrcode}}">
+                     src="{{\App\Helper\qrcoder::generate($eWay->ewbno,2)}}"
+                     alt="{{$eWay->ewbno}}">
             @endif
         </div>
     </div>

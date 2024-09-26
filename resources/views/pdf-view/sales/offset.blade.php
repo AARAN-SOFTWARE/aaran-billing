@@ -61,9 +61,12 @@
                         <div class="inline-flex justify-between"><span
                                 class="font-bold text-black">Date:</span><span>{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</span>
                         </div>
+                        @if($irn)
+
                         <div class="inline-flex justify-between"><span
                                 class="w-1/2 font-bold text-black">IRN No:</span><span
-                                class="w-1/2 break-all text-end">12345678901234567980012345678901234567890</span></div>
+                                class="w-1/2 break-all text-end">{{ $irn-> }}</span></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -263,7 +266,6 @@
 
 @pageBreak
 
-
 <div class="p-5 ">
     <div class="text-end text-xs text-gray-500 p-0.5">Original Copy</div>
     <div class="w-full border-t border-l border-r border-gray-300">
@@ -271,8 +273,8 @@
             <span class="">e-Way Bill</span>
         </div>
         <div class="w-full text-xs  tracking-wider flex items-center justify-between py-2 px-0.5">
-            <div><span>Doc No:</span> <span class="font-semibold">Tax Invoice - 43</span></div>
-            <div><span>Date:</span> <span class="font-semibold">{{date('y-m-d')}}</span></div>
+            <div><span>Invoice No:</span> <span class="font-semibold"> {{$obj->invoice_no}}</span></div>
+            <div><span>Date:</span> <span class="font-semibold">{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</span></div>
         </div>
     </div>
     <div
