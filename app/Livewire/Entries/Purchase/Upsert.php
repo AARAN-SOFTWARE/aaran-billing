@@ -578,14 +578,14 @@ class Upsert extends Component
 
                 } else {
                     $obj = Purchase::find($this->common->vid);
-                    $obj->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->purchase_no;
+                    $obj->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.Purchase::nextNo();
                     $obj->acyear = session()->get('acyear');
                     $obj->company_id = session()->get('company_id');
                     $obj->contact_id = $this->contact_id;
                     $obj->order_id = $this->order_id;
                     $obj->purchase_no = $this->purchase_no;
                     $obj->purchase_date = $this->purchase_date;
-                    $obj->entry_no = $this->entry_no;
+                    $obj->entry_no = Purchase::nextNo();
                     $obj->sales_type = $this->sales_type;
                     $obj->transport_id = $this->transport_id;
                     $obj->bundle = $this->bundle;
