@@ -310,5 +310,10 @@
                 </div>
             </div>
         </x-jet.modal>
+    <x-modal.info>
+        <div>
+           {{$successMessage}}
+        </div>
+    </x-modal.info>
     </x-forms.m-panel>
 </div>

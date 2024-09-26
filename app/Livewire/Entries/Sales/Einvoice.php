@@ -237,7 +237,7 @@ class Einvoice extends Component
          if (isset($result['data']['Irn'])) {
              $this->successMessage = 'E-invoice generated successfully: ' . $result['data']['Irn'];
          } else {
-             $this->successMessage = 'Failed to generate IRN.';
+             $this->successMessage = 'Failed to generate IRN '.$result['status_desc'];
          }
          $this->dispatch('notify', ...['type' => 'success', 'content' => $this->successMessage]);
         $this->getRoute();
