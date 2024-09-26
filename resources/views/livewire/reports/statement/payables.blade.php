@@ -2,9 +2,9 @@
     <x-slot name="header">Payables</x-slot>
 
     <x-forms.m-panel>
-        <div class="flex justify-between w-full gap-3">
+        <div class="flex md:flex-row flex-col md:justify-between w-full gap-3">
 
-            <div class="w-[40rem]">
+            <div class="sm:w-[40rem]">
                 <x-input.model-select wire:model.live="byParty" :label="'Party Name'">
                     <option value="">choose</option>
                     @foreach($contacts as $contact)
@@ -59,7 +59,9 @@
                         <x-table.cell-text colspan="1">
                         </x-table.cell-text>
                         <x-table.cell-text colspan="1">
+                            <div class="text-right font-bold">
                             {{$opening_balance}}
+                            </div>
                         </x-table.cell-text>
                     @endif
                 </x-table.row>
@@ -91,7 +93,7 @@
                             {{ $row->transaction_amount }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             {{  $balance  = $totalpurchase-$totalpayment}}
                         </x-table.cell-text>
 

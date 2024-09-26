@@ -37,7 +37,7 @@
         $purchaseTotal = 0
         ?>
 
-        <div class="flex flex-row gap-5">
+        <div class="flex sm:flex-row flex-col gap-5">
             <div class="w-full h-auto">
                 <div class="py-2 flex justify-evenly items-center">
                     <div class="text-xl text-center  font-bold tracking-wider">Sales Report</div>
@@ -65,11 +65,11 @@
 
                                 <x-table.row>
                                     <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
+                                    <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
                                     <x-table.cell-text>{{$row->invoice_no}}</x-table.cell-text>
                                     <x-table.cell-text> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->grand_total}}</x-table.cell-text>
-                                    <x-table.cell-text>
+                                    <x-table.cell-text right>{{$row->grand_total}}</x-table.cell-text>
+                                    <x-table.cell-text right>
                                         {{$row->total_gst}}
                                     </x-table.cell-text>
                                 </x-table.row>
@@ -80,6 +80,7 @@
                     </x-table.form>
                 </div>
             </div>
+
             <div class="w-full h-auto">
                 <div class="py-2 flex justify-evenly items-center">
                     <div class="text-xl text-center  font-bold tracking-wider">Purchase Report</div>
@@ -108,11 +109,11 @@
 
                                 <x-table.row>
                                     <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->contact->vname}}</x-table.cell-text>
+                                    <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
                                     <x-table.cell-text>{{$row->purchase_no}}</x-table.cell-text>
                                     <x-table.cell-text> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</x-table.cell-text>
-                                    <x-table.cell-text>{{$row->grand_total}}</x-table.cell-text>
-                                    <x-table.cell-text>
+                                    <x-table.cell-text right>{{$row->grand_total}}</x-table.cell-text>
+                                    <x-table.cell-text right>
                                         {{$row->total_gst}}
                                     </x-table.cell-text>
                                 </x-table.row>
@@ -127,6 +128,7 @@
         <div>
             <x-table.form>
                 <x-slot:table_body name="table_body">
+
                     <x-table.row>
                         <x-table.cell-text right>Total Sales</x-table.cell-text>
                         <x-table.cell-text>{{\App\Helper\ConvertTo::rupeesFormat($invoiceTotal)}}</x-table.cell-text>
@@ -135,6 +137,7 @@
                         <x-table.cell-text>{{\App\Helper\ConvertTo::rupeesFormat($purchaseTotal)}}</x-table.cell-text>
                         <x-table.cell-text>{{\App\Helper\ConvertTo::rupeesFormat($purchase_gstTotal)}}</x-table.cell-text>
                     </x-table.row>
+
                     <x-table.row>
                         <x-table.cell-text colspan="2" right>
                             <div class="font-bold">Difference (Sales-Purchase)</div>
