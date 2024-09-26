@@ -2,7 +2,6 @@
 
 namespace Aaran\Taskmanager\Models;
 
-use Aaran\Audit\Models\Client;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,8 +24,4 @@ class Activities extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function client(): BelongsTo
-    {
-        return $this->belongsTo(Client::class);
-    }
 }

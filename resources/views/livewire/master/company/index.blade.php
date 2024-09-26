@@ -109,6 +109,7 @@
                                 @error('address_2')
                                 <span class="text-red-400">{{$message}}</span>
                                 @enderror
+
                                 <!-- City ----------------------------------------------------------------------------->
 
                                 <x-dropdown.wrapper label="City" type="cityTyped">
@@ -135,6 +136,7 @@
                                 @error('city_name')
                                 <span class="text-red-400">{{$message}}</span>
                                 @enderror
+
                                 <!-- State ---------------------------------------------------------------------------->
 
                                 <x-dropdown.wrapper label="State" type="stateTyped">
@@ -174,7 +176,7 @@
                                         <x-dropdown.select>
                                             @if($pincodeCollection)
                                                 @forelse ($pincodeCollection as $i => $pincode)
-                                                    <x-dropdown.option highlight="{{$pincodeCollection === $i  }}"
+                                                    <x-dropdown.option highlight="{{$highlightPincode === $i  }}"
                                                                        wire:click.prevent="setPincode('{{$pincode->vname}}','{{$pincode->id}}')">
                                                         {{ $pincode->vname }}
                                                     </x-dropdown.option>

@@ -101,7 +101,7 @@
                                                                       wire:model.live="itemList.{{0}}.city_name"
                                                                       wire:keydown.arrow-up="decrementCity"
                                                                       wire:keydown.arrow-down="incrementCity"
-                                                                      wire:keydown.enter="enterCity"/>
+                                                                      wire:keydown.enter="enterCity({{0}})"/>
                                                     <x-dropdown.select>
                                                         @if($cityCollection)
                                                             @forelse ($cityCollection as $i => $city)
@@ -122,13 +122,14 @@
                                             @error('itemList.0.city_name')
                                             <span class="text-red-400"> {{$message}}</span>
                                             @enderror
+
                                             <x-dropdown.wrapper label="State" type="stateTyped">
                                                 <div class="relative ">
                                                     <x-dropdown.input label="State" id="state_name"
                                                                       wire:model.live="itemList.{{0}}.state_name"
                                                                       wire:keydown.arrow-up="decrementState"
                                                                       wire:keydown.arrow-down="incrementState"
-                                                                      wire:keydown.enter="enterState"/>
+                                                                      wire:keydown.enter="enterState({{0}})"/>
                                                     <x-dropdown.select>
                                                         @if($stateCollection)
                                                             @forelse ($stateCollection as $i => $states)
@@ -156,12 +157,12 @@
                                                                       wire:model.live="itemList.{{0}}.pincode_name"
                                                                       wire:keydown.arrow-up="decrementPincode"
                                                                       wire:keydown.arrow-down="incrementPincode"
-                                                                      wire:keydown.enter="enterPincode"/>
+                                                                      wire:keydown.enter="enterPincode({{0}})"/>
                                                     <x-dropdown.select>
                                                         @if($pincodeCollection)
                                                             @forelse ($pincodeCollection as $i => $pincode)
                                                                 <x-dropdown.option
-                                                                    highlight="{{$pincodeCollection === $i  }}"
+                                                                    highlight="{{$highlightPincode === $i  }}"
                                                                     wire:click.prevent="setPincode('{{$pincode->vname}}','{{$pincode->id}}','{{0}}')">
                                                                     {{ $pincode->vname }}
                                                                 </x-dropdown.option>
@@ -189,7 +190,7 @@
                                                         @if($countryCollection)
                                                             @forelse ($countryCollection as $i => $country)
                                                                 <x-dropdown.option
-                                                                    highlight="{{$countryCollection === $i  }}"
+                                                                    highlight="{{$highlightCountry === $i  }}"
                                                                     wire:click.prevent="setCountry('{{$country->vname}}','{{$country->id}}','{{0}}')">
                                                                     {{ $country->vname }}
                                                                 </x-dropdown.option>
@@ -246,69 +247,6 @@
                                                     </div>
                                                 </x-dropdown.wrapper>
 
-                                                {{--                                                <div class="flex flex-row ">--}}
-                                                {{--                                                    <div class="xl:flex w-full gap-2">--}}
-                                                {{--                                                        <label for="city_name"--}}
-                                                {{--                                                               class="w-[10rem] text-zinc-500 tracking-wide py-2 ">City</label>--}}
-                                                {{--                                                        <div x-data="{isTyped: @entangle('cityTyped')}"--}}
-                                                {{--                                                             @click.away="isTyped = false"--}}
-                                                {{--                                                             class="w-full">--}}
-                                                {{--                                                            <div class="relative">--}}
-                                                {{--                                                                <input--}}
-                                                {{--                                                                    id="city_name"--}}
-                                                {{--                                                                    type="search"--}}
-                                                {{--                                                                    wire:model.live="itemList.{{$row}}.city_name"--}}
-                                                {{--                                                                    autocomplete="off"--}}
-                                                {{--                                                                    placeholder="Choose.."--}}
-                                                {{--                                                                    @focus="isTyped = true"--}}
-                                                {{--                                                                    @keydown.escape.window="isTyped = false"--}}
-                                                {{--                                                                    @keydown.tab.window="isTyped = false"--}}
-                                                {{--                                                                    @keydown.enter.prevent="isTyped = false"--}}
-                                                {{--                                                                    wire:keydown.arrow-up="decrementCity"--}}
-                                                {{--                                                                    wire:keydown.arrow-down="incrementCity"--}}
-                                                {{--                                                                    wire:keydown.enter="enterCity('{{$row}}')"--}}
-                                                {{--                                                                    class="block w-full rounded-lg "--}}
-                                                {{--                                                                />--}}
-
-                                                {{--                                                                <!-- City Dropdown -------------------------------------------------------------------->--}}
-
-                                                {{--                                                                <div x-show="isTyped"--}}
-                                                {{--                                                                     x-transition:leave="transition ease-in duration-100"--}}
-                                                {{--                                                                     x-transition:leave-start="opacity-100"--}}
-                                                {{--                                                                     x-transition:leave-end="opacity-0"--}}
-                                                {{--                                                                     x-cloak--}}
-                                                {{--                                                                >--}}
-                                                {{--                                                                    <div class="absolute z-20 w-full mt-2">--}}
-                                                {{--                                                                        <div class="block py-1 shadow-md w-full--}}
-                                                {{--                rounded-lg border-transparent flex-1 appearance-none border--}}
-                                                {{--                                 bg-white text-gray-800 ring-1 ring-purple-600">--}}
-                                                {{--                                                                            <ul class="overflow-y-scroll h-96">--}}
-                                                {{--                                                                                @if($cityCollection)--}}
-                                                {{--                                                                                    @forelse ($cityCollection as $i => $city)--}}
-
-                                                {{--                                                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
-                                                {{--                                                        {{ $highlightCity === $i ? 'bg-yellow-100' : '' }}"--}}
-                                                {{--                                                                                            wire:click.prevent="setCity('{{$city->vname}}','{{$city->id}}','{{$row}}')"--}}
-                                                {{--                                                                                            x-on:click="isTyped = false">--}}
-                                                {{--                                                                                            {{ $city->vname }}--}}
-                                                {{--                                                                                        </li>--}}
-                                                {{--                                                                                    @empty--}}
-                                                {{--                                                                                        <button--}}
-                                                {{--                                                                                            wire:click.prevent="citySave('{{$itemList[$row]['city_name']}}','{{$row}}')"--}}
-                                                {{--                                                                                            class="text-white bg-green-500 text-center w-full">--}}
-                                                {{--                                                                                            create--}}
-                                                {{--                                                                                        </button>--}}
-                                                {{--                                                                                    @endforelse--}}
-                                                {{--                                                                                @endif--}}
-                                                {{--                                                                            </ul>--}}
-                                                {{--                                                                        </div>--}}
-                                                {{--                                                                    </div>--}}
-                                                {{--                                                                </div>--}}
-                                                {{--                                                            </div>--}}
-                                                {{--                                                        </div>--}}
-                                                {{--                                                    </div>--}}
-                                                {{--                                                </div>--}}
-
                                                 <x-dropdown.wrapper label="State" type="stateTyped">
                                                     <div class="relative ">
                                                         <x-dropdown.input label="State" id="state_name"
@@ -336,69 +274,6 @@
                                                     </div>
                                                 </x-dropdown.wrapper>
 
-                                                {{--                                                <div class="flex flex-col ">--}}
-                                                {{--                                                    <div class="xl:flex w-full gap-2">--}}
-                                                {{--                                                        <label for="state_name"--}}
-                                                {{--                                                               class="w-[10rem] text-zinc-500 tracking-wide py-2">State</label>--}}
-                                                {{--                                                        <div x-data="{isTyped: @entangle('stateTyped')}"--}}
-                                                {{--                                                             @click.away="isTyped = false"--}}
-                                                {{--                                                             class="w-full">--}}
-                                                {{--                                                            <div class="relative">--}}
-                                                {{--                                                                <input--}}
-                                                {{--                                                                    id="state_name"--}}
-                                                {{--                                                                    type="search"--}}
-                                                {{--                                                                    wire:model.live="itemList.{{$row}}.state_name"--}}
-                                                {{--                                                                    autocomplete="off"--}}
-                                                {{--                                                                    placeholder="Choose.."--}}
-                                                {{--                                                                    @focus="isTyped = true"--}}
-                                                {{--                                                                    @keydown.escape.window="isTyped = false"--}}
-                                                {{--                                                                    @keydown.tab.window="isTyped = false"--}}
-                                                {{--                                                                    @keydown.enter.prevent="isTyped = false"--}}
-                                                {{--                                                                    wire:keydown.arrow-up="decrementState"--}}
-                                                {{--                                                                    wire:keydown.arrow-down="incrementState"--}}
-                                                {{--                                                                    wire:keydown.enter="enterState('{{$row}}')"--}}
-                                                {{--                                                                    class="block w-full rounded-lg"--}}
-                                                {{--                                                                />--}}
-
-                                                {{--                                                                <!-- State Dropdown -------------------------------------------------------------------->--}}
-                                                {{--                                                                <div x-show="isTyped"--}}
-                                                {{--                                                                     x-transition:leave="transition ease-in duration-100"--}}
-                                                {{--                                                                     x-transition:leave-start="opacity-100"--}}
-                                                {{--                                                                     x-transition:leave-end="opacity-0"--}}
-                                                {{--                                                                     x-cloak--}}
-                                                {{--                                                                >--}}
-                                                {{--                                                                    <div class="absolute z-20 w-full mt-2">--}}
-                                                {{--                                                                        <div class="block py-1 shadow-md w-full--}}
-                                                {{--                rounded-lg border-transparent flex-1 appearance-none border--}}
-                                                {{--                                 bg-white text-gray-800 ring-1 ring-purple-600">--}}
-                                                {{--                                                                            <ul class="overflow-y-scroll h-96">--}}
-                                                {{--                                                                                @if($stateCollection)--}}
-                                                {{--                                                                                    @forelse ($stateCollection as $i => $states)--}}
-
-                                                {{--                                                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
-                                                {{--                                                        {{ $highlightState === $i ? 'bg-yellow-100' : '' }}"--}}
-                                                {{--                                                                                            wire:click.prevent="setState('{{$states->vname}}','{{$states->id}}','{{$row}}')"--}}
-                                                {{--                                                                                            x-on:click="isTyped = false">--}}
-                                                {{--                                                                                            {{ $states->vname }}--}}
-                                                {{--                                                                                        </li>--}}
-
-                                                {{--                                                                                    @empty--}}
-                                                {{--                                                                                        <button--}}
-                                                {{--                                                                                            wire:click.prevent="stateSave('{{$itemList[$row]['state_name']}}','{{$row}}')"--}}
-                                                {{--                                                                                            class="text-white bg-green-500 text-center w-full">--}}
-                                                {{--                                                                                            create--}}
-                                                {{--                                                                                        </button>--}}
-                                                {{--                                                                                    @endforelse--}}
-                                                {{--                                                                                @endif--}}
-                                                {{--                                                                            </ul>--}}
-                                                {{--                                                                        </div>--}}
-                                                {{--                                                                    </div>--}}
-                                                {{--                                                                </div>--}}
-                                                {{--                                                            </div>--}}
-                                                {{--                                                        </div>--}}
-                                                {{--                                                    </div>--}}
-                                                {{--                                                </div>--}}
-
                                                 <x-dropdown.wrapper label="Pincode" type="pincodeTyped">
                                                     <div class="relative ">
                                                         <x-dropdown.input label="Pincode" id="pincode_name"
@@ -410,7 +285,7 @@
                                                             @if($pincodeCollection)
                                                                 @forelse ($pincodeCollection as $i => $pincode)
                                                                     <x-dropdown.option
-                                                                        highlight="{{$pincodeCollection === $i  }}"
+                                                                        highlight="{{$highlightPincode === $i  }}"
                                                                         wire:click.prevent="setPincode('{{$pincode->vname}}','{{$pincode->id}}','{{$row}}')">
                                                                         {{ $pincode->vname }}
                                                                     </x-dropdown.option>
@@ -426,69 +301,6 @@
                                                     </div>
                                                 </x-dropdown.wrapper>
 
-                                                {{--                                                <div class="flex flex-col ">--}}
-                                                {{--                                                    <div class="xl:flex w-full gap-2">--}}
-                                                {{--                                                        <label for="pincode_name"--}}
-                                                {{--                                                               class="w-[10rem] text-zinc-500 tracking-wide py-2">Pincode</label>--}}
-                                                {{--                                                        <div x-data="{isTyped: @entangle('pincodeTyped')}"--}}
-                                                {{--                                                             @click.away="isTyped = false"--}}
-                                                {{--                                                             class="w-full">--}}
-                                                {{--                                                            <div class="relative">--}}
-                                                {{--                                                                <input--}}
-                                                {{--                                                                    id="pincode_name"--}}
-                                                {{--                                                                    type="search"--}}
-                                                {{--                                                                    wire:model.live="itemList.{{$row}}.pincode_name"--}}
-                                                {{--                                                                    autocomplete="off"--}}
-                                                {{--                                                                    placeholder="Choose.."--}}
-                                                {{--                                                                    @focus="isTyped = true"--}}
-                                                {{--                                                                    @keydown.escape.window="isTyped = false"--}}
-                                                {{--                                                                    @keydown.tab.window="isTyped = false"--}}
-                                                {{--                                                                    @keydown.enter.prevent="isTyped = false"--}}
-                                                {{--                                                                    wire:keydown.arrow-up="decrementPincode"--}}
-                                                {{--                                                                    wire:keydown.arrow-down="incrementPincode"--}}
-                                                {{--                                                                    wire:keydown.enter="enterPincode('{{$row}}')"--}}
-                                                {{--                                                                    class="block w-full rounded-lg"--}}
-                                                {{--                                                                />--}}
-
-                                                {{--                                                                <!-- Pin-code Dropdown -------------------------------------------------------------------->--}}
-                                                {{--                                                                <div x-show="isTyped"--}}
-                                                {{--                                                                     x-transition:leave="transition ease-in duration-100"--}}
-                                                {{--                                                                     x-transition:leave-start="opacity-100"--}}
-                                                {{--                                                                     x-transition:leave-end="opacity-0"--}}
-                                                {{--                                                                     x-cloak--}}
-                                                {{--                                                                >--}}
-                                                {{--                                                                    <div class="absolute z-20 w-full mt-2">--}}
-                                                {{--                                                                        <div class="block py-1 shadow-md w-full--}}
-                                                {{--                rounded-lg border-transparent flex-1 appearance-none border--}}
-                                                {{--                                 bg-white text-gray-800 ring-1 ring-purple-600">--}}
-                                                {{--                                                                            <ul class="overflow-y-scroll h-96">--}}
-                                                {{--                                                                                @if($pincodeCollection)--}}
-                                                {{--                                                                                    @forelse ($pincodeCollection as $i => $pincode)--}}
-                                                {{--                                                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
-                                                {{--                                                        {{ $highlightPincode === $i ? 'bg-yellow-100' : '' }}"--}}
-                                                {{--                                                                                            wire:click.prevent="setPincode('{{$pincode->vname}}','{{$pincode->id}}','{{$row}}')"--}}
-                                                {{--                                                                                            x-on:click="isTyped = false">--}}
-                                                {{--                                                                                            {{ $pincode->vname }}--}}
-                                                {{--                                                                                        </li>--}}
-                                                {{--                                                                                    @empty--}}
-                                                {{--                                                                                        <button--}}
-                                                {{--                                                                                            wire:click.prevent="pincodeSave('{{$itemList[$row]['pincode_name']}}','{{$row}}')"--}}
-                                                {{--                                                                                            class="text-white bg-green-500 text-center w-full">--}}
-                                                {{--                                                                                            create--}}
-                                                {{--                                                                                        </button>--}}
-
-                                                {{--                                                                                    @endforelse--}}
-                                                {{--                                                                                @endif--}}
-                                                {{--                                                                            </ul>--}}
-                                                {{--                                                                        </div>--}}
-                                                {{--                                                                    </div>--}}
-                                                {{--                                                                </div>--}}
-                                                {{--                                                            </div>--}}
-                                                {{--                                                        </div>--}}
-                                                {{--                                                    </div>--}}
-                                                {{--                                                </div>--}}
-
-
                                                 <x-dropdown.wrapper label="Country" type="countryTyped">
                                                     <div class="relative ">
 
@@ -503,7 +315,7 @@
 
                                                                 @forelse ($countryCollection as $i => $country)
                                                                     <x-dropdown.option
-                                                                        highlight="{{$countryCollection === $i  }}"
+                                                                        highlight="{{$highlightCountry === $i  }}"
                                                                         wire:click.prevent="setCountry('{{$country->vname}}','{{$country->id}}','{{$row}}')">
                                                                         {{ $country->vname }}
                                                                     </x-dropdown.option>
@@ -521,68 +333,6 @@
                                                         </x-dropdown.select>
                                                     </div>
                                                 </x-dropdown.wrapper>
-
-                                                {{--                                                <div class="flex flex-col ">--}}
-                                                {{--                                                    <div class="xl:flex w-full gap-2">--}}
-                                                {{--                                                        <label for="country_name"--}}
-                                                {{--                                                               class="w-[10rem] text-zinc-500 tracking-wide py-2">Country</label>--}}
-                                                {{--                                                        <div x-data="{isTyped: @entangle('countryTyped')}"--}}
-                                                {{--                                                             @click.away="isTyped = false"--}}
-                                                {{--                                                             class="w-full">--}}
-                                                {{--                                                            <div class="relative">--}}
-                                                {{--                                                                <input--}}
-                                                {{--                                                                    id="country_name"--}}
-                                                {{--                                                                    type="search"--}}
-                                                {{--                                                                    wire:model.live="itemList.{{$row}}.country_name"--}}
-                                                {{--                                                                    autocomplete="off"--}}
-                                                {{--                                                                    placeholder="Choose.."--}}
-                                                {{--                                                                    @focus="isTyped = true"--}}
-                                                {{--                                                                    @keydown.escape.window="isTyped = false"--}}
-                                                {{--                                                                    @keydown.tab.window="isTyped = false"--}}
-                                                {{--                                                                    @keydown.enter.prevent="isTyped = false"--}}
-                                                {{--                                                                    wire:keydown.arrow-up="decrementCountry"--}}
-                                                {{--                                                                    wire:keydown.arrow-down="incrementCountry"--}}
-                                                {{--                                                                    wire:keydown.enter="enterCountry('{{$row}}')"--}}
-                                                {{--                                                                    class="block w-full rounded-lg"--}}
-                                                {{--                                                                />--}}
-
-                                                {{--                                                                <!-- Country Dropdown -------------------------------------------------------------------->--}}
-                                                {{--                                                                <div x-show="isTyped"--}}
-                                                {{--                                                                     x-transition:leave="transition ease-in duration-100"--}}
-                                                {{--                                                                     x-transition:leave-start="opacity-100"--}}
-                                                {{--                                                                     x-transition:leave-end="opacity-0"--}}
-                                                {{--                                                                     x-cloak--}}
-                                                {{--                                                                >--}}
-                                                {{--                                                                    <div class="absolute z-20 w-full mt-2">--}}
-                                                {{--                                                                        <div class="block py-1 shadow-md w-full--}}
-                                                {{--                rounded-lg border-transparent flex-1 appearance-none border--}}
-                                                {{--                                 bg-white text-gray-800 ring-1 ring-purple-600">--}}
-                                                {{--                                                                            <ul class="overflow-y-scroll h-96">--}}
-                                                {{--                                                                                @if($countryCollection)--}}
-                                                {{--                                                                                    @forelse ($countryCollection as $i => $country)--}}
-                                                {{--                                                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
-                                                {{--                                                        {{ $highlightCountry === $i ? 'bg-yellow-100' : '' }}"--}}
-                                                {{--                                                                                            wire:click.prevent="setCountry('{{$country->vname}}','{{$country->id}}','{{$row}}')"--}}
-                                                {{--                                                                                            x-on:click="isTyped = false">--}}
-                                                {{--                                                                                            {{ $country->vname }}--}}
-                                                {{--                                                                                        </li>--}}
-                                                {{--                                                                                    @empty--}}
-                                                {{--                                                                                        <button--}}
-                                                {{--                                                                                            wire:click.prevent="countrySave('{{$itemList[$row]['country_name']}}','{{$row}}')"--}}
-                                                {{--                                                                                            class="text-white bg-green-500 text-center w-full">--}}
-                                                {{--                                                                                            create--}}
-                                                {{--                                                                                        </button>--}}
-
-                                                {{--                                                                                    @endforelse--}}
-                                                {{--                                                                                @endif--}}
-                                                {{--                                                                            </ul>--}}
-                                                {{--                                                                        </div>--}}
-                                                {{--                                                                    </div>--}}
-                                                {{--                                                                </div>--}}
-                                                {{--                                                            </div>--}}
-                                                {{--                                                        </div>--}}
-                                                {{--                                                    </div>--}}
-                                                {{--                                                </div>--}}
 
                                             </div>
 

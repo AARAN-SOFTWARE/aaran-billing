@@ -11,10 +11,9 @@ return new class extends Migration {
 
             Schema::create('tasks', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('client_id')->nullable();
-                $table->string('title');
+                $table->string('vname');
                 $table->longText('body');
-                $table->string('channel', 3)->nullable();
+                $table->longText('image')->nullable();
                 $table->foreignId('allocated')->references('id')->on('users')->onDelete('cascade');
                 $table->string('status', 3)->nullable();
                 $table->string('verified')->nullable();
