@@ -13,7 +13,6 @@
                         #007BFF
                     </x-interactions.clip>
                 </div>
-
             </div>
             <div class="flex-col flex justify-center items-center font-roboto tracking-wider">
                 <div class="w-40 bg-[#6c757d] text-white text-xs text-left border-b border-white px-2 py-2 rounded-t-md">

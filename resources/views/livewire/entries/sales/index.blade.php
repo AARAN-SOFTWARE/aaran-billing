@@ -71,14 +71,14 @@
                                 @if(isset($obj))
                                     @if($obj->status=='Generated')
                                         <div
-                                            class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
+                                            class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-emerald-100/60 ">
                                             <span class="h-1.5 w-1.5  rounded-full bg-emerald-500 "></span>
                                             <h2 class="font-normal text-emerald-500">{{$obj->status}}
                                             </h2>
                                         </div>
                                     @elseif($obj->status=='Canceled')
                                         <div
-                                            class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-red-100/60 dark:bg-gray-800">
+                                            class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-red-100/60 ">
                                             <span class="h-1.5 w-1.5  rounded-full bg-red-500 "></span>
                                             <h2 class="font-normal text-red-500 ">{{$obj->status}}
                                             </h2>
@@ -86,7 +86,7 @@
                                     @endif
                                 @else
                                     <div
-                                        class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-purple-100/60 dark:bg-gray-800">
+                                        class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-purple-100/60 ">
                                         <span
                                             class="h-1.5 w-1.5  rounded-full bg-purple-500 "></span>
                                         <h2 class="font-normal text-purple-500 ">

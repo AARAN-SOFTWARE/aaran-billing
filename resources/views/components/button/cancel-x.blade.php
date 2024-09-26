@@ -1,9 +1,9 @@
 <button
-    class="tab-button sm:px-6 px-4 sm:py-[7px] py-[6px] relative rounded group overflow-hidden font-medium bg-gradient-to-r
-    from-gray-600 to-gray-400 inline-block text-center" {{$attributes}}>
+    class="tab-button sm:px-6 px-4 sm:py-[7px] py-[6px] relative rounded group overflow-hidden font-medium bg-gray-500 inline-block text-center" {{$attributes}}>
                 <span
                     class="absolute top-0 left-0 flex h-full w-0 mr-0 transition-all
-                    duration-500 ease-out transform translate-x-0 group-hover:w-full opacity-90 bg-gradient-to-r from-gray-400 to-gray-600"></span>
+                    duration-500 ease-out transform translate-x-0 group-hover:w-full opacity-90
+                    bg-gray-600"></span>
     <span class="relative group-hover:hidden text-white sm:text-lg text-sm">
                Cancel
             </span>

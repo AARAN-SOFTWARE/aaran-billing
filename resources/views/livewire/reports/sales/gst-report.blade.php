@@ -39,9 +39,9 @@
 
         <div class="flex sm:flex-row flex-col gap-5">
             <div class="w-full h-auto">
-                <div class="py-2 flex justify-evenly">
+                <div class="py-2 flex justify-evenly items-center">
                     <div class="text-xl text-center  font-bold tracking-wider">Sales Report</div>
-                    <x-button.secondary wire:click="salesReport">Print</x-button.secondary>
+                    <x-button.print-x wire:click="salesReport">Print</x-button.print-x>
                 </div>
                 <div class="h-screen overflow-y-auto pr-2">
                     <x-table.form>
@@ -82,9 +82,9 @@
             </div>
 
             <div class="w-full h-auto">
-                <div class="py-2 flex justify-evenly">
+                <div class="py-2 flex justify-evenly items-center">
                     <div class="text-xl text-center  font-bold tracking-wider">Purchase Report</div>
-                    <x-button.secondary wire:click="purchaseReport">Print</x-button.secondary>
+                    <x-button.print-x wire:click="purchaseReport">Print</x-button.print-x>
                 </div>
                 <div class="h-screen overflow-y-auto pr-2">
 
@@ -159,7 +159,7 @@
         </div>
 
         <div class="w-full flex justify-end items-end">
-            <x-button.secondary wire:click="GstPrint">Print</x-button.secondary>
+            <x-button.print-x wire:click="GstPrint">Print</x-button.print-x>
         </div>
 
     </x-forms.m-panel>

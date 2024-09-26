@@ -1,5 +1,5 @@
 <svg fill="#FFFFFF"
-     class=" group-hover:translate-y-2  origin-top transition-all duration-150 ease-linear"
+     class=" sm:group-hover:translate-y-2 group-hover:translate-y-1  origin-top transition-all duration-150 ease-linear"
      width="60px"
      height="60px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
     <path

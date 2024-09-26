@@ -13,7 +13,12 @@
     <div class="text-end text-xs text-gray-500 p-0.5">Original Copy</div>
     <div class="border border-gray-300">
         <div class="flex justify-center p-2 gap-x-6">
-            <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-24 h-auto"/>
+                @if($cmp->get('logo')!='no_image')
+                    <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo"
+                         class="w-24 h-auto"/>
+                @else
+                    <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" class="w-auto h-24">
+                @endif
             <div class="flex-col flex gap-1 ">
                 <div class="text-3xl uppercase font-bold">{{$cmp->get('company_name')}}</div>
                 <div class="flex-col flex text-xs space-y-0.5 text-gray-600 justify-center items-center">
@@ -56,9 +61,12 @@
                         <div class="inline-flex justify-between"><span
                                 class="font-bold text-black">Date:</span><span>{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</span>
                         </div>
+                        @if($irn)
+
                         <div class="inline-flex justify-between"><span
                                 class="w-1/2 font-bold text-black">IRN No:</span><span
-                                class="w-1/2 break-all text-end">12345678901234567980012345678901234567890</span></div>
+                                class="w-1/2 break-all text-end">{{ $irn-> }}</span></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -257,7 +265,6 @@
 </div>
 
 @pageBreak
-
 
 <div class="p-5 ">
     <div class="text-end text-xs text-gray-500 p-0.5">Original Copy</div>
@@ -266,11 +273,12 @@
             <span class="">e-Way Bill</span>
         </div>
         <div class="w-full text-xs  tracking-wider flex items-center justify-between py-2 px-0.5">
-            <div><span>Doc No:</span> <span class="font-semibold">Tax Invoice - 43</span></div>
-            <div><span>Date:</span> <span class="font-semibold">{{date('y-m-d')}}</span></div>
+            <div><span>Invoice No:</span> <span class="font-semibold"> {{$obj->invoice_no}}</span></div>
+            <div><span>Date:</span> <span class="font-semibold">{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. e-way Bill Details</span>
     </div>
     <div class="w-full flex border-l border-r border-gray-300">
@@ -311,7 +319,8 @@
             @endif
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. Address Details</span>
     </div>
     <div class="flex justify-between text-xs   border-l border-r border-gray-300">
@@ -345,7 +354,8 @@
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
         <span class=" ">3. Good Details</span>
     </div>
     <!-- Item Table -->
@@ -380,7 +390,8 @@
                     </td>
                     <td class="py-2 px-0.5 border-r border-gray-300 text-center">{{$row['qty']+0}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300 font-semibold">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}&nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
+                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}
+                        &nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>--}}
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>--}}
                 </tr>
@@ -452,7 +463,8 @@
                     class="w-2/5 text-end"></span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">4. Transportation Details</span>
     </div>
     <div class="w-full flex  text-xs border-l border-r border-gray-300">
@@ -474,7 +486,8 @@
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">5. Vehicle Details</span>
     </div>
     <div class="w-full  text-xs inline-flex items-center justify-between border-b border-l border-r border-gray-300">
@@ -756,7 +769,8 @@
             <div><span>Date:</span> <span class="font-semibold">{{date('y-m-d')}}</span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. e-way Bill Details</span>
     </div>
     <div class="w-full flex border-l border-r border-gray-300">
@@ -797,7 +811,8 @@
             @endif
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. Address Details</span>
     </div>
     <div class="flex justify-between text-xs   border-l border-r border-gray-300">
@@ -831,7 +846,8 @@
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
         <span class=" ">3. Good Details</span>
     </div>
     <!-- Item Table -->
@@ -866,7 +882,8 @@
                     </td>
                     <td class="py-2 px-0.5 border-r border-gray-300 text-center">{{$row['qty']+0}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300 font-semibold">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}&nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
+                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}
+                        &nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>--}}
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>--}}
                 </tr>
@@ -938,7 +955,8 @@
                     class="w-2/5 text-end"></span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">4. Transportation Details</span>
     </div>
     <div class="w-full flex  text-xs border-l border-r border-gray-300">
@@ -960,7 +978,8 @@
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">5. Vehicle Details</span>
     </div>
     <div class="w-full  text-xs inline-flex items-center justify-between border-b border-l border-r border-gray-300">
@@ -1240,7 +1259,8 @@
             <div><span>Date:</span> <span class="font-semibold">{{date('y-m-d')}}</span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. e-way Bill Details</span>
     </div>
     <div class="w-full flex border-l border-r border-gray-300">
@@ -1281,7 +1301,8 @@
             @endif
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. Address Details</span>
     </div>
     <div class="flex justify-between text-xs   border-l border-r border-gray-300">
@@ -1315,7 +1336,8 @@
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
         <span class=" ">3. Good Details</span>
     </div>
     <!-- Item Table -->
@@ -1350,7 +1372,8 @@
                     </td>
                     <td class="py-2 px-0.5 border-r border-gray-300 text-center">{{$row['qty']+0}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300 font-semibold">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}&nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
+                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}
+                        &nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>--}}
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>--}}
                 </tr>
@@ -1422,7 +1445,8 @@
                     class="w-2/5 text-end"></span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">4. Transportation Details</span>
     </div>
     <div class="w-full flex  text-xs border-l border-r border-gray-300">
@@ -1444,7 +1468,8 @@
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">5. Vehicle Details</span>
     </div>
     <div class="w-full  text-xs inline-flex items-center justify-between border-b border-l border-r border-gray-300">

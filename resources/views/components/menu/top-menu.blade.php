@@ -1,9 +1,11 @@
-<header class="flex  items-center sm:px-4 px-1 py-3 text-semibold text-gray-800  border-b shadow-md print:hidden">
+<header class="flex  items-center sm:px-4 px-1 py-3 text-semibold text-gray-800  border-b
+shadow-md print:hidden">
 
     <div class="w-full sm:px-2 px-0 flex flex-row  justify-between items-center">
 
         <div
-            class="w-3/12 flex sm:flex-row flex-col sm:justify-start sm:space-x-4  items-center sm:space-y-1.5 space-y-3">
+            class="w-3/12 flex sm:flex-row flex-col sm:justify-start sm:space-x-4
+            items-center sm:space-y-1.5 space-y-3">
             <div class="p-1 cursor-pointer hover:bg-gray-200 self-start hover:rounded-sm"
                  @click="sidebarOpen = !sidebarOpen">
 
@@ -27,13 +29,7 @@
 
         <div class="w-5/12 flex sm:flex-row flex-col sm:justify-end justify-evenly items-center space-y-1">
             <div class="flex max-w-max justify-center items-center">
-                {{--                @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3|| session()->get('role_id')==4 )--}}
                 <livewire:default-company.index/>
-                {{--                @endif--}}
-                {{-- @livewire('controls.searchbars.topsearch')--}}
-                {{-- @livewire('controls.searchbars.searchbar')--}}
-                {{-- @livewire('controls.searchbars.filters')--}}
-
             </div>
 
             {{-- login menu--}}
@@ -45,7 +41,8 @@
                             @auth
                                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                     <button
-                                        class="flex sm:text-sm text-xs border-2 border-gray-300 rounded-full focus:outline-none focus:border-gray-300 transition">
+                                        class="flex sm:text-sm text-xs border-2 border-gray-300 rounded-full
+                                        focus:outline-none focus:border-gray-300 transition">
                                         <img class="h-10 w-12 rounded-full object-cover"
                                              src="{{ Auth::user()->profile_photo_url }}"
                                              alt="{{ Auth::user()->name }}"/>

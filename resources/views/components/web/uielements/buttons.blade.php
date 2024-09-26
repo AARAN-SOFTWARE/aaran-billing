@@ -37,5 +37,16 @@
             </div>
         </div>
     </div>
+    <div class=" flex-wrap flex items-center gap-5">
+        <x-button.new-x/>
+        <x-button.danger-x/>
+        <x-button.save-x/>
+        <x-button.back-x/>
+        <x-button.cancel-x/>
+        <x-button.print-x/>
+        <x-button.e-invoice-x/>
+        <x-button.e-way-x/>
+        <x-button.e-cancel-x/>
+    </div>
 
 </x-forms.m-panel>
