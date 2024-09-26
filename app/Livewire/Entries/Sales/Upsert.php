@@ -5,6 +5,7 @@ namespace App\Livewire\Entries\Sales;
 use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Sale;
 use Aaran\Entries\Models\Saleitem;
+use Aaran\Entries\Models\SalesEvent;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
@@ -890,11 +891,11 @@ class Upsert extends Component
                     $this->validate($this->rules());
 
                     $obj = Sale::create([
-                        'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no,
+                        'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.Sale::nextNo(),
                         'acyear' => session()->get('acyear'),
                         'company_id' => session()->get('company_id'),
                         'contact_id' => $this->contact_id,
-                        'invoice_no' => $this->invoice_no,
+                        'invoice_no' => Sale::nextNo(),
                         'invoice_date' => $this->invoice_date,
                         'order_id' => $this->order_id ?: 1,
                         'billing_id' => $this->billing_id ?: ContactDetail::getId($this->contact_id),
@@ -1032,7 +1033,6 @@ class Upsert extends Component
     public function mount($id): void
     {
         $this->apiAuthenticate();
-        $this->invoice_no = Sale::nextNo();
         if ($id != 0) {
             $obj = Sale::find($id);
             $this->common->vid = $obj->id;
@@ -1107,6 +1107,8 @@ class Upsert extends Component
             $this->e_invoiceDetails=MasterGstIrn::where('sales_id',$this->common->vid)->first();
             $this->e_wayDetails=MasterGstEway::where('sales_id',$this->common->vid)->first();
         } else {
+
+            $this->invoice_no= Sale::nextNo();
             $this->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
             $this->common->active_id = true;
             $this->sales_type = '1';
