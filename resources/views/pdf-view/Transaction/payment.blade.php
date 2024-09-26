@@ -34,7 +34,7 @@
     <tr class="py-2 border-b border-r border-gray-300 tracking-wider">
         <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300 text-center">S.No</th>
         <th class="py-2  border-r border-gray-300">Contact</th>
-        <th class="py-2 w-[5%] border-r border-gray-300">Type</th>
+        <th class="py-2 w-[10%] border-r border-gray-300">Type</th>
         <th class="py-2 w-[20%] border-r border-gray-300">Mode of Payments</th>
         <th class="py-2 w-[10%] border-r px-1 border-gray-300">Amount</th>
     </tr>
@@ -43,10 +43,10 @@
     @foreach($list as $index=>$row)
         <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
             <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
-            <td class="py-2 text-start border-r border-gray-300">{{$row->contact->vname}}</td>
+            <td class="py-2 text-start px-0.5 border-r border-gray-300">{{$row->contact->vname}}</td>
             <td class="py-2 text-center px-0.5 border-r border-gray-300">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
-            <td class="py-2 text-end px-0.5 border-r border-gray-300">{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</td>
-            <td class="py-2 text-center border-r border-gray-300">{{$row->vname+0}}</td>
+            <td class="py-2 text-center px-0.5 border-r border-gray-300">{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</td>
+            <td class="py-2 text-right border-r px-2 border-gray-300">{{$row->vname+0}}</td>
 
     @endforeach
 {{--    @for($i = 0; $i < 9 - $list->count(); $i++)--}}

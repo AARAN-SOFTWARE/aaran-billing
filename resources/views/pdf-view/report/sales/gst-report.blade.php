@@ -57,8 +57,8 @@ $purchaseTotal = 0
                 <td class="py-2 text-start px-0.5 border-r border-gray-300">{{$row->contact->vname}}</td>
                 <td class="py-2 text-center px-0.5 border-r border-gray-300">{{$row->invoice_no}}</td>
                 <td class="py-2 text-end px-0.5 border-r border-gray-300"> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</td>
-                <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row->grand_total}}</td>
-                <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row->total_gst}}</td>
+                <td class="py-2 text-end px-1 border-r border-gray-300">{{$row->grand_total}}</td>
+                <td class="py-2 text-center px-1 border-r border-gray-300">{{$row->total_gst}}</td>
             </tr>
         @endforeach
         <tr class="text-[10px] border-b border-r border-gray-300 self-start font-semibold">

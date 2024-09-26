@@ -50,9 +50,9 @@
     <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
         @if($party !=null)
             <td class="py-2 text-center px-0.5 border-l border-r border-gray-300" colspan="3">Opening Balance</td>
-            <td class="py-2 text-end px-0.5 border-r border-gray-300">{{ $opening_balance}}</td>
-            <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
-            <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$opening_balance}}</td>
+            <td class="py-2 text-end px-1 border-r border-gray-300">{{ $opening_balance}}</td>
+            <td class="py-2 text-end px-1 border-r border-gray-300"></td>
+            <td class="py-2 text-end px-1 border-r border-gray-300">{{$opening_balance}}</td>
         @endif
     </tr>
     @foreach($list as $index=>$row)
@@ -65,9 +65,9 @@
             <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
             <td class="py-2 text-center border-r border-gray-300">{{ $row->mode }}</td>
             <td class="py-2 text-center px-0.5 border-r border-gray-300">{{$row->mode=='invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}</td>
-            <td class="py-2 text-end px-0.5 border-r border-gray-300"> {{ $row->grand_total }}</td>
-            <td class="py-2 text-end px-0.5 border-r border-gray-300">{{ $row->transaction_amount }}</td>
-            <td class="py-2 text-end px-0.5 border-r border-gray-300">{{  $balance  = $totalPurchase-$totalPayment}}</td>
+            <td class="py-2 text-end px-1 border-r border-gray-300"> {{ $row->grand_total }}</td>
+            <td class="py-2 text-end px-1 border-r border-gray-300">{{ $row->transaction_amount }}</td>
+            <td class="py-2 text-end px-1 border-r border-gray-300">{{  $balance  = $totalPurchase-$totalPayment}}</td>
         </tr>
     @endforeach
     <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
@@ -78,7 +78,7 @@
     </tr>
     <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
         <td class="py-2 text-center border-l border-r border-gray-300" colspan="3">Balance</td>
-        <td class="py-2 text-end px-0.5 border-r border-gray-300">{{ $totalPurchase-$totalPayment}}</td>
+        <td class="py-2 text-end px-1 border-r border-gray-300">{{ $totalPurchase-$totalPayment}}</td>
         <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
         <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
     </tr>

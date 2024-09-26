@@ -14,7 +14,7 @@
             </x-table.caption>
 
             <div class="flex justify-end w-full">
-                    <x-button.print-x href="{{route('trans.print',[$trans_type_id == 108 ? 1 : 2 ])}}" />
+                <x-button.print-x href="{{route('trans.print',[$trans_type_id == 108 ? 1 : 2 ])}}"/>
             </div>
         </div>
 
@@ -30,15 +30,16 @@
                     Contact
                 </x-table.header-text>
 
-                <x-table.header-text sort-icon="none">Payment</x-table.header-text>
-
-                <x-table.header-text sort-icon="none">Receipt</x-table.header-text>
 
                 @if( $trans_type_id != 80)
                     <x-table.header-text wire:click.prevent="sortBy('contact_id')"
-                                         sort-icon="{{$getListForm->sortAsc}}">Type
+                                         sort-icon="none">Type
                     </x-table.header-text>
                 @endif
+
+                <x-table.header-text sort-icon="none">Payment</x-table.header-text>
+
+                <x-table.header-text sort-icon="none">Receipt</x-table.header-text>
 
                 <x-table.header-text sort-icon="none">Balance</x-table.header-text>
 
@@ -79,6 +80,10 @@
 
                         <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
 
+                        @if( $trans_type_id != 85)
+                            <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
+                        @endif
+
                         @if($row->mode_id == 110)
                             <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
                         @else
@@ -92,9 +97,6 @@
                             <x-table.cell-text></x-table.cell-text>
                         @endif
 
-                        @if( $trans_type_id != 85)
-                            <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
-                        @endif
 
                         <x-table.cell-text right>
                             {{  $balance  = $totalReceipt-$totalPayment}}
@@ -107,7 +109,7 @@
                 @endforeach
 
                 <x-table.row>
-                    <x-table.cell-text right colspan="2">
+                    <x-table.cell-text right colspan="3">
                         Total
                     </x-table.cell-text>
                     <x-table.cell-text right>
@@ -116,7 +118,7 @@
                     <x-table.cell-text right>
                         {{$totalReceipt}}
                     </x-table.cell-text>
-                    <x-table.cell-text colspan="2" class=" text-right">
+                    <x-table.cell-text class="text-right">
                         {{$totalReceipt - $totalPayment }}
                     </x-table.cell-text>
                 </x-table.row>
@@ -310,7 +312,7 @@
                                         </div>
                                     </x-dropdown.wrapper>
 
-{{--                                    <x-input.floating wire:model="ref_no" :label="'Against'"/>--}}
+                                    {{--                                    <x-input.floating wire:model="ref_no" :label="'Against'"/>--}}
                                     <x-dropdown.wrapper label="Against" type="salesTyped">
                                         <div class="relative">
 
@@ -328,7 +330,8 @@
                                                             {{ $sale->invoice_no }}
                                                         </x-dropdown.option>
                                                     @empty
-                                                        <x-dropdown.new href="{{ route('sales.upsert', ['0']) }}" label="Sales"/>
+                                                        <x-dropdown.new href="{{ route('sales.upsert', ['0']) }}"
+                                                                        label="Sales"/>
                                                     @endforelse
                                                 @endif
 

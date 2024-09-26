@@ -43,6 +43,7 @@
                     <div class="text-xl text-center  font-bold tracking-wider">Sales Report</div>
                     <x-button.print-x wire:click="salesReport">Print</x-button.print-x>
                 </div>
+
                 <div class="h-screen overflow-y-auto pr-2">
                     <x-table.form>
                         <x-slot:table_header name="table_header" class="bg-green-600">
@@ -79,6 +80,7 @@
                         </x-slot:table_body>
                     </x-table.form>
                 </div>
+
             </div>
 
             <div class="w-full h-auto">
@@ -86,8 +88,8 @@
                     <div class="text-xl text-center  font-bold tracking-wider">Purchase Report</div>
                     <x-button.print-x wire:click="purchaseReport">Print</x-button.print-x>
                 </div>
-                <div class="h-screen overflow-y-auto pr-2">
 
+                <div class="h-screen overflow-y-auto pr-2">
                     <x-table.form>
                         <x-slot:table_header name="table_header" class="bg-green-600">
                             <x-table.header-serial width="20%"/>
@@ -125,7 +127,8 @@
                 </div>
             </div>
         </div>
-        <div>
+
+        <div class="hidden sm:block">
             <x-table.form>
                 <x-slot:table_body name="table_body">
 
@@ -146,6 +149,7 @@
                             <div
                                 class="font-bold">{{\App\Helper\ConvertTo::rupeesFormat($invoiceTotal-$purchaseTotal)}}</div>
                         </x-table.cell-text>
+
                         <x-table.cell-text colspan="2" right>
                             <div class="font-bold">GST (Sales-Purchase)</div>
                         </x-table.cell-text>
@@ -154,6 +158,51 @@
                                 class="font-bold">{{\App\Helper\ConvertTo::rupeesFormat($sales_gstTotal-$purchase_gstTotal)}}</div>
                         </x-table.cell-text>
                     </x-table.row>
+                </x-slot:table_body>
+            </x-table.form>
+        </div>
+
+        <div class="block sm:hidden">
+            <x-table.form>
+                <x-slot:table_body name="table_body">
+
+                    <x-table.row>
+                        <x-table.cell-text right>Total Sales Amount</x-table.cell-text>
+                        <x-table.cell-text>{{\App\Helper\ConvertTo::rupeesFormat($invoiceTotal)}}</x-table.cell-text>
+                    </x-table.row>
+                    <x-table.row>
+                        <x-table.cell-text right>Total Sales GST Amount</x-table.cell-text>
+                        <x-table.cell-text>{{\App\Helper\ConvertTo::rupeesFormat($sales_gstTotal)}}</x-table.cell-text>
+                    </x-table.row>
+
+                    <x-table.row>
+                        <x-table.cell-text right>Total Purchase Amount</x-table.cell-text>
+                        <x-table.cell-text>{{\App\Helper\ConvertTo::rupeesFormat($purchaseTotal)}}</x-table.cell-text>
+                    </x-table.row>
+                    <x-table.row>
+                        <x-table.cell-text right>Total Purchase GST Amount</x-table.cell-text>
+                        <x-table.cell-text>{{\App\Helper\ConvertTo::rupeesFormat($purchase_gstTotal)}}</x-table.cell-text>
+                    </x-table.row>
+
+                    <x-table.row>
+                        <x-table.cell-text  right>
+                            <div class="font-bold">Difference (Sales-Purchase)</div>
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <div
+                                class="font-bold">{{\App\Helper\ConvertTo::rupeesFormat($invoiceTotal-$purchaseTotal)}}</div>
+                        </x-table.cell-text>
+                    </x-table.row>
+                    <x-table.row>
+                    <x-table.cell-text  right>
+                        <div class="font-bold">GST (Sales-Purchase)</div>
+                    </x-table.cell-text>
+                    <x-table.cell-text>
+                        <div
+                            class="font-bold">{{\App\Helper\ConvertTo::rupeesFormat($sales_gstTotal-$purchase_gstTotal)}}</div>
+                    </x-table.cell-text>
+                    </x-table.row>
+
                 </x-slot:table_body>
             </x-table.form>
         </div>
