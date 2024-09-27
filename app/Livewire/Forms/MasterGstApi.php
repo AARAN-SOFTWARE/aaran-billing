@@ -337,4 +337,38 @@ class MasterGstApi extends Form
         }
     }
     #endregion
+
+    #region[getEwayDetails]
+    public function getIrnDetail(Request $request,$token = null, $docDetail = null)
+    {
+        try {
+            $response = Http::withHeaders([
+                'ip_address' => '103.231.117.198',
+                'client_id' => '7428e4e3-3dc4-45dd-a09d-78e70267dc7b',
+                'client_secret' => '79a7b613-cf8f-466f-944f-28b9c429544d',
+                'username' => 'mastergst',
+                'auth-token' => $token,
+                'gstin' => '29AABCT1332L000',
+                'docnum' =>(string)($docDetail['No']),
+                'docdate' => (string)($docDetail['Dt']),
+            ])->get('https://api.mastergst.com/einvoice/type/GETIRNBYDOCDETAILS/version/V1_03', [
+                'email' => 'aaranoffice@gmail.com',
+                'param1' => $docDetail['Typ'],
+            ]);
+            if ($response->successful()) {
+                $data = $response->json();
+                if ($data !== null) {
+                    return $data;
+                } else {
+                    return response()->json(['error' => 'Failed to decode JSON data.'], 500);
+                }
+
+            } else {
+                echo "Request failed with status code: ".$response->status();
+            }
+        } catch (\Exception $e) {
+            echo "An error occurred: ".$e->getMessage();
+        }
+    }
+    #endregion
 }
