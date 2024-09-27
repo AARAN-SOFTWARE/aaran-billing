@@ -356,7 +356,7 @@
                 <div>{{$shipping_address->get('address_3')}}</div>
             </div>
             <div class="">
-                <div class="font-semibold">Ship From</div>
+                <div class="font-semibold">Ship To</div>
                 <div>{{$shipping_address->get('address_1')}}</div>
                 <div>{{$shipping_address->get('address_2')}}</div>
                 <div>{{$shipping_address->get('address_3')}}</div>
