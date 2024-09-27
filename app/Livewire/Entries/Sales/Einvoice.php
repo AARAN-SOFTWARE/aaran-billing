@@ -40,6 +40,7 @@ class Einvoice extends Component
     public $contactDetails;
     public $companyDetails;
     public $addressDetails;
+    public $showError=false;
     #endregion
 
     #region[mount]
@@ -236,11 +237,12 @@ class Einvoice extends Component
          $result = $this->masterGstApi->getIrn(new Request(), $this->token, $this->irnData,$this->salesData->id);
          if (isset($result['data']['Irn'])) {
              $this->successMessage = 'E-invoice generated successfully: ' . $result['data']['Irn'];
+             $this->dispatch('notify', ...['type' => 'success', 'content' => $this->successMessage]);
+             $this->getRoute();
          } else {
-             $this->successMessage = 'Failed to generate IRN '.$result['status_desc'];
+             $this->successMessage = json_decode($result['status_desc']);
+             $this->showError = !$this->showError;
          }
-         $this->dispatch('notify', ...['type' => 'success', 'content' => $this->successMessage]);
-        $this->getRoute();
      }
      #endregion
 

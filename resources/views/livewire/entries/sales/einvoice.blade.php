@@ -216,7 +216,9 @@
                 <div class="w-full">
                     @if(isset($e_invoiceDetails->id))
                         <div class="flex flex-col items-center justify-center ">
-                            <img class="w-[145px]" src="{{\App\Helper\qrcoder::generate($e_invoiceDetails->signed_qrcode,22)}}" alt="{{$e_invoiceDetails->signed_qrcode}}">
+                            <img class="w-[145px]"
+                                 src="{{\App\Helper\qrcoder::generate($e_invoiceDetails->signed_qrcode,22)}}"
+                                 alt="{{$e_invoiceDetails->signed_qrcode}}">
                             <div>Irn No : {{$e_invoiceDetails->irn}}</div>
                         </div>
                     @endif
@@ -255,24 +257,24 @@
 
             <div class="flex gap-3">
                 <x-button.back-x wire:click="getRoute"/>
-{{--                <x-button.back/>--}}
+                {{--                <x-button.back/>--}}
                 @if(!isset($e_invoiceDetails))
-{{--                <x-button.secondary wire:click="jsonFormate"--}}
-{{--                                    class=" bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600--}}
-{{--                                    focus:ring-2 focus:ring-offset-2 focus:ring-green-600 text-white ">--}}
-{{--                    Generate E-Invoice--}}
-{{--                </x-button.secondary>--}}
-                    <x-button.e-invoice-x wire:click="jsonFormate" />
+                    {{--                <x-button.secondary wire:click="jsonFormate"--}}
+                    {{--                                    class=" bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600--}}
+                    {{--                                    focus:ring-2 focus:ring-offset-2 focus:ring-green-600 text-white ">--}}
+                    {{--                    Generate E-Invoice--}}
+                    {{--                </x-button.secondary>--}}
+                    <x-button.e-invoice-x wire:click="jsonFormate"/>
                 @endif
                 @if(isset($e_invoiceDetails))
                     @if($e_invoiceDetails->status!='Canceled')
-{{--                        <button class='max-w-max bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 focus:ring-2 focus:ring-offset-2--}}
-{{--            focus:ring-red-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold--}}
-{{--            transition-all linear duration-400 ' wire:click="cancelIrn">--}}
-{{--                            <x-icons.icon :icon="'x-mark'" class="sm:h-5 h-3 w-auto"/>--}}
-{{--                            <span>Cancel  E-Invoice</span>--}}
-{{--                        </button>--}}
-                        <x-button.e-cancel-x wire:click="cancelIrn" />
+                        {{--                        <button class='max-w-max bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 focus:ring-2 focus:ring-offset-2--}}
+                        {{--            focus:ring-red-600 text-white sm:px-4 sm:py-2 px-2 py-1 text-[12px] inline-flex items-center gap-x-2 rounded-md tracking-widest font-semibold--}}
+                        {{--            transition-all linear duration-400 ' wire:click="cancelIrn">--}}
+                        {{--                            <x-icons.icon :icon="'x-mark'" class="sm:h-5 h-3 w-auto"/>--}}
+                        {{--                            <span>Cancel  E-Invoice</span>--}}
+                        {{--                        </button>--}}
+                        <x-button.e-cancel-x wire:click="cancelIrn"/>
                     @endif
                 @endif
             </div>
@@ -300,20 +302,34 @@
                 <div class="w-full flex justify-between gap-3">
                     <div class="py-2">&nbsp;</div>
                     <div class="flex gap-3">
-{{--                        <x-button.secondary wire:click.prevent="$set('showModel', false)">Cancel</x-button.secondary>--}}
-{{--                        <x-button.secondary wire:click="getCancelIrn" class="bg-red-500 hover:bg-red-700">E-invoice--}}
-{{--                            Cancel--}}
-{{--                        </x-button.secondary>--}}
+                        {{--                        <x-button.secondary wire:click.prevent="$set('showModel', false)">Cancel</x-button.secondary>--}}
+                        {{--                        <x-button.secondary wire:click="getCancelIrn" class="bg-red-500 hover:bg-red-700">E-invoice--}}
+                        {{--                            Cancel--}}
+                        {{--                        </x-button.secondary>--}}
                         <x-button.cancel-x wire:click.prevent="$set('showModel', false)"/>
-                        <x-button.e-cancel-x wire:click="getCancelIrn" />
+                        <x-button.e-cancel-x wire:click="getCancelIrn"/>
                     </div>
                 </div>
             </div>
         </x-jet.modal>
-    <x-modal.info>
-        <div>
-           {{$successMessage}}
-        </div>
-    </x-modal.info>
+        <x-jet.modal wire:model="showError">
+            <div class="p-5 space-y-5">
+                <div class="">Reason for Failed to Generate IRN</div>
+                <div class="border-b-2">&nbsp;</div>
+                <div>
+                    @if(isset($successMessage))
+                        <ul class="list-decimal space-y-2 px-5">
+                            @foreach($successMessage as $row)
+                                <li> {{$row->ErrorMessage}}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+                <div class="border-b-2">&nbsp;</div>
+                <div class="flex justify-end items-end">
+                    <x-button.secondary wire:click.prevent="$set('showError', false)">Cancel</x-button.secondary>
+                </div>
+            </div>
+        </x-jet.modal>
     </x-forms.m-panel>
 </div>
