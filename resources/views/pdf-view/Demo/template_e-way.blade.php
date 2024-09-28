@@ -221,7 +221,7 @@
 <div class="w-full text-xs right p-1">Original Copy</div>
 <table class="border w-full border-b-none">
     <tr>
-        <td style="width: 145px;height: 145px;">
+        <td style="width: 145px;">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
@@ -249,7 +249,7 @@
 </table>
 <table class="border v-align-c">
     <tr class="bg-gray center font-bold text-md p-1">
-        <td width="40%" class="right">TAX INVOICE</td>
+        <td width="40%" class="right py-5">TAX INVOICE</td>
         <td width="20%"></td>
         <td width="40%" class=""></td>
     </tr>
@@ -278,10 +278,10 @@
 <table class="border border-t-none">
     <tr class="bg-gray text-sm lh-2 border-b">
         <th width="4.33%" class="border-r">S.No</th>
-        <th width="6.33%" class="border-r">PO.No</th>
-        <th width="8.33%" class="border-r">DC.No</th>
-        <th width="auto" class="border-r">Particulars</th>
         <th width="8.33%" class="border-r">HSN Code</th>
+        <th width="auto" class="border-r">Particulars</th>
+        <th width="6.33%" class="border-r">Size</th>
+        <th width="8.33%" class="border-r">Colours</th>
         <th width="4.33%" class="border-r">Quantity</th>
         <th width="8.33%" class="border-r">Price</th>
         <th width="8.33%" class="border-r">Taxable Amount</th>
@@ -295,8 +295,7 @@
     @foreach($list as $index => $row)
         <tr class="text-sm center v-align-t">
             <td height="26px" class="center border-r p-1">{{$index+1}} </td>
-            <td class="left border-r p-1">{{$row['po_no']}}</td>
-            <td class="left border-r p-1">{{$row['dc_no']}}</td>
+            <td class="left border-r p-1">{{$row['hsncode']}}</td>
             <td class="left border-r p-1" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
@@ -304,7 +303,8 @@
                     {{$row['product_name']}}
                 @endif
             </td>
-            <td class="center border-r p-1">{{$row['hsncode']}}</td>
+            <td class="center border-r p-1">{{$row['size_name']}}</td>
+            <td class="center border-r p-1">{{$row['colour_name']}} </td>
             <td class="right border-r p-1">{{$row['qty']+0}}</td>
             <td class="right border-r p-1">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
             <td class="right border-r p-1">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
@@ -358,7 +358,7 @@
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
-        @if($obj->sales_type=='1')
+        @if($obj->sales_type==0)
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -377,7 +377,7 @@
             <div>* Goods once sold cannot be return back or exchanged</div>
             <div>* Seller cannot be responsible for any damage/mistakes.</div>
         </td>
-        @if($obj->sales_type=='1')
+        @if($obj->sales_type==0)
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -400,13 +400,13 @@
             colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
     </tr>
     <tr>
-        <td class="text-sm font-bold px-5" rowspan="2" colspan="3" width="100px">
+        <td class="text-sm font-bold px-5" rowspan="2" colspan="2" width="100px">
             <div>ACCOUNT NO</div>
             <div>IFSC CODE</div>
             <div>BANK NAME</div>
             <div>BRANCH</div>
         </td>
-        <td rowspan="2" colspan="2" class="text-sm font-bold px-5">
+        <td rowspan="2" colspan="3" class="text-sm font-bold px-5">
             <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
             <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
             <div>:&nbsp;{{$cmp->get('bank')}}</div>
@@ -431,7 +431,7 @@
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
             <div>Amount (in words)</div>
-            <div><b class="times">{{$rupees}}Only</b></div>
+            <div ><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
         <td class="text-sm right border-b lh-2  v-align-c" colspan="2">
@@ -514,7 +514,7 @@
 </table>
 <table class="border-l border-r">
     <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-        <td colspan="5" class="left p-5">2. Address Details</td>
+        <td colspan="2" class="left p-5">2. Address Details</td>
     </tr>
     <tr class="text-md v-align-t lh-0">
         <td width="50%" class=" px-5">

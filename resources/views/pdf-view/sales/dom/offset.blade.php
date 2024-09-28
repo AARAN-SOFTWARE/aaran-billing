@@ -27,7 +27,7 @@
         }
 
         .bg-gray {
-            background-color: #f2f2f2;
+            background-color: #F9FAFB;
         }
 
         .w-full {
@@ -221,7 +221,7 @@
 <div class="w-full text-xs right p-1">Original Copy</div>
 <table class="border w-full border-b-none">
     <tr>
-        <td style="width: 145px;">
+        <td style="width: 145px;height: 145px;">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
@@ -649,7 +649,7 @@
         </td>
         <td class="font-bold">
             <p>: {{$obj->transport_no}}</p>
-            <p>: {{ $eWay->ewbdt }}</p>
+            <p>:  @if(isset($eWay)){{ $eWay->ewbdt }}  @endif</p>
         </td>
     </tr>
 </table>
@@ -673,7 +673,7 @@
 <div class="w-full text-xs right p-1">Duplicate Copy</div>
 <table class="border w-full border-b-none">
     <tr>
-        <td style="width: 145px;">
+        <td style="width: 145px;height: 145px;">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
@@ -1101,7 +1101,7 @@
         </td>
         <td class="font-bold">
             <p>: {{$obj->transport_no}}</p>
-            <p>: {{ $eWay->ewbdt }}</p>
+            <p>:  @if(isset($eWay)){{ $eWay->ewbdt }}  @endif</p>
         </td>
     </tr>
 </table>
@@ -1124,7 +1124,7 @@
 <div class="w-full text-xs right p-1">Triplicate Copy</div>
 <table class="border w-full border-b-none">
     <tr>
-        <td style="width: 145px;">
+        <td style="width: 145px;height: 145px;">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
@@ -1552,7 +1552,7 @@
         </td>
         <td class="font-bold">
             <p>: {{$obj->transport_no}}</p>
-            <p>: {{ $eWay->ewbdt }}</p>
+            <p>:  @if(isset($eWay)){{ $eWay->ewbdt }}  @endif</p>
         </td>
     </tr>
 </table>

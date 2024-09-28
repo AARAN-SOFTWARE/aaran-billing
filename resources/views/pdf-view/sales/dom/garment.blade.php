@@ -27,7 +27,7 @@
         }
 
         .bg-gray {
-            background-color: #f2f2f2;
+            background-color: #F9FAFB;
         }
 
         .w-full {
@@ -221,7 +221,7 @@
 <div class="w-full text-xs right p-1">Original Copy</div>
 <table class="border w-full border-b-none">
     <tr>
-        <td style="width: 145px;">
+        <td style="width: 145px;height: 145px;">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
@@ -293,8 +293,8 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="text-sm center v-align-t">
-            <td height="26px" class="center border-r p-1">{{$index+1}} </td>
+        <tr class="text-sm center v-align-t border-b">
+            <td height="38px" class="center border-r p-1">{{$index+1}} </td>
             <td class="left border-r p-1">{{$row['hsncode']}}</td>
             <td class="left border-r p-1" style="">
                 @if($row['description'])
@@ -318,9 +318,9 @@
     @endforeach
 
     {{-- Spacing  --}}
-    @for($i = 0; $i < 13-$list->count(); $i++)
+    @for($i = 0; $i < 9-$list->count(); $i++)
         <tr class="">
-            <td height="26px" class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
+            <td height="38px" class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
@@ -649,7 +649,7 @@
         </td>
         <td class="font-bold">
             <p>: {{$obj->transport_no}}</p>
-            <p>: {{ $eWay->ewbdt }}</p>
+            <p>:  @if(isset($eWay)){{ $eWay->ewbdt }}  @endif</p>
         </td>
     </tr>
 </table>
@@ -671,7 +671,7 @@
 <div class="w-full text-xs right p-1">Duplicate Copy</div>
 <table class="border w-full border-b-none">
     <tr>
-        <td style="width: 145px;">
+        <td style="width: 145px;height: 145px;">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
@@ -743,8 +743,8 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="text-sm center v-align-t">
-            <td height="26px" class="center border-r p-1">{{$index+1}} </td>
+        <tr class="text-sm center v-align-t border-b">
+            <td height="38px" class="center border-r p-1">{{$index+1}} </td>
             <td class="left border-r p-1">{{$row['hsncode']}}</td>
             <td class="left border-r p-1" style="">
                 @if($row['description'])
@@ -768,9 +768,9 @@
     @endforeach
 
     {{-- Spacing  --}}
-    @for($i = 0; $i < 13-$list->count(); $i++)
+    @for($i = 0; $i < 9-$list->count(); $i++)
         <tr class="">
-            <td height="26px" class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
+            <td height="38px" class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
@@ -850,13 +850,13 @@
             colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
     </tr>
     <tr>
-        <td class="text-sm font-bold px-5" rowspan="2" colspan="3" width="100px">
+        <td class="text-sm font-bold px-5" rowspan="2" colspan="2" width="100px">
             <div>ACCOUNT NO</div>
             <div>IFSC CODE</div>
             <div>BANK NAME</div>
             <div>BRANCH</div>
         </td>
-        <td rowspan="2" colspan="2" class="text-sm font-bold px-5">
+        <td rowspan="2" colspan="3" class="text-sm font-bold px-5">
             <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
             <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
             <div>:&nbsp;{{$cmp->get('bank')}}</div>
@@ -1099,7 +1099,7 @@
         </td>
         <td class="font-bold">
             <p>: {{$obj->transport_no}}</p>
-            <p>: {{ $eWay->ewbdt }}</p>
+            <p>:  @if(isset($eWay)){{ $eWay->ewbdt }}  @endif</p>
         </td>
     </tr>
 </table>
@@ -1122,7 +1122,7 @@
 <div class="w-full text-xs right p-1">Triplicate Copy</div>
 <table class="border w-full border-b-none">
     <tr>
-        <td style="width: 145px;">
+        <td style="width: 145px;height: 145px;">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
@@ -1194,8 +1194,8 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="text-sm center v-align-t">
-            <td height="26px" class="center border-r p-1">{{$index+1}} </td>
+        <tr class="text-sm center v-align-t border-b">
+            <td height="38px" class="center border-r p-1">{{$index+1}} </td>
             <td class="left border-r p-1">{{$row['hsncode']}}</td>
             <td class="left border-r p-1" style="">
                 @if($row['description'])
@@ -1219,9 +1219,9 @@
     @endforeach
 
     {{-- Spacing  --}}
-    @for($i = 0; $i < 13-$list->count(); $i++)
+    @for($i = 0; $i < 9-$list->count(); $i++)
         <tr class="">
-            <td height="26px" class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
+            <td height="38px" class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
@@ -1550,7 +1550,7 @@
         </td>
         <td class="font-bold">
             <p>: {{$obj->transport_no}}</p>
-            <p>: {{ $eWay->ewbdt }}</p>
+            <p>:  @if(isset($eWay)){{ $eWay->ewbdt }}  @endif</p>
         </td>
     </tr>
 </table>
