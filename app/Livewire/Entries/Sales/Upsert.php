@@ -927,6 +927,7 @@ class Upsert extends Component
                     ]);
                     $this->sales_id=$obj->id;
                     $this->saveItem( $this->sales_id);
+                    $this->contactUpdate();
                     $message = "Saved";
 
 
@@ -973,6 +974,7 @@ class Upsert extends Component
                     $this->sales_id=$obj->id;
                     DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
                     $this->saveItem( $this->sales_id);
+                    $this->contactUpdate();
                     $message = "Updated";
                 }
 
@@ -1004,6 +1006,14 @@ class Upsert extends Component
                 'description' => $sub['description'],
             ]);
         }
+    }
+
+    public function contactUpdate()
+    {
+        $obj=Contact::find($this->contact_id);
+        $outstanding= $obj->contact_type_id==124?$obj->outstanding+$this->grand_total:$obj->outstanding-$this->grand_total;
+        $obj->outstanding=$outstanding;
+        $obj->save();
     }
     #endregion
 
@@ -1106,6 +1116,11 @@ class Upsert extends Component
             $this->itemList = $data;
             $this->e_invoiceDetails=MasterGstIrn::where('sales_id',$this->common->vid)->first();
             $this->e_wayDetails=MasterGstEway::where('sales_id',$this->common->vid)->first();
+
+            $contact_outstanding=Contact::find($this->contact_id);
+            $contact_outstanding->outstanding=($contact_outstanding->contact_type_id==124?$contact_outstanding->outstanding-$this->grand_total:$contact_outstanding->outstanding+$this->grand_total);
+            $contact_outstanding->save();
+
         } else {
 
             $this->invoice_no= Sale::nextNo();
@@ -1275,6 +1290,7 @@ class Upsert extends Component
 
     public function getRoute(): void
     {
+        $this->contactUpdate();
         $this->redirect(route('sales'));
     }
 

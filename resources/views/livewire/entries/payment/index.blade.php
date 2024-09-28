@@ -75,7 +75,7 @@
 
         <!-- Create  -------------------------------------------------------------------------------------------------->
 
-        <x-forms.create :id="$common->vid" :max-width="'6xl'">
+        <x-forms.create :id="$common->vid" :max-width="'6xl'" wire:click="contactUpdate">
 
             <!-- Receipt & Payment  ----------------------------------------------------------------------------------->
 

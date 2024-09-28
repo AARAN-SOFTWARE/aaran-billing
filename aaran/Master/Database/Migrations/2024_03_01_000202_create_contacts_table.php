@@ -20,6 +20,7 @@ return new class extends Migration {
                 $table->string('msme_no')->nullable();
                 $table->foreignId('msme_type_id')->references('id')->on('commons');
                 $table->decimal('opening_balance')->nullable();
+                $table->decimal('outstanding')->nullable();
                 $table->string('effective_from')->nullable();
                 $table->string('gstin')->nullable();
                 $table->string('email')->nullable();

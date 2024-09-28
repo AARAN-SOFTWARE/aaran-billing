@@ -30,6 +30,7 @@
 
                 <x-table.header-text sortIcon="none">Contact Person</x-table.header-text>
                 <x-table.header-text sortIcon="none">GST No</x-table.header-text>
+                <x-table.header-text sortIcon="none">Outstanding</x-table.header-text>
 
                 <x-table.header-action/>
 
@@ -66,6 +67,10 @@
 
                         <x-table.cell-text><a
                                 href="{{route('contacts.upsert',[$row->id])}}"> {{$row->gstin}}</a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text><a
+                                href="{{route('contacts.upsert',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>
                         </x-table.cell-text>
 
                         <td class="max-w-max print:hidden">

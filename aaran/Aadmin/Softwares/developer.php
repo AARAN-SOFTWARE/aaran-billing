@@ -15,6 +15,7 @@ return [
         Customise::transaction(),
         Customise::demodata(),
         Customise::taskManager(),
+        Customise::exportsales(),
     ],
     'SalesEntry' => [
         SaleEntry::order(),

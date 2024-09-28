@@ -401,6 +401,8 @@
 
                         <x-input.floating wire:model="opening_balance" label="Opening Balance"/>
 
+                        <x-input.floating wire:model="outstanding" label="Outstanding"/>
+
                         <x-input.model-date wire:model="effective_from" :label="'Opening Date'"/>
                     </div>
                 </x-tabs.content>

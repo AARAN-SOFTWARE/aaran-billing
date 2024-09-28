@@ -84,6 +84,7 @@ class Index extends Component
 
                 ];
                 $this->common->save($Transaction, $extraFields);
+                $this->contactUpdate();
                 $message = "Saved";
             } else {
                 $Transaction = Transaction::find($this->common->vid);
@@ -112,10 +113,19 @@ class Index extends Component
                     'user_id' => auth()->id(),
                 ];
                 $this->common->edit($Transaction, $extraFields);
+                $this->contactUpdate();
                 $message = "Updated";
             }
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
         }
+    }
+
+    public function contactUpdate()
+    {
+        $obj = Contact::find($this->contact_id);
+        $outstanding = $obj->outstanding - $this->common->vname;
+        $obj->outstanding = $outstanding;
+        $obj->save();
     }
     #endregion
 
@@ -565,6 +575,10 @@ class Index extends Component
             $this->verified_by = $Transaction->verified_by;
             $this->verified_on = $Transaction->verified_on;
             $this->against_id = $Transaction->against_id;
+
+            $contact_outstanding=Contact::find($this->contact_id);
+            $contact_outstanding->outstanding=$contact_outstanding->outstanding+$this->common->vname;
+            $contact_outstanding->save();
             return $Transaction;
         }
         return null;
@@ -615,8 +629,8 @@ class Index extends Component
         return view('livewire.entries.payment.index')->with([
             'list' => $this->getListForm->getList(Transaction::class, function ($query) {
                 return $query->where('mode_id', $this->mode_id)
-                    ->where('acyear',session()->get('acyear'))
-                    ->where('company_id',session()->get('company_id'));
+                    ->where('acyear', session()->get('acyear'))
+                    ->where('company_id', session()->get('company_id'));
             })
         ]);
     }

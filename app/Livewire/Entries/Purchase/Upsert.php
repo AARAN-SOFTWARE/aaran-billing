@@ -573,6 +573,7 @@ class Upsert extends Component
 
                     ]);
                     $this->saveItem($obj->id);
+                    $this->contactUpdate();
                     $message = "Saved";
                     $this->getRoute();
 
@@ -600,6 +601,7 @@ class Upsert extends Component
                     $obj->save();
                     DB::table('purchaseitems')->where('purchase_id', '=', $obj->id)->delete();
                     $this->saveItem($obj->id);
+                    $this->contactUpdate();
                     $message = "Updated";
                 }
 
@@ -625,6 +627,14 @@ class Upsert extends Component
                 'gst_percent' => $sub['gst_percent'],
             ]);
         }
+    }
+
+    public function contactUpdate()
+    {
+        $obj=Contact::find($this->contact_id);
+        $outstanding= ($obj->contact_type_id==124?$obj->outstanding-$this->grand_total:$obj->outstanding+$this->grand_total);
+        $obj->outstanding=$outstanding;
+        $obj->save();
     }
     #endregion
 
@@ -683,6 +693,10 @@ class Upsert extends Component
                     ];
                 });
             $this->itemList = $data;
+
+            $contact_outstanding=Contact::find($this->contact_id);
+            $contact_outstanding->outstanding=($contact_outstanding->contact_type_id==124?$contact_outstanding->outstanding+$this->grand_total:$contact_outstanding->outstanding-$this->grand_total);
+            $contact_outstanding->save();
         } else {
             $this->uniqueno = "{$this->contact_id}~{$this->purchase_no}~{$this->purchase_date}";
             $this->common->active_id = true;
@@ -829,6 +843,7 @@ class Upsert extends Component
     #region[Render]
     public function getRoute(): void
     {
+        $this->contactUpdate();
         $this->redirect(route('purchase'));
     }
 
