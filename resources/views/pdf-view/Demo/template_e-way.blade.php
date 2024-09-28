@@ -217,10 +217,11 @@
     </style>
 </head>
 <body>
+<!-- Invoice IRN -->
 <div class="w-full text-xs right p-1">Original Copy</div>
 <table class="border w-full border-b-none">
     <tr>
-        <td style="width: 145px;">
+        <td style="width: 145px;height: 145px;">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
@@ -452,6 +453,7 @@
 </table>
 <div class="page-break"></div>
 
+<!-- eWay -->
 <div class="w-full text-xs right p-1">Original Copy</div>
 <table class="border border-b-none v-align-c">
     <tr class="bg-gray center font-bold text-md p-1 v-align-c">
@@ -459,7 +461,7 @@
     </tr>
     <tr class="text-md v-align-c">
         <td class="left p-5">Invoice No: {{$obj->invoice_no}}</td>
-        <td class="right p-5 ">Date: {{date('y-m-d')}}</td>
+        <td class="right p-5 ">Date: {{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</td>
     </tr>
 </table>
 <table class="border-l border-r">
@@ -474,9 +476,11 @@
             <p>Mode</p>
         </td>
         <td width="25%" class="lh-2 border-r">
-            @if(isset($eWay))
-                <p>: {{ $eWay->ewayBillNo }}</p>
-            @endif
+
+            <p>:@if(isset($eWay))
+                    {{ $eWay->ewbno }}
+                @endif</p>
+
             <p class="wrap">: {{$cmp->get('gstin')}}</p>
             <p>: {{$obj->contact_name}}</p>
             <p>: {{$obj->TransMode}}</p>
@@ -490,8 +494,12 @@
         <td width="25%" class="lh-2 border-r">
             <p>: {{$obj->distance}}</p>
             <p>: {{$obj->Vehtype}}</p>
-            <p>: {{ $eWay->ewbdt }}</p>
-            <p>: {{ $eWay->ewbvalidtill }}</p>
+            <p>: @if(isset($eWay))
+                    {{ $eWay->ewbdt }}
+                @endif</p>
+            <p>: @if(isset($eWay))
+                    {{ $eWay->ewbvalidtill }}
+                @endif</p>
         </td>
         <td style="width: 145px;height: 145px;">
             <div style="width: 145px; height: 145px;">
@@ -537,13 +545,13 @@
         </td>
     </tr>
 </table>
-<table class="border-l border-r">
+<table class="border-t border-l border-r">
     <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-        <td colspan="" class="left p-5">2. Address Details</td>
+        <td colspan="" class="left p-5">3. Good Details</td>
     </tr>
 </table>
 <table class="border-l border-r border-b">
-    <tr class="bg-gray text-md border-t border-b v-align-c">
+    <tr class="bg-gray text-sm border-t border-b v-align-c">
         <th width="12%" class="border-r py-10">HSN Code</th>
         <th width="auto" class="border-r">Product name & Desc</th>
         <th width="8%" class="border-r">Quantity</th>
@@ -554,8 +562,8 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="text-md center v-align-t">
-            <td height="26px" class="left border-r p-1">{{$row['hsncode']}}</td>
+        <tr class="text-sm center v-align-t">
+            <td height="24px" class="center border-r p-1">{{$row['hsncode']}}</td>
             <td class="left border-r p-1" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
@@ -582,29 +590,81 @@
         </tr>
     @endfor
 </table>
-{{--<table class="border-t border-l border-r">--}}
-{{--    <tr class="text-md v-align-t">--}}
-{{--        <td>--}}
-{{--            <p>Tot. Taxable Amt</p>--}}
-{{--            <p></p>--}}
-{{--        </td>--}}
-{{--        <td>--}}
-{{--            <p>: {{number_format($obj->total_taxable,2,'.','')}}</p>--}}
-{{--            <p></p>--}}
-{{--        </td>--}}
-{{--        <td>--}}
-{{--            <p></p>--}}
-{{--            <p></p>--}}
-{{--        </td>--}}
-{{--        <td>--}}
-{{--            <p></p>--}}
-{{--            <p></p>--}}
-{{--        </td>--}}
-{{--        <td>--}}
-{{--            <p></p>--}}
-{{--            <p></p>--}}
-{{--        </td>--}}
-{{--    </tr>--}}
-{{--</table>--}}
+<table class="border-b border-l border-r">
+    <tr class="text-md lh-0">
+        <td class="">
+            <p>Tot. Taxable Amt</p>
+            @if($obj->sales_type=='1')
+                <p>CGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
+            @else
+                <p>IGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
+            @endif
+        </td>
+        <td class="font-bold">
+            <p>: {{number_format($obj->total_taxable,2,'.','')}}</p>
+            @if($obj->sales_type=='1')
+                <p>: {{number_format($obj->total_gst/2,2,'.','')}}</p>
+            @else
+                <p>: {{number_format($obj->total_gst,2,'.','')}}</p>
+            @endif
+        </td>
+        <td>
+            <p>Other Amt</p>
+            @if($obj->sales_type=='1')
+                <p>SGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
+            @endif
+        </td>
+        <td class="font-bold">
+            <p>: {{ number_format($obj->additional,2,'.','') }}</p>
+            @if($obj->sales_type=='1')
+                <p>: {{number_format($obj->grand_total,2,'.','')}}</p>
+            @endif
+        </td>
+        <td>
+            <p>Total Inv Amt</p>
+            <p>&nbsp;</p>
+        </td>
+        <td class="font-bold">
+            <p>: {{number_format($obj->grand_total,2,'.','')}}</p>
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+</table>
+<table class="border-l border-r">
+    <tr class="bg-gray center font-bold text-md p-1 v-align-c">
+        <td colspan="4" class="left p-5">4. Transportation Details</td>
+    </tr>
+    <tr class="text-md lh-0">
+        <td>
+            <p>Transporter ID</p>
+            <p>Name</p>
+        </td>
+        <td class="font-bold">
+            <p>: {{$obj->transport_id}}</p>
+            <p>: {{$obj->transport_name}}</p>
+        </td>
+        <td>
+            <p>Doc No</p>
+            <p>Date</p>
+        </td>
+        <td class="font-bold">
+            <p>: {{$obj->transport_no}}</p>
+            <p>: {{ $eWay->ewbdt }}</p>
+        </td>
+    </tr>
+</table>
+<table class="border-l border-r border-b">
+    <tr class="bg-gray center font-bold text-md p-1 v-align-c">
+        <td colspan="6" class="left p-5">5. Vehicle Details</td>
+    </tr>
+    <tr class="text-md ">
+        <td height="20px">Vehicle No</td>
+        <td>: {{ $obj->Vehno }}</td>
+        <td>From</td>
+        <td>: {{$cmp->get('city_name')}}</td>
+        <td>CEWB No</td>
+        <td>: &nbsp;</td>
+    </tr>
+</table>
 </body>
 </html>

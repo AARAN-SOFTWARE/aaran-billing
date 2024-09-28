@@ -435,7 +435,7 @@
             <div class="w-full inline-flex justify-between"><span class="w-2/5 ">Tot. Taxable Amt</span><span
                     class="w-1/5">:</span><span
                     class="w-w-2/5 text-end font-bold">  {{number_format($obj->total_taxable,2,'.','')}}</span></div>
-            @if($obj->sales_type=='CGST-SGST')
+            @if($obj->sales_type=='1')
                 <div class="w-full inline-flex justify-between"><span
                         class="w-2/5">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/5">:</span><span
                         class="w-2/5 text-end font-bold">{{number_format($obj->total_gst/2,2,'.','')}}</span></div>
@@ -466,8 +466,8 @@
         </div>
         <div class="w-2/5 flex-col border-r border-gray-300 px-0.5 py-1 space-y-1">
             <div class="w-full inline-flex justify-between"><span class="w-2/5">Total Inv Amt</span><span
-                    class="w-1/5">:</span><span
-                    class="w-2/5 text-end font-bold"> {{number_format($obj->grand_total,2,'.','')}}</span></div>
+                    class="w-1/5">:</span>
+                <span class="w-2/5 text-end font-bold"> {{number_format($obj->grand_total,2,'.','')}}</span></div>
             <div class="w-full inline-flex justify-between"><span class="w-2/5"></span><span class="w-1/5"></span><span
                     class="w-2/5 text-end"></span></div>
         </div>
@@ -482,7 +482,7 @@
                 <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_id}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Name</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_name}}</span>
+                <span class="w-2/5"></span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_name}}</span>
             </div>
         </div>
         <div class="w-1/2 flex-col p-1 space-y-1">
