@@ -25,11 +25,12 @@ class Index extends Component
     public $category_id;
     public $tags;
     public $tagfilter = [];
+    public $visibility = false;
     #endregion
 
     public function mount()
     {
-        $this->BlogCategories = Common::where('label_id','=','17')->get();
+        $this->BlogCategories = Common::where('label_id','=','18')->get();
     }
     #region[Get-Save]
     public function getSave(): void
@@ -43,6 +44,8 @@ class Index extends Component
                     'blogtag_id' => $this->blogtag_id,
                     'image' => $this->saveImage(),
                     'user_id' => auth()->id(),
+                    'visibility' => $this->visibility,
+
                 ];
                 $this->common->save($Post, $extraFields);
                 $message = "Saved";
@@ -54,6 +57,7 @@ class Index extends Component
                     'blogtag_id' => $this->blogtag_id,
                     'image' => $this->saveImage(),
                     'user_id' => auth()->id(),
+                    'visibility' => $this->visibility,
                 ];
                 $this->common->edit($Post, $extraFields);
                 $message = "Updated";
@@ -77,6 +81,7 @@ class Index extends Component
             $this->blogtag_name = $Post->blogtag_id?Common::find($Post->blogtag_id)->vname:'';
             $this->common->active_id = $Post->active_id;
             $this->old_image = $Post->image;
+            $this->visibility = $Post->visibility;
             return $Post;
         }
         return null;
@@ -96,6 +101,7 @@ class Index extends Component
         $this->blogtag_name = '';
         $this->old_image = '';
         $this->image = '';
+        $this->visibility = false;
     }
     #endregion
 
@@ -179,7 +185,7 @@ class Index extends Component
     public function blogcategorySave($name)
     {
         $obj = Common::create([
-            'label_id' => 17,
+            'label_id' => 18,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -190,8 +196,8 @@ class Index extends Component
     public function getBlogcategoryList(): void
     {
         $this->blogcategoryCollection = $this->blogcategory_name ?
-            Common::search(trim($this->blogcategory_name))->where('label_id', '=', '17')->get() :
-            Common::where('label_id', '=', '17')->get();
+            Common::search(trim($this->blogcategory_name))->where('label_id', '=', '18')->get() :
+            Common::where('label_id', '=', '18')->get();
     }
 
     #endregion

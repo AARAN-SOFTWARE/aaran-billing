@@ -8,16 +8,155 @@ use Aaran\Common\Models\Common;
 use Aaran\Common\Models\Label;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Blog extends Component
 {
     use CommonTraitNew;
+    use WithFileUploads;
 
+    #region[properties]
+    public string $body;
+    public $users;
+    public $image;
+    public $old_image;
     public $BlogCategories;
     public $category_id;
     public $tags;
     public $tagfilter = [];
+    public $visibility = false;
+    #endregion
+
+    public function rules(): array
+    {
+        return [
+            'common.vname' => 'required|min:3|max:75',
+            'body' => 'required|min:3|max:255',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'common.vname.required' => ' :attribute is required.',
+            'body.required' => ' :attribute is required.',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'common.vname' => 'User name',
+            'body' => 'Description',
+        ];
+    }
+    public function mount()
+    {
+        $this->BlogCategories = Common::where('label_id','=','18')->get();
+    }
+
+    #region[Get-Save]
+    public function getSave(): void
+    {
+        $this->validate($this->rules());
+        if ($this->common->vname != '') {
+            if ($this->common->vid == '') {
+                $Post = new Post();
+                $extraFields = [
+                    'body' => $this->body,
+                    'blogcategory_id' => $this->blogcategory_id?:104,
+                    'blogtag_id' => $this->blogtag_id?:1,
+                    'image' => $this->saveImage(),
+                    'user_id' => auth()->id(),
+                    'visibility' => $this->visibility,
+
+                ];
+                $this->common->save($Post, $extraFields);
+                $message = "Saved";
+            } else {
+                $Post = Post::find($this->common->vid);
+                $extraFields = [
+                    'body' => $this->body,
+                    'blogcategory_id' => $this->blogcategory_id?:104,
+                    'blogtag_id' => $this->blogtag_id?:1,
+                    'image' => $this->saveImage(),
+                    'user_id' => auth()->id(),
+                    'visibility' => $this->visibility,
+                ];
+                $this->common->edit($Post, $extraFields);
+                $message = "Updated";
+            }
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+        }
+    }
+    #endregion
+
+    #region[Get-Obj]
+    public function getObj($id)
+    {
+        if ($id) {
+            $Post = Post::find($id);
+            $this->common->vid = $Post->id;
+            $this->common->vname = $Post->vname;
+            $this->body = $Post->body;
+            $this->blogcategory_id = $Post->blogcategory_id;
+            $this->blogcategory_name = $Post->blogcategory_id?Common::find($Post->blogcategory_id)->vname:'';
+            $this->blogtag_id = $Post->blogtag_id;
+            $this->blogtag_name = $Post->blogtag_id?Common::find($Post->blogtag_id)->vname:'';
+            $this->common->active_id = $Post->active_id;
+            $this->old_image = $Post->image;
+            $this->visibility = $Post->visibility;
+            return $Post;
+        }
+        return null;
+    }
+    #endregion
+
+    #region[Clear-Fields]
+    public function clearFields(): void
+    {
+        $this->common->vid = '';
+        $this->common->vname = '';
+        $this->common->active_id = '1';
+        $this->body = '';
+        $this->blogcategory_id = '';
+        $this->blogcategory_name = '';
+        $this->blogtag_id = '';
+        $this->blogtag_name = '';
+        $this->old_image = '';
+        $this->image = '';
+        $this->visibility = false;
+    }
+    #endregion
+
+    #region[Image]
+    public function saveImage()
+    {
+        if ($this->image) {
+
+            $image = $this->image;
+            $filename = $this->image->getClientOriginalName();
+
+            if (Storage::disk('public')->exists(Storage::path('public/images/' . $this->old_image))) {
+                Storage::disk('public')->delete(Storage::path('public/images/' . $this->old_image));
+            }
+
+            $image->storeAs('public/images', $filename);
+
+            return $filename;
+
+        } else {
+            if ($this->old_image) {
+                return $this->old_image;
+            } else {
+                return 'no image';
+            }
+        }
+    }
+    #endregion
 
     #region[blogCategory]
     public $blogcategory_id = '';
@@ -26,10 +165,10 @@ class Blog extends Component
     public $highlightBlogCategory = 0;
     public $blogcategoryTyped = false;
 
-    public function mount()
-    {
-        $this->BlogCategories = Common::where('label_id','=','17')->get();
-    }
+//    public function mount()
+//    {
+//        $this->BlogCategories = Common::where('label_id', '=', '18')->get();
+//    }
 
     public function decrementBlogcategory(): void
     {
@@ -78,7 +217,7 @@ class Blog extends Component
     public function blogcategorySave($name)
     {
         $obj = Common::create([
-            'label_id' => 17,
+            'label_id' => 18,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -89,8 +228,8 @@ class Blog extends Component
     public function getBlogcategoryList(): void
     {
         $this->blogcategoryCollection = $this->blogcategory_name ?
-            Common::search(trim($this->blogcategory_name))->where('label_id', '=', '17')->get() :
-            Common::where('label_id', '=', '17')->get();
+            Common::search(trim($this->blogcategory_name))->where('label_id', '=', '18')->get() :
+            Common::where('label_id', '=', '18')->get();
     }
 
     #endregion
@@ -179,14 +318,14 @@ class Blog extends Component
 
     public function getFilter($id)
     {
-        if (!in_array($id,$this->tagfilter,true)) {
+        if (!in_array($id, $this->tagfilter, true)) {
             return array_push($this->tagfilter, $id);
         }
     }
 
     public function clearFilter()
     {
-        $this->tagfilter=[];
+        $this->tagfilter = [];
     }
 
     public function removeFilter($id)
@@ -198,24 +337,24 @@ class Blog extends Component
     #region[Render]
     public function getRoute()
     {
-        return route('posts');
+        return route('blog');
     }
 
     public function render()
     {
-//        $this->getBlogData();
-        $this->getListForm->perPage=6;
+        $this->getBlogcategoryList();
+        $this->getBlogtagList();
+
+        $this->getListForm->perPage = 6;
         return view('livewire.web.home.blog')->layout('layouts.web')->with([
-            'list' => $this ->getListForm ->getList(Post::class,function ($query){
-                return $query->latest()->when($this->tagfilter,function ($query,$tagfilter){
-                    return $query->whereIn('blogtag_id',$tagfilter);
-                });
+            'list' => $this->getListForm->getList(Post::class, function ($query) {
+                return $query->latest()->whereIN('visibility', session()->get('tenant_id') ? [0, 1] : [1])
+                    ->when($this->tagfilter, function ($query, $tagfilter) {
+                        return $query->whereIn('blogtag_id', $tagfilter);
+                    });
             }),
-            'firstPost'=>Post::latest()->take(1)->when($this->tagfilter,function ($query,$tagfilter){
-                return $query->whereIn('blogtag_id',$tagfilter);
-            })->get(),
-            'topPost'=>Post::take(4)->when($this->tagfilter,function ($query,$tagfilter){
-                return $query->whereIn('blogtag_id',$tagfilter);
+            'topPost' => Post::take(4)->whereIN('visibility', session()->get('tenant_id') ? [0, 1] : [1])->when($this->tagfilter, function ($query, $tagfilter) {
+                return $query->whereIn('blogtag_id', $tagfilter);
             })->get(),
         ]);
     }

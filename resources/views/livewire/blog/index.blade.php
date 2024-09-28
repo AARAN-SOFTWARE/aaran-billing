@@ -2,7 +2,9 @@
     <x-slot name="header">Blog</x-slot>
 
     <div>
+
         <!-- header --------------------------------------------------------------------------------------------------->
+
         <div style="background-image: url('/../../../images/557501.jpg')"
              class="h-[35rem] w-full bg-[#F7FAF9] bg-no-repeat flex-col flex justify-center items-center">
 
@@ -14,7 +16,9 @@
         </div>
 
         <div class="flex justify-center my-16 ">
+
             <!-- left side card --------------------------------------------------------------------------------------->
+
             <div class="w-6/12 border-r border-gray-200 pr-10 font-roboto tracking-wider">
                 @foreach($firstPost as $data)
 
@@ -219,7 +223,8 @@
 
                             </span>
                         @endforeach
-                        <button wire:click="clearFilter()" class="border border-gray-200 rounded-lg p-2 text-xs hover:bg-blue-100">Clear All
+                        <button wire:click="clearFilter()"
+                                class="border border-gray-200 rounded-lg p-2 text-xs hover:bg-blue-100">Clear All
                         </button>
                     @endif
                 </div>
@@ -233,7 +238,11 @@
     <x-forms.create :id="$common->vid" :max-width="'xl'">
         <div class="flex flex-col gap-4">
 
-{{--            <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
+            {{--            <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
+
+            <input type="checkbox" wire:model="visibility">
+            <label for="">Public</label>
+
             <x-input.floating wire:model="common.vname" label="Name"/>
 
             <x-input.textarea wire:model="body" label="Description"/>
@@ -264,64 +273,64 @@
                 </div>
             </x-dropdown.wrapper>
 
-{{--            <div class="flex flex-row py-3 gap-3">--}}
-{{--                <div class="xl:flex w-full gap-2">--}}
-{{--                    <label for="blogcategory_name"--}}
-{{--                           class="w-[10rem] text-zinc-500 tracking-wide py-2">Blog Category</label>--}}
-{{--                    <div x-data="{isTyped: @entangle('blogcategoryTyped')}" @click.away="isTyped = false"--}}
-{{--                         class="w-full relative">--}}
-{{--                        <div>--}}
-{{--                            <input--}}
-{{--                                id="blogcategory_name"--}}
-{{--                                type="search"--}}
-{{--                                wire:model.live="blogcategory_name"--}}
-{{--                                autocomplete="off"--}}
-{{--                                placeholder="Blog Category Name.."--}}
-{{--                                @focus="isTyped = true"--}}
-{{--                                @keydown.escape.window="isTyped = false"--}}
-{{--                                @keydown.tab.window="isTyped = false"--}}
-{{--                                @keydown.enter.prevent="isTyped = false"--}}
-{{--                                wire:keydown.arrow-up="decrementBlogcategory"--}}
-{{--                                wire:keydown.arrow-down="incrementBlogcategory"--}}
-{{--                                wire:keydown.enter="enterBlogcategory"--}}
-{{--                                class="block w-full rounded-lg"--}}
-{{--                            />--}}
+            {{--            <div class="flex flex-row py-3 gap-3">--}}
+            {{--                <div class="xl:flex w-full gap-2">--}}
+            {{--                    <label for="blogcategory_name"--}}
+            {{--                           class="w-[10rem] text-zinc-500 tracking-wide py-2">Blog Category</label>--}}
+            {{--                    <div x-data="{isTyped: @entangle('blogcategoryTyped')}" @click.away="isTyped = false"--}}
+            {{--                         class="w-full relative">--}}
+            {{--                        <div>--}}
+            {{--                            <input--}}
+            {{--                                id="blogcategory_name"--}}
+            {{--                                type="search"--}}
+            {{--                                wire:model.live="blogcategory_name"--}}
+            {{--                                autocomplete="off"--}}
+            {{--                                placeholder="Blog Category Name.."--}}
+            {{--                                @focus="isTyped = true"--}}
+            {{--                                @keydown.escape.window="isTyped = false"--}}
+            {{--                                @keydown.tab.window="isTyped = false"--}}
+            {{--                                @keydown.enter.prevent="isTyped = false"--}}
+            {{--                                wire:keydown.arrow-up="decrementBlogcategory"--}}
+            {{--                                wire:keydown.arrow-down="incrementBlogcategory"--}}
+            {{--                                wire:keydown.enter="enterBlogcategory"--}}
+            {{--                                class="block w-full rounded-lg"--}}
+            {{--                            />--}}
 
-{{--                            <!-- HSN Code Dropdown -->--}}
-{{--                            <div x-show="isTyped"--}}
-{{--                                 x-transition:leave="transition ease-in duration-100"--}}
-{{--                                 x-transition:leave-start="opacity-100"--}}
-{{--                                 x-transition:leave-end="opacity-0"--}}
-{{--                                 x-cloak--}}
-{{--                            >--}}
-{{--                                <div class="absolute z-20 w-full mt-2">--}}
-{{--                                    <div class="block py-1 shadow-md w-full rounded-lg border-transparent flex-1 appearance-none border--}}
-{{--                             bg-white text-gray-800 ring-1 ring-purple-600">--}}
-{{--                                        <ul class="overflow-y-scroll h-20">--}}
-{{--                                            @if($blogcategoryCollection)--}}
-{{--                                                @forelse ($blogcategoryCollection as $i => $blogcategory)--}}
-{{--                                                    <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
-{{--                                            {{ $highlightBlogCategory === $i ? 'bg-yellow-100' : '' }}"--}}
-{{--                                                        wire:click.prevent="setBlogcategory('{{$blogcategory->vname}}','{{$blogcategory->id}}')"--}}
-{{--                                                        x-on:click="isTyped = false">--}}
-{{--                                                        {{ $blogcategory->vname }}--}}
-{{--                                                    </li>--}}
-{{--                                                @empty--}}
-{{--                                                    <button--}}
-{{--                                                        wire:click.prevent="blogcategorySave('{{$blogcategory_name}}')"--}}
-{{--                                                        class="text-white bg-green-500 text-center w-full">--}}
-{{--                                                        create--}}
-{{--                                                    </button>--}}
-{{--                                                @endforelse--}}
-{{--                                            @endif--}}
-{{--                                        </ul>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            {{--                            <!-- HSN Code Dropdown -->--}}
+            {{--                            <div x-show="isTyped"--}}
+            {{--                                 x-transition:leave="transition ease-in duration-100"--}}
+            {{--                                 x-transition:leave-start="opacity-100"--}}
+            {{--                                 x-transition:leave-end="opacity-0"--}}
+            {{--                                 x-cloak--}}
+            {{--                            >--}}
+            {{--                                <div class="absolute z-20 w-full mt-2">--}}
+            {{--                                    <div class="block py-1 shadow-md w-full rounded-lg border-transparent flex-1 appearance-none border--}}
+            {{--                             bg-white text-gray-800 ring-1 ring-purple-600">--}}
+            {{--                                        <ul class="overflow-y-scroll h-20">--}}
+            {{--                                            @if($blogcategoryCollection)--}}
+            {{--                                                @forelse ($blogcategoryCollection as $i => $blogcategory)--}}
+            {{--                                                    <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
+            {{--                                            {{ $highlightBlogCategory === $i ? 'bg-yellow-100' : '' }}"--}}
+            {{--                                                        wire:click.prevent="setBlogcategory('{{$blogcategory->vname}}','{{$blogcategory->id}}')"--}}
+            {{--                                                        x-on:click="isTyped = false">--}}
+            {{--                                                        {{ $blogcategory->vname }}--}}
+            {{--                                                    </li>--}}
+            {{--                                                @empty--}}
+            {{--                                                    <button--}}
+            {{--                                                        wire:click.prevent="blogcategorySave('{{$blogcategory_name}}')"--}}
+            {{--                                                        class="text-white bg-green-500 text-center w-full">--}}
+            {{--                                                        create--}}
+            {{--                                                    </button>--}}
+            {{--                                                @endforelse--}}
+            {{--                                            @endif--}}
+            {{--                                        </ul>--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
+            {{--                            </div>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
 
 
             <x-dropdown.wrapper label="Blog Tag" type="blogtagTyped">
@@ -350,64 +359,64 @@
                 </div>
             </x-dropdown.wrapper>
 
-{{--            <div class="flex flex-row py-3 gap-3">--}}
-{{--                <div class="xl:flex w-full gap-2">--}}
-{{--                    <label for="blogtag_name"--}}
-{{--                           class="w-[10rem] text-zinc-500 tracking-wide py-2">Blog Tag</label>--}}
-{{--                    <div x-data="{isTyped: @entangle('blogtagTyped')}" @click.away="isTyped = false"--}}
-{{--                         class="w-full relative">--}}
-{{--                        <div>--}}
-{{--                            <input--}}
-{{--                                id="blogtag_name"--}}
-{{--                                type="search"--}}
-{{--                                wire:model.live="blogtag_name"--}}
-{{--                                autocomplete="off"--}}
-{{--                                placeholder="Blog Tag Name.."--}}
-{{--                                @focus="isTyped = true"--}}
-{{--                                @keydown.escape.window="isTyped = false"--}}
-{{--                                @keydown.tab.window="isTyped = false"--}}
-{{--                                @keydown.enter.prevent="isTyped = false"--}}
-{{--                                wire:keydown.arrow-up="decrementBlogtag"--}}
-{{--                                wire:keydown.arrow-down="incrementBlogtag"--}}
-{{--                                wire:keydown.enter="enterBlogtag"--}}
-{{--                                class="block w-full rounded-lg"--}}
-{{--                            />--}}
+            {{--            <div class="flex flex-row py-3 gap-3">--}}
+            {{--                <div class="xl:flex w-full gap-2">--}}
+            {{--                    <label for="blogtag_name"--}}
+            {{--                           class="w-[10rem] text-zinc-500 tracking-wide py-2">Blog Tag</label>--}}
+            {{--                    <div x-data="{isTyped: @entangle('blogtagTyped')}" @click.away="isTyped = false"--}}
+            {{--                         class="w-full relative">--}}
+            {{--                        <div>--}}
+            {{--                            <input--}}
+            {{--                                id="blogtag_name"--}}
+            {{--                                type="search"--}}
+            {{--                                wire:model.live="blogtag_name"--}}
+            {{--                                autocomplete="off"--}}
+            {{--                                placeholder="Blog Tag Name.."--}}
+            {{--                                @focus="isTyped = true"--}}
+            {{--                                @keydown.escape.window="isTyped = false"--}}
+            {{--                                @keydown.tab.window="isTyped = false"--}}
+            {{--                                @keydown.enter.prevent="isTyped = false"--}}
+            {{--                                wire:keydown.arrow-up="decrementBlogtag"--}}
+            {{--                                wire:keydown.arrow-down="incrementBlogtag"--}}
+            {{--                                wire:keydown.enter="enterBlogtag"--}}
+            {{--                                class="block w-full rounded-lg"--}}
+            {{--                            />--}}
 
-{{--                            <!-- BlogTag Code Dropdown -->--}}
-{{--                            <div x-show="isTyped"--}}
-{{--                                 x-transition:leave="transition ease-in duration-100"--}}
-{{--                                 x-transition:leave-start="opacity-100"--}}
-{{--                                 x-transition:leave-end="opacity-0"--}}
-{{--                                 x-cloak--}}
-{{--                            >--}}
-{{--                                <div class="absolute z-20 w-full mt-2">--}}
-{{--                                    <div class="block py-1 shadow-md w-full rounded-lg border-transparent flex-1 appearance-none border--}}
-{{--                             bg-white text-gray-800 ring-1 ring-purple-600">--}}
-{{--                                        <ul class="overflow-y-scroll h-20">--}}
-{{--                                            @if($blogtagCollection)--}}
-{{--                                                @forelse ($blogtagCollection as $i => $blogtag)--}}
-{{--                                                    <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
-{{--                                            {{ $highlightBlogtag === $i ? 'bg-yellow-100' : '' }}"--}}
-{{--                                                        wire:click.prevent="setBlogTag('{{$blogtag->vname}}','{{$blogtag->id}}')"--}}
-{{--                                                        x-on:click="isTyped = false">--}}
-{{--                                                        {{ $blogtag->vname }}--}}
-{{--                                                    </li>--}}
-{{--                                                @empty--}}
-{{--                                                    <button--}}
-{{--                                                        wire:click.prevent="blogtagSave('{{$blogtag_name}}')"--}}
-{{--                                                        class="text-white bg-green-500 text-center w-full">--}}
-{{--                                                        create--}}
-{{--                                                    </button>--}}
-{{--                                                @endforelse--}}
-{{--                                            @endif--}}
-{{--                                        </ul>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            {{--                            <!-- BlogTag Code Dropdown -->--}}
+            {{--                            <div x-show="isTyped"--}}
+            {{--                                 x-transition:leave="transition ease-in duration-100"--}}
+            {{--                                 x-transition:leave-start="opacity-100"--}}
+            {{--                                 x-transition:leave-end="opacity-0"--}}
+            {{--                                 x-cloak--}}
+            {{--                            >--}}
+            {{--                                <div class="absolute z-20 w-full mt-2">--}}
+            {{--                                    <div class="block py-1 shadow-md w-full rounded-lg border-transparent flex-1 appearance-none border--}}
+            {{--                             bg-white text-gray-800 ring-1 ring-purple-600">--}}
+            {{--                                        <ul class="overflow-y-scroll h-20">--}}
+            {{--                                            @if($blogtagCollection)--}}
+            {{--                                                @forelse ($blogtagCollection as $i => $blogtag)--}}
+            {{--                                                    <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
+            {{--                                            {{ $highlightBlogtag === $i ? 'bg-yellow-100' : '' }}"--}}
+            {{--                                                        wire:click.prevent="setBlogTag('{{$blogtag->vname}}','{{$blogtag->id}}')"--}}
+            {{--                                                        x-on:click="isTyped = false">--}}
+            {{--                                                        {{ $blogtag->vname }}--}}
+            {{--                                                    </li>--}}
+            {{--                                                @empty--}}
+            {{--                                                    <button--}}
+            {{--                                                        wire:click.prevent="blogtagSave('{{$blogtag_name}}')"--}}
+            {{--                                                        class="text-white bg-green-500 text-center w-full">--}}
+            {{--                                                        create--}}
+            {{--                                                    </button>--}}
+            {{--                                                @endforelse--}}
+            {{--                                            @endif--}}
+            {{--                                        </ul>--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
+            {{--                            </div>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
 
             <!-- Image  ----------------------------------------------------------------------------------------------->
 
