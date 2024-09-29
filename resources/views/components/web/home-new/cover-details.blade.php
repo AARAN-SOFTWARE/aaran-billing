@@ -1,4 +1,4 @@
-<div class="py-8 mt-5">
+<div class="py-8 mt-12">
 
     <div class="font-roboto tracking-wider grid sm:gap-10 gap-5 sm:pt-20 pt-0">
         <x-web.home-new.items.heading label="Billing Made Simple and Efficient" />
@@ -9,20 +9,15 @@
 
             <x-web.home-new.items.cover-card
                 title="Sales & Purchase"
-                desc="Create sleek invoices with the click of a button.
-                    From adding your company logo to changing fonts, customize invoice templates to reflect your brand.
-                    Streamlines the sales order processing, Facilitates the purchase order management, Provides a better
-                    customer experience..."
+                desc="Create sleek invoices with the click of a button. customize templates to reflect your brand."
                 border="border-[#66C25F]"
                 bg_color="bg-[#66C25F]">
                     <x-web.home-new.icons.sales-purchase-cover />
             </x-web.home-new.items.cover-card>
 
             <x-web.home-new.items.cover-card
-                title="Payable & Receivable"
-                desc="Send customized statements to your clients and
-                    Simplify payment procedures for your customers by giving them access to the customer portal and
-                    enabling direct portal-based payments..."
+                title="Book Keeping"
+                desc="software designed to simplify accounting and book keeping for all businesses."
                 border="border-[#FEBA35]"
                 bg_color="bg-[#FEBA35]"
             >
@@ -31,10 +26,8 @@
 
             <x-web.home-new.items.cover-card
                 title="Reporting Tools"
-                desc="View homes, reports and charts covering all your receivables, payable,
-                    Daily , Weekly & Monthly Sales Report, Supplier Performance Report,
-                    Inventory Purchase Report and more. Use your report data to make inferences and create robust,
-                    up-to-date business plans..."
+                desc="Use your report data to make inferences and create robust,
+                    up-to-date business plans."
                 border="border-[#464B8B]"
                 bg_color="bg-[#464B8B]"
             >
@@ -43,10 +36,7 @@
 
             <x-web.home-new.items.cover-card
                 title="e-Invoice"
-                desc="Automatic E-Invoice Generation, The new system of e-invoicing
-                    has standardized how business-to -business invoices are accounted in the GST system.
-                    you can connect with the IRP directly and create invoices in the e-invoicing format,
-                    hassle-free process..."
+                desc="Automatic E-Invoice Generation, keep track of their finances operations."
                 border="border-[#8E9BA3]"
                 bg_color="bg-[#8E9BA3]"
             >
