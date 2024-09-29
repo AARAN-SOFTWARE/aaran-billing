@@ -1,6 +1,7 @@
 @props([
     'id',
     'maxWidth' => '2xl',
+    'attributes'=>null
 ])
 
 <form wire:submit.prevent="save">
@@ -34,7 +35,7 @@
                     </div>
                     <div class="flex gap-3">
 {{--                        <x-button.cancel/>--}}
-                        <x-button.cancel-x wire:click.prevent="$set('showEditModal', false)" />
+                        <x-button.cancel-x wire:click.prevent="$set('showEditModal', false)" {{$attributes}} />
 {{--                        <x-button.save/>--}}
                         <x-button.save-x  wire:click.prevent="save" />
                     </div>

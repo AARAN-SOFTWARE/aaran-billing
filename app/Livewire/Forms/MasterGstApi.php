@@ -37,10 +37,11 @@ class MasterGstApi extends Form
 
                 return $data;
             } else {
-                return response()->json(['error' => 'Request failed with status code: ' . $response->status()], $response->status());
+                return response()->json(['error' => 'Request failed with status code: '.$response->status()],
+                    $response->status());
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'An error occurred: '.$e->getMessage()], 500);
         }
     }
     #endregion
@@ -64,8 +65,8 @@ class MasterGstApi extends Form
     }
     #endregion
 
-     #region[getIrn]
-    public function getIrn(Request $request, $token=null, $jsonData=null,$sales_id=null)
+    #region[getIrn]
+    public function getIrn(Request $request, $token = null, $jsonData = null, $sales_id = null)
     {
 
         try {
@@ -77,27 +78,33 @@ class MasterGstApi extends Form
                 'auth-token' => $token,
                 'gstin' => '29AABCT1332L000',
                 'Content-Type' => 'application/json',
-            ])->post('https://api.mastergst.com/einvoice/type/GENERATE/version/V1_03?email=aaranoffice%40gmail.com', $jsonData);
+            ])->post('https://api.mastergst.com/einvoice/type/GENERATE/version/V1_03?email=aaranoffice%40gmail.com',
+                $jsonData);
             if ($response->successful()) {
                 $data = $response->json();
-                $obj=MasterGstIrn::create([
-                    'sales_id'=>$sales_id,
-                    'ackno' => $data['data']['AckNo'],
-                    'ackdt' => $data['data']['AckDt'],
-                    'irn' => $data['data']['Irn'],
-                    'signed_invoice' => $data['data']['SignedInvoice'],
-                    'signed_qrcode' => $data['data']['SignedQRCode'],
-                    'status'=>'Generated',
-                ]);
-                if ($data['data']['EwbNo']!='') {
-                    MasterGstEway::create([
-                        'irn_id' => $obj->id,
+                if (isset($data['data'])) {
+                    $obj = MasterGstIrn::create([
                         'sales_id' => $sales_id,
-                        'ewbno' => $data['data']['EwbNo'],
-                        'ewbdt' => $data['data']['EwbDt'],
-                        'ewbvalidtill' => $data['data']['EwbValidTill'],
+                        'ackno' => $data['data']['AckNo'],
+                        'ackdt' => $data['data']['AckDt'],
+                        'irn' => $data['data']['Irn'],
+                        'signed_invoice' => $data['data']['SignedInvoice'],
+                        'signed_qrcode' => $data['data']['SignedQRCode'],
+                        'status' => 'Generated',
                     ]);
                 }
+                if (isset($data['data'])) {
+                    if ($data['data']['EwbNo'] != '') {
+                        MasterGstEway::create([
+                            'irn_id' => $obj->id,
+                            'sales_id' => $sales_id,
+                            'ewbno' => $data['data']['EwbNo'],
+                            'ewbdt' => $data['data']['EwbDt'],
+                            'ewbvalidtill' => $data['data']['EwbValidTill'],
+                        ]);
+                    }
+                }
+
                 return $data;
             } else {
                 Log::error('API Request Failed', [
@@ -106,19 +113,19 @@ class MasterGstApi extends Form
                     'headers' => $response->headers(),
                 ]);
                 return response()->json([
-                    'error' => 'Request failed with status code: ' . $response->status(),
+                    'error' => 'Request failed with status code: '.$response->status(),
                     'message' => $response->body(),
                 ], $response->status());
             }
         } catch (\Exception $e) {
             Log::error('An error occurred while fetching IRN', ['exception' => $e->getMessage()]);
-            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'An error occurred: '.$e->getMessage()], 500);
         }
     }
     #endregion
 
-     #region[getIrnCancel]
-    public function getIrnCancel(Request $request,$jsonData=null,$token=null,$sales_id=null)
+    #region[getIrnCancel]
+    public function getIrnCancel(Request $request, $jsonData = null, $token = null, $sales_id = null)
     {
 
         try {
@@ -134,8 +141,8 @@ class MasterGstApi extends Form
                 $jsonData);
 
             if ($response->successful()) {
-                $obj=  MasterGstIrn::where('sales_id',$sales_id)->first();
-                $obj->status="Canceled";
+                $obj = MasterGstIrn::where('sales_id', $sales_id)->first();
+                $obj->status = "Canceled";
                 $obj->save();
                 return $response->json();
             } else {
@@ -157,8 +164,8 @@ class MasterGstApi extends Form
     }
     #endregion
 
-     #region[getEwayBill]
-    public function getEwayBill(Request $request,$jsonData=null,$token=null,$sales_id=null)
+    #region[getEwayBill]
+    public function getEwayBill(Request $request, $jsonData = null, $token = null, $sales_id = null)
     {
 
         try {
@@ -175,13 +182,13 @@ class MasterGstApi extends Form
 
             if ($response->successful()) {
                 $data = $response->json();
-                $obj=MasterGstIrn::where('sales_id',$sales_id)->first();
+                $obj = MasterGstIrn::where('sales_id', $sales_id)->first();
                 MasterGstEway::create([
                     'irn_id' => $obj->id,
                     'sales_id' => $sales_id,
-                    'ewbno'=>$data['data']['EwbNo'],
-                    'ewbdt'=>$data['data']['EwbDt'],
-                    'ewbvalidtill'=>$data['data']['EwbValidTill'],
+                    'ewbno' => $data['data']['EwbNo'],
+                    'ewbdt' => $data['data']['EwbDt'],
+                    'ewbvalidtill' => $data['data']['EwbValidTill'],
                 ]);
                 return $data;
             } else {
@@ -203,8 +210,8 @@ class MasterGstApi extends Form
     }
     #endregion
 
-     #region[getEwayDetails]
-    public function getEwayDetails($token=null, $irn=null,$supplier_gstn=null)
+    #region[getEwayDetails]
+    public function getEwayDetails($token = null, $irn = null, $supplier_gstn = null)
     {
 
         try {
@@ -217,7 +224,7 @@ class MasterGstApi extends Form
                 'gstin' => '29AABCT1332L000',
             ])->get('https://api.mastergst.com/einvoice/type/GETEWAYBILLIRN/version/V1_03', [
                 'param1' => $irn,
-                'supplier_gstn'=>$supplier_gstn,
+                'supplier_gstn' => $supplier_gstn,
                 'email' => 'aaranoffice@gmail.com',
             ]);
             if ($response->successful()) {
@@ -238,15 +245,15 @@ class MasterGstApi extends Form
     #endregion
 
     #region[EwayBillGenerate]
-    public function EwayBillGenerate(Request $request,$jsonData=null,$salesID=null)
+    public function EwayBillGenerate(Request $request, $jsonData = null, $salesID = null)
     {
-        $auth= Http::withHeaders([
+        $auth = Http::withHeaders([
             'ip_address' => '103.231.117.198',
             'client_id' => 'b569cf9a-72ba-4bc2-9558-3a94821c1ea4',
             'client_secret' => 'ee72ff2e-c441-4d77-be67-ebb960001a8b',
             'gstin' => '05AAACH6188F1ZM',
         ])->get('https://api.mastergst.com/ewaybillapi/v1.03/authenticate', [
-            'email' => 'aaranoffice@gmail.com','username'=>'05AAACH6188F1ZM','password'=>'abc123@@'
+            'email' => 'aaranoffice@gmail.com', 'username' => '05AAACH6188F1ZM', 'password' => 'abc123@@'
         ]);
         $auth->json();
         try {
@@ -261,10 +268,10 @@ class MasterGstApi extends Form
                 $data = $response->json();
                 EwayBill::create([
                     'sales_id' => $salesID,
-                    'ewayBillNo'=>$data['data']['ewayBillNo'],
-                    'ewayBillDate'=>$data['data']['ewayBillDate'],
-                    'validUpto'=>$data['data']['validUpto'],
-                    'status'=>'Generated',
+                    'ewayBillNo' => $data['data']['ewayBillNo'],
+                    'ewayBillDate' => $data['data']['ewayBillDate'],
+                    'validUpto' => $data['data']['validUpto'],
+                    'status' => 'Generated',
                 ]);
                 return $data;
             } else {
@@ -287,15 +294,15 @@ class MasterGstApi extends Form
     #endregion
 
     #region[EwayBillCancel]
-    public function EwayBillCancel(Request $request,$jsonData=null,$salesID=null)
+    public function EwayBillCancel(Request $request, $jsonData = null, $salesID = null)
     {
-        $auth= Http::withHeaders([
+        $auth = Http::withHeaders([
             'ip_address' => '103.231.117.198',
             'client_id' => 'b569cf9a-72ba-4bc2-9558-3a94821c1ea4',
             'client_secret' => 'ee72ff2e-c441-4d77-be67-ebb960001a8b',
             'gstin' => '05AAACH6188F1ZM',
         ])->get('https://api.mastergst.com/ewaybillapi/v1.03/authenticate', [
-            'email' => 'aaranoffice@gmail.com','username'=>'05AAACH6188F1ZM','password'=>'abc123@@'
+            'email' => 'aaranoffice@gmail.com', 'username' => '05AAACH6188F1ZM', 'password' => 'abc123@@'
         ]);
         $auth->json();
         try {
@@ -308,9 +315,9 @@ class MasterGstApi extends Form
                 $jsonData);
             if ($response->successful()) {
                 $data = $response->json();
-                $obj=EwayBill::where('sales_id', $salesID)->first();
-                $obj->status='Cancelled';
-                $obj->cancelDate=$data['data']['cancelDate'];
+                $obj = EwayBill::where('sales_id', $salesID)->first();
+                $obj->status = 'Cancelled';
+                $obj->cancelDate = $data['data']['cancelDate'];
                 $obj->save();
                 return $data;
             } else {
@@ -327,6 +334,40 @@ class MasterGstApi extends Form
         } catch (\Exception $e) {
             Log::error('An error occurred while fetching IRN', ['exception' => $e->getMessage()]);
             return response()->json(['error' => 'An error occurred: '.$e->getMessage()], 500);
+        }
+    }
+    #endregion
+
+    #region[getEwayDetails]
+    public function getIrnDetail(Request $request,$token = null, $docDetail = null)
+    {
+        try {
+            $response = Http::withHeaders([
+                'ip_address' => '103.231.117.198',
+                'client_id' => '7428e4e3-3dc4-45dd-a09d-78e70267dc7b',
+                'client_secret' => '79a7b613-cf8f-466f-944f-28b9c429544d',
+                'username' => 'mastergst',
+                'auth-token' => $token,
+                'gstin' => '29AABCT1332L000',
+                'docnum' =>(string)($docDetail['No']),
+                'docdate' => (string)($docDetail['Dt']),
+            ])->get('https://api.mastergst.com/einvoice/type/GETIRNBYDOCDETAILS/version/V1_03', [
+                'email' => 'aaranoffice@gmail.com',
+                'param1' => $docDetail['Typ'],
+            ]);
+            if ($response->successful()) {
+                $data = $response->json();
+                if ($data !== null) {
+                    return $data;
+                } else {
+                    return response()->json(['error' => 'Failed to decode JSON data.'], 500);
+                }
+
+            } else {
+                echo "Request failed with status code: ".$response->status();
+            }
+        } catch (\Exception $e) {
+            echo "An error occurred: ".$e->getMessage();
         }
     }
     #endregion

@@ -125,4 +125,17 @@ class Customise
         return 'demodata';
     }
     #endregion
+
+
+    #region[ExportSales]
+    public static function hasExportSales(): bool
+    {
+        return static::enabled(static::exportsales());
+    }
+
+    public static function exportsales(): string
+    {
+        return 'exportsales';
+    }
+    #endregion
 }

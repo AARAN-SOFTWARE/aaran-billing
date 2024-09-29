@@ -82,6 +82,7 @@ class Index extends Component
 
                 ];
                 $this->common->save($Transaction, $extraFields);
+                $this->contactUpdate();
                 $message = "Saved";
             } else {
                 $Transaction = Transaction::find($this->common->vid);
@@ -110,10 +111,18 @@ class Index extends Component
                     'user_id' => auth()->id(),
                 ];
                 $this->common->edit($Transaction, $extraFields);
+                $this->contactUpdate();
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
+    }
+    public function contactUpdate()
+    {
+        $obj = Contact::find($this->contact_id);
+        $outstanding = $obj->outstanding - $this->common->vname;
+        $obj->outstanding = $outstanding;
+        $obj->save();
     }
     #endregion
 
@@ -565,6 +574,10 @@ class Index extends Component
             $this->against_id = $Transaction->against_id;
             $this->sales_id = $Transaction->against_id;
             $this->sales_no = $Transaction->against_id ? Sale::find($Transaction->against_id)->invoice_no : '';
+
+            $contact_outstanding=Contact::find($this->contact_id);
+            $contact_outstanding->outstanding=$contact_outstanding->outstanding+$this->common->vname;
+            $contact_outstanding->save();
             return $Transaction;
         }
         return null;

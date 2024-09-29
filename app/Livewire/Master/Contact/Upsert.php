@@ -33,6 +33,7 @@ class Upsert extends Component
     public mixed $contact_type = '';
     public string $msme_no = '';
     public mixed $opening_balance = 0;
+    public mixed $outstanding = 0;
     public string $effective_from = '';
     public mixed $route;
     #endregion
@@ -633,6 +634,7 @@ class Upsert extends Component
                     'msme_no' => $this->msme_no ?: '-',
                     'msme_type_id' => $this->msme_type_id ?: '125',
                     'opening_balance' => $this->opening_balance ?: 0,
+                    'outstanding' => $this->outstanding ?: 0,
                     'effective_from' => $this->effective_from,
                     'active_id' => $this->active_id,
                     'gstin' => Str::upper($this->gstin),
@@ -655,6 +657,7 @@ class Upsert extends Component
                 $obj->msme_no = $this->msme_no;
                 $obj->msme_type_id = $this->msme_type_id;
                 $obj->opening_balance = $this->opening_balance ?: 0;
+                $obj->outstanding = $this->outstanding ?: 0;
                 $obj->effective_from = $this->effective_from;
                 $obj->gstin = $this->gstin;
                 $obj->email = $this->email;
@@ -748,6 +751,7 @@ class Upsert extends Component
             $this->msme_type_id = $obj->msme_type_id;
             $this->msme_type_name = Common::find($obj->msme_type_id)->vname;
             $this->opening_balance = $obj->opening_balance;
+            $this->outstanding = $obj->outstanding;
             $this->effective_from = $obj->effective_from;
             $this->gstin = $obj->gstin;
             $this->email = $obj->email;
