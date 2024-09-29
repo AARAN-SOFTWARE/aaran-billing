@@ -6,6 +6,7 @@ use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Company;
 use Aaran\Transaction\Models\Transaction;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 use function Spatie\LaravelPdf\Support\pdf;
 
 class TransController extends Controller
@@ -23,13 +24,20 @@ class TransController extends Controller
             $this->trans_type_name = Common::find(109)->vname;
         }
 
-        return pdf('pdf-view.Transaction.trans', [
+//        return pdf('pdf-view.Transaction.trans', [
+        Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
+
+        $pdf = PDF::loadView('pdf-view.Transaction.trans'
+            , [
             'list' => $this->getList(),
             'cmp' => Company::printDetails(session()->get('company_id')),
             'trans_type_id' => $this->trans_type_id,
             'trans_type_name' => $this->trans_type_name,
 
         ]);
+        $pdf->render();
+
+        return $pdf->stream();
 
     }
 

@@ -9,7 +9,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white">
-
 <div class="p-5">
     <div class="text-end text-xs text-gray-500 p-0.5">Original Copy</div>
     <div class="border border-gray-300">
@@ -18,7 +17,7 @@
                     <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo"
                          class="w-24 h-auto"/>
                 @else
-                    <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" class="w-24 h-auto">
+                    <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" class="w-auto h-24">
                 @endif
             <div class="flex-col flex gap-1 ">
                 <div class="text-3xl uppercase font-bold">{{$cmp->get('company_name')}}</div>
@@ -50,7 +49,7 @@
                         class="w-1/2 text-xs text-gray-600 space-y-1 flex-col justify-evenly px-2 border-r border-gray-300">
                         <div class="font-bold text-black">TO:</div>
                         <div class="font-bold inline-flex items-end space-x-2 text-black text-sm">
-                            <span>M/S</span><span>{{$obj->contact_name}}</span></div>
+                            <span>M/S</span><span>{{$cmp->get('company_name')}}</span></div>
                         <div class="">{{$billing_address->get('address_1')}}
                             , {{$billing_address->get('address_2')}}</div>
                         <div class="">{{$billing_address->get('address_3')}}</div>
@@ -62,20 +61,14 @@
                         <div class="inline-flex justify-between"><span
                                 class="font-bold text-black">Date:</span><span>{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</span>
                         </div>
-                        <div class="inline-flex justify-between"><span
-                                class="w-1/2 font-bold text-black">IRN No:</span><span
-                                class="1/2 break-all text-end">12345678901234567980012345678901234567890</span>
-                        </div>
-                        {{--                    <div class="inline-flex justify-between">--}}
-                        {{--                        <span class="font-bold text-black">PO No:</span><span--}}
-                        {{--                            class="">{{ $obj->despatch_name }}</span>--}}
-                        {{--                    </div>--}}
-                        {{--                    <div class="inline-flex justify-between">--}}
-                        {{--                        <span class="font-bold text-black">PO Date:</span>--}}
-                        {{--                        <span class="">--}}
-                        {{--                            {{ $obj->despatch_date }}</span>--}}
 
-                        {{--                    </div>--}}
+                        <div class="inline-flex justify-between"><span
+                                class="w-1/2 font-bold text-black">IRN No:</span>
+                        @if($irn)
+                            <span
+                                class="w-1/2 break-all text-end">{{ $irn->irn }}</span>
+                        @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,12 +85,12 @@
     <div>
         <table class="w-full border-b border-gray-300">
             <thead class="font-semibold text-[10px] bg-gray-50">
-            <tr class="py-2 border-b border-r border-gray-300 tracking-wider">
+            <tr class="py-2 border-r border-gray-300 tracking-wider">
                 <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300">S.No</th>
+                <th class="py-2 w-[8%] border-r border-gray-300">PO.No</th>
+                <th class="py-2 w-[8%] border-r border-gray-300">DC.No</th>
                 <th class="py-2 w-[8%] border-r border-gray-300">HSN Code</th>
                 <th class="py-2 border-r border-gray-300">Particulars</th>
-                <th class="py-2 w-[4%] border-r border-gray-300">Size</th>
-                <th class="py-2 w-[6%] border-r px-1 border-gray-300">colours</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Qty</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Price</th>
                 <th class="py-2 w-[8%] border-r border-gray-300">Taxable Amount</th>
@@ -111,8 +104,10 @@
                 $gstPercent = 0;
             @endphp
             @foreach($list as $index => $row)
-                <tr class="text-xs border-r border-gray-300">
+                <tr class="text-xs  border-r border-gray-300">
                     <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
+                    <td class="py-2 text-center border-r border-gray-300">{{$row['po_no']}}</td>
+                    <td class="py-2 text-center border-r border-gray-300">{{$row['dc_no']}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['hsncode']}}</td>
                     <td class="py-2 text-start px-0.5 border-r border-gray-300">
                         @if($row['description'])
@@ -121,18 +116,19 @@
                             {{$row['product_name']}}
                         @endif
                     </td>
-                    <td class="py-2 text-center border-r border-gray-300">{{$row['size_name']}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{$row['colour_name']}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row['qty']+0}}</td>
-                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
+                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['gst_percent']*2}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>
                 </tr>
+                @php
+                    $gstPercent = $row['gst_percent'];
+                @endphp
             @endforeach
             @for($i = 0; $i < 9 - $list->count(); $i++)
-                <tr class="text-xs border-r border-gray-300">
+                <tr class="text-xs  border-r border-gray-300">
                     <td class="py-2 text-center border-l border-r border-gray-300">&nbsp;</td>
                     <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
                     <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
@@ -269,7 +265,6 @@
         </div>
     </div>
 </div>
-
 
 @pageBreak
 
@@ -284,7 +279,8 @@
             <div><span>Date:</span> <span class="font-semibold">{{date('y-m-d')}}</span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. e-way Bill Details</span>
     </div>
     <div class="w-full flex border-l border-r border-gray-300">
@@ -292,28 +288,35 @@
             <div class=" flex justify-between h-[160px]">
                 <div
                     class="w-1/2 text-xs flex-col flex space-y-1 justify-evenly px-1 border-r border-gray-300">
-                    <div class="inline-flex  "><span class="w-2/5">e-Way Bill No</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">5432121234565678</span></div>
-                    <div class="inline-flex  "><span class="w-2/5">Generated By</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">33AEYFS0879K1Z5</span></div>
+                    <div class="inline-flex  "><span class="w-2/5">e-Way Bill No</span>
+                        <span class="w-1/5">:</span>
+                        @if($eWay)
+                            <span class="font-semibold w-2/5">{{ $eWay->ewayBillNo }}</span>
+                        @endif
+                    </div>
+                    <div class="inline-flex  "><span class="w-2/5">Generated By</span>
+                        <span class="w-1/5">:</span>
+                        <span
+                            class="font-semibold w-2/5">{{$cmp->get('gstin')}}</span>
+                    </div>
                     <div class="inline-flex "><span class="w-2/5">Supply By</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">Outward-Supply</span></div>
+                            class="font-semibold w-2/5">{{$obj->contact_name}}</span></div>
                     <div class="inline-flex "><span class="w-2/5">Mode</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">1 - Road</span>
+                            class="font-semibold w-2/5">{{$obj->TransMode}}</span>
                     </div>
                 </div>
                 <div class="w-1/2 text-xs flex-col flex space-y-1 justify-evenly px-1">
                     <div class="inline-flex "><span class="w-2/5">Approx Distance</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">6 KM</span></div>
+                            class="font-semibold w-2/5">{{$obj->distance}}</span></div>
                     <div class="inline-flex "><span class="w-2/5">Transaction Type</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">Regular</span></div>
+                            class="font-semibold w-2/5">{{$obj->Vehtype}}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Generated Date</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{date('y-m-d')}}</span></div>
+                            class="font-semibold w-2/5">{{ $eWay->ewbdt }}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Valid Upto</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{date('y-m-d')}}</span></div>
+                            class="font-semibold w-2/5">{{ $eWay->ewbvalidtill }}</span></div>
                 </div>
             </div>
         </div>
@@ -325,41 +328,43 @@
             @endif
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. Address Details</span>
     </div>
     <div class="flex justify-between text-xs   border-l border-r border-gray-300">
         <div class="flex-col w-1/2 space-y-2 py-2 p-1">
             <div class=" ">
                 <div class="font-semibold">From</div>
-                <div>SK INTERNATIONAL</div>
-                <div>GSTIN : 33AEYFS0879K1Z5</div>
-                <div>Tamil Nadu</div>
+                <div>{{$cmp->get('company_name')}}</div>
+                <div>{{$billing_address->get('gstcell')}}</div>
+                <div>{{$billing_address->get('address_3')}}</div>
             </div>
             <div class="">
                 <div class="font-semibold">Dispatch From</div>
-                <div> Ground Floor, SF.No. 390/1,, Tkt Thottam, Pitchampalayam</div>
-                <div>Pudur,, P.N. Road, Thottipalayam,, Tiruppur.</div>
-                <div> TIRUPUR Tamil Nadu 641602</div>
+                <div> {{ $billing_address->get('address_1') }},</div>
+                <div> {{$billing_address->get('address_2')}}</div>
+                <div>{{$billing_address->get('address_3')}}</div>
             </div>
 
         </div>
         <div class="flex-col w-1/2 space-y-2 border-l border-gray-300 py-2 p-1">
             <div class="">
                 <div class="font-semibold">To</div>
-                <div>SATYANARAYANA GARMENTS</div>
-                <div>GSTIN : 33AEZFS3018M1ZF</div>
-                <div>Tamil Nadu</div>
+                <div>{{$cmp->get('company_name')}}</div>
+                <div>{{$shipping_address->get('gstcell')}}</div>
+                <div>{{$shipping_address->get('address_3')}}</div>
             </div>
             <div class="">
-                <div class="font-semibold">Ship From</div>
-                <div>321, SWAMYNATHAPURAM 1 ST STREET,,</div>
-                <div>SWAMYNATHAPURAM, Velampalayam,, Tiruppur</div>
-                <div>TIRUPUR Tamil Nadu 641603</div>
+                <div class="font-semibold">Ship To</div>
+                <div>{{$shipping_address->get('address_1')}}</div>
+                <div>{{$shipping_address->get('address_2')}}</div>
+                <div>{{$shipping_address->get('address_3')}}</div>
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
         <span class=" ">3. Good Details</span>
     </div>
     <!-- Item Table -->
@@ -394,7 +399,8 @@
                     </td>
                     <td class="py-2 px-0.5 border-r border-gray-300 text-center">{{$row['qty']+0}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300 font-semibold">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}&nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
+                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}
+                        &nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>--}}
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>--}}
                 </tr>
@@ -429,7 +435,7 @@
             <div class="w-full inline-flex justify-between"><span class="w-2/5 ">Tot. Taxable Amt</span><span
                     class="w-1/5">:</span><span
                     class="w-w-2/5 text-end font-bold">  {{number_format($obj->total_taxable,2,'.','')}}</span></div>
-            @if($obj->sales_type=='CGST-SGST')
+            @if($obj->sales_type=='1')
                 <div class="w-full inline-flex justify-between"><span
                         class="w-2/5">CGST&nbsp;@&nbsp;{{$gstPercent}}%</span><span class="w-1/5">:</span><span
                         class="w-2/5 text-end font-bold">{{number_format($obj->total_gst/2,2,'.','')}}</span></div>
@@ -460,43 +466,45 @@
         </div>
         <div class="w-2/5 flex-col border-r border-gray-300 px-0.5 py-1 space-y-1">
             <div class="w-full inline-flex justify-between"><span class="w-2/5">Total Inv Amt</span><span
-                    class="w-1/5">:</span><span
-                    class="w-2/5 text-end font-bold"> {{number_format($obj->grand_total,2,'.','')}}</span></div>
+                    class="w-1/5">:</span>
+                <span class="w-2/5 text-end font-bold"> {{number_format($obj->grand_total,2,'.','')}}</span></div>
             <div class="w-full inline-flex justify-between"><span class="w-2/5"></span><span class="w-1/5"></span><span
                     class="w-2/5 text-end"></span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">4. Transportation Details</span>
     </div>
     <div class="w-full flex  text-xs border-l border-r border-gray-300">
         <div class="w-1/2 flex-col p-1 space-y-1 border-r border-gray-300">
             <div class="flex justify-between">
-                <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_id}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Name</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5"></span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_name}}</span>
             </div>
         </div>
         <div class="w-1/2 flex-col p-1 space-y-1">
             <div class="flex justify-between">
-                <span class="w-2/5">Doc No</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Doc No</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_no}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5">{{ $eWay->ewbdt }}</span>
 
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">5. Vehicle Details</span>
     </div>
     <div class="w-full  text-xs inline-flex items-center justify-between border-b border-l border-r border-gray-300">
         <div class="w-1/3 flex justify-between border-r border-gray-300 p-1">
-            <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+            <span class="w-2/5">Vehicle ID</span><span class="w-1/5">:</span><span class="w-2/5">{{ $obj->Vehno }}</span>
         </div>
         <div class="w-1/3 flex justify-between border-r border-gray-300 p-1">
-            <span class="w-2/5">From</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+            <span class="w-2/5">From</span><span class="w-1/5">:</span><span class="w-2/5">{{$cmp->get('city_name')}}</span>
         </div>
         <div class="w-1/3 flex justify-between p-1">
             <span class="w-2/5">CEWB</span><span class="w-1/5">:</span><span class="w-2/5"></span>
@@ -506,14 +514,18 @@
 
 </div>
 
-
 @pageBreak
 
 <div class="p-5">
     <div class="text-end text-xs text-gray-500 p-0.5">Duplicate Copy</div>
     <div class="border border-gray-300">
         <div class="flex justify-center p-2 gap-x-6">
-            <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-24 h-auto"/>
+            @if($cmp->get('logo')!='no_image')
+                <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo"
+                     class="w-24 h-auto"/>
+            @else
+                <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" class="w-auto h-24">
+            @endif
             <div class="flex-col flex gap-1 ">
                 <div class="text-3xl uppercase font-bold">{{$cmp->get('company_name')}}</div>
                 <div class="flex-col flex text-xs space-y-0.5 text-gray-600 justify-center items-center">
@@ -544,7 +556,7 @@
                         class="w-1/2 text-xs text-gray-600 space-y-1 flex-col justify-evenly px-2 border-r border-gray-300">
                         <div class="font-bold text-black">TO:</div>
                         <div class="font-bold inline-flex items-end space-x-2 text-black text-sm">
-                            <span>M/S</span><span>{{$obj->contact_name}}</span></div>
+                            <span>M/S</span><span>{{$cmp->get('company_name')}}</span></div>
                         <div class="">{{$billing_address->get('address_1')}}
                             , {{$billing_address->get('address_2')}}</div>
                         <div class="">{{$billing_address->get('address_3')}}</div>
@@ -556,20 +568,14 @@
                         <div class="inline-flex justify-between"><span
                                 class="font-bold text-black">Date:</span><span>{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</span>
                         </div>
-                        <div class="inline-flex justify-between"><span
-                                class="w-1/2 font-bold text-black">IRN No:</span><span
-                                class="1/2 break-all text-end">12345678901234567980012345678901234567890</span>
-                        </div>
-                        {{--                    <div class="inline-flex justify-between">--}}
-                        {{--                        <span class="font-bold text-black">PO No:</span><span--}}
-                        {{--                            class="">{{ $obj->despatch_name }}</span>--}}
-                        {{--                    </div>--}}
-                        {{--                    <div class="inline-flex justify-between">--}}
-                        {{--                        <span class="font-bold text-black">PO Date:</span>--}}
-                        {{--                        <span class="">--}}
-                        {{--                            {{ $obj->despatch_date }}</span>--}}
 
-                        {{--                    </div>--}}
+                        <div class="inline-flex justify-between"><span
+                                class="w-1/2 font-bold text-black">IRN No:</span>
+                            @if($irn)
+                                <span
+                                    class="w-1/2 break-all text-end">{{ $irn->irn }}</span>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -586,12 +592,12 @@
     <div>
         <table class="w-full border-b border-gray-300">
             <thead class="font-semibold text-[10px] bg-gray-50">
-            <tr class="py-2 border-b border-r border-gray-300 tracking-wider">
+            <tr class="py-2 border-r border-gray-300 tracking-wider">
                 <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300">S.No</th>
+                <th class="py-2 w-[8%] border-r border-gray-300">PO.No</th>
+                <th class="py-2 w-[8%] border-r border-gray-300">DC.No</th>
                 <th class="py-2 w-[8%] border-r border-gray-300">HSN Code</th>
                 <th class="py-2 border-r border-gray-300">Particulars</th>
-                <th class="py-2 w-[4%] border-r border-gray-300">Size</th>
-                <th class="py-2 w-[6%] border-r px-1 border-gray-300">colours</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Qty</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Price</th>
                 <th class="py-2 w-[8%] border-r border-gray-300">Taxable Amount</th>
@@ -605,8 +611,10 @@
                 $gstPercent = 0;
             @endphp
             @foreach($list as $index => $row)
-                <tr class="text-xs border-r border-gray-300">
+                <tr class="text-xs  border-r border-gray-300">
                     <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
+                    <td class="py-2 text-center border-r border-gray-300">{{$row['po_no']}}</td>
+                    <td class="py-2 text-center border-r border-gray-300">{{$row['dc_no']}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['hsncode']}}</td>
                     <td class="py-2 text-start px-0.5 border-r border-gray-300">
                         @if($row['description'])
@@ -615,18 +623,19 @@
                             {{$row['product_name']}}
                         @endif
                     </td>
-                    <td class="py-2 text-center border-r border-gray-300">{{$row['size_name']}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{$row['colour_name']}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row['qty']+0}}</td>
-                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
+                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['gst_percent']*2}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>
                 </tr>
+                @php
+                    $gstPercent = $row['gst_percent'];
+                @endphp
             @endforeach
             @for($i = 0; $i < 9 - $list->count(); $i++)
-                <tr class="text-xs border-r border-gray-300">
+                <tr class="text-xs  border-r border-gray-300">
                     <td class="py-2 text-center border-l border-r border-gray-300">&nbsp;</td>
                     <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
                     <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
@@ -764,7 +773,6 @@
     </div>
 </div>
 
-
 @pageBreak
 
 <div class="p-5 ">
@@ -774,11 +782,12 @@
             <span class="">e-Way Bill</span>
         </div>
         <div class="w-full text-xs  tracking-wider flex items-center justify-between py-2 px-0.5">
-            <div><span>Doc No:</span> <span class="font-semibold">Tax Invoice - 43</span></div>
+            <div><span>Invoice  No:</span> <span class="font-semibold">{{$obj->invoice_no}}</span></div>
             <div><span>Date:</span> <span class="font-semibold">{{date('y-m-d')}}</span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. e-way Bill Details</span>
     </div>
     <div class="w-full flex border-l border-r border-gray-300">
@@ -786,74 +795,83 @@
             <div class=" flex justify-between h-[160px]">
                 <div
                     class="w-1/2 text-xs flex-col flex space-y-1 justify-evenly px-1 border-r border-gray-300">
-                    <div class="inline-flex  "><span class="w-2/5">e-Way Bill No</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">5432121234565678</span></div>
-                    <div class="inline-flex  "><span class="w-2/5">Generated By</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">33AEYFS0879K1Z5</span></div>
+                    <div class="inline-flex  "><span class="w-2/5">e-Way Bill No</span>
+                        <span class="w-1/5">:</span>
+                        @if($eWay)
+                            <span class="font-semibold w-2/5">{{ $eWay->ewayBillNo }}</span>
+                        @endif
+                    </div>
+                    <div class="inline-flex  "><span class="w-2/5">Generated By</span>
+                        <span class="w-1/5">:</span>
+                        <span
+                            class="font-semibold w-2/5">{{$cmp->get('gstin')}}</span>
+                    </div>
                     <div class="inline-flex "><span class="w-2/5">Supply By</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">Outward-Supply</span></div>
+                            class="font-semibold w-2/5">{{$obj->contact_name}}</span></div>
                     <div class="inline-flex "><span class="w-2/5">Mode</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">1 - Road</span>
+                            class="font-semibold w-2/5">{{$obj->TransMode}}</span>
                     </div>
                 </div>
                 <div class="w-1/2 text-xs flex-col flex space-y-1 justify-evenly px-1">
                     <div class="inline-flex "><span class="w-2/5">Approx Distance</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">6 KM</span></div>
+                            class="font-semibold w-2/5">{{$obj->distance}}</span></div>
                     <div class="inline-flex "><span class="w-2/5">Transaction Type</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">Regular</span></div>
+                            class="font-semibold w-2/5">{{$obj->Vehtype}}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Generated Date</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{date('y-m-d')}}</span></div>
+                            class="font-semibold w-2/5">{{ $eWay->ewbdt }}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Valid Upto</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{date('y-m-d')}}</span></div>
+                            class="font-semibold w-2/5">{{ $eWay->ewbvalidtill }}</span></div>
                 </div>
             </div>
         </div>
         <div class="w-[20%] h-[160px] border-l border-gray-300 flex items-center justify-center">
-            @if($irn)
+            @if($eWay)
                 <img class="w-[145px] h-auto rounded-sm"
-                     src="{{\App\Helper\qrcoder::generate($irn->signed_qrcode,22)}}"
-                     alt="{{$irn->signed_qrcode}}">
+                     src="{{\App\Helper\qrcoder::generate($eWay->ewbno,2)}}"
+                     alt="{{$eWay->ewbno}}">
             @endif
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. Address Details</span>
     </div>
     <div class="flex justify-between text-xs   border-l border-r border-gray-300">
         <div class="flex-col w-1/2 space-y-2 py-2 p-1">
             <div class=" ">
                 <div class="font-semibold">From</div>
-                <div>SK INTERNATIONAL</div>
-                <div>GSTIN : 33AEYFS0879K1Z5</div>
-                <div>Tamil Nadu</div>
+                <div>{{$cmp->get('company_name')}}</div>
+                <div>{{$billing_address->get('gstcell')}}</div>
+                <div>{{$billing_address->get('address_3')}}</div>
             </div>
             <div class="">
                 <div class="font-semibold">Dispatch From</div>
-                <div> Ground Floor, SF.No. 390/1,, Tkt Thottam, Pitchampalayam</div>
-                <div>Pudur,, P.N. Road, Thottipalayam,, Tiruppur.</div>
-                <div> TIRUPUR Tamil Nadu 641602</div>
+                <div> {{ $billing_address->get('address_1') }},</div>
+                <div> {{$billing_address->get('address_2')}}</div>
+                <div>{{$billing_address->get('address_3')}}</div>
             </div>
 
         </div>
         <div class="flex-col w-1/2 space-y-2 border-l border-gray-300 py-2 p-1">
             <div class="">
                 <div class="font-semibold">To</div>
-                <div>SATYANARAYANA GARMENTS</div>
-                <div>GSTIN : 33AEZFS3018M1ZF</div>
-                <div>Tamil Nadu</div>
+                <div>{{$cmp->get('company_name')}}</div>
+                <div>{{$shipping_address->get('gstcell')}}</div>
+                <div>{{$shipping_address->get('address_3')}}</div>
             </div>
             <div class="">
                 <div class="font-semibold">Ship From</div>
-                <div>321, SWAMYNATHAPURAM 1 ST STREET,,</div>
-                <div>SWAMYNATHAPURAM, Velampalayam,, Tiruppur</div>
-                <div>TIRUPUR Tamil Nadu 641603</div>
+                <div>{{$shipping_address->get('address_1')}}</div>
+                <div>{{$shipping_address->get('address_2')}}</div>
+                <div>{{$shipping_address->get('address_3')}}</div>
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
         <span class=" ">3. Good Details</span>
     </div>
     <!-- Item Table -->
@@ -888,7 +906,8 @@
                     </td>
                     <td class="py-2 px-0.5 border-r border-gray-300 text-center">{{$row['qty']+0}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300 font-semibold">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}&nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
+                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}
+                        &nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>--}}
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>--}}
                 </tr>
@@ -960,37 +979,39 @@
                     class="w-2/5 text-end"></span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">4. Transportation Details</span>
     </div>
     <div class="w-full flex  text-xs border-l border-r border-gray-300">
         <div class="w-1/2 flex-col p-1 space-y-1 border-r border-gray-300">
             <div class="flex justify-between">
-                <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_id}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Name</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Name</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_name}}</span>
             </div>
         </div>
         <div class="w-1/2 flex-col p-1 space-y-1">
             <div class="flex justify-between">
-                <span class="w-2/5">Doc No</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Doc No</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_no}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5">{{ $eWay->ewbdt }}</span>
 
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">5. Vehicle Details</span>
     </div>
     <div class="w-full  text-xs inline-flex items-center justify-between border-b border-l border-r border-gray-300">
         <div class="w-1/3 flex justify-between border-r border-gray-300 p-1">
-            <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+            <span class="w-2/5">Vehicle ID</span><span class="w-1/5">:</span><span class="w-2/5">{{ $obj->Vehno }}</span>
         </div>
         <div class="w-1/3 flex justify-between border-r border-gray-300 p-1">
-            <span class="w-2/5">From</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+            <span class="w-2/5">From</span><span class="w-1/5">:</span><span class="w-2/5">{{$cmp->get('city_name')}}</span>
         </div>
         <div class="w-1/3 flex justify-between p-1">
             <span class="w-2/5">CEWB</span><span class="w-1/5">:</span><span class="w-2/5"></span>
@@ -1000,15 +1021,18 @@
 
 </div>
 
-
-
 @pageBreak
 
 <div class="p-5">
     <div class="text-end text-xs text-gray-500 p-0.5">Triplicate Copy</div>
     <div class="border border-gray-300">
         <div class="flex justify-center p-2 gap-x-6">
-            <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" class="w-24 h-auto"/>
+            @if($cmp->get('logo')!='no_image')
+                <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo"
+                     class="w-24 h-auto"/>
+            @else
+                <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" class="w-auto h-24">
+            @endif
             <div class="flex-col flex gap-1 ">
                 <div class="text-3xl uppercase font-bold">{{$cmp->get('company_name')}}</div>
                 <div class="flex-col flex text-xs space-y-0.5 text-gray-600 justify-center items-center">
@@ -1039,7 +1063,7 @@
                         class="w-1/2 text-xs text-gray-600 space-y-1 flex-col justify-evenly px-2 border-r border-gray-300">
                         <div class="font-bold text-black">TO:</div>
                         <div class="font-bold inline-flex items-end space-x-2 text-black text-sm">
-                            <span>M/S</span><span>{{$obj->contact_name}}</span></div>
+                            <span>M/S</span><span>{{$cmp->get('company_name')}}</span></div>
                         <div class="">{{$billing_address->get('address_1')}}
                             , {{$billing_address->get('address_2')}}</div>
                         <div class="">{{$billing_address->get('address_3')}}</div>
@@ -1051,20 +1075,14 @@
                         <div class="inline-flex justify-between"><span
                                 class="font-bold text-black">Date:</span><span>{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</span>
                         </div>
-                        <div class="inline-flex justify-between"><span
-                                class="w-1/2 font-bold text-black">IRN No:</span><span
-                                class="1/2 break-all text-end">12345678901234567980012345678901234567890</span>
-                        </div>
-                        {{--                    <div class="inline-flex justify-between">--}}
-                        {{--                        <span class="font-bold text-black">PO No:</span><span--}}
-                        {{--                            class="">{{ $obj->despatch_name }}</span>--}}
-                        {{--                    </div>--}}
-                        {{--                    <div class="inline-flex justify-between">--}}
-                        {{--                        <span class="font-bold text-black">PO Date:</span>--}}
-                        {{--                        <span class="">--}}
-                        {{--                            {{ $obj->despatch_date }}</span>--}}
 
-                        {{--                    </div>--}}
+                        <div class="inline-flex justify-between"><span
+                                class="w-1/2 font-bold text-black">IRN No:</span>
+                            @if($irn)
+                                <span
+                                    class="w-1/2 break-all text-end">{{ $irn->irn }}</span>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1081,12 +1099,12 @@
     <div>
         <table class="w-full border-b border-gray-300">
             <thead class="font-semibold text-[10px] bg-gray-50">
-            <tr class="py-2 border-b border-r border-gray-300 tracking-wider">
+            <tr class="py-2 border-r border-gray-300 tracking-wider">
                 <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300">S.No</th>
+                <th class="py-2 w-[8%] border-r border-gray-300">PO.No</th>
+                <th class="py-2 w-[8%] border-r border-gray-300">DC.No</th>
                 <th class="py-2 w-[8%] border-r border-gray-300">HSN Code</th>
                 <th class="py-2 border-r border-gray-300">Particulars</th>
-                <th class="py-2 w-[4%] border-r border-gray-300">Size</th>
-                <th class="py-2 w-[6%] border-r px-1 border-gray-300">colours</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Qty</th>
                 <th class="py-2 w-[6%] border-r border-gray-300">Price</th>
                 <th class="py-2 w-[8%] border-r border-gray-300">Taxable Amount</th>
@@ -1100,8 +1118,10 @@
                 $gstPercent = 0;
             @endphp
             @foreach($list as $index => $row)
-                <tr class="text-xs border-r border-gray-300">
+                <tr class="text-xs  border-r border-gray-300">
                     <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
+                    <td class="py-2 text-center border-r border-gray-300">{{$row['po_no']}}</td>
+                    <td class="py-2 text-center border-r border-gray-300">{{$row['dc_no']}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['hsncode']}}</td>
                     <td class="py-2 text-start px-0.5 border-r border-gray-300">
                         @if($row['description'])
@@ -1110,18 +1130,19 @@
                             {{$row['product_name']}}
                         @endif
                     </td>
-                    <td class="py-2 text-center border-r border-gray-300">{{$row['size_name']}}</td>
-                    <td class="py-2 text-center border-r border-gray-300">{{$row['colour_name']}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300">{{$row['qty']+0}}</td>
-                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
+                    <td class="py-2 text-center border-r border-gray-300">{{number_format($row['price'],2,'.','')}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
                     <td class="py-2 text-center border-r border-gray-300">{{$row['gst_percent']*2}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>
                 </tr>
+                @php
+                    $gstPercent = $row['gst_percent'];
+                @endphp
             @endforeach
             @for($i = 0; $i < 9 - $list->count(); $i++)
-                <tr class="text-xs border-r border-gray-300">
+                <tr class="text-xs  border-r border-gray-300">
                     <td class="py-2 text-center border-l border-r border-gray-300">&nbsp;</td>
                     <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
                     <td class="py-2 text-center border-r border-gray-300">&nbsp;</td>
@@ -1259,8 +1280,6 @@
     </div>
 </div>
 
-
-
 @pageBreak
 
 <div class="p-5 ">
@@ -1270,11 +1289,12 @@
             <span class="">e-Way Bill</span>
         </div>
         <div class="w-full text-xs  tracking-wider flex items-center justify-between py-2 px-0.5">
-            <div><span>Doc No:</span> <span class="font-semibold">Tax Invoice - 43</span></div>
+            <div><span>Invoice  No:</span> <span class="font-semibold">{{$obj->invoice_no}}</span></div>
             <div><span>Date:</span> <span class="font-semibold">{{date('y-m-d')}}</span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. e-way Bill Details</span>
     </div>
     <div class="w-full flex border-l border-r border-gray-300">
@@ -1282,74 +1302,83 @@
             <div class=" flex justify-between h-[160px]">
                 <div
                     class="w-1/2 text-xs flex-col flex space-y-1 justify-evenly px-1 border-r border-gray-300">
-                    <div class="inline-flex  "><span class="w-2/5">e-Way Bill No</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">5432121234565678</span></div>
-                    <div class="inline-flex  "><span class="w-2/5">Generated By</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">33AEYFS0879K1Z5</span></div>
+                    <div class="inline-flex  "><span class="w-2/5">e-Way Bill No</span>
+                        <span class="w-1/5">:</span>
+                        @if($eWay)
+                            <span class="font-semibold w-2/5">{{ $eWay->ewayBillNo }}</span>
+                        @endif
+                    </div>
+                    <div class="inline-flex  "><span class="w-2/5">Generated By</span>
+                        <span class="w-1/5">:</span>
+                        <span
+                            class="font-semibold w-2/5">{{$cmp->get('gstin')}}</span>
+                    </div>
                     <div class="inline-flex "><span class="w-2/5">Supply By</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">Outward-Supply</span></div>
+                            class="font-semibold w-2/5">{{$obj->contact_name}}</span></div>
                     <div class="inline-flex "><span class="w-2/5">Mode</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">1 - Road</span>
+                            class="font-semibold w-2/5">{{$obj->TransMode}}</span>
                     </div>
                 </div>
                 <div class="w-1/2 text-xs flex-col flex space-y-1 justify-evenly px-1">
                     <div class="inline-flex "><span class="w-2/5">Approx Distance</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">6 KM</span></div>
+                            class="font-semibold w-2/5">{{$obj->distance}}</span></div>
                     <div class="inline-flex "><span class="w-2/5">Transaction Type</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">Regular</span></div>
+                            class="font-semibold w-2/5">{{$obj->Vehtype}}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Generated Date</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{date('y-m-d')}}</span></div>
+                            class="font-semibold w-2/5">{{ $eWay->ewbdt }}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Valid Upto</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{date('y-m-d')}}</span></div>
+                            class="font-semibold w-2/5">{{ $eWay->ewbvalidtill }}</span></div>
                 </div>
             </div>
         </div>
         <div class="w-[20%] h-[160px] border-l border-gray-300 flex items-center justify-center">
-            @if($irn)
+            @if($eWay)
                 <img class="w-[145px] h-auto rounded-sm"
-                     src="{{\App\Helper\qrcoder::generate($irn->signed_qrcode,22)}}"
-                     alt="{{$irn->signed_qrcode}}">
+                     src="{{\App\Helper\qrcoder::generate($eWay->ewbno,2)}}"
+                     alt="{{$eWay->ewbno}}">
             @endif
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">1. Address Details</span>
     </div>
     <div class="flex justify-between text-xs   border-l border-r border-gray-300">
         <div class="flex-col w-1/2 space-y-2 py-2 p-1">
             <div class=" ">
                 <div class="font-semibold">From</div>
-                <div>SK INTERNATIONAL</div>
-                <div>GSTIN : 33AEYFS0879K1Z5</div>
-                <div>Tamil Nadu</div>
+                <div>{{$cmp->get('company_name')}}</div>
+                <div>{{$billing_address->get('gstcell')}}</div>
+                <div>{{$billing_address->get('address_3')}}</div>
             </div>
             <div class="">
                 <div class="font-semibold">Dispatch From</div>
-                <div> Ground Floor, SF.No. 390/1,, Tkt Thottam, Pitchampalayam</div>
-                <div>Pudur,, P.N. Road, Thottipalayam,, Tiruppur.</div>
-                <div> TIRUPUR Tamil Nadu 641602</div>
+                <div> {{ $billing_address->get('address_1') }},</div>
+                <div> {{$billing_address->get('address_2')}}</div>
+                <div>{{$billing_address->get('address_3')}}</div>
             </div>
 
         </div>
         <div class="flex-col w-1/2 space-y-2 border-l border-gray-300 py-2 p-1">
             <div class="">
                 <div class="font-semibold">To</div>
-                <div>SATYANARAYANA GARMENTS</div>
-                <div>GSTIN : 33AEZFS3018M1ZF</div>
-                <div>Tamil Nadu</div>
+                <div>{{$cmp->get('company_name')}}</div>
+                <div>{{$shipping_address->get('gstcell')}}</div>
+                <div>{{$shipping_address->get('address_3')}}</div>
             </div>
             <div class="">
                 <div class="font-semibold">Ship From</div>
-                <div>321, SWAMYNATHAPURAM 1 ST STREET,,</div>
-                <div>SWAMYNATHAPURAM, Velampalayam,, Tiruppur</div>
-                <div>TIRUPUR Tamil Nadu 641603</div>
+                <div>{{$shipping_address->get('address_1')}}</div>
+                <div>{{$shipping_address->get('address_2')}}</div>
+                <div>{{$shipping_address->get('address_3')}}</div>
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-t border-l border-r border-gray-300">
         <span class=" ">3. Good Details</span>
     </div>
     <!-- Item Table -->
@@ -1384,7 +1413,8 @@
                     </td>
                     <td class="py-2 px-0.5 border-r border-gray-300 text-center">{{$row['qty']+0}}</td>
                     <td class="py-2 text-end px-0.5 border-r border-gray-300 font-semibold">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}&nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
+                    <td class="py-2 text-center border-r border-gray-300 ">{{$row['gst_percent']/2*2}}
+                        &nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300">{{number_format($row['gst_amount'],2,'.','')}}</td>--}}
                     {{--                    <td class="py-2 text-end px-0.5 border-r border-gray-300 ">{{number_format($row['sub_total'],2,'.','')}}</td>--}}
                 </tr>
@@ -1456,37 +1486,39 @@
                     class="w-2/5 text-end"></span></div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">4. Transportation Details</span>
     </div>
     <div class="w-full flex  text-xs border-l border-r border-gray-300">
         <div class="w-1/2 flex-col p-1 space-y-1 border-r border-gray-300">
             <div class="flex justify-between">
-                <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_id}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Name</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Name</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_name}}</span>
             </div>
         </div>
         <div class="w-1/2 flex-col p-1 space-y-1">
             <div class="flex justify-between">
-                <span class="w-2/5">Doc No</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Doc No</span><span class="w-1/5">:</span><span class="w-2/5">{{$obj->transport_no}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5">{{ $eWay->ewbdt }}</span>
 
             </div>
         </div>
     </div>
-    <div class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
+    <div
+        class="w-full inline-flex items-center justify-start bg-gray-100 text-black text-sm font-semibold p-1 border-l border-r border-gray-300">
         <span class="">5. Vehicle Details</span>
     </div>
     <div class="w-full  text-xs inline-flex items-center justify-between border-b border-l border-r border-gray-300">
         <div class="w-1/3 flex justify-between border-r border-gray-300 p-1">
-            <span class="w-2/5">Transporter ID</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+            <span class="w-2/5">Vehicle ID</span><span class="w-1/5">:</span><span class="w-2/5">{{ $obj->Vehno }}</span>
         </div>
         <div class="w-1/3 flex justify-between border-r border-gray-300 p-1">
-            <span class="w-2/5">From</span><span class="w-1/5">:</span><span class="w-2/5"></span>
+            <span class="w-2/5">From</span><span class="w-1/5">:</span><span class="w-2/5">{{$cmp->get('city_name')}}</span>
         </div>
         <div class="w-1/3 flex justify-between p-1">
             <span class="w-2/5">CEWB</span><span class="w-1/5">:</span><span class="w-2/5"></span>
@@ -1495,6 +1527,8 @@
     <div class="text-center text-[10px] text-gray-600">This is a Computer generated Invoice</div>
 
 </div>
+
+@pageBreak
 
 </body>
 </html>

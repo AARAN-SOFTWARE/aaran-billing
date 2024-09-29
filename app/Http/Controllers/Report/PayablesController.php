@@ -8,6 +8,7 @@ use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
 use Aaran\Transaction\Models\Transaction;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use function Spatie\LaravelPdf\Support\pdf;
 
@@ -17,8 +18,13 @@ class PayablesController extends Controller
     {
         $purchase = $this->getList($party, $start_date, $end_date);
         $this->getBalance($party, $start_date, $end_date);
-        return pdf('pdf-view.report.payables', [
+//        return pdf('pdf-view.report.payables', [
+        Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
+
+        $pdf = PDF::loadView('pdf-view.report.payables'
+            , [
             'list' => $purchase,
+
             'cmp' => Company::printDetails(session()->get('company_id')),
             'contact' => Contact::find($party),
             'start_date' => date('d-m-Y', strtotime($start_date)),
@@ -27,6 +33,9 @@ class PayablesController extends Controller
             'opening_balance'=>$this->opening_balance ,
             'party'=>$party
         ]);
+        $pdf->render();
+
+        return $pdf->stream();
     }
     #region[opening_balance]
 

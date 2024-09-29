@@ -104,7 +104,7 @@
                             </div>
                         </x-table.cell-text>
                         <x-table.cell-text>
-                            <x-button.print-pdf routes="{{route('sales.invoice', [$row->id])}}"/>
+                            <x-button.print-pdf routes="{{route('sales.print', [$row->id])}}"/>
                         </x-table.cell-text>
 
                         <td class="max-w-max print:hidden">
