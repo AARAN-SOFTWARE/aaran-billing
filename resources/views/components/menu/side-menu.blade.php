@@ -6,9 +6,9 @@
     <div class="flex justify-between px-5 py-6">
         <a href="{{route('dashboard')}}" class="flex gap-3">
             <x-assets.logo.cxlogo :icon="'dark'" class="h-10 w-auto block"/>
-            <span class="font-bold text-2xl sm:text-3xl tracking-widest">{{config('app.name')}}</span>
+            <span class="font-bold text-2xl sm:text-3xl tracking-widest">Codexsun</span>
         </a>
-
+{{-- {{config('app.name')}} --}}
         <button
             class="focus:outline-none focus:bg-gray-700 hover:bg-gray-800  rounded-md group"
             @click="sidebarOpen = false"
