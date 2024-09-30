@@ -3,8 +3,7 @@
     <!-- Banner -->
     <x-web.home-new.items.banner
         label="About us"
-        desc=" We Design and develop Outstanding Digital products and digital -
-                first Brands"
+        desc=" We Design and develop Outstanding Digital products"
         padding="sm:px-[180px]"
         padding_mob="px-[70px]"
     />
@@ -12,7 +11,7 @@
     <x-web.about.company/>
     <x-web.about.work-process/>
     <x-web.about.counter/>
-    <x-web.about.goal/>
+{{--    <x-web.about.goal/>--}}
     <x-web.about.team/>
     <x-web.about.feedback/>
     <x-web.home-new.footer/>

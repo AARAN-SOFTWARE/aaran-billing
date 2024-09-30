@@ -1,7 +1,8 @@
+<div class="mt-8 h-20">&nbsp;</div>
 <div class="flex-col flex gap-6 sm:py-0 py-8">
-     <x-web.home-new.items.heading label="TESTIMONIALS" />
-    <div class="sm:text-5xl text-2xl text-center font-semibold animate__animated wow bounceInUp"
-         data-wow-duration="3s">CLIENTS FEEDBACK
+     <x-web.home-new.items.heading label="Customer Stories" />
+    <div class="sm:text-2xl text-lg text-center font-semibold animate__animated wow bounceInUp"
+         data-wow-duration="3s">See how customers are growing their businesses and getting incredible results.
     </div>
     <div class="sm:w-9/12 w-auto mx-auto grid sm:grid-cols-3 grid-cols-1 sm:gap-4 gap-20 gap my-16 sm:px-0 px-2">
         @for($i=1; $i<=3; $i++)
