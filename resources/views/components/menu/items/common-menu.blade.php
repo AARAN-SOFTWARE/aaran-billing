@@ -14,10 +14,3 @@
 <x-menu.base.route-menuitem  href="{{route('receipt-types',[15])}}" :label="'Product Type'"/>
 <x-menu.base.route-menuitem  href="{{route('receipt-types',[16])}}" :label="'Units'"/>
 <x-menu.base.route-menuitem  href="{{route('receipt-types',[17])}}" :label="'GST Percent'"/>
-
-<x-menu.base.route-menuitem  href="{{route('demorequest')}}" :label="'Demo Request'"/>
-
-
-
-{{--<x-menu.base.li-menuitem :routes="'commons'" :label="'Common'"/>--}}
-{{--<x-menu.base.li-menuitem :routes="'labels'" :label="'Label'"/>--}}
