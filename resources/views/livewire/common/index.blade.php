@@ -33,7 +33,7 @@
 
                 @if($module->cols === 3)
                     <x-table.header-text sortIcon="none">
-                        Description-2
+                        Notes
                     </x-table.header-text>
                 @endif
 
