@@ -19,7 +19,7 @@ class InvController extends Controller
     public function __invoke($vid)
     {
         $sale = $this->getSales($vid);
-        return pdf('pdf-view.sales.garments', [
+        return pdf('pdf-view.sales.spatie.garment', [
             'obj' => $sale,
             'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
             'list' => $this->getSaleItems($vid),
@@ -44,6 +44,8 @@ class InvController extends Controller
             'despatches.vname as despatch_name',
 //            'despatches.vdate as despatch_date',
             'transports.vname as transport_name',
+            'transports.desc as transport_id',
+            'transports.desc_1 as transport_no',
             'ledgers.vname as ledger_name',
         )
             ->join('contacts', 'contacts.id', '=', 'sales.contact_id')

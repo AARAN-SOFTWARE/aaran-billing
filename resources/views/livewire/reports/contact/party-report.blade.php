@@ -2,9 +2,12 @@
     <x-slot name="header">Party Report</x-slot>
 
     <x-forms.m-panel>
+        @php
+            $party=\Aaran\Master\Models\Contact::find($byParty);
+        @endphp
         <div class="flex justify-between w-full gap-3">
             <div class="text-xl font-bold tracking-wider w-full">Party Name
-                : {{\Aaran\Master\Models\Contact::find($byParty)->vname}}</div>
+                : {{$party->vname}}</div>
             <div class="w-full">
                 <x-input.model-date wire:model.live="start_date" :label="'From Date'"/>
             </div>
@@ -57,7 +60,13 @@
                 @forelse ($list as $index =>  $row)
 
                     @php
-                        $totalSales += floatval($row->grand_total);
+                    if ($row->mode=='Sales Invoice'){
+                        if ($party->contact_type_id==124){
+                        $totalSales += floatval($row->grand_total);}else{$totalSales -= floatval($row->grand_total);}
+                        }else{
+                        if ($party->contact_type_id==123){
+                        $totalSales += floatval($row->grand_total);}else{ $totalSales -= floatval($row->grand_total);}
+                        }
                         $totalReceipt += floatval($row->transaction_amount);
                     @endphp
 

@@ -11,7 +11,8 @@
         <x-web.about.items.team-card images="../../../../images/t3.webp" name="Lara Williams" position="Web Developer"
                                      class="animate__animated wow animate__backInLeft"
                                      data-wow-duration="3s"/>
-        <x-web.about.items.team-card images="../../../../images/t4.webp" name="Shilph Adams" position="UI/UX DesignAccounts"
+        <x-web.about.items.team-card images="../../../../images/t4.webp" name="Shilph Adams"
+                                     position="UI/UX DesignAccounts"
                                      class="animate__animated wow animate__backInRight"
                                      data-wow-duration="3s"/>
         <x-web.about.items.team-card images="../../../../images/t5.webp" name="Mana Green" position="Senior Executive"
@@ -25,10 +26,10 @@
         <div class="text-3xl animate__animated wow animate__backInLeft" data-wow-duration="3s">How it started…</div>
         <div class="text-sm text-gray-600 leading-5 animate__animated wow animate__backInLeft"
              data-wow-duration="3s">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
-            massa.
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-            Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+            In 2004, fellow MIT graduate students Brian Halligan and Dharmesh Shah noticed a major shift in the way
+            people shop and purchase products. Buyers didn’t want to be interrupted by ads, they wanted helpful
+            information. In 2006, they founded HubSpot to help companies use that shift to grow better with inbound
+            marketing.
         </div>
     </div>
     <div class="flex-col flex sm:gap-y-6 gap-y-2">

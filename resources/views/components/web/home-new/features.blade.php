@@ -89,16 +89,11 @@
         <div class="grid lg:grid-cols-2 sm:grid-cols-1 sm:gap-12 gap-5 sm:text-sm text-xs text-zinc-600 font-roboto tracking-wider sm:py-5">
 
             <div class="animate__animated wow animate__backInLeft" data-wow-duration="3s">
-                Codexsun is the best rated top seller for a reason. It comes with a lot of great features
-                and available resources, but at the same time we always try to keep things as simple and intuitive as possible, so
-                that users with little experience have no problem using it as well.
+                Codexsun is the best rated top seller for a reason. It comes with a lot of great features and available resources.
             </div>
 
             <div class="animate__animated wow animate__backInRight" data-wow-duration="3s">
-                With a cloud based GST billing software, you can access all your documents and create invoices on the
-                go. It works on any operating system, computer or tablet, and it's completely secure!, we care
-                that your site runs as smooth as possible. You got a question? Don’t hesitate to get in touch.
-            </div>
+                With a cloud based GST billing software, you can access all your documents and create invoices on the go.            </div>
 
         </div>
     </div>

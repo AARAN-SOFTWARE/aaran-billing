@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entries\Sales;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\ContactDetail;
+ use Aaran\MasterGst\Models\MasterGstEway;
 use Aaran\MasterGst\Models\MasterGstIrn;
 use App\Helper\ConvertTo;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,7 @@ class InvoiceController extends Controller
 
             Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
 
-            $pdf = PDF::loadView('pdf-view.sales_invoice'
+            $pdf = PDF::loadView('pdf-view.sales.dom.garment'
                 , [
                     'obj' => $sale,
                     'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
@@ -31,6 +32,7 @@ class InvoiceController extends Controller
                     'billing_address' => ContactDetail::printDetails($sale->billing_id),
                     'shipping_address' => ContactDetail::printDetails($sale->shipping_id),
                     'irn'=>$this->getIrn($vid),
+                    'eWay'=>$this->getEway($vid),
                 ]);
 
             $pdf->render();
@@ -55,6 +57,8 @@ class InvoiceController extends Controller
             'despatches.vname as despatch_name',
 //            'despatches.vdate as despatch_date',
             'transports.vname as transport_name',
+            'transports.desc as transport_id',
+            'transports.desc_1 as transport_no',
             'ledgers.vname as ledger_name',
         )
             ->join('contacts', 'contacts.id', '=', 'sales.contact_id')
@@ -112,5 +116,11 @@ class InvoiceController extends Controller
     {
         return MasterGstIrn::where('sales_id',$vid)->first();
     }
+    public function getEway($vid)
+    {
+        return MasterGstEway::where('sales_id',$vid)->first();
+    }
+
+
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Report\Sales;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use function Spatie\LaravelPdf\Support\pdf;
 
@@ -12,10 +13,17 @@ class SummaryController extends Controller
 {
     public function __invoke($year)
     {
-        return pdf('pdf-view.report.sales.summary-report', [
+//        return pdf('pdf-view.report.sales.summary-report', [
+            Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
+
+        $pdf = PDF::loadView('pdf-view.report.sales.summary-report'
+            , [
             'year' => $year,
             'cmp' => Company::printDetails(session()->get('company_id')),
         ]);
+        $pdf->render();
+
+        return $pdf->stream();
     }
 
     #region[monthlySales]

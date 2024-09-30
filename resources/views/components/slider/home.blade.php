@@ -59,80 +59,63 @@
 
                 @if($list)
                     @forelse($list as $row)
-                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start relative">
+                        <x-slider.home-slider
+                            :bg_image="'/../../../storage/images/{{$row->bg_image}}'"
+                            title="{{$row->vname}}"
+                            slogan="{{$row->description}}"
+                        />
 
-                            <div style="background-image: url('/../../../storage/images/{{$row->bg_image}}');"
-                                 class=" w-full md:h-screen h-80 bg-cover bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">
-                            </div>
-                            <div
-                                class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
-
-                                <div
-                                    class="sm:text-6xl sm:capitalize sm:drop-shadow-lg">{{$row->vname}}</div>
-                                <div
-                                    class="sm:text-2xl text-xs mt-3 text-white">{{$row->description}}</div>
-                            </div>
-                        </li>
                     @empty
-                        <li class="flex flex-col items-center justify-center w-full sm:h-screen h-full shrink-0 snap-start relative">
-                            <div style="background-image: url('/../../../images/w3.webp');"
-                                 class="w-full md:h-screen h-full sm:bg-cover bg-contain bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">
-                            </div>
-                            <div
-                                class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
-                                <div
-                                    class="sm:text-6xl sm:capitalize sm:drop-shadow-lg">GST Billing Software Online
-                                    in India
-                                </div>
-                                <div
-                                    class="sm:text-2xl text-xs mt-3 text-white">
-                                    {{\Illuminate\Support\Str::words('Create, manage & track invoices, e-invoices, and
-                                    eWay bills.
-                                    Seamlessly generate GSTR reports and file GST instantly.
-                                    100% safe, reliable, and secure GST-compliant billing software.
-                                    Aaran for invoicing, quotations, inventory, eWay bills & more!',15)}}
-                                </div>
 
-                            </div>
-                        </li>
-                        <li class="flex flex-col items-center justify-center w-full sm:h-screen h-full shrink-0 snap-start relative">
-                            <div style="background-image: url('/../../../images/wp2.webp');"
-                                 class="w-full md:h-screen h-full sm:bg-cover bg-contain bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">
-                            </div>
-                            <div
-                                class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
-                                <div
-                                    class="sm:text-6xl sm:capitalize sm:drop-shadow-lg">Only GST Billing Software You
-                                    Need For
-                                    Your Business
-                                </div>
-                                <div
-                                    class="sm:text-2xl text-xs mt-3 text-white">
-                                    {{\Illuminate\Support\Str::words('Streamline your invoicing with Refrens GST billing software:
-                                    effortlessly create GST-compliant invoices in minutes. Seamlessly share invoices via WhatsApp,
-                                    Email, PDF, and shareable links.',15)}}
-                                </div>
+                        <x-slider.home-slider
+                            :bg_image="'/../../../images/home/bg_1.webp'"
+                            title="Best Online GST Billing Software in India"
+                            slogan="Create, manage & track invoices, e-invoices, and eWay bills, 100% safe, reliable, and secure..."
 
-                            </div>
-                        </li>
-                        <li class="flex flex-col items-center justify-center w-full sm:h-screen h-full shrink-0 snap-start relative">
-                            <div style="background-image: url('/../../../images/wp1.webp');"
-                                 class="w-full md:h-screen h-full sm:bg-cover bg-contain bg-no-repeat mx-auto flex-col brightness-75 flex justify-center relative">
-                            </div>
-                            <div
-                                class="absolute bottom-1 left-10 w-auto h-10/12 flex-col text-white font-roboto p-5 my-5  px-10">
-                                <div
-                                    class="sm:text-6xl sm:capitalize sm:drop-shadow-lg">Empower your business with our
-                                    streamlined GST billing software
-                                </div>
-                                <div
-                                    class="sm:text-2xl text-xs mt-3 text-white">
-                                    {{\Illuminate\Support\Str::words('Automate payment reminders for quicker settlements. Enjoy
-                                    one-click IRN & QR Code generation for enhanced compliance.
-                                    Experience the simplicity, reliability, and security of our user-friendly platform.',15)}}
-                                </div>
-                            </div>
-                        </li>
+                        />
+
+                        <x-slider.home-slider
+                            :bg_image="'/../../../images/home/bg_6.webp'"
+                            title="Only GST Billing Software You Need For Your Business"
+                            slogan="Streamline your invoicing with GST billing software, effortlessly create GST-compliant invoices in minutes..."
+                        />
+
+
+                        <x-slider.home-slider
+                            :bg_image="'/../../../images/home/bg_7.webp'"
+                            title="Book keeping and Transaction Recording"
+                            slogan="Categorized revenue, expenses, assets, liabilities, and other options.
+                            Further, reviewed in detail and adjusted according to the entries to ensure accuracy..."
+                            text_length="28"
+                        />
+
+                        <x-slider.home-slider
+                            :bg_image="'/../../../images/home/bg_2.webp'"
+                            title="Maintain Regular Communication"
+                            slogan="Keeping clients in the loop about their financial standing and any pertinent
+                            changes to tax laws or financial regulations is vital."
+                        />
+
+
+
+                        <x-slider.home-slider
+                            :bg_image="'/../../../images/home/bg_4.webp'"
+                            title="one-stop solution workflow management."
+                            slogan="Devote all your attention to a better customer experience for fast and secure information sharing"
+                        />
+
+                        <x-slider.home-slider
+                            :bg_image="'/../../../images/home/bg_3.webp'"
+                            title="Real-Time Financial Monitoring and Reporting"
+                            slogan="Helps to tracks the KPIs like revenue growth, gross margin, and net profit business
+                            owners to directly access the dashboard, monitor these metrics and make a sensible decision.."
+                            text_length="28"
+                        />
+
+
+
+
+
                     @endforelse
                 @endif
             </ul>

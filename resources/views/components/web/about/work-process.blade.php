@@ -1,18 +1,21 @@
 <div class=" font-roboto tracking-wider sm:py-0 py-2 sm:px-0 px-2">
 
-    <x-web.home-new.items.heading label="WORK PROCESS"/>
+    <x-web.home-new.items.heading label="What we do"/>
 
     <div class="relative">
         <div
             class="text-gray-50 sm:text-9xl text-6xl font-bold drop-shadow-md text-center tracking-widest animate__animated wow animate__backInRight"
-            data-wow-duration="3s">BILLING
+            data-wow-duration="3s">CODEXSUN
         </div>
         <div
-            class="absolute sm:bottom-0 sm:left-96 -bottom-2 sm:w-6/12 w-auto sm:text-5xl text-xl text-center font-semibold text-gray-600 animate__animated wow animate__backInLeft"
-            data-wow-duration="3s">Quality
-            services For Growth Your Branding Identity
+            class="absolute sm:bottom-0 sm:left-96 -bottom-2 sm:w-6/12 w-auto sm:text-3xl text-xl text-center font-semibold text-gray-600 animate__animated wow animate__backInLeft"
+            data-wow-duration="3s">
+            We help organizations achieve their most ambitious goals and move with greater agility.
         </div>
     </div>
+
+    <div class="mt-6">&nbsp;</div>
+
     <div class="sm:w-8/12 w-auto mx-auto gap-6 grid sm:grid-cols-3 grid-cols-1 sm:pt-16 pt-6">
         @for($i=1; $i<=3; $i++)
             <div class="bg-gray-100 h-auto flex-col flex p-5 gap-y-6 animate__animated wow bounceInUp"
