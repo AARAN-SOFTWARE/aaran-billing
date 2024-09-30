@@ -39,6 +39,8 @@
                 <x-table.header-text wire:click="sortBy('purchase_no')" sortIcon="none">Grand Total
                 </x-table.header-text>
 
+                <x-table.header-text wire:click="sortBy('purchase_no')" sortIcon="none">Print</x-table.header-text>
+
                 <x-table.header-action/>
 
             </x-slot:table_header>
@@ -81,6 +83,9 @@
 
                         <x-table.cell-text right>
                             <a href="{{route('purchase.upsert',[$row->id])}}"> {{$row->grand_total}}</a>
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <x-button.print-pdf routes="{{route('purchases.print', [$row->id])}}"/>
                         </x-table.cell-text>
 
                         <!-- Table Action ----------------------------------------------------------------------------->

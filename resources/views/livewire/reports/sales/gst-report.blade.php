@@ -158,9 +158,9 @@
             </x-table.form>
         </div>
 
-        <div class="w-full flex justify-end items-end">
-            <x-button.print-x wire:click="GstPrint">Print</x-button.print-x>
-        </div>
+{{--        <div class="w-full flex justify-end items-end">--}}
+{{--            <x-button.print-x wire:click="GstPrint">Print</x-button.print-x>--}}
+{{--        </div>--}}
 
     </x-forms.m-panel>
 </div>

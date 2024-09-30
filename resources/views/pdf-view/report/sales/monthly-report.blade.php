@@ -228,7 +228,9 @@
     </style>
 </head>
 <body class="bg-white-100 p-5">
+
 <!------Top Company Area------------------------------------------------------------------------------------------>
+
 <table class="border w-full">
     <tr>
         <td width="35%" class="right">
@@ -275,8 +277,8 @@ $CGSTTotal = 0;
             <?php
             $invoiceTotal += $row->grand_total;
             $taxableValueTotal += $row->total_taxable;
-            $gstTotal += $row->sales_type == '1' ? $row->total_gst : 0;
-            $CGSTTotal += $row->sales_type != '1' ? $row->total_gst : 0;
+            $gstTotal+=$row->sales_type==='1'?$row->total_gst:0;
+            $CGSTTotal+=($row->sales_type!=='1'?$row->total_gst:0);
             ?>
         <tr class="text-sm center v-align-c border-b">
             <td height="26px" class="center border-r">{{$index+1}}</td>
@@ -294,18 +296,18 @@ $CGSTTotal = 0;
             <td class="right border-r">{{$row->sales_type!='1'?$row->total_gst:0}}</td>
         </tr>
     @endforeach
-    <tr class="text-sm border-t center v-align-c">
+    <tr class="text-sm border-t right v-align-c px-2">
         <td height="26px" class="center border-r" colspan="3">TOTALS</td>
-        <td class="center border-r ">&nbsp;</td>
-        <td class="center border-r ">&nbsp;</td>
-        <td class="center border-r ">{{\App\Helper\ConvertTo::rupeesFormat($invoiceTotal)}}</td>
-        <td class="center border-r ">{{\App\Helper\ConvertTo::rupeesFormat($taxableValueTotal)}}</td>
-        <td class="center border-r ">&nbsp;</td>
-        <td class="center border-r ">{{\App\Helper\ConvertTo::rupeesFormat($gstTotal/2)}}</td>
-        <td class="center border-r ">&nbsp;</td>
-        <td class="center border-r ">{{\App\Helper\ConvertTo::rupeesFormat($gstTotal/2)}}</td>
-        <td class="center border-r ">&nbsp;</td>
-        <td class="center border-r ">{{\App\Helper\ConvertTo::rupeesFormat($CGSTTotal)}}</td>
+        <td class="right border-r ">&nbsp;</td>
+        <td class="right border-r ">&nbsp;</td>
+        <td class="right border-r ">{{number_format($invoiceTotal,2,'.','')}}</td>
+        <td class="right border-r ">{{number_format($taxableValueTotal,2,'.','')}}</td>
+        <td class="right border-r ">&nbsp;</td>
+        <td class="right border-r ">{{number_format($gstTotal/2,2,'.','')}}</td>
+        <td class="right border-r ">&nbsp;</td>
+        <td class="right border-r ">{{number_format($gstTotal/2,2,'.','')}}</td>
+        <td class="right border-r ">&nbsp;</td>
+        <td class="right border-r ">{{number_format($CGSTTotal,2,'.','')}}</td>
     </tr>
 
 </table>

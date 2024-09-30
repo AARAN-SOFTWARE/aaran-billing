@@ -296,7 +296,7 @@
         @endphp
         <tr class="text-sm center v-align-c">
             <td height="26px" class="center border-r">{{$index+1}}</td>
-            <td class="center border-r ">{{$row->contact->vname}}</td>
+            <td class="left border-r ">{{$row->contact->vname}}</td>
             @if($row->mode_id == 110)
                 <td class="right px-2  border-r ">{{$row->vname+0}}</td>
             @else
@@ -313,7 +313,7 @@
             <td class="right px-2 border-r ">{{  $balance  = $totalReceipt-$totalPayment}}</td>
         </tr>
     @endforeach
-    <tr class="text-sm center v-align-c border-t">
+    <tr class="text-sm center v-align-c border-t font-bold">
         <td height="26px" class="center border-r" colspan="2">Total</td>
         <td class="right px-2  border-r ">{{$totalPayment}}</td>
         <td class="right px-2  border-r ">{{$totalReceipt}}</td>

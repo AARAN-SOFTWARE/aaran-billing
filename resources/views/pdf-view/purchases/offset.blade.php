@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Garments</title>
+    <title>Offset</title>
     {{--    <link rel="stylesheet" href="/public/invoice.css" type="text/css">--}}
     <link rel="stylesheet" href="https://cdn.curlwind.com">
     <style type="text/css">
@@ -216,8 +216,8 @@
         }
     </style>
 </head>
-
 <body>
+<!-- Invoice IRN -->
 <div class="w-full text-xs right p-1">Original Copy</div>
 <table class="border w-full border-b-none">
     <tr>
@@ -278,10 +278,10 @@
 <table class="border border-t-none">
     <tr class="bg-gray text-sm lh-2 border-b">
         <th width="4.33%" class="border-r">S.No</th>
-        <th width="8.33%" class="border-r">HSN Code</th>
+        <th width="6.33%" class="border-r">PO.No</th>
+        <th width="8.33%" class="border-r">DC.No</th>
         <th width="auto" class="border-r">Particulars</th>
-        <th width="6.33%" class="border-r">Size</th>
-        <th width="8.33%" class="border-r">Colours</th>
+        <th width="8.33%" class="border-r">HSN Code</th>
         <th width="4.33%" class="border-r">Quantity</th>
         <th width="8.33%" class="border-r">Price</th>
         <th width="8.33%" class="border-r">Taxable Amount</th>
@@ -293,9 +293,10 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="text-sm center v-align-t ">
+        <tr class="text-sm center v-align-t">
             <td height="38px" class="center border-r p-1">{{$index+1}} </td>
-            <td class="left border-r p-1">{{$row['hsncode']}}</td>
+            <td class="left border-r p-1">{{$row['po_no']}}</td>
+            <td class="left border-r p-1">{{$row['dc_no']}}</td>
             <td class="left border-r p-1" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
@@ -303,8 +304,7 @@
                     {{$row['product_name']}}
                 @endif
             </td>
-            <td class="center border-r p-1">{{$row['size_name']}}</td>
-            <td class="center border-r p-1">{{$row['colour_name']}} </td>
+            <td class="center border-r p-1">{{$row['hsncode']}}</td>
             <td class="right border-r p-1">{{$row['qty']+0}}</td>
             <td class="right border-r p-1">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
             <td class="right border-r p-1">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
@@ -358,7 +358,7 @@
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type=='1')
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -377,7 +377,7 @@
             <div>* Goods once sold cannot be return back or exchanged</div>
             <div>* Seller cannot be responsible for any damage/mistakes.</div>
         </td>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type=='1')
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -400,13 +400,13 @@
             colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
     </tr>
     <tr>
-        <td class="text-sm font-bold px-5" rowspan="2" colspan="2" width="100px">
+        <td class="text-sm font-bold px-5" rowspan="2" colspan="3" width="100px">
             <div>ACCOUNT NO</div>
             <div>IFSC CODE</div>
             <div>BANK NAME</div>
             <div>BRANCH</div>
         </td>
-        <td rowspan="2" colspan="3" class="text-sm font-bold px-5">
+        <td rowspan="2" colspan="2" class="text-sm font-bold px-5">
             <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
             <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
             <div>:&nbsp;{{$cmp->get('bank')}}</div>
@@ -431,7 +431,7 @@
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
             <div>Amount (in words)</div>
-            <div><b class="times">{{$rupees}}Only</b></div>
+            <div ><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
         <td class="text-sm right border-b lh-2  v-align-c" colspan="2">
@@ -453,225 +453,7 @@
 </table>
 <div class="page-break"></div>
 
-<!-- eWay -->
-@if(isset($eWay))
-    <div class="w-full text-xs right p-1">Original Copy</div>
-    <table class="border border-b-none v-align-c">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td width="40%" colspan="2" class="center py-5">e-Way Bill</td>
-        </tr>
-        <tr class="text-md v-align-c">
-            <td class="left p-5">Invoice No: {{$obj->invoice_no}}</td>
-            <td class="right p-5 ">Date: {{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</td>
-        </tr>
-    </table>
-    <table class="border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="5" class="left p-5">1. e-way Bill details</td>
-        </tr>
-        <tr class="text-md v-align-t">
-            <td width=15%" class="lh-2 px-5">
-                <p>e-Way Bill No</p>
-                <p>Generated By</p>
-                <p>Supply By</p>
-                <p>Mode</p>
-            </td>
-            <td width="25%" class="lh-2 border-r">
-
-                <p>:@if(isset($eWay))
-                        {{ $eWay->ewbno }}
-                    @endif</p>
-
-                <p class="wrap">: {{$cmp->get('gstin')}}</p>
-                <p>: {{$obj->contact_name}}</p>
-                <p>: {{$obj->TransMode}}</p>
-            </td>
-            <td width="15%" class="lh-2 px-5">
-                <p>Approx Distance</p>
-                <p>Transaction Type</p>
-                <p>Generated Date</p>
-                <p>Valid Upto</p>
-            </td>
-            <td width="25%" class="lh-2 border-r">
-                <p>: {{$obj->distance}}</p>
-                <p>: {{$obj->Vehtype}}</p>
-                <p>: @if(isset($eWay))
-                        {{ $eWay->ewbdt }}
-                    @endif</p>
-                <p>: @if(isset($eWay))
-                        {{ $eWay->ewbvalidtill }}
-                    @endif</p>
-            </td>
-            <td style="width: 145px;height: 145px;">
-                <div style="width: 145px; height: 145px;">
-                    @if(isset($eWay))
-                        <img style="width: 145px; height: 145px;" class=""
-                             src="{{\App\Helper\qrcoder::generate($eWay->ewbno,2)}}"
-                             alt="{{$eWay->ewbno}}">
-                    @endif
-                </div>
-            </td>
-        </tr>
-    </table>
-    <table class="border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="2" class="left p-5">2. Address Details</td>
-        </tr>
-        <tr class="text-md v-align-t lh-0">
-            <td width="50%" class=" px-5">
-                <p class="font-bold">From</p>
-                <p>{{$cmp->get('company_name')}}</p>
-                <p>{{$billing_address->get('gstcell')}}</p>
-                <p>{{$billing_address->get('address_3')}}</p>
-            </td>
-            <td width="50%" class="border-l px-5">
-                <p class="font-bold">To</p>
-                <p>{{$cmp->get('company_name')}}</p>
-                <p>{{$shipping_address->get('gstcell')}}</p>
-                <p>{{$shipping_address->get('address_3')}}</p>
-            </td>
-        </tr>
-        <tr class="text-md v-align-t lh-0 ">
-            <td width="50%" class="px-5">
-                <p class="font-bold">Dispatch From</p>
-                <p>{{ $billing_address->get('address_1') }}</p>
-                <p>{{$billing_address->get('address_2')}}</p>
-                <p>{{$billing_address->get('address_3')}}</p>
-            </td>
-            <td width="50%" class="border-l px-5">
-                <p class="font-bold">Ship To</p>
-                <p>{{$shipping_address->get('address_1')}}</p>
-                <p>{{$shipping_address->get('address_2')}}</p>
-                <p>{{$shipping_address->get('address_3')}}</p>
-            </td>
-        </tr>
-    </table>
-    <table class="border-t border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="" class="left p-5">3. Good Details</td>
-        </tr>
-    </table>
-    <table class="border-l border-r border-b">
-        <tr class="bg-gray text-sm border-t border-b v-align-c">
-            <th width="12%" class="border-r py-10">HSN Code</th>
-            <th width="auto" class="border-r">Product name & Desc</th>
-            <th width="8%" class="border-r">Quantity</th>
-            <th width="12%" class="border-r">Taxable Amount</th>
-            <th width="12%" class="border-r">Sub Total</th>
-        </tr>
-        @php
-            $gstPercent = 0;
-        @endphp
-        @foreach($list as $index => $row)
-            <tr class="text-sm center v-align-t">
-                <td height="32px" class="center border-r p-1">{{$row['hsncode']}}</td>
-                <td class="left border-r p-1" style="">
-                    @if($row['description'])
-                        {{$row['product_name'].' - '.$row['description']}}
-                    @else
-                        {{$row['product_name']}}
-                    @endif
-                </td>
-
-                <td class="center border-r p-1">{{$row['qty']+0}}</td>
-                <td class="right border-r p-1">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                <td class="center border-r p-1">{{$row['gst_percent']/2*2}}&nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
-            </tr>
-            @php
-                $gstPercent = $row['gst_percent'];
-            @endphp
-        @endforeach
-        @for($i = 0; $i < 11-$list->count(); $i++)
-            <tr class="">
-                <td height="26px" class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-            </tr>
-        @endfor
-    </table>
-    <table class="border-b border-l border-r">
-        <tr class="text-md lh-0">
-            <td class="">
-                <p>Tot. Taxable Amt</p>
-                @if($obj->sales_type=='1')
-                    <p>CGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
-                @else
-                    <p>IGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
-                @endif
-            </td>
-            <td class="font-bold">
-                <p>: {{number_format($obj->total_taxable,2,'.','')}}</p>
-                @if($obj->sales_type=='1')
-                    <p>: {{number_format($obj->total_gst/2,2,'.','')}}</p>
-                @else
-                    <p>: {{number_format($obj->total_gst,2,'.','')}}</p>
-                @endif
-            </td>
-            <td>
-                <p>Other Amt</p>
-                @if($obj->sales_type=='1')
-                    <p>SGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
-                @endif
-            </td>
-            <td class="font-bold">
-                <p>: {{ number_format($obj->additional,2,'.','') }}</p>
-                @if($obj->sales_type=='1')
-                    <p>: {{number_format($obj->grand_total,2,'.','')}}</p>
-                @endif
-            </td>
-            <td>
-                <p>Total Inv Amt</p>
-                <p>&nbsp;</p>
-            </td>
-            <td class="font-bold">
-                <p>: {{number_format($obj->grand_total,2,'.','')}}</p>
-                <p>&nbsp;</p>
-            </td>
-        </tr>
-    </table>
-    <table class="border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="4" class="left p-5">4. Transportation Details</td>
-        </tr>
-        <tr class="text-md lh-0">
-            <td>
-                <p>Transporter ID</p>
-                <p>Name</p>
-            </td>
-            <td class="font-bold">
-                <p>: {{$obj->transport_id}}</p>
-                <p>: {{$obj->transport_name}}</p>
-            </td>
-            <td>
-                <p>Doc No</p>
-                <p>Date</p>
-            </td>
-            <td class="font-bold">
-                <p>: {{$obj->transport_no}}</p>
-                <p>: @if(isset($eWay))
-                        {{ $eWay->ewbdt }}
-                    @endif</p>
-            </td>
-        </tr>
-    </table>
-    <table class="border-l border-r border-b">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="6" class="left p-5">5. Vehicle Details</td>
-        </tr>
-        <tr class="text-md ">
-            <td height="20px">Vehicle No</td>
-            <td>: {{ $obj->Vehno }}</td>
-            <td>From</td>
-            <td>: {{$cmp->get('city_name')}}</td>
-            <td>CEWB No</td>
-            <td>: &nbsp;</td>
-        </tr>
-    </table>
-    <div class="page-break"></div>
-@endif
-
+<!-- Invoice IRN -->
 <div class="w-full text-xs right p-1">Duplicate Copy</div>
 <table class="border w-full border-b-none">
     <tr>
@@ -732,10 +514,10 @@
 <table class="border border-t-none">
     <tr class="bg-gray text-sm lh-2 border-b">
         <th width="4.33%" class="border-r">S.No</th>
-        <th width="8.33%" class="border-r">HSN Code</th>
+        <th width="6.33%" class="border-r">PO.No</th>
+        <th width="8.33%" class="border-r">DC.No</th>
         <th width="auto" class="border-r">Particulars</th>
-        <th width="6.33%" class="border-r">Size</th>
-        <th width="8.33%" class="border-r">Colours</th>
+        <th width="8.33%" class="border-r">HSN Code</th>
         <th width="4.33%" class="border-r">Quantity</th>
         <th width="8.33%" class="border-r">Price</th>
         <th width="8.33%" class="border-r">Taxable Amount</th>
@@ -747,9 +529,10 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="text-sm center v-align-t ">
+        <tr class="text-sm center v-align-t">
             <td height="38px" class="center border-r p-1">{{$index+1}} </td>
-            <td class="left border-r p-1">{{$row['hsncode']}}</td>
+            <td class="left border-r p-1">{{$row['po_no']}}</td>
+            <td class="left border-r p-1">{{$row['dc_no']}}</td>
             <td class="left border-r p-1" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
@@ -757,8 +540,7 @@
                     {{$row['product_name']}}
                 @endif
             </td>
-            <td class="center border-r p-1">{{$row['size_name']}}</td>
-            <td class="center border-r p-1">{{$row['colour_name']}} </td>
+            <td class="center border-r p-1">{{$row['hsncode']}}</td>
             <td class="right border-r p-1">{{$row['qty']+0}}</td>
             <td class="right border-r p-1">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
             <td class="right border-r p-1">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
@@ -812,7 +594,7 @@
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type=='1')
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -831,7 +613,7 @@
             <div>* Goods once sold cannot be return back or exchanged</div>
             <div>* Seller cannot be responsible for any damage/mistakes.</div>
         </td>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type=='1')
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -854,13 +636,13 @@
             colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
     </tr>
     <tr>
-        <td class="text-sm font-bold px-5" rowspan="2" colspan="2" width="100px">
+        <td class="text-sm font-bold px-5" rowspan="2" colspan="3" width="100px">
             <div>ACCOUNT NO</div>
             <div>IFSC CODE</div>
             <div>BANK NAME</div>
             <div>BRANCH</div>
         </td>
-        <td rowspan="2" colspan="3" class="text-sm font-bold px-5">
+        <td rowspan="2" colspan="2" class="text-sm font-bold px-5">
             <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
             <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
             <div>:&nbsp;{{$cmp->get('bank')}}</div>
@@ -885,7 +667,7 @@
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
             <div>Amount (in words)</div>
-            <div><b class="times">{{$rupees}}Only</b></div>
+            <div ><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
         <td class="text-sm right border-b lh-2  v-align-c" colspan="2">
@@ -907,226 +689,7 @@
 </table>
 <div class="page-break"></div>
 
-<!-- eWay -->
-@if(isset($eWay))
-
-    <div class="w-full text-xs right p-1">Duplicate Copy</div>
-    <table class="border border-b-none v-align-c">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td width="40%" colspan="2" class="center py-5">e-Way Bill</td>
-        </tr>
-        <tr class="text-md v-align-c">
-            <td class="left p-5">Invoice No: {{$obj->invoice_no}}</td>
-            <td class="right p-5 ">Date: {{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</td>
-        </tr>
-    </table>
-    <table class="border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="5" class="left p-5">1. e-way Bill details</td>
-        </tr>
-        <tr class="text-md v-align-t">
-            <td width=15%" class="lh-2 px-5">
-                <p>e-Way Bill No</p>
-                <p>Generated By</p>
-                <p>Supply By</p>
-                <p>Mode</p>
-            </td>
-            <td width="25%" class="lh-2 border-r">
-
-                <p>:@if(isset($eWay))
-                        {{ $eWay->ewbno }}
-                    @endif</p>
-
-                <p class="wrap">: {{$cmp->get('gstin')}}</p>
-                <p>: {{$obj->contact_name}}</p>
-                <p>: {{$obj->TransMode}}</p>
-            </td>
-            <td width="15%" class="lh-2 px-5">
-                <p>Approx Distance</p>
-                <p>Transaction Type</p>
-                <p>Generated Date</p>
-                <p>Valid Upto</p>
-            </td>
-            <td width="25%" class="lh-2 border-r">
-                <p>: {{$obj->distance}}</p>
-                <p>: {{$obj->Vehtype}}</p>
-                <p>: @if(isset($eWay))
-                        {{ $eWay->ewbdt }}
-                    @endif</p>
-                <p>: @if(isset($eWay))
-                        {{ $eWay->ewbvalidtill }}
-                    @endif</p>
-            </td>
-            <td style="width: 145px;height: 145px;">
-                <div style="width: 145px; height: 145px;">
-                    @if(isset($eWay))
-                        <img style="width: 145px; height: 145px;" class=""
-                             src="{{\App\Helper\qrcoder::generate($eWay->ewbno,2)}}"
-                             alt="{{$eWay->ewbno}}">
-                    @endif
-                </div>
-            </td>
-        </tr>
-    </table>
-    <table class="border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="2" class="left p-5">2. Address Details</td>
-        </tr>
-        <tr class="text-md v-align-t lh-0">
-            <td width="50%" class=" px-5">
-                <p class="font-bold">From</p>
-                <p>{{$cmp->get('company_name')}}</p>
-                <p>{{$billing_address->get('gstcell')}}</p>
-                <p>{{$billing_address->get('address_3')}}</p>
-            </td>
-            <td width="50%" class="border-l px-5">
-                <p class="font-bold">To</p>
-                <p>{{$cmp->get('company_name')}}</p>
-                <p>{{$shipping_address->get('gstcell')}}</p>
-                <p>{{$shipping_address->get('address_3')}}</p>
-            </td>
-        </tr>
-        <tr class="text-md v-align-t lh-0 ">
-            <td width="50%" class="px-5">
-                <p class="font-bold">Dispatch From</p>
-                <p>{{ $billing_address->get('address_1') }}</p>
-                <p>{{$billing_address->get('address_2')}}</p>
-                <p>{{$billing_address->get('address_3')}}</p>
-            </td>
-            <td width="50%" class="border-l px-5">
-                <p class="font-bold">Ship To</p>
-                <p>{{$shipping_address->get('address_1')}}</p>
-                <p>{{$shipping_address->get('address_2')}}</p>
-                <p>{{$shipping_address->get('address_3')}}</p>
-            </td>
-        </tr>
-    </table>
-    <table class="border-t border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="" class="left p-5">3. Good Details</td>
-        </tr>
-    </table>
-    <table class="border-l border-r border-b">
-        <tr class="bg-gray text-sm border-t border-b v-align-c">
-            <th width="12%" class="border-r py-10">HSN Code</th>
-            <th width="auto" class="border-r">Product name & Desc</th>
-            <th width="8%" class="border-r">Quantity</th>
-            <th width="12%" class="border-r">Taxable Amount</th>
-            <th width="12%" class="border-r">Sub Total</th>
-        </tr>
-        @php
-            $gstPercent = 0;
-        @endphp
-        @foreach($list as $index => $row)
-            <tr class="text-sm center v-align-t">
-                <td height="32px" class="center border-r p-1">{{$row['hsncode']}}</td>
-                <td class="left border-r p-1" style="">
-                    @if($row['description'])
-                        {{$row['product_name'].' - '.$row['description']}}
-                    @else
-                        {{$row['product_name']}}
-                    @endif
-                </td>
-
-                <td class="center border-r p-1">{{$row['qty']+0}}</td>
-                <td class="right border-r p-1">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                <td class="center border-r p-1">{{$row['gst_percent']/2*2}}&nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
-            </tr>
-            @php
-                $gstPercent = $row['gst_percent'];
-            @endphp
-        @endforeach
-        @for($i = 0; $i < 11-$list->count(); $i++)
-            <tr class="">
-                <td height="26px" class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-            </tr>
-        @endfor
-    </table>
-    <table class="border-b border-l border-r">
-        <tr class="text-md lh-0">
-            <td class="">
-                <p>Tot. Taxable Amt</p>
-                @if($obj->sales_type=='1')
-                    <p>CGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
-                @else
-                    <p>IGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
-                @endif
-            </td>
-            <td class="font-bold">
-                <p>: {{number_format($obj->total_taxable,2,'.','')}}</p>
-                @if($obj->sales_type=='1')
-                    <p>: {{number_format($obj->total_gst/2,2,'.','')}}</p>
-                @else
-                    <p>: {{number_format($obj->total_gst,2,'.','')}}</p>
-                @endif
-            </td>
-            <td>
-                <p>Other Amt</p>
-                @if($obj->sales_type=='1')
-                    <p>SGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
-                @endif
-            </td>
-            <td class="font-bold">
-                <p>: {{ number_format($obj->additional,2,'.','') }}</p>
-                @if($obj->sales_type=='1')
-                    <p>: {{number_format($obj->grand_total,2,'.','')}}</p>
-                @endif
-            </td>
-            <td>
-                <p>Total Inv Amt</p>
-                <p>&nbsp;</p>
-            </td>
-            <td class="font-bold">
-                <p>: {{number_format($obj->grand_total,2,'.','')}}</p>
-                <p>&nbsp;</p>
-            </td>
-        </tr>
-    </table>
-    <table class="border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="4" class="left p-5">4. Transportation Details</td>
-        </tr>
-        <tr class="text-md lh-0">
-            <td>
-                <p>Transporter ID</p>
-                <p>Name</p>
-            </td>
-            <td class="font-bold">
-                <p>: {{$obj->transport_id}}</p>
-                <p>: {{$obj->transport_name}}</p>
-            </td>
-            <td>
-                <p>Doc No</p>
-                <p>Date</p>
-            </td>
-            <td class="font-bold">
-                <p>: {{$obj->transport_no}}</p>
-                <p>: @if(isset($eWay))
-                        {{ $eWay->ewbdt }}
-                    @endif</p>
-            </td>
-        </tr>
-    </table>
-    <table class="border-l border-r border-b">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="6" class="left p-5">5. Vehicle Details</td>
-        </tr>
-        <tr class="text-md ">
-            <td height="20px">Vehicle No</td>
-            <td>: {{ $obj->Vehno }}</td>
-            <td>From</td>
-            <td>: {{$cmp->get('city_name')}}</td>
-            <td>CEWB No</td>
-            <td>: &nbsp;</td>
-        </tr>
-    </table>
-    <div class="page-break"></div>
-@endif
-
+<!-- Invoice IRN -->
 <div class="w-full text-xs right p-1">Triplicate Copy</div>
 <table class="border w-full border-b-none">
     <tr>
@@ -1187,10 +750,10 @@
 <table class="border border-t-none">
     <tr class="bg-gray text-sm lh-2 border-b">
         <th width="4.33%" class="border-r">S.No</th>
-        <th width="8.33%" class="border-r">HSN Code</th>
+        <th width="6.33%" class="border-r">PO.No</th>
+        <th width="8.33%" class="border-r">DC.No</th>
         <th width="auto" class="border-r">Particulars</th>
-        <th width="6.33%" class="border-r">Size</th>
-        <th width="8.33%" class="border-r">Colours</th>
+        <th width="8.33%" class="border-r">HSN Code</th>
         <th width="4.33%" class="border-r">Quantity</th>
         <th width="8.33%" class="border-r">Price</th>
         <th width="8.33%" class="border-r">Taxable Amount</th>
@@ -1202,9 +765,10 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="text-sm center v-align-t ">
+        <tr class="text-sm center v-align-t">
             <td height="38px" class="center border-r p-1">{{$index+1}} </td>
-            <td class="left border-r p-1">{{$row['hsncode']}}</td>
+            <td class="left border-r p-1">{{$row['po_no']}}</td>
+            <td class="left border-r p-1">{{$row['dc_no']}}</td>
             <td class="left border-r p-1" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
@@ -1212,8 +776,7 @@
                     {{$row['product_name']}}
                 @endif
             </td>
-            <td class="center border-r p-1">{{$row['size_name']}}</td>
-            <td class="center border-r p-1">{{$row['colour_name']}} </td>
+            <td class="center border-r p-1">{{$row['hsncode']}}</td>
             <td class="right border-r p-1">{{$row['qty']+0}}</td>
             <td class="right border-r p-1">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
             <td class="right border-r p-1">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
@@ -1267,7 +830,7 @@
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type=='1')
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -1286,7 +849,7 @@
             <div>* Goods once sold cannot be return back or exchanged</div>
             <div>* Seller cannot be responsible for any damage/mistakes.</div>
         </td>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type=='1')
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -1309,13 +872,13 @@
             colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
     </tr>
     <tr>
-        <td class="text-sm font-bold px-5" rowspan="2" colspan="2" width="100px">
+        <td class="text-sm font-bold px-5" rowspan="2" colspan="3" width="100px">
             <div>ACCOUNT NO</div>
             <div>IFSC CODE</div>
             <div>BANK NAME</div>
             <div>BRANCH</div>
         </td>
-        <td rowspan="2" colspan="3" class="text-sm font-bold px-5">
+        <td rowspan="2" colspan="2" class="text-sm font-bold px-5">
             <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
             <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
             <div>:&nbsp;{{$cmp->get('bank')}}</div>
@@ -1340,7 +903,7 @@
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
             <div>Amount (in words)</div>
-            <div><b class="times">{{$rupees}}Only</b></div>
+            <div ><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
         <td class="text-sm right border-b lh-2  v-align-c" colspan="2">
@@ -1360,226 +923,7 @@
         <td colspan="5" class="">Authorised Signatory</td>
     </tr>
 </table>
-
-@if(isset($eWay))
-
 <div class="page-break"></div>
 
-<!-- eWay -->
-    <div class="w-full text-xs right p-1">Triplicate Copy</div>
-    <table class="border border-b-none v-align-c">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td width="40%" colspan="2" class="center py-5">e-Way Bill</td>
-        </tr>
-        <tr class="text-md v-align-c">
-            <td class="left p-5">Invoice No: {{$obj->invoice_no}}</td>
-            <td class="right p-5 ">Date: {{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</td>
-        </tr>
-    </table>
-    <table class="border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="5" class="left p-5">1. e-way Bill details</td>
-        </tr>
-        <tr class="text-md v-align-t">
-            <td width=15%" class="lh-2 px-5">
-                <p>e-Way Bill No</p>
-                <p>Generated By</p>
-                <p>Supply By</p>
-                <p>Mode</p>
-            </td>
-            <td width="25%" class="lh-2 border-r">
-
-                <p>:@if(isset($eWay))
-                        {{ $eWay->ewbno }}
-                    @endif</p>
-
-                <p class="wrap">: {{$cmp->get('gstin')}}</p>
-                <p>: {{$obj->contact_name}}</p>
-                <p>: {{$obj->TransMode}}</p>
-            </td>
-            <td width="15%" class="lh-2 px-5">
-                <p>Approx Distance</p>
-                <p>Transaction Type</p>
-                <p>Generated Date</p>
-                <p>Valid Upto</p>
-            </td>
-            <td width="25%" class="lh-2 border-r">
-                <p>: {{$obj->distance}}</p>
-                <p>: {{$obj->Vehtype}}</p>
-                <p>: @if(isset($eWay))
-                        {{ $eWay->ewbdt }}
-                    @endif</p>
-                <p>: @if(isset($eWay))
-                        {{ $eWay->ewbvalidtill }}
-                    @endif</p>
-            </td>
-            <td style="width: 145px;height: 145px;">
-                <div style="width: 145px; height: 145px;">
-                    @if(isset($eWay))
-                        <img style="width: 145px; height: 145px;" class=""
-                             src="{{\App\Helper\qrcoder::generate($eWay->ewbno,2)}}"
-                             alt="{{$eWay->ewbno}}">
-                    @endif
-                </div>
-            </td>
-        </tr>
-    </table>
-    <table class="border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="2" class="left p-5">2. Address Details</td>
-        </tr>
-        <tr class="text-md v-align-t lh-0">
-            <td width="50%" class=" px-5">
-                <p class="font-bold">From</p>
-                <p>{{$cmp->get('company_name')}}</p>
-                <p>{{$billing_address->get('gstcell')}}</p>
-                <p>{{$billing_address->get('address_3')}}</p>
-            </td>
-            <td width="50%" class="border-l px-5">
-                <p class="font-bold">To</p>
-                <p>{{$cmp->get('company_name')}}</p>
-                <p>{{$shipping_address->get('gstcell')}}</p>
-                <p>{{$shipping_address->get('address_3')}}</p>
-            </td>
-        </tr>
-        <tr class="text-md v-align-t lh-0 ">
-            <td width="50%" class="px-5">
-                <p class="font-bold">Dispatch From</p>
-                <p>{{ $billing_address->get('address_1') }}</p>
-                <p>{{$billing_address->get('address_2')}}</p>
-                <p>{{$billing_address->get('address_3')}}</p>
-            </td>
-            <td width="50%" class="border-l px-5">
-                <p class="font-bold">Ship To</p>
-                <p>{{$shipping_address->get('address_1')}}</p>
-                <p>{{$shipping_address->get('address_2')}}</p>
-                <p>{{$shipping_address->get('address_3')}}</p>
-            </td>
-        </tr>
-    </table>
-    <table class="border-t border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="" class="left p-5">3. Good Details</td>
-        </tr>
-    </table>
-    <table class="border-l border-r border-b">
-        <tr class="bg-gray text-sm border-t border-b v-align-c">
-            <th width="12%" class="border-r py-10">HSN Code</th>
-            <th width="auto" class="border-r">Product name & Desc</th>
-            <th width="8%" class="border-r">Quantity</th>
-            <th width="12%" class="border-r">Taxable Amount</th>
-            <th width="12%" class="border-r">Sub Total</th>
-        </tr>
-        @php
-            $gstPercent = 0;
-        @endphp
-        @foreach($list as $index => $row)
-            <tr class="text-sm center v-align-t">
-                <td height="32px" class="center border-r p-1">{{$row['hsncode']}}</td>
-                <td class="left border-r p-1" style="">
-                    @if($row['description'])
-                        {{$row['product_name'].' - '.$row['description']}}
-                    @else
-                        {{$row['product_name']}}
-                    @endif
-                </td>
-
-                <td class="center border-r p-1">{{$row['qty']+0}}</td>
-                <td class="right border-r p-1">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                <td class="center border-r p-1">{{$row['gst_percent']/2*2}}&nbsp;+&nbsp;{{$row['gst_percent']/2*2}}</td>
-            </tr>
-            @php
-                $gstPercent = $row['gst_percent'];
-            @endphp
-        @endforeach
-        @for($i = 0; $i < 11-$list->count(); $i++)
-            <tr class="">
-                <td height="26px" class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-                <td class="border-r text-md v-align-t p-1 center">&nbsp;</td>
-            </tr>
-        @endfor
-    </table>
-    <table class="border-b border-l border-r">
-        <tr class="text-md lh-0">
-            <td class="">
-                <p>Tot. Taxable Amt</p>
-                @if($obj->sales_type=='1')
-                    <p>CGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
-                @else
-                    <p>IGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
-                @endif
-            </td>
-            <td class="font-bold">
-                <p>: {{number_format($obj->total_taxable,2,'.','')}}</p>
-                @if($obj->sales_type=='1')
-                    <p>: {{number_format($obj->total_gst/2,2,'.','')}}</p>
-                @else
-                    <p>: {{number_format($obj->total_gst,2,'.','')}}</p>
-                @endif
-            </td>
-            <td>
-                <p>Other Amt</p>
-                @if($obj->sales_type=='1')
-                    <p>SGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
-                @endif
-            </td>
-            <td class="font-bold">
-                <p>: {{ number_format($obj->additional,2,'.','') }}</p>
-                @if($obj->sales_type=='1')
-                    <p>: {{number_format($obj->grand_total,2,'.','')}}</p>
-                @endif
-            </td>
-            <td>
-                <p>Total Inv Amt</p>
-                <p>&nbsp;</p>
-            </td>
-            <td class="font-bold">
-                <p>: {{number_format($obj->grand_total,2,'.','')}}</p>
-                <p>&nbsp;</p>
-            </td>
-        </tr>
-    </table>
-    <table class="border-l border-r">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="4" class="left p-5">4. Transportation Details</td>
-        </tr>
-        <tr class="text-md lh-0">
-            <td>
-                <p>Transporter ID</p>
-                <p>Name</p>
-            </td>
-            <td class="font-bold">
-                <p>: {{$obj->transport_id}}</p>
-                <p>: {{$obj->transport_name}}</p>
-            </td>
-            <td>
-                <p>Doc No</p>
-                <p>Date</p>
-            </td>
-            <td class="font-bold">
-                <p>: {{$obj->transport_no}}</p>
-                <p>: @if(isset($eWay))
-                        {{ $eWay->ewbdt }}
-                    @endif</p>
-            </td>
-        </tr>
-    </table>
-    <table class="border-l border-r border-b">
-        <tr class="bg-gray center font-bold text-md p-1 v-align-c">
-            <td colspan="6" class="left p-5">5. Vehicle Details</td>
-        </tr>
-        <tr class="text-md ">
-            <td height="20px">Vehicle No</td>
-            <td>: {{ $obj->Vehno }}</td>
-            <td>From</td>
-            <td>: {{$cmp->get('city_name')}}</td>
-            <td>CEWB No</td>
-            <td>: &nbsp;</td>
-        </tr>
-    </table>
-@endif
 </body>
 </html>

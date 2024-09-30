@@ -102,7 +102,6 @@ class Receivables extends Component
     #endregion
     public function print()
     {
-
         if ($this->byParty != null) {
             $this->redirect(route('receviables.print',
                 [
@@ -112,9 +111,6 @@ class Receivables extends Component
                 ]));
         }
     }
-
-
-
 
 
     #region[Render]

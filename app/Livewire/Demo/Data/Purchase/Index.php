@@ -47,11 +47,14 @@ class Index extends Component
                 'Entry_no' =>Purchase::nextNo() ,
                 'sales_type' => '1',
                 'transport_id' => $transport,
+                'ledger_id'=>1,
                 'bundle' => '1',
                 'total_qty' => $purchaseValue['total_quantity'],
                 'total_taxable' => $purchaseValue['total_taxable'],
                 'total_gst' => $purchaseValue['total_gst'],
                 'grand_total' => $purchaseValue['grand_total'],
+                'additional'=>0,
+                'round_off'=>0,
                 'active_id' => 1,
 
             ]);
@@ -66,9 +69,18 @@ class Index extends Component
                 'gst_percent' => $this->gst_percent,
 
             ]);
+        $this->contactUpdate($contact,$obj->grand_total);
         }
         $successMessage = 'Purchase Create Successfully.';
         $this->dispatch('notify', ...['type' => 'success', 'content' => $successMessage]);
+    }
+
+    public function contactUpdate($contact,$total)
+    {
+        $obj=Contact::find($contact);
+        $outstanding= ($obj->contact_type_id==124?$obj->outstanding-$total:$obj->outstanding+$total);
+        $obj->outstanding=$outstanding;
+        $obj->save();
     }
 
     public $quantity;

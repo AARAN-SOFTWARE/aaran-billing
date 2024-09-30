@@ -551,7 +551,7 @@ class Upsert extends Component
             if ($this->uniqueno != '') {
                 if ($this->common->vid == "") {
                     $obj = Purchase::create([
-                        'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.$this->purchase_no,
+                        'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.$this->entry_no,
                         'acyear' => session()->get('acyear'),
                         'company_id' => session()->get('company_id'),
                         'contact_id' => $this->contact_id?:1,
@@ -698,7 +698,7 @@ class Upsert extends Component
             $contact_outstanding->outstanding=($contact_outstanding->contact_type_id==124?$contact_outstanding->outstanding+$this->grand_total:$contact_outstanding->outstanding-$this->grand_total);
             $contact_outstanding->save();
         } else {
-            $this->uniqueno = "{$this->contact_id}~{$this->purchase_no}~{$this->purchase_date}";
+            $this->uniqueno = "{$this->contact_id}~{$this->entry_no}~{$this->purchase_date}";
             $this->common->active_id = true;
             $this->sales_type = '1';
             $this->gst_percent = 5;
