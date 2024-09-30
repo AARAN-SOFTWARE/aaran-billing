@@ -13,18 +13,51 @@
         <div class="sm:w-6/12 w-auto flex-col flex gap-y-16 border-r border-gray-200 sm:pr-6 sm:px-0 px-2">
             @forelse($list as $row)
 
-                <div class="group flex-col flex gap-y-4 border-b border-gray-300 pb-16 overflow-hidden">
-                    <div class="text-2xl font-semibold animate__animated wow animate__backInLeft"
-                         data-wow-duration="3s">{{$row->vname}}</div>
+                <a href="{{route('blog.Show',[$row->id])}}">
+                    <div class="group flex-col flex gap-y-4 border-b border-gray-300 pb-16 overflow-hidden">
 
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}" alt=""
-                         class="h-[30rem] object-cover transition duration-700 ease-out group-hover:scale-105
+                        <div class="flex flex-row justify-between">
+
+                            <div class="text-2xl font-semibold animate__animated wow animate__backInLeft "
+                                 data-wow-duration="3s">{{\Illuminate\Support\Str::words($row->vname,16)}}
+                            </div>
+
+
+                            <x-dropdown.icon>
+                                <div class="max-w-max  flex-col flex justify-start items-start space-y-3 text-xs">
+                                    <button wire:click="edit({{$row->id}})"
+                                            class="inline-flex items-center gap-x-2 px-2 py-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                             stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+                                        </svg>
+                                        <span>Edit</span>
+                                    </button>
+
+                                    <button wire:click="getDelete({{$row->id}})"
+                                            class="inline-flex items-center gap-x-2 px-2 py-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                             stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
+                                        </svg>
+                                        <span>Delete</span>
+                                    </button>
+
+                                </div>
+                            </x-dropdown.icon>
+                        </div>
+
+
+                        <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}" alt=""
+                             class="h-[30rem] object-cover transition duration-700 ease-out group-hover:scale-105
                          animate__animated wow bounceInUp" data-wow-duration="3s">
 
-                    <div
-                        class="flex justify-between items-center gap-x-4 text-gray-600 text-sm animate__animated wow animate__backInLeft"
-                        data-wow-duration="3s">
-                        <div class="flex items-center gap-x-4">
+                        <div
+                            class="flex justify-between items-center gap-x-4 text-gray-600 text-sm animate__animated wow animate__backInLeft"
+                            data-wow-duration="3s">
+                            <div class="flex items-center gap-x-4">
                             <span class="inline-flex items-center gap-x-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5"
@@ -35,7 +68,7 @@
                                 <span>{{ $row->created_at->diffForHumans() }}</span>
                             </span>
 
-                            <span class="inline-flex items-center gap-x-1 ">
+                                <span class="inline-flex items-center gap-x-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                      class="size-4 text-gray-600">
                                 <path fill-rule="evenodd"
@@ -45,29 +78,32 @@
                                 <span class="uppercase mt-1">POST BY : {{$row->user->name}}</span>
                             </span>
 
-                            <span class="inline-flex items-center gap-x-1 ">
+                                <span class="inline-flex items-center gap-x-1 ">
                                 <span class="uppercase mt-1">| {{$row->visibility==0?'Private':'Public'}}</span>
                             </span>
-                        </div>
+                            </div>
 
-                        <div class="flex items-center gap-x-4 animate__animated wow animate__backInRight"
-                             data-wow-duration="3s">
+                            <div class="flex items-center gap-x-4 animate__animated wow animate__backInRight"
+                                 data-wow-duration="3s">
                             <span class="text-blue-600">
                                 #{{ \Aaran\Blog\Models\Post::type($row->blogcategory_id) ?: 'posts'}}
                             </span>
-                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-md border border-blue-600">
+                                <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-md border border-blue-600">
                                 {{ \Aaran\Blog\Models\Post::tagName($row->blogtag_id) ?: 'posts'}}
                             </span>
+                            </div>
+                        </div>
+
+                        <div class="text-gray-600 text-sm animate__animated wow bounceInUp"
+                             data-wow-duration="3s">{{\Illuminate\Support\Str::words($row->body,30)}}
                         </div>
                     </div>
+                </a>
 
-                    <div class="text-gray-600 text-sm animate__animated wow bounceInUp"
-                         data-wow-duration="3s">{{$row->body}}
-                    </div>
-                </div>
             @empty
                 <x-image.empty_post/>
             @endforelse
+            <x-modal.delete/>
 
             <div class="pt-5">{{ $list->links() }}</div>
         </div>
@@ -93,9 +129,11 @@
                 </span>
                 </label>
 
-                <div class="my-5">
-                    <x-button.new-x wire:click="create"/>
-                </div>
+                @if(session()->get('tenant_id')!='')
+                    <div class="my-5">
+                        <x-button.new-x wire:click="create"/>
+                    </div>
+                @endif
             </div>
 
             <!-- Form create  ----------------------------------------------------------------------------------------->
@@ -268,7 +306,7 @@
 
             <!-- Blog Category ------------------------------------------------------------------------------------>
 
-            <div class="text-2xl font-semibold mt-9 scroll-smooth animate__animated wow bounceInRight"
+            <div class="text-2xl font-semibold mt-9 my-6 scroll-smooth animate__animated wow bounceInRight"
                  data-wow-duration="3s">Category
             </div>
 
@@ -296,25 +334,30 @@
 
             <!-- Tag Filter --------------------------------------------------------------------------------------->
 
-            <div class="grid grid-cols-3 gap-2 my-8 scroll-smooth">
-                @if($tagfilter)
-                    @foreach($tagfilter as $index => $i)
+            @if(session()->get('tenant_id')!='')
+                <div class="flex flex-row flex-wrap w-full gap-5 my-8 p-0.5 group">
+                    @if($tagfilter)
+                        @foreach($tagfilter as $index => $i)
+                            <div
+                                class="inline-flex items-center bg-blue-50 border border-gray-200 rounded-md px-2 gap-3 justify-between hover:bg-blue-100
+                            hover:text-blue-800 transition-all ease-linear duration-300 hover:border-blue-600">
+                                <span> {{\Aaran\Blog\Models\BlogTag::find($i)->vname}}</span>
 
-                        <span
-                            class="group max-w-max inline-flex items-center gap-x-2 px-2 py-1 bg-[#3F5AF3] text-white rounded-md">
-                            {{\Aaran\Blog\Models\BlogTag::find($i)->vname}}
-                            <button wire:click="removeFilter({{$index}})"
-                                    class="inline-flex justify-center items-center">
-                                <x-icons.icon :icon="'x-mark'" class="group-hover:scale-125 w-4 h-5 font-bold"/>
+                                <span>
+                            <button wire:click="removeFilter({{$index}})" class="flex items-center justify-end">
+                                <x-icons.icon :icon="'x-mark'" class="w-4 h-4"/>
                             </button>
-                        </span>
-                    @endforeach
-                    <button wire:click="clearFilter()"
-                            class="max-w-max px-2 py-1 border border-gray-200 rounded-md text-xs hover:bg-blue-100">
-                        Clear All
-                    </button>
-                @endif
-            </div>
+                                </span>
+
+                            </div>
+                        @endforeach
+                        <button wire:click="clearFilter()"
+                                class="max-w-max px-2 py-1 border border-gray-200 bg-blue-50 rounded-md text-xs hover:text-blue-800 hover:bg-blue-100 hover:border hover:border-blue-600">
+                            Clear All
+                        </button>
+                    @endif
+                </div>
+            @endif
 
             <!-- Blog Tag ----------------------------------------------------------------------------------------->
 
@@ -324,14 +367,14 @@
                 @if($tags)
                     @foreach($tags as $tag)
                         <button wire:click="getFilter({{$tag->id}})"
-                                class="group px-4 py-2 border border-gray-200 text-center hover:bg-[#3F5AF3] hover:text-white duration-300 transition-all ease-linear inline-flex items-center gap-x-3 rounded-md mr-2">
+                                class="group px-4 py-2 border-s-2 border-gray-200 w-40 text-center bg-red-50 hover:bg-red-600 hover:text-white duration-300 transition-all ease-linear inline-flex items-center gap-x-3 rounded-md mr-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                 class="w-4 h-4 text-blue-600 group-hover:text-white">
+                                 class="w-4 h-4 text-red-600 group-hover:text-white">
                                 <path fill-rule="evenodd"
                                       d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"
                                       clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-xs text-blue-600 group-hover:text-white">{{$tag->vname}} </span>
+                            <span class="text-xs text-red-600 group-hover:text-white">{{$tag->vname}} </span>
                         </button>
                     @endforeach
                 @endif

@@ -34,7 +34,7 @@ class Blog extends Component
     {
         return [
             'common.vname' => 'required|min:3|max:75',
-            'body' => 'required|min:3|max:255',
+            'body' => 'required|min:10|',
         ];
     }
 

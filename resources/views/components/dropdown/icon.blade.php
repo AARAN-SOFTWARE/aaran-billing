@@ -18,9 +18,9 @@
     <div x-cloak x-show="isOpen || openedWithKeyboard" x-transition x-trap="openedWithKeyboard"
          @click.outside="isOpen = false, openedWithKeyboard = false" @keydown.down.prevent="$focus.wrap().next()"
          @keydown.up.prevent="$focus.wrap().previous()"
-         class="absolute z-10 flex flex-col h-auto p-1 space-y-2 overflow-hidden bg-white border rounded-md -top-12 right-6 max-w-max shadow-md shadow-gray-300"
+         class="absolute z-10 flex flex-col p-1 space-y-2 overflow-hidden bg-white border rounded-md -bottom-12 right-6 max-w-max shadow-md shadow-gray-300"
          role="menu">
-         <div class=" space-y-1 text-sm w-28">
+         <div class="">
             {{$slot}}
         </div>
     </div>
