@@ -21,6 +21,13 @@ class ExportSale extends Model
         return new ExportSaleFactory();
     }
 
+    public static function nextNo()
+    {
+        return
+            static::where('company_id', '=', session()->get('company_id'))
+                ->max('invoice_no') + 1;
+    }
+
     public function contact(): BelongsTo
     {
         return $this->belongsTo(Contact::class);

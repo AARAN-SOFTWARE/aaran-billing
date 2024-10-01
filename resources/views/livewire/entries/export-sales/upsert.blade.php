@@ -135,8 +135,15 @@
 
                         <!--PO/DC  -------------------------------------------------------------------------------------------------------->
 
-                        <x-input.floating id="qty" wire:model.live="pkgs_type" label="Pkgs Type"/>
-
+                        {{--                        <x-input.floating id="qty" wire:model.live="pkgs_type" label="Pkgs Type"/>--}}
+                        <div class="w-full">
+                            <x-input.model-select wire:model.live="pkgs_type" :label="'Pkgs Type'">
+                                <option value="">Choose...</option>
+                                @foreach(\App\Enums\PackageType::cases() as $packageType)
+                                    <option value="{{$packageType->value}}">{{$packageType->getName()}}</option>
+                                @endforeach
+                            </x-input.model-select>
+                        </div>
                         <x-input.floating id="dc" wire:model.live="no_of_count" label="No of Count"/>
 
                         <!--Product Name ---------------------------------------------------------------------------------------------->
@@ -274,8 +281,8 @@
                                     <th class="px-2 text-center border border-gray-300">QTY</th>
                                     <th class="px-2 text-center border border-gray-300">PRICE</th>
                                     <th class="px-2 text-center border border-gray-300">TAXABLE</th>
-{{--                                    <th class="px-2 text-center border border-gray-300">GST</th>--}}
-{{--                                    <th class="px-2 text-center border border-gray-300">SUBTOTAL</th>--}}
+                                    {{--                                    <th class="px-2 text-center border border-gray-300">GST</th>--}}
+                                    {{--                                    <th class="px-2 text-center border border-gray-300">SUBTOTAL</th>--}}
                                     <th class="w-12 px-1 text-center border border-gray-300">ACTION</th>
                                 </tr>
                                 </thead>
@@ -297,7 +304,7 @@
 
 
                                             <td class="px-2 text-left border border-gray-300 cursor-pointer"
-                                                wire:click.prevent="changeItems({{$index}})">{{$row['pkgs_type']}}</td>
+                                                wire:click.prevent="changeItems({{$index}})">{{ \App\Enums\PackageType::tryFrom($row['pkgs_type'])->getName()}}</td>
 
                                             <td class="px-2 text-left border border-gray-300 cursor-pointer"
                                                 wire:click.prevent="changeItems({{$index}})">{{$row['no_of_count']}}</td>
@@ -332,10 +339,10 @@
                                             <td class="px-2 text-right border border-gray-300 cursor-pointer"
                                                 wire:click.prevent="changeItems({{$index}})">{{$row['taxable']}}</td>
 
-{{--                                            <td class="px-2 text-right border border-gray-300 cursor-pointer"--}}
-{{--                                                wire:click.prevent="changeItems({{$index}})">{{$row['gst_amount']}}</td>--}}
-{{--                                            <td class="px-2 text-right border border-gray-300 cursor-pointer"--}}
-{{--                                                wire:click.prevent="changeItems({{$index}})">{{$row['subtotal']}}</td>--}}
+                                            {{--                                            <td class="px-2 text-right border border-gray-300 cursor-pointer"--}}
+                                            {{--                                                wire:click.prevent="changeItems({{$index}})">{{$row['gst_amount']}}</td>--}}
+                                            {{--                                            <td class="px-2 text-right border border-gray-300 cursor-pointer"--}}
+                                            {{--                                                wire:click.prevent="changeItems({{$index}})">{{$row['subtotal']}}</td>--}}
                                             <td class="text-center border border-gray-300">
                                                 <x-button.delete wire:click.prevent="removeItems({{$index}})"/>
                                             </td>
@@ -348,18 +355,18 @@
                                 <tfoot class="mt-2">
                                 <tr class="h-8 text-sm border border-gray-400 bg-cyan-50">
 
-{{--                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasSize() or \Aaran\Aadmin\Src\SaleEntry::hasColour())--}}
-{{--                                        <td colspan="4" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>--}}
-{{--                                    @else--}}
-{{--                                        <td colspan="2" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>--}}
-{{--                                    @endif--}}
+                                    {{--                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasSize() or \Aaran\Aadmin\Src\SaleEntry::hasColour())--}}
+                                    {{--                                        <td colspan="4" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>--}}
+                                    {{--                                    @else--}}
+                                    {{--                                        <td colspan="2" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>--}}
+                                    {{--                                    @endif--}}
                                     <td colspan="6" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
                                     <td class="px-2 text-center border border-gray-300">{{$total_qty}}</td>
                                     <td class="px-2 text-center border border-gray-300">&nbsp;</td>
                                     <td class="px-2 text-right border border-gray-300">{{$total_taxable}}</td>
-{{--                                    <td class="px-2 text-center border border-gray-300">&nbsp;</td>--}}
-{{--                                    <td class="px-2 text-right border border-gray-300">{{$total_gst}}</td>--}}
-{{--                                    <td class="px-2 text-right border border-gray-300">{{$grandtotalBeforeRound}}</td>--}}
+                                    {{--                                    <td class="px-2 text-center border border-gray-300">&nbsp;</td>--}}
+                                    {{--                                    <td class="px-2 text-right border border-gray-300">{{$total_gst}}</td>--}}
+                                    {{--                                    <td class="px-2 text-right border border-gray-300">{{$grandtotalBeforeRound}}</td>--}}
                                     <td class="px-2 text-center border border-gray-300">&nbsp;</td>
                                 </tr>
                                 </tfoot>
@@ -374,10 +381,15 @@
                     <section class="grid sm:grid-cols-3 grid-cols-1 gap-2 ">
                         <!-- Bottom Left -------------------------------------------------------------------------------------------------->
                         <section class="w-full p-4 space-y-4">
-                           <x-input.floating wire:model.live="pre_carriage" :label="'Pre-Carriage by'"/>
-                           <x-input.floating wire:model.live="vessel_flight_no" :label="'Vessel/Flight No'"/>
-                           <x-input.floating wire:model.live="port_of_discharge" :label="'Port of Discharge'"/>
-                           <x-input.floating wire:model.live="additional" :label="'Additional'"/>
+                            <x-input.model-select wire:model.live="pre_carriage" :label="'Pre-Carriage by'">
+                                <option value="">Choose...</option>
+                                @foreach(\App\Enums\PreCarriage::cases() as $preCarriage)
+                                    <option value="{{$preCarriage->value}}">{{$preCarriage->getName()}}</option>
+                                @endforeach
+                            </x-input.model-select>
+                            <x-input.floating wire:model.live="vessel_flight_no" :label="'Vessel/Flight No'"/>
+                            <x-input.floating wire:model.live="port_of_discharge" :label="'Port of Discharge'"/>
+                            <x-input.floating wire:model.live="additional" :label="'Additional'"/>
                         </section>
 
                         <section class="w-full mx-2 p-4 space-y-4">
@@ -415,13 +427,92 @@
                     </section>
 
                 </x-tabs.content>
-                <x-tabs.content></x-tabs.content>
+                <x-tabs.content>
+                    <div class="flex gap-3">
+                        <x-dropdown.wrapper label="Party Name" type="consigneeTyped">
+                            <div class="relative ">
+                                <x-dropdown.input label="Party Name" id="consignee_name"
+                                                  wire:model.live="consignee_name"
+                                                  wire:keydown.arrow-up="decrementConsignee"
+                                                  wire:keydown.arrow-down="incrementConsignee"
+                                                  wire:keydown.enter="enterConsignee"/>
+                                @error('consignee_id')
+                                <span class="text-red-500">{{'The Party Name is Required.'}}</span>
+                                @enderror
+                                <x-dropdown.select>
+                                    @if($consigneeCollection)
+                                        @forelse ($consigneeCollection as $i => $consignee)
+                                            <x-dropdown.option highlight="{{$highlightConsignee === $i}}"
+                                                               wire:click.prevent="setConsignee('{{$consignee->vname}}','{{$consignee->id}}')">
+                                                {{ $consignee->vname }}
+                                            </x-dropdown.option>
+                                        @empty
+                                            <x-dropdown.new href="{{route('contacts.upsert',['0'])}}"
+                                                            label="Party"/>
+                                        @endforelse
+                                    @endif
+                                </x-dropdown.select>
+                            </div>
+                        </x-dropdown.wrapper>
+                        <x-button.add wire:click="addConsignee"/>
+                    </div>
+                    <x-forms.section-border/>
+
+                    <section>
+                        <div class="py-2 mt-5 overflow-x-auto">
+
+                            <table class="overflow-x-auto md:w-full ">
+                                <thead>
+                                <tr class="h-8 text-xs bg-gray-100 border border-gray-300">
+
+                                    <th class="w-12 px-2 text-center border border-gray-300">#</th>
+
+                                    <th class="px-2 text-center border border-gray-300">Pkgs Type</th>
+
+                                    <th class="w-12 px-1 text-center border border-gray-300">ACTION</th>
+                                </tr>
+                                </thead>
+
+                                <!--Display Table Items ------------------------------------------------------------------------------->
+                                <tbody>
+
+                                @if ($consigneeList)
+
+                                    @foreach($consigneeList as $index => $row)
+
+                                        <tr class="border border-gray-400 hover:bg-amber-50">
+                                            <td class="text-center border border-gray-300 bg-gray-100">
+                                                <button class="w-full h-full cursor-pointer"
+                                                        wire:click.prevent="changeConsignee({{$index}})">
+                                                    {{$index+1}}
+                                                </button>
+                                            </td>
+
+
+                                            <td class="px-2 text-left border border-gray-300 cursor-pointer"
+                                                wire:click.prevent="changeConsignee({{$index}})">{{$row['contact_name']}}</td>
+
+
+                                            <td class="text-center border border-gray-300">
+                                                <x-button.delete wire:click.prevent="removeConsignee({{$index}})"/>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </section>
+
+                </x-tabs.content>
             </x-slot>
         </x-tabs.tab-panel>
     </x-forms.m-panel>
     @if( $common->vid != "")
-        <x-forms.m-panel-bottom-button routes="{{ route('exportsales', [$this->common->vid])}}" save back print />
+        <x-forms.m-panel-bottom-button routes="{{ route('exportsales', [$this->common->vid])}}" save back print/>
     @else
-        <x-forms.m-panel-bottom-button save back />
+        <x-forms.m-panel-bottom-button save back/>
     @endif
 </div>

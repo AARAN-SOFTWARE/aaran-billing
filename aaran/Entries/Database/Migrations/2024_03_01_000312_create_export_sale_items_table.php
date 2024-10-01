@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->foreignId('size_id')->references('id')->on('commons');
                 $table->decimal('qty');
                 $table->decimal('price');
+                $table->string('gst_percent')->nullable();
                 $table->timestamps();
             });
         }

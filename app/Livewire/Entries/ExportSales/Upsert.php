@@ -4,6 +4,7 @@ namespace App\Livewire\Entries\ExportSales;
 
 use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\ExportSale;
+use Aaran\Entries\Models\ExportSaleContact;
 use Aaran\Entries\Models\ExportSaleItem;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Contact;
@@ -122,6 +123,68 @@ class Upsert extends Component
     }
 
     #endregion
+
+    #region[Consignee]
+    #[validate]
+    public $consignee_name = '';
+    public $consignee_id = '';
+    public Collection $consigneeCollection;
+    public $highlightConsignee = 0;
+    public $consigneeTyped = false;
+
+    public function decrementConsignee(): void
+    {
+        if ($this->highlightConsignee === 0) {
+            $this->highlightConsignee = count($this->consigneeCollection) - 1;
+            return;
+        }
+        $this->highlightConsignee--;
+    }
+
+    public function incrementConsignee(): void
+    {
+        if ($this->highlightConsignee === count($this->consigneeCollection) - 1) {
+            $this->highlightConsignee = 0;
+            return;
+        }
+        $this->highlightConsignee++;
+    }
+
+    public function setConsignee($name, $id): void
+    {
+        $this->consignee_name = $name;
+        $this->consignee_id = $id;
+        $this->getConsigneeList();
+    }
+
+    public function enterConsignee(): void
+    {
+        $obj = $this->consigneeCollection[$this->highlightConsignee] ?? null;
+
+        $this->consignee_name = '';
+        $this->consigneeCollection = Collection::empty();
+        $this->highlightConsignee = 0;
+
+        $this->consignee_name = $obj['vname'] ?? '';
+        $this->consignee_id = $obj['id'] ?? '';
+    }
+
+    #[On('refresh-consignee')]
+    public function refreshConsignee($v): void
+    {
+        $this->consignee_id = $v['id'];
+        $this->consignee_name = $v['name'];
+        $this->consigneeTyped = false;
+    }
+
+    public function getConsigneeList(): void
+    {
+        $this->consigneeCollection = $this->consignee_name ? Contact::search(trim($this->consignee_name))
+            ->where('company_id', '=', session()->get('company_id'))
+            ->get() : Contact::where('company_id', '=', session()->get('company_id'))->get();
+    }
+
+#endregion
 
     #region[Order]
 
@@ -468,11 +531,11 @@ class Upsert extends Component
 //                $this->validate($this->rules());
 
                 $obj = ExportSale::create([
-                    'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.Sale::nextNo(),
+                    'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.ExportSale::nextNo(),
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
                     'contact_id' => $this->contact_id,
-                    'invoice_no' => Sale::nextNo(),
+                    'invoice_no' => ExportSale::nextNo(),
                     'invoice_date' => $this->invoice_date,
                     'order_id' => $this->order_id ?: 1,
                     'style_id' => $this->style_id ?: 1,
@@ -489,10 +552,12 @@ class Upsert extends Component
                     'additional' => $this->additional,
                     'round_off' => $this->round_off,
                     'grand_total' => $this->grand_total,
+                    'ex_rate' => $this->ex_rate,
                     'active_id' => $this->common->active_id,
 
                 ]);
                 $this->saveItem( $obj->id);
+                $this->saveContact( $obj->id);
                 $message = "Saved";
 
             } else {
@@ -516,12 +581,15 @@ class Upsert extends Component
                 $obj->total_taxable = $this->total_taxable;
                 $obj->total_gst = $this->total_gst;
                 $obj->additional = $this->additional;
+                $obj->ex_rate = $this->ex_rate;
                 $obj->round_off = $this->round_off;
                 $obj->grand_total = $this->grand_total;
                 $obj->active_id = $this->common->active_id;
                 $obj->save();
                 DB::table('export_sale_items')->where('export_sales_id', '=', $obj->id)->delete();
                 $this->saveItem( $obj->id);
+                DB::table('export_sale_contacts')->where('export_sales_id', '=', $obj->id)->delete();
+                $this->saveContact( $obj->id);
                 $message = "Updated";
             }
 
@@ -545,6 +613,16 @@ class Upsert extends Component
                 'size_id' => $sub['size_id'] ?: '14',
                 'qty' => $sub['qty'],
                 'price' => $sub['price'],
+            ]);
+        }
+    }
+
+    public function saveContact($id):void
+    {
+        foreach ($this->consigneeList as $consignee) {
+            ExportSaleContact::create([
+                'export_sales_id' => $id,
+                'contact_id'=>$consignee['contact_id'],
             ]);
         }
     }
@@ -580,15 +658,19 @@ class Upsert extends Component
             $this->additional = $obj->additional;
             $this->round_off = $obj->round_off;
             $this->grand_total = $obj->grand_total;
+            $this->ex_rate = $obj->ex_rate;
             $this->common->active_id = $obj->active_id;
 
             $data = DB::table('export_sale_items')->select('export_sale_items.*',
                 'products.vname as product_name',
                 'colours.vname as colour_name',
-                'sizes.vname as size_name',)->join('products', 'products.id', '=', 'export_sale_items.product_id')
+                'sizes.vname as size_name',)
+                ->join('products', 'products.id', '=', 'export_sale_items.product_id')
                 ->join('commons as colours', 'colours.id', '=', 'export_sale_items.colour_id')
-                ->join('commons as sizes', 'sizes.id', '=', 'export_sale_items.size_id')->where('sale_id', '=',
-                    $id)->get()->transform(function ($data) {
+                ->join('commons as sizes', 'sizes.id', '=', 'export_sale_items.size_id')
+                ->where('export_sales_id', '=',$id)
+                ->get()
+                ->transform(function ($data) {
                     return [
                         'export_sales_id' => $data->id,
                         'pkgs_type' => $data->pkgs_type,
@@ -606,9 +688,21 @@ class Upsert extends Component
                     ];
                 });
             $this->itemList = $data;
+            $contact=DB::table('export_sale_contacts')
+                ->select('export_sale_contacts.*','contacts.vname as contact_name')
+                ->join('contacts', 'contacts.id', '=', 'export_sale_contacts.contact_id')
+                ->where('export_sales_id', '=', $id)->get()
+                ->transform(function ($contact) {
+                    return [
+                        'export_sale_contact_id' => $contact->id,
+                        'contact_name' => $contact->contact_name,
+                        'contact_id' => $contact->contact_id,
+                    ];
+                });
+            $this->consigneeList=$contact;
         }else{
         $this->gst_percent=5;
-            $this->invoice_no= Sale::nextNo();
+            $this->invoice_no= ExportSale::nextNo();
             $this->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
             $this->common->active_id = true;
             $this->gst_percent = 5;
@@ -651,6 +745,7 @@ class Upsert extends Component
                     'price' => $this->price,
                     'description' => $this->description,
                     'taxable' => $this->qty * $this->price,
+                    'gst_percent'=>$this->gst_percent1,
                 ];
             }
         } else {
@@ -667,6 +762,7 @@ class Upsert extends Component
                 'price' => $this->price,
                 'description' => $this->description,
                 'taxable' => $this->qty * $this->price,
+                'gst_percent'=>$this->gst_percent1,
             ];
         }
 
@@ -689,6 +785,7 @@ class Upsert extends Component
         $this->qty = '';
         $this->price = '';
         $this->description = '';
+        $this->gst_percent1='';
         $this->calculateTotal();
     }
 
@@ -701,6 +798,7 @@ class Upsert extends Component
         $this->no_of_count = $items['no_of_count'];
         $this->product_name = $items['product_name'];
         $this->product_id = $items['product_id'];
+        $this->gst_percent1 = $items['gst_percent'];
         $this->colour_name = $items['colour_name'];
         $this->colour_id = $items['colour_id'];
         $this->size_name = $items['size_name'];
@@ -718,6 +816,50 @@ class Upsert extends Component
         $this->calculateTotal();
     }
 
+    #endregion
+
+    #region[addConsignee]
+    public function addConsignee(): void
+    {
+        if ($this->consigneeIndex == "") {
+            if (!(empty($this->consignee_name))
+            ) {
+                $this->consigneeList[] = [
+                    'contact_id' => $this->consignee_id,
+                    'contact_name' => $this->consignee_name,
+                ];
+            }
+        } else {
+            $this->consigneeList[$this->consigneeIndex] = [
+                'contact_id' => $this->consignee_id,
+                'contact_name' => $this->consignee_name,
+            ];
+        }
+
+        $this->resetsConsignee();
+        $this->render();
+    }
+    public function resetsConsignee(): void
+    {
+        $this->consigneeIndex = '';
+        $this->consignee_id = '';
+        $this->consignee_name = '';
+    }
+
+    public function changeConsignee($index): void
+    {
+        $this->consigneeIndex = $index;
+
+        $items = $this->consigneeList[$index];
+        $this->consignee_id = $items['contact_id'];
+        $this->consignee_name = $items['contact_name'];
+    }
+
+    public function removeConsignee($index): void
+    {
+        unset($this->consigneeList[$index]);
+        $this->consigneeList = collect($this->consigneeList);
+    }
     #endregion
 
     #region[Calculate total]
@@ -758,6 +900,7 @@ class Upsert extends Component
     public function render()
     {
         $this->getContactList();
+        $this->getConsigneeList();
         $this->getOrderList();
         $this->getStyleList();
         $this->getProductList();
