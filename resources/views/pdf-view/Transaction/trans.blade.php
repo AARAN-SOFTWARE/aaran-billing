@@ -191,6 +191,19 @@
             padding: 5px 0;
         }
 
+
+    <thead class="font-semibold text-[10px] bg-gray-50">
+    <tr class="py-2 border-b border-r border-gray-300 tracking-wider">
+        <th class="py-2 w-[3%] px-1 border-r border-l border-gray-300 text-center">S.No</th>
+        <th class="py-2  border-r border-gray-300">Contact</th>
+        @if( $trans_type_id != 108)
+            <th class="py-2 w-[10%] border-r border-gray-300">Type</th>
+        @endif
+        <th class="py-2 w-[10%] border-r border-gray-300">Payment</th>
+        <th class="py-2 w-[10%] border-r border-gray-300">Receipt</th>
+
+        <th class="py-2 w-[10%] border-r px-1 border-gray-300">Balance</th>
+
         .py-10 {
             padding: 10px 0;
         }
@@ -267,6 +280,7 @@
             <th width="10%" class="border-r">Type</th>
         @endif
         <th width="10%" class="border-r">Balance</th>
+
     </tr>
     @php
         $balance = 0;
@@ -294,6 +308,23 @@
                 $totalReceipt  += floatval($row->vname + 0);
             }
         @endphp
+
+
+        <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
+
+            <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
+
+            <td class="py-2 text-start border-r border-gray-300 px-1">{{$row->contact->vname}}</td>
+
+            @if( $trans_type_id != 108)
+                <td class="py-2 text-center px-2 border-r border-gray-300">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
+            @endif
+
+            @if($row->mode_id == 110)
+                <td class="py-2 text-end px-1 border-r border-gray-300">{{$row->vname+0}}</td>
+            @else
+                <td class="py-2 text-center px-1 border-r border-gray-300"></td>
+
         <tr class="text-sm center v-align-c">
             <td height="26px" class="center border-r">{{$index+1}}</td>
             <td class="center border-r ">{{$row->contact->vname}}</td>
@@ -301,8 +332,28 @@
                 <td class="right px-2  border-r ">{{$row->vname+0}}</td>
             @else
                 <td class="center border-r ">&nbsp;</td>
+
             @endif
             @if($row->mode_id == 111)
+
+                <td class="py-2 text-end px-1 border-r border-gray-300">{{$row->vname+0}}</td>
+            @else
+                <td class="py-2 text-end px-1 border-r border-gray-300"></td>
+            @endif
+
+
+            <td class="py-2 text-end px-1 border-r border-gray-300">  {{  $balance  = $totalReceipt-$totalPayment}}</td>
+        </tr>
+    @endforeach
+
+    <tr class="text-[10px] border-r border-gray-300 font-semibold">
+        <td class="py-2 text-end border-l border-r border-gray-300 px-1" colspan="3">Total</td>
+        <td class="py-2 text-end border-r border-gray-300 px-1">{{$totalPayment}}</td>
+        <td class="py-2 text-end border-r border-gray-300 px-1">{{$totalReceipt}}</td>
+        <td class="py-2 text-end border-r border-gray-300 px-1 text-blue-600"> {{$totalReceipt - $totalPayment }}</td>
+    </tr>
+    </tbody>
+
                 <td class="right px-2  border-r ">{{$row->vname+0}}</td>
             @else
                 <td class="center border-r ">&nbsp;</td>
@@ -323,6 +374,7 @@
             <td class="right px-2 border-r ">{{$totalReceipt - $totalPayment }}</td>
         @endif
     </tr>
+
 </table>
 
 

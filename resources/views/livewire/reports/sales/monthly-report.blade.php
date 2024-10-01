@@ -52,8 +52,14 @@
                         <x-slot:table_body name="table_body">
                             @foreach(\App\Helper\Months::months() as $index=>$row)
                                 <x-table.row>
-                                    <x-table.cell-text><button wire:click="monthlyReport({{$index+1}})" @click="setTimeout(()=>open = 2,1500)">{{$row}}</button></x-table.cell-text>
-                                    <x-table.cell-text> <button wire:click="monthlyReport({{$index+1}})" @click="setTimeout(()=>open = 2,1500)">{{\App\Livewire\Reports\Sales\MonthlyReport::monthlySales($index+1)}}</button></x-table.cell-text>
+                                    <x-table.cell-text>
+                                        <button wire:click="monthlyReport({{$index+1}})"
+                                                @click="setTimeout(()=>open = 2,1500)">{{$row}}</button>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text>
+                                        <button wire:click="monthlyReport({{$index+1}})"
+                                                @click="setTimeout(()=>open = 2,1500)">{{\App\Livewire\Reports\Sales\MonthlyReport::monthlySales($index+1)}}</button>
+                                    </x-table.cell-text>
                                 </x-table.row>
                                     <?php
                                     $totalSales += \App\Livewire\Reports\Sales\MonthlyReport::monthlySales($index + 1);
@@ -129,20 +135,42 @@
                                     $gstTotal += $row['sale']['sales_type'] == '1' ? $row['sale']['total_gst'] : 0;
                                     $CGSTTotal += $row['sale']['sales_type'] != '1' ? $row['sale']['total_gst'] : 0;
                                     ?>
-{{--                                {{dd($row['sale']['sales_type'])}}--}}
+                                {{--                                {{dd($row['sale']['sales_type'])}}--}}
                                 <x-table.row>
-                                    <x-table.cell-text><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$index+1}}</a></x-table.cell-text>
+                                    <x-table.cell-text><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$index+1}}</a>
+                                    </x-table.cell-text>
 
-                                    <x-table.cell-text left><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['contact_gstin']}}</a></x-table.cell-text>
-                                    <x-table.cell-text left><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['contact_name']}}</a></x-table.cell-text>
-                                    <x-table.cell-text><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['invoice_no']}}</a></x-table.cell-text>
-                                    <x-table.cell-text><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{ date('d-m-Y', strtotime( $row['sale']['invoice_date']))}}</a></x-table.cell-text>
-                                    <x-table.cell-text right><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['grand_total']}}</a></x-table.cell-text>
-                                    <x-table.cell-text right><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['total_taxable']}}</a></x-table.cell-text>
-                                    <x-table.cell-text left><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['percent']:0}}</a></x-table.cell-text>
-                                    <x-table.cell-text right><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</a></x-table.cell-text>
-                                    <x-table.cell-text left><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['percent']:0}}</a></x-table.cell-text>
-                                    <x-table.cell-text right><a href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</a></x-table.cell-text>
+                                    <x-table.cell-text left><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['contact_gstin']}}</a>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text left><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['contact_name']}}</a>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['invoice_no']}}</a>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{ date('d-m-Y', strtotime( $row['sale']['invoice_date']))}}</a>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text right><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['grand_total']}}</a>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text right><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['total_taxable']}}</a>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text left><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['percent']:0}}</a>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text right><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</a>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text left><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['percent']:0}}</a>
+                                    </x-table.cell-text>
+                                    <x-table.cell-text right><a
+                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</a>
+                                    </x-table.cell-text>
                                     <x-table.cell-text>
                                         <a href="{{ route('sales.upsert',[$row['sale']['id']]) }}">{{$row['sale']['sales_type']!='1'?$row['percent']:0}}</a>
                                     </x-table.cell-text>
@@ -171,85 +199,89 @@
             </div>
 
             <div x-show="open === 3" class="w-full" x-cloak>
-              <div>
-                  <div class="my-2 flex justify-between">
-                    <div class="flex sm:h-10 h-7">
-                        <select class="bg-gray-100 border-l rounded-l-lg sm:w-36 border-r-0" wire:model.live="filterField" wire:change="clearFilter">
-                            <option value="">Select...</option>
-                            <option value="invoice_no"> Invoice NO</option>
-                            <option value="invoice_date"> Invoice Date</option>
-                            <option value="contact_id"> Party Name</option>
-                        </select>
-                        @if($filterField=='contact_id')
-                            <select wire:model.live="filterValue" class="rounded-r-lg sm:w-96"  wire:keydown.escape="$set('filterValue', '')">
-                                <option value="">Choose...</option>
-                                @foreach($contects as $contact)
-                                    <option value="{{$contact->id}}">{{$contact->vname}}</option>
-                                @endforeach
+                <div>
+                    <div class="my-2 flex justify-between">
+                        <div class="flex sm:h-10 h-7">
+                            <select class="bg-gray-100 border-l rounded-l-lg sm:w-36 border-r-0"
+                                    wire:model.live="filterField" wire:change="clearFilter">
+                                <option value="">Select...</option>
+                                <option value="invoice_no"> Invoice NO</option>
+                                <option value="invoice_date"> Invoice Date</option>
+                                <option value="contact_id"> Party Name</option>
                             </select>
-                        @elseif($filterField=='invoice_date')
-                        <input type="date" wire:model.live="filterValue" class="rounded-r-lg sm:w-96"  wire:keydown.escape="$set('filterValue', '')">
-                        @else
-                        <input wire:model.live="filterValue" class="rounded-r-lg sm:w-96"  wire:keydown.escape="$set('filterValue', '')">
-                        @endif
+                            @if($filterField=='contact_id')
+                                <select wire:model.live="filterValue" class="rounded-r-lg sm:w-96"
+                                        wire:keydown.escape="$set('filterValue', '')">
+                                    <option value="">Choose...</option>
+                                    @foreach($contects as $contact)
+                                        <option value="{{$contact->id}}">{{$contact->vname}}</option>
+                                    @endforeach
+                                </select>
+                            @elseif($filterField=='invoice_date')
+                                <input type="date" wire:model.live="filterValue" class="rounded-r-lg sm:w-96"
+                                       wire:keydown.escape="$set('filterValue', '')">
+                            @else
+                                <input wire:model.live="filterValue" class="rounded-r-lg sm:w-96"
+                                       wire:keydown.escape="$set('filterValue', '')">
+                            @endif
+                        </div>
+                        <x-button.new-x wire:click="create"/>
+
                     </div>
-                    <x-button.new-x wire:click="create"/>
 
-                  </div>
+                    <x-table.form>
+                        <x-slot:table_header name="table_header" class="bg-green-600">
+                            <x-table.header-text sortIcon="none">
+                                Invoice NO
+                            </x-table.header-text>
+                            <x-table.header-text sortIcon="none">
+                                Invoice Date
+                            </x-table.header-text>
+                            <x-table.header-text sortIcon="none">Party Name</x-table.header-text>
+                            <x-table.header-text sortIcon="none">Total Qty</x-table.header-text>
+                            <x-table.header-text sortIcon="none">Total Taxable
+                            </x-table.header-text>
+                            <x-table.header-text sortIcon="none">Total Gst</x-table.header-text>
+                            <x-table.header-text sortIcon="none">Grand Total</x-table.header-text>
+                        </x-slot:table_header>
 
-                  <x-table.form>
-                      <x-slot:table_header name="table_header" class="bg-green-600">
-                          <x-table.header-text sortIcon="none">
-                              Invoice NO
-                          </x-table.header-text>
-                          <x-table.header-text sortIcon="none">
-                              Invoice Date
-                          </x-table.header-text>
-                          <x-table.header-text sortIcon="none">Party Name</x-table.header-text>
-                          <x-table.header-text sortIcon="none">Total Qty</x-table.header-text>
-                          <x-table.header-text sortIcon="none">Total Taxable
-                          </x-table.header-text>
-                          <x-table.header-text sortIcon="none">Total Gst</x-table.header-text>
-                          <x-table.header-text sortIcon="none">Grand Total</x-table.header-text>
-                      </x-slot:table_header>
+                        <!-- Table Body ------------------------------------------------------------------------------------------->
 
-                      <!-- Table Body ------------------------------------------------------------------------------------------->
+                        <x-slot:table_body name="table_body">
+                            @foreach($salesAll as $index=>$row)
+                                <x-table.row>
+                                    <x-table.cell-text>
+                                        <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->invoice_no}}</a>
+                                    </x-table.cell-text>
 
-                      <x-slot:table_body name="table_body">
-                          @foreach($salesAll as $index=>$row)
-                              <x-table.row>
-                                  <x-table.cell-text>
-                                      <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->invoice_no}}</a>
-                                  </x-table.cell-text>
+                                    <x-table.cell-text>
+                                        <a href="{{route('sales.upsert',[$row->id])}}"> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</a>
+                                    </x-table.cell-text>
 
-                                  <x-table.cell-text>
-                                      <a href="{{route('sales.upsert',[$row->id])}}"> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</a>
-                                  </x-table.cell-text>
+                                    <x-table.cell-text left>
+                                        <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->contact->vname}}</a>
+                                    </x-table.cell-text>
 
-                                  <x-table.cell-text left>
-                                      <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->contact->vname}}</a>
-                                  </x-table.cell-text>
+                                    <x-table.cell-text right>
+                                        <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_qty}}</a>
+                                    </x-table.cell-text>
 
-                                  <x-table.cell-text right>
-                                      <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_qty}}</a>
-                                  </x-table.cell-text>
+                                    <x-table.cell-text right>
+                                        <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_taxable}}</a>
+                                    </x-table.cell-text>
 
-                                  <x-table.cell-text right>
-                                      <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_taxable}}</a>
-                                  </x-table.cell-text>
+                                    <x-table.cell-text right>
+                                        <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_gst}}</a>
+                                    </x-table.cell-text>
 
-                                  <x-table.cell-text right>
-                                      <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->total_gst}}</a>
-                                  </x-table.cell-text>
-
-                                  <x-table.cell-text right>
-                                      <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->grand_total}}</a>
-                                  </x-table.cell-text>
-                              </x-table.row>
-                          @endforeach
-                      </x-slot:table_body>
-                  </x-table.form>
-              </div>
+                                    <x-table.cell-text right>
+                                        <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->grand_total}}</a>
+                                    </x-table.cell-text>
+                                </x-table.row>
+                            @endforeach
+                        </x-slot:table_body>
+                    </x-table.form>
+                </div>
             </div>
         </div>
 

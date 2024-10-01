@@ -17,6 +17,7 @@ return new class extends Migration {
                 $table->foreignId('blogcategory_id')->references('id')->on('commons');
                 $table->foreignId('blogtag_id')->references('id')->on('blog_tags');
                 $table->foreignId('user_id')->references('id')->on('users');
+                $table->boolean('visibility')->nullable();
                 $table->decimal('active_id')->nullable();
 //                $table->foreignId('company_id')->references('id')->on('companies');
                 $table->timestamps();

@@ -31,7 +31,7 @@
                 </x-table.header-text>
 
                 <x-table.header-text wire:click.prevent="sortBy('contact_id')"
-                                     sort-icon="{{$getListForm->sortAsc}}">Type
+                                     sort-icon="none">Type
                 </x-table.header-text>
 
 {{--                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>--}}
