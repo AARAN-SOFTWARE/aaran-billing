@@ -16,6 +16,6 @@ class Blogshow extends Component
 
     public function render()
     {
-        return view('livewire.blog.blogshow');
+        return view('livewire.blog.blogshow')->layout('layouts.web');
     }
 }

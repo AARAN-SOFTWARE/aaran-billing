@@ -22,37 +22,44 @@
                                  data-wow-duration="3s">{{\Illuminate\Support\Str::words($row->vname,16)}}
                             </div>
 
+                            <!-- Drop down ---------------------------------------------------------------------------->
 
-                            <x-dropdown.icon>
-                                <div class="max-w-max  flex-col flex justify-start items-start space-y-3 text-xs">
-                                    <button wire:click="edit({{$row->id}})"
-                                            class="inline-flex items-center gap-x-2 px-2 py-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
-                                        </svg>
-                                        <span>Edit</span>
-                                    </button>
+                            @if(session()->get('tenant_id')!='')
+                                <x-dropdown.icon>
+                                    <div class="max-w-max  flex-col flex justify-start items-start space-y-3 text-xs">
+                                        <button wire:click="edit({{$row->id}})"
+                                                class="inline-flex items-center gap-x-2 px-2 py-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                 stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+                                            </svg>
+                                            <span>Edit</span>
+                                        </button>
 
-                                    <button wire:click="getDelete({{$row->id}})"
-                                            class="inline-flex items-center gap-x-2 px-2 py-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
-                                        </svg>
-                                        <span>Delete</span>
-                                    </button>
+                                        <button wire:click="getDelete({{$row->id}})"
+                                                class="inline-flex items-center gap-x-2 px-2 py-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                 stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
+                                            </svg>
+                                            <span>Delete</span>
+                                        </button>
 
-                                </div>
-                            </x-dropdown.icon>
+                                    </div>
+                                </x-dropdown.icon>
+                            @endif
                         </div>
 
 
-                        <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}" alt=""
-                             class="h-[30rem] object-cover transition duration-700 ease-out group-hover:scale-105
+                        @if($row->image != 'no image')
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}" alt=""
+                                 class="h-[30rem] object-cover transition duration-700 ease-out group-hover:scale-105
                          animate__animated wow bounceInUp" data-wow-duration="3s">
+                        @else
+                            <x-image.empty-img/>
+                        @endif
 
                         <div
                             class="flex justify-between items-center gap-x-4 text-gray-600 text-sm animate__animated wow animate__backInLeft"
@@ -107,6 +114,8 @@
 
             <div class="pt-5">{{ $list->links() }}</div>
         </div>
+
+        <!--Search  --------------------------------------------------------------------------------------------------->
 
         <div class="sm:w-3/12 w-auto scroll-smooth sm:px-0 px-2">
 
@@ -277,10 +286,15 @@
                         <div
                             class="w-full h-auto flex gap-x-2 hover:bg-slate-100 animate__animated wow animate__backInRight"
                             data-wow-duration="3s">
-                            <div class="w-2/6 ">
+
+                            <div class="w-2/6">
+
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}"
+                                     alt="no image"
                                      class="w-full h-20">
+
                             </div>
+
                             <div class="w-4/6 flex-col flex py-1 ">
                                 <div class="h-1/4 inline-flex items-center gap-x-2">
                                     <span>
@@ -304,7 +318,7 @@
                 </div>
             </div>
 
-            <!-- Blog Category ------------------------------------------------------------------------------------>
+            <!-- Blog Category ---------------------------------------------------------------------------------------->
 
             <div class="text-2xl font-semibold mt-9 my-6 scroll-smooth animate__animated wow bounceInRight"
                  data-wow-duration="3s">Category
@@ -332,10 +346,10 @@
             </div>
 
 
-            <!-- Tag Filter --------------------------------------------------------------------------------------->
+            <!-- Tag Filter ------------------------------------------------------------------------------------------->
 
-            @if(session()->get('tenant_id')!='')
-                <div class="flex flex-row flex-wrap w-full gap-5 my-8 p-0.5 group">
+            <div class="flex flex-row flex-wrap w-full gap-5 my-8 p-0.5 group">
+                @if(session()->get('tenant_id')!='')
                     @if($tagfilter)
                         @foreach($tagfilter as $index => $i)
                             <div
@@ -356,26 +370,27 @@
                             Clear All
                         </button>
                     @endif
-                </div>
-            @endif
+                @endif
+            </div>
 
-            <!-- Blog Tag ----------------------------------------------------------------------------------------->
+            <!-- Blog Tag --------------------------------------------------------------------------------------------->
 
-            <div class="text-2xl font-semibold my-6">Tags</div>
+            <div class="text-2xl font-semibold my-8">Tags</div>
 
-            <div class="flex-col flex gap-2 text-sm h-64 overflow-y-auto scroll-smooth">
+            <div class="text-sm h-64 overflow-y-auto space-y-3">
                 @if($tags)
                     @foreach($tags as $tag)
-                        <button wire:click="getFilter({{$tag->id}})"
-                                class="group px-4 py-2 border-s-2 border-gray-200 w-40 text-center bg-red-50 hover:bg-red-600 hover:text-white duration-300 transition-all ease-linear inline-flex items-center gap-x-3 rounded-md mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                 class="w-4 h-4 text-red-600 group-hover:text-white">
-                                <path fill-rule="evenodd"
-                                      d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"
-                                      clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-xs text-red-600 group-hover:text-white">{{$tag->vname}} </span>
-                        </button>
+                            <button wire:click="getFilter({{$tag->id}})"
+                                    class="group px-4 py-2 border-s-2 border-gray-200 max-w-max h-8 text-center bg-red-50 hover:bg-red-600 hover:text-white duration-300 transition-all ease-linear inline-flex items-center
+                                 gap-x-3 rounded-md mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                     class="w-4 h-4 text-red-600 group-hover:text-white">
+                                    <path fill-rule="evenodd"
+                                          d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-xs text-red-600 group-hover:text-white">{{$tag->vname}} </span>
+                            </button>
                     @endforeach
                 @endif
             </div>
