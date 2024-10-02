@@ -56,7 +56,8 @@ class Upsert extends Component
     public mixed $pkgs_type = '';
     public mixed $no_of_count = '';
     public mixed $ex_rate = '';
-
+    public $sales_type='';
+    public $currency_type='';
     #endregion
 
     #region[Contact]
@@ -537,6 +538,8 @@ class Upsert extends Component
                     'contact_id' => $this->contact_id,
                     'invoice_no' => ExportSale::nextNo(),
                     'invoice_date' => $this->invoice_date,
+                    'sales_type' => $this->sales_type,
+                    'currency_type' => $this->currency_type,
                     'order_id' => $this->order_id ?: 1,
                     'style_id' => $this->style_id ?: 1,
                     'pre_carriage' => $this->pre_carriage,
@@ -568,6 +571,8 @@ class Upsert extends Component
                 $obj->contact_id = $this->contact_id;
                 $obj->invoice_no = $this->invoice_no;
                 $obj->invoice_date = $this->invoice_date;
+                $obj->currency_type = $this->currency_type;
+                $obj->sales_type = $this->sales_type;
                 $obj->order_id = $this->order_id;
                 $obj->style_id = $this->style_id;
                 $obj->pre_carriage = $this->pre_carriage;
@@ -641,6 +646,8 @@ class Upsert extends Component
             $this->contact_name = $obj->contact->vname;
             $this->invoice_no = $obj->invoice_no;
             $this->invoice_date = $obj->invoice_date;
+            $this->currency_type = $obj->currency_type;
+            $this->sales_type = $obj->sales_type;
             $this->order_id = $obj->order_id;
             $this->order_name = $obj->order->vname;
             $this->style_id = $obj->style_id;
@@ -701,13 +708,16 @@ class Upsert extends Component
                 });
             $this->consigneeList=$contact;
         }else{
-        $this->gst_percent=5;
+            $this->gst_percent=5;
             $this->invoice_no= ExportSale::nextNo();
             $this->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
             $this->common->active_id = true;
-            $this->gst_percent = 5;
+            $this->gst_percent = 0;
             $this->additional = 0;
             $this->grand_total = 0;
+            $this->ex_rate=1;
+            $this->sales_type=1;
+            $this->currency_type=1;
             $this->total_taxable = 0;
             $this->round_off = 0;
             $this->total_gst = 0;
@@ -876,7 +886,7 @@ class Upsert extends Component
             foreach ($this->itemList as $row) {
                 $this->total_qty += round(floatval($row['qty']), 3);
                 $this->total_taxable += round(floatval($row['taxable']), 2);
-                $this->total_gst += ((round(floatval($row['taxable']), 2)*$this->ex_rate)*$this->gst_percent/100);
+                $this->total_gst += ((round(floatval($row['taxable']), 2)*$this->ex_rate)*$row['gst_percent']/100);
                 $this->grandtotalBeforeRound += (round(floatval($row['taxable']), 2)*$this->ex_rate);
             }
             $this->grand_total = round($this->grandtotalBeforeRound);

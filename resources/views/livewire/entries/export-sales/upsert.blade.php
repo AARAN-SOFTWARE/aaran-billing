@@ -75,12 +75,12 @@
 
                             <x-input.floating wire:model.live="ex_rate" :label="'Exchange Rate'"/>
 
-                            <x-input.model-select wire:model.live="gst_percent" :label="'GST %'">
-                                <option>Choose...</option>
-                                @foreach($gstPercents as $percent)
-                                    <option value="{{$percent->vname}}">{{$percent->vname}}</option>
-                                @endforeach
-                            </x-input.model-select>
+{{--                            <x-input.model-select wire:model.live="gst_percent" :label="'GST %'">--}}
+{{--                                <option>Choose...</option>--}}
+{{--                                @foreach($gstPercents as $percent)--}}
+{{--                                    <option value="{{$percent->vname}}">{{$percent->vname}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </x-input.model-select>--}}
 
                         </div>
 
@@ -121,6 +121,13 @@
                                     </div>
                                 </x-dropdown.wrapper>
                             @endif
+
+                            <x-input.model-select wire:model.live="currency_type" :label="'Currency Type'">
+                                <option value="">Choose...</option>
+                                @foreach(\App\Enums\CurrencyType::cases() as $currency)
+                                    <option value="{{$currency->value}}">{{$currency->getName()}}</option>
+                                @endforeach
+                            </x-input.model-select>
 
                         </div>
                     </section>
