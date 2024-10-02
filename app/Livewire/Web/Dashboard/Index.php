@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Web\Dashboard;
 
+use Aaran\Blog\Models\Post;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Contact;
@@ -20,12 +21,15 @@ class Index extends Component
     public $transactions;
     public $entries;
     public $contacts;
+    public $blogs;
+    public $user;
 
 
     public function mount()
     {
         $this->transactions = $this->getTransactions();
         $this->entries = $this->getEntries();
+
     }
 
     public function getTransactions()
@@ -148,11 +152,17 @@ class Index extends Component
         $this->contacts = Contact::all();
     }
 
+    public function getBlog()
+    {
+        $this->blogs = Post::latest()->get();
+    }
+
 
 
     public function render()
     {
         $this->getContact();
+        $this->getBlog();
 
         return view('livewire.web.dashboard.index');
     }

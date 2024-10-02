@@ -297,18 +297,18 @@
                 <td class="right border-r">{{$row->sales_type!='1'?$row->total_gst:0}}</td>
             </tr>
         @endforeach
-        <tr class="text-sm border-t center v-align-c">
+        <tr class="text-sm border-t right v-align-c">
             <td height="26px" class="center border-r" colspan="3">Total</td>
-            <td class="center border-r "></td>
-            <td class="center border-r "></td>
-            <td class="center border-r ">{{\App\Helper\ConvertTo::rupeesFormat($invoiceTotal)}}</td>
-            <td class="center border-r ">{{\App\Helper\ConvertTo::rupeesFormat($taxableValueTotal)}}</td>
-            <td class="center border-r "></td>
-            <td class="center border-r ">{{\App\Helper\ConvertTo::rupeesFormat($gstTotal/2)}}</td>
-            <td class="center border-r "></td>
-            <td class="center border-r">{{\App\Helper\ConvertTo::rupeesFormat($gstTotal/2)}}</td>
-            <td class="center border-r"></td>
-            <td class="center border-r">{{\App\Helper\ConvertTo::rupeesFormat($CGSTTotal)}}</td>
+            <td class="right border-r "></td>
+            <td class="right border-r "></td>
+            <td class="right border-r ">{{number_format($invoiceTotal,2,'.','')}}</td>
+            <td class="right border-r ">{{number_format($taxableValueTotal,2,'.','')}}</td>
+            <td class="right border-r "></td>
+            <td class="right border-r ">{{number_format($gstTotal/2,2,'.','')}}</td>
+            <td class="right border-r "></td>
+            <td class="right border-r">{{number_format($gstTotal/2,2,'.','')}}</td>
+            <td class="right border-r"></td>
+            <td class="right border-r">{{number_format($CGSTTotal,2,'.','')}}</td>
         </tr>
     </table>
 </body>

@@ -162,6 +162,11 @@
             </x-table.form>
         </div>
 
+
+{{--        <div class="w-full flex justify-end items-end">--}}
+{{--            <x-button.print-x wire:click="GstPrint">Print</x-button.print-x>--}}
+{{--        </div>--}}
+
         <div class="block sm:hidden">
             <x-table.form>
                 <x-slot:table_body name="table_body">
@@ -210,6 +215,7 @@
         <div class="w-full flex justify-end items-end">
             <x-button.print-x wire:click="GstPrint">Print</x-button.print-x>
         </div>
+
 
     </x-forms.m-panel>
 </div>

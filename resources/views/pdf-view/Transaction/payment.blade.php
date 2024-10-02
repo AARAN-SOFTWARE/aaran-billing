@@ -11,6 +11,7 @@
         @page {
             size: A4 landscape;
         }
+
         /*common class*/
         * {
             font-family: Verdana, Arial, sans-serif, Helvetica, Times;
@@ -152,6 +153,7 @@
         .p-1 {
             padding: 1px;
         }
+
         .p-2 {
             padding: 2px;
         }
@@ -167,6 +169,7 @@
         .px-1 {
             padding: 0 1px;
         }
+
         .px-2 {
             padding: 0 2px;
         }
@@ -182,6 +185,7 @@
         .py-1 {
             padding: 1px 0;
         }
+
         .py-2 {
             padding: 2px 0;
         }
@@ -300,6 +304,7 @@
     </tr>
     @foreach($list as $index=>$row)
 
+
         <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
             <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
             <td class="py-2 text-start px-0.5 border-r border-gray-300">{{$row->contact->vname}}</td>
@@ -308,15 +313,25 @@
             <td class="py-2 text-right border-r px-2 border-gray-300">{{$row->vname+0}}</td>
 
 
+
         <tr class="text-md center v-align-c">
             <td height="26px" class="center border-r">{{$index+1}}</td>
             <td class="left border-r ">{{$row->contact->vname}}</td>
             <td class="center border-r ">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
             <td class="center border-r ">{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</td>
-            <td class="right border-r px-2">{{$row->vname+0}}</td>
+            <td class="right border-r px-2">
+                {{number_format($row->vname,2,'.','')}}</td>
         </tr>
 
     @endforeach
+    @php
+        $total = $list->sum('vname');
+    @endphp
+    <tr class="text-md center v-align-c border-t  font-bold">
+        <td class="center border-r px-2 py-10" colspan="3">Total</td>
+        <td class="right border-r px-2" colspan="2">{{number_format($total,2,'.','')}}</td>
+
+    </tr>
 </table>
 
 </body>

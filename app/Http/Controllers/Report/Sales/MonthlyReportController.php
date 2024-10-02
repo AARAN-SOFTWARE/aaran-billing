@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use function Spatie\LaravelPdf\Support\pdf;
 
 class MonthlyReportController extends Controller
 {
@@ -29,6 +28,7 @@ class MonthlyReportController extends Controller
         $pdf->render();
         return $pdf->stream();
     }
+
     public static function getPercent($id,$salesType)
     {
         $obj=DB::table('saleitems')
@@ -50,4 +50,5 @@ class MonthlyReportController extends Controller
         return Sale::whereMonth('invoice_date','=',$month)->whereYear('invoice_date','=',$year?:Carbon::now()->format('Y'))
             ->where('company_id','=',session()->get('company_id'))->get();
     }
+
 }

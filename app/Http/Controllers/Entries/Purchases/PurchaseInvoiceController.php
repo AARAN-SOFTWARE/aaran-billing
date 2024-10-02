@@ -1,100 +1,90 @@
 <?php
 
-namespace App\Http\Controllers\Entries\Sales;
+namespace App\Http\Controllers\Entries\Purchases;
 
+use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\ContactDetail;
- use Aaran\MasterGst\Models\MasterGstEway;
-use Aaran\MasterGst\Models\MasterGstIrn;
 use App\Helper\ConvertTo;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class InvoiceController extends Controller
+class PurchaseInvoiceController extends Controller
 {
     public function __invoke($vid)
     {
         if ($vid != '') {
 
-            $sale = $this->getSales($vid);
+            $purchases = $this->getPurchases($vid);
 
             Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
 
-            $pdf = PDF::loadView('pdf-view.sales.dom.garment'
+            $pdf = PDF::loadView('pdf-view.purchases.garment'
                 , [
-                    'obj' => $sale,
-                    'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
-                    'list' => $this->getSaleItems($vid),
+                    'obj' => $purchases,
+                    'rupees' => ConvertTo::ruppesToWords($purchases->grand_total),
+                    'list' => $this->getPurchaseItems($vid),
                     'cmp' => Company::printDetails(session()->get('company_id')),
-                    'billing_address' => ContactDetail::printDetails($sale->billing_id),
-                    'shipping_address' => ContactDetail::printDetails($sale->shipping_id),
-                    'irn'=>$this->getIrn($vid),
-                    'eWay'=>$this->getEway($vid),
+                    'billing_address' => ContactDetail::printDetails(ContactDetail::where('contact_id',$purchases->contact_id )->first()->id),
+//                    'shipping_address' => ContactDetail::printDetails($purchases->shipping_id),
                 ]);
-
             $pdf->render();
-
             return $pdf->stream();
 
         }
         return null;
     }
 
-    public function getSales($vid): ?Sale
+    public function getPurchases($vid)
     {
-        return Sale::select(
-            'sales.*',
+        return Purchase::select(
+            'purchases.*',
             'contacts.vname as contact_name',
             'contacts.msme_no as msme_no',
             'contacts.msme_type_id as msme_type',
             'orders.vname as order_no',
             'orders.order_name as order_name',
-            'styles.vname as style_name',
-            'styles.desc as style_desc',
-            'despatches.vname as despatch_name',
-//            'despatches.vdate as despatch_date',
             'transports.vname as transport_name',
             'transports.desc as transport_id',
             'transports.desc_1 as transport_no',
             'ledgers.vname as ledger_name',
         )
-            ->join('contacts', 'contacts.id', '=', 'sales.contact_id')
-            ->join('orders', 'orders.id', '=', 'sales.order_id')
-            ->join('styles', 'styles.id', '=', 'sales.style_id')
-            ->join('commons as despatches', 'despatches.id', '=', 'sales.despatch_id')
-            ->join('commons as transports', 'transports.id', '=', 'sales.transport_id')
-            ->join('commons as ledgers', 'ledgers.id', '=', 'sales.ledger_id')
-            ->where('sales.id', '=', $vid)
-            ->get()->firstOrFail();
+            ->join('contacts', 'contacts.id', '=', 'purchases.contact_id')
+            ->join('orders', 'orders.id', '=', 'purchases.order_id')
+            ->join('commons as transports', 'transports.id', '=', 'purchases.transport_id')
+            ->join('commons as ledgers', 'ledgers.id', '=', 'purchases.ledger_id')
+            ->where('purchases.id', '=', $vid)
+            ->get()
+        ->firstOrFail();
     }
-    public function getSaleItems($vid): Collection
+    public function getPurchaseItems($vid): Collection
     {
-        return DB::table('saleitems')
+        return DB::table('purchaseitems')
             ->select(
-                'saleitems.*',
+                'purchaseitems.*',
                 'products.vname as product_name',
                 'units.vname as product_unit',
                 'hsncodes.vname as hsncode',
                 'colours.vname as colour_name',
                 'sizes.vname as size_name',
             )
-            ->join('products', 'products.id', '=', 'saleitems.product_id')
+            ->join('products', 'products.id', '=', 'purchaseitems.product_id')
             ->join('commons as hsncodes', 'hsncodes.id', '=', 'products.hsncode_id')
             ->join('commons as units', 'units.id', '=', 'products.unit_id')
-            ->join('commons as colours', 'colours.id', '=', 'saleitems.colour_id')
-            ->join('commons as sizes', 'sizes.id', '=', 'saleitems.size_id')
-            ->where('sale_id', '=', $vid)
+            ->join('commons as colours', 'colours.id', '=', 'purchaseitems.colour_id')
+            ->join('commons as sizes', 'sizes.id', '=', 'purchaseitems.size_id')
+            ->where('purchase_id', '=', $vid)
             ->get()
             ->transform(function ($data) {
                 return [
-                    'saleitem_id' => $data->id,
+                    'purchaseitem_id' => $data->id,
                     'product_id' => $data->product_id,
-                    'po_no' => $data->po_no,
-                    'dc_no' => $data->dc_no,
-                    'no_of_roll' => $data->no_of_roll,
+//                    'po_no' => $data->po_no,
+//                    'dc_no' => $data->dc_no,
+//                    'no_of_roll' => $data->no_of_roll,
                     'product_name' => $data->product_name,
                     'product_unit' => $data->product_unit,
                     'hsncode' => $data->hsncode,
@@ -112,14 +102,14 @@ class InvoiceController extends Controller
                 ];
             });
     }
-    public function getIrn($vid)
-    {
-        return MasterGstIrn::where('sales_id',$vid)->first();
-    }
-    public function getEway($vid)
-    {
-        return MasterGstEway::where('sales_id',$vid)->first();
-    }
+//    public function getIrn($vid)
+//    {
+//        return MasterGstIrn::where('purchase',$vid)->first();
+//    }
+//    public function getEway($vid)
+//    {
+//        return MasterGstEway::where('sales_id',$vid)->first();
+//    }
 
 
 
