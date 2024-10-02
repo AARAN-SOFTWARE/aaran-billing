@@ -90,7 +90,7 @@ class Index extends Component
     public function blogcategorySave($name)
     {
         $obj = Common::create([
-            'label_id' => 17,
+            'label_id' => 18,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -101,8 +101,8 @@ class Index extends Component
     public function getBlogcategoryList(): void
     {
         $this->blogcategoryCollection = $this->blogcategory_name ?
-            Common::search(trim($this->blogcategory_name))->where('label_id', '=', '17')->get() :
-            Common::where('label_id', '=', '17')->get();
+            Common::search(trim($this->blogcategory_name))->where('label_id', '=', '18')->get() :
+            Common::where('label_id', '=', '18')->get();
     }
 
     #endregion

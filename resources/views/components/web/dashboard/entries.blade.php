@@ -14,40 +14,41 @@
                         </svg>
                             <span class="font-semibold text-lg font-roboto">Entries</span>
                         </span>
-        <a class="inline-flex items-center gap-1 text-gray-500 font-semibold hover:bg-cyan-50 hover:text-cyan-600 px-2 py-1 rounded-md transition-colors duration-300 ease-out">
-            <span class="text-xs ">View All </span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                 stroke-width="1.5"
-                 stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/>
-            </svg>
-        </a>
     </div>
 
     <div class="flex-col flex h-[24rem] px-2 overflow-y-auto">
 
-        <x-web.dashboard.entries_list entry="Sales" date="{{$entries['sales_date']}}"
-                                      invoice="INV - {{$entries['sales_no']}}" amount="{{$entries['sales']}}"
-                                      color="text-[#23B7E5]">
-            <x-icons.sales/>
-        </x-web.dashboard.entries_list>
+        <a href="{{route('sales')}}">
+            <x-web.dashboard.entries_list entry="Sales" date="{{$entries['sales_date']}}"
+                                          invoice="INV - {{$entries['sales_no']}}" amount="{{$entries['sales']}}"
+                                          color="text-[#23B7E5]">
+                <x-icons.sales/>
+            </x-web.dashboard.entries_list>
+        </a>
 
-        <x-web.dashboard.entries_list entry="Purchase" date="{{$entries['purchase_date']}}"
-                                      invoice="INV - {{$entries['purchase_no']}}" amount="{{$entries['purchase']}}"
-                                      color="text-[#845ADF]">
-            <x-icons.purchase/>
-        </x-web.dashboard.entries_list>
+        <a href="{{route('purchase')}}">
+            <x-web.dashboard.entries_list entry="Purchase" date="{{$entries['purchase_date']}}"
+                                          invoice="INV - {{$entries['purchase_no']}}" amount="{{$entries['purchase']}}"
+                                          color="text-[#845ADF]">
+                <x-icons.purchase/>
+            </x-web.dashboard.entries_list>
+        </a>
 
-        <x-web.dashboard.entries_list entry="Payment" date="{{$entries['payment_date']}}" invoice="" amount="{{$entries['payment']}}"
-                                      color="text-[#E6533C]">
-            <x-icons.payment/>
-        </x-web.dashboard.entries_list>
+        <a href="{{route('transactions',[2])}}">
+            <x-web.dashboard.entries_list entry="Payment" date="{{$entries['payment_date']}}" invoice=""
+                                          amount="{{$entries['payment']}}"
+                                          color="text-[#E6533C]">
+                <x-icons.payment/>
+            </x-web.dashboard.entries_list>
+        </a>
 
-        <x-web.dashboard.entries_list entry="Receipt" date="{{$entries['receipt_date']}}" invoice="" amount="{{$entries['receipt']}}"
-                                      color="text-[#F5B849]">
-            <x-icons.receipt/>
-        </x-web.dashboard.entries_list>
+        <a href="{{route('transactions',[1])}}">
+            <x-web.dashboard.entries_list entry="Receipt" date="{{$entries['receipt_date']}}" invoice=""
+                                          amount="{{$entries['receipt']}}"
+                                          color="text-[#F5B849]">
+                <x-icons.receipt/>
+            </x-web.dashboard.entries_list>
+        </a>
     </div>
 
 </div>

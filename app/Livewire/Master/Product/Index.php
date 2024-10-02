@@ -16,6 +16,7 @@ class Index extends Component
     #region[Properties]
     public $quantity;
     public $price;
+
     #endregion
 
     public function rules(): array
@@ -57,14 +58,14 @@ class Index extends Component
                 $this->validate($this->rules());
                 $Product = new Product();
                 $extraFields = [
-                    'producttype_id' => $this->producttype_id?:'92',
-                    'hsncode_id' => $this->hsncode_id?:'62',
-                    'unit_id' => $this->unit_id?:'97',
-                    'gstpercent_id' => $this->gstpercent_id?:'99',
-                    'initial_quantity' => $this->quantity?:'0',
-                    'initial_price' => $this->price?:'0',
+                    'producttype_id' => $this->producttype_id ?: '92',
+                    'hsncode_id' => $this->hsncode_id ?: '62',
+                    'unit_id' => $this->unit_id ?: '97',
+                    'gstpercent_id' => $this->gstpercent_id ?: '99',
+                    'initial_quantity' => $this->quantity ?: '0',
+                    'initial_price' => $this->price ?: '0',
                     'user_id' => auth()->id(),
-                    'company_id' =>session()->get('company_id'),
+                    'company_id' => session()->get('company_id'),
                 ];
                 $this->common->save($Product, $extraFields);
                 $message = "Saved";
@@ -78,7 +79,7 @@ class Index extends Component
                     'initial_quantity' => $this->quantity,
                     'initial_price' => $this->price,
                     'user_id' => auth()->id(),
-                    'company_id' =>session()->get('company_id'),
+                    'company_id' => session()->get('company_id'),
                 ];
                 $this->common->edit($Product, $extraFields);
                 $message = "Updated";
@@ -380,13 +381,13 @@ class Index extends Component
             $this->common->vname = $Product->vname;
             $this->common->active_id = $Product->active_id;
             $this->hsncode_id = $Product->hsncode_id;
-//            $this->hsncode_name=$Product->hsncode_id?Common::find($Product->hsncode_id)->vname:'';
+            $this->hsncode_name = $Product->hsncode_id ? Common::find($Product->hsncode_id)->vname : '';
             $this->producttype_id = $Product->producttype_id;
-//            $this->producttype_name=$Product->producttype_id?Common::find($Product->producttype_id)->vname:'';
+            $this->producttype_name = $Product->producttype_id ? Common::find($Product->producttype_id)->vname : '';
             $this->unit_id = $Product->unit_id;
-//            $this->unit_name=$Product->unit_id?Common::find($Product->unit_id)->vname:'';
+            $this->unit_name = $Product->unit_id ? Common::find($Product->unit_id)->vname : '';
             $this->gstpercent_id = $Product->gstpercent_id;
-//            $this->gstpercent_name=$Product->gstpercent_id?Common::find($Product->gstpercent_id)->vname:'';
+            $this->gstpercent_name = $Product->gstpercent_id ? Common::find($Product->gstpercent_id)->vname : '';
             $this->quantity = $Product->initial_quantity;
             $this->price = $Product->initial_price;
             return $Product;
@@ -402,15 +403,15 @@ class Index extends Component
         $this->common->vname = '';
         $this->common->active_id = '1';
         $this->hsncode_id = '';
-        $this->hsncode_name='';
-        $this->gstpercent_name='';
-        $this->gstpercent_id='';
-        $this->unit_name='';
-        $this->unit_id='';
-        $this->producttype_id='';
-        $this->producttype_name='';
+        $this->hsncode_name = '';
+        $this->gstpercent_name = '';
+        $this->gstpercent_id = '';
+        $this->unit_name = '';
+        $this->unit_id = '';
+        $this->producttype_id = '';
+        $this->producttype_name = '';
         $this->quantity = '';
-        $this->price='';
+        $this->price = '';
     }
     #endregion
 
@@ -428,14 +429,14 @@ class Index extends Component
             'unit.vname as unit_name',
             'hsncode.vname as hsncode_name',
             'gstpercent.vname as gstpercent_name',
-            )
-            ->where('products.company_id',session()->get('company_id'))
-            ->where('products.active_id',$this->getListForm->activeRecord)
+        )
+            ->where('products.company_id', session()->get('company_id'))
+            ->where('products.active_id', $this->getListForm->activeRecord)
             ->join('commons as producttype', 'producttype.id', '=', 'products.producttype_id')
             ->join('commons as unit', 'unit.id', '=', 'products.unit_id')
             ->join('commons as hsncode', 'hsncode.id', '=', 'products.hsncode_id')
             ->join('commons as gstpercent', 'gstpercent.id', '=', 'products.gstpercent_id')
-            ->orderBy('products.id',$this->getListForm->sortAsc ? 'asc' : 'desc')
+            ->orderBy('products.id', $this->getListForm->sortAsc ? 'asc' : 'desc')
             ->paginate($this->getListForm->perPage);
     }
 
