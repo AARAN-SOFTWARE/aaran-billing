@@ -18,6 +18,10 @@ return new class extends Migration
                 $table->integer('invoice_no');
                 $table->date('invoice_date');
 
+                $table->decimal('ex_rate', 11, 2)->nullable();
+                $table->string('currency_type')->nullable();
+                $table->string('sales_type')->nullable();
+
                 $table->foreignId('order_id')->references('id')->on('orders');
                 $table->foreignId('style_id')->references('id')->on('styles');
 
@@ -36,7 +40,7 @@ return new class extends Migration
                 $table->decimal('round_off')->nullable();
                 $table->decimal('grand_total', 11, 2)->nullable();
                 $table->decimal('additional', 11, 2)->nullable();
-                $table->decimal('ex_rate', 11, 2)->nullable();
+
                 $table->string('active_id', 10)->nullable();
                 $table->timestamps();
             });
