@@ -73,14 +73,14 @@
                                 </x-dropdown.wrapper>
                             @endif
 
-                            <x-input.floating wire:model.live="ex_rate" :label="'Exchange Rate'"/>
+                            <x-input.model-select wire:model.live="currency_type" :label="'Currency Type'">
+                                <option value="">Choose...</option>
+                                @foreach(\App\Enums\CurrencyType::cases() as $currency)
+                                    <option value="{{$currency->value}}">{{$currency->getName()}}</option>
+                                @endforeach
+                            </x-input.model-select>
 
-{{--                            <x-input.model-select wire:model.live="gst_percent" :label="'GST %'">--}}
-{{--                                <option>Choose...</option>--}}
-{{--                                @foreach($gstPercents as $percent)--}}
-{{--                                    <option value="{{$percent->vname}}">{{$percent->vname}}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </x-input.model-select>--}}
+                            <x-input.floating wire:model.live="ex_rate" :label="'Exchange Rate'"/>
 
                         </div>
 
@@ -92,6 +92,7 @@
 
                             <x-input.model-date wire:model="invoice_date" label="Invoice Date"/>
 
+                            <x-input.floating wire:model.live="sales_type" :label="'Sales Type'"/>
                             <!-- Style ------------------------------------------------------------------------------------------------>
 
                             @if(\Aaran\Aadmin\Src\SaleEntry::hasStyle())
@@ -121,13 +122,6 @@
                                     </div>
                                 </x-dropdown.wrapper>
                             @endif
-
-                            <x-input.model-select wire:model.live="currency_type" :label="'Currency Type'">
-                                <option value="">Choose...</option>
-                                @foreach(\App\Enums\CurrencyType::cases() as $currency)
-                                    <option value="{{$currency->value}}">{{$currency->getName()}}</option>
-                                @endforeach
-                            </x-input.model-select>
 
                         </div>
                     </section>
@@ -340,7 +334,7 @@
                                             @endif
 
                                             <td class="px-2 text-center border border-gray-300 cursor-pointer"
-                                                wire:click.prevent="changeItems({{$index}})">{{$row['qty']}}</td>
+                                                wire:click.prevent="changeItems({{$index}})">{{$row['qty']+0}}</td>
                                             <td class="px-2 text-right border border-gray-300 cursor-pointer"
                                                 wire:click.prevent="changeItems({{$index}})">{{$row['price']}}</td>
                                             <td class="px-2 text-right border border-gray-300 cursor-pointer"
@@ -368,7 +362,7 @@
                                     {{--                                        <td colspan="2" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>--}}
                                     {{--                                    @endif--}}
                                     <td colspan="6" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
-                                    <td class="px-2 text-center border border-gray-300">{{$total_qty}}</td>
+                                    <td class="px-2 text-center border border-gray-300">{{$total_qty+0}}</td>
                                     <td class="px-2 text-center border border-gray-300">&nbsp;</td>
                                     <td class="px-2 text-right border border-gray-300">{{$total_taxable}}</td>
                                     {{--                                    <td class="px-2 text-center border border-gray-300">&nbsp;</td>--}}
