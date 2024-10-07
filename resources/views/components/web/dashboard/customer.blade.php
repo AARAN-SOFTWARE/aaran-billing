@@ -15,7 +15,10 @@
 
                             <span class="font-semibold text-lg font-roboto">Customer</span>
                         </span>
-        <a class="inline-flex items-center gap-1 text-gray-500 font-semibold hover:bg-cyan-50 hover:text-cyan-600 px-2 py-1 rounded-md transition-colors duration-300 ease-out">
+
+        <a href="{{route('contacts')}}"
+            class="inline-flex items-center gap-1 text-gray-500 font-semibold
+            hover:bg-cyan-50 hover:text-cyan-600 px-2 py-1 rounded-md transition-colors duration-300 ease-out">
 
             <span class="text-xs ">View All </span>
 
