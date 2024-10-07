@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Entries\ExportSales;
 
 use Aaran\Entries\Models\ExportSale;
+use Aaran\Master\Models\Company;
+use Aaran\Master\Models\ContactDetail;
 use App\Helper\ConvertTo;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -20,6 +22,8 @@ class ExportInvoiceController extends Controller
                 'obj'=>$export_sales,
                 'rupees'=>ConvertTo::ruppesToWords($export_sales->grand_total),
                 'list'=>$this->getExportSalesItem($vid),
+                'cmp' => Company::printDetails(session()->get('company_id')),
+                'consignee_address'=>ContactDetail::printDetails(ContactDetail::where('contact_id',$export_sales->contact_id)->first()->id),
                 'consignees'=>$this->getExportConsignee($vid),
                 'packingList'=>$this->getExportPackingList($vid),
 
