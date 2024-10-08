@@ -36,6 +36,7 @@ class ContactDetail extends Model
             'address_1' => $obj->address_1,
             'address_2' => $obj->address_2,
             'address_3' => Common::find($obj->city_id)->vname . ' - ' . Common::find($obj->pincode_id)->vname . '.  ' . Common::find($obj->state_id)->state_code,
+            'country' => Common::find($obj->country_id)->vname,
             'gstcell' => 'GSTin : ' . $obj->gstin,
             'gstContact' => $obj->gstin,
             'email' => $obj->email,

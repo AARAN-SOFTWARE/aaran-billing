@@ -214,6 +214,12 @@
         .text-xs {
             font-size: 9px;
         }
+        .uppercase {
+            text-transform: uppercase;
+        }
+        .lowercase {
+            text-transform: lowercase;
+        }
     </style>
 </head>
 
@@ -257,17 +263,14 @@
             <p>{{$consignee_address->get('address_1')}}</p>
             <p>{{$consignee_address->get('address_2')}}</p>
             <p>{{$consignee_address->get('address_3')}}</p>
-            <p>{{$consignee_address->get('gstcell')}}</p>
         </td>
         <td class="lh-0 text-xs  px-5 border-l">
             <p>Buyer (if other than consignee)</p>
-            <p>{{$obj->contact_name}}</p>
-            <p>Lorem ipsum dolor sit amet, consectetur.</p>
-            <p>Lorem ipsum dolor.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur.</p>
-            <p>Lorem ipsum dolor.</p>
+            @foreach($consignees as  $index=>$row)
+                <p>{{$row['contact_name']}}</p>
+                <p>{{$row['address_1']}},{{$row['address_2']}},{{$row['city_name']}},{{$row['state_name']}},{{$row['pincode_name']}},{{$row['country_name']}}.</p>
+            @endforeach
         </td>
-
     </tr>
 </table>
 <table class="border border-t-none lh-2 ">
@@ -280,8 +283,8 @@
     <tr class="text-xs border-l ">
         <td width="20%" class="border-r border-b px-5">{{$obj->pre_carriage}}</td>
         <td width="20%" class="border-r border-b px-5">{{$obj->place_of_Receipt}}</td>
-        <td width="20%" class="border- px-5">&nbsp;</td>
-        <td width="20%" class=" px-5">&nbsp;</td>
+        <td width="20%" class="border-r px-5">INDIA</td>
+        <td width="20%" class="border- px-5">{{$consignee_address->get('country')}}</td>
     </tr>
     <tr class="text-xs">
         <td width="20%" class="border-r px-5">Vessel/Flight No</td>
@@ -304,45 +307,52 @@
         <td width="20%" class=" px-5" colspan="2">&nbsp;</td>
     </tr>
 </table>
-<table class="border border-t-none">
-    <tr class="text-xs font-bold lh-1 bg-gray">
-        <th class="center border-r" rowspan="2">S.No</th>
-        <th class="center border-r">Marks & Nos.</th>
-        <th class="center border-r" rowspan="2">No. & Kinds of Pkgs</th>
+<table class="border border-t-none text-xs">
+    <tr class=" font-bold lh-1 bg-gray">
+        <th width="5%" class="center border-r" rowspan="2">S.No</th>
+        <th width="10%" class="center border-r">Marks & Nos.</th>
+        <th width="10%" class="center border-r" rowspan="2">No. & Kinds of Pkgs</th>
         <th class="center border-r" rowspan="2">Description of Goods</th>
-        <th class="center border-r">Qty</th>
-        <th class="center border-r">C & F Rate</th>
-        <th class="center border-r">Amount</th>
+        <th width="10%" class="center border-r">Qty</th>
+        <th width="10%" class="center border-r">C & F Rate</th>
+        <th width="10%" class="center border-r">Amount</th>
     </tr>
     <tr class="text-xs font-bold lh-1 border-b bg-gray">
         <th class="cnetr border-r">Container No.</th>
-
         <th class="center border-r">PCS</th>
         <th class="center border-r">IN USD</th>
         <th class="center">C&F in usd</th>
     </tr>
     @php
         $gstPercent = 0;
+        $totalAmount = 0;
     @endphp
+
     @foreach($list as $index => $row)
         <tr class="text-sm center v-align-t ">
-            <td class="center border-r p-1">{{$index + 1}}</td>
+            <td height="38px" class="center border-r p-1">{{$index + 1}}</td>
             <td class="center border-r p-1">{{$row['pkgs_type']}}</td>
             <td class="center border-r p-1">{{$row['no_of_count']}} </td>
-            <td class="center border-r p-1">{{$row['product_name']}} </td>
+            <td class="left border-r p-1">
+                @if($row['description'])
+                    {{$row['product_name'].' - '.$row['description']}}
+                @else
+                    {{$row['product_name']}}
+                @endif</td>
             <td class="center border-r p-1">{{$row['qty']+0}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
+            <td class="right border-r p-1">$&nbsp;{{number_format($row['price'],2,'.','')}}</td>
+            <td class="right border-r p-1 ">$&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
         </tr>
         @php
             $gstPercent = $row['gst_percent'];
+
         @endphp
     @endforeach
     {{-- Spacing  --}}
-    @for($i = 0; $i < 8-$list->count(); $i++)
+    @for($i = 0; $i < 12-$list->count(); $i++)
         <tr class="">
             <td height="38px" class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
-            <td height="38px" class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
+            <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
@@ -350,8 +360,69 @@
             <td class="border-r text-sm v-align-t p-1 center">&nbsp;</td>
         </tr>
     @endfor
+    @php
+
+
+        @endphp
+    <tr class="border">
+        <td colspan="2" class="px-5">Total Net Weight</td>
+        <td>&nbsp;</td>
+        <td class="border-l right px-5 " rowspan="2">Total</td>
+        <td rowspan="2" class="border-l right p-1 ">{{$obj->total_qty+0}}</td>
+        <td rowspan="2" class="border-l right p-1 "></td>
+        <td rowspan="2" class="border-l right p-1 ">$&nbsp;{{number_format($obj->total_taxable,2,'.','')}}</td>
+        {{--        <td rowspan="2" class="border-l right p-1 ">{{number_format($obj->grand_total-$obj->additional,2,'.','')}}</td>--}}
+    </tr>
+    <tr class="border">
+        <td colspan="2" class="px-5">Total Net Weight</td>
+        <td>&nbsp;</td>
+    </tr>
     <tr>
-        td
+        <td colspan="7" class="font-bold border-b p-5 uppercase">Amount Chargeable: {{$currency}} {{\App\Enums\CurrencyType::tryFrom($obj->currency_type)->getCurrency()}} only</td>
+    </tr>
+    <tr class="center border-b ">
+        <th width="5%" class="p-5 border-r">S.NO</th>
+        <th class=" border-r">INVOICE USD</th>
+        <th class=" border-r">EX RATE</th>
+        <th class=" border-r" colspan="2">INVOICE VALUE IN INR</th>
+        <th class=" border-r">IGST %</th>
+        <th class=" border-r">IGST INR</th>
+    </tr>
+    <tr class="">
+        <td class="p-5 center border-r">1-2</td>
+        <td class="center border-r">{{number_format($obj->total_taxable,2,'.','')}}</td>
+        <td class="center border-r">{{number_format($obj->ex_rate,2,'.','')}}</td>
+        <td class=" border-r" colspan="2" class="center">{{number_format($obj->grand_total,2,'.','')}}</td>
+        <td class="center border-r">{{$gstPercent}}</td>
+        <td class="center">{{number_format($obj->total_gst,2,'.','')}}</td>
+    </tr>
+    <tr>
+        <td colspan="7" class="font-bold border-b p-5 border-t uppercase">IGST RS: {{$rupees}} only</td>
+    </tr>
+    <tr>
+        <td class="border-b font-bold bg-gray border p-5" colspan="7">SUPPLY MEANT FOR EXPORT ON PAYMENT OF INTEGRATED
+            TAX (IGST)
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">&nbsp;</td>
+        <td colspan="3" class="border-l px-5 ">Signature & Date</td>
+    </tr>
+    <tr>
+        <td colspan="4" class="p-10">&nbsp;</td>
+        <td colspan="3" class="border-l ">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="4" class="px-5">Declaration:</td>
+        <td colspan="3" class="border-l px-5">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="4" class="px-5">We declare that this invoice shows the actual price of the goods</td>
+        <td colspan="3" class="border-l px-5">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="4" class="px-5">described & that all particulars are true & correct.</td>
+        <td colspan="3" class="border-l px-5">&nbsp;</td>
     </tr>
 </table>
 </body>
