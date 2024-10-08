@@ -18,5 +18,15 @@ enum CurrencyType: int
             self::JPY => 'JPY',
         };
     }
+
+    public function getCurrency(): string
+    {
+        return match ($this) {
+            self::USD => 'DOLLARS',
+            self::EUR => 'EUROS',
+            self::GBP => 'POUNDS',
+            self::JPY => 'YEN',
+        };
+    }
 }
 

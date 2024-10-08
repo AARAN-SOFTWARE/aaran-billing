@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Entries\ExportSales;
 
 use Aaran\Entries\Models\ExportSale;
+use Aaran\Master\Models\Company;
+use Aaran\Master\Models\ContactDetail;
 use App\Helper\ConvertTo;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use NumberFormatter;
 
 class ExportInvoiceController extends Controller
 {
@@ -18,8 +21,11 @@ class ExportInvoiceController extends Controller
         $pdf = PDF::loadView('pdf-view.export.invoice',
             [
                 'obj'=>$export_sales,
-                'rupees'=>ConvertTo::ruppesToWords($export_sales->grand_total),
+                'currency'=>ConvertTo::currencyToWords($export_sales->total_taxable),
+                'rupees'=>ConvertTo::ruppesToWords($export_sales->total_gst),
                 'list'=>$this->getExportSalesItem($vid),
+                'cmp' => Company::printDetails(session()->get('company_id')),
+                'consignee_address'=>ContactDetail::printDetails(ContactDetail::where('contact_id',$export_sales->contact_id)->first()->id),
                 'consignees'=>$this->getExportConsignee($vid),
                 'packingList'=>$this->getExportPackingList($vid),
 
@@ -81,16 +87,33 @@ class ExportInvoiceController extends Controller
 
     public function getExportConsignee($vid)
     {
-      return  DB::table('export_sale_contacts')
+        return  DB::table('export_sale_contacts')
             ->select('export_sale_contacts.*',
-                'contacts.vname as contact_name',)
+                'contacts.vname as contact_name',
+                'contact_details.address_1 as address_1',
+                'contact_details.address_2 as address_2',
+                'city.vname as city_name',
+                'state.vname as state_name',
+                'pincode.vname as pincode_name',
+                'country.vname as country_name',)
             ->join('contacts', 'contacts.id', '=', 'export_sale_contacts.contact_id')
+            ->join('contact_details', 'contact_details.contact_id', '=', 'export_sale_contacts.contact_id')
+            ->join('commons as city', 'city.id', '=', 'contact_details.city_id')
+            ->join('commons as state', 'state.id', '=', 'contact_details.state_id')
+            ->join('commons as pincode', 'pincode.id', '=', 'contact_details.pincode_id')
+            ->join('commons as country', 'country.id', '=', 'contact_details.contact_id')
             ->where('export_sales_id','=', $vid)->get()
             ->transform(function ($contact) {
                 return [
                     'export_sale_contact_id' => $contact->id,
                     'contact_name' => $contact->contact_name,
                     'contact_id' => $contact->contact_id,
+                    'address_1' => $contact->address_1,
+                    'address_2' => $contact->address_2,
+                    'city_name' => $contact->city_name,
+                    'state_name' => $contact->state_name,
+                    'pincode_name' => $contact->pincode_name,
+                    'country_name' => $contact->country_name,
                 ];
             });
     }
