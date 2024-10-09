@@ -22,8 +22,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/exportsales/{id}/print', App\Http\Controllers\Entries\ExportSales\ExportInvoiceController::class)->name('exportsales.print');
     Route::get('/exportsales/{id}/packingListPrint', App\Http\Controllers\Entries\ExportSales\ExportPackingListController::class)->name('exportsales.packingListPrint');
 
-
-
     Route::get('transactions/{id}', App\Livewire\Entries\Payment\Index::class)->name('transactions');
     Route::get('transactions/{id}/print', App\Http\Controllers\Transaction\PaymentController::class)->name('transactions.print');
 
