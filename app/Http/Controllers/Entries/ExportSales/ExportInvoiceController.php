@@ -16,18 +16,18 @@ class ExportInvoiceController extends Controller
 {
     public function __invoke($vid)
     {
-        $export_sales=$this->getExportSales($vid);
-        pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
+        $export_sales = $this->getExportSales($vid);
+        pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif', 'fontDir']);
         $pdf = PDF::loadView('pdf-view.export.invoice',
             [
-                'obj'=>$export_sales,
-                'currency'=>ConvertTo::currencyToWords($export_sales->total_taxable),
-                'rupees'=>ConvertTo::ruppesToWords($export_sales->total_gst),
-                'list'=>$this->getExportSalesItem($vid),
+                'obj' => $export_sales,
+                'currency' => ConvertTo::currencyToWords($export_sales->total_taxable),
+                'rupees' => ConvertTo::ruppesToWords($export_sales->total_gst),
+                'list' => $this->getExportSalesItem($vid),
                 'cmp' => Company::printDetails(session()->get('company_id')),
-                'consignee_address'=>ContactDetail::printDetails(ContactDetail::where('contact_id',$export_sales->contact_id)->first()->id),
-                'consignees'=>$this->getExportConsignee($vid),
-                'packingList'=>$this->getExportPackingList($vid),
+                'consignee_address' => ContactDetail::printDetails(ContactDetail::where('contact_id', $export_sales->contact_id)->first()->id),
+                'consignees' => $this->getExportConsignee($vid),
+                'packingList' => $this->getExportPackingList($vid),
 
             ]);
         $pdf->render();
@@ -38,7 +38,7 @@ class ExportInvoiceController extends Controller
     {
         return ExportSale::select(
             'export_sales.*',
-             'contacts.vname as contact_name',
+            'contacts.vname as contact_name',
             'contacts.msme_no as msme_no',
             'contacts.msme_type_id as msme_type',
             'orders.vname as order_no',
@@ -49,7 +49,7 @@ class ExportInvoiceController extends Controller
             ->join('contacts', 'contacts.id', '=', 'export_sales.contact_id')
             ->join('orders', 'orders.id', '=', 'export_sales.order_id')
             ->join('styles', 'styles.id', '=', 'export_sales.style_id')
-            ->where('export_sales.id','=', $vid)
+            ->where('export_sales.id', '=', $vid)
             ->get()->firstOrFail();
     }
 
@@ -63,7 +63,7 @@ class ExportInvoiceController extends Controller
             ->join('products', 'products.id', '=', 'export_sale_items.product_id')
             ->join('commons as colours', 'colours.id', '=', 'export_sale_items.colour_id')
             ->join('commons as sizes', 'sizes.id', '=', 'export_sale_items.size_id')
-            ->where('export_sales_id', '=',$vid)
+            ->where('export_sales_id', '=', $vid)
             ->get()
             ->transform(function ($data) {
                 return [
@@ -87,7 +87,7 @@ class ExportInvoiceController extends Controller
 
     public function getExportConsignee($vid)
     {
-        return  DB::table('export_sale_contacts')
+        return DB::table('export_sale_contacts')
             ->select('export_sale_contacts.*',
                 'contacts.vname as contact_name',
                 'contact_details.address_1 as address_1',
@@ -102,7 +102,7 @@ class ExportInvoiceController extends Controller
             ->join('commons as state', 'state.id', '=', 'contact_details.state_id')
             ->join('commons as pincode', 'pincode.id', '=', 'contact_details.pincode_id')
             ->join('commons as country', 'country.id', '=', 'contact_details.contact_id')
-            ->where('export_sales_id','=', $vid)->get()
+            ->where('export_sales_id', '=', $vid)->get()
             ->transform(function ($contact) {
                 return [
                     'export_sale_contact_id' => $contact->id,
@@ -118,16 +118,34 @@ class ExportInvoiceController extends Controller
             });
     }
 
+    public $exportSalesItem;
     public function getExportPackingList($vid)
     {
-        return  DB::table('packing_lists')
+        $this->exportSalesItem = DB::table('export_sale_items')
+            ->select(
+                'export_sale_items.*',
+                'products.vname as product_name',
+                'sizes.vname as size_name',
+                'colours.vname as colour_name',
+            )
+            ->join('products', 'export_sale_items.product_id', '=', 'products.id')
+            ->join('commons as sizes', 'export_sale_items.size_id', '=', 'sizes.id')
+            ->join('commons as colours', 'export_sale_items.colour_id', '=', 'colours.id')
+            ->where('export_sale_items.export_sales_id', $vid)
+            ->get();
+
+        return DB::table('packing_lists')
             ->select('packing_lists.*')
             ->where('export_sales_id', $vid)
             ->get()
             ->transform(function ($obj) {
+                $index = $this->exportSalesItem->search(function ($item) use ($obj) {
+                    return $item->id == $obj->export_sales_item_id;
+                });
+
                 return [
-                    'export_sales_id' => $obj->export_sales_id,
-                    'export_sales_item_id' => $obj->export_sales_item_id,
+                    'export_sales_item_id' => $obj->id,
+                    'exportSalesItem_index' => $index !== false ? $index : null,
                     'nos' => $obj->nos,
                     'net_wt' => $obj->net_wt,
                     'grs_wt' => $obj->grs_wt,
@@ -135,5 +153,20 @@ class ExportInvoiceController extends Controller
                     'cbm' => $obj->cbm,
                 ];
             });
+//        return  DB::table('packing_lists')
+//            ->select('packing_lists.*')
+//            ->where('export_sales_id', $vid)
+//            ->get()
+//            ->transform(function ($obj) {
+//                return [
+//                    'export_sales_id' => $obj->export_sales_id,
+//                    'export_sales_item_id' => $obj->export_sales_item_id,
+//                    'nos' => $obj->nos,
+//                    'net_wt' => $obj->net_wt,
+//                    'grs_wt' => $obj->grs_wt,
+//                    'dimension' => $obj->dimension,
+//                    'cbm' => $obj->cbm,
+//                ];
+//            });
     }
 }

@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Garments</title>
+    <title>Export</title>
     {{--    <link rel="stylesheet" href="/public/invoice.css" type="text/css">--}}
     <link rel="stylesheet" href="https://cdn.curlwind.com">
     <style type="text/css">
@@ -214,9 +214,11 @@
         .text-xs {
             font-size: 9px;
         }
+
         .uppercase {
             text-transform: uppercase;
         }
+
         .lowercase {
             text-transform: lowercase;
         }
@@ -252,6 +254,7 @@
     <tr>
         <td class="text-xs lh-0 v-align-t border px-5" colspan="2">
             <p>Buyer's style:</p>
+            <p>{{$obj->style_name}}</p>
         </td>
     </tr>
 </table>
@@ -268,7 +271,8 @@
             <p>Buyer (if other than consignee)</p>
             @foreach($consignees as  $index=>$row)
                 <p>{{$row['contact_name']}}</p>
-                <p>{{$row['address_1']}},{{$row['address_2']}},{{$row['city_name']}},{{$row['state_name']}},{{$row['pincode_name']}},{{$row['country_name']}}.</p>
+                <p>{{$row['address_1']}},{{$row['address_2']}},{{$row['city_name']}},{{$row['state_name']}}
+                    ,{{$row['pincode_name']}},{{$row['country_name']}}.</p>
             @endforeach
         </td>
     </tr>
@@ -331,7 +335,7 @@
     @foreach($list as $index => $row)
         <tr class="text-sm center v-align-t ">
             <td height="38px" class="center border-r p-1">{{$index + 1}}</td>
-            <td class="center border-r p-1">{{$row['pkgs_type']}}</td>
+            <td class="center border-r p-1">{{\App\Enums\PackageType::tryFrom($row['pkgs_type'])->getName()}}</td>
             <td class="center border-r p-1">{{$row['no_of_count']}} </td>
             <td class="left border-r p-1">
                 @if($row['description'])
@@ -361,24 +365,36 @@
         </tr>
     @endfor
     @php
+        $totalNetWt=0;
+        $totalGrsWt=0;
+    @endphp
 
-
+    @foreach($packingList as $index => $row)
+        @php
+            $totalGrsWt+=$row['grs_wt']*$list[$row['exportSalesItem_index']]['no_of_count'];
+               $totalNetWt+=$row['net_wt']*$list[$row['exportSalesItem_index']]['no_of_count'];
         @endphp
+    @endforeach
     <tr class="border">
         <td colspan="2" class="px-5">Total Net Weight</td>
-        <td>&nbsp;</td>
+        <td class="center">{{$totalNetWt}}</td>
         <td class="border-l right px-5 " rowspan="2">Total</td>
         <td rowspan="2" class="border-l right p-1 ">{{$obj->total_qty+0}}</td>
         <td rowspan="2" class="border-l right p-1 "></td>
         <td rowspan="2" class="border-l right p-1 ">$&nbsp;{{number_format($obj->total_taxable,2,'.','')}}</td>
         {{--        <td rowspan="2" class="border-l right p-1 ">{{number_format($obj->grand_total-$obj->additional,2,'.','')}}</td>--}}
     </tr>
+
+
+
     <tr class="border">
         <td colspan="2" class="px-5">Total Net Weight</td>
-        <td>&nbsp;</td>
+        <td class="center">{{$totalGrsWt}}</td>
     </tr>
     <tr>
-        <td colspan="7" class="font-bold border-b p-5 uppercase">Amount Chargeable: {{$currency}} {{\App\Enums\CurrencyType::tryFrom($obj->currency_type)->getCurrency()}} only</td>
+        <td colspan="7" class="font-bold border-b p-5 uppercase">Amount
+            Chargeable: {{$currency}} {{\App\Enums\CurrencyType::tryFrom($obj->currency_type)->getCurrency()}} only
+        </td>
     </tr>
     <tr class="center border-b ">
         <th width="5%" class="p-5 border-r">S.NO</th>

@@ -36,6 +36,7 @@
                         <th class="px-2 text-center border border-gray-300">TOTAL GRS WT</th>
                         <th class="px-2 text-center border border-gray-300">DIMENSION</th>
                         <th class="px-2 text-center border border-gray-300">CBM</th>
+                        <th class="px-2 text-center border border-gray-300">Print</th>
                         <th class="w-12 px-1 text-center border border-gray-300">ACTION</th>
                     </tr>
                 </thead>
@@ -105,7 +106,9 @@
                         <td class="px-2 text-left border border-gray-300 cursor-pointer"
                             wire:click.prevent="changeItems({{$index}})">{{$row['cbm']}}
                         </td>
-
+                        <td class="text-center border border-gray-300">
+                            <x-button.print-pdf routes="{{route('exportsales.packingListPrint',[$exportSales_id])}}"/>
+                        </td>
                         <td class="text-center border border-gray-300">
                             <x-button.delete wire:click.prevent="removeItems({{$index}})"/>
                         </td>
