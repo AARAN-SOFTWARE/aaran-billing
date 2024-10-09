@@ -36,8 +36,6 @@ class Upsert extends Component
     public mixed $additional = '';
     public mixed $round_off = '';
     public mixed $grand_total = '';
-    public string $gst_percent = '';
-    public $gstPercents = '';
 
     public mixed $qty = '';
     public mixed $price = '';
@@ -548,7 +546,6 @@ class Upsert extends Component
                     'port_of_loading' => $this->port_of_loading,
                     'port_of_discharge' => $this->port_of_discharge,
                     'final_destination' => $this->final_destination,
-                    'gst_percent' => $this->gst_percent,
                     'total_qty' => $this->total_qty,
                     'total_taxable' => $this->total_taxable,
                     'total_gst' => $this->total_gst,
@@ -581,7 +578,6 @@ class Upsert extends Component
                 $obj->port_of_loading = $this->port_of_loading;
                 $obj->port_of_discharge = $this->port_of_discharge;
                 $obj->final_destination = $this->final_destination;
-                $obj->gst_percent = $this->gst_percent;
                 $obj->total_qty = $this->total_qty;
                 $obj->total_taxable = $this->total_taxable;
                 $obj->total_gst = $this->total_gst;
@@ -617,6 +613,7 @@ class Upsert extends Component
                 'colour_id' => $sub['colour_id'] ?: '11',
                 'size_id' => $sub['size_id'] ?: '14',
                 'qty' => $sub['qty'],
+                'gst_percent' => $sub['gst_percent'],
                 'price' => $sub['price'],
             ]);
         }
@@ -636,7 +633,6 @@ class Upsert extends Component
     #region[mount]
     public function mount($id)
     {
-        $this->gstPercents=Common::where('label_id', '=', 17)->get();
         if ($id!=0){
             $obj = ExportSale::find($id);
             $this->common->vid = $obj->id;
@@ -658,7 +654,6 @@ class Upsert extends Component
             $this->port_of_loading = $obj->port_of_loading;
             $this->port_of_discharge = $obj->port_of_discharge;
             $this->final_destination = $obj->final_destination;
-            $this->gst_percent = $obj->gst_percent;
             $this->total_qty = $obj->total_qty;
             $this->total_taxable = $obj->total_taxable;
             $this->total_gst = $obj->total_gst;
@@ -690,6 +685,7 @@ class Upsert extends Component
                         'size_id' => $data->size_id,
                         'qty' => $data->qty,
                         'price' => $data->price,
+                        'gst_percent' => $data->gst_percent,
                         'description' => $data->description,
                         'taxable' => $data->qty * $data->price,
                     ];
@@ -708,15 +704,13 @@ class Upsert extends Component
                 });
             $this->consigneeList=$contact;
         }else{
-            $this->gst_percent=5;
             $this->invoice_no= ExportSale::nextNo();
             $this->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
             $this->common->active_id = true;
-            $this->gst_percent = 0;
             $this->additional = 0;
             $this->grand_total = 0;
             $this->ex_rate=1;
-            $this->sales_type=1;
+            $this->sales_type="IGST";
             $this->currency_type=1;
             $this->total_taxable = 0;
             $this->round_off = 0;

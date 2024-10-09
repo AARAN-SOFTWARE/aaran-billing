@@ -266,74 +266,73 @@
         <th class="py-2 w-[20%] border-r border-gray-300">Mode of Payments</th>
         <th class="py-2 w-[10%] border-r px-1 border-gray-300">Amount</th>
 
-<body>
+        <body>
 
-<table class="border w-full">
-    <tr>
-        <td width="35%" class="right">
-            @if($cmp->get('logo')!='no_image')
-                <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
-            @else
-                <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" width="130px">
-            @endif
-        </td>
-        <td width="65%" class="lh-0 left">
-            <div class=" lh-1 font-bold times text-4xl">{{$cmp->get('company_name')}}</div>
-            <div class="lh-2 text-md v-align-b">
-                <div class="times">{{$cmp->get('address_1')}}</div>
-                <div class="times">{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</div>
-                <div class="times">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</div>
-                <div class="times">{{$cmp->get('gstin')}}</div>
-            </div>
-        </td>
-    </tr>
-</table>
-<table class="border v-align-c border-t-none">
-    <tr class="bg-gray center font-bold text-lg p-1">
-        <td class="center py-5">{{$mode_name}}</td>
-    </tr>
-</table>
-<table class="border border-t-none">
-    <tr class="bg-gray text-md lh-2 border-b">
-        <th height="26px" width="5%" class="border-r">S.No</th>
-        <th width="auto" class="border-r">Contact</th>
-        <th width="12%" class="border-r">Type</th>
-        <th width="12%" class="border-r">Mode of Payments</th>
-        <th width="15%" class="border-r">Amount</th>
+        <table class="border w-full">
+            <tr>
+                <td width="35%" class="right">
+                    @if($cmp->get('logo')!='no_image')
+                        <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo"
+                             width="130px"/>
+                    @else
+                        <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" width="130px">
+                    @endif
+                </td>
+                <td width="65%" class="lh-0 left">
+                    <div class=" lh-1 font-bold times text-4xl">{{$cmp->get('company_name')}}</div>
+                    <div class="lh-2 text-md v-align-b">
+                        <div class="times">{{$cmp->get('address_1')}}</div>
+                        <div class="times">{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</div>
+                        <div class="times">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</div>
+                        <div class="times">{{$cmp->get('gstin')}}</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="border v-align-c border-t-none">
+            <tr class="bg-gray center font-bold text-lg p-1">
+                <td class="center py-5">{{$mode_name}}</td>
+            </tr>
+        </table>
+        <table class="border border-t-none">
+            <tr class="bg-gray text-md lh-2 border-b">
+                <th height="26px" width="5%" class="border-r">S.No</th>
+                <th width="auto" class="border-r">Contact</th>
+                <th width="12%" class="border-r">Type</th>
+                <th width="12%" class="border-r">Mode of Payments</th>
+                <th width="15%" class="border-r">Amount</th>
 
-    </tr>
-    @foreach($list as $index=>$row)
+            </tr>
+            @foreach($list as $index=>$row)
+
+                <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
+                    <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
+                    <td class="py-2 text-start px-0.5 border-r border-gray-300">{{$row->contact->vname}}</td>
+                    <td class="py-2 text-center px-0.5 border-r border-gray-300">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
+                    <td class="py-2 text-center px-0.5 border-r border-gray-300">{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</td>
+                    <td class="py-2 text-right border-r px-2 border-gray-300">{{$row->vname+0}}</td>
 
 
-        <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
-            <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
-            <td class="py-2 text-start px-0.5 border-r border-gray-300">{{$row->contact->vname}}</td>
-            <td class="py-2 text-center px-0.5 border-r border-gray-300">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
-            <td class="py-2 text-center px-0.5 border-r border-gray-300">{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</td>
-            <td class="py-2 text-right border-r px-2 border-gray-300">{{$row->vname+0}}</td>
 
+                <tr class="text-md center v-align-c">
+                    <td height="26px" class="center border-r">{{$index+1}}</td>
+                    <td class="left border-r ">{{$row->contact->vname}}</td>
+                    <td class="center border-r ">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
+                    <td class="center border-r ">{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</td>
+                    <td class="right border-r px-2">
+                        {{number_format($row->vname,2,'.','')}}</td>
+                </tr>
 
+            @endforeach
+            @php
+                $total = $list->sum('vname');
+            @endphp
+            <tr class="text-md center v-align-c border-t  font-bold">
+                <td class="center border-r px-2 py-10" colspan="3">Total</td>
+                <td class="right border-r px-2" colspan="2">{{number_format($total,2,'.','')}}</td>
 
-        <tr class="text-md center v-align-c">
-            <td height="26px" class="center border-r">{{$index+1}}</td>
-            <td class="left border-r ">{{$row->contact->vname}}</td>
-            <td class="center border-r ">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
-            <td class="center border-r ">{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</td>
-            <td class="right border-r px-2">
-                {{number_format($row->vname,2,'.','')}}</td>
-        </tr>
-
-    @endforeach
-    @php
-        $total = $list->sum('vname');
-    @endphp
-    <tr class="text-md center v-align-c border-t  font-bold">
-        <td class="center border-r px-2 py-10" colspan="3">Total</td>
-        <td class="right border-r px-2" colspan="2">{{number_format($total,2,'.','')}}</td>
-
-    </tr>
-</table>
-
-</body>
+            </tr>
+        </table>
+        </body>
 </html>
 

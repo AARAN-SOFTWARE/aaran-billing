@@ -18,8 +18,6 @@ return new class extends Migration {
                 $table->string('duration')->nullable();
                 $table->string('channel')->nullable();
                 $table->text('remarks')->nullable();
-                $table->string('verified')->nullable();
-                $table->string('verified_on')->nullable();
                 $table->string('active_id', 3)->nullable();
                 $table->timestamps();
             });

@@ -32,8 +32,6 @@ return new class extends Migration
                 $table->string('port_of_discharge')->nullable();
                 $table->string('final_destination')->nullable();
 
-                $table->string('gst_percent')->nullable();
-
                 $table->decimal('total_qty', 11, 3)->nullable();
                 $table->decimal('total_taxable', 11, 2)->nullable();
                 $table->decimal('total_gst', 11, 2)->nullable();
