@@ -123,7 +123,7 @@ class ProductModel extends Component
     public function hsncodeSave($name)
     {
         $obj = Common::create([
-            'label_id' => 5,
+            'label_id' => 6,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -194,7 +194,7 @@ class ProductModel extends Component
     public function productTypeSave($name)
     {
         $obj = Common::create([
-            'label_id' => '14',
+            'label_id' => '15',
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -265,7 +265,7 @@ class ProductModel extends Component
     public function unitSave($name)
     {
         $obj = Common::create([
-            'label_id' => '15',
+            'label_id' => '16',
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -336,7 +336,7 @@ class ProductModel extends Component
     public function gstPercentSave($name)
     {
         $obj = Common::create([
-            'label_id' => '16',
+            'label_id' => '17',
             'vname' => $name,
             'active_id' => '1'
         ]);
