@@ -358,7 +358,7 @@
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type==1)
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -377,14 +377,14 @@
             <div>* Goods once sold cannot be return back or exchanged</div>
             <div>* Seller cannot be responsible for any damage/mistakes.</div>
         </td>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type==1)
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
             <td class="text-sm right border-b lh-2 v-align-c"
                 colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         @else
-            <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent}}
+            <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent*2}}
                 %
             </td>
             <td class="text-sm right border-b lh-2 v-align-c"
@@ -598,7 +598,7 @@
                 @if($obj->sales_type=='1')
                     <p>CGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
                 @else
-                    <p>IGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
+                    <p>IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</p>
                 @endif
             </td>
             <td class="font-bold">
@@ -812,7 +812,7 @@
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type==1)
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -831,14 +831,14 @@
             <div>* Goods once sold cannot be return back or exchanged</div>
             <div>* Seller cannot be responsible for any damage/mistakes.</div>
         </td>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type==1)
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
             <td class="text-sm right border-b lh-2 v-align-c"
                 colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         @else
-            <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent}}
+            <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent*2}}
                 %
             </td>
             <td class="text-sm right border-b lh-2 v-align-c"
@@ -1053,7 +1053,7 @@
                 @if($obj->sales_type=='1')
                     <p>CGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
                 @else
-                    <p>IGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
+                    <p>IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</p>
                 @endif
             </td>
             <td class="font-bold">
@@ -1267,7 +1267,7 @@
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type==1)
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
@@ -1286,14 +1286,14 @@
             <div>* Goods once sold cannot be return back or exchanged</div>
             <div>* Seller cannot be responsible for any damage/mistakes.</div>
         </td>
-        @if($obj->sales_type==0)
+        @if($obj->sales_type==1)
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
             <td class="text-sm right border-b lh-2 v-align-c"
                 colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         @else
-            <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent}}
+            <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent*2}}
                 %
             </td>
             <td class="text-sm right border-b lh-2 v-align-c"
@@ -1509,7 +1509,7 @@
                 @if($obj->sales_type=='1')
                     <p>CGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
                 @else
-                    <p>IGST&nbsp;@&nbsp;{{$gstPercent}}%</p>
+                    <p>IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</p>
                 @endif
             </td>
             <td class="font-bold">
