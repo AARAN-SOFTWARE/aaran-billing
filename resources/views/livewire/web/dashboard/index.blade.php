@@ -1,25 +1,29 @@
 <div class="bg-[#F8F8FF]">
+
     <x-slot name="header">Dashboard</x-slot>
+
     <div class="flex-col flex gap-10 tracking-wider p-2">
-        <!-- Col 1 -->
+
+        <!-- Col 1 ---------------------------------------------------------------------------------------------------->
         <div class=" bg-[#F8F8FF] gap-10 flex sm:flex-row flex-col tracking-wider rounded-lg">
+
             <x-web.dashboard.greetings/>
+
             @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3 )
                 {{--                @if(Aaran\Aadmin\Src\DbMigration::hasEntry())--}}
                 <x-web.dashboard.sales :transactions="$transactions"/>
                 <x-web.dashboard.cards :transactions="$transactions"/>
-
-                {{--                @endif--}}
             @endif
-            {{--            <x-web.dashboard.cards/>--}}
+
         </div>
-        <!-- Col 2 -->
+
+        <!-- Col 2 ---------------------------------------------------------------------------------------------------->
         <div class=" bg-[#F8F8FF] gap-10 flex sm:flex-row flex-col tracking-wider rounded-lg ">
+
             <x-web.dashboard.customer :contacts="$contacts"/>
             <x-web.dashboard.entries :entries="$entries"/>
-            {{--            <x-web.dashboard.statistics/>--}}
-            <div class="sm:w-5/12 w-auto bg-white  rounded-lg flex-col flex h-[28rem] gap-y-5 hover:shadow-md gap-y">
 
+            <div class="sm:w-5/12 w-auto bg-white  rounded-lg flex-col flex h-[28rem] gap-y-5 hover:shadow-md gap-y">
 
                 <div
                     class="w-full h-[4rem] py-3 border-b border-gray-200 inline-flex items-center justify-between px-8">
@@ -49,7 +53,7 @@
                             data-wow-duration="3s">
                             <div class="h-24 w-32">
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}"
-                                     class="w-full h-20">
+                                     class="w-full h-20" alt="">
                             </div>
                             <div class="w-4/6 flex-col flex py-1 ">
                                 <div class="h-1/4 inline-flex items-center gap-x-2">
