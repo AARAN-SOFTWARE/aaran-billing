@@ -11,14 +11,16 @@ return new class extends Migration {
 
             Schema::create('activities', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-                $table->date('cdate');
+                $table->foreignId('task_id')->references('id')->on('tasks')->onDelete('cascade');
+                $table->string('cdate');
                 $table->text('vname');
-                $table->string('client_id')->nullable();
+                $table->string('estimated')->nullable();
                 $table->string('duration')->nullable();
-                $table->string('channel')->nullable();
+                $table->string('start_on')->nullable();
+                $table->string('end_on')->nullable();
                 $table->text('remarks')->nullable();
                 $table->string('active_id', 3)->nullable();
+                $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->timestamps();
             });
         }

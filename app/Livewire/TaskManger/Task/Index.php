@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\TaskManger;
+namespace App\Livewire\TaskManger\Task;
 
 use Aaran\Taskmanager\Models\Task;
 use App\Livewire\Trait\CommonTraitNew;
@@ -32,13 +32,13 @@ class Index extends Component
             $extraFields = [
                 'body' => $this->body,
                 'image' => $this->save_image(),
-                'allocated'=>$this->allocated,
-                'status'=>$this->status,
-                'user_id'=>auth()->id(),
-                'verified'=>$this->verified,
-                'verified_on'=>$this->verified_on,
+                'allocated' => $this->allocated,
+                'status' => $this->status,
+                'user_id' => auth()->id(),
+                'verified' => $this->verified,
+                'verified_on' => $this->verified_on,
             ];
-            $this->common->save($task,$extraFields);
+            $this->common->save($task, $extraFields);
             $this->clearFields();
             $message = "Saved";
         } else {
@@ -46,13 +46,13 @@ class Index extends Component
             $extraFields = [
                 'body' => $this->body,
                 'image' => $this->save_image(),
-                'allocated'=>$this->allocated,
-                'status'=>$this->status,
-                'user_id'=>auth()->id(),
-                'verified'=>$this->verified,
-                'verified_on'=>$this->verified_on,
+                'allocated' => $this->allocated,
+                'status' => $this->status,
+                'user_id' => auth()->id(),
+                'verified' => $this->verified,
+                'verified_on' => $this->verified_on,
             ];
-            $this->common->edit($task,$extraFields);
+            $this->common->edit($task, $extraFields);
             $this->clearFields();
             $message = "Updated";
         }
@@ -67,12 +67,12 @@ class Index extends Component
             $task = Task::find($id);
             $this->common->vid = $task->id;
             $this->common->vname = $task->vname;
-            $this->body=$task->body;
-            $this->old_image=$task->image;
-            $this->status=$task->status;
-            $this->allocated=$task->allocated;
-            $this->verified=$task->verified;
-            $this->verified_on=$task->verified_on;
+            $this->body = $task->body;
+            $this->old_image = $task->image;
+            $this->status = $task->status;
+            $this->allocated = $task->allocated;
+            $this->verified = $task->verified;
+            $this->verified_on = $task->verified_on;
             $this->common->active_id = $task->active_id;
             return $task;
         }
@@ -121,6 +121,7 @@ class Index extends Component
             }
         }
     }
+
     #endregion
 
     public function getRoute()
@@ -130,9 +131,9 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.task-manger.index')->with([
+        return view('livewire.task-manger.task.index')->with([
             'list' => $this->getListForm->getList(Task::class),
-            'users'=>DB::table('users')->where('users.tenant_id',session()->get('tenant_id'))->get(),
+            'users' => DB::table('users')->where('users.tenant_id', session()->get('tenant_id'))->get(),
         ]);
     }
 }
