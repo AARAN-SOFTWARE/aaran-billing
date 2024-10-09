@@ -587,7 +587,6 @@ class Upsert extends Component
                 $obj->grand_total = $this->grand_total;
                 $obj->active_id = $this->common->active_id;
                 $obj->save();
-                DB::table('export_sale_items')->where('export_sales_id', '=', $obj->id)->delete();
                 $this->saveItem( $obj->id);
                 DB::table('export_sale_contacts')->where('export_sales_id', '=', $obj->id)->delete();
                 $this->saveContact( $obj->id);
@@ -603,19 +602,35 @@ class Upsert extends Component
 
     public function saveItem($id): void
     {
+
         foreach ($this->itemList as $sub) {
-            ExportSaleItem::create([
-                'export_sales_id' => $id,
-                'pkgs_type' => $sub['pkgs_type'],
-                'no_of_count' => $sub['no_of_count'],
-                'product_id' => $sub['product_id'],
-                'description' => $sub['description'],
-                'colour_id' => $sub['colour_id'] ?: '11',
-                'size_id' => $sub['size_id'] ?: '14',
-                'qty' => $sub['qty'],
-                'gst_percent' => $sub['gst_percent'],
-                'price' => $sub['price'],
-            ]);
+            if ($sub['export_sales_item_id']===0) {
+                ExportSaleItem::create([
+                    'export_sales_id' => $id,
+                    'pkgs_type' => $sub['pkgs_type'],
+                    'no_of_count' => $sub['no_of_count'],
+                    'product_id' => $sub['product_id'],
+                    'description' => $sub['description'],
+                    'colour_id' => $sub['colour_id'] ?: '11',
+                    'size_id' => $sub['size_id'] ?: '14',
+                    'qty' => $sub['qty'],
+                    'gst_percent' => $sub['gst_percent'],
+                    'price' => $sub['price'],
+                ]);
+            }elseif ($sub['export_sales_item_id']!=0){
+                $item=ExportSaleItem::find($sub['export_sales_item_id']);
+                $item->export_sales_id=$id;
+                $item->pkgs_type=$sub['pkgs_type'];
+                $item->no_of_count=$sub['no_of_count'];
+                $item->product_id=$sub['product_id'];
+                $item->description=$sub['description'];
+                $item->colour_id=$sub['colour_id'];
+                $item->size_id=$sub['size_id'];
+                $item->qty=$sub['qty'];
+                $item->gst_percent=$sub['gst_percent'];
+                $item->price=$sub['price'];
+                $item->save();
+            }
         }
     }
 
@@ -674,7 +689,7 @@ class Upsert extends Component
                 ->get()
                 ->transform(function ($data) {
                     return [
-                        'export_sales_id' => $data->id,
+                        'export_sales_item_id'=>$data->id,
                         'pkgs_type' => $data->pkgs_type,
                         'no_of_count' => $data->no_of_count,
                         'product_name' => $data->product_name,
@@ -737,6 +752,7 @@ class Upsert extends Component
                 !(empty($this->qty))
             ) {
                 $this->itemList[] = [
+                    'export_sales_item_id'=>0,
                     'pkgs_type' => $this->pkgs_type,
                     'no_of_count' => $this->no_of_count,
                     'product_name' => $this->product_name,
@@ -754,6 +770,7 @@ class Upsert extends Component
             }
         } else {
             $this->itemList[$this->itemIndex] = [
+                'export_sales_item_id'=>$this->itemList[$this->itemIndex]['export_sales_item_id'],
                 'pkgs_type' => $this->pkgs_type,
                 'no_of_count' => $this->no_of_count,
                 'product_name' => $this->product_name,
