@@ -56,6 +56,7 @@ class Index extends Component
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
                 $this->validate($this->rules());
+                $this->common->vname = preg_replace('/[^A-Za-z0-9\-]/', '', $this->common->vname);
                 $Product = new Product();
                 $extraFields = [
                     'producttype_id' => $this->producttype_id ?: '92',

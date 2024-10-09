@@ -34,6 +34,7 @@ class ProductModel extends Component
 
     public function save(): void
     {
+        $this->vname=preg_replace('/[^A-Za-z0-9\-]/', ' ', $this->vname);
         if ($this->vname != '') {
             $obj = Product::create([
                 'vname' => Str::ucfirst($this->vname),
