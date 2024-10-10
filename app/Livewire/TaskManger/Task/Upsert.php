@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\TaskManger;
+namespace App\Livewire\TaskManger\Task;
 
 use Aaran\Taskmanager\Models\Reply;
 use Aaran\Taskmanager\Models\Task;
@@ -83,6 +83,6 @@ class Upsert extends Component
 
     public function render()
     {
-        return view('livewire.task-manger.upsert')->with(['list'=>$this->getList(),]);
+        return view('livewire.task-manger.task.upsert')->with(['list'=>$this->getList(),]);
     }
 }
