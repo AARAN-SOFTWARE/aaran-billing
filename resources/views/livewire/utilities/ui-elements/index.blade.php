@@ -25,8 +25,11 @@
            rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 pointer-events-none">Title</label>
         </div>
 
-        <input type="text" class="text-end">
-
-
+        <x-button.login-x  />
+        <x-button.back-x  />
+        <x-button.cancel-x  />
+        <x-button.danger-x  />
+        <x-button.save-x  />
+        <x-button.new-x  />
     </div>
 </div>

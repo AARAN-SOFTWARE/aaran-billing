@@ -203,6 +203,8 @@
                                                                 label="Colour"/>
                                             @endforelse
                                         @endif
+                                            <x-dropdown.option2  wire:click.prevent="colourSave('{{$colour_name}}')" label="Colour" />
+
                                     </x-dropdown.select>
                                 </div>
                             </x-dropdown.wrapper>
@@ -233,6 +235,8 @@
                                                                 label="Size"/>
                                             @endforelse
                                         @endif
+                                            <x-dropdown.option2  wire:click.prevent="colourSave('{{$colour_name}}')" label="Size" />
+
                                     </x-dropdown.select>
                                 </div>
                             </x-dropdown.wrapper>
