@@ -16,6 +16,7 @@ Route::get('/info', App\Livewire\Web\Home\Info::class)->name('info');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::get('/dashboard', App\Livewire\Web\Dashboard\Index::class)->name('dashboard');
+    Route::get('/showArticles/{id}', App\Livewire\Web\Dashboard\Show::class)->name('showArticles');
     Route::get('/elements', App\Livewire\Utilities\UiElements\Index::class)->name('elements');
     Route::get('/icons', App\Livewire\Utilities\Icon\Index::class)->name('icons');
     Route::get('/test', App\Livewire\Test\Index::class)->name('test');

@@ -6,6 +6,7 @@ use Aaran\Common\Models\Common;
 use Aaran\Master\Database\Factories\CompanyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
 
@@ -62,4 +63,8 @@ class Company extends Model
         return new CompanyFactory();
     }
 
+    public function companyDetail():HasMany
+    {
+        return  $this->hasMany(CompanyDetail::class);
+    }
 }
