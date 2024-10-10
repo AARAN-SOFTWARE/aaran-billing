@@ -5,6 +5,7 @@ namespace App\Livewire\TaskManger\Activity;
 use Aaran\Taskmanager\Models\Activities;
 use Aaran\Taskmanager\Models\Task;
 use App\Livewire\Trait\CommonTraitNew;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -153,22 +154,18 @@ class Index extends Component
     {
         $this->common->vid = '';
         $this->common->vname = '';
+        $this->cdate = Carbon::now()->format('Y-m-d');
         $this->task_id = '';
         $this->task_name = '';
         $this->common->active_id = '1';
         $this->estimated = '';
         $this->duration = '';
-        $this->start_on = '';
+        $this->start_on = Carbon::now()->format('Y-m-d');
         $this->end_on = '';
         $this->remarks = '';
     }
 
     #endregion
-
-//    public function getRoute()
-//    {
-//        return route('activity');
-//    }
 
     public function render()
     {

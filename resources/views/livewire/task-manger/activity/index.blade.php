@@ -22,18 +22,18 @@
                 <x-table.header-serial></x-table.header-serial>
 
                 <x-table.header-text wire:click.prevent="sortBy ('task_id')" sort-icon="{{$getListForm->sortAsc}}">
-                    Task_Id
+                    Tasks
                 </x-table.header-text>
 
-                <x-table.header-text sort-icon="none">Name</x-table.header-text>
+                <x-table.header-text sort-icon="none">Activities</x-table.header-text>
 
-                <x-table.header-text sort-icon="none">Estimated</x-table.header-text>
+                <x-table.header-text sort-icon="none">Estimate</x-table.header-text>
 
                 <x-table.header-text sort-icon="none">Duration</x-table.header-text>
 
-                <x-table.header-text sort-icon="none">Start_on</x-table.header-text>
+                <x-table.header-text sort-icon="none">Started At</x-table.header-text>
 
-                <x-table.header-text sort-icon="none">End_on</x-table.header-text>
+                <x-table.header-text sort-icon="none">Ended Up</x-table.header-text>
 
                 <x-table.header-text sort-icon="none">Remarks</x-table.header-text>
 
@@ -54,15 +54,15 @@
 
                         <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
 
-                        <x-table.cell-text left>{{$row->estimated}}</x-table.cell-text>
+                        <x-table.cell-text center>{{$row->estimated}}</x-table.cell-text>
 
-                        <x-table.cell-text left>{{$row->duration}}</x-table.cell-text>
+                        <x-table.cell-text center>{{$row->duration}}</x-table.cell-text>
 
-                        <x-table.cell-text left>{{$row->start_on}}</x-table.cell-text>
+                        <x-table.cell-text center>{{date('d-m-Y', strtotime($row->start_on))}}</x-table.cell-text>
 
-                        <x-table.cell-text left>{{$row->end_on}}</x-table.cell-text>
+                        <x-table.cell-text center>{{date('d-m-Y', strtotime($row->end_on))}}</x-table.cell-text>
 
-                        <x-table.cell-text left>{{$row->remarks}}</x-table.cell-text>
+                        <x-table.cell-text center>{{$row->remarks}}</x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>
 
@@ -117,7 +117,7 @@
                     </x-dropdown.wrapper>
 
 
-                    <x-input.floating wire:model="common.vname" :label="'Title'"/>
+                    <x-input.floating wire:model="common.vname" :label="'Activities'"/>
 
                     <x-input.floating wire:model="estimated" :label="'Estimate'"/>
 
