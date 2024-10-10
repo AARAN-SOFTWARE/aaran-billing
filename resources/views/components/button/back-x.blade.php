@@ -1,10 +1,10 @@
 <button
     class="tab-button sm:px-6 px-4 sm:py-[7px] py-[6px] relative rounded group overflow-hidden font-medium
-    bg-blue-500 inline-block text-center" {{$attributes}}>
+    bg-blue-600 inline-block text-center" {{$attributes}}>
                 <span
                     class="absolute top-0 left-0 flex h-full w-0 mr-0 transition-all
                     duration-500 ease-out transform translate-x-0 group-hover:w-full opacity-90
-                    bg-blue-600 to-blue-600"></span>
+                    bg-blue-500 to-blue-600"></span>
     <span class="relative group-hover:hidden text-white sm:text-lg text-sm">
                Back
             </span>

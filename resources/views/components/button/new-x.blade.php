@@ -1,9 +1,9 @@
 <button
-    class="tab-button px-6 py-[7px]   relative rounded group overflow-hidden font-medium bg-green-500 inline-block text-center" {{$attributes}}>
+    class="tab-button px-6 py-[7px]   relative rounded group overflow-hidden font-medium bg-green-600 inline-block text-center" {{$attributes}}>
                 <span
                     class="absolute top-0 left-0 flex h-full w-0 mr-0 transition-all
                     duration-500 ease-out transform translate-x-0 group-hover:w-full opacity-90
-                    bg-green-600 "></span>
+                    bg-green-500 "></span>
     <span class="relative group-hover:hidden text-white sm:text-lg text-sm">
                New
             </span>
