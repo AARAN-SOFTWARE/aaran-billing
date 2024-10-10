@@ -12,6 +12,7 @@ use App\Helper\ConvertTo;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class Index extends Component
@@ -154,7 +155,8 @@ class Index extends Component
 
     public function getBlog()
     {
-        $this->blogs = Post::latest()->get();
+        $response=Http::get('https://cloud.aaranassociates.com/api/v1/blog');
+        $this->blogs=$response->json();
     }
 
 
