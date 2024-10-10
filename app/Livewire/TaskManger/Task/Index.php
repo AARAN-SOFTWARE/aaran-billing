@@ -3,6 +3,7 @@
 namespace App\Livewire\TaskManger\Task;
 
 use Aaran\Taskmanager\Models\Task;
+use App\Enums\Status;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -80,6 +81,17 @@ class Index extends Component
     }
     #endregion
 
+    #region[Sundar]
+    public function adminCloseTask(): void
+    {
+        $obj = Task::find($this->task_id);
+        $obj->status = Status::ADMINCLOSED->value;
+        $obj->active_id = false;
+        $obj->save();
+        redirect()->to(route('task'));
+    }
+    #endregion
+
     #region[Clear Fields]
     public function clearFields(): void
     {
@@ -95,7 +107,6 @@ class Index extends Component
         $this->status = '';
     }
     #endregion
-
 
     #region[image]
     public function save_image()
