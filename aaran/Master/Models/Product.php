@@ -15,10 +15,6 @@ class Product extends Model
     protected $guarded = [];
 
 
-//    public static function common($id)
-//    {
-//        return Common::find($id)->vname;
-//    }
 
     public static function search(string $searches)
     {
@@ -30,7 +26,6 @@ class Product extends Model
     {
         return $this->belongsTo(Common::class, 'producttype_id', 'id');
     }
-//
     public function hsncode(): BelongsTo
     {
         return $this->belongsTo(Common::class, 'hsncode_id', 'id');

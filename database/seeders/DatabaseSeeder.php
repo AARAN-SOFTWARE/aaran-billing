@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Aaran\Common\Database\Seeders\S101_LabelSeeder;
 use Aaran\Common\Database\Seeders\S102_CommonSeeder;
-use Aaran\Master\Database\Seeders\S201_CompanySeeder;
+use Aaran\Master\Database\Seeders\S200_CompanySeeder;
 use Aaran\Master\Database\Seeders\S202_ContactSeeder;
 use Aaran\Master\Database\Seeders\S203_ProductSeeder;
 use Aaran\Master\Database\Seeders\S204_OrderSeeder;
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         S04_DefaultCompanySeeder::run();
 
 
-        S201_CompanySeeder::run();
+        S200_CompanySeeder::run();
         S202_ContactSeeder::run();
         S203_ProductSeeder::run();
         S204_OrderSeeder::run();
