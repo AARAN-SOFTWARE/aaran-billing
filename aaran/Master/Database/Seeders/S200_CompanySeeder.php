@@ -24,6 +24,7 @@ class S200_CompanySeeder extends Seeder
             'city_id'=>'128',
             'state_id'=>'47',
             'pincode_id'=>'129',
+            'country_id'=>'60',
             'active_id' => '1',
             'user_id' => '1',
             'tenant_id' => '1',
