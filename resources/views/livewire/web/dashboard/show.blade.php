@@ -129,7 +129,6 @@
 
         <div class="text-[10px] text-gray-300 underline cursor-pointer">Privacy Policies</div>
         <div class="text-[10px] text-gray-600 underline cursor-pointer">Fast Company Newsletters</div>
-
     </div>
 
 </div>
