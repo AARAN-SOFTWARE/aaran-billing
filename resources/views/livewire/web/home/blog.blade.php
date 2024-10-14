@@ -1,5 +1,4 @@
 <div>
-
     <x-web.home-new.items.banner label="Blog" desc=" We Design and develop Outstanding Digital products and digital -
                 first Brands" padding="sm:px-[95px]" padding_mob="px-[40px]" />
 
@@ -42,8 +41,9 @@
                 <div class="space-y-5 pb-16">
                     @if($row->image != 'no image')
                     <a href="{{route('blog.Show',[$row->id])}}">
-                        <div class="w-fill overflow-hidden">
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}" alt="" class="w-full h-[25rem] object-cover transition duration-500 hover:scale-105 ease-out">
+                        <div class="w-fill overflow-hidden shadow-md shadow-gray-400 rounded-sm">
+
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->image) }}" alt="" class="w-full h-[30rem] object-cover transition duration-500 hover:scale-105 ease-out ">
                         </div>
                     </a>
                     @else
@@ -76,7 +76,6 @@
                     </div>
                     <div class="indent-5 text-xs font-lex leading-loose">{{\Illuminate\Support\Str::words($row->body,30)}}</div>
 
-
                 </div>
             </div>
             @empty
@@ -100,6 +99,7 @@
                         </span>
 
                         <span class="absolute top-0 right-0 w-14 h-11 bg-[#F31A49] inline-flex items-center justify-center rounded-r-sm">
+
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
                                 <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                             </svg>
@@ -110,7 +110,13 @@
 
                 @if(session()->get('tenant_id')!='')
                 <div class="">
-                    <x-button.new-x wire:click="create" />
+                    <button class="bg-[#F31A49] text-white text-smd h-11 px-4 rounded-sm inline-flex items-center space-x-1" wire:click="create"><span>New</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5  fill-white">
+                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+
+                    {{-- <x-button.new-x wire:click="create" /> --}}
                 </div>
                 @endif
             </div>
@@ -224,12 +230,12 @@
 
             </x-forms.create>
 
-            <div class="text-2xl font-semibold animate__animated wow bounceInRight" data-wow-duration="3s">Top
+            <div class="text-2xl font-semibold underline animate__animated wow bounceInRight" data-wow-duration="3s">Top
                 Posts
             </div>
 
             <div class="flex-col flex gap-y-6">
-                <div class="bg-white flex-col flex gap-y-4 group ">
+                <div class="bg-white flex-col flex gap-y-5 group ">
                     @foreach($topPost as $row)
                     <div class="w-full h-auto flex gap-x-2 hover:bg-slate-100 group animate__animated wow animate__backInRight " data-wow-duration="3s">
                         <div class="w-2/6 overflow-hidden">
@@ -256,9 +262,11 @@
                 </div>
             </div>
 
+            <div class="w-full border"></div>
             <!-- Blog Category ---------------------------------------------------------------------------------------->
 
-            <div class="text-2xl font-semibold scroll-smooth animate__animated wow bounceInRight" data-wow-duration="3s">Category
+            <div class="text-2xl font-semibold underline scroll-smooth animate__animated wow bounceInRight" data-wow-duration="3s">Category
+
             </div>
 
             <div class="flex-col flex justify-between w-full overflow-y-auto h-72">
@@ -278,6 +286,7 @@
 
             </div>
 
+            <div class="w-full border"></div>
 
             <!-- Tag Filter ------------------------------------------------------------------------------------------->
 
@@ -306,7 +315,7 @@
 
             <!-- Blog Tag --------------------------------------------------------------------------------------------->
 
-            <div class="text-2xl font-semibold my-8">Tags</div>
+            <div class="text-2xl font-semibold my-8 underline">Tags</div>
 
             <div class="text-sm h-64 overflow-y-auto space-y-3">
                 @if($tags)
