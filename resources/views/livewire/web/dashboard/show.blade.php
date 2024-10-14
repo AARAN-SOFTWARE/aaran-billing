@@ -131,24 +131,25 @@
 
 
     </div>
-    <div class="w-full h-60 font-lex flex-col flex justify-center items-center bg-gray-50">
-        <div class="w-7/12 mx-auto flex-col justify-center items-center bg-white rounded-t-md">
+    <div class="w-full h-60 font-lex flex-col flex justify-center items-center bg-gray-100">
+        <div class="w-7/12 mx-auto flex-col justify-center items-center rounded-t-md">
             <div class="w-2/3 mx-auto flex flex-col items-center justify-center py-5 gap-x-5 text-xs space-y-2">
                 <div>Subscribe to <span class="text-red-600">Codexsun</span> Newsletter</div>
-                <div class="text-gray-600">Fast Company's trending stories delivered to you daily</div>
+                <div class="text-gray-600">Stay Connected and get latest updates and more about...</div>
             </div>
         </div>
-        <div class="w-7/12 flex justify-center items-center gap-x-3 bg-white">
+        <div class="w-7/12 flex justify-center items-center gap-x-3">
             <div class="w-2/4 h-full ">
                 <x-input.floating label="Email*"/>
             </div>
 
             <button class=" bg-black text-white h-10 px-4 rounded-md text-sm cursor-pointer">Sign Up</button>
         </div>
-        <div class="w-7/12 mx-auto flex gap-x-5 justify-center py-2 bg-white rounded-b-md">
+        <div class="w-7/12 mx-auto flex gap-x-5 justify-center py-2 rounded-b-md">
 
-            <div class="text-[10px] text-gray-300 underline cursor-pointer">Privacy Policies</div>
-            <div class="text-[10px] text-gray-600 underline cursor-pointer">Fast Company Newsletters</div>
+            <div class="text-[10px] text-gray-400 underline cursor-pointer">Privacy Policies</div>
+            <div class="text-[10px] text-gray-400">/</div>
+            <div class="text-[10px] text-gray-400 underline cursor-pointer">Terms</div>
         </div>
 
     </div>
