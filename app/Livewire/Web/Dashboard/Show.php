@@ -10,9 +10,9 @@ class Show extends Component
     public $blog;
     public function mount($id)
     {
-        $response=Http::get('https://cloud.aaranassociates.com/api/v1/blog');
-        $this->blog=$response->json();
-        $this->blog=$this->blog[$id];
+        $response = Http::get('https://cloud.aaranassociates.com/api/v1/blog');
+        $this->blog = $response->json();
+        $this->blog = $this->blog[$id];
     }
     public function render()
     {
