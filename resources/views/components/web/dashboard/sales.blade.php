@@ -44,5 +44,4 @@
     <div class="pt-5">
         <x-web.dashboard.barchart />
     </div>
-
 </div>
