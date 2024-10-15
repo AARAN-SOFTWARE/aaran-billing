@@ -190,6 +190,32 @@
                                 @error('pincode_name')
                                 <span class="text-red-400">{{$message}}</span>
                                 @enderror
+
+                                <!-- country ------------------------------------------------------------------------->
+                                <x-dropdown.wrapper label="Country" type="countryTyped">
+                                    <div class="relative">
+                                        <x-dropdown.input label="Country" id="country_name"
+                                                          wire:model.live="country_name"
+                                                          wire:keydown.arrow-up="decrementCountry"
+                                                          wire:keydown.arrow-down="incrementCountry"
+                                                          wire:keydown.enter="enterCountry"/>
+                                        <x-dropdown.select>
+                                            @if($countryCollection)
+                                                @forelse ($countryCollection as $i => $country)
+                                                    <x-dropdown.option highlight="{{$highlightCountry === $i}}"
+                                                                       wire:click.prevent="setCountry('{{$country->vname}}','{{$country->id}}')">
+                                                        {{ $country->vname }}
+                                                    </x-dropdown.option>
+                                                @empty
+                                                    <x-dropdown.create wire:click.prevent="countrySave('{{$country_name}}')" label="Country" />
+                                                @endforelse
+                                            @endif
+                                        </x-dropdown.select>
+                                    </div>
+                                </x-dropdown.wrapper>
+                                @error('country_name')
+                                <span class="text-red-400">{{$message}}</span>
+                                @enderror
                             </div>
                         </x-tabs.content>
 
@@ -259,6 +285,8 @@
                                 <x-input.floating wire:model="ifsc_code" label="IFSC Code" />
                                 <x-input.floating wire:model="bank" label="Bank" />
                                 <x-input.floating wire:model="branch" label="Branch" />
+                                <x-input.floating wire:model.live="inv_pfx" label="Invoice Prefix"/>
+                                <x-input.floating wire:model.live="iec_no" label="IEC No"/>
                             </div>
                         </x-tabs.content>
 

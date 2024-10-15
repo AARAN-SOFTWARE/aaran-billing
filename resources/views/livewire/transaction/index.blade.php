@@ -139,9 +139,9 @@
             <!-- Receipt & Payment  ----------------------------------------------------------------------------------->
 
             <div class="flex gap-3 w-full mb-3">
-                <x-radio.btn value="111" wire:model="mode_id">Receipt
+                <x-radio.btn value="111" wire:model="mode_id" wire:change="VchNO">Receipt
                 </x-radio.btn>
-                <x-radio.btn value="110" wire:model="mode_id">Payment
+                <x-radio.btn value="110" wire:model="mode_id" wire:change="VchNO">Payment
                 </x-radio.btn>
             </div>
 

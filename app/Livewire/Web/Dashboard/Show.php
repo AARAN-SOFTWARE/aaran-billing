@@ -10,6 +10,7 @@ class Show extends Component
     public $blog;
     public $collectBlog;
     public $blogIndex;
+
     public function mount($id)
     {
         $this->blogIndex=$id;

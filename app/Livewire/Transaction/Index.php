@@ -33,6 +33,7 @@ class Index extends Component
     public $verified_by;
     public $verified_on;
     public $against_id;
+    public $vch_no;
     #endregion
 
     #region[Mount]
@@ -60,6 +61,7 @@ class Index extends Component
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
                     'contact_id' => $this->contact_id ?: '1',
+                    'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
@@ -90,6 +92,7 @@ class Index extends Component
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
                     'contact_id' => $this->contact_id,
+                    'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id,
@@ -119,10 +122,17 @@ class Index extends Component
     }
     public function contactUpdate()
     {
-        $obj = Contact::find($this->contact_id);
-        $outstanding = $obj->outstanding - $this->common->vname;
-        $obj->outstanding = $outstanding;
-        $obj->save();
+        if ($this->contact_id!='') {
+            $obj = Contact::find($this->contact_id);
+            $outstanding = $obj->outstanding - $this->common->vname;
+            $obj->outstanding = $outstanding;
+            $obj->save();
+        }
+    }
+
+    public function VchNO()
+    {
+        $this->vch_no=Transaction::nextNo($this->mode_id);
     }
     #endregion
 
@@ -548,6 +558,7 @@ class Index extends Component
             $this->common->active_id = $Transaction->active_id;
             $this->contact_id = $Transaction->contact_id;
             $this->contact_name = $Transaction->contact_id ? Contact::find($Transaction->contact_id)->vname : '';
+            $this->vch_no=$Transaction->vch_no;
             $this->paid_to = $Transaction->paid_to;
             $this->purpose = $Transaction->purpose;
             $this->order_id = $Transaction->order_id;
@@ -592,6 +603,7 @@ class Index extends Component
         $this->common->active_id = '1';
         $this->contact_id = '';
         $this->contact_name = '';
+        $this->vch_no='';
         $this->paid_to = '';
         $this->purpose = '';
         $this->order_id = '';

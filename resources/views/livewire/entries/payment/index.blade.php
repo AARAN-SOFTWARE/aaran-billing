@@ -27,6 +27,10 @@
                 <x-table.header-serial></x-table.header-serial>
 
                 <x-table.header-text wire:click.prevent="sortBy ('contact_id')" sort-icon="{{$getListForm->sortAsc}}">
+                    VCH NO
+                </x-table.header-text>
+
+                <x-table.header-text wire:click.prevent="sortBy ('contact_id')" sort-icon="{{$getListForm->sortAsc}}">
                     Contact
                 </x-table.header-text>
 
@@ -51,6 +55,8 @@
                     <x-table.row>
 
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+
+                        <x-table.cell-text left>{{$row->vch_no+0}}</x-table.cell-text>
 
                         <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
 

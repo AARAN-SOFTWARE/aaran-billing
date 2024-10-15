@@ -29,4 +29,10 @@ class Transaction extends Model
         return new TransactionFactory();
     }
 
+    public static function nextNo($value)
+    {
+        return
+            static::where('mode_id', '=', $value)
+                ->max('vch_no') + 1;
+    }
 }

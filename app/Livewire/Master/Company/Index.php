@@ -29,6 +29,8 @@ class Index extends Component
     public string $display_name = '';
     public string $landline = '';
     public string $website = '';
+    public string $inv_pfx='';
+    public string $iec_no='';
     public $logo = '';
     public $old_logo = '';
     public string $pan = '';
@@ -304,6 +306,77 @@ class Index extends Component
     }
     #endregion
 
+    #region[country]
+    public $country_id = '';
+    public $country_name = '';
+    public Collection $countryCollection;
+    public $highlightCountry = 0;
+    public $countryTyped = false;
+
+    public function decrementCountry(): void
+    {
+        if ($this->highlightCountry === 0) {
+            $this->highlightCountry = count($this->countryCollection) - 1;
+            return;
+        }
+        $this->highlightCountry--;
+    }
+
+    public function incrementCountry(): void
+    {
+        if ($this->highlightCountry === count($this->countryCollection) - 1) {
+            $this->highlightCountry = 0;
+            return;
+        }
+        $this->highlightCountry++;
+    }
+
+    public function setCountry($name, $id): void
+    {
+        $this->country_name = $name;
+        $this->country_id = $id;
+        $this->getCountryList();
+    }
+
+    public function enterCountry(): void
+    {
+        $obj = $this->countryCollection[$this->highlightCountry] ?? null;
+
+        $this->country_name = '';
+        $this->countryCollection = Collection::empty();
+        $this->highlightCountry = 0;
+
+        $this->country_name = $obj['vname'] ?? '';
+        $this->country_id = $obj['id'] ?? '';
+    }
+
+    #[On('refresh-country')]
+    public function refreshCountry($v): void
+    {
+        $this->country_id = $v['id'];
+        $this->country_name = $v['name'];
+        $this->countryTyped = false;
+    }
+
+    public function countrySave($name)
+    {
+        $obj = Common::create([
+            'label_id' => 2,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshCountry($v);
+    }
+
+    public function getCountryList(): void
+    {
+        $this->countryCollection = $this->country_name ?
+            Common::search(trim($this->country_name))->where('label_id', '=', '2')->get() :
+            Common::where('label_id', '=', '2')->Orwhere('label_id', '=', '1')->get();
+    }
+#endregion
+
     #region[MSME Type]
     public $msme_type_id = '';
     public $msme_type_name = '';
@@ -398,10 +471,13 @@ class Index extends Component
                     'city_id' => $this->city_id ?: '1',
                     'state_id' => $this->state_id ?: '1',
                     'pincode_id' => $this->pincode_id ?: '1',
+                    'country_id' => $this->country_id ?: '1',
                     'bank' => $this->bank,
                     'acc_no' => $this->acc_no,
                     'ifsc_code' => $this->ifsc_code,
                     'branch' => $this->branch,
+                    'inv_pfx' => $this->inv_pfx,
+                    'iec_no' => $this->iec_no,
                     'user_id' => Auth::id(),
                     'tenant_id' => $this->tenant_id ?: '1',
                     'logo' => $this->save_logo(),
@@ -425,10 +501,13 @@ class Index extends Component
                     'city_id' => $this->city_id ?: '1',
                     'state_id' => $this->state_id ?: '1',
                     'pincode_id' => $this->pincode_id ?: '1',
+                    'country_id' => $this->country_id ?: '1',
                     'bank' => $this->bank,
                     'acc_no' => $this->acc_no,
                     'ifsc_code' => $this->ifsc_code,
                     'branch' => $this->branch,
+                    'inv_pfx' => $this->inv_pfx,
+                    'iec_no' => $this->iec_no,
                     'user_id' => Auth::id(),
                     'tenant_id' => $this->tenant_id ?: '1',
                     'logo' => $this->save_logo(),
@@ -465,6 +544,10 @@ class Index extends Component
         $this->state_name = '';
         $this->pincode_id = '';
         $this->pincode_name = '';
+        $this->country_id='';
+        $this->country_name='';
+        $this->iec_no='';
+        $this->inv_pfx='';
         $this->bank = '';
         $this->acc_no = '';
         $this->ifsc_code = '';
@@ -525,10 +608,14 @@ class Index extends Component
             $this->state_name = $obj->state_id ? Common::find($obj->state_id)->vname : '';
             $this->pincode_id = $obj->pincode_id;
             $this->pincode_name = $obj->pincode_id ? Common::find($obj->pincode_id)->vname : '';
+            $this->country_id=$obj->country_id;
+            $this->country_name = $obj->country_id ? Common::find($obj->country_id)->vname : '';
             $this->bank = $obj->bank;
             $this->acc_no = $obj->acc_no;
             $this->ifsc_code = $obj->ifsc_code;
             $this->branch = $obj->branch;
+            $this->inv_pfx=$obj->inv_pfx;
+            $this->iec_no=$obj->iec_no;
             $this->common->active_id = $obj->active_id;
             $this->old_logo = $obj->logo;
             return $obj;
@@ -560,6 +647,7 @@ class Index extends Component
         $this->getPincodeList();
         $this->getTenants();
         $this->getMsmeTypeList();
+        $this->getCountryList();
         return view('livewire.master.company.index')->with([
             'list' => $this->getListForm->getList(Company::class,function ($query){
                 return $query->where('tenant_id',session()->get('tenant_id'));
