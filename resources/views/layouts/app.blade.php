@@ -9,45 +9,48 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <!-- Styles -->
     @livewireStyles
 </head>
 <body class="font-sans antialiased">
-<x.jet-banner/>
+    <x.jet-banner />
 
-<div x-data="{ sidebarOpen: false }" @keydown.window.escape="sidebarOpen=false"
-     class="min-h-screen bg-white print:bg-white">
-    <div class="flex-1">
+    <div x-data="{ sidebarOpen: false }" @keydown.window.escape="sidebarOpen=false" class="min-h-screen bg-white print:bg-white">
+        <div class="flex-1">
 
-        <x-menu.top-menu>{{$header}}</x-menu.top-menu>
-        <x-menu.side-menu/>
+            <x-menu.top-menu>{{$header}}</x-menu.top-menu>
+            <x-menu.side-menu />
 
-        <!-- Page Content -->
-        <main {{$attributes}} class=" @if (\Route::current()->getName() == 'dashboard') bg-[#F8F8FF] @else bg-white @endif  print:bg-white sm:p-5 p-2 ">
-            {{ $slot }}
-        </main>
+            <!-- Page Content -->
+            <main {{$attributes}} class=" @if (\Route::current()->getName() == 'dashboard') bg-[#F8F8FF] @else bg-white @endif  print:bg-white sm:p-5 p-2 ">
+                {{ $slot }}
+            </main>
 
+        </div>
     </div>
-</div>
-<x-alerts.notification/>
+    <x-alerts.notification />
 
-@stack('modals')
+    @stack('modals')
 
-@livewireScripts
+    @livewireScripts
 
-<script>
-    function copyToClipboard(id) {
-        navigator.clipboard.writeText(id);
-    }
-</script>
+    <script>
+        function copyToClipboard(id) {
+            navigator.clipboard.writeText(id);
+        }
 
-@stack('custom-scripts')
+    </script>
 
-@if (\Route::current()->getName() == 'dashboard')
+
+
+    @stack('custom-scripts')
+
+    @if (\Route::current()->getName() == 'dashboard')
     <x-web.dashboard.copyright />
-@endif
+    @endif
 </body>
 </html>

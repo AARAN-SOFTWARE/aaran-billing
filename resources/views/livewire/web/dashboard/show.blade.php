@@ -123,7 +123,6 @@
 
 {{-- <div class="w-full border"></div> --}}
 
-
 </div>
 <div class="w-full h-60 font-lex flex-col flex justify-center items-center bg-gray-50">
     <div class="w-7/12 mx-auto flex-col justify-center items-center bg-white rounded-t-md">
