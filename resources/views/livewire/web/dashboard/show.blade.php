@@ -80,48 +80,55 @@
             <div class="font-lex text-sm font-semibold">FURTHER READING</div>
 
 
-            <div class="w-full flex gap-5 ">
-                @for($i = 0; $i < 3; $i++) <div class="w-1/3 overflow-hidden rounded-md relative group cursor-pointer">
-                    <img src="../../../../images/wall1.webp" alt="" class="w-full h-40 object-cover duration-500 ease-in-out transition group-hover:scale-105 rounded-md">
-                    <div class="absolute bottom-0 translate-y-20 group-hover:translate-y-0 transition-all duration-300 ease-in-out p-3 text-xs text-white bg-black/40">
-                        <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. </div>
+            <div class="w-full grid grid-cols-3 gap-5 ">
+                @foreach ($collectBlog as $index=>$row )
+                @if ($index!=$blogIndex)
+                @if($index<=3) <a href="{{ route('showArticles',[$index]) }}" class=" overflow-hidden rounded-md relative group cursor-pointer">
+
+                    <img src="{{ $row['image'] }}" alt="" class="w-full h-40 object-cover duration-500 ease-in-out transition group-hover:scale-105 rounded-md">
+                    <div class="w-full absolute bottom-0 translate-y-20 group-hover:translate-y-0 transition-all duration-300 ease-in-out p-3 text-xs text-white bg-black/40">
+                        <div>{{ $row['vname'] }}</div>
+
+
                     </div>
+                    </a>
+
+                    @endif
+                    @endif
+                    @endforeach
             </div>
+        </div>
+        <div class="w-full border"></div>
+        <div class="py-10 space-y-5">
+            <div class="space-y-3 font-lex font-semibold">EXPLORE TOPICS</div>
+
+            <div class="flex flex-wrap gap-5 text-gray-600 font-lex text-xs ">
+                @for($i = 0; $i < 16; $i++) <div class=" px-4 py-1 border border-gray-600 rounded-md font-bold text-gray-600 hover:text-red-600 
+            hover:border-red-600  cursor-pointer">Topics</div>
             @endfor
         </div>
     </div>
-    <div class="w-full border"></div>
-    <div class="py-10 space-y-5">
-        <div class="space-y-3 font-lex font-semibold">EXPLORE TOPICS</div>
 
-        <div class="flex flex-wrap gap-5 text-gray-600 font-lex text-xs ">
-            @for($i = 0; $i < 16; $i++) <div class=" px-4 py-1 border border-gray-600 rounded-md font-bold text-gray-600 hover:text-red-600 
-            hover:border-red-600  cursor-pointer">Topics</div>
-        @endfor
+    <div class=" flex justify-between items-center gap-x-5 font-lex text-gray-800 py-10 hover:text-blue-800 group">
+        <a href="{{ route('showArticles',[$blogIndex==0?0:$blogIndex-1]) }}" class="border px-4 py-2 text-xs flex items-center justify-center gap-x-5 rounded-sm cursor cursor-pointer hover:border-blue-800 transition-all duration-300 ease-in-out">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800 group-hover:text-blue-800">
+
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+            </svg>
+            <span class="">Previous</span>
+        </a>
+        <a href="{{ route('showArticles',[isset($collectBlog[$blogIndex+1]) ? $blogIndex+1 :0]) }}" class="border px-4 py-2 text-xs flex items-center justify-center gap-x-5 rounded-sm cursor cursor-pointer hover:border-blue-800 transition-all duration-300 ease-in-out">
+
+            <span class="">Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800 group-hover:text-blue-800">
+
+
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+            </svg>
+        </a>
     </div>
-</div>
 
-<div class=" flex justify-between items-center gap-x-5 font-lex text-gray-800 py-10 hover:text-blue-800 group">
-    <button class="border px-4 py-2 text-xs flex items-center justify-center gap-x-5 rounded-sm cursor cursor-pointer hover:border-blue-800 transition-all duration-300 ease-in-out">
-
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800 group-hover:text-blue-800">
-
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
-        </svg>
-        <span class="">Previous</span>
-    </button>
-    <button class="border px-4 py-2 text-xs flex items-center justify-center gap-x-5 rounded-sm cursor cursor-pointer hover:border-blue-800 transition-all duration-300 ease-in-out">
-
-        <span class="">Next</span>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800 group-hover:text-blue-800">
-
-
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-        </svg>
-    </button>
-</div>
-
-{{-- <div class="w-full border"></div> --}}
+    {{-- <div class="w-full border"></div> --}}
 
 </div>
 <div class="w-full h-60 font-lex flex-col flex justify-center items-center bg-gray-50">
@@ -139,11 +146,9 @@
         <button class=" bg-black text-white h-10 px-4 rounded-md text-sm cursor-pointer">Sign Up</button>
     </div>
     <div class="w-7/12 mx-auto flex gap-x-5 justify-center py-2 bg-white rounded-b-md">
-
         <div class="text-[10px] text-gray-300 underline cursor-pointer">Privacy Policies</div>
         <div class="text-[10px] text-gray-600 underline cursor-pointer">Fast Company Newsletters</div>
     </div>
-
 </div>
 </div>
 </div>
