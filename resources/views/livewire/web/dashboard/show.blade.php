@@ -58,16 +58,27 @@
         <div class="w-full border"></div>
 
         <div class="space-y-3 py-10">
-            <div class="font-lex text-sm">ABOUT THE AUTHOR</div>
-            <div class=" text-gray-600 text-sm ">
-                <span class="uppercase text-red-600 pl-10 pr-2"> {{ $blog['user_name'] }}</span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem quasi quibusdam deserunt placeat ipsa cum. Quos blanditiis itaque saepe consequatur. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem, eum?. Lorem ipsum dolor sit amet consectetur adipisicing elit. In porro repudiandae rem nostrum aliquid exercitationem vel?
+            <div class="font-lex text-sm font-semibold">ABOUT THE AUTHOR</div>
+            <div class="flex items-center gap-x-4">
+                <div>
+                    <img src="../../../../images/t4.webp" alt="" class="w-10 h-10 rounded-full">
+                </div>
+
+                <div class="flex-col flex   font-semibold justify-start items-start gap-y-1">
+                    <div class="capitalize text-gray-800 text-sm underline"> {{ $blog['user_name'] }}</div>
+                    <div class="text-gray-600 text-xs">Content Creator</div>
+                </div>
+            </div>
+            <div class=" text-gray-600 text-sm">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem quasi quibusdam deserunt placeat ipsa cum. Quos blanditiis itaque saepe consequatur. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem, eum?. Lorem ipsum dolor sit amet consectetur adipisicing elit. In porro repudiandae rem nostrum aliquid exercitationem vel.<a class="px-2 font-semibold cursor-pointer">Read more...</a>
             </div>
         </div>
 
         <div class="w-full border"></div>
 
         <div class="py-10 space-y-5">
-            <div class="font-lex text-sm">FURTHER READING</div>
+            <div class="font-lex text-sm font-semibold">FURTHER READING</div>
+
 
             <div class="w-full flex gap-5 ">
                 @for($i = 0; $i < 3; $i++) <div class="w-1/3 overflow-hidden rounded-md relative group cursor-pointer">
@@ -81,7 +92,8 @@
     </div>
     <div class="w-full border"></div>
     <div class="py-10 space-y-5">
-        <div class="space-y-3 font-bold">EXPLORE TOPICS</div>
+        <div class="space-y-3 font-lex font-semibold">EXPLORE TOPICS</div>
+
         <div class="flex flex-wrap gap-5 text-gray-600 font-lex text-xs ">
             @for($i = 0; $i < 16; $i++) <div class=" px-4 py-1 border border-gray-600 rounded-md font-bold text-gray-600 hover:text-red-600 
             hover:border-red-600  cursor-pointer">Topics</div>
@@ -89,22 +101,24 @@
     </div>
 </div>
 
-<div class=" flex justify-between items-center gap-x-5 font-lex text-blue-800 py-10">
-    <div class="border px-4 py-2 text-xs flex items-center justify-center gap-x-5 rounded-sm cursor cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-blue-800">
+<div class=" flex justify-between items-center gap-x-5 font-lex text-gray-800 py-10 hover:text-blue-800 group">
+    <button class="border px-4 py-2 text-xs flex items-center justify-center gap-x-5 rounded-sm cursor cursor-pointer hover:border-blue-800 transition-all duration-300 ease-in-out">
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800 group-hover:text-blue-800">
+
             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
         </svg>
         <span class="">Previous</span>
-    </div>
-    <div class="border px-4 py-2 text-xs flex items-center justify-center gap-x-5 rounded-sm cursor cursor-pointer">
+    </button>
+    <button class="border px-4 py-2 text-xs flex items-center justify-center gap-x-5 rounded-sm cursor cursor-pointer hover:border-blue-800 transition-all duration-300 ease-in-out">
 
+        <span class="">Next</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800 group-hover:text-blue-800">
 
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-blue-800">
 
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
         </svg>
-        <span class="">Next</span>
-    </div>
+    </button>
 </div>
 
 {{-- <div class="w-full border"></div> --}}
