@@ -34,6 +34,7 @@ class Index extends Component
     public $verified_by;
     public $verified_on;
     public $against_id;
+    public $vch_no;
     #endregion
 
     #region[Mount]
@@ -42,9 +43,11 @@ class Index extends Component
         if ($id == 1) {
             $this->mode_id = 111;
             $this->mode_name = Common::find(111)->vname;
+            $this->vch_no=Transaction::nextNo($this->mode_id);
         } elseif ($id == 2) {
             $this->mode_id = 110;
             $this->mode_name = Common::find(110)->vname;
+            $this->vch_no=Transaction::nextNo($this->mode_id);
         }
         $this->trans_type_id = 108;
 //        $this->receipt_type_id = 60;
@@ -62,6 +65,7 @@ class Index extends Component
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
                     'contact_id' => $this->contact_id ?: '1',
+                    'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
@@ -92,6 +96,7 @@ class Index extends Component
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
                     'contact_id' => $this->contact_id,
+                    'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id,
@@ -551,6 +556,7 @@ class Index extends Component
             $this->common->active_id = $Transaction->active_id;
             $this->contact_id = $Transaction->contact_id;
             $this->contact_name = $Transaction->contact_id ? Contact::find($Transaction->contact_id)->vname : '';
+            $this->vch_no=$Transaction->vch_no;
             $this->paid_to = $Transaction->paid_to;
             $this->purpose = $Transaction->purpose;
             $this->order_id = $Transaction->order_id;

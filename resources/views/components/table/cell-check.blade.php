@@ -1,4 +1,4 @@
-<td class="border-r border-neutral-300">
+<td class="border-r border-neutral-300" >
     <label for="user2335" class="flex justify-center items-center cursor-pointer text-neutral-600 dark:text-neutral-300 ">
         <div class="relative flex items-center">
             <input type="checkbox" id="user2335" class="before:content[''] peer relative size-4 cursor-pointer

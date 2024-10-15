@@ -19,4 +19,5 @@ return [
     Aaran\Demodata\Providers\DemodataServiceProvider::class,
     Aaran\Taskmanager\Providers\TaskmanagerServiceProvider::class,
 
+    Aaran\Conclusion\Providers\ConclusionServiceProvider::class,
 ];
