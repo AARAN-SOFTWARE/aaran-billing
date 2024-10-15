@@ -110,13 +110,13 @@
 
                 @if(session()->get('tenant_id')!='')
                 <div class="">
-                    <button class="bg-[#F31A49] text-white text-smd h-11 px-4 rounded-sm inline-flex items-center space-x-1" wire:click="create"><span>New</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5  fill-white">
-                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
+                    {{-- <button class="bg-pink-600 text-white text-md h-11 px-4 rounded-md " wire:click="create">New --}}
 
-                    {{-- <x-button.new-x wire:click="create" /> --}}
+                    </button>
+                    <div>
+                        <x-button.new-x wire:click="create" />
+                    </div>
+
                 </div>
                 @endif
             </div>
