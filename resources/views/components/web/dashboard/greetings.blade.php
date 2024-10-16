@@ -3,7 +3,9 @@
     <div class="relative h-full">
         <img src="../../../../images/wall1.webp" alt="" class="w-full h-full brightness-75 rounded-lg hover:brightness-100 transition-all duration-300 ease-out">
         <div class="absolute sm:top-40 top-8 w-full text-center p-5 space-y-4">
-            <div class="w-full text-center font-roboto  fsm:ont-semi text-lgbold text-2xl text-white">
+            <div class="w-full text-center font-lex  font-semibold sm:text-lg text-2xl text-white">
+
+
                 <span class="w-full">{{ App\Helper\Core::greetings() }},
                 </span>&nbsp;<span>{{ Auth::user()->name }}</span>&nbsp;&nbsp;<span>👋</span>
             </div>

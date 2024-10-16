@@ -96,13 +96,13 @@ class Index extends Component
             ->firstOrFail();
 
         return Collection::make([
-            'total_sales' => ConvertTo::rupeesFormat($total_sales->grand_total ?? 0 ),
+            'total_sales' => ConvertTo::rupeesFormat($total_sales->grand_total ?? 0),
             'month_sales' => ConvertTo::rupeesFormat($month_sales->grand_total ?? 0),
-            'total_purchase' => ConvertTo::rupeesFormat($total_purchase->grand_total ?? 0 ),
-            'month_purchase' => ConvertTo::rupeesFormat($month_purchase->grand_tota ?? 0 ),
-            'total_receivable' => ConvertTo::rupeesFormat($total_receivable->receipt_amount ?? 0 ),
-            'month_receivable' => ConvertTo::rupeesFormat($month_receivable->receipt_amount ?? 0 ),
-            'total_payable' => ConvertTo::rupeesFormat($total_payable->payment_amount ?? 0 ),
+            'total_purchase' => ConvertTo::rupeesFormat($total_purchase->grand_total ?? 0),
+            'month_purchase' => ConvertTo::rupeesFormat($month_purchase->grand_total ?? 0),
+            'total_receivable' => ConvertTo::rupeesFormat($total_receivable->receipt_amount ?? 0),
+            'month_receivable' => ConvertTo::rupeesFormat($month_receivable->receipt_amount ?? 0),
+            'total_payable' => ConvertTo::rupeesFormat($total_payable->payment_amount ?? 0),
             'month_payable' => ConvertTo::rupeesFormat($month_payable->payment_amount ?? 0),
             'net_profit' => ConvertTo::rupeesFormat($total_sales->grand_total - $total_purchase->grand_total ?? 0),
             'month_profit' => ConvertTo::rupeesFormat($month_sales->grand_total - $month_purchase->grand_total ?? 0),
@@ -125,7 +125,7 @@ class Index extends Component
             'purchase_date' => $purchase->purchase_date ?? '-',
             'payment' => ConvertTo::rupeesFormat($payment->vname ?? 0),
             'payment_date' => $payment->vdate ?? '-',
-            'receipt' => ConvertTo::rupeesFormat($receipt->vname ??0),
+            'receipt' => ConvertTo::rupeesFormat($receipt->vname ?? 0),
             'receipt_date' => $receipt->vdate ?? '-',
         ]);
     }
@@ -155,8 +155,8 @@ class Index extends Component
 
     public function getBlog()
     {
-        $response=Http::get('https://cloud.aaranassociates.com/api/v1/blog');
-        $this->blogs=$response->json();
+        $response = Http::get('https://cloud.aaranassociates.com/api/v1/blog');
+        $this->blogs = $response->json();
     }
 
 
