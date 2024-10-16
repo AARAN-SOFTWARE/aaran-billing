@@ -51,7 +51,7 @@
 
             </div>
             <div class="text-gray-600 font-lex indent-10 leading-loose">
-                {{$blog['body']}}
+                {{ \Illuminate\Support\Str::words( $blog['body'], 8) }}
             </div>
         </div>
 
@@ -92,10 +92,11 @@
                 @if($index<=3) <a href="{{ route('showArticles',[$index]) }}" class=" overflow-hidden rounded-md relative group cursor-pointer">
 
                     <img src="{{ $row['image'] }}" alt="" class="w-full h-40 object-cover duration-500 ease-in-out transition group-hover:scale-105 rounded-md" />
-                    <div class="w-full absolute bottom-0 translate-y-20 group-hover:translate-y-0 transition-all duration-300 ease-in-out
+                    <div class="w-full absolute bottom-0 font-lex
                                     p-3 text-xs text-white bg-black/40">
-
                         <div>{{ $row['vname'] }}</div>
+                        <div>{{ $row['body'] }}</div>
+
 
                     </div>
                     </a>
