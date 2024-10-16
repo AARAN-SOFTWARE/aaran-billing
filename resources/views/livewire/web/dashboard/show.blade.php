@@ -51,7 +51,7 @@
 
             </div>
             <div class="text-gray-600 font-lex indent-10 leading-loose">
-                {{ \Illuminate\Support\Str::words( $blog['body'], 8) }}
+                {{ $blog['body'] }}
             </div>
         </div>
 
@@ -61,20 +61,17 @@
             <div class="font-lex text-sm font-semibold">About the Author</div>
             <div class="flex items-center gap-x-4">
                 <div>
-                    <img src="../../../../images/t4.webp" alt="" class="w-10 h-10 rounded-full">
+                    <img src="{{ $blog['user_image'] }}" alt="" class="w-10 h-10 rounded-full">
                 </div>
 
                 <div class="flex-col flex   font-semibold justify-start items-start gap-y-1">
                     <div class="capitalize text-gray-800 text-sm underline"> {{ $blog['user_name'] }}</div>
-                    <div class="text-gray-600 text-xs">Content Creator</div>
+                    <div class="text-gray-600 text-xs">{{ $blog['user_role'] }}</div>
                 </div>
             </div>
             <div class=" text-gray-600 text-sm">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem quasi quibusdam deserunt placeat
-                ipsa cum. Quos blanditiis itaque saepe consequatur. Lorem ipsum dolor sit amet consectetur, adipisicing
-                elit. Exercitationem, eum?. Lorem ipsum dolor sit amet consectetur adipisicing elit. In porro
-                repudiandae rem nostrum aliquid exercitationem vel.
-                <a class="px-2 font-semibold cursor-pointer">Read more...</a>
+                {{ $blog['user_bio'] }}
+{{--                <a class="px-2 font-semibold cursor-pointer">Read more...</a>--}}
             </div>
         </div>
 
@@ -91,11 +88,12 @@
 
                 @if($index<=3) <a href="{{ route('showArticles',[$index]) }}" class=" overflow-hidden rounded-md relative group cursor-pointer">
 
-                    <img src="{{ $row['image'] }}" alt="" class="w-full h-40 object-cover duration-500 ease-in-out transition group-hover:scale-105 rounded-md" />
+                    <img src="{{ $row['image'] }}" alt=""
+                         class="w-full h-40 object-cover duration-500 ease-in-out transition group-hover:scale-105 rounded-md" />
                     <div class="w-full absolute bottom-0 font-lex
                                     p-3 text-xs text-white bg-black/40">
-                        <div>{{ $row['vname'] }}</div>
-                        <div>{{ $row['body'] }}</div>
+                        <div class="text-[16px]">{{ $row['vname'] }}</div>
+                        <div class="text-xs"> {{ \Illuminate\Support\Str::words( $row['body'], 8) }}</div>
 
 
                     </div>
@@ -113,9 +111,9 @@
             <div class="space-y-3 font-lex font-semibold">Explore topics</div>
 
             <div class="flex flex-wrap gap-5 text-gray-600 font-lex text-xs ">
-                @foreach ($collectBlog as $index=>$row )
+                @foreach ($blogCategory as $index=>$row )
                 <div class=" px-4 py-1 border border-gray-600 rounded-md font-bold text-gray-600 hover:text-red-600
-            hover:border-red-600  cursor-pointer">{{$row['vname']}}
+            hover:border-red-600  cursor-pointer">{{$row['category_name']}}
                 </div>
                 @endforeach
             </div>
