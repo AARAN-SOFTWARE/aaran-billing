@@ -3,7 +3,7 @@
 ])
 <div class="sm:w-5/12 h-auto grid sm:grid-cols-2 grid-col-1 gap-5 font-lex">
     {{-- Purchase --}}
-    <div class="bg-white rounded-md border-t-2 border-[#845ADF] flex flex-col justify-evenly">
+    <div class="bg-white rounded-md border-t-2 border-[#845ADF] flex flex-col justify-evenly hover:shadow-md">
         <div class="flex flex-row justify-between items-center pt-5 px-5">
             <div class="space-y-2">
                 <div class="text-md font-semibold">Purchase</div>
@@ -48,7 +48,8 @@
 
     {{-- Receivables --}}
 
-    <div class="bg-white rounded-md border-t-2 border-[#F5B849] flex flex-col justify-evenly">
+    <div class="bg-white rounded-md border-t-2 border-[#F5B849] flex flex-col justify-evenly hover:shadow-md">
+
 
         <div class="flex flex-row justify-between items-center pt-5 px-5">
             <div class="space-y-2">
@@ -88,7 +89,8 @@
 
     {{-- Payables --}}
 
-    <div class="bg-white rounded-md border-t-2 border-[#E6533C] flex flex-col justify-evenly">
+    <div class="bg-white rounded-md border-t-2 border-[#E6533C] flex flex-col justify-evenly hover:shadow-md">
+
         <div class="flex flex-row justify-between items-center pt-5 px-5">
             <div class="space-y-2">
                 <div class="text-md font-semibold">Payables</div>
@@ -154,10 +156,10 @@
 
 
     {{-- Net Prize --}}
-    <div class="bg-white rounded-md border-t-2 border-[#26BF94] flex flex-col justify-evenly">
+    <div class="bg-white rounded-md border-t-2 border-[#26BF94] flex flex-col justify-evenly hover:shadow-md">
         <div class="flex flex-row justify-between items-center pt-5 px-5">
             <div class="space-y-2">
-                <div class="text-md font-semibold">Payables</div>
+                <div class="text-md font-semibold">Net Profit</div>
                 <div class="sm:text-2xl text-md text-[#26BF94] font-semibold">{{$transactions['net_profit']}}</div>
             </div>
             <div class="w-16 h-16">
@@ -192,7 +194,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                     </svg>
                 </a>
-
             </div>
         </div>
     </div>

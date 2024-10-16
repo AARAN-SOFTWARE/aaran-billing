@@ -51,7 +51,7 @@ class Index extends Component
                 'company_id' => $company,
                 'contact_id' => $contact,
                 'invoice_no' => $invoice_no,
-                'invoice_date' => $this->randomDate('2024-01-01', '2024-12-31'),
+                'invoice_date' => $this->randomDate('2023-01-01', '2024-12-31'),
                 'sales_type' => '1',
                 'order_id' => $order,
                 'billing_id' => $billing,
