@@ -25,11 +25,14 @@ class Index extends Component
     public $blogs;
     public $user;
 
+    public $monthlyTotals = [];
+
 
     public function mount()
     {
         $this->transactions = $this->getTransactions();
         $this->entries = $this->getEntries();
+        $this->fetchMonthlyTotals();
 
     }
 
@@ -159,7 +162,16 @@ class Index extends Component
         $this->blogs = $response->json();
     }
 
-
+    
+    public function fetchMonthlyTotals()
+    {
+        $this->monthlyTotals = Sale::selectRaw('MONTH(invoice_date) as month, YEAR(invoice_date) as year, SUM(grand_total) as total')
+            ->where('company_id', '=', session()->get('company_id'))
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'asc')
+            ->orderBy('month', 'asc')
+            ->get();
+    }
 
     public function render()
     {
