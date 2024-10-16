@@ -44,8 +44,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var xValues = @json($monthlyTotals - > pluck('month')); // Get months dynamically
-            var yValues = @json($monthlyTotals - > pluck('total')); // Get totals dynamically
+            var xValues = @json($monthlyTotals->pluck('month')); // Get months dynamically
+            var yValues = @json($monthlyTotals->pluck('total')); // Get totals dynamically
 
             var barColors = Array(xValues.length).fill("#23B7E5"); // Set color for each bar
 
