@@ -1,8 +1,13 @@
 <div class="w-full bg-white">
+
     <x-slot name="header">Articles</x-slot>
-    <x-web.home-new.items.banner label="Articles"
-                                 desc="Our Library provides all the necessary direct and indirect tax-related data." padding="sm:px-[160px]" padding_mob="px-[40px]"/>
-    <x-slot name="header">Show</x-slot>
+
+    <x-web.home-new.items.banner
+        label="Articles"
+        desc="Our Library provides all the necessary direct and indirect tax-related data."
+        padding="sm:px-[160px]" padding_mob="px-[40px]"/>
+
+
     <div class="w-7/12 mx-auto mt-20">
 
         <div class="w-full h-auto flex flex-col my-14 gap-y-5">
@@ -13,8 +18,6 @@
             <div class="uppercase flex gap-x-3 text-red-600 font-lex">
 
                 <span class="text-gray-600">{{ date('d-m-Y', strtotime($blog['created_at'])) }}</span>
-
-                {{-- // <span>{{ \Carbon\Carbon::parse($blog['created_at']->format('d/m/Y')) }}</span> --}}
 
                 <span>
                     <span class="text-gray-900">| &nbsp;</span>
@@ -77,8 +80,8 @@
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem quasi quibusdam deserunt placeat
                 ipsa cum. Quos blanditiis itaque saepe consequatur. Lorem ipsum dolor sit amet consectetur, adipisicing
                 elit. Exercitationem, eum?. Lorem ipsum dolor sit amet consectetur adipisicing elit. In porro
-                repudiandae rem nostrum aliquid exercitationem vel.<a class="px-2 font-semibold cursor-pointer">Read
-                    more...</a>
+                repudiandae rem nostrum aliquid exercitationem vel.
+                <a class="px-2 font-semibold cursor-pointer">Read more...</a>
             </div>
         </div>
 
@@ -90,23 +93,28 @@
 
             <div class="w-full grid grid-cols-3 gap-5 ">
                 @foreach ($collectBlog as $index=>$row )
-                    @if ($index!=$blogIndex)
+
+                    @if ($index != $blogIndex)
+
                         @if($index<=3)
                             <a href="{{ route('showArticles',[$index]) }}"
                                class=" overflow-hidden rounded-md relative group cursor-pointer">
 
                                 <img src="{{ $row['image'] }}" alt=""
-                                     class="w-full h-40 object-cover duration-500 ease-in-out transition group-hover:scale-105 rounded-md">
+                                     class="w-full h-40 object-cover duration-500 ease-in-out transition group-hover:scale-105 rounded-md"/>
                                 <div
-                                    class="w-full absolute bottom-0 translate-y-20 group-hover:translate-y-0 transition-all duration-300 ease-in-out p-3 text-xs text-white bg-black/40">
-                                    <div>{{ $row['vname'] }}</div>
+                                    class="w-full absolute bottom-0 translate-y-20 group-hover:translate-y-0 transition-all duration-300 ease-in-out
+                                    p-3 text-xs text-white bg-black/40">
 
+                                    <div>{{ $row['vname'] }}</div>
 
                                 </div>
                             </a>
 
                         @endif
+
                     @endif
+
                 @endforeach
             </div>
         </div>
@@ -115,11 +123,11 @@
             <div class="space-y-3 font-lex font-semibold">Explore topics</div>
 
             <div class="flex flex-wrap gap-5 text-gray-600 font-lex text-xs ">
-                @for($i = 0; $i < 16; $i++)
+                @foreach ($collectBlog as $index=>$row )
                     <div class=" px-4 py-1 border border-gray-600 rounded-md font-bold text-gray-600 hover:text-red-600
-            hover:border-red-600  cursor-pointer">Topics
+            hover:border-red-600  cursor-pointer">{{$row['vname']}}
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
 

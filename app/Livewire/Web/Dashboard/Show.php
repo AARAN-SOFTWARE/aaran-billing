@@ -14,12 +14,11 @@ class Show extends Component
     public function mount($id)
     {
         $this->blogIndex=$id;
-        $response = Http::get('https://cloud.aaranassociates.com/api/v1/blog');
-        $this->collectBlog = $response->json();
+        $this->collectBlog = Http::get('https://cloud.aaranassociates.com/api/v1/blog')->json();
         $this->blog = $this->collectBlog[$id];
     }
 
-    
+
     public function render()
     {
         return view('livewire.web.dashboard.show');
