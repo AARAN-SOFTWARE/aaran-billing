@@ -1,7 +1,7 @@
 @props([
 'transactions' => [],
 ])
-<div class="sm:w-5/12 h-auto grid sm:grid-cols-2 grid-col-1 gap-5">
+<div class="sm:w-5/12 h-auto grid sm:grid-cols-2 grid-col-1 gap-5 font-lex">
     {{-- Purchase --}}
     <div class="bg-white rounded-md border-t-2 border-[#845ADF] flex flex-col justify-evenly">
         <div class="flex flex-row justify-between items-center pt-5 px-5">
