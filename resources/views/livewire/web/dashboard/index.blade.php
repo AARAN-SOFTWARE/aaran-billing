@@ -53,8 +53,6 @@
 
                 <div class="pt-5">
                     <div>
-                        <h2>Monthly Sales Totals</h2>
-
                         @if($monthlyTotals->isEmpty())
                         <p>No sales data available for this company.</p>
                         @else
@@ -62,8 +60,8 @@
 
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
-                                var xValues = @json($monthlyTotals->pluck('month')); // Corrected
-                                var yValues = @json($monthlyTotals->pluck('total')); // Corrected
+                                var xValues = @json($monthlyTotals -> pluck('month')); // Corrected
+                                var yValues = @json($monthlyTotals -> pluck('total')); // Corrected
 
                                 var barColors = Array(xValues.length).fill("#23B7E5"); // Set color for each bar
                                 new Chart("myChart", {
@@ -176,33 +174,6 @@
             </div>
         </div>
     </div>
-</div>
-
-<div>
-    <h2>Monthly Sales Totals</h2>
-
-    @if($monthlyTotals->isEmpty())
-    <p>No sales data available for this company.</p>
-    @else
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Month</th>
-                <th>Year</th>
-                <th>Total Sales</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($monthlyTotals as $total)
-            <tr>
-                <td>{{ $total->month }}</td>
-                <td>{{ $total->year }}</td>
-                <td>{{ number_format($total->total, 2) }}</td> <!-- Format total -->
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    @endif
 </div>
 
 
