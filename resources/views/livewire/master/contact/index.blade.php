@@ -47,30 +47,30 @@
                         <x-table.cell-text><a href="{{route('contactReport',[$row->id])}}"> {{$index+1}}</a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text left><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->vname}}</a>
+                        <x-table.cell-text left><a href="{{route('contactReport',[$row->id])}}"> {{$row->vname}}</a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text><a href="{{route('contacts.upsert',[$row->id])}}"> {{$row->mobile}}</a>
+                        <x-table.cell-text><a href="{{route('contactReport',[$row->id])}}"> {{$row->mobile}}</a>
                         </x-table.cell-text>
 
 
 
                         <x-table.cell-text>
-                            <a href="{{route('contacts.upsert',[$row->id])}}" class="{{$row->contact_type == 'Debtor'?:'text-orange-400'}}">
+                            <a href="{{route('contactReport',[$row->id])}}" class="{{$row->contact_type == 'Debtor'?:'text-orange-400'}}">
                                 {{$row->contact_type}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text><a
-                                href="{{route('contacts.upsert',[$row->id])}}"> {{$row->contact_person}}</a>
+                                href="{{route('contactReport',[$row->id])}}"> {{$row->contact_person}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text><a
-                                href="{{route('contacts.upsert',[$row->id])}}"> {{$row->gstin}}</a>
+                                href="{{route('contactReport',[$row->id])}}"> {{$row->gstin}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text><a
-                                href="{{route('contacts.upsert',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>
+                                href="{{route('contactReport',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>
                         </x-table.cell-text>
 
                         <td class="max-w-max print:hidden">

@@ -1,7 +1,7 @@
 
 <a  target="_blank"
     class="tab-button sm:px-6 px-4 sm:py-[7px] py-[6px] relative rounded group overflow-hidden font-medium
-    bg-violet-600 inline-block text-center" {{$attributes}}>
+    bg-violet-600 inline-block text-center cursor-pointer" {{$attributes}}>
                 <span
                     class="absolute top-0 left-0 flex h-full w-0 mr-0 transition-all
                     duration-500 ease-out transform translate-x-0 group-hover:w-full opacity-90
