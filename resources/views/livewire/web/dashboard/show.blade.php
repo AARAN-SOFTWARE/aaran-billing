@@ -173,13 +173,13 @@
 
             <button class="h-10 px-4 text-sm text-white bg-black rounded-md cursor-pointer ">Sign Up</button>
         </div>
-        <div class="flex justify-center w-7/12 py-2 mx-auto gap-x-5 rounded-b-md">
+        <div class="flex justify-center w-7/12 py-2 mx-auto gap-x-2 rounded-b-md">
 
-            <div class="text-[10px] text-gray-400 underline cursor-pointer">Privacy Policies</div>
+            <div class="text-[10px] text-gray-400">By submitting this form, I agree to the Codexsun </div>
+            <a href="{{route('policy.show')}}" class="text-[10px] text-gray-400 underline cursor-pointer">Privacy Policy</a>
             <div class="text-[10px] text-gray-400">/</div>
-            <div class="text-[10px] text-gray-400 underline cursor-pointer">Terms</div>
+            <a  href="{{route('terms.show')}}" class="text-[10px] text-gray-400 underline cursor-pointer">Terms</a>
         </div>
 
     </div>
-</div>
 </div>
