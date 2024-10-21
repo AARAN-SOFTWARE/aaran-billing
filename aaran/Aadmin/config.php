@@ -2,7 +2,7 @@
 
 return [
 
-    'soft_version' => '1.0.0',
+    'soft_version' => '1.0.0.187.100',
 
     'db_version' => '1.0.0',
 

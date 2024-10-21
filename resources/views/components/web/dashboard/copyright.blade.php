@@ -3,7 +3,5 @@
     <span> <b>Aaran InfoTech</b> © 2020 - 2024 — All Rights Reserved.</span>
     <div class="absolute sm:bottom-3  bottom-1 sm:right-4 text-gray-500">
         v-{{config('aadmin.soft_version')}}
-        &nbsp;-&nbsp;{{config('aadmin.git_version')}}
-        &nbsp;-&nbsp;{{\Livewire\str()->ucfirst(config('aadmin.app_type'))}}
     </div>
 </div>
