@@ -13,8 +13,8 @@ return [
         Customise::blog(),
         Customise::gstapi(),
         Customise::transaction(),
-        Customise::demodata(),
-        Customise::taskManager(),
+//        Customise::demodata(),
+//        Customise::taskManager(),
         Customise::exportsales(),
     ],
     'SalesEntry' => [
