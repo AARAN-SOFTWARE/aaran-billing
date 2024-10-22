@@ -1,7 +1,7 @@
 @props([
 'height'=>'h-64',
 'width'=>'w-full',
-'placeholder'
+'placeholder'=>null
 ])
 
 <div wire:ignore.self class="rounded-md shadow-sm" x-data="{
@@ -24,3 +24,5 @@
                     placeholder-gray-400 text-base focus:outline-none
                     focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-150 ease-in-out"></trix-editor>
 </div>
+
+

@@ -69,6 +69,16 @@ class Index extends Component
                 'gst_percent' => $this->gst_percent,
 
             ]);
+
+            $updateContact = Contact::where('id', $contact)->first();
+            if ($updateContact->contact_type_id==124) {
+                $updateContact->outstanding = $updateContact->outstanding - $purchaseValue['grand_total'];
+                $updateContact->save();
+            }elseif($updateContact->contact_type_id==123){
+                $updateContact->outstanding = $updateContact->outstanding + $purchaseValue['grand_total'];
+                $updateContact->save();
+            }
+
         $this->contactUpdate($contact,$obj->grand_total);
         }
         $successMessage = 'Purchase Create Successfully.';
