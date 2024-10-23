@@ -86,7 +86,8 @@
                                             {{ $billing_address->gstin }}
                                         </x-dropdown.option>
                                     @empty
-                                        <x-dropdown.new href="{{route('contacts.upsert',[$contact_id])}}" label="Billing Address"/>
+                                        <x-dropdown.new href="{{route('contacts.upsert',[$contact_id])}}"
+                                                        label="Billing Address"/>
                                     @endforelse
                                 @endif
                             </x-dropdown.select>
@@ -115,7 +116,8 @@
                                             {{ $shipping_address->gstin }}
                                         </x-dropdown.option>
                                     @empty
-                                        <x-dropdown.new href="{{route('contacts.upsert',[$contact_id])}}" label="Shipping Address"/>
+                                        <x-dropdown.new href="{{route('contacts.upsert',[$contact_id])}}"
+                                                        label="Shipping Address"/>
                                     @endforelse
                                 @endif
                             </x-dropdown.select>
@@ -284,10 +286,10 @@
                                         {{ $colour->vname }}
                                     </x-dropdown.option>
                                 @empty
-                                    <x-dropdown.new  wire:click.prevent="colourSave('{{$colour_name}}')" label="Colour" />
+                                    <x-dropdown.new wire:click.prevent="colourSave('{{$colour_name}}')" label="Colour"/>
                                 @endforelse
                             @endif
-{{--                                <x-dropdown.option2  wire:click.prevent="colourSave('{{$colour_name}}')" label="Colour" />--}}
+                            {{--                                <x-dropdown.option2  wire:click.prevent="colourSave('{{$colour_name}}')" label="Colour" />--}}
 
                         </x-dropdown.select>
                     </div>
@@ -318,7 +320,7 @@
                                     <x-dropdown.new wire:click.prevent="sizeSave('{{$size_name}}')" label="Size"/>
                                 @endforelse
                             @endif
-{{--                                <x-dropdown.option2  wire:click.prevent="colourSave('{{$colour_name}}')" label="Size" />--}}
+                            {{--                                <x-dropdown.option2  wire:click.prevent="colourSave('{{$colour_name}}')" label="Size" />--}}
 
                         </x-dropdown.select>
                     </div>
@@ -337,7 +339,7 @@
                 <x-input.floating id="price" wire:model.live="price" label="Price"/>
             </div>
 
-        <x-button.add wire:click="addItems"  />
+            <x-button.add wire:click="addItems"/>
 
         </section>
 
@@ -549,7 +551,9 @@
                                                                     {{ $transport->vname. '|'. $transport->desc.'|' .$transport->desc_1 }}
                                                                 </x-dropdown.option>
                                                             @empty
-                                                                <x-dropdown.new wire:click.prevent="transportSave('{{$transport_name}}')" label="Transport" />
+                                                                <x-dropdown.new
+                                                                    wire:click.prevent="transportSave('{{$transport_name}}')"
+                                                                    label="Transport"/>
                                                             @endforelse
                                                         @endif
                                                     </x-dropdown.select>
@@ -588,7 +592,11 @@
                             <x-tabs.content>
                                 <div class="space-y-2">
                                     <x-input.floating wire:model="additional" wire:change.debounce="calculateTotal"
-                                                      label="Addition"/>
+                                                      label="Addition"
+                                                      class="text-right block px-2.5 pb-2.5 pt-4 w-full text-sm
+                                                      text-gray-900 bg-transparent rounded-lg border-1
+                                                       border-gray-300 appearance-none
+                                                       focus:outline-none focus:ring-2 focus:ring-cyan-50 focus:border-blue-600 peer"/>
                                     <!-- Ledger ----------------------------------------------------------------------------------->
                                     <x-dropdown.wrapper label="Ledger" type="ledgerTyped">
                                         <div class="relative ">
@@ -608,7 +616,9 @@
                                                             {{ $ledger->vname }}
                                                         </x-dropdown.option>
                                                     @empty
-                                                        <x-dropdown.new wire:click.prevent="ledgerSave('{{$ledger_name}}')" label="Ledger" />
+                                                        <x-dropdown.new
+                                                            wire:click.prevent="ledgerSave('{{$ledger_name}}')"
+                                                            label="Ledger"/>
                                                     @endforelse
                                                 @endif
                                             </x-dropdown.select>
@@ -619,7 +629,6 @@
 
                             <x-tabs.content>
                                 <div class="mt-3 flex flex-col gap-2 ">
-
 
 
                                     @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())
@@ -680,8 +689,8 @@
 
     </x-forms.m-panel>
     @if( $common->vid != "")
-        <x-forms.m-panel-bottom-button routes="{{ route('sales.invoice', [$this->common->vid])}}" save back print />
+        <x-forms.m-panel-bottom-button routes="{{ route('sales.print', [$this->common->vid])}}" save back print/>
     @else
-        <x-forms.m-panel-bottom-button save back />
+        <x-forms.m-panel-bottom-button save back/>
     @endif
 </div>

@@ -5,8 +5,6 @@ namespace App\Livewire\Entries\Sales;
 use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Sale;
 use Aaran\Entries\Models\Saleitem;
-use Aaran\Entries\Models\SalesEvent;
-use Aaran\Master\Models\Company;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
@@ -19,7 +17,6 @@ use App\Livewire\Forms\MasterGstApi;
 use App\Livewire\Trait\CommonTraitNew;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
@@ -1010,10 +1007,12 @@ class Upsert extends Component
 
     public function contactUpdate()
     {
-        $obj=Contact::find($this->contact_id);
-        $outstanding= $obj->contact_type_id==124?$obj->outstanding+$this->grand_total:$obj->outstanding-$this->grand_total;
-        $obj->outstanding=$outstanding;
-        $obj->save();
+        if ($this->contact_id) {
+            $obj = Contact::find($this->contact_id);
+            $outstanding = $obj->contact_type_id == 124 ? $obj->outstanding + $this->grand_total : $obj->outstanding - $this->grand_total;
+            $obj->outstanding = $outstanding;
+            $obj->save();
+        }
     }
     #endregion
 
@@ -1137,6 +1136,9 @@ class Upsert extends Component
             $this->TransMode=1;
             $this->Vehtype='R';
             $this->TransdocDt=Carbon::now()->format('Y-m-d');
+            $this->transport_id=1;
+            $this->transport_name=Common::find(1)->vname;
+            $this->Vehno='-';
         }
 
         $this->calculateTotal();

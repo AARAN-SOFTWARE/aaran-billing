@@ -33,10 +33,11 @@ class Index extends Component
             }
             $bank = Common::where('label_id', '=', '9')->pluck('id')->random();
 
-            Transaction::create([
+            $obj = Transaction::create([
                 'acyear' => session()->get('acyear'),
                 'company_id' => $company,
                 'contact_id' => $contact,
+                'vch_no'=>Transaction::nextNo($mode),
                 'paid_to' => '-',
                 'order_id' => $order,
                 'trans_type_id' => $trans_type,
@@ -60,7 +61,9 @@ class Index extends Component
 
 
             ]);
-
+            $updateContact = Contact::where('id', $contact)->first();
+            $updateContact->outstanding = $updateContact->outstanding - $obj->vname;
+            $updateContact->save();
         }
         $successMessage = 'Transaction Create Successfully.';
         $this->dispatch('notify', ...['type' => 'success', 'content' => $successMessage]);

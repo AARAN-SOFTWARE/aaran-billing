@@ -127,10 +127,12 @@ class Index extends Component
 
     public function contactUpdate()
     {
+        if ($this->contact_id){
         $obj = Contact::find($this->contact_id);
         $outstanding = $obj->outstanding - $this->common->vname;
         $obj->outstanding = $outstanding;
         $obj->save();
+        }
     }
     #endregion
 
