@@ -216,6 +216,34 @@ class SaleEntry
         return 'no_of_roll';
     }
 
+    /**
+     * Eway
+     * @return bool
+     */
+    public static function hasEway(): bool
+    {
+        return static::enabled(static::eway());
+    }
+
+    public static function eway(): string
+    {
+        return 'eway';
+    }
+
+    /**
+     * Einvoice
+     * @return bool
+     */
+    public static function hasEinvoice(): bool
+    {
+        return static::enabled(static::einvoice());
+    }
+
+    public static function einvoice(): string
+    {
+        return 'einvoice';
+    }
+
 }
 
 
