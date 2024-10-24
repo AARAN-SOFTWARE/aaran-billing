@@ -16,6 +16,20 @@
             </div>
             <div class="w-full">&nbsp;</div>
 
+            <div class="flex gap-5">
+                <div class="">
+                    <x-button.print-x wire:click="print"/>
+                </div>
+
+                <div
+                    class="hidden lg:flex justify-end border border-gray-200 rounded-lg h-10 p-3 hover:border hover:border-blue-400 transition-colors duration-300">
+                    <a href="{{route('contacts')}}"
+                       class=" relative inline-flex items-center text-lg gap-1 mr-2">
+                        <x-icons.icon-fill :iconfill="'chevron-d-left'" class="w-5 h-5"></x-icons.icon-fill>
+                        Back
+                    </a>
+                </div>
+            </div>
         </div>
 
         <x-table.form>
@@ -60,14 +74,14 @@
                 @forelse ($list as $index =>  $row)
 
                     @php
-                    if ($row->mode=='Sales Invoice'){
-                        if ($party->contact_type_id==124){
-                        $totalSales += floatval($row->grand_total);}else{$totalSales -= floatval($row->grand_total);}
-                        }else{
-                        if ($party->contact_type_id==123){
-                        $totalSales += floatval($row->grand_total);}else{ $totalSales -= floatval($row->grand_total);}
-                        }
-                        $totalReceipt += floatval($row->transaction_amount);
+                        if ($row->mode=='Sales Invoice'){
+                            if ($party->contact_type_id==124){
+                            $totalSales += floatval($row->grand_total);}else{$totalSales -= floatval($row->grand_total);}
+                            }else{
+                            if ($party->contact_type_id==123){
+                            $totalSales += floatval($row->grand_total);}else{ $totalSales -= floatval($row->grand_total);}
+                            }
+                            $totalReceipt += floatval($row->transaction_amount);
                     @endphp
 
                     <x-table.row>
