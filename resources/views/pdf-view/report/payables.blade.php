@@ -228,6 +228,7 @@
     </style>
 </head>
 <body>
+
 <!------Top Company Area------------------------------------------------------------------------------------------>
 <table class="border w-full">
     <tr>
@@ -248,6 +249,7 @@
             </div>
         </td>
     </tr>
+
     <tr class="border-t">
         <td colspan="2" class="text-md lh-0 px-10 ">
             <p class="font-bold text-lg">M/s.{{$contact->vname}}</p>
@@ -258,11 +260,12 @@
         </td>
     </tr>
 </table>
+
 <table class="border border-t-none">
     <tr class="bg-gray text-sm lh-2 border-b">
         <th width="5%" class="border-r py-5">S.No</th>
         <th width="12%" class="border-r">Type</th>
-        <th width="auto" class="border-r">Particulars</th>
+        <th width="auto" class="border-r">Date</th>
         <th width="12%" class="border-r">Invoice Amount</th>
         <th width="12%" class="border-r">Receipt Amount</th>
         <th width="12%" class="border-r">Balance</th>
@@ -274,60 +277,42 @@
     <tr class="text-sm center v-align-c border-b">
         @if($party !=null)
 
-            <td class="py-2 text-center px-0.5 border-l border-r border-gray-300" colspan="3">Opening Balance</td>
-            <td class="py-2 text-end px-1 border-r border-gray-300">{{ $opening_balance}}</td>
-            <td class="py-2 text-end px-1 border-r border-gray-300"></td>
-            <td class="py-2 text-end px-1 border-r border-gray-300">{{$opening_balance}}</td>
-
             <td height="26px" class="center border-r" colspan="3">Opening Balance</td>
-            <td class="center border-r ">{{ $opening_balance}}</td>
-            <td class="center border-r ">&nbsp;</td>
-            <td class="right border-r px-2">{{$opening_balance}}}</td>
+            <td class="right border-r ">{{ $opening_balance}}</td>
+            <td class="right border-r ">&nbsp;</td>
+            <td class="right border-r px-2">{{$opening_balance}}</td>
 
         @endif
     </tr>
+
     @foreach($list as $index=>$row)
         @php
             $totalPurchase += floatval($row->grand_total);
             $totalPayment += floatval($row->transaction_amount);
         @endphp
 
-        <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
-            <td class="py-2 text-center border-l border-r border-gray-300">{{$index+1}}</td>
-            <td class="py-2 text-center border-r border-gray-300">{{ $row->mode }}</td>
-            <td class="py-2 text-center px-0.5 border-r border-gray-300">{{$row->mode=='invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}</td>
-            <td class="py-2 text-end px-1 border-r border-gray-300"> {{ $row->grand_total }}</td>
-            <td class="py-2 text-end px-1 border-r border-gray-300">{{ $row->transaction_amount }}</td>
-            <td class="py-2 text-end px-1 border-r border-gray-300">{{  $balance  = $totalPurchase-$totalPayment}}</td>
-
         <tr class="text-sm center v-align-c">
             <td height="26px" class="center border-r">{{$index+1}}</td>
             <td class="center border-r ">{{ $row->mode }}</td>
             <td class="center border-r ">{{$row->mode=='invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}</td>
-            <td class="center border-r ">{{ $row->grand_total }}</td>
+            <td class="right border-r ">{{ $row->grand_total }}</td>
             <td class="right border-r px-2">{{ $row->transaction_amount }}</td>
             <td class="right border-r px-2">{{  $balance  = $totalPurchase-$totalPayment}}</td>
-
         </tr>
     @endforeach
+
     <tr class="text-sm border-t center v-align-c">
         <td height="26px" class="center border-r" colspan="3">TOTALS</td>
-        <td class="center border-r ">{{$totalPurchase+$opening_balance}}</td>
-        <td class="center border-r ">{{ $totalPayment}}</td>
-        <td class="center border-r "></td>
+        <td class="right border-r ">{{$totalPurchase+$opening_balance}}</td>
+        <td class="right border-r ">{{ $totalPayment}}</td>
+        <td class="right border-r "></td>
     </tr>
-
-    <tr class="text-[10px] border-b border-r border-gray-300 self-start ">
-        <td class="py-2 text-center border-l border-r border-gray-300" colspan="3">Balance</td>
-        <td class="py-2 text-end px-1 border-r border-gray-300">{{ $totalPurchase-$totalPayment}}</td>
-        <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
-        <td class="py-2 text-end px-0.5 border-r border-gray-300"></td>
 
     <tr class="text-sm border-t center v-align-c">
         <td height="26px" class="center border-r" colspan="3">Balance</td>
-        <td class="center border-r ">{{ $totalPurchase-$totalPayment}}</td>
-        <td class="center border-r "></td>
-        <td class="center border-r "></td>
+        <td class="right border-r ">{{ $totalPurchase-$totalPayment}}</td>
+        <td class="right border-r "></td>
+        <td class="right border-r "></td>
 
     </tr>
 </table>
