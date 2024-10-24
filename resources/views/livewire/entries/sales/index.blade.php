@@ -24,9 +24,13 @@
                 </x-table.header-text>
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Total Gst</x-table.header-text>
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Grand Total</x-table.header-text>
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasEinvoice())
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">E-Invoice</x-table.header-text>
-                <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none" class="w-28">E-Generate
-                </x-table.header-text>
+                @endif
+                @if(\Aaran\Aadmin\Src\SaleEntry::hasEway()||\Aaran\Aadmin\Src\SaleEntry::hasEinvoice())
+                    <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none" class="w-28">E-Generate
+                    </x-table.header-text>
+                @endif
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Print</x-table.header-text>
                 <x-table.header-action/>
             </x-slot:table_header>
@@ -62,7 +66,7 @@
                         <x-table.cell-text right>
                             <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->grand_total}}</a>
                         </x-table.cell-text>
-
+                        @if(\Aaran\Aadmin\Src\SaleEntry::hasEinvoice())
                         <x-table.cell-text>
                             <a href="{{route('sales.upsert',[$row->id])}}">
                                     <?php
@@ -96,13 +100,22 @@
                                 @endif
                             </a>
                         </x-table.cell-text>
+                        @endif
 
-                        <x-table.cell-text>
-                            <div class="inline-flex items-center gap-x-4">
-                                    <x-button.e-inv routes="{{route('sales.einvoice',[$row->id]) }}"/>
-                                    <x-button.e-way routes="{{ route('sales.eway',[$row->id]) }}" />
-                            </div>
-                        </x-table.cell-text>
+                        @if(\Aaran\Aadmin\Src\SaleEntry::hasEway()||\Aaran\Aadmin\Src\SaleEntry::hasEinvoice())
+                            <x-table.cell-text>
+                                <div class="inline-flex items-center gap-x-4">
+                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasEinvoice())
+                                        <x-button.e-inv routes="{{route('sales.einvoice',[$row->id]) }}"/>
+                                        <x-button.e-way routes="{{ route('sales.eway',[$row->id]) }}"/>
+                                    @endif
+                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasEway())
+                                        <x-button.e-way routes="{{ route('sales.eway',[$row->id]) }}"/>
+                                    @endif
+                                </div>
+                            </x-table.cell-text>
+                        @endif
+
                         <x-table.cell-text>
                             <x-button.print-pdf routes="{{route('sales.print', [$row->id])}}"/>
                         </x-table.cell-text>

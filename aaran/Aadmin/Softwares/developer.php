@@ -26,6 +26,8 @@ return [
         SaleEntry::transport(),
         SaleEntry::destination(),
         SaleEntry::bundle(),
+        SaleEntry::einvoice(),
+//        SaleEntry::eway(),
 
         SaleEntry::productDescription(),
         SaleEntry::colour(),

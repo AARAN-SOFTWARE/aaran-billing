@@ -798,16 +798,16 @@ class Upsert extends Component
             $this->itemList[0] = [
                 "contact_detail_id" => 0,
                 'address_type' => $this->address_type ?: "Primary",
-                "state_name" => "",
-                "state_id" => "",
-                "city_id" => "",
-                "city_name" => "",
-                "country_id" => "",
-                "country_name" => "",
-                "pincode_id" => "",
-                "pincode_name" => "",
+                "state_name" => "-",
+                "state_id" => "1",
+                "city_id" => "1",
+                "city_name" => "-",
+                "country_id" => "1",
+                "country_name" => "-",
+                "pincode_id" => "1",
+                "pincode_name" => "-",
                 "address_1" => "-",
-                "address_2" => "",
+                "address_2" => "-",
             ];
             $this->address_type = "Primary";
         }
