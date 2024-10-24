@@ -2,9 +2,9 @@
 
 return [
 
-    // software version => software version . 0 . 0 . git . app code
+    // software version => software version . sub version . database . git . app code
 
-    'soft_version' => '1.0.0.187.100',
+    'soft_version' => '1.0.0.193.100',
 
     'current_acyear' => '2024_25',
 
@@ -12,7 +12,7 @@ return [
 
     'app_code' => env('APP_CODE', '1'),
 
-    'brand' => env('BRAND', 'AARAN'),
+    'brand' => env('BRAND', 'CODEXSUN'),
 
     'main_menu' => [
         ['menu' => 'home', 'link' => 'home'],
