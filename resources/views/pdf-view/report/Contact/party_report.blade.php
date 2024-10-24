@@ -227,8 +227,7 @@
         }
     </style>
 </head>
-<body>
-
+<body class="">
 <!------Top Company Area------------------------------------------------------------------------------------------>
 <table class="border w-full">
     <tr>
@@ -239,6 +238,7 @@
                 <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" width="130px">
             @endif
         </td>
+
         <td width="65%" class="lh-0 left">
             <div class=" lh-1 font-bold times text-4xl">{{$cmp->get('company_name')}}</div>
             <div class="lh-2 text-md v-align-b">
@@ -261,7 +261,6 @@
     </tr>
 </table>
 
-<!------Table Header -------------------------------------------------------------------------------------------------->
 <table class="border border-t-none">
     <tr class="bg-gray text-sm lh-2 border-b">
         <th width="5%" class="border-r py-5">S.No</th>
@@ -269,63 +268,59 @@
         <th width="auto" class="border-r">Date</th>
         <th width="12%" class="border-r">Invoice Amount</th>
         <th width="12%" class="border-r">Receipt Amount</th>
-        <th width="12%" class="border-r">Balance</th>
+        <th width="15%" class="border-r">Balance</th>
     </tr>
+
     @php
-        $totalPurchase = 0+$opening_balance;
-        $totalPayment = 0;
+        $totalSales = 0+$opening_balance;
+        $totalReceipt = 0;
     @endphp
 
-        <!------Opening Balance --------------------------------------------------------------------------------------->
-    <tr class="text-sm center v-align-c border-b">
-        @if($party !=null)
-
+    @if($party !=null)
+        <tr class="text-sm center v-align-c border-b">
             <td height="26px" class="center border-r" colspan="3">Opening Balance</td>
             <td class="right border-r ">{{ $opening_balance}}</td>
             <td class="right border-r ">&nbsp;</td>
             <td class="right border-r px-2">{{$opening_balance}}</td>
-
-        @endif
-    </tr>
-
-    <!------Table Data ------------------------------------------------------------------------------------------------>
+        </tr>
+    @endif
 
     @foreach($list as $index=>$row)
+
         @php
-            $totalPurchase += floatval($row->grand_total);
-            $totalPayment += floatval($row->transaction_amount);
+            if ($row->mode=='Sales Invoice'){
+                if ($contact->contact_type_id==124){
+                $totalSales += floatval($row->grand_total);}else{$totalSales -= floatval($row->grand_total);}
+                }else{
+                if ($contact->contact_type_id==123){
+                $totalSales += floatval($row->grand_total);}else{ $totalSales -= floatval($row->grand_total);}
+                }
+                $totalReceipt += floatval($row->transaction_amount);
         @endphp
 
         <tr class="text-sm center v-align-c">
             <td height="26px" class="center border-r">{{$index+1}}</td>
             <td class="center border-r ">{{ $row->mode }}</td>
-            <td class="center border-r ">{{$row->mode=='invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}</td>
+            <td class="center border-r ">{{$row->mode=='Purchase Invoice'||$row->mode=='Sales Invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}</td>
             <td class="right border-r ">{{ $row->grand_total }}</td>
             <td class="right border-r px-2">{{ $row->transaction_amount }}</td>
-            <td class="right border-r px-2">{{  $balance  = $totalPurchase-$totalPayment}}</td>
+            <td class="right border-r px-2">{{  $balance  = $totalSales-$totalReceipt}}</td>
         </tr>
     @endforeach
 
-    <!------Totals ---------------------------------------------------------------------------------------------------->
-
     <tr class="text-sm border-t center v-align-c">
         <td height="26px" class="center border-r" colspan="3">TOTALS</td>
-        <td class="right border-r ">{{$totalPurchase+$opening_balance}}</td>
-        <td class="right border-r ">{{ $totalPayment}}</td>
-        <td class="right border-r "></td>
+        <td class="right px-2 border-r ">{{$totalSales+$opening_balance}}</td>
+        <td class="right px-2 border-r ">{{ $totalReceipt}}</td>
+        <td class="right px-2 border-r "></td>
     </tr>
-
     <tr class="text-sm border-t center v-align-c">
         <td height="26px" class="center border-r" colspan="3">Balance</td>
-        <td class="right border-r ">{{ $totalPurchase-$totalPayment}}</td>
-        <td class="right border-r "></td>
-        <td class="right border-r "></td>
+        <td class="right px-2 border-r ">{{ $totalSales-$totalReceipt}}</td>
+        <td class="right px-2 border-r "></td>
+        <td class="right px-2 border-r "></td>
     </tr>
 </table>
+
 </body>
 </html>
-
-
-
-
-

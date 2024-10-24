@@ -16,4 +16,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/styles', App\Livewire\Master\Style\Index::class)->name('styles');
 
+    Route::get('/contactReport/print/{party}/{start_date?}/{end_date?}', App\Http\Controllers\Report\Contact\PartyReportController::class)->name('contactReport.print');
 });

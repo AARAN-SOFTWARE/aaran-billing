@@ -144,6 +144,18 @@ class PartyReport extends Component
     }
 
     #endregion
+
+    public function print()
+    {
+        if ($this->byParty != null) {
+            $this->redirect(route('contactReport.print',
+                [
+                    'party' => $this->byParty, 'start_date' => $this->start_date ?: $this->invoiceDate_first,
+                    'end_date' => $this->end_date ?: Carbon::now()->format('Y-m-d'),
+
+                ]));
+        }
+    }
     public function render()
     {
         return view('livewire.reports.contact.party-report')->with([
