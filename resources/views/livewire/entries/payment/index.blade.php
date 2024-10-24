@@ -56,7 +56,7 @@
 
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
-                        <x-table.cell-text left>{{$row->vch_no+0}}</x-table.cell-text>
+                        <x-table.cell-text >{{$row->vch_no+0}}</x-table.cell-text>
 
                         <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
 

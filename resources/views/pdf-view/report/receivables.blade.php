@@ -263,7 +263,7 @@
     <tr class="bg-gray text-sm lh-2 border-b">
         <th width="5%" class="border-r py-5">S.No</th>
         <th width="12%" class="border-r">Type</th>
-        <th width="auto" class="border-r">Particulars</th>
+        <th width="auto" class="border-r">Date</th>
         <th width="12%" class="border-r">Invoice Amount</th>
         <th width="12%" class="border-r">Receipt Amount</th>
         <th width="15%" class="border-r">Balance</th>
@@ -275,9 +275,9 @@
     @if($party !=null)
         <tr class="text-sm center v-align-c border-b">
             <td height="26px" class="center border-r" colspan="3">Opening Balance</td>
-            <td class="center border-r ">{{ $opening_balance}}</td>
-            <td class="center border-r ">&nbsp;</td>
-            <td class="right border-r px-2">{{$opening_balance}}}</td>
+            <td class="right border-r ">{{ $opening_balance}}</td>
+            <td class="right border-r ">&nbsp;</td>
+            <td class="right border-r px-2">{{$opening_balance}}</td>
         </tr>
     @endif
     @foreach($list as $index=>$row)
@@ -289,22 +289,22 @@
             <td height="26px" class="center border-r">{{$index+1}}</td>
             <td class="center border-r ">{{ $row->mode }}</td>
             <td class="center border-r ">{{$row->mode=='invoice' ?$row->vno.' / ':''}}{{date('d-m-Y', strtotime($row->vdate))}}</td>
-            <td class="center border-r ">{{ $row->grand_total }}</td>
+            <td class="right border-r ">{{ $row->grand_total }}</td>
             <td class="right border-r px-2">{{ $row->transaction_amount }}</td>
             <td class="right border-r px-2">{{  $balance  = $totalSales-$totalReceipt}}</td>
         </tr>
     @endforeach
     <tr class="text-sm border-t center v-align-c">
         <td height="26px" class="center border-r" colspan="3">TOTALS</td>
-        <td class="center border-r ">{{$totalSales+$opening_balance}}</td>
-        <td class="center border-r ">{{ $totalReceipt}}</td>
-        <td class="center border-r "></td>
+        <td class="right px-2 border-r ">{{$totalSales+$opening_balance}}</td>
+        <td class="right px-2 border-r ">{{ $totalReceipt}}</td>
+        <td class="right px-2 border-r "></td>
     </tr>
     <tr class="text-sm border-t center v-align-c">
         <td height="26px" class="center border-r" colspan="3">Balance</td>
-        <td class="center border-r ">{{ $totalSales-$totalReceipt}}</td>
-        <td class="center border-r "></td>
-        <td class="center border-r "></td>
+        <td class="right px-2 border-r ">{{ $totalSales-$totalReceipt}}</td>
+        <td class="right px-2 border-r "></td>
+        <td class="right px-2 border-r "></td>
     </tr>
 </table>
 
