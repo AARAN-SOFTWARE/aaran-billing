@@ -112,7 +112,7 @@
                 <div class="">
                     {{-- <button class="bg-pink-600 text-white text-md h-11 px-4 rounded-md " wire:click="create">New --}}
 
-                    </button>
+{{--                    </button>--}}
                     <div>
                         <x-button.new-x wire:click="create" />
                     </div>

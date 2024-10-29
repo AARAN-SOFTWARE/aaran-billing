@@ -108,7 +108,7 @@
 
                 <div class="flex gap-3">
                     <x-icons.search-new />
-                    <x-button.new />
+                    <x-button.new-x />
                 </div>
 
                 <div class="flex flex-col gap-10">
