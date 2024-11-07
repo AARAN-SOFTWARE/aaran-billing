@@ -8,7 +8,7 @@
             <x-assets.logo.cxlogo :icon="'dark'" class="h-10 w-auto block"/>
             <span class="font-bold text-2xl sm:text-3xl tracking-widest">Codexsun</span>
         </a>
-{{-- {{config('app.name')}} --}}
+        {{-- {{config('app.name')}} --}}
         <button
             class="focus:outline-none focus:bg-gray-700 hover:bg-gray-800  rounded-md group"
             @click="sidebarOpen = false"
@@ -26,14 +26,6 @@
             x-data="{selected:null}">
 
 
-            @if(Aaran\Aadmin\Src\Customise::hasCommon())
-                <x-menu.sub.common/>
-            @endif
-
-            @if(Aaran\Aadmin\Src\Customise::hasMaster())
-                <x-menu.sub.master/>
-            @endif
-
             @if(Aaran\Aadmin\Src\Customise::hasEntries())
                 <x-menu.sub.entries/>
             @endif
@@ -41,6 +33,14 @@
             @if(Aaran\Aadmin\Src\Customise::hasTransaction())
                 <x-menu.sub.transaction/>
                 <x-menu.sub.reports/>
+            @endif
+
+            @if(Aaran\Aadmin\Src\Customise::hasMaster())
+                <x-menu.sub.master/>
+            @endif
+
+            @if(Aaran\Aadmin\Src\Customise::hasCommon())
+                <x-menu.sub.common/>
             @endif
 
             @if(Aaran\Aadmin\Src\Customise::hasDemodata())

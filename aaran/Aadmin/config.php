@@ -4,7 +4,7 @@ return [
 
     // software version => software version . sub version . database . git . app code
 
-    'soft_version' => '1.0.0.193.100',
+    'soft_version' => '1.0.0.196.100',
 
     'current_acyear' => '2024_25',
 
