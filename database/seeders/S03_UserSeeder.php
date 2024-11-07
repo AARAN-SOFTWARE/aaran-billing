@@ -41,6 +41,16 @@ class S03_UserSeeder extends Seeder
             'role_id' => '1'
         ]);
 
+        User::create([
+            'name' => 'demo',
+            'email' => 'demo@demo.com',
+            'password' => bcrypt('123456789'),
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+            'tenant_id' => '1',
+            'role_id' => '1'
+        ]);
+
 //        User::create([
 //            'name' => 'Jagadeesh',
 //            'email' => 'Jagadeesh@aaran.org',
