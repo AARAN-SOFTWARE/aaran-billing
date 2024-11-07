@@ -34,7 +34,7 @@ class Index extends Component
             '40 x 25 Walz Sticker',
             '100 x 150 mm Sticker',
             'A8 Carton Silp',
-            'Atex Recycled Satin Label',
+            'Atex Satin Label',
             'Barcode Label',
             'Bed black',
             'Brand Name Sticker',
