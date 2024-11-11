@@ -9,6 +9,13 @@
             {{$list->count()}}
         </x-table.caption>
 
+        <?php
+        $qty = 0;
+        $taxable = 0;
+        $gst = 0;
+        $grand_total = 0;
+        ?>
+
         <x-table.form>
 
             <x-slot:table_header name="table_header" class="bg-green-600">
@@ -25,7 +32,8 @@
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Total Gst</x-table.header-text>
                 <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">Grand Total</x-table.header-text>
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasEinvoice())
-                <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">E-Invoice</x-table.header-text>
+                    <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none">E-Invoice
+                    </x-table.header-text>
                 @endif
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasEway()||\Aaran\Aadmin\Src\SaleEntry::hasEinvoice())
                     <x-table.header-text wire:click="sortBy('invoice_no')" sortIcon="none" class="w-28">E-Generate
@@ -37,6 +45,12 @@
 
             <x-slot:table_body name="table_body">
                 @foreach($list as $index=>$row)
+                    <?php
+                        $qty+=$row->total_qty;
+                        $taxable+=$row->total_taxable;
+                        $gst+=$row->total_gst;
+                        $grand_total+=$row->grand_total;
+                        ?>
                     <x-table.row>
 
                         <x-table.cell-text>
@@ -67,39 +81,39 @@
                             <a href="{{route('sales.upsert',[$row->id])}}"> {{$row->grand_total}}</a>
                         </x-table.cell-text>
                         @if(\Aaran\Aadmin\Src\SaleEntry::hasEinvoice())
-                        <x-table.cell-text>
-                            <a href="{{route('sales.upsert',[$row->id])}}">
-                                    <?php
-                                    $obj = \Aaran\Entries\Models\Sale::Irn($row->id);
-                                    ?>
-                                @if(isset($obj))
-                                    @if($obj->status=='Generated')
+                            <x-table.cell-text>
+                                <a href="{{route('sales.upsert',[$row->id])}}">
+                                        <?php
+                                        $obj = \Aaran\Entries\Models\Sale::Irn($row->id);
+                                        ?>
+                                    @if(isset($obj))
+                                        @if($obj->status=='Generated')
+                                            <div
+                                                    class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-emerald-100/60 ">
+                                                <span class="h-1.5 w-1.5  rounded-full bg-emerald-500 "></span>
+                                                <h2 class="font-normal text-emerald-500">{{$obj->status}}
+                                                </h2>
+                                            </div>
+                                        @elseif($obj->status=='Canceled')
+                                            <div
+                                                    class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-red-100/60 ">
+                                                <span class="h-1.5 w-1.5  rounded-full bg-red-500 "></span>
+                                                <h2 class="font-normal text-red-500 ">{{$obj->status}}
+                                                </h2>
+                                            </div>
+                                        @endif
+                                    @else
                                         <div
-                                            class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-emerald-100/60 ">
-                                            <span class="h-1.5 w-1.5  rounded-full bg-emerald-500 "></span>
-                                            <h2 class="font-normal text-emerald-500">{{$obj->status}}
-                                            </h2>
-                                        </div>
-                                    @elseif($obj->status=='Canceled')
-                                        <div
-                                            class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-red-100/60 ">
-                                            <span class="h-1.5 w-1.5  rounded-full bg-red-500 "></span>
-                                            <h2 class="font-normal text-red-500 ">{{$obj->status}}
+                                                class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-purple-100/60 ">
+                                        <span
+                                                class="h-1.5 w-1.5  rounded-full bg-purple-500 "></span>
+                                            <h2 class="font-normal text-purple-500 ">
+                                                Not-Generated
                                             </h2>
                                         </div>
                                     @endif
-                                @else
-                                    <div
-                                        class="inline-flex items-center px-3 py-1 rounded-xl gap-x-2 bg-purple-100/60 ">
-                                        <span
-                                            class="h-1.5 w-1.5  rounded-full bg-purple-500 "></span>
-                                        <h2 class="font-normal text-purple-500 ">
-                                            Not-Generated
-                                        </h2>
-                                    </div>
-                                @endif
-                            </a>
-                        </x-table.cell-text>
+                                </a>
+                            </x-table.cell-text>
                         @endif
 
                         @if(\Aaran\Aadmin\Src\SaleEntry::hasEway()||\Aaran\Aadmin\Src\SaleEntry::hasEinvoice())
@@ -190,6 +204,24 @@
                         {{--                        </x-table.cell-text>--}}
                     </x-table.row>
                 @endforeach
+                    <x-table.row>
+                        <x-table.cell-text right colspan="3">
+                            <span class="font-bold">Total</span>
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <span class="font-bold">{{$qty}}</span>
+                        </x-table.cell-text>
+                        <x-table.cell-text right>
+                            <span class="font-bold">{{\App\Helper\ConvertTo::decimal2($taxable)}}</span>
+                        </x-table.cell-text>
+                        <x-table.cell-text right>
+                            <span class="font-bold">{{\App\Helper\ConvertTo::decimal2($gst)}}</span>
+                        </x-table.cell-text>
+                        <x-table.cell-text right>
+                            <span class="text-lg font-bold text-green-500">{{\App\Helper\ConvertTo::decimal2($grand_total)}}</span>
+                        </x-table.cell-text>
+                    </x-table.row>
+
             </x-slot:table_body>
 
         </x-table.form>

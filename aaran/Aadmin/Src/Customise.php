@@ -9,6 +9,7 @@ class Customise
         return match (config('aadmin.app_code')) {
 
             config('software.DEVELOPER') => in_array($feature, config('developer.customise', [])),
+            config('software.OFFSET') => in_array($feature, config('offset.customise', [])),
 
         };
     }

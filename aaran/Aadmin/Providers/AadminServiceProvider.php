@@ -14,6 +14,7 @@ class AadminServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../clients.php', 'clients');
 
         $this->mergeConfigFrom(__DIR__ . '/../Softwares/developer.php', 'developer');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/offset.php', 'offset');
 
 
         $this->app->register(AadminRouteServiceProvider::class);

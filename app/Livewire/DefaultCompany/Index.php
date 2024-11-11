@@ -28,7 +28,7 @@ class Index extends Component
 
 
     #region[get Default]
-    public function getDefaultCompany(): void
+    public function getDefaultCompany()
     {
         $this->defaultCompany = DefaultCompany::find(1);
 //        $soft_version = SoftVersion::latest()->first();
