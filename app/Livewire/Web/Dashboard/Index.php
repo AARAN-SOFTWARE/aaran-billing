@@ -28,12 +28,12 @@ class Index extends Component
     public $monthlyTotals = [];
 
 
-    public function mount()
+    public function mount():void
     {
+
         $this->transactions = $this->getTransactions();
         $this->entries = $this->getEntries();
-        $this->fetchMonthlyTotals();
-
+        $this->monthlyTotals=$this->fetchMonthlyTotals();
     }
 
     public function getTransactions()
@@ -158,22 +158,56 @@ class Index extends Component
 
     public function getBlog()
     {
-        $response = Http::get('https://cloud.aaranassociates.com/api/v1/blog');
-        $this->blogs = $response->json();
+//        $response = Http::get('https://cloud.aaranassociates.com/api/v1/blog');
+//        $this->blogs = $response->json();
+
+        try {
+            $response = Http::get('https://cloud.aaranassociates.com/api/v1/blog');
+
+            // Check if the response is successful
+            if ($response->successful()) {
+                // Process the response
+                $this->blogs= $response->json();
+                // Handle your data here
+            } else {
+                // Handle different response codes
+                switch ($response->status()) {
+                    case 404:
+                        echo "Error 404: Not Found. The requested resource could not be found.";
+                        break;
+                    case 503:
+                        echo "Error 503: Service Unavailable. Please try again later.";
+                        break;
+                    default:
+                        echo "Error {$response->status()}: Something went wrong.";
+                        break;
+                }
+            }
+        } catch (\Exception $e) {
+            // Log the exception message
+            error_log($e->getMessage());
+//            echo "An error occurred while trying to access the API: " . $e->getMessage();
+        }
     }
 
 
     public function fetchMonthlyTotals()
     {
-        $currentYear = date('Y'); // Get the current year
+        $currentYear = date('Y');
+        $nextYear = $currentYear + 1;
 
-        $this->monthlyTotals = Sale::selectRaw('MONTH(invoice_date) as month, YEAR(invoice_date) as year, SUM(grand_total) as total')
+// Define the start and end dates
+        $startDate = "{$currentYear}-04-01"; // April 1st of the current year
+        $endDate = "{$nextYear}-03-31"; // March 31st of the next year
+
+        $monthlyTotals = Sale::selectRaw('MONTH(invoice_date) as month, YEAR(invoice_date) as year, SUM(grand_total) as total')
             ->where('company_id', '=', session()->get('company_id'))
-            ->whereYear('invoice_date', '=', $currentYear) // Filter for current year
+            ->whereBetween('invoice_date', [$startDate, $endDate]) // Filter for April to March
             ->groupBy('year', 'month')
             ->orderBy('year', 'asc')
             ->orderBy('month', 'asc')
             ->get();
+        return $monthlyTotals;
     }
 
     public function render()

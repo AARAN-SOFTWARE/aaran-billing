@@ -8,6 +8,7 @@ class SaleEntry
     {
         return match (config('aadmin.app_type')) {
             config('software.DEVELOPER') => in_array($feature, config('developer.SalesEntry', [])),
+            config('software.OFFSET') => in_array($feature, config('offset.SalesEntry', [])),
         };
     }
 

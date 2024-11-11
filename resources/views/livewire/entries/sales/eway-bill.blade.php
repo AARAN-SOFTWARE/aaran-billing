@@ -256,7 +256,7 @@
             </div>
 
             <div class="flex gap-3">
-                <x-button.back/>
+                <x-button.back-x wire:click="getRoute"/>
                 @if(!isset($e_wayBillDetails))
 {{--                    <x-button.secondary wire:click="EwayBill"--}}
 {{--                                        class=" bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600--}}
