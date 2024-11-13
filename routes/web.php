@@ -22,4 +22,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/test', App\Livewire\Test\Index::class)->name('test');
 
     Route::get('sys', App\Livewire\Sys\Artisan\Migration::class)->name('sys');
+    Route::get('dataTransfers', App\Livewire\DataTransfer\Index::class)->name('dataTransfers');
 });
