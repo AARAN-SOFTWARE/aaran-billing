@@ -112,7 +112,23 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'destination' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_DEST', '127.0.0.1'),
+            'port' => env('DB_PORT_DEST', '3306'),
+            'database' => env('DB_DATABASE_DEST', 'forge'),
+            'username' => env('DB_USERNAME_DEST', 'forge'),
+            'password' => env('DB_PASSWORD_DEST', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
     ],
+
 
     /*
     |--------------------------------------------------------------------------
