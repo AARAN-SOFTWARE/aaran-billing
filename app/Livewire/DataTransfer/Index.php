@@ -3,6 +3,7 @@
 namespace App\Livewire\DataTransfer;
 
 use Aaran\Common\Models\Common;
+use Aaran\Master\Models\Company;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -58,10 +59,46 @@ class Index extends Component
         }
     }
 
+    public function getCompany()
+    {
+        // Fetch all old companies from the destination database
+        $oldCompanies = DB::connection('destination')->table('companies')->get();
+        foreach ($oldCompanies as $oldCompany) {
+            // Check if the company already exists in the current database
+            $exists = DB::table('companies')->where('vname', $oldCompany->vname)->exists();
+            // If it doesn't exist, prepare to create a new company
+            if (!$exists) {
+                // Convert stdClass to array
+                $oldCompanyArray = (array) $oldCompany;
+                // Fetch related data (city, state, pin code)
+                $locationData = $this->getLocationData($oldCompanyArray);
+                unset($oldCompanyArray['msme_type'], $oldCompanyArray['id']);
+                // Create a new company with the gathered data
+                Company::create(array_merge($oldCompanyArray, [
+                    'city_id' => $locationData['city_id'],
+                    'state_id' => $locationData['state_id'],
+                    'pincode_id' => $locationData['pincode_id'],
+                    'country_id' => 60,
+                    'msme_type_id' => 126,
+                ]));
+            }
+        }
+        $this->dispatch('notify', ...['type' => 'success', 'content' => 'Company Migrated Successfully']);
+    }
+
+
+    private function getLocationData($oldCompany)
+    {
+        return [
+            'city_id' => DB::table('commons')->where('vname', DB::connection('destination')->table('cities')->where('id', $oldCompany['city_id'])->value('vname'))->value('id'),
+            'state_id' => DB::table('commons')->where('vname', DB::connection('destination')->table('states')->where('id', $oldCompany['state_id'])->value('vname'))->value('id'),
+            'pincode_id' => DB::table('commons')->where('vname', DB::connection('destination')->table('pincodes')->where('id', $oldCompany['pincode_id'])->value('vname'))->value('id'),
+        ];
+    }
     public function migrateData():void
     {
 
-        $this->getCommon();
+        $this->getCompany();
     }
     public function render()
     {
