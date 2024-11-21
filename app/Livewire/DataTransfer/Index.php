@@ -4,6 +4,7 @@ namespace App\Livewire\DataTransfer;
 
 use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Company;
+use Aaran\Master\Models\Contact;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -95,10 +96,37 @@ class Index extends Component
             'pincode_id' => DB::table('commons')->where('vname', DB::connection('destination')->table('pincodes')->where('id', $oldCompany['pincode_id'])->value('vname'))->value('id'),
         ];
     }
+
+    public function getContact()
+    {
+        $oldContacts = DB::connection('destination')->table('contacts')->get();
+        foreach ($oldContacts as $oldContact) {
+            $oldContactDetails=DB::connection('destination')->table('contact_details')->where('contact_id', $oldContact->id)->get();
+
+            foreach ($oldContactDetails as $oldContactDetail) {
+                $exists = DB::table('contacts')->where('vname', $oldContact->vname)->exists();
+                $oldContactArray = (array)$oldContact;
+//            $locationData=$this->getLocationData($oldContactArray);
+                if ($oldContactArray['contact_type'] == 1) {
+                    $contact_type_id = 124;
+                } else {
+                    $contact_type_id = 123;
+                }
+                unset($oldContactArray['msme_type'], $oldContactArray['contact_type'], $oldContactArray['id']);
+                Contact::create(array_merge($oldContactArray, [
+                    'msme_type_id' => 126,
+                    'contact_type_id' => $contact_type_id,
+                    'gstin'=>$oldContactDetail->gstin,
+                    'email'=>$oldContactDetail->email,
+                ]));
+
+            }
+        }
+    }
     public function migrateData():void
     {
 
-        $this->getCompany();
+        $this->getContact();
     }
     public function render()
     {

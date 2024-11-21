@@ -32,6 +32,7 @@ class S102_CommonSeeder extends Seeder
         self::msmeType();
         self::GstApiData();
         self::AddNew();
+        self::accountType();
     }
 
     #region[noRecord]
@@ -1103,5 +1104,24 @@ class S102_CommonSeeder extends Seeder
             'desc_1' => '-',
             'active_id' => '1'
         ]);
+    }
+
+    public static function accountType()
+    {
+        Common::create([
+            'label_id' => '24',
+            'vname' => 'Current',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '24',
+            'vname' => 'Savings',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+
     }
 }
