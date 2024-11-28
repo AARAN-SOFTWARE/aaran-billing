@@ -4,6 +4,7 @@
     'padding' => null,
     'padding_mob' => null,
 ])
+
 <div class="relative font-roboto tracking-wider">
     <div style="background-image: url('/../../../images/wp1.webp')"
          class="h-[20rem] bg-no-repeat bg-cover bg-center bg-fixed opacity-95 brightness-50 bg-black">
