@@ -93,6 +93,9 @@
                 </x-input.model-select>
                 {{--                <x-input.model-text wire:model="common.vname" :label="'Name'"/>--}}
                 <x-input.floating wire:model="common.vname" label="Name"/>
+               @error('common.vname')
+                <span>{{$message}}</span>
+                @enderror
                 <x-input.floating wire:model="desc" label="Description 1"/>
                 <x-input.floating wire:model="desc_1" label="Description 2"/>
                 {{--                <x-input.model-text wire:model="desc" :label="'desc'"/>--}}

@@ -644,6 +644,7 @@ class ContactModel extends Component
                     'company_id' => session()->get('company_id'),
                 ]);
                 $this->saveItem($obj->id);
+                $this->vid = $obj->id;
 
                 $message = "Saved";
                 $this->getRoute();
@@ -672,6 +673,10 @@ class ContactModel extends Component
                 $message = "Updated";
                 $this->getRoute();
             }
+
+            $this->dispatch('refresh-contact', ['name' => $this->vname, 'id' => $this->vid]);
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+
             $this->vname = '';
             $this->mobile = '';
             $this->whatsapp = '';
@@ -684,7 +689,7 @@ class ContactModel extends Component
             $this->gstin = '';
             $this->email = '';
 
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+
 
         }
     }
