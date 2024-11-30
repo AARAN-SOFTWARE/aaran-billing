@@ -102,8 +102,6 @@ class Upsert extends Component
     #endregion
 
     #region[addAddress]
-
-    #region[addAddress]
     public function addAddress($id)
     {
         $this->addressIncrement = $id + 1;
@@ -643,7 +641,7 @@ class Upsert extends Component
                     'company_id' => session()->get('company_id'),
                 ]);
                 $this->saveItem($obj->id);
-
+                $this->common->logEntry('Contact','create',$this->vname.'has been created');
                 $message = "Saved";
                 $this->getRoute();
 
@@ -667,7 +665,7 @@ class Upsert extends Component
                 $obj->save();
 
                 $this->saveItem($obj->id);
-
+                $this->common->logEntry('Contact','update',$this->vname.' has been updated');
                 $message = "Updated";
                 $this->getRoute();
             }

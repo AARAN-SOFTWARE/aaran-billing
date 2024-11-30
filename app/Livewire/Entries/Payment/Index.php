@@ -4,6 +4,7 @@ namespace App\Livewire\Entries\Payment;
 
 use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Payment;
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
 use Aaran\Transaction\Models\Transaction;
@@ -35,6 +36,8 @@ class Index extends Component
     public $verified_on;
     public $against_id;
     public $vch_no;
+
+    public $log;
     #endregion
 
     #region[Mount]
@@ -88,6 +91,9 @@ class Index extends Component
 
                 ];
                 $this->common->save($Transaction, $extraFields);
+
+                $this->common->logEntry($this->mode_name,'create',$this->common->vname.' '.$this->mode_name.' for '.$this->contact_name.' - '.$this->mode_name.' has been created.');
+
                 $this->contactUpdate();
                 $message = "Saved";
             } else {
@@ -118,6 +124,7 @@ class Index extends Component
                     'user_id' => auth()->id(),
                 ];
                 $this->common->edit($Transaction, $extraFields);
+                $this->common->logEntry($this->mode_name,'update',$this->common->vname.' '.$this->mode_name.' for '.$this->contact_name.' - '.$this->mode_name.' has been updated.');
                 $this->contactUpdate();
                 $message = "Updated";
             }
@@ -633,6 +640,7 @@ class Index extends Component
         $this->getTransTypeList();
         $this->getModeList();
         $this->getOrderList();
+        $this->log = Logbook::where('vname',$this->mode_name)->take(5)->get();
 
         return view('livewire.entries.payment.index')->with([
             'list' => $this->getListForm->getList(Transaction::class, function ($query) {

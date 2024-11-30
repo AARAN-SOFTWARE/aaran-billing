@@ -51,6 +51,10 @@
                 <x-menu.sub.task/>
             @endif
 
+            @if(Aaran\Aadmin\Src\Customise::hasLogbook())
+                <x-menu.sub.logbook/>
+            @endif
+
 
             <x-menu.sub.logout/>
 

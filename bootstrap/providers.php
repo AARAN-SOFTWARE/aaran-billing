@@ -20,4 +20,6 @@ return [
     Aaran\Taskmanager\Providers\TaskmanagerServiceProvider::class,
 
     Aaran\Conclusion\Providers\ConclusionServiceProvider::class,
+
+    Aaran\Logbook\Providers\LogbookServiceProvider::class,
 ];

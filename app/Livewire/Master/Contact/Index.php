@@ -3,6 +3,7 @@
 namespace App\Livewire\Master\Contact;
 
 
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Contact;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,8 @@ use Livewire\Component;
 class Index extends Component
 {
     use CommonTraitNew;
+
+    public $log;
 
     public function create(): void
     {
@@ -52,6 +55,7 @@ class Index extends Component
 
     public function render()
     {
+        $this->log = Logbook::where('vname','Contact')->take(5)->get();
         return view('livewire.master.contact.index')->with([
             'list' => $this->getList(),
         ]);

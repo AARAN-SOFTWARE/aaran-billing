@@ -92,7 +92,7 @@
                         <td class="max-w-max print:hidden">
                             <div class="flex justify-center items-center">
                                 <a href="{{route('purchase.upsert',[$row->id])}}" class="pt-1 px-1.5">
-                                    <x-button.edit  />
+                                    <x-button.edit/>
                                 </a>
                                 <x-button.delete wire:click="getDelete({{$row->id}})"/>
 
@@ -105,6 +105,16 @@
 
         </x-table.form>
         <x-modal.delete/>
-        <div class="pt-5">{{ $list->links() }}</div>
+
+        <!-- Actions ------------------------------------------------------------------------------------------->
+
+        @if(!$log->isEmpty())
+            <div class="w-10/12 mx-auto font-merri">Log
+            </div>
+        @endif
+        <x-extra.timeline :list="$log"/>
+
+        <div class="pt-5 w-10/12 mx-auto">{{ $list->links() }}</div>
+
     </x-forms.m-panel>
 </div>

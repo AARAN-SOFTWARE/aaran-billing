@@ -3,6 +3,7 @@
 namespace App\Livewire\Master\Product;
 
 use Aaran\Common\Models\Common;
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Product;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Collection;
@@ -16,6 +17,7 @@ class Index extends Component
     #region[Properties]
     public $quantity;
     public $price;
+    public $log;
 
     #endregion
 
@@ -69,6 +71,7 @@ class Index extends Component
                     'company_id' => session()->get('company_id'),
                 ];
                 $this->common->save($Product, $extraFields);
+                $this->common->logEntry('Product','create',$this->common->vname.' has been created');
                 $message = "Saved";
             } else {
                 $Product = Product::find($this->common->vid);
@@ -83,6 +86,7 @@ class Index extends Component
                     'company_id' => session()->get('company_id'),
                 ];
                 $this->common->edit($Product, $extraFields);
+                $this->common->logEntry('Product','update',$this->common->vname.' has been updated');
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
@@ -447,6 +451,7 @@ class Index extends Component
         $this->getProductTypeList();
         $this->getUnitList();
         $this->getGstPercentList();
+        $this->log = Logbook::where('vname','Product')->take(5)->get();
 
         return view('livewire.master.product.index')->with([
             'list' => $this->getList()

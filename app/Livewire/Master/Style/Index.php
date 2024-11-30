@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Master\Style;
 
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Style;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Facades\Storage;
@@ -17,6 +18,7 @@ class Index extends Component
     public $desc;
     public $image;
     public $old_image;
+    public $log;
     #endregion
 
     #region[getSave]
@@ -31,6 +33,7 @@ class Index extends Component
                     'image' => $this->save_image(),
                 ];
                 $this->common->save($style, $extraFields);
+                $this->common->logEntry('Style','create',$this->common->vname.' has been created');
                 $message = "Saved";
             } else {
                 $style = Style::find($this->common->vid);
@@ -40,6 +43,7 @@ class Index extends Component
                     'image' => $this->save_image(),
                 ];
                 $this->common->edit($style, $extraFields);
+                $this->common->logEntry('Style','update',$this->common->vname.' has been updated');
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
@@ -111,6 +115,7 @@ class Index extends Component
     #region[render]
     public function render()
     {
+        $this->log = Logbook::where('vname','Style')->take(5)->get();
         return view('livewire.master.style.index')->with([
             'list' => $this->getListForm->getList(Style::class,function ($query){
                 return $query->where('company_id',session()->get('company_id'));

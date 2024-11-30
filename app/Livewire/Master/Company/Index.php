@@ -3,6 +3,7 @@
 namespace App\Livewire\Master\Company;
 
 use Aaran\Common\Models\Common;
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Company;
 use App\Livewire\Trait\CommonTraitNew;
 use App\Models\Tenant;
@@ -45,6 +46,7 @@ class Index extends Component
     public string $states;
     public string $pincode;
     public $tenant_id;
+    public $log;
     public Collection $tenants;
     #endregion
 
@@ -90,7 +92,6 @@ class Index extends Component
         ];
     }
     #endregion
-
 
     #region[city]
     public $city_id = '';
@@ -361,7 +362,7 @@ class Index extends Component
     public function countrySave($name)
     {
         $obj = Common::create([
-            'label_id' => 2,
+            'label_id' => 5,
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -372,8 +373,8 @@ class Index extends Component
     public function getCountryList(): void
     {
         $this->countryCollection = $this->country_name ?
-            Common::search(trim($this->country_name))->where('label_id', '=', '2')->get() :
-            Common::where('label_id', '=', '2')->Orwhere('label_id', '=', '1')->get();
+            Common::search(trim($this->country_name))->where('label_id', '=', '5')->get() :
+            Common::where('label_id', '=', '5')->Orwhere('label_id', '=', '1')->get();
     }
 #endregion
 
@@ -483,6 +484,7 @@ class Index extends Component
                     'logo' => $this->save_logo(),
                 ];
                 $this->common->save($company, $extraFields);
+                $this->common->logEntry('Company','create',$this->common->vname.' has been created');
                 $message = "Saved";
             } else {
                 $company = Company::find($this->common->vid);
@@ -513,6 +515,7 @@ class Index extends Component
                     'logo' => $this->save_logo(),
                 ];
                 $this->common->edit($company, $extraFields);
+                $this->common->logEntry('Company','update',$this->common->vname.' has been updated');
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
@@ -648,6 +651,7 @@ class Index extends Component
         $this->getTenants();
         $this->getMsmeTypeList();
         $this->getCountryList();
+        $this->log = Logbook::where('vname','Company')->take(5)->get();
         return view('livewire.master.company.index')->with([
             'list' => $this->getListForm->getList(Company::class,function ($query){
                 return $query->where('tenant_id',session()->get('tenant_id'));
