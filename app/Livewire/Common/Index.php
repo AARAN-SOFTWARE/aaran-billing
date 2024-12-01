@@ -106,7 +106,6 @@ class Index extends Component
                     ->when($this->filter, function ($query, $filter) {
                         return $query->whereIn('label_id', $filter);
                     });
-
             }),
         ]);
     }

@@ -27,7 +27,9 @@
                                         {{ $contact->vname }}
                                     </x-dropdown.option>
                                 @empty
-                                    <x-dropdown.new href="{{route('contacts.upsert',['0'])}}" label="Party"/>
+{{--                                    <x-dropdown.new href="{{route('contacts.upsert',['0'])}}" label="Party"/>--}}
+                                    @livewire('controls.model.contact-model',['0'])
+
                                 @endforelse
                             @endif
                         </x-dropdown.select>
