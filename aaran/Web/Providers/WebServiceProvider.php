@@ -9,7 +9,7 @@ class WebServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-        $this->mergeConfigFrom(__DIR__ . '/../config.php','common');
+        $this->mergeConfigFrom(__DIR__ . '/../config.php','web');
 
         $this->app->register(WebRouteServiceProvider::class);
     }

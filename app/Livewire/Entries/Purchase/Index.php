@@ -3,6 +3,7 @@
 namespace App\Livewire\Entries\Purchase;
 
 use Aaran\Entries\Models\Purchase;
+use Aaran\Logbook\Models\Logbook;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -11,6 +12,7 @@ class Index extends Component
 {
     use CommonTraitNew;
 
+    public $log;
     #region[create]
     public function create(): void
     {
@@ -43,12 +45,14 @@ class Index extends Component
     #region[Render]
     public function render()
     {
+        $this->log = Logbook::where('vname','Purchase')->take(5)->get();
         $this->getListForm->searchField = 'purchase_no';
         $this->getListForm->sortField = 'purchase_no';
         return view('livewire.entries.purchase.index')->with([
             'list' => $this->getListForm->getList(Purchase::class, function ($query) {
                 return $query->where('company_id', '=', session()->get('company_id'))->where('acyear',session()->get('acyear'));
             }),
+            'log' => $this->log,
         ]);
     }
     #endregion

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Master\Orders;
 
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Order;
 use App\Livewire\Trait\CommonTraitNew;
 use Livewire\Component;
@@ -12,6 +13,7 @@ class Index extends Component
 
     #region[properties]
     public $order_name = '';
+    public $log;
     #endregion
 
     #region[getSave]
@@ -25,6 +27,7 @@ class Index extends Component
                     'company_id' => session()->get('company_id'),
                 ];
                 $this->common->save($order, $extraFields);
+                $this->common->logEntry('Order','create',$this->common->vname.' has been created');
                 $message = "Saved";
             } else {
                 $order = Order::find($this->common->vid);
@@ -33,6 +36,7 @@ class Index extends Component
                     'company_id' => session()->get('company_id'),
                 ];
                 $this->common->edit($order, $extraFields);
+                $this->common->logEntry('Order','update',$this->common->vname.' has been updated');
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
@@ -75,6 +79,7 @@ class Index extends Component
     #region[render]
     public function render()
     {
+        $this->log = Logbook::where('vname','Order')->take(5)->get();
         $this->getListForm->searchField = 'order_name';
 
         return view('livewire.master.orders.index')->with([

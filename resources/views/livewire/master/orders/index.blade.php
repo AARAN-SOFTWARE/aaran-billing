@@ -50,8 +50,6 @@
 
         <x-modal.delete/>
 
-        <div class="pt-5">{{ $list->links() }}</div>
-
         <!--Create ---------------------------------------------------------------------------------------------------->
         <x-forms.create :id="$common->vid">
 
@@ -61,6 +59,18 @@
             </div>
 
         </x-forms.create>
+
+        <!-- Actions ------------------------------------------------------------------------------------------->
+
+        @if(!$log->isEmpty())
+            <div class="w-10/12 mx-auto font-merri">Log
+            </div>
+        @endif
+        <x-extra.timeline :list="$log"/>
+
+        <div class="pt-5 w-10/12 mx-auto">{{ $list->links() }}</div>
+
+
 
     </x-forms.m-panel>
 </div>

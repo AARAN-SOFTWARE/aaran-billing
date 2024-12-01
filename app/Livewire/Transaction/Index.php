@@ -84,6 +84,7 @@ class Index extends Component
 
                 ];
                 $this->common->save($Transaction, $extraFields);
+                $this->common->logEntry('Transaction','create',$this->common->vname.' has been created');
                 $this->contactUpdate();
                 $message = "Saved";
             } else {
@@ -115,6 +116,7 @@ class Index extends Component
                 ];
                 $this->common->edit($Transaction, $extraFields);
                 $this->contactUpdate();
+                $this->common->logEntry('Transaction','update',$this->common->vname.' has been updated');
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);

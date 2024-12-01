@@ -42,9 +42,9 @@
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
                         <x-table.cell-text>
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->image) }}" alt="image"
-                                     class="flex w-10 h-10"
-                                />
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->image) }}" alt="image"
+                                 class="flex w-10 h-10"
+                            />
                         </x-table.cell-text>
 
                         <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
@@ -61,8 +61,6 @@
         </x-table.form>
 
         <x-modal.delete/>
-
-        <div class="pt-5">{{ $list->links() }}</div>
 
         <!-- Create --------------------------------------------------------------------------------------------------->
 
@@ -132,6 +130,16 @@
                 </div>
             </div>
         </x-forms.create>
+
+        <!-- Actions ------------------------------------------------------------------------------------------->
+
+        @if(!$log->isEmpty())
+            <div class="w-10/12 mx-auto font-merri">Log
+            </div>
+        @endif
+        <x-extra.timeline :list="$log"/>
+
+        <div class="pt-5 w-10/12 mx-auto">{{ $list->links() }}</div>
 
     </x-forms.m-panel>
 </div>

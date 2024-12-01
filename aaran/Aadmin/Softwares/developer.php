@@ -16,6 +16,7 @@ return [
 //        Customise::demodata(),
 //        Customise::taskManager(),
         Customise::exportsales(),
+        Customise::logbooks(),
     ],
     'SalesEntry' => [
         SaleEntry::order(),

@@ -139,4 +139,16 @@ class Customise
         return 'exportsales';
     }
     #endregion
+
+    #region[LogBook]
+    public static function hasLogbook(): bool
+    {
+        return static::enabled(static::logbooks());
+    }
+
+    public static function logbooks(): string
+    {
+        return 'logbooks';
+    }
+    #endregion
 }

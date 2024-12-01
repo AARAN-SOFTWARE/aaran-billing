@@ -924,6 +924,7 @@ class Upsert extends Component
                     ]);
                     $this->sales_id=$obj->id;
                     $this->saveItem( $this->sales_id);
+                    $this->common->logEntry('Sale','create','The Sales entry has been created for '.$this->contact_name);
                     $this->contactUpdate();
                     $message = "Saved";
 
@@ -971,6 +972,7 @@ class Upsert extends Component
                     $this->sales_id=$obj->id;
                     DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
                     $this->saveItem( $this->sales_id);
+                    $this->common->logEntry('Sale','update','The Sales entry has been updated for '.$this->contact_name);
                     $this->contactUpdate();
                     $message = "Updated";
                 }

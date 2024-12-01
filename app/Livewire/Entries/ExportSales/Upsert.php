@@ -558,6 +558,7 @@ class Upsert extends Component
                 ]);
                 $this->saveItem( $obj->id);
                 $this->saveContact( $obj->id);
+                $this->common->logEntry('ExportSale','create','The ExportSale entry has been created for '.$this->contact_name);
                 $message = "Saved";
 
             } else {
@@ -590,6 +591,7 @@ class Upsert extends Component
                 $this->saveItem( $obj->id);
                 DB::table('export_sale_contacts')->where('export_sales_id', '=', $obj->id)->delete();
                 $this->saveContact( $obj->id);
+                $this->common->logEntry('ExportSale','update','The ExportSale entry has been updated for '.$this->contact_name);
                 $message = "Updated";
             }
 
@@ -599,7 +601,9 @@ class Upsert extends Component
         }
 
     }
+    #endregion
 
+    #region[saveItem]
     public function saveItem($id): void
     {
 

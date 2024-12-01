@@ -3,6 +3,7 @@
 namespace App\Livewire\Entries\Sales;
 
 use Aaran\Entries\Models\Sale;
+use Aaran\Logbook\Models\Logbook;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -12,6 +13,7 @@ class Index extends Component
 {
     use CommonTraitNew;
     use WithPagination;
+    public $log;
 
     #region[create]
     public function create(): void
@@ -53,6 +55,7 @@ class Index extends Component
     #region[render]
     public function render()
     {
+        $this->log = Logbook::where('vname','Sale')->take(5)->get();
         $this->getListForm->searchField='invoice_no';
         $this->getListForm->sortField='invoice_no';
         return view('livewire.entries.sales.index')->with([
