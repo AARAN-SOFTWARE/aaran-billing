@@ -32,7 +32,7 @@
 
             @if(Aaran\Aadmin\Src\Customise::hasTransaction())
                 <x-menu.sub.transaction/>
-                <x-menu.sub.reports/>
+
             @endif
 
             @if(Aaran\Aadmin\Src\Customise::hasMaster())
@@ -43,7 +43,11 @@
                 <x-menu.sub.common/>
             @endif
 
-            @if(Aaran\Aadmin\Src\Customise::hasDemodata())
+            @if(Aaran\Aadmin\Src\Customise::hasReport())
+                <x-menu.sub.reports/>
+            @endif
+
+            @if(Aaran\Aadmin\Src\Customise::hasDemoData())
                 <x-menu.sub.demodata/>
             @endif
 

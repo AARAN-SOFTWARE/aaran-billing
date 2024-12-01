@@ -12,7 +12,7 @@
                 <x-dropdown.wrapper label="Party Name" type="contactTyped">
                     <div class="relative ">
                         <x-dropdown.input label="Party Name" id="contact_name"
-                                          wire:model.live="contact_name"
+                                          wire:model.live.debounce="contact_name"
                                           wire:keydown.arrow-up="decrementContact"
                                           wire:keydown.arrow-down="incrementContact"
                                           wire:keydown.enter="enterContact"/>
@@ -27,9 +27,7 @@
                                         {{ $contact->vname }}
                                     </x-dropdown.option>
                                 @empty
-{{--                                    <x-dropdown.new href="{{route('contacts.upsert',['0'])}}" label="Party"/>--}}
-                                    @livewire('controls.model.contact-model',['0'])
-
+                                    @livewire('controls.model.contact-model',[$contact_name])
                                 @endforelse
                             @endif
                         </x-dropdown.select>

@@ -116,14 +116,14 @@ class Customise
     #endregion
 
     #region[Demo data]
-    public static function hasDemodata(): bool
+    public static function hasDemoData(): bool
     {
-        return static::enabled(static::demodata());
+        return static::enabled(static::demoData());
     }
 
-    public static function demodata(): string
+    public static function demoData(): string
     {
-        return 'demodata';
+        return 'demoData';
     }
     #endregion
 
@@ -131,12 +131,25 @@ class Customise
     #region[ExportSales]
     public static function hasExportSales(): bool
     {
-        return static::enabled(static::exportsales());
+        return static::enabled(static::exportSales());
     }
 
-    public static function exportsales(): string
+    public static function exportSales(): string
     {
-        return 'exportsales';
+        return 'exportSales';
+    }
+    #endregion
+
+
+    #region[Demo data]
+    public static function hasReport(): bool
+    {
+        return static::enabled(static::report());
+    }
+
+    public static function report(): string
+    {
+        return 'report';
     }
     #endregion
 
@@ -151,4 +164,5 @@ class Customise
         return 'logbooks';
     }
     #endregion
+
 }

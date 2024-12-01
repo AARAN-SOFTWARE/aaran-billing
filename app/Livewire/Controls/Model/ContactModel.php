@@ -183,7 +183,7 @@ class ContactModel extends Component
         $this->highlightCity++;
     }
 
-    public function setCity($name, $id, $index=null): void
+    public function setCity($name, $id, $index = null): void
     {
         $this->city_name = $name;
         $this->city_id = $id;
@@ -383,7 +383,7 @@ class ContactModel extends Component
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v = ['name' => $name, 'id' => $obj->id,'index' => $index];
+        $v = ['name' => $name, 'id' => $obj->id, 'index' => $index];
         $this->refreshPincode($v);
     }
 
@@ -623,59 +623,30 @@ class ContactModel extends Component
     public function save(): void
     {
         if ($this->vname != '') {
-            if ($this->vid == "") {
-                $this->validate($this->rules());
 
-                $obj = Contact::create([
-                    'vname' => Str::upper($this->vname),
-                    'mobile' => $this->mobile,
-                    'whatsapp' => $this->whatsapp,
-                    'contact_person' => $this->contact_person,
-                    'contact_type_id' => $this->contact_type_id ?: '124',
-                    'msme_no' => $this->msme_no ?: '-',
-                    'msme_type_id' => $this->msme_type_id ?: '125',
-                    'opening_balance' => $this->opening_balance ?: 0,
-                    'outstanding' => $this->outstanding ?: 0,
-                    'effective_from' => $this->effective_from,
-                    'active_id' => $this->active_id,
-                    'gstin' => Str::upper($this->gstin),
-                    'email' => $this->email,
-                    'user_id' => Auth::id(),
-                    'company_id' => session()->get('company_id'),
-                ]);
-                $this->saveItem($obj->id);
-                $this->vid = $obj->id;
+            $this->validate($this->rules());
 
-                $message = "Saved";
-                $this->getRoute();
+            $obj = Contact::create([
+                'vname' => Str::upper($this->vname),
+                'mobile' => $this->mobile,
+                'whatsapp' => $this->whatsapp,
+                'contact_person' => $this->contact_person,
+                'contact_type_id' => $this->contact_type_id ?: '124',
+                'msme_no' => $this->msme_no ?: '-',
+                'msme_type_id' => $this->msme_type_id ?: '125',
+                'opening_balance' => $this->opening_balance ?: 0,
+                'outstanding' => $this->outstanding ?: 0,
+                'effective_from' => $this->effective_from,
+                'active_id' => $this->active_id,
+                'gstin' => Str::upper($this->gstin),
+                'email' => $this->email,
+                'user_id' => Auth::id(),
+                'company_id' => session()->get('company_id'),
+            ]);
+            $this->saveItem($obj->id);
 
-            } else {
-                $obj = Contact::find($this->vid);
-                $obj->vname = Str::upper($this->vname);
-                $obj->mobile = $this->mobile;
-                $obj->whatsapp = $this->whatsapp;
-                $obj->contact_person = $this->contact_person;
-                $obj->contact_type_id = $this->contact_type_id;
-                $obj->msme_no = $this->msme_no;
-                $obj->msme_type_id = $this->msme_type_id;
-                $obj->opening_balance = $this->opening_balance ?: 0;
-                $obj->outstanding = $this->outstanding ?: 0;
-                $obj->effective_from = $this->effective_from;
-                $obj->gstin = $this->gstin;
-                $obj->email = $this->email;
-                $obj->active_id = $this->active_id;
-                $obj->user_id = Auth::id();
-                $obj->company_id = session()->get('company_id');
-                $obj->save();
+            $this->dispatch('refresh-contact', ['name' => $this->vname, 'id' => $obj->id]);
 
-                $this->saveItem($obj->id);
-
-                $message = "Updated";
-                $this->getRoute();
-            }
-
-            $this->dispatch('refresh-contact', ['name' => $this->vname, 'id' => $this->vid]);
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
 
             $this->vname = '';
             $this->mobile = '';
@@ -688,9 +659,6 @@ class ContactModel extends Component
             $this->effective_from = '';
             $this->gstin = '';
             $this->email = '';
-
-
-
         }
     }
     #endregion
@@ -742,80 +710,83 @@ class ContactModel extends Component
     #region[Mount]
     public function mount($id): void
     {
-        $this->route = url()->previous();
-        if ($id != 0) {
+        $this->vname = $id;
 
-            $obj = Contact::find($id);
-            $this->vid = $obj->id;
-            $this->vname = $obj->vname;
-            $this->mobile = $obj->mobile;
-            $this->whatsapp = $obj->whatsapp;
-            $this->contact_person = $obj->contact_person;
-            $this->contact_type_id = $obj->contact_type_id;
-            $this->contact_type_name = Common::find($obj->contact_type_id)->vname;
-            $this->msme_no = $obj->msme_no;
-            $this->msme_type_id = $obj->msme_type_id;
-            $this->msme_type_name = Common::find($obj->msme_type_id)->vname;
-            $this->opening_balance = $obj->opening_balance;
-            $this->outstanding = $obj->outstanding;
-            $this->effective_from = $obj->effective_from;
-            $this->gstin = $obj->gstin;
-            $this->email = $obj->email;
-            $this->active_id = $obj->active_id;
 
-            $data = DB::table('contact_details')
-                ->select(
-                    'contact_details.*',
-                    'city.vname as city_name',
-                    'state.vname as state_name',
-                    'country.vname as country_name',
-                    'pincode.vname as pincode_name'
-                )
-                ->join('commons as city', 'city.id', '=', 'contact_details.city_id')
-                ->join('commons as state', 'state.id', '=', 'contact_details.state_id')
-                ->join('commons as country', 'country.id', '=', 'contact_details.country_id')
-                ->join('commons as pincode', 'pincode.id', '=', 'contact_details.pincode_id')
-                ->where('contact_id', '=', $id)
-                ->get()
-                ->transform(function ($data) {
-                    return [
-                        'contact_detail_id' => $data->id,
-                        'address_type' => $data->address_type,
-                        'city_name' => $data->city_name,
-                        'city_id' => $data->city_id,
-                        'state_name' => $data->state_name,
-                        'state_id' => $data->state_id,
-                        'pincode_name' => $data->pincode_name,
-                        'pincode_id' => $data->pincode_id,
-                        'country_name' => $data->country_name,
-                        'country_id' => $data->country_id,
-                        'address_1' => $data->address_1,
-                        'address_2' => $data->address_2,
-                    ];
-                });
-            $this->itemList = $data->toArray();
-            for ($j = 0; $j < $data->skip(1)->count(); $j++) {
-                $this->secondaryAddress[] = $j + 1;
-            }
-        } else {
-            $this->effective_from = Carbon::now()->format('Y-m-d');
-            $this->active_id = true;
-            $this->itemList[0] = [
-                "contact_detail_id" => 0,
-                'address_type' => $this->address_type ?: "Primary",
-                "state_name" => "-",
-                "state_id" => "1",
-                "city_id" => "1",
-                "city_name" => "-",
-                "country_id" => "1",
-                "country_name" => "-",
-                "pincode_id" => "1",
-                "pincode_name" => "-",
-                "address_1" => "-",
-                "address_2" => "-",
-            ];
-            $this->address_type = "Primary";
-        }
+//        $this->route = url()->previous();
+//        if ($id != 0) {
+//
+//            $obj = Contact::find($id);
+//            $this->vid = $obj->id;
+//            $this->vname = $obj->vname;
+//            $this->mobile = $obj->mobile;
+//            $this->whatsapp = $obj->whatsapp;
+//            $this->contact_person = $obj->contact_person;
+//            $this->contact_type_id = $obj->contact_type_id;
+//            $this->contact_type_name = Common::find($obj->contact_type_id)->vname;
+//            $this->msme_no = $obj->msme_no;
+//            $this->msme_type_id = $obj->msme_type_id;
+//            $this->msme_type_name = Common::find($obj->msme_type_id)->vname;
+//            $this->opening_balance = $obj->opening_balance;
+//            $this->outstanding = $obj->outstanding;
+//            $this->effective_from = $obj->effective_from;
+//            $this->gstin = $obj->gstin;
+//            $this->email = $obj->email;
+//            $this->active_id = $obj->active_id;
+//
+//            $data = DB::table('contact_details')
+//                ->select(
+//                    'contact_details.*',
+//                    'city.vname as city_name',
+//                    'state.vname as state_name',
+//                    'country.vname as country_name',
+//                    'pincode.vname as pincode_name'
+//                )
+//                ->join('commons as city', 'city.id', '=', 'contact_details.city_id')
+//                ->join('commons as state', 'state.id', '=', 'contact_details.state_id')
+//                ->join('commons as country', 'country.id', '=', 'contact_details.country_id')
+//                ->join('commons as pincode', 'pincode.id', '=', 'contact_details.pincode_id')
+//                ->where('contact_id', '=', $id)
+//                ->get()
+//                ->transform(function ($data) {
+//                    return [
+//                        'contact_detail_id' => $data->id,
+//                        'address_type' => $data->address_type,
+//                        'city_name' => $data->city_name,
+//                        'city_id' => $data->city_id,
+//                        'state_name' => $data->state_name,
+//                        'state_id' => $data->state_id,
+//                        'pincode_name' => $data->pincode_name,
+//                        'pincode_id' => $data->pincode_id,
+//                        'country_name' => $data->country_name,
+//                        'country_id' => $data->country_id,
+//                        'address_1' => $data->address_1,
+//                        'address_2' => $data->address_2,
+//                    ];
+//                });
+//            $this->itemList = $data->toArray();
+//            for ($j = 0; $j < $data->skip(1)->count(); $j++) {
+//                $this->secondaryAddress[] = $j + 1;
+//            }
+//        } else {
+        $this->effective_from = Carbon::now()->format('Y-m-d');
+        $this->active_id = true;
+        $this->itemList[0] = [
+            "contact_detail_id" => 0,
+            'address_type' => $this->address_type ?: "Primary",
+            "state_name" => "-",
+            "state_id" => "1",
+            "city_id" => "1",
+            "city_name" => "-",
+            "country_id" => "1",
+            "country_name" => "-",
+            "pincode_id" => "1",
+            "pincode_name" => "-",
+            "address_1" => "-",
+            "address_2" => "-",
+        ];
+        $this->address_type = "Primary";
+//        }
     }
 #endregion
 
@@ -840,7 +811,7 @@ class ContactModel extends Component
     #region[Route]
     public function getRoute(): void
     {
-        $this->redirect(route('sales.upsert',['0']));
+        $this->redirect(route('sales.upsert', ['0']));
     }
 
     public function render()

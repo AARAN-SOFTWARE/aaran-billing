@@ -170,9 +170,8 @@ class Upsert extends Component
     #[On('refresh-contact')]
     public function refreshContact($v): void
     {
-        dd('refresh contact');
         $this->contact_id = $v['id'];
-        $this->contact_name = $v['name'];
+        $this->contact_name = \Livewire\str($v['name'])->upper();
         $this->contactTyped = false;
 
     }

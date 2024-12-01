@@ -15,9 +15,11 @@ return [
         Customise::transaction(),
 //        Customise::demodata(),
 //        Customise::taskManager(),
-        Customise::exportsales(),
+        Customise::exportSales(),
+        Customise::report(),
         Customise::logbooks(),
     ],
+
     'SalesEntry' => [
         SaleEntry::order(),
         SaleEntry::billingAddress(),
