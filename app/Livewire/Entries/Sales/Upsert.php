@@ -931,6 +931,7 @@ class Upsert extends Component
 
                 } else {
                     $obj = Sale::find($this->common->vid);
+                    $previousData = $obj->getOriginal();
                     $obj->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
                     $obj->acyear = session()->get('acyear');
                     $obj->company_id = session()->get('company_id');
@@ -972,7 +973,14 @@ class Upsert extends Component
                     $this->sales_id=$obj->id;
                     DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
                     $this->saveItem( $this->sales_id);
-                    $this->common->logEntry('Sale','update','The Sales entry has been updated for '.$this->contact_name);
+                    $changes = [];
+                    foreach ($obj->getChanges() as $key => $newValue) {
+                        $oldValue = $previousData[$key] ?? null;
+                        $changes[] = "$key: '$oldValue' changed to '$newValue'";
+                    }
+                    $changesMessage = implode(' , ', $changes);
+                    $this->common->logEntry('Sale','update','The Sales entry has been updated for ' . $this->contact_name . '. Changes: ' . $changesMessage);
+//                    dd($changesMessage);
                     $this->contactUpdate();
                     $message = "Updated";
                 }
@@ -980,7 +988,6 @@ class Upsert extends Component
                 $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
 
             }
-
     }
     public function save()
     {
