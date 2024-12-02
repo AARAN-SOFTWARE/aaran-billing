@@ -6,7 +6,7 @@
             },
             {
                 label: 'Alfa Romeo',
-                value: 'Alfa Romeo'
+                value: '1'
             },
             {
                 label: 'Aston Martin',

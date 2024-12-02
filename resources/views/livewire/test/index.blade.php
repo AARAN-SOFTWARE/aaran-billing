@@ -1,8 +1,11 @@
 <div>
     <x-slot name="header">Common</x-slot>
 
-    <div>Test Here</div>
+    <div class="flex gap-4">
 
-    <x-combobox.search />
+        <x-combobox.search wire:model="searches"/>
 
+        <div>{{$searches}}</div>
+
+    </div>
 </div>
