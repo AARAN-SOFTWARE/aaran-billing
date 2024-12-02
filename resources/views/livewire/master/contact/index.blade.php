@@ -69,7 +69,8 @@
                                 href="{{route('contactReport',[$row->id])}}"> {{$row->gstin}}</a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text><a
+                        <x-table.cell-text>
+                            <a
                                 href="{{route('contactReport',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>
                         </x-table.cell-text>
 
