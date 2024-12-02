@@ -58,7 +58,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('purchase.upsert',[$row->id])}}"> {{$row->purchase_no}}</a>
+                            <a href="{{route('logs',[$row->id])}}"> {{$row->purchase_no}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>

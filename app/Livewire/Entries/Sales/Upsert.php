@@ -924,7 +924,7 @@ class Upsert extends Component
                     ]);
                     $this->sales_id=$obj->id;
                     $this->saveItem( $this->sales_id);
-                    $this->common->logEntry('Sale','create','The Sales entry has been created for '.$this->contact_name);
+                    $this->common->logEntry( $this->invoice_no,'create','The Sales entry has been created for '.$this->contact_name);
                     $this->contactUpdate();
                     $message = "Saved";
 
@@ -979,7 +979,7 @@ class Upsert extends Component
                         $changes[] = "$key: '$oldValue' changed to '$newValue'";
                     }
                     $changesMessage = implode(' , ', $changes);
-                    $this->common->logEntry('Sale','update','The Sales entry has been updated for ' . $this->contact_name . '. Changes: ' . $changesMessage);
+                    $this->common->logEntry($this->invoice_no,'update','The Sales entry has been updated for ' . $this->contact_name . '. Changes: ' . $changesMessage);
 //                    dd($changesMessage);
                     $this->contactUpdate();
                     $message = "Updated";
