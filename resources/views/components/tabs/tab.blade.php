@@ -7,8 +7,8 @@
         type="button"
         :tabindex="isSelected($el.id) ? 0 : -1"
         :aria-selected="isSelected($el.id)"
-        :class="isSelected($el.id) ? 'border-zinc-300 bg-white' : 'border-transparent'"
-        class="inline-flex rounded-t-md border-t border-l border-r px-5 py-2.5"
+        :class="isSelected($el.id) ? ' border-blue-500 ' : 'border-transparent'"
+        class="inline-flex rounded-t-sm border-b-2   px-5 py-3 font-merri text-xs"
         role="tab"
     >
         {{$slot}}

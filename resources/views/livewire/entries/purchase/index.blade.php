@@ -54,7 +54,7 @@
                     <x-table.row>
 
                         <x-table.cell-text>
-                            <a href="{{route('purchase.upsert',[$row->id])}}"> {{$row->order->vname}}</a>
+                            <a href="{{route('purchase.log',[$row->id])}}"> {{$row->order->vname}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
@@ -95,7 +95,6 @@
                                     <x-button.edit/>
                                 </a>
                                 <x-button.delete wire:click="getDelete({{$row->id}})"/>
-
                             </div>
                         </td>
                     </x-table.row>

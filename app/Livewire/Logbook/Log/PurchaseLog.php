@@ -1,39 +1,40 @@
 <?php
 
-namespace App\Livewire\Logbook;
+namespace App\Livewire\Logbook\Log;
 
-use Aaran\Entries\Models\Sale;
+use Aaran\Entries\Models\Purchase;
 use Aaran\Logbook\Models\Logbook;
 use App\Livewire\Trait\CommonTraitNew;
 use Livewire\Component;
 
-class CommonLog extends Component
+class PurchaseLog extends Component
 {
     use CommonTraitNew;
 
     #region[Property]
-    public $sales;
-    public $salesInv;
+    public $purchase;
+    public $purchaseInv;
 
     #endregion
 
     #region[Mount]
     public function mount($id)
     {
-        $this->sales = Sale::find($id);
-        $this->salesInv = $this->sales->invoice_no;
+        $this->purchase = Purchase::find($id);
+        $this->purchaseInv = $this->purchase->purchase_no;
     }
 
     #endregion
     public function render()
     {
-        return view('livewire.logbook.common-log')->with([
+        return view('livewire.logbook.log.purchase-log')->with([
             'logs' => $this->getListForm->getList(Logbook::class, function ($query) {
-                if ($this->salesInv) {
-                    return $query->where('vname', $this->salesInv);
+                if ($this->purchaseInv) {
+                    return $query->where('vname', $this->purchaseInv);
                 }
                 return $query;
             }),
         ]);
     }
+
 }

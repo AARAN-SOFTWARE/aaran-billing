@@ -55,7 +55,6 @@ class Index extends Component
     #region[render]
     public function render()
     {
-        $this->log = Logbook::where('vname','Sale')->take(5)->get();
         $this->getListForm->searchField='invoice_no';
         $this->getListForm->sortField='invoice_no';
         return view('livewire.entries.sales.index')->with([

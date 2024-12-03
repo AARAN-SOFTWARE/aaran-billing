@@ -574,7 +574,7 @@ class Upsert extends Component
                     ]);
                     $this->saveItem($obj->id);
                     $this->contactUpdate();
-                    $this->common->logEntry('Purchase','create','The Purchase entry has been created for '.$this->contact_name);
+                    $this->common->logEntry($this->purchase_no,'create','The Purchase entry has been created for '.$this->contact_name);
                     $message = "Saved";
                     $this->getRoute();
 
@@ -602,7 +602,7 @@ class Upsert extends Component
                     $obj->save();
                     DB::table('purchaseitems')->where('purchase_id', '=', $obj->id)->delete();
                     $this->saveItem($obj->id);
-                    $this->common->logEntry('Purchase','update','The Purchase entry has been updated for '.$this->contact_name);
+                    $this->common->logEntry($this->purchase_no,'update','The Purchase entry has been updated for '.$this->contact_name);
                     $this->contactUpdate();
                     $message = "Updated";
                 }
