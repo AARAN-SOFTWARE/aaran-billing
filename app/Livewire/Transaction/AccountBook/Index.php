@@ -1,69 +1,90 @@
 <?php
 
-namespace App\Livewire\Transaction\Books;
+namespace App\Livewire\Transaction\AccountBook;
 
 use Aaran\Common\Models\Common;
 use Aaran\Transaction\Models\AccountBook;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Collection;
 use Livewire\Component;
-use Aaran\Transaction\Models\BankBook as BankBookModel;
 
-class BankBook extends Component
+class Index extends Component
 {
     use CommonTraitNew;
 
-    #region[properties]
+    public $opening_balance;
+    public $opening_balance_date;
+    public $notes;
     public $account_no;
     public $ifsc_code;
     public $branch;
-    public $opening_balance;
-    public $opening_date;
-    public $notes;
-    #endregion
 
+    #region[Validation]
+    public function rules(): array
+    {
+        return [
+            'common.vname' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'common.vname.required' => ' Mention The :attribute',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'common.vname' => 'Account name',
+        ];
+    }
+    #endregion
 
     #region[Get-Save]
     public function getSave(): void
     {
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
-                $this->common->vname = preg_replace('/[^A-Za-z0-9\-]/', '', $this->common->vname);
-                $bank_book = new BankBookModel();
+                $AccountBook = new AccountBook();
                 $extraFields = [
+                    'trans_type_id' => $this->trans_type_id,
+                    'opening_balance' => $this->opening_balance,
+                    'opening_balance_date' => $this->opening_balance_date,
+                    'notes' => $this->notes,
                     'account_no' => $this->account_no,
                     'ifsc_code' => $this->ifsc_code,
                     'bank_id' => $this->bank_id,
                     'account_type_id' => $this->account_type_id,
                     'branch' => $this->branch,
-                    'opening_balance' => $this->opening_balance,
-                    'opening_date' => $this->opening_date,
-                    'notes' => $this->notes,
                     'user_id' => auth()->id(),
                     'company_id' => session()->get('company_id'),
                 ];
-                $this->common->save($bank_book, $extraFields);
+                $this->common->save($AccountBook, $extraFields);
                 $message = "Saved";
             } else {
-                $bank_book = BankBookModel::find($this->common->vid);
+                $AccountBook = AccountBook::find($this->common->vid);
                 $extraFields = [
+                    'trans_type_id' => $this->trans_type_id,
+                    'opening_balance' => $this->opening_balance,
+                    'opening_balance_date' => $this->opening_balance_date,
+                    'notes' => $this->notes,
                     'account_no' => $this->account_no,
                     'ifsc_code' => $this->ifsc_code,
                     'bank_id' => $this->bank_id,
                     'account_type_id' => $this->account_type_id,
                     'branch' => $this->branch,
-                    'opening_balance' => $this->opening_balance,
-                    'opening_date' => $this->opening_date,
-                    'notes' => $this->notes,
                     'user_id' => auth()->id(),
                     'company_id' => session()->get('company_id'),
                 ];
-                $this->common->edit($bank_book, $extraFields);
+                $this->common->edit($AccountBook, $extraFields);
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
+
     #endregion
 
     #region[bank]
@@ -206,72 +227,132 @@ class BankBook extends Component
     }
 #endregion
 
+    #region[trans_type]
+    public $trans_type_id = '';
+    public $trans_type_name = '';
+    public \Illuminate\Support\Collection $trans_typeCollection;
+    public $highlightTransType = 0;
+    public $trans_typeTyped = false;
+
+    public function decrementTransType(): void
+    {
+        if ($this->highlightTransType === 0) {
+            $this->highlightTransType = count($this->trans_typeCollection) - 1;
+            return;
+        }
+        $this->highlightTransType--;
+    }
+
+    public function incrementTransType(): void
+    {
+        if ($this->highlightTransType === count($this->trans_typeCollection) - 1) {
+            $this->highlightTransType = 0;
+            return;
+        }
+        $this->highlightTransType++;
+    }
+
+    public function setTransType($name, $id): void
+    {
+        $this->trans_type_name = $name;
+        $this->trans_type_id = $id;
+        $this->getTransTypeList();
+    }
+
+    public function enterTransType(): void
+    {
+        $obj = $this->trans_typeCollection[$this->highlightTransType] ?? null;
+
+        $this->trans_type_name = '';
+        $this->trans_typeCollection = \Illuminate\Database\Eloquent\Collection::empty();
+        $this->highlightTransType = 0;
+
+        $this->trans_type_name = $obj['vname'] ?? '';
+        $this->trans_type_id = $obj['id'] ?? '';
+    }
+
+    public function refreshTransType($v): void
+    {
+        $this->trans_type_id = $v['id'];
+        $this->trans_type_name = $v['name'];
+        $this->trans_typeTyped = false;
+    }
+
+    public function transTypeSave($name)
+    {
+        $obj = Common::create([
+            'label_id' => 19,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshTransType($v);
+    }
+
+    public function getTransTypeList(): void
+    {
+        $this->trans_typeCollection = $this->trans_type_name ?
+            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
+            Common::where('label_id', '=', '19')->get();
+    }
+#endregion
+
     #region[Get-Obj]
     public function getObj($id)
     {
         if ($id) {
-            $bank_book = BankBookModel::find($id);
-            $this->common->vid = $bank_book->id;
-            $this->common->vname = $bank_book->vname;
-            $this->common->active_id = $bank_book->active_id;
-            $this->bank_id = $bank_book->bank_id;
-            $this->bank_name = $bank_book->bank->vname;
-            $this->account_type_id = $bank_book->account_type_id;
-            $this->account_type_name = $bank_book->accountType->vname;
-            $this->account_no = $bank_book->account_no;
-            $this->ifsc_code = $bank_book->ifsc_code;
-            $this->branch = $bank_book->branch;
-            $this->opening_balance = $bank_book->opening_balance;
-            $this->opening_date = $bank_book->opening_date;
-            $this->notes = $bank_book->notes;
-            return $bank_book;
+            $AccountBook = AccountBook::find($id);
+//            dd($AccountBook);
+            $this->common->vid = $AccountBook->id;
+            $this->common->vname = $AccountBook->vname;
+            $this->trans_type_id = $AccountBook->trans_type_id;
+            $this->trans_type_name = $AccountBook->transType->vname;
+            $this->opening_balance = $AccountBook->opening_balance;
+            $this->opening_balance_date = $AccountBook->opening_balance_date;
+            $this->notes = $AccountBook->notes;
+            $this->account_no = $AccountBook->account_no;
+            $this->ifsc_code = $AccountBook->ifsc_code;
+            $this->bank_id = $AccountBook->bank_id;
+            $this->bank_name = $AccountBook->bank->vname;
+            $this->account_type_id = $AccountBook->account_type_id;
+            $this->account_type_name = $AccountBook->accountType->vname;
+            $this->branch = $AccountBook->branch;
+            $this->common->active_id = $AccountBook->active_id;
+            return $AccountBook;
         }
         return null;
     }
+
     #endregion
 
     #region[Clear-Fields]
     public function clearFields(): void
     {
         $this->common->vid = '';
+        $this->trans_type_id = '';
+        $this->trans_type_name = '';
         $this->common->vname = '';
-        $this->common->active_id = '1';
+        $this->opening_balance = '';
+        $this->opening_balance_date = '';
+        $this->notes = '';
+        $this->account_no = '';
+        $this->ifsc_code = '';
         $this->bank_id = '';
         $this->bank_name = '';
         $this->account_type_id = '';
         $this->account_type_name = '';
-        $this->account_no = '';
-        $this->ifsc_code = '';
         $this->branch = '';
-        $this->opening_balance = '';
-        $this->opening_date = '';
-        $this->notes = '';
+        $this->common->active_id = '1';
     }
     #endregion
-
-    #region[render]
-    public function getList()
-    {
-        return BankBookModel::select(
-            'bank_books.*',
-            'bank.vname as bank_name',
-            'account_type.vname as account_type_name',
-        )
-            ->join('commons as bank', 'bank.id', '=', 'bank_books.bank_id')
-            ->join('commons as account_type', 'account_type.id', '=', 'bank_books.account_type_id')
-            ->where('bank_books.active_id', '=', $this->getListForm->activeRecord)
-            ->where('bank_books.company_id', '=', session()->get('company_id'))
-            ->orderBy('bank_books.id', $this->getListForm->sortAsc ? 'asc' : 'desc')
-            ->paginate($this->getListForm->perPage);
-    }
 
     public function render()
     {
         $this->getBankList();
         $this->getAccountTypeList();
-        return view('livewire.transaction.books.bank-book')->with([
-            'list' => $this->getList()
+        $this->getTransTypeList();
+        return view('livewire.transaction.account-book.index')->with([
+            'list' => $this->getListForm->getList(AccountBook::class),
         ]);
     }
-    #endregion
 }

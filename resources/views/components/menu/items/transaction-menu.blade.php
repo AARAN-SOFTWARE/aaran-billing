@@ -5,4 +5,5 @@
 
 <x-menu.base.route-menuitem  href="{{route('bankBooks')}}" :label="'Bank Books'"/>
 <x-menu.base.route-menuitem  href="{{route('cashBooks')}}" :label="'Cash Books'"/>
+<x-menu.base.li-menuitem :routes="'accBooks'" :label="'Account Book'"/>
 
