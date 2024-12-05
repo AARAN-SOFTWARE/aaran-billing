@@ -5,6 +5,7 @@ namespace App\Livewire\Entries\Sales;
 use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Sale;
 use Aaran\Entries\Models\Saleitem;
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
@@ -50,6 +51,7 @@ class Upsert extends Component
     public $Vehno;
     public $Vehtype;
     public $TransMode;
+    public $term;
     #endregion
 
     #region[Properties]
@@ -88,6 +90,7 @@ class Upsert extends Component
     public $grandtotalBeforeRound;
     public $dc_no;
     public $no_of_roll;
+    public $salesLogs;
     #endregion
 
     #region[rules]
@@ -912,6 +915,7 @@ class Upsert extends Component
                         'TransdocDt' => $this->TransdocDt,
                         'Vehno' => $this->Vehno,
                         'Vehtype' => $this->Vehtype,
+                        'term' => $this->term,
                         'total_qty' => $this->total_qty,
                         'total_taxable' => $this->total_taxable,
                         'total_gst' => $this->total_gst,
@@ -959,6 +963,7 @@ class Upsert extends Component
                     $obj->Transdocno = $this->Transdocno;
                     $obj->TransdocDt = $this->TransdocDt;
                     $obj->Vehno = $this->Vehno;
+                    $obj->term = $this->term;
                     $obj->Vehtype = $this->Vehtype;
                     $obj->total_qty = $this->total_qty;
                     $obj->total_taxable = $this->total_taxable;
@@ -1284,12 +1289,19 @@ class Upsert extends Component
 
     #endregion
 
+    public function getSalesLog()
+    {
+        $this->salesLogs = Logbook::where('vname', $this->invoice_no)->get();
+    }
+
     #region[Render]
 
 //    public function print()
 //    {
 //        $this->redirect(route('sales.invoice', [$this->common->vid]));
 //    }
+
+
 
     public function getRoute(): void
     {
@@ -1299,6 +1311,7 @@ class Upsert extends Component
 
     public function render()
     {
+
         $this->getContactList();
         $this->getOrderList();
         $this->getTransportList();

@@ -47,6 +47,7 @@ class Upsert extends Component
     public $description;
 
     public string $transport;
+    public  $term;
     public string $ledger;
     public string $sale;
     public string $product;
@@ -562,6 +563,7 @@ class Upsert extends Component
                         'sales_type' => $this->sales_type,
                         'transport_id' => $this->transport_id ?: 1,
                         'bundle' => $this->bundle,
+                        'term' => $this->term,
                         'total_qty' => $this->total_qty,
                         'total_taxable' => $this->total_taxable,
                         'total_gst' => $this->total_gst,
@@ -591,6 +593,7 @@ class Upsert extends Component
                     $obj->sales_type = $this->sales_type;
                     $obj->transport_id = $this->transport_id;
                     $obj->bundle = $this->bundle;
+                    $obj->term = $this->term;
                     $obj->total_qty = $this->total_qty;
                     $obj->total_taxable = $this->total_taxable;
                     $obj->total_gst = $this->total_gst;

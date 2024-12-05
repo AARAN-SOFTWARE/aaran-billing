@@ -1,4 +1,4 @@
-@props([
+ @props([
 'height'=>'h-64',
 'width'=>'w-full',
 'placeholder'=>null
@@ -18,7 +18,7 @@
 
     </style>
     <input id="x" class="hidden">
-    <trix-editor x-ref="trix" input="x" placeholder="{{$placeholder}}" class="overflow-y-auto text-ellipsis form-textarea block text
+    <trix-editor x-ref="trix" input="x" placeholder="{{$placeholder}}" class="overflow-y-auto text-ellipsis form-textarea block text text-xs
                     rounded-lg appearance-none border-2 {{$height}} {{$width}}
                     border-gray-200 py-2 px-3 bg-white text-zinc-700
                     placeholder-gray-400 text-base focus:outline-none

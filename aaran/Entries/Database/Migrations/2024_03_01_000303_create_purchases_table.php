@@ -22,6 +22,7 @@ return new class extends Migration {
                 $table->string('sales_type')->nullable();
                 $table->foreignId('transport_id')->references('id')->on('commons');
                 $table->string('bundle')->nullable();
+                $table->text('term')->nullable();
                 $table->decimal('total_qty', 11, 3)->nullable();
                 $table->decimal('total_taxable', 11, 2)->nullable();
                 $table->decimal('total_gst', 11, 2)->nullable();

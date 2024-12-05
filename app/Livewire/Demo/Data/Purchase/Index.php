@@ -49,6 +49,7 @@ class Index extends Component
                 'transport_id' => $transport,
                 'ledger_id'=>1,
                 'bundle' => '1',
+                'term' => '-',
                 'total_qty' => $purchaseValue['total_quantity'],
                 'total_taxable' => $purchaseValue['total_taxable'],
                 'total_gst' => $purchaseValue['total_gst'],
