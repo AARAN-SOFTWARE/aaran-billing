@@ -70,6 +70,7 @@ class Index extends Component
                 'TransdocDt' => date('Y-m-d'),
                 'Vehno' => 'ka123456',
                 'Vehtype' => 'R',
+                'term' => '-',
                 'total_qty' => $salesValue['total_quantity'],
                 'total_taxable' => $salesValue['total_taxable'],
                 'total_gst' => $salesValue['total_gst'],

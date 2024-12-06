@@ -6,6 +6,7 @@ use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Purchaseitem;
 use Aaran\Entries\Models\Sale;
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
@@ -47,6 +48,7 @@ class Upsert extends Component
     public $description;
 
     public string $transport;
+    public  $term;
     public string $ledger;
     public string $sale;
     public string $product;
@@ -562,6 +564,7 @@ class Upsert extends Component
                         'sales_type' => $this->sales_type,
                         'transport_id' => $this->transport_id ?: 1,
                         'bundle' => $this->bundle,
+                        'term' => $this->term,
                         'total_qty' => $this->total_qty,
                         'total_taxable' => $this->total_taxable,
                         'total_gst' => $this->total_gst,
@@ -570,16 +573,38 @@ class Upsert extends Component
                         'round_off' => $this->round_off,
                         'grand_total' => $this->grand_total,
                         'active_id' => $this->common->active_id,
-
                     ]);
                     $this->saveItem($obj->id);
                     $this->contactUpdate();
-                    $this->common->logEntry('Purchase','create','The Purchase entry has been created for '.$this->contact_name);
+                    $this->common->logEntry($this->purchase_no,'create','The Purchase entry has been created for '.$this->contact_name);
                     $message = "Saved";
                     $this->getRoute();
 
                 } else {
                     $obj = Purchase::find($this->common->vid);
+                    $previousData = $obj->getOriginal();
+                    $mapping = [
+                        'uniqueno' => 'Unique Number',
+                        'acyear' => 'Accounting Year',
+                        'company_id' => 'Company ID',
+                        'contact_id' => 'Contact ID',
+                        'order_id' => 'Order ID',
+                        'purchase_no' => 'Purchase Number',
+                        'purchase_date' => 'Purchase Date',
+                        'entry_no' => 'Entry Number',
+                        'sales_type' => 'Sales Type',
+                        'transport_id' => 'Transport ID',
+                        'bundle' => 'Bundle',
+                        'term' => 'Term',
+                        'total_qty' => 'Total Quantity',
+                        'total_taxable' => 'Total Taxable Amount',
+                        'total_gst' => 'Total GST Amount',
+                        'ledger_id' => 'Ledger ID',
+                        'additional' => 'Additional Information',
+                        'round_off' => 'Round Off Amount',
+                        'grand_total' => 'Grand Total Amount',
+                        'active_id' => 'Active ID'
+                    ];
                     $obj->uniqueno = session()->get('company_id') . '~' . session()->get('acyear') . '~' . Purchase::nextNo();
                     $obj->acyear = session()->get('acyear');
                     $obj->company_id = session()->get('company_id');
@@ -591,6 +616,7 @@ class Upsert extends Component
                     $obj->sales_type = $this->sales_type;
                     $obj->transport_id = $this->transport_id;
                     $obj->bundle = $this->bundle;
+                    $obj->term = $this->term;
                     $obj->total_qty = $this->total_qty;
                     $obj->total_taxable = $this->total_taxable;
                     $obj->total_gst = $this->total_gst;
@@ -602,7 +628,15 @@ class Upsert extends Component
                     $obj->save();
                     DB::table('purchaseitems')->where('purchase_id', '=', $obj->id)->delete();
                     $this->saveItem($obj->id);
-                    $this->common->logEntry('Purchase','update','The Purchase entry has been updated for '.$this->contact_name);
+                    $changes = [];
+                    foreach ($obj->getChanges() as $key => $newValue) {
+                        $oldValue = $previousData[$key] ?? null;
+                        $friendlyName = $mapping[$key] ?? $key;
+                        $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
+                    }
+                    $changesMessage = implode(' , ', $changes);
+                    $this->common->logEntry($this->purchase_no, 'update',
+                        "The Purchase entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
                     $this->contactUpdate();
                     $message = "Updated";
                 }
@@ -851,6 +885,11 @@ function calculateTotal(): void
 }
 
 #endregion
+public $purchaseLogs;
+    public function getPurchasesLog()
+    {
+        $this->purchaseLogs = Logbook::where('vname', $this->purchase_no)->get();
+    }
 
 #region[Render]
 public
@@ -863,6 +902,7 @@ function getRoute(): void
 public
 function render()
 {
+    $this->getPurchasesLog();
     $this->getContactList();
     $this->getOrderList();
     $this->getTransportList();

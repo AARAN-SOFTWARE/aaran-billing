@@ -29,7 +29,7 @@
         @keydown.end.prevent.stop="$focus.last()"
         @keydown.page-down.prevent.stop="$focus.last()"
         role="tablist"
-        class="-mb-px flex items-stretch py-2 overflow-x-auto"
+        class="-mb-px flex items-stretch  overflow-x-auto border rounded-t-lg"
     >
         <!-- Tab -->
 
@@ -38,16 +38,16 @@
         @endif
 
     </ul>
+    <div class=" border-b   border-gray-200 shadow-md"></div>
 
     <!-- Panels -->
-    <div role="tabpanel" class="rounded-b-md border border-zinc-300 bg-white">
+    <div role="tabpanel" class="rounded-b-lg border-l border-r border-b border-gray-200 bg-white text-xs font-lex">
 
         <!-- Content -->
 
         @if(isset($content))
             {{$content}}
         @endif
-
 
     </div>
 </div>

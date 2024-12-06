@@ -36,6 +36,7 @@ return new class extends Migration {
                 $table->string('TransdocDt')->nullable();
                 $table->string('Vehno')->nullable();
                 $table->string('Vehtype')->nullable();
+                $table->text('term')->nullable();
 
                 $table->decimal('total_qty', 11, 3)->nullable();
                 $table->decimal('total_taxable', 11, 2)->nullable();
