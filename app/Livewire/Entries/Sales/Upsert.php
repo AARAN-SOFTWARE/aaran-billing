@@ -40,9 +40,9 @@ class Upsert extends Component
     public $CnlRsn;
     public $CnlRem;
     #[validate]
-    public $distance=0;
-    public $showModel=false;
-    public $successMessage='';
+    public $distance = 0;
+    public $showModel = false;
+    public $successMessage = '';
     public $Transid;
     public $Transname;
     public $Transdocno;
@@ -517,7 +517,7 @@ class Upsert extends Component
     {
         $this->transportCollection = $this->transport_name ? Common::search(trim($this->transport_name))->where('label_id',
             '=', 11)
-            ->get() : Common::where('label_id', '=', 11)->Orwhere('id','=','1')->get();
+            ->get() : Common::where('label_id', '=', 11)->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -667,7 +667,7 @@ class Upsert extends Component
     {
         $this->ledgerCollection = $this->ledger_name ? Common::search(trim($this->ledger_name))->where('label_id', '=',
             10)
-            ->get() : Common::where('label_id', '=', 10)->Orwhere('id','=','1')->get();
+            ->get() : Common::where('label_id', '=', 10)->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -805,7 +805,7 @@ class Upsert extends Component
     {
         $this->colourCollection = $this->colour_name ? Common::search(trim($this->colour_name))->where('label_id', '=',
             7)
-            ->get() : Common::where('label_id', '=', 7)->Orwhere('id','=','1')->get();
+            ->get() : Common::where('label_id', '=', 7)->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
@@ -877,115 +877,156 @@ class Upsert extends Component
     public function getSizeList(): void
     {
         $this->sizeCollection = $this->size_name ? Common::search(trim($this->size_name))->where('label_id', '=', 8)
-            ->get() : Common::where('label_id', '=', 8)->Orwhere('id','=','1')->get();
+            ->get() : Common::where('label_id', '=', 8)->Orwhere('id', '=', '1')->get();
     }
 
     #endregion
 
     #region[Save]
+
     public function saveExit(): void
     {
-            if ($this->uniqueno != '') {
-                if ($this->common->vid == "") {
+        if ($this->uniqueno != '') {
+            if ($this->common->vid == "") {
+                $this->validate($this->rules());
+                $obj = Sale::create([
+                    'uniqueno' => session()->get('company_id') . '~' . session()->get('acyear') . '~' . Sale::nextNo(),
+                    'acyear' => session()->get('acyear'),
+                    'company_id' => session()->get('company_id'),
+                    'contact_id' => $this->contact_id,
+                    'invoice_no' => Sale::nextNo(),
+                    'invoice_date' => $this->invoice_date,
+                    'order_id' => $this->order_id ?: 1,
+                    'billing_id' => $this->billing_id ?: ContactDetail::getId($this->contact_id),
+                    'shipping_id' => $this->shipping_id ?: ContactDetail::getId($this->contact_id),
+                    'style_id' => $this->style_id ?: 1,
+                    'despatch_id' => $this->despatch_id ?: 31,
+                    'job_no' => $this->job_no,
+                    'sales_type' => $this->sales_type,
+                    'transport_id' => $this->transport_id ?: 1,
+                    'destination' => $this->destination,
+                    'bundle' => $this->bundle,
+                    'distance' => $this->distance,
+                    'TransMode' => $this->TransMode,
+                    'Transid' => $this->Transid,
+                    'Transname' => $this->Transname,
+                    'Transdocno' => $this->Transdocno,
+                    'TransdocDt' => $this->TransdocDt,
+                    'Vehno' => $this->Vehno,
+                    'Vehtype' => $this->Vehtype,
+                    'term' => $this->term,
+                    'total_qty' => $this->total_qty,
+                    'total_taxable' => $this->total_taxable,
+                    'total_gst' => $this->total_gst,
+                    'ledger_id' => $this->ledger_id ?: 1,
+                    'additional' => $this->additional,
+                    'round_off' => $this->round_off,
+                    'grand_total' => $this->grand_total,
+                    'active_id' => $this->common->active_id,
 
-                    $this->validate($this->rules());
+                ]);
 
-                    $obj = Sale::create([
-                        'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.Sale::nextNo(),
-                        'acyear' => session()->get('acyear'),
-                        'company_id' => session()->get('company_id'),
-                        'contact_id' => $this->contact_id,
-                        'invoice_no' => Sale::nextNo(),
-                        'invoice_date' => $this->invoice_date,
-                        'order_id' => $this->order_id ?: 1,
-                        'billing_id' => $this->billing_id ?: ContactDetail::getId($this->contact_id),
-                        'shipping_id' => $this->shipping_id ?: ContactDetail::getId($this->contact_id),
-                        'style_id' => $this->style_id ?: 1,
-                        'despatch_id' => $this->despatch_id ?: 31,
-                        'job_no' => $this->job_no,
-                        'sales_type' => $this->sales_type,
-                        'transport_id' => $this->transport_id ?: 1,
-                        'destination' => $this->destination,
-                        'bundle' => $this->bundle,
-                        'distance' => $this->distance,
-                        'TransMode' => $this->TransMode,
-                        'Transid' => $this->Transid,
-                        'Transname' => $this->Transname,
-                        'Transdocno' => $this->Transdocno,
-                        'TransdocDt' => $this->TransdocDt,
-                        'Vehno' => $this->Vehno,
-                        'Vehtype' => $this->Vehtype,
-                        'term' => $this->term,
-                        'total_qty' => $this->total_qty,
-                        'total_taxable' => $this->total_taxable,
-                        'total_gst' => $this->total_gst,
-                        'ledger_id' => $this->ledger_id ?: 1,
-                        'additional' => $this->additional,
-                        'round_off' => $this->round_off,
-                        'grand_total' => $this->grand_total,
-                        'active_id' => $this->common->active_id,
+                $this->sales_id = $obj->id;
+                $this->saveItem($this->sales_id);
+                $this->common->logEntry($this->invoice_no, 'create', 'The Sales entry has been created for ' . $this->contact_name);
+                $this->contactUpdate();
+                $message = "Saved";
+            } else {
+                $obj = Sale::find($this->common->vid);
+                $previousData = $obj->getOriginal();
+                $mapping = [
+                    'uniqueno' => 'Unique Number',
+                    'acyear' => 'Accounting Year',
+                    'company_id' => 'Company ID',
+                    'billing_id' => 'Billing ID',
+                    'shipping_id' => 'Shipping ID',
+                    'contact_id' => 'Contact ID',
+                    'invoice_no' => 'Invoice Number',
+                    'invoice_date' => 'Invoice Date',
+                    'order_id' => 'Order ID',
+                    'style_id' => 'Style ID',
+                    'despatch_id' => 'Despatch ID',
+                    'job_no' => 'Job Number',
+                    'sales_type' => 'Sales Type',
+                    'transport_id' => 'Transport ID',
+                    'destination' => 'Destination',
+                    'bundle' => 'Bundle',
+                    'distance' => 'Distance',
+                    'TransMode' => 'Transport Mode',
+                    'Transid' => 'Transport ID',
+                    'Transname' => 'Transport Name',
+                    'Transdocno' => 'Transport Document Number',
+                    'TransdocDt' => 'Transport Document Date',
+                    'Vehno' => 'Vehicle Number',
+                    'term' => 'Term',
+                    'Vehtype' => 'Vehicle Type',
+                    'total_qty' => 'Total Quantity',
+                    'total_taxable' => 'Total Taxable Amount',
+                    'total_gst' => 'Total GST Amount',
+                    'ledger_id' => 'Ledger ID',
+                    'additional' => 'Additional Information',
+                    'round_off' => 'Round Off Amount',
+                    'grand_total' => 'Grand Total Amount',
+                ];
 
-                    ]);
-                    $this->sales_id=$obj->id;
-                    $this->saveItem( $this->sales_id);
-                    $this->common->logEntry( $this->invoice_no,'create','The Sales entry has been created for '.$this->contact_name);
-                    $this->contactUpdate();
-                    $message = "Saved";
-
-
+                $obj->uniqueno = session()->get('company_id') . '~' . session()->get('acyear') . '~' . $this->invoice_no;
+                $obj->acyear = session()->get('acyear');
+                $obj->company_id = session()->get('company_id');
+                if ($obj->contact_id == $this->contact_id) {
+                    $obj->billing_id = $this->billing_id;
+                    $obj->shipping_id = $this->shipping_id;
                 } else {
-                    $obj = Sale::find($this->common->vid);
-                    $obj->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
-                    $obj->acyear = session()->get('acyear');
-                    $obj->company_id = session()->get('company_id');
-                    if ($obj->contact_id == $this->contact_id) {
-                        $obj->billing_id = $this->billing_id;
-                        $obj->shipping_id = $this->shipping_id;
-                    } else {
-                        $obj->billing_id = ContactDetail::getId($this->contact_id);
-                        $obj->shipping_id = $this->shipping_id;
-                    }
-                    $obj->contact_id = $this->contact_id;
-                    $obj->invoice_no = $this->invoice_no;
-                    $obj->invoice_date = $this->invoice_date;
-                    $obj->order_id = $this->order_id;
-                    $obj->style_id = $this->style_id;
-                    $obj->despatch_id = $this->despatch_id;
-                    $obj->job_no = $this->job_no;
-                    $obj->sales_type = $this->sales_type;
-                    $obj->transport_id = $this->transport_id;
-                    $obj->destination = $this->destination;
-                    $obj->bundle = $this->bundle;
-                    $obj->distance = $this->distance;
-                    $obj->TransMode = $this->TransMode;
-                    $obj->Transid = $this->Transid;
-                    $obj->Transname = $this->Transname;
-                    $obj->Transdocno = $this->Transdocno;
-                    $obj->TransdocDt = $this->TransdocDt;
-                    $obj->Vehno = $this->Vehno;
-                    $obj->term = $this->term;
-                    $obj->Vehtype = $this->Vehtype;
-                    $obj->total_qty = $this->total_qty;
-                    $obj->total_taxable = $this->total_taxable;
-                    $obj->total_gst = $this->total_gst;
-                    $obj->ledger_id = $this->ledger_id;
-                    $obj->additional = $this->additional;
-                    $obj->round_off = $this->round_off;
-                    $obj->grand_total = $this->grand_total;
-                    $obj->active_id = $this->common->active_id;
-                    $obj->save();
-                    $this->sales_id=$obj->id;
-                    DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
-                    $this->saveItem( $this->sales_id);
-                    $this->common->logEntry($this->invoice_no,'update','The Sales entry has been updated for ' . $this->contact_name);
-                    $this->contactUpdate();
-                    $message = "Updated";
+                    $obj->billing_id = ContactDetail::getId($this->contact_id);
+                    $obj->shipping_id = $this->shipping_id;
                 }
-
-                $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
-
+                $obj->contact_id = $this->contact_id;
+                $obj->invoice_no = $this->invoice_no;
+                $obj->invoice_date = $this->invoice_date;
+                $obj->order_id = $this->order_id;
+                $obj->style_id = $this->style_id;
+                $obj->despatch_id = $this->despatch_id;
+                $obj->job_no = $this->job_no;
+                $obj->sales_type = $this->sales_type;
+                $obj->transport_id = $this->transport_id;
+                $obj->destination = $this->destination;
+                $obj->bundle = $this->bundle;
+                $obj->distance = $this->distance;
+                $obj->TransMode = $this->TransMode;
+                $obj->Transid = $this->Transid;
+                $obj->Transname = $this->Transname;
+                $obj->Transdocno = $this->Transdocno;
+                $obj->TransdocDt = $this->TransdocDt;
+                $obj->Vehno = $this->Vehno;
+                $obj->term = $this->term;
+                $obj->Vehtype = $this->Vehtype;
+                $obj->total_qty = $this->total_qty;
+                $obj->total_taxable = $this->total_taxable;
+                $obj->total_gst = $this->total_gst;
+                $obj->ledger_id = $this->ledger_id;
+                $obj->additional = $this->additional;
+                $obj->round_off = $this->round_off;
+                $obj->grand_total = $this->grand_total;
+                $obj->active_id = $this->common->active_id;
+                $obj->save();
+                $this->sales_id = $obj->id;
+                DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
+                $this->saveItem($this->sales_id);
+                $changes = [];
+                foreach ($obj->getChanges() as $key => $newValue) {
+                    $oldValue = $previousData[$key] ?? null;
+                    $friendlyName = $mapping[$key] ?? $key;
+                    $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
+                }
+                $changesMessage = implode(' , ', $changes);
+                $this->common->logEntry($this->invoice_no, 'update',
+                    "The Sales entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
+                $this->contactUpdate();
+                $message = "Updated";
             }
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+        }
     }
+
     public function save()
     {
         $this->saveExit();
@@ -1119,17 +1160,17 @@ class Upsert extends Component
                     ];
                 });
             $this->itemList = $data;
-            $this->e_invoiceDetails=MasterGstIrn::where('sales_id',$this->common->vid)->first();
-            $this->e_wayDetails=MasterGstEway::where('sales_id',$this->common->vid)->first();
+            $this->e_invoiceDetails = MasterGstIrn::where('sales_id', $this->common->vid)->first();
+            $this->e_wayDetails = MasterGstEway::where('sales_id', $this->common->vid)->first();
 
-            $contact_outstanding=Contact::find($this->contact_id);
-            $contact_outstanding->outstanding=($contact_outstanding->contact_type_id==124?$contact_outstanding->outstanding-$this->grand_total:$contact_outstanding->outstanding+$this->grand_total);
+            $contact_outstanding = Contact::find($this->contact_id);
+            $contact_outstanding->outstanding = ($contact_outstanding->contact_type_id == 124 ? $contact_outstanding->outstanding - $this->grand_total : $contact_outstanding->outstanding + $this->grand_total);
             $contact_outstanding->save();
 
         } else {
 
-            $this->invoice_no= Sale::nextNo();
-            $this->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
+            $this->invoice_no = Sale::nextNo();
+            $this->uniqueno = session()->get('company_id') . '~' . session()->get('acyear') . '~' . $this->invoice_no;
             $this->common->active_id = true;
             $this->sales_type = '1';
             $this->gst_percent = 5;
@@ -1139,12 +1180,12 @@ class Upsert extends Component
             $this->round_off = 0;
             $this->total_gst = 0;
             $this->invoice_date = Carbon::now()->format('Y-m-d');
-            $this->TransMode=1;
-            $this->Vehtype='R';
-            $this->TransdocDt=Carbon::now()->format('Y-m-d');
-            $this->transport_id=1;
-            $this->transport_name=Common::find(1)->vname;
-            $this->Vehno='-';
+            $this->TransMode = 1;
+            $this->Vehtype = 'R';
+            $this->TransdocDt = Carbon::now()->format('Y-m-d');
+            $this->transport_id = 1;
+            $this->transport_name = Common::find(1)->vname;
+            $this->Vehno = '-';
         }
 
         $this->calculateTotal();
@@ -1302,7 +1343,6 @@ class Upsert extends Component
 //    }
 
 
-
     public function getRoute(): void
     {
         $this->contactUpdate();
@@ -1311,7 +1351,7 @@ class Upsert extends Component
 
     public function render()
     {
-
+        $this->getSalesLog();
         $this->getContactList();
         $this->getOrderList();
         $this->getTransportList();

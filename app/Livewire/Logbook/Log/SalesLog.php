@@ -27,7 +27,6 @@ class SalesLog extends Component
         $this->sales = Sale::find($id);
         $this->salesInv = $this->sales->invoice_no;
         $this->sales_id = $this->sales->id;
-
     }
 
     public function getSalesItems()
