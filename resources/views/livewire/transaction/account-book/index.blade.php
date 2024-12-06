@@ -1,12 +1,12 @@
 <div>
-    <x-slot name="header">Bank Book</x-slot>
+    <x-slot name="header">Account Book</x-slot>
     <x-forms.m-panel>
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
 
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-        <x-table.caption :caption="'Bank Book'">
+        <x-table.caption :caption="'Account Book'">
             {{$list->count()}}
         </x-table.caption>
 
@@ -35,15 +35,24 @@
 
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                        <x-table.cell-text left>{{$row->bank_name}}</x-table.cell-text>
+
+{{--                        <x-table.cell-text>{{\Aaran\Transaction\Models\AccountBook::common($row->bank->vname)}}</x-table.cell-text>--}}
+
+                        <x-table.cell-text left>{{$row->bank->vname}}</x-table.cell-text>
+
                         <x-table.cell-text>{{$row->account_no}}</x-table.cell-text>
+
                         <x-table.cell-text>
-                            {{  $row->account_type_name }}
+                            {{  $row->accountType->vname }}
                         </x-table.cell-text>
+
                         <x-table.cell-text>{{  $row->opening_balance }}
                         </x-table.cell-text>
-                        <x-table.cell-text>{{date('d-m-Y',strtotime($row->opening_date))}}</x-table.cell-text>
+
+                        <x-table.cell-text>{{date('d-m-Y',strtotime($row->opening_balance_date))}}</x-table.cell-text>
+
                         <x-table.cell-action id="{{$row->id}}"/>
+
                     </x-table.row>
 
                 @endforeach
@@ -59,8 +68,43 @@
         <x-forms.create :id="$common->vid">
 
             <div class="flex flex-col gap-3">
+
+                <x-dropdown.wrapper label="Trans Type" type="trans_typeTyped">
+                    <div class="relative">
+                        <x-dropdown.input label="Trans Type" id="trans_type_name"
+                                          wire:model.live="trans_type_name"
+                                          wire:keydown.arrow-up="decrementTransType"
+                                          wire:keydown.arrow-down="incrementTransType"
+                                          wire:keydown.enter="enterTransType"/>
+                        <x-dropdown.select>
+                            @if($trans_typeCollection)
+                                @forelse ($trans_typeCollection as $i => $trans_type)
+                                    <x-dropdown.option highlight="{{$highlightTransType === $i}}"
+                                                       wire:click.prevent="setTransType('{{$trans_type->vname}}','{{$trans_type->id}}')">
+                                        {{ $trans_type->vname }}
+                                    </x-dropdown.option>
+                                @empty
+                                    <x-dropdown.new wire:click.prevent="transTypeSave('{{$trans_type_name}}')"
+                                                    label="Trans Type"/>
+                                @endforelse
+                            @endif
+                        </x-dropdown.select>
+                    </div>
+                </x-dropdown.wrapper>
+
+
+
                 <x-input.floating wire:model.live="common.vname" label="Account Name"/>
+
+                <x-input.floating wire:model.live="opening_balance" label="Opening Balance"/>
+
+                <x-input.floating wire:model.live="opening_balance_date" type="date" label="Opening Balance date"/>
+
+                <x-input.floating wire:model.live="notes" label="Notes"/>
+
                 <x-input.floating wire:model.live="account_no" label="Account No"/>
+
+                <x-input.floating wire:model.live="ifsc_code" label="IFSC Code"/>
 
                 <x-dropdown.wrapper label="Bank" type="bankTyped">
 
@@ -120,15 +164,10 @@
                     </div>
                 </x-dropdown.wrapper>
 
-                <x-input.floating wire:model.live="ifsc_code" label="IFSC Code"/>
                 <x-input.floating wire:model.live="branch" label="Branch"/>
-                <x-input.floating wire:model.live="opening_balance" label="Opening Balance"/>
-                <x-input.floating wire:model.live="opening_date" type="date" label="Opening date"/>
-                <x-input.floating wire:model.live="notes" label="Notes"/>
+
 
             </div>
         </x-forms.create>
-
-        <x-cards.card-3 :list="$list"/>
     </x-forms.m-panel>
 </div>

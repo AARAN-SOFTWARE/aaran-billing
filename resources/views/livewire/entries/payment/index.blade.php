@@ -127,6 +127,35 @@
 
                     <x-input.model-date wire:model="vdate" :label="'Date'"/>
 
+                    <x-dropdown.wrapper label="Bank" type="bankTyped">
+
+                        <div class="relative">
+
+                            <x-dropdown.input label="Bank" id="bank_name"
+                                              wire:model.live="bank_name"
+                                              wire:keydown.arrow-up="decrementBank"
+                                              wire:keydown.arrow-down="incrementBank"
+                                              wire:keydown.enter="enterBank"/>
+
+                            <x-dropdown.select>
+                                @if($bankCollection)
+
+                                    @forelse ($bankCollection as $i => $bank)
+                                        <x-dropdown.option highlight="{{$highlightBank === $i}}"
+                                                           wire:click.prevent="setBank('{{$bank->vname}}','{{$bank->id}}')">
+                                            {{ $bank->vname }}
+                                        </x-dropdown.option>
+
+                                    @empty
+                                        <x-dropdown.new wire:click.prevent="bankSave('{{$bank_name}}')"
+                                                        label="Bank"/>
+                                    @endforelse
+                                @endif
+
+                            </x-dropdown.select>
+                        </div>
+                    </x-dropdown.wrapper>
+
                 </div>
 
                 <!-- Right Area  -------------------------------------------------------------------------------------->
