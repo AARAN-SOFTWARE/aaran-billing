@@ -5,6 +5,7 @@ namespace App\Livewire\Transaction\AccountBook;
 use Aaran\Common\Models\Common;
 use Aaran\Transaction\Models\AccountBook;
 use App\Livewire\Trait\CommonTraitNew;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -12,7 +13,7 @@ class Index extends Component
 {
     use CommonTraitNew;
 
-    public $opening_balance;
+    public $account_name;
     public $opening_balance_date;
     public $notes;
     public $account_no;
@@ -22,22 +23,39 @@ class Index extends Component
     #region[Validation]
     public function rules(): array
     {
+        if ($this->trans_type_id == 108) {
+            return [
+                'common.vname' => 'required',
+            ];
+        } else
         return [
             'common.vname' => 'required',
+            'account_no' => 'required',
+            'ifsc_code' => 'required',
+            'bank_id' => 'required',
+            'account_type_id' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'common.vname.required' => ' Mention The :attribute',
+            'common.vname.required' => ' Enter your :attribute',
+            'account_no.required' => ' Enter valid :attribute',
+            'ifsc_code.required' => ' Required :attribute',
+            'bank_id.required' => ' Mention the :attribute',
+            'account_type_id.required' => ' Mention your :attribute',
         ];
     }
 
     public function validationAttributes()
     {
         return [
-            'common.vname' => 'Account name',
+            'common.vname' => 'Opening bal',
+            'account_no' => 'Account No',
+            'ifsc_code' => 'IFSC code',
+            'bank_id' => 'Bank name',
+            'account_type_id' => 'A/C Type',
         ];
     }
     #endregion
@@ -45,19 +63,21 @@ class Index extends Component
     #region[Get-Save]
     public function getSave(): void
     {
+        $this->validate($this->rules());
+
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
                 $AccountBook = new AccountBook();
                 $extraFields = [
-                    'trans_type_id' => $this->trans_type_id,
-                    'opening_balance' => $this->opening_balance,
+                    'trans_type_id' => $this->trans_type_id ?: 108,
+                    'account_name' => $this->account_name,
                     'opening_balance_date' => $this->opening_balance_date,
                     'notes' => $this->notes,
-                    'account_no' => $this->account_no,
-                    'ifsc_code' => $this->ifsc_code,
-                    'bank_id' => $this->bank_id,
-                    'account_type_id' => $this->account_type_id,
-                    'branch' => $this->branch,
+                    'account_no' => $this->account_no ?: '0',
+                    'ifsc_code' => $this->ifsc_code ?: '0',
+                    'bank_id' => $this->bank_id ?: '1',
+                    'account_type_id' => $this->account_type_id ?: '1',
+                    'branch' => $this->branch ?: '-',
                     'user_id' => auth()->id(),
                     'company_id' => session()->get('company_id'),
                 ];
@@ -67,7 +87,7 @@ class Index extends Component
                 $AccountBook = AccountBook::find($this->common->vid);
                 $extraFields = [
                     'trans_type_id' => $this->trans_type_id,
-                    'opening_balance' => $this->opening_balance,
+                    'account_name' => $this->account_name,
                     'opening_balance_date' => $this->opening_balance_date,
                     'notes' => $this->notes,
                     'account_no' => $this->account_no,
@@ -307,7 +327,7 @@ class Index extends Component
             $this->common->vname = $AccountBook->vname;
             $this->trans_type_id = $AccountBook->trans_type_id;
             $this->trans_type_name = $AccountBook->transType->vname;
-            $this->opening_balance = $AccountBook->opening_balance;
+            $this->account_name = $AccountBook->account_name;
             $this->opening_balance_date = $AccountBook->opening_balance_date;
             $this->notes = $AccountBook->notes;
             $this->account_no = $AccountBook->account_no;
@@ -332,8 +352,8 @@ class Index extends Component
         $this->trans_type_id = '';
         $this->trans_type_name = '';
         $this->common->vname = '';
-        $this->opening_balance = '';
-        $this->opening_balance_date = '';
+        $this->account_name = '';
+        $this->opening_balance_date = Carbon::now()->format('Y-m-d');
         $this->notes = '';
         $this->account_no = '';
         $this->ifsc_code = '';

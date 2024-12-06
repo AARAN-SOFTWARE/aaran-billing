@@ -3,7 +3,7 @@
 
     <x-corousels.carousel-auto class="sm:min-h-[80svh] h-72"/>
     <x-web.uielements.color-palette/>
-    <x-web.uielements.buttons/>
+{{--    <x-web.uielements.buttons/>--}}
     <x-web.uielements.cards/>
     <x-web.uielements.extra/>
     <x-web.uielements.form/>
@@ -24,12 +24,13 @@
            peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4
            rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 pointer-events-none">Title</label>
         </div>
+        #6c757d
 
-        <x-button.login-x  />
-        <x-button.back-x  />
-        <x-button.cancel-x  />
-        <x-button.danger-x  />
-        <x-button.save-x  />
-        <x-button.new-x  />
+        {{--        <x-button.login-x  />--}}
+{{--        <x-button.back-x  />--}}
+{{--        <x-button.cancel-x  />--}}
+{{--        <x-button.danger-x  />--}}
+{{--        <x-button.save-x  />--}}
+{{--        <x-button.new-x  />--}}
     </div>
 </div>
