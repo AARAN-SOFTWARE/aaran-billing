@@ -54,9 +54,7 @@
 {{--                <div>{{$row->product_id}}</div>--}}
 {{--                <div>{{$row->qty}}</div>--}}
 {{--                <div>{{$row->price}}</div>--}}
-
 {{--            @endforeach--}}
-
 
         </div>
         @if(!$logs->isEmpty())

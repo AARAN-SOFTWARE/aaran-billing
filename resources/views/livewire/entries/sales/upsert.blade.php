@@ -12,7 +12,6 @@
                         <x-tabs.tab>Destination</x-tabs.tab>
                         <x-tabs.tab>Additional Charges</x-tabs.tab>
                         <x-tabs.tab>Terms</x-tabs.tab>
-
                     </x-slot>
                     <x-slot name="content">
                         <x-tabs.content>
@@ -77,7 +76,6 @@
                                                 </x-dropdown.wrapper>
                                             @endif
                                         </div>
-
                                         <div class="h-16 ">
                                             @if(\Aaran\Aadmin\Src\SaleEntry::hasStyle())
 
@@ -107,10 +105,7 @@
                                                     </div>
                                                 </x-dropdown.wrapper>
                                             @endif
-
                                         </div>
-
-
                                     </div>
                                     <div class="w-full space-y-3 ">
                                         <div class="h-16 ">
@@ -124,7 +119,6 @@
                                                 <x-input.floating wire:model="job_no" label="Job No"/>
                                             @endif
                                         </div>
-
                                         <div class="">
                                             @if(\Aaran\Aadmin\Src\SaleEntry::hasDespatch())
                                                 <x-dropdown.wrapper label="Despatch No" type="despatchTyped">
@@ -166,7 +160,6 @@
                                             </x-input.model-select>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div
                                     class="px-4 pb-4  text-lg font-merri tracking-wider text-orange-600 underline underline-offset-4 underline-orange-500">
@@ -402,10 +395,45 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="max-w-6xl mx-auto flex justify-between items-start gap-5 py-10">
+                                <div class="w-2/3">
+                                    @if(isset($e_invoiceDetails->id))
+                                        <div class="sm:w-full w-[300px] flex flex-col items-center justify-center ">
+                                            <img class="w-[200px]"
+                                                 src="{{\App\Helper\qrcoder::generate($e_invoiceDetails->signed_qrcode,22)}}"
+                                                 alt="{{$e_invoiceDetails->signed_qrcode}}">
+                                            <div class="sm:w-full w-[300px]">Irn No : {{$e_invoiceDetails->irn}}</div>
+                                            @if(isset($e_wayDetails))
+                                                <div class="sm:w-full w-[300px] ">E-way Bill NO: {{$e_wayDetails->ewbno}}</div>
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="w-1/3 flex text-xs text-400 px-4">
+                                    <div class="w-2/4 space-y-4 text-gray-400 font-merri tracking-wider">
+                                        <div>Taxable No</div>
+                                        <div>GST</div>
+                                        <div>Round off</div>
+                                        <div class="font-semibold">Grand Total</div>
+                                    </div>
+                                    <div class="w-1/4 text-center space-y-4 ">
+                                        <div>:</div>
+                                        <div>:</div>
+                                        <div>:</div>
+                                        <div>:</div>
+                                    </div>
+                                    <div class="w-1/4 text-end space-y-4 tracking-wider font-lex">
+                                        <div>{{number_format($total_taxable,2,'.','')}}</div>
+                                        <div>{{number_format($total_gst,2,'.','')}}</div>
+                                        <div>{{$round_off}}</div>
+                                        <div class="font-semibold">{{number_format($grand_total,2,'.','')}}</div>
+                                    </div>
+                                </div>
+                            </div>
                         </x-tabs.content>
                         <x-tabs.content>
                             <div class="w-1/2 space-y-8 h-52 pt-3">
-                                <div >
+                                <div>
                                     @if(\Aaran\Aadmin\Src\SaleEntry::hasBillingAddress())
                                         <x-dropdown.wrapper label="Billing Address" type="orderTyped">
                                             <div class="relative ">
@@ -581,7 +609,6 @@
                                                       text-gray-900 bg-transparent rounded-lg border-1
                                                        border-gray-300 appearance-none
                                                        focus:outline-none focus:ring-2 focus:ring-cyan-50 focus:border-blue-600 peer"/>
-
                             </div>
                         </x-tabs.content>
                         <x-tabs.content>
@@ -596,41 +623,6 @@
         </div>
 
 
-        <div class="max-w-6xl mx-auto flex justify-between items-start gap-5">
-            <div class="w-2/3">
-                @if(isset($e_invoiceDetails->id))
-                    <div class="sm:w-full w-[300px] flex flex-col items-center justify-center ">
-                        <img class="w-[200px]"
-                             src="{{\App\Helper\qrcoder::generate($e_invoiceDetails->signed_qrcode,22)}}"
-                             alt="{{$e_invoiceDetails->signed_qrcode}}">
-                        <div class="sm:w-full w-[300px]">Irn No : {{$e_invoiceDetails->irn}}</div>
-                        @if(isset($e_wayDetails))
-                            <div class="sm:w-full w-[300px] ">E-way Bill NO: {{$e_wayDetails->ewbno}}</div>
-                        @endif
-                    </div>
-                @endif
-            </div>
-            <div class="w-1/3 flex text-xs text-400 px-4">
-                <div class="w-2/4 space-y-4 text-gray-400 font-merri tracking-wider">
-                    <div>Taxable No</div>
-                    <div>GST</div>
-                    <div>Round off</div>
-                    <div class="font-semibold">Grand Total</div>
-                </div>
-                <div class="w-1/4 text-center space-y-4 ">
-                    <div>:</div>
-                    <div>:</div>
-                    <div>:</div>
-                    <div>:</div>
-                </div>
-                <div class="w-1/4 text-end space-y-4 tracking-wider font-lex">
-                    <div>{{number_format($total_taxable,2,'.','')}}</div>
-                    <div>{{number_format($total_gst,2,'.','')}}</div>
-                    <div>{{$round_off}}</div>
-                    <div class="font-semibold">{{number_format($grand_total,2,'.','')}}</div>
-                </div>
-            </div>
-        </div>
 
 
     </div>
@@ -646,18 +638,23 @@
     </div>
 
 
-    <div  class="max-w-6xl mx-auto  py-16 space-y-4">
-        <div class="text-lg text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
+    <div class="max-w-6xl mx-auto  py-16 space-y-4">
+        @if(!$salesLogs->isEmpty())
+            <div class="text-lg text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
+        @endif
         @foreach($salesLogs as $row)
             <div class="relative ">
                 <div class=" border-l-4 border-dotted px-8   tracking-wider py-3">
                     <div class="flex gap-x-5">
-                        <div class="inline-flex text-gray-500 items-center font-sans font-semibold"><span>Invoice No:</span> <span>{{$row->vname}}</span></div>
-                        <div class="text-xs inline-flex items-center space-x-1 font-merri"><span class="text-blue-600">@</span><span class="text-gray-500">{{$row->user->name}}</span></div>
+                        <div class="inline-flex text-gray-500 items-center font-sans font-semibold">
+                            <span>Invoice No:</span> <span>{{$row->vname}}</span></div>
+                        <div class="text-xs inline-flex items-center space-x-1 font-merri"><span
+                                class="text-blue-600">@</span><span class="text-gray-500">{{$row->user->name}}</span>
+                        </div>
                     </div>
                     <div
                         class="text-gray-400 text-xs font-semibold">{{date('M d, Y', strtotime($row->created_at))}}</div>
-                    <div class="pb-2 text-xs font-lex leading-5 py-2">{{$row->description}}</div>
+                    <div class="pb-2 text-xs font-lex leading-5 py-2">{!! $row->description !!}</div>
                 </div>
                 <div class="absolute top-0 -ml-1 h-3 w-3  rounded-full bg-teal-600 "></div>
             </div>

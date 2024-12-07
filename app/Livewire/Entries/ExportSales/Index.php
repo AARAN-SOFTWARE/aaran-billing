@@ -12,7 +12,6 @@ class Index extends Component
 {
     use CommonTraitNew;
 
-    public $log;
     #region[create]
     public function create(): void
     {
@@ -47,7 +46,6 @@ class Index extends Component
     {
         $this->getListForm->searchField='invoice_no';
         $this->getListForm->sortField='invoice_no';
-        $this->log = Logbook::where('vname','ExportSale')->take(5)->get();
         return view('livewire.entries.export-sales.index')->with([
             'list'=>$this->getListForm->getList(ExportSale::class,function ($query){
                 return  $query->where('company_id','=',session()->get('company_id'))->where('acyear',session()->get('acyear'));
