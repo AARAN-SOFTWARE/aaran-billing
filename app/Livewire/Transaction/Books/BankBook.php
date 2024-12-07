@@ -5,6 +5,7 @@ namespace App\Livewire\Transaction\Books;
 use Aaran\Common\Models\Common;
 use Aaran\Transaction\Models\AccountBook;
 use App\Livewire\Trait\CommonTraitNew;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Aaran\Transaction\Models\BankBook as BankBookModel;
@@ -22,10 +23,49 @@ class BankBook extends Component
     public $notes;
     #endregion
 
+    #region[Validation]
+    public function rules(): array
+    {
+        return [
+            'common.vname' => 'required',
+            'account_no' => 'required',
+            'ifsc_code' => 'required',
+            'bank_id' => 'required',
+            'account_type_id' => 'required',
+            'opening_balance' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'common.vname.required' => ' Enter Your :attribute',
+            'account_no.required' => ' Enter :attribute',
+            'ifsc_code.required' => ' Required :attribute',
+            'bank_id.required' => ' Mention the :attribute',
+            'account_type_id.required' => ' Enter Your :attribute',
+            'opening_balance.required' => ' Enter Your :attribute',
+        ];
+    }
+
+    public function validationAttributes()
+    {
+        return [
+            'common.vname' => 'Account Name',
+            'account_no' => 'Account No',
+            'ifsc_code' => 'IFSC code',
+            'bank_id' => 'Bank Name',
+            'account_type_id' => 'Account Type',
+            'opening_balance' => 'Opening Balance',
+        ];
+    }
+    #endregion
 
     #region[Get-Save]
     public function getSave(): void
     {
+        $this->validate($this->rules());
+
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
                 $this->common->vname = preg_replace('/[^A-Za-z0-9\-]/', '', $this->common->vname);
@@ -244,8 +284,9 @@ class BankBook extends Component
         $this->ifsc_code = '';
         $this->branch = '';
         $this->opening_balance = '';
-        $this->opening_date = '';
+        $this->opening_date = Carbon::now()->format('Y-m-d');
         $this->notes = '';
+
     }
     #endregion
 

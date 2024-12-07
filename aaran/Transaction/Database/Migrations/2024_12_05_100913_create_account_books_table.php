@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('trans_type_id')->references('id')->on('commons');
             $table->string('vname');
-            $table->decimal('opening_balance', 8, 2)->default(0);
+            $table->decimal('opening_balance', 13, 2)->default(0)->nullable();
             $table->date('opening_balance_date');
             $table->longText('notes')->nullable();
             $table->string('account_no')->nullable();
