@@ -39,8 +39,6 @@
             </div>
 
             <!-- Copy All Button -->
-
-            <!-- Copy All Button -->
             <div class="flex justify-end">
                 <button @click="
                     const details = `Bank Name: {{ $row->bank_name }}\nA/C No: {{ $row->account_no }}\nIFSC Code: {{ $row->ifsc_code }}\nBranch:

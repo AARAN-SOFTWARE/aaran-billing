@@ -13,7 +13,7 @@ class Index extends Component
 {
     use CommonTraitNew;
 
-    public $account_name;
+    public $opening_balance;
     public $opening_balance_date;
     public $notes;
     public $account_no;
@@ -27,14 +27,19 @@ class Index extends Component
             return [
                 'common.vname' => 'required',
             ];
+        } elseif ($this->trans_type_id == 136) {
+            return [
+                'common.vname' => 'required',
+                'bank_id' => 'required',
+            ];
         } else
-        return [
-            'common.vname' => 'required',
-            'account_no' => 'required',
-            'ifsc_code' => 'required',
-            'bank_id' => 'required',
-            'account_type_id' => 'required',
-        ];
+            return [
+                'common.vname' => 'required',
+                'account_no' => 'required',
+                'ifsc_code' => 'required',
+                'bank_id' => 'required',
+                'account_type_id' => 'required',
+            ];
     }
 
     public function messages()
@@ -51,7 +56,7 @@ class Index extends Component
     public function validationAttributes()
     {
         return [
-            'common.vname' => 'Opening bal',
+            'common.vname' => 'Account Name',
             'account_no' => 'Account No',
             'ifsc_code' => 'IFSC code',
             'bank_id' => 'Bank name',
@@ -70,7 +75,7 @@ class Index extends Component
                 $AccountBook = new AccountBook();
                 $extraFields = [
                     'trans_type_id' => $this->trans_type_id ?: 108,
-                    'account_name' => $this->account_name,
+                    'opening_balance' => $this->opening_balance ?: 0,
                     'opening_balance_date' => $this->opening_balance_date,
                     'notes' => $this->notes,
                     'account_no' => $this->account_no ?: '0',
@@ -87,7 +92,7 @@ class Index extends Component
                 $AccountBook = AccountBook::find($this->common->vid);
                 $extraFields = [
                     'trans_type_id' => $this->trans_type_id,
-                    'account_name' => $this->account_name,
+                    'opening_balance' => $this->opening_balance,
                     'opening_balance_date' => $this->opening_balance_date,
                     'notes' => $this->notes,
                     'account_no' => $this->account_no,
@@ -327,7 +332,7 @@ class Index extends Component
             $this->common->vname = $AccountBook->vname;
             $this->trans_type_id = $AccountBook->trans_type_id;
             $this->trans_type_name = $AccountBook->transType->vname;
-            $this->account_name = $AccountBook->account_name;
+            $this->opening_balance = $AccountBook->opening_balance;
             $this->opening_balance_date = $AccountBook->opening_balance_date;
             $this->notes = $AccountBook->notes;
             $this->account_no = $AccountBook->account_no;
@@ -352,7 +357,7 @@ class Index extends Component
         $this->trans_type_id = '';
         $this->trans_type_name = '';
         $this->common->vname = '';
-        $this->account_name = '';
+        $this->opening_balance = '';
         $this->opening_balance_date = Carbon::now()->format('Y-m-d');
         $this->notes = '';
         $this->account_no = '';
@@ -364,6 +369,7 @@ class Index extends Component
         $this->branch = '';
         $this->common->active_id = '1';
     }
+
     #endregion
 
     public function render()
