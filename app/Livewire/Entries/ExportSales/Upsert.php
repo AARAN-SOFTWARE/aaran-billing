@@ -630,10 +630,8 @@ class Upsert extends Component
                     "The Export Sales entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
                 $message = "Updated";
             }
-
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
             $this->getRoute();
-
         }
 
     }
