@@ -1122,6 +1122,7 @@ class Upsert extends Component
             $this->TransdocDt = $obj->TransdocDt;
             $this->Vehno = $obj->Vehno;
             $this->Vehtype = $obj->Vehtype;
+            $this->term = $obj->term;
             $this->total_qty = $obj->total_qty;
             $this->total_taxable = $obj->total_taxable;
             $this->total_gst = $obj->total_gst;

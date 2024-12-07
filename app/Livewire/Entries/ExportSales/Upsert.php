@@ -7,6 +7,7 @@ use Aaran\Entries\Models\ExportSale;
 use Aaran\Entries\Models\ExportSaleContact;
 use Aaran\Entries\Models\ExportSaleItem;
 use Aaran\Entries\Models\Sale;
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
@@ -558,11 +559,38 @@ class Upsert extends Component
                 ]);
                 $this->saveItem( $obj->id);
                 $this->saveContact( $obj->id);
-                $this->common->logEntry('ExportSale','create','The ExportSale entry has been created for '.$this->contact_name);
+                $this->common->logEntry($this->invoice_no,'create','The ExportSale entry has been created for '.$this->contact_name);
                 $message = "Saved";
 
             } else {
                 $obj = ExportSale::find($this->common->vid);
+                $previousData = $obj->getOriginal();
+                $mapping = [
+                    'uniqueno' => 'Unique Number',
+                    'acyear' => 'Accounting Year',
+                    'company_id' => 'Company ID',
+                    'contact_id' => 'Contact ID',
+                    'invoice_no' => 'Invoice Number',
+                    'invoice_date' => 'Invoice Date',
+                    'currency_type' => 'Currency Type',
+                    'sales_type' => 'Sales Type',
+                    'order_id' => 'Order ID',
+                    'style_id' => 'Style ID',
+                    'pre_carriage' => 'Pre-Carriage Information',
+                    'place_of_Receipt' => 'Place of Receipt',
+                    'vessel_flight_no' => 'Vessel/Flight Number',
+                    'port_of_loading' => 'Port of Loading',
+                    'port_of_discharge' => 'Port of Discharge',
+                    'final_destination' => 'Final Destination',
+                    'total_qty' => 'Total Quantity',
+                    'total_taxable' => 'Total Taxable Amount',
+                    'total_gst' => 'Total GST Amount',
+                    'additional' => 'Additional Information',
+                    'ex_rate' => 'Exchange Rate',
+                    'round_off' => 'Round Off Amount',
+                    'grand_total' => 'Grand Total Amount',
+                    'active_id' => 'Active ID'
+                ];
                 $obj->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
                 $obj->acyear = session()->get('acyear');
                 $obj->company_id = session()->get('company_id');
@@ -591,7 +619,15 @@ class Upsert extends Component
                 $this->saveItem( $obj->id);
                 DB::table('export_sale_contacts')->where('export_sales_id', '=', $obj->id)->delete();
                 $this->saveContact( $obj->id);
-                $this->common->logEntry('ExportSale','update','The ExportSale entry has been updated for '.$this->contact_name);
+                $changes = [];
+                foreach ($obj->getChanges() as $key => $newValue) {
+                    $oldValue = $previousData[$key] ?? null;
+                    $friendlyName = $mapping[$key] ?? $key;
+                    $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
+                }
+                $changesMessage = implode(' , ', $changes);
+                $this->common->logEntry($this->invoice_no, 'update',
+                    "The Export Sales entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
                 $message = "Updated";
             }
 
@@ -919,11 +955,20 @@ class Upsert extends Component
         }
     }
 
+
     #endregion
+    public $exportLogs;
+
+    public function getExportLog()
+    {
+        $this->exportLogs = Logbook::where('vname', $this->invoice_no)->get();
+//        dd($this->exportLogs);
+    }
 
     #region[render]
     public function render()
     {
+        $this->getExportLog();
         $this->getContactList();
         $this->getConsigneeList();
         $this->getOrderList();
