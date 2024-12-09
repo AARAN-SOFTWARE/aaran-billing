@@ -484,7 +484,6 @@ class Index extends Component
                     'logo' => $this->save_logo(),
                 ];
                 $this->common->save($company, $extraFields);
-                $this->common->logEntry('Company','create',$this->common->vname.' has been created');
                 $message = "Saved";
             } else {
                 $company = Company::find($this->common->vid);
@@ -515,7 +514,6 @@ class Index extends Component
                     'logo' => $this->save_logo(),
                 ];
                 $this->common->edit($company, $extraFields);
-                $this->common->logEntry('Company','update',$this->common->vname.' has been updated');
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);

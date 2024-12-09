@@ -70,11 +70,12 @@ class CommonForm extends Form
         return false;
     }
 
-    public function logEntry($vname, $action = null, $desc = null): void
+    public function logEntry($vname,$model_name = null, $action = null, $desc = null): void
     {
         if (!empty($vname)) {
             Logbook::create([
                 'vname' => $vname,
+                'model_name' => $model_name,
                 'action' => $action,
                 'description' => $desc,
                 'user_id' => auth()->id(),

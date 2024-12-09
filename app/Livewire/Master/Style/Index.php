@@ -33,7 +33,7 @@ class Index extends Component
                     'image' => $this->save_image(),
                 ];
                 $this->common->save($style, $extraFields);
-                $this->common->logEntry('Style','create',$this->common->vname.' has been created');
+                $this->common->logEntry('Style','Style','create',$this->common->vname.' has been created');
                 $message = "Saved";
             } else {
                 $style = Style::find($this->common->vid);
@@ -43,7 +43,7 @@ class Index extends Component
                     'image' => $this->save_image(),
                 ];
                 $this->common->edit($style, $extraFields);
-                $this->common->logEntry('Style','update',$this->common->vname.' has been updated');
+                $this->common->logEntry('Style','Style','update',$this->common->vname.' has been updated');
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
@@ -115,7 +115,7 @@ class Index extends Component
     #region[render]
     public function render()
     {
-        $this->log = Logbook::where('vname','Style')->take(5)->get();
+        $this->log = Logbook::where('model_name','Style')->take(5)->get();
         return view('livewire.master.style.index')->with([
             'list' => $this->getListForm->getList(Style::class,function ($query){
                 return $query->where('company_id',session()->get('company_id'));

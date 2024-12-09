@@ -170,7 +170,6 @@
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())
                                             <x-input.floating id="qty" wire:model.live="po_no" label="Po No"/>
                                         @endif
-
                                     </div>
                                     <div class="">
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
@@ -183,7 +182,7 @@
                                                               label="No of Roll"/>
                                         @endif
                                     </div>
-                                    <div class="">
+                                    <div class="w-[30%]">
                                         <x-dropdown.wrapper label="Product Name" type="productTyped">
                                             <div class="relative ">
                                                 <x-dropdown.input label="Product Name" id="product_name"
@@ -209,13 +208,13 @@
                                             </div>
                                         </x-dropdown.wrapper>
                                     </div>
-                                    <div class="">
+                                    <div class="w-[20%]">
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
                                             <x-input.floating id="qty" wire:model.live="description"
                                                               label="description"/>
                                         @endif
                                     </div>
-                                    <div class="">
+                                    <div class="w-[15%]">
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
 
                                             <x-dropdown.wrapper label="Colour Name" type="colourTyped">
@@ -246,7 +245,7 @@
                                             </x-dropdown.wrapper>
                                         @endif
                                     </div>
-                                    <div class="">
+                                    <div class="w-[15%]">
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
                                             <x-dropdown.wrapper label="Size Name" type="sizeTyped">
                                                 <div class="relative ">
@@ -279,15 +278,13 @@
                                             </x-dropdown.wrapper>
                                         @endif
                                     </div>
-                                    <div class="">
+                                    <div class="w-[10%]">
                                         <x-input.floating id="qty" wire:model.live="qty" label="Quantity"/>
                                     </div>
-                                    <div class="">
+                                    <div class="w-[10%]">
                                         <x-input.floating id="price" wire:model.live="price" label="Price"/>
                                     </div>
-
                                     <x-button.add wire:click="addItems"/>
-
                                 </div>
                                 <div class="max-w-6xl mx-auto">
                                     <div class="w-full border rounded-lg overflow-hidden">
@@ -637,26 +634,25 @@
         @endif
     </div>
 
-
-    <div class="max-w-6xl mx-auto  py-16 space-y-4">
+    <div class="max-w-4xl mx-auto  py-16 space-y-4">
         @if(!$salesLogs->isEmpty())
-            <div class="text-lg text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
+            <div class="text-xs text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
         @endif
         @foreach($salesLogs as $row)
             <div class="relative ">
-                <div class=" border-l-4 border-dotted px-8   tracking-wider py-3">
-                    <div class="flex gap-x-5">
+                <div class=" border-l-[3px] border-dotted px-8 text-[10px]  tracking-wider py-3">
+                    <div class="flex gap-x-5 ">
                         <div class="inline-flex text-gray-500 items-center font-sans font-semibold">
                             <span>Invoice No:</span> <span>{{$row->vname}}</span></div>
-                        <div class="text-xs inline-flex items-center space-x-1 font-merri"><span
+                        <div class="inline-flex  items-center space-x-1 font-merri"><span
                                 class="text-blue-600">@</span><span class="text-gray-500">{{$row->user->name}}</span>
                         </div>
                     </div>
                     <div
-                        class="text-gray-400 text-xs font-semibold">{{date('M d, Y', strtotime($row->created_at))}}</div>
-                    <div class="pb-2 text-xs font-lex leading-5 py-2">{!! $row->description !!}</div>
+                        class="text-gray-400 text-[8px] font-semibold">{{date('M d, Y', strtotime($row->created_at))}}</div>
+                    <div class="pb-2 font-lex leading-5 py-2 text-justify">{!! $row->description !!}</div>
                 </div>
-                <div class="absolute top-0 -ml-1 h-3 w-3  rounded-full bg-teal-600 "></div>
+                <div class="absolute top-0 -left-1 h-2.5 w-2.5  rounded-full bg-teal-600 "></div>
             </div>
         @endforeach
     </div>

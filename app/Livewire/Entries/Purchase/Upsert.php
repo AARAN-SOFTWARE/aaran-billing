@@ -575,7 +575,7 @@ class Upsert extends Component
                     ]);
                     $this->saveItem($obj->id);
                     $this->contactUpdate();
-                    $this->common->logEntry($this->purchase_no,'create','The Purchase entry has been created for '.$this->contact_name);
+                    $this->common->logEntry($this->purchase_no,'Purchase','create','The Purchase entry has been created for '.$this->contact_name);
                     $message = "Saved";
                     $this->getRoute();
                 } else {
@@ -633,7 +633,7 @@ class Upsert extends Component
                         $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
                     }
                     $changesMessage = implode(' , ', $changes);
-                    $this->common->logEntry($this->purchase_no, 'update',
+                    $this->common->logEntry($this->purchase_no,'Purchase', 'update',
                         "The Purchase entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
                     $this->contactUpdate();
                     $message = "Updated";
@@ -878,7 +878,7 @@ function calculateTotal(): void
 public $purchaseLogs;
     public function getPurchasesLog()
     {
-        $this->purchaseLogs = Logbook::where('vname', $this->purchase_no)->get();
+        $this->purchaseLogs = Logbook::where('model_name', 'Purchase')->get();
     }
 
 #region[Render]

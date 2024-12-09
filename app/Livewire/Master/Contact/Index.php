@@ -55,7 +55,7 @@ class Index extends Component
 
     public function render()
     {
-        $this->log = Logbook::where('vname','Contact')->take(5)->get();
+
         return view('livewire.master.contact.index')->with([
             'list' => $this->getList(),
         ]);
