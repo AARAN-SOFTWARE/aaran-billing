@@ -59,8 +59,23 @@
         <x-forms.create :id="$common->vid">
 
             <div class="flex flex-col gap-3">
-                <x-input.floating wire:model.live="common.vname" label="Account Name"/>
-                <x-input.floating wire:model.live="account_no" label="Account No"/>
+                <div>
+                    <x-input.floating wire:model.live="common.vname" label="Account Name"/>
+                    @error('common.vname')
+                    <div class="text-xs text-red-500">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
+                <div>
+                    <x-input.floating wire:model.live="account_no" label="Account No"/>
+                    @error('account_no')
+                    <div class="text-xs text-red-500">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
 
                 <x-dropdown.wrapper label="Bank" type="bankTyped">
 
@@ -89,6 +104,11 @@
 
                         </x-dropdown.select>
                     </div>
+                    @error('bank_id')
+                    <div class="text-xs text-red-500">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </x-dropdown.wrapper>
 
                 <x-dropdown.wrapper label="Account Type" type="account_typeTyped">
@@ -118,17 +138,42 @@
 
                         </x-dropdown.select>
                     </div>
+                    @error('account_type_id')
+                    <div class="text-xs text-red-500">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </x-dropdown.wrapper>
 
-                <x-input.floating wire:model.live="ifsc_code" label="IFSC Code"/>
+                <div>
+                    <x-input.floating wire:model.live="ifsc_code" label="IFSC Code"/>
+                    @error('ifsc_code')
+                    <div class="text-xs text-red-500">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
                 <x-input.floating wire:model.live="branch" label="Branch"/>
-                <x-input.floating wire:model.live="opening_balance" label="Opening Balance"/>
+
+                <div>
+                    <x-input.floating wire:model.live="opening_balance" label="Opening Balance"/>
+                    @error('opening_balance')
+                    <div class="text-xs text-red-500">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
                 <x-input.floating wire:model.live="opening_date" type="date" label="Opening date"/>
+
                 <x-input.floating wire:model.live="notes" label="Notes"/>
 
             </div>
         </x-forms.create>
 
         <x-cards.card-3 :list="$list"/>
+
+        <x-cards.card-4 :list="$list"/>
     </x-forms.m-panel>
 </div>

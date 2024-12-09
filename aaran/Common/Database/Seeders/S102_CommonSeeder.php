@@ -33,6 +33,7 @@ class S102_CommonSeeder extends Seeder
         self::GstApiData();
         self::AddNew();
         self::accountType();
+        self::transaction1();
     }
 
     #region[noRecord]
@@ -1124,4 +1125,17 @@ class S102_CommonSeeder extends Seeder
         ]);
 
     }
+
+    #region[transaction]
+    private static function transaction1(): void
+    {
+        Common::create([
+            'label_id' => '19',
+            'vname' => 'UPI',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+    }
+
 }
