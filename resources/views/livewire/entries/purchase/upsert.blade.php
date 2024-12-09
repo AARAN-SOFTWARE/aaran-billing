@@ -537,14 +537,19 @@
         @endif
     </div>
     {{--    </x-forms.m-panel>--}}
-    <div  class="max-w-6xl mx-auto  py-16 space-y-4">
-        <div class="text-lg text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
+    <div class="max-w-6xl mx-auto  py-16 space-y-4">
+        @if(!$purchaseLogs->isEmpty())
+            <div class="text-lg text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
+        @endif
         @foreach($purchaseLogs as $row)
             <div class="relative ">
                 <div class=" border-l-4 border-dotted px-8   tracking-wider py-3">
                     <div class="flex gap-x-5">
-                        <div class="inline-flex text-gray-500 items-center font-sans font-semibold"><span>Invoice No:</span> <span>{{$row->vname}}</span></div>
-                        <div class="text-xs inline-flex items-center space-x-1 font-merri"><span class="text-blue-600">@</span><span class="text-gray-500">{{$row->user->name}}</span></div>
+                        <div class="inline-flex text-gray-500 items-center font-sans font-semibold">
+                            <span>Purchase No:</span> <span>{{$row->vname}}</span></div>
+                        <div class="text-xs inline-flex items-center space-x-1 font-merri"><span
+                                class="text-blue-600">@</span><span class="text-gray-500">{{$row->user->name}}</span>
+                        </div>
                     </div>
                     <div
                         class="text-gray-400 text-xs font-semibold">{{date('M d, Y', strtotime($row->created_at))}}</div>

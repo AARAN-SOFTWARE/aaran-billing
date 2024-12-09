@@ -548,7 +548,6 @@ class Upsert extends Component
     #region[Save]
     public function save(): void
     {
-
         try {
             if ($this->uniqueno != '') {
                 if ($this->common->vid == "") {
@@ -579,7 +578,6 @@ class Upsert extends Component
                     $this->common->logEntry($this->purchase_no,'create','The Purchase entry has been created for '.$this->contact_name);
                     $message = "Saved";
                     $this->getRoute();
-
                 } else {
                     $obj = Purchase::find($this->common->vid);
                     $previousData = $obj->getOriginal();
@@ -640,7 +638,6 @@ class Upsert extends Component
                     $this->contactUpdate();
                     $message = "Updated";
                 }
-
                 $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
                 $this->getRoute();
             }
@@ -668,7 +665,6 @@ class Upsert extends Component
     public function contactUpdate()
     {
         if ($this->contact_id) {
-
         $obj = Contact::find($this->contact_id);
         $outstanding = ($obj->contact_type_id == 124 ? $obj->outstanding - $this->grand_total : $obj->outstanding + $this->grand_total);
         $obj->outstanding = $outstanding;
@@ -708,7 +704,6 @@ function mount($id): void
         $this->round_off = $obj->round_off;
         $this->grand_total = $obj->grand_total;
         $this->common->active_id = $obj->active_id;
-
         $data = DB::table('purchaseitems')->select('purchaseitems.*',
             'products.vname as product_name',
             'colours.vname as colour_name',
@@ -734,7 +729,6 @@ function mount($id): void
                 ];
             });
         $this->itemList = $data;
-
         $contact_outstanding = Contact::find($this->contact_id);
         $contact_outstanding->outstanding = ($contact_outstanding->contact_type_id == 124 ? $contact_outstanding->outstanding + $this->grand_total : $contact_outstanding->outstanding - $this->grand_total);
         $contact_outstanding->save();
@@ -826,7 +820,6 @@ public
 function changeItems($index): void
 {
     $this->itemIndex = $index;
-
     $items = $this->itemList[$index];
     $this->product_name = $items['product_name'];
     $this->product_id = $items['product_id'];
@@ -857,12 +850,10 @@ public
 function calculateTotal(): void
 {
     if ($this->itemList) {
-
         $this->total_qty = 0;
         $this->total_taxable = 0;
         $this->total_gst = 0;
         $this->grandtotalBeforeRound = 0;
-
         foreach ($this->itemList as $row) {
             $this->total_qty += round(floatval($row['qty']), 3);
             $this->total_taxable += round(floatval($row['taxable']), 2);
@@ -875,7 +866,6 @@ function calculateTotal(): void
         if ($this->grandtotalBeforeRound > $this->grand_total) {
             $this->round_off = round($this->round_off, 2) * -1;
         }
-
         $this->qty = round(floatval($this->qty), 3);
         $this->total_taxable = round(floatval($this->total_taxable), 2);
         $this->total_gst = round(floatval($this->total_gst), 2);
