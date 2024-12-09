@@ -3,6 +3,7 @@
 namespace App\Livewire\Master\Contact;
 
 use Aaran\Common\Models\Common;
+use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\ContactDetail;
 use App\Livewire\Trait\CommonTraitNew;
@@ -43,6 +44,7 @@ class Upsert extends Component
     public $gstin = '';
     public $email = '';
     public $address_type;
+    public $log;
 
     #endregion
 
@@ -641,7 +643,7 @@ class Upsert extends Component
                     'company_id' => session()->get('company_id'),
                 ]);
                 $this->saveItem($obj->id);
-                $this->common->logEntry('Contact','create',$this->vname.'has been created');
+                $this->common->logEntry('Contact name: '.$this->common->vname,'Contact','create',$this->vname.'has been created');
                 $message = "Saved";
                 $this->getRoute();
 
@@ -665,7 +667,7 @@ class Upsert extends Component
                 $obj->save();
 
                 $this->saveItem($obj->id);
-                $this->common->logEntry('Contact','update',$this->vname.' has been updated');
+                $this->common->logEntry('Contact','Contact','update',$this->vname.' has been updated');
                 $message = "Updated";
                 $this->getRoute();
             }
@@ -833,6 +835,7 @@ class Upsert extends Component
 
     public function render()
     {
+        $this->log = Logbook::where('model_name','Contact')->get();
         $this->getCityList();
         $this->getStateList();
         $this->getPincodeList();

@@ -27,7 +27,7 @@ class Index extends Component
                     'company_id' => session()->get('company_id'),
                 ];
                 $this->common->save($order, $extraFields);
-                $this->common->logEntry('Order','create',$this->common->vname.' has been created');
+                $this->common->logEntry('Order_name','Order','create',$this->common->vname.' has been created');
                 $message = "Saved";
             } else {
                 $order = Order::find($this->common->vid);
@@ -36,7 +36,7 @@ class Index extends Component
                     'company_id' => session()->get('company_id'),
                 ];
                 $this->common->edit($order, $extraFields);
-                $this->common->logEntry('Order','update',$this->common->vname.' has been updated');
+                $this->common->logEntry('Order','Order','update',$this->common->vname.' has been updated');
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
@@ -79,7 +79,7 @@ class Index extends Component
     #region[render]
     public function render()
     {
-        $this->log = Logbook::where('vname','Order')->take(5)->get();
+        $this->log = Logbook::where('model_name','Order')->take(5)->get();
         $this->getListForm->searchField = 'order_name';
 
         return view('livewire.master.orders.index')->with([
