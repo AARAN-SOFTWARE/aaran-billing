@@ -38,7 +38,23 @@
 
                         {{--                        <x-table.cell-text>{{\Aaran\Transaction\Models\AccountBook::common($row->bank->vname)}}</x-table.cell-text>--}}
 
-                        <x-table.cell-text left>{{$row->transType->vname}}</x-table.cell-text>
+
+                        {{--                        <x-table.cell-text left>--}}
+                        {{--                            @if($row->transType->vname == 'Cash Book')--}}
+                        {{--                                <a href="{{  route('cashBooks', $row->id) }}">--}}
+                        {{--                                    {{$row->transType->vname}} </a>--}}
+                        {{--                            @elseif($row->transType->vname == 'Bank Book')--}}
+                        {{--                                <a href="{{  route('bankBooks', $row->id) }}">--}}
+                        {{--                                    {{$row->transType->vname}} </a>--}}
+                        {{--                            @else--}}
+                        {{--                                <a href="{{ route('accBooks') }}">--}}
+                        {{--                                    {{$row->transType->vname}} </a>--}}
+                        {{--                            @endif--}}
+                        {{--                        </x-table.cell-text>--}}
+
+                        <x-table.cell-text left>
+                            {{$row->transType->vname}}
+                        </x-table.cell-text>
 
                         <x-table.cell-text>{{$row->account_no}}</x-table.cell-text>
 
@@ -86,16 +102,16 @@
                         @enderror
                     </div>
 
-{{--                    @if( $trans_type_id == 136)--}}
-{{--                        <div>--}}
-{{--                            <x-input.floating wire:model.live="account_no" label="UPI ID"/>--}}
-{{--                            @error('account_no')--}}
-{{--                            <div class="text-xs text-red-500">--}}
-{{--                                {{$message}}--}}
-{{--                            </div>--}}
-{{--                            @enderror--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
+                    {{--                    @if( $trans_type_id == 136)--}}
+                    {{--                        <div>--}}
+                    {{--                            <x-input.floating wire:model.live="account_no" label="UPI ID"/>--}}
+                    {{--                            @error('account_no')--}}
+                    {{--                            <div class="text-xs text-red-500">--}}
+                    {{--                                {{$message}}--}}
+                    {{--                            </div>--}}
+                    {{--                            @enderror--}}
+                    {{--                        </div>--}}
+                    {{--                    @endif--}}
 
                 </div>
 

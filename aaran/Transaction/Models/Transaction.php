@@ -19,6 +19,7 @@ class Transaction extends Model
     {
         return $this->belongsTo(Contact::class);
     }
+
     public static function common($id)
     {
         return Common::find($id)->vname;

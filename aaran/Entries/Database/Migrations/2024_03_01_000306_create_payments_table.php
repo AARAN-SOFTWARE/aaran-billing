@@ -12,7 +12,9 @@ return new class extends Migration {
             Schema::create('payments', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('company_id')->references('id')->on('companies');
+                $table->foreignId('account_book_id')->references('id')->on('account_books');
                 $table->string('acyear')->nullable();
+                $table->foreignId('trans_type_id')->references('id')->on('commons');
                 $table->string('mode')->nullable();
                 $table->date('vdate');
                 $table->foreignId('contact_id')->references('id')->on('contacts');
