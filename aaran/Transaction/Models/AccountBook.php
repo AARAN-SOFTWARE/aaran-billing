@@ -19,6 +19,11 @@ class AccountBook extends Model
         return $this->belongsTo(User::class);
     }
 
+    public static function common($id)
+    {
+        return Common::find($id)->vname;
+    }
+
     public function bank(): BelongsTo
     {
         return $this->belongsTo(Common::class);
@@ -32,6 +37,8 @@ class AccountBook extends Model
     public function transType(): BelongsTo
     {
         return $this->belongsTo(Common::class);
+
+
     }
 
 }

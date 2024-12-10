@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->id();
             $table->string('acyear')->nullable();
             $table->foreignId('company_id')->references('id')->on('companies');
+            $table->foreignId('account_book_id')->references('id')->on('account_books');
 
             $table->foreignId('contact_id')->references('id')->on('contacts');
             $table->string('paid_to')->nullable();

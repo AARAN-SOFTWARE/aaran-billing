@@ -109,13 +109,13 @@ class Index extends Component
 
     public function getObj($id)
     {
-        if ($id){
+        if ($id) {
             $BlogTag = BlogTag::find($id);
             $this->common->vid = $BlogTag->id;
             $this->common->vname = $BlogTag->vname;
             $this->common->active_id = $BlogTag->active_id;
             $this->blogcategory_id = $BlogTag->blogcategory_id;
-            $this->blogcategory_name = $BlogTag->blogcategory_id?Common::find($BlogTag->blogcategory_id)->vname:'';
+            $this->blogcategory_name = $BlogTag->blogcategory_id ? Common::find($BlogTag->blogcategory_id)->vname : '';
             return $BlogTag;
         }
         return null;
@@ -136,8 +136,8 @@ class Index extends Component
         $this->getBlogcategoryList();
 
         return view('livewire.blog.blog-tag.index')->with([
-            'list' => $this->getListForm->getList(BlogTag::class,function ($query){
-                return $query->where('id','>','');
+            'list' => $this->getListForm->getList(BlogTag::class, function ($query) {
+                return $query->where('id', '>', '');
             })
         ]);
     }
