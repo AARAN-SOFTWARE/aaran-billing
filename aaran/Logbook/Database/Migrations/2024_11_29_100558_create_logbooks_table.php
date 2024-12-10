@@ -12,6 +12,7 @@ return new class extends Migration
         Schema::create('logbooks', function (Blueprint $table) {
             $table->id();
             $table->string('vname');
+            $table->string('model_name');
             $table->string('action');
             $table->longtext('description');
             $table->foreignId('user_id')->references('id')->on('users');

@@ -928,7 +928,7 @@ class Upsert extends Component
 
                 $this->sales_id = $obj->id;
                 $this->saveItem($this->sales_id);
-                $this->common->logEntry($this->invoice_no, 'create', 'The Sales entry has been created for ' . $this->contact_name);
+                $this->common->logEntry($this->invoice_no,'Sales', 'create', 'The Sales entry has been created for ' . $this->contact_name);
                 $this->contactUpdate();
                 $message = "Saved";
             } else {
@@ -1018,7 +1018,7 @@ class Upsert extends Component
                     $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
                 }
                 $changesMessage = implode(' , ', $changes);
-                $this->common->logEntry($this->invoice_no, 'update',
+                $this->common->logEntry($this->invoice_no,'Sales', 'update',
                     "The Sales entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
                 $this->contactUpdate();
                 $message = "Updated";
@@ -1333,7 +1333,7 @@ class Upsert extends Component
 
     public function getSalesLog()
     {
-        $this->salesLogs = Logbook::where('vname', $this->invoice_no)->get();
+        $this->salesLogs = Logbook::where('model_name', 'Sales')->get();
     }
 
     #region[Render]

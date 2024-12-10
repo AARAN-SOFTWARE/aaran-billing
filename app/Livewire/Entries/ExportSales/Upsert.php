@@ -527,9 +527,7 @@ class Upsert extends Component
     {
         if ($this->uniqueno != '') {
             if ($this->common->vid == "") {
-
 //                $this->validate($this->rules());
-
                 $obj = ExportSale::create([
                     'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.ExportSale::nextNo(),
                     'acyear' => session()->get('acyear'),
@@ -555,13 +553,11 @@ class Upsert extends Component
                     'grand_total' => $this->grand_total,
                     'ex_rate' => $this->ex_rate,
                     'active_id' => $this->common->active_id,
-
                 ]);
                 $this->saveItem( $obj->id);
                 $this->saveContact( $obj->id);
-                $this->common->logEntry($this->invoice_no,'create','The ExportSale entry has been created for '.$this->contact_name);
+                $this->common->logEntry($this->invoice_no,'ExportSale','create','The ExportSale entry has been created for '.$this->contact_name);
                 $message = "Saved";
-
             } else {
                 $obj = ExportSale::find($this->common->vid);
                 $previousData = $obj->getOriginal();
@@ -626,7 +622,7 @@ class Upsert extends Component
                     $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
                 }
                 $changesMessage = implode(' , ', $changes);
-                $this->common->logEntry($this->invoice_no, 'update',
+                $this->common->logEntry($this->invoice_no,'ExportSale','update',
                     "The Export Sales entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
                 $message = "Updated";
             }
@@ -959,7 +955,7 @@ class Upsert extends Component
 
     public function getExportLog()
     {
-        $this->exportLogs = Logbook::where('vname', $this->invoice_no)->get();
+        $this->exportLogs = Logbook::where('model_name', 'ExportSale')->get();
 //        dd($this->exportLogs);
     }
 
