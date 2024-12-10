@@ -7,6 +7,7 @@ use Aaran\Entries\Models\Payment;
 use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
+use Aaran\Transaction\Models\AccountBook;
 use Aaran\Transaction\Models\Transaction;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Database\Eloquent\Collection;
@@ -46,15 +47,17 @@ class Index extends Component
         if ($id == 1) {
             $this->mode_id = 111;
             $this->mode_name = Common::find(111)->vname;
-            $this->vch_no=Transaction::nextNo($this->mode_id);
+            $this->vch_no = Transaction::nextNo($this->mode_id);
         } elseif ($id == 2) {
             $this->mode_id = 110;
             $this->mode_name = Common::find(110)->vname;
-            $this->vch_no=Transaction::nextNo($this->mode_id);
+            $this->vch_no = Transaction::nextNo($this->mode_id);
         }
         $this->trans_type_id = 108;
 //        $this->receipt_type_id = 60;
 //        $this->receipt_type_name = Common::find(60)->vname;
+
+
     }
     #endregion
 
@@ -67,6 +70,7 @@ class Index extends Component
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
+//                    'account_book_id' => $this->account_book_id ?: '1',
                     'contact_id' => $this->contact_id ?: '1',
                     'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
@@ -87,6 +91,7 @@ class Index extends Component
                     'verified_by' => $this->verified_by,
                     'verified_on' => $this->verified_on,
                     'against_id' => $this->against_id ?: '0',
+//
                     'user_id' => auth()->id(),
 
                 ];
@@ -101,6 +106,7 @@ class Index extends Component
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
+//                    'account_book_id' => $this->account_book_id ?: '1',
                     'contact_id' => $this->contact_id,
                     'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
@@ -121,24 +127,27 @@ class Index extends Component
                     'verified_by' => $this->verified_by,
                     'verified_on' => $this->verified_on,
                     'against_id' => $this->against_id,
+//                    'account_id' => $this->account_id,
                     'user_id' => auth()->id(),
                 ];
                 $this->common->edit($Transaction, $extraFields);
+
                 $this->common->logEntry($this->vch_no,$this->mode_name,'update',$this->mode_name.' for '.$this->contact_name.' - '.$this->mode_name.' has been updated and the amount is '.$this->common->vname.' by '.$this->trans_type_name);
+
                 $this->contactUpdate();
                 $message = "Updated";
             }
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
 
     public function contactUpdate()
     {
-        if ($this->contact_id){
-        $obj = Contact::find($this->contact_id);
-        $outstanding = $obj->outstanding - $this->common->vname;
-        $obj->outstanding = $outstanding;
-        $obj->save();
+        if ($this->contact_id) {
+            $obj = Contact::find($this->contact_id);
+            $outstanding = $obj->outstanding - $this->common->vname;
+            $obj->outstanding = $outstanding;
+            $obj->save();
         }
     }
     #endregion
@@ -553,7 +562,64 @@ class Index extends Component
             Common::search(trim($this->mode_name))->where('label_id', '=', '20')->get() :
             Common::where('label_id', '=', '20')->get();
     }
+
 #endregion
+
+//    public $account_book_id = '';
+//    public $account_book_name = '';
+//    public \Illuminate\Support\Collection $account_bookCollection;
+//    public $highlightAccountBook = 0;
+//    public $account_bookTyped = false;
+//
+//    public function decrementAccountBook(): void
+//    {
+//        if ($this->highlightAccountBook === 0) {
+//            $this->highlightAccountBook = count($this->account_bookCollection) - 1;
+//            return;
+//        }
+//        $this->highlightAccountBook--;
+//    }
+//
+//    public function incrementAccountBook(): void
+//    {
+//        if ($this->highlightAccountBook === count($this->account_bookCollection) - 1) {
+//            $this->highlightAccountBook = 0;
+//            return;
+//        }
+//        $this->highlightAccountBook++;
+//    }
+//
+//    public function setAccountBook($name, $id): void
+//    {
+//        $this->account_book_name = $name;
+//        $this->account_book_id = $id;
+//        $this->getAccountBookList();
+//    }
+//
+//    public function enterAccountBook(): void
+//    {
+//        $obj = $this->account_bookCollection[$this->highlightAccountBook] ?? null;
+//
+//        $this->account_book_name = '';
+//        $this->account_bookCollection = Collection::empty();
+//        $this->highlightAccountBook = 0;
+//
+//        $this->account_book_name = $obj['vname'] ?? '';
+//        $this->account_book_id = $obj['id'] ?? '';
+//    }
+//
+//    public function refreshAccountBook($v): void
+//    {
+//        $this->account_book_id = $v['id'];
+//        $this->account_book_name = $v['name'];
+//        $this->account_bookTyped = false;
+//    }
+//
+//    public function getAccountBookList(): void
+//    {
+//        $this->account_bookCollection = $this->account_book_name ?
+//            AccountBook::search(trim($this->account_book_name))->get() : AccountBook::where('vname', '=', $this->account_book_id)->get();
+//    }
 
     #region[Get-Obj]
     public function getObj($id)
@@ -563,9 +629,11 @@ class Index extends Component
             $this->common->vid = $Transaction->id;
             $this->common->vname = $Transaction->vname;
             $this->common->active_id = $Transaction->active_id;
+//            $this->account_book_id = $Transaction->account_book_id;
+//            $this->account_book_name = $Transaction->account_book_id ? AccountBook::find($Transaction->account_book_id)->vname : '';
             $this->contact_id = $Transaction->contact_id;
             $this->contact_name = $Transaction->contact_id ? Contact::find($Transaction->contact_id)->vname : '';
-            $this->vch_no=$Transaction->vch_no;
+            $this->vch_no = $Transaction->vch_no;
             $this->paid_to = $Transaction->paid_to;
             $this->purpose = $Transaction->purpose;
             $this->order_id = $Transaction->order_id;
@@ -590,9 +658,11 @@ class Index extends Component
             $this->verified_by = $Transaction->verified_by;
             $this->verified_on = $Transaction->verified_on;
             $this->against_id = $Transaction->against_id;
+//            $this->account_id = $Transaction->account_id;
+//            $this->account_name = $Transaction->account_id ? AccountBook::find($Transaction->account_id)->vname : '';
 
-            $contact_outstanding=Contact::find($this->contact_id);
-            $contact_outstanding->outstanding=$contact_outstanding->outstanding+$this->common->vname;
+            $contact_outstanding = Contact::find($this->contact_id);
+            $contact_outstanding->outstanding = $contact_outstanding->outstanding + $this->common->vname;
             $contact_outstanding->save();
             return $Transaction;
         }
@@ -627,6 +697,8 @@ class Index extends Component
         $this->verified_on = '';
         $this->receipt_type_id = '';
         $this->receipt_type_name = '';
+//        $this->account_book_id = '';
+//        $this->account_book_name = '';
         $this->vdate = Carbon::now()->format('Y-m-d');
     }
     #endregion
@@ -640,7 +712,11 @@ class Index extends Component
         $this->getTransTypeList();
         $this->getModeList();
         $this->getOrderList();
+//        $this->getAccountBookList();
+      
+
         $this->log = Logbook::where('model_name',$this->mode_name)->take(5)->get();
+
 
         return view('livewire.entries.payment.index')->with([
             'list' => $this->getListForm->getList(Transaction::class, function ($query) {

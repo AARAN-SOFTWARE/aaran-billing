@@ -9,6 +9,7 @@ use Aaran\Entries\Database\Factories\PaymentFactory;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
+use Aaran\Transaction\Models\AccountBook;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -58,6 +59,11 @@ class Payment extends Model
     public static function common($id)
     {
         return Common::find($id)->vname;
+    }
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo( AccountBook::class , 'account_book_id', 'id' );
     }
 
     protected static function newFactory(): PaymentFactory
