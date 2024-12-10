@@ -96,50 +96,25 @@
 
                 <div class="w-1/2 space-y-3">
 
-                    <!-- Party Name ----------------------------------------------------------------------------------->
-                    <x-input.model-select wire:model.live="trans_type_id">
-                        <option value="Select" selected>Choose</option>
-                        <option value="108">Cash Type</option>
-                        <option value="109">Bank Type</option>
-                        <option value="136">UPI</option>
-                    </x-input.model-select>
+                   <!-- Party Name ----------------------------------------------------------------------------------->
 
-
-{{--                    <x-dropdown.wrapper label="Account Book Name" type="account_bookTyped">--}}
-{{--                        <div class="relative">--}}
-
-{{--                            <x-dropdown.input label="Account Book Name*" id="account_book_name"--}}
-{{--                                              wire:model.live="account_book_name"--}}
-{{--                                              wire:keydown.arrow-up="decrementAccountBook"--}}
-{{--                                              wire:keydown.arrow-down="incrementAccountBook"--}}
-{{--                                              wire:keydown.enter="enterAccountBook"/>--}}
-{{--                            <x-dropdown.select>--}}
-
-{{--                                @if($account_bookCollection)--}}
-{{--                                    @forelse ($account_bookCollection as $i => $accountBook)--}}
-{{--                                        <x-dropdown.option highlight="{{ $highlightAccountBook === $i }}"--}}
-{{--                                                           wire:click.prevent="setAccountBook('{{$accountBook->vname}}','{{$accountBook->id}}')">--}}
-{{--                                            {{ $accountBook->vname }}--}}
-{{--                                        </x-dropdown.option>--}}
-{{--                                    @empty--}}
-{{--                                        <x-dropdown.new href="{{ route('$accountBook }}" label="Account Book"/>--}}
-{{--                                    @endforelse--}}
-{{--                                @endif--}}
-{{--                            </x-dropdown.select>--}}
-
-{{--                        </div>--}}
-{{--                    </x-dropdown.wrapper>--}}
-
-
-{{--                    <x-input.model-select wire:model.live="account_book_id">--}}
+{{--                    <x-input.model-select wire:model.live="trans_type_id">--}}
 {{--                        <option value="Select" selected>Choose</option>--}}
-{{--                        @foreach()--}}
 {{--                        <option value="108">Cash Type</option>--}}
-
-{{--                        @endforeach--}}
 {{--                        <option value="109">Bank Type</option>--}}
 {{--                        <option value="136">UPI</option>--}}
 {{--                    </x-input.model-select>--}}
+
+
+                    <x-input.model-select wire:model.live="account_book_id">
+                        <option value="" selected>Choose</option>
+                        @foreach($account_books as $account_book)
+                            <option value="{{ $account_book->id }}">
+                                {{ $account_book->vname. ' (ACC-No: - '.$account_book->account_no . ')'}}
+                            </option>
+                        @endforeach
+                    </x-input.model-select>
+
 
                     <x-dropdown.wrapper label="Contact Name" type="contactTyped">
                         <div class="relative ">
@@ -230,7 +205,7 @@
 
                                     <!-- bank ------------------------------------------------------------------------->
 
-                                    @if($receipt_type_name =='Cheque')
+                                    @if($receipt_type_name =='Cheque' )
 
                                         <x-dropdown.wrapper label="Bank" type="bankTyped">
                                             <div class="relative ">

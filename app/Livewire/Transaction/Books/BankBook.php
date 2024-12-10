@@ -3,7 +3,9 @@
 namespace App\Livewire\Transaction\Books;
 
 use Aaran\Common\Models\Common;
+use Aaran\Entries\Models\Payment;
 use Aaran\Transaction\Models\AccountBook;
+use Aaran\Transaction\Models\Transaction;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -311,11 +313,22 @@ class BankBook extends Component
 //        $this->accountData = AccountBook::find($id);
 //
 //    }
+
     public $bankBookData;
 
     public function getBankbookData()
     {
         $this->bankBookData = AccountBook::where('trans_type_id', 109)->get();
+
+    }
+
+    public $payments;
+    public $paymentBank;
+
+    public function getPayment()
+
+    {
+        $this->payments = Transaction::where('trans_type_id', 109)->get();
     }
 
     public function render()
@@ -323,6 +336,7 @@ class BankBook extends Component
 //        $this->getBankList();
 //        $this->getAccountTypeList();
         $this->getBankbookData();
+        $this->getPayment();
         return view('livewire.transaction.books.bank-book');
     }
     #endregion

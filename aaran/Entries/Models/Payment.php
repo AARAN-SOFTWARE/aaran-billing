@@ -63,7 +63,13 @@ class Payment extends Model
 
     public function account(): BelongsTo
     {
-        return $this->belongsTo( AccountBook::class , 'account_book_id', 'id' );
+        return $this->belongsTo( AccountBook::class);
+    }
+
+    // In TransactionType model
+    public function accountBooks()
+    {
+        return $this->hasMany(AccountBook::class, 'trans_type_id'); // Adjust as necessary
     }
 
     protected static function newFactory(): PaymentFactory

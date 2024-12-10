@@ -25,6 +25,35 @@ class Transaction extends Model
         return Common::find($id)->vname;
     }
 
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo( AccountBook::class);
+    }
+
+    public function accountBook()
+    {
+        return $this->belongsTo(AccountBook::class, 'account_book_id');
+    }
+
+    public function transType(): BelongsTo
+    {
+        return $this->belongsTo(Common::class);
+
+
+    }
+
+    public function mode(): BelongsTo
+    {
+        return $this->belongsTo(Common::class);
+
+    }
+
+    public function bank(): BelongsTo
+    {
+        return $this->belongsTo(Common::class);
+
+    }
+
     protected static function newFactory():TransactionFactory
     {
         return new TransactionFactory();

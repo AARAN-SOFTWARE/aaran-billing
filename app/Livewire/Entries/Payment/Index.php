@@ -39,6 +39,9 @@ class Index extends Component
     public $vch_no;
 
     public $log;
+    public $trans_type_id;
+    public $account_book_id;
+    public $account_books;
     #endregion
 
     #region[Mount]
@@ -57,7 +60,7 @@ class Index extends Component
 //        $this->receipt_type_id = 60;
 //        $this->receipt_type_name = Common::find(60)->vname;
 
-
+        $this->account_books = AccountBook::all();
     }
     #endregion
 
@@ -70,7 +73,7 @@ class Index extends Component
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
-//                    'account_book_id' => $this->account_book_id ?: '1',
+                    'account_book_id' => $this->account_book_id ?: '1',
                     'contact_id' => $this->contact_id ?: '1',
                     'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
@@ -91,7 +94,6 @@ class Index extends Component
                     'verified_by' => $this->verified_by,
                     'verified_on' => $this->verified_on,
                     'against_id' => $this->against_id ?: '0',
-//
                     'user_id' => auth()->id(),
 
                 ];
@@ -106,7 +108,7 @@ class Index extends Component
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
-//                    'account_book_id' => $this->account_book_id ?: '1',
+                    'account_book_id' => $this->account_book_id ?: '1',
                     'contact_id' => $this->contact_id,
                     'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
@@ -424,75 +426,75 @@ class Index extends Component
 
     #endregion
 
-    #region[trans_type]
-    public $trans_type_id = '';
-    public $trans_type_name = '';
-    public \Illuminate\Support\Collection $trans_typeCollection;
-    public $highlightTransType = 0;
-    public $trans_typeTyped = false;
-
-    public function decrementTransType(): void
-    {
-        if ($this->highlightTransType === 0) {
-            $this->highlightTransType = count($this->trans_typeCollection) - 1;
-            return;
-        }
-        $this->highlightTransType--;
-    }
-
-    public function incrementTransType(): void
-    {
-        if ($this->highlightTransType === count($this->trans_typeCollection) - 1) {
-            $this->highlightTransType = 0;
-            return;
-        }
-        $this->highlightTransType++;
-    }
-
-    public function setTransType($name, $id): void
-    {
-        $this->trans_type_name = $name;
-        $this->trans_type_id = $id;
-        $this->getTransTypeList();
-    }
-
-    public function enterTransType(): void
-    {
-        $obj = $this->trans_typeCollection[$this->highlightTransType] ?? null;
-
-        $this->trans_type_name = '';
-        $this->trans_typeCollection = Collection::empty();
-        $this->highlightTransType = 0;
-
-        $this->trans_type_name = $obj['vname'] ?? '';
-        $this->trans_type_id = $obj['id'] ?? '';
-    }
-
-    public function refreshTransType($v): void
-    {
-        $this->trans_type_id = $v['id'];
-        $this->trans_type_name = $v['name'];
-        $this->trans_typeTyped = false;
-    }
-
-    public function transTypeSave($name)
-    {
-        $obj = Common::create([
-            'label_id' => 19,
-            'vname' => $name,
-            'active_id' => '1'
-        ]);
-        $v = ['name' => $name, 'id' => $obj->id];
-        $this->refreshTransType($v);
-    }
-
-    public function getTransTypeList(): void
-    {
-        $this->trans_typeCollection = $this->trans_type_name ?
-            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
-            Common::where('label_id', '=', '19')->get();
-    }
-#endregion
+//    #region[trans_type]
+//    public $trans_type_id = '';
+//    public $trans_type_name = '';
+//    public \Illuminate\Support\Collection $trans_typeCollection;
+//    public $highlightTransType = 0;
+//    public $trans_typeTyped = false;
+//
+//    public function decrementTransType(): void
+//    {
+//        if ($this->highlightTransType === 0) {
+//            $this->highlightTransType = count($this->trans_typeCollection) - 1;
+//            return;
+//        }
+//        $this->highlightTransType--;
+//    }
+//
+//    public function incrementTransType(): void
+//    {
+//        if ($this->highlightTransType === count($this->trans_typeCollection) - 1) {
+//            $this->highlightTransType = 0;
+//            return;
+//        }
+//        $this->highlightTransType++;
+//    }
+//
+//    public function setTransType($name, $id): void
+//    {
+//        $this->trans_type_name = $name;
+//        $this->trans_type_id = $id;
+//        $this->getTransTypeList();
+//    }
+//
+//    public function enterTransType(): void
+//    {
+//        $obj = $this->trans_typeCollection[$this->highlightTransType] ?? null;
+//
+//        $this->trans_type_name = '';
+//        $this->trans_typeCollection = Collection::empty();
+//        $this->highlightTransType = 0;
+//
+//        $this->trans_type_name = $obj['vname'] ?? '';
+//        $this->trans_type_id = $obj['id'] ?? '';
+//    }
+//
+//    public function refreshTransType($v): void
+//    {
+//        $this->trans_type_id = $v['id'];
+//        $this->trans_type_name = $v['name'];
+//        $this->trans_typeTyped = false;
+//    }
+//
+//    public function transTypeSave($name)
+//    {
+//        $obj = Common::create([
+//            'label_id' => 19,
+//            'vname' => $name,
+//            'active_id' => '1'
+//        ]);
+//        $v = ['name' => $name, 'id' => $obj->id];
+//        $this->refreshTransType($v);
+//    }
+//
+//    public function getTransTypeList(): void
+//    {
+//        $this->trans_typeCollection = $this->trans_type_name ?
+//            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
+//            Common::where('label_id', '=', '19')->get();
+//    }
+//#endregion
 
     #region[mode]
     public $mode_id = '';
@@ -565,16 +567,18 @@ class Index extends Component
 
 #endregion
 
+#region[AccountBook]
+
 //    public $account_book_id = '';
 //    public $account_book_name = '';
-//    public \Illuminate\Support\Collection $account_bookCollection;
+//    public Collection $accountBookCollection;
 //    public $highlightAccountBook = 0;
-//    public $account_bookTyped = false;
+//    public $accountBookTyped = false;
 //
 //    public function decrementAccountBook(): void
 //    {
 //        if ($this->highlightAccountBook === 0) {
-//            $this->highlightAccountBook = count($this->account_bookCollection) - 1;
+//            $this->highlightAccountBook = count($this->accountBookCollection) - 1;
 //            return;
 //        }
 //        $this->highlightAccountBook--;
@@ -582,7 +586,7 @@ class Index extends Component
 //
 //    public function incrementAccountBook(): void
 //    {
-//        if ($this->highlightAccountBook === count($this->account_bookCollection) - 1) {
+//        if ($this->highlightAccountBook === count($this->accountBookCollection) - 1) {
 //            $this->highlightAccountBook = 0;
 //            return;
 //        }
@@ -598,28 +602,42 @@ class Index extends Component
 //
 //    public function enterAccountBook(): void
 //    {
-//        $obj = $this->account_bookCollection[$this->highlightAccountBook] ?? null;
+//        $obj = $this->accountBookCollection[$this->highlightAccountBook] ?? null;
 //
 //        $this->account_book_name = '';
-//        $this->account_bookCollection = Collection::empty();
+//        $this->accountBookCollection = Collection::empty();
 //        $this->highlightAccountBook = 0;
 //
-//        $this->account_book_name = $obj['vname'] ?? '';
-//        $this->account_book_id = $obj['id'] ?? '';
+//        if ($obj) {
+//            $this->account_book_name = $obj['vname'] ?? '';
+//            $this->account_book_id = $obj['id'] ?? '';
+//        }
 //    }
 //
+//    #[On('refresh-account-book')]
 //    public function refreshAccountBook($v): void
 //    {
 //        $this->account_book_id = $v['id'];
 //        $this->account_book_name = $v['name'];
-//        $this->account_bookTyped = false;
+//        $this->accountBookTyped = false;
 //    }
+//
+////    public function getAccountBookList(): void
+////    {
+////        $this->accountBookCollection = $this->account_book_name
+////            ? AccountBook::search(trim($this->account_book_name))
+////                ->where('company_id', '=', session()->get('company_id'))
+////                ->get()
+////            : AccountBook::where('company_id', '=', session()->get('company_id'))->get();
+////    }
+//
 //
 //    public function getAccountBookList(): void
 //    {
-//        $this->account_bookCollection = $this->account_book_name ?
+//        $this->accountBookCollection = $this->account_book_name ?
 //            AccountBook::search(trim($this->account_book_name))->get() : AccountBook::where('vname', '=', $this->account_book_id)->get();
 //    }
+//#endregion
 
     #region[Get-Obj]
     public function getObj($id)
@@ -629,7 +647,7 @@ class Index extends Component
             $this->common->vid = $Transaction->id;
             $this->common->vname = $Transaction->vname;
             $this->common->active_id = $Transaction->active_id;
-//            $this->account_book_id = $Transaction->account_book_id;
+            $this->account_book_id = $Transaction->account_book_id;
 //            $this->account_book_name = $Transaction->account_book_id ? AccountBook::find($Transaction->account_book_id)->vname : '';
             $this->contact_id = $Transaction->contact_id;
             $this->contact_name = $Transaction->contact_id ? Contact::find($Transaction->contact_id)->vname : '';
@@ -697,11 +715,18 @@ class Index extends Component
         $this->verified_on = '';
         $this->receipt_type_id = '';
         $this->receipt_type_name = '';
-//        $this->account_book_id = '';
+        $this->account_book_id = '';
 //        $this->account_book_name = '';
         $this->vdate = Carbon::now()->format('Y-m-d');
     }
     #endregion
+
+    public function updatedTransTypeId($value)
+    {
+        $this->account_books = AccountBook::where('trans_type_id', $value)->get();
+//        $this->account_books = AccountBook::all();
+        $this->account_book_id = null;
+    }
 
     #region[render]
     public function render()
@@ -709,11 +734,11 @@ class Index extends Component
         $this->getBankList();
         $this->getContactList();
         $this->getReceiptTypeList();
-        $this->getTransTypeList();
+//        $this->getTransTypeList();
         $this->getModeList();
         $this->getOrderList();
 //        $this->getAccountBookList();
-      
+
 
         $this->log = Logbook::where('model_name',$this->mode_name)->take(5)->get();
 
@@ -723,7 +748,8 @@ class Index extends Component
                 return $query->where('mode_id', $this->mode_id)
                     ->where('acyear', session()->get('acyear'))
                     ->where('company_id', session()->get('company_id'));
-            })
+            }),
+            'transaction_types' => AccountBook::all()
         ]);
     }
     #endregion
