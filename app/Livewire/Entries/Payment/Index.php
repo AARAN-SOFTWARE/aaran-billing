@@ -97,7 +97,7 @@ class Index extends Component
                 ];
                 $this->common->save($Transaction, $extraFields);
 
-                $this->common->logEntry($this->mode_name, 'create', $this->common->vname . ' ' . $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been created.');
+                $this->common->logEntry($this->vch_no,$this->mode_name,'create',$this->mode_name.' for '.$this->contact_name.' - '.$this->mode_name.' has been created.');
 
                 $this->contactUpdate();
                 $message = "Saved";
@@ -131,7 +131,9 @@ class Index extends Component
                     'user_id' => auth()->id(),
                 ];
                 $this->common->edit($Transaction, $extraFields);
-                $this->common->logEntry($this->mode_name, 'update', $this->common->vname . ' ' . $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been updated.');
+
+                $this->common->logEntry($this->vch_no,$this->mode_name,'update',$this->mode_name.' for '.$this->contact_name.' - '.$this->mode_name.' has been updated and the amount is '.$this->common->vname.' by '.$this->trans_type_name);
+
                 $this->contactUpdate();
                 $message = "Updated";
             }
@@ -711,7 +713,10 @@ class Index extends Component
         $this->getModeList();
         $this->getOrderList();
 //        $this->getAccountBookList();
-        $this->log = Logbook::where('vname', $this->mode_name)->take(5)->get();
+      
+
+        $this->log = Logbook::where('model_name',$this->mode_name)->take(5)->get();
+
 
         return view('livewire.entries.payment.index')->with([
             'list' => $this->getListForm->getList(Transaction::class, function ($query) {
