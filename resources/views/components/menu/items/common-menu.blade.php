@@ -14,3 +14,5 @@
 <x-menu.base.route-menuitem  href="{{route('receipt-types',[15])}}" :label="'Product Type'"/>
 <x-menu.base.route-menuitem  href="{{route('receipt-types',[16])}}" :label="'Units'"/>
 <x-menu.base.route-menuitem  href="{{route('receipt-types',[17])}}" :label="'GST Percent'"/>
+<x-menu.base.li-menuitem :routes="'styles'" :label="'Styles'"/>
+
