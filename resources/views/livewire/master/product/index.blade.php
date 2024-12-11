@@ -57,6 +57,7 @@
         </x-table.form>
 
         <x-modal.delete/>
+        <div class="">{{ $list->links() }}</div>
 
         <!-- Create  -------------------------------------------------------------------------------------------------->
 
@@ -197,11 +198,15 @@
 
         <!-- Actions ------------------------------------------------------------------------------------------->
 
-        <div class="max-w-4xl mx-auto  py-16 space-y-4">
-            @if(!$log->isEmpty())
-                <div class="text-xs text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
-            @endif
-            @foreach($log as $row)
+
+
+    </x-forms.m-panel>
+    <div class="px-10  py-16 space-y-4">
+        @if(!$log->isEmpty())
+            <div class="text-xs text-orange-600  font-merri underline underline-offset-4">Activity</div>
+        @endif
+        @foreach($log as $row)
+            <div class="px-6">
                 <div class="relative ">
                     <div class=" border-l-[3px] border-dotted px-8 text-[10px]  tracking-wider py-3">
                         <div class="flex gap-x-5 ">
@@ -217,10 +222,7 @@
                     </div>
                     <div class="absolute top-0 -left-1 h-2.5 w-2.5  rounded-full bg-teal-600 "></div>
                 </div>
-            @endforeach
-        </div>
-        <div class="pt-5 w-10/12 mx-auto">{{ $list->links() }}</div>
-
-
-    </x-forms.m-panel>
+            </div>
+        @endforeach
+    </div>
 </div>

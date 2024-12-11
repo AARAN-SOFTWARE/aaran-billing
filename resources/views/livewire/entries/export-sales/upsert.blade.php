@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">Export Sales</x-slot>
 
-    <div class="space-y-5 py-10  min-h-[40rem]">
+    <div class="space-y-5 pt-10  min-h-[40rem]">
         <div class="space-y-5">
             <div class="max-w-6xl mx-auto">
                 <x-tabs.tab-panel>
@@ -135,7 +135,7 @@
                             </div>
                             <div
                                 class="px-4 pb-4  text-lg font-merri tracking-wider text-orange-600 underline underline-offset-4 underline-orange-500">
-                                Sales Items
+                                Exports Sales Items
                             </div>
                             <div class="w-full flex  gap-x-1 pb-4">
                                 <div class="w-[20%]">
@@ -146,13 +146,13 @@
                                         @endforeach
                                     </x-input.model-select>
                                 </div>
-                                <div class="w-[10%]">
+                                <div class="">
                                     <x-input.floating id="dc" wire:model.live="no_of_count" label="No of Count"/>
                                 </div>
-                                <div class="w-[20%]">
+                                <div class="">
                                     <x-dropdown.wrapper label="Product Name" type="productTyped">
                                         <div class="relative ">
-                                            <x-dropdown.input label="Product Name" id="product_name"
+                                            <x-dropdown.input label="Particulars" id="product_name"
                                                               wire:model.live="product_name"
                                                               wire:keydown.arrow-up="decrementProduct"
                                                               wire:keydown.arrow-down="incrementProduct"
@@ -174,14 +174,13 @@
                                         </div>
                                     </x-dropdown.wrapper>
                                 </div>
-                                <div class="w-[10%]">
-                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
+                                @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
+                                    <div class="">
                                         <x-input.floating id="qty" wire:model.live="description" label="description"/>
-                                    @endif
-                                </div>
-                                <div class="w-[10%]">
-                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
-
+                                    </div>
+                                @endif
+                                @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
+                                    <div class="w-[10%]">
                                         <x-dropdown.wrapper label="Colour Name" type="colourTyped">
                                             <div class="relative ">
                                                 <x-dropdown.input label="Colour Name" id="colour_name"
@@ -207,10 +206,10 @@
                                                 </x-dropdown.select>
                                             </div>
                                         </x-dropdown.wrapper>
-                                    @endif
-                                </div>
-                                <div class="w-[10%]">
-                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
+                                    </div>
+                                @endif
+                                @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
+                                    <div class="w-[10%]">
                                         <x-dropdown.wrapper label="Size Name" type="sizeTyped">
                                             <div class="relative ">
                                                 <x-dropdown.input label="Size Name" id="size_name"
@@ -239,8 +238,8 @@
                                                 </x-dropdown.select>
                                             </div>
                                         </x-dropdown.wrapper>
-                                    @endif
-                                </div>
+                                    </div>
+                                @endif
                                 <div class="w-[10%]">
                                     <x-input.floating id="qty" wire:model.live="qty" label="Quantity"/>
                                 </div>
@@ -248,7 +247,6 @@
                                 <div class="w-[10%]">
                                     <x-input.floating id="price" wire:model.live="price" label="Price"/>
                                 </div>
-
                                 <x-button.add wire:click="addItems"/>
 
                             </div>
@@ -491,7 +489,7 @@
 
         </div>
     </div>
-    <div class="max-w-6xl mx-auto pt-6">
+    <div class="max-w-6xl mx-auto">
         @if( $common->vid != "")
             <x-forms.m-panel-bottom-button routes="{{ route('exportsales', [$this->common->vid])}}" save back print/>
         @else
@@ -499,25 +497,28 @@
         @endif
     </div>
 
-    <div class="max-w-4xl mx-auto  py-16 space-y-4">
+    <div class="max-w-6xl mx-auto px-10  py-16 space-y-4">
         @if(!$exportLogs->isEmpty())
-            <div class="text-xs text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
+            <div class="text-xs text-orange-600  font-merri underline underline-offset-4">Activity</div>
         @endif
         @foreach($exportLogs as $row)
-            <div class="relative ">
-                <div class=" border-l-[3px] border-dotted px-8 text-[10px]  tracking-wider py-3">
-                    <div class="flex gap-x-5 ">
-                        <div class="inline-flex text-gray-500 items-center font-sans font-semibold">
-                            <span>Invoice No:</span> <span>{{$row->vname}}</span></div>
-                        <div class="inline-flex  items-center space-x-1 font-merri"><span
-                                class="text-blue-600">@</span><span class="text-gray-500">{{$row->user->name}}</span>
+            <div class="px-6">
+                <div class="relative ">
+                    <div class=" border-l-[3px] border-dotted px-8 text-[10px]  tracking-wider py-3">
+                        <div class="flex gap-x-5 ">
+                            <div class="inline-flex text-gray-500 items-center font-sans font-semibold">
+                                <span>Invoice No:</span> <span>{{$row->vname}}</span></div>
+                            <div class="inline-flex  items-center space-x-1 font-merri"><span
+                                    class="text-blue-600">@</span><span
+                                    class="text-gray-500">{{$row->user->name}}</span>
+                            </div>
                         </div>
+                        <div
+                            class="text-gray-400 text-[8px] font-semibold">{{date('M d, Y', strtotime($row->created_at))}}</div>
+                        <div class="pb-2 font-lex leading-5 py-2 text-justify">{!! $row->description !!}</div>
                     </div>
-                    <div
-                        class="text-gray-400 text-[8px] font-semibold">{{date('M d, Y', strtotime($row->created_at))}}</div>
-                    <div class="pb-2 font-lex leading-5 py-2 text-justify">{!! $row->description !!}</div>
+                    <div class="absolute top-0 -left-1 h-2.5 w-2.5  rounded-full bg-teal-600 "></div>
                 </div>
-                <div class="absolute top-0 -left-1 h-2.5 w-2.5  rounded-full bg-teal-600 "></div>
             </div>
         @endforeach
     </div>

@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">Purchase</x-slot>
 
-    <div class="space-y-5 py-10  min-h-[40rem]">
+    <div class="space-y-5 pt-10  min-h-[40rem]">
         <div class="space-y-5">
             <div class="max-w-6xl mx-auto">
                 <x-tabs.tab-panel>
@@ -174,23 +174,23 @@
                                     Purchase Items
                                 </div>
                                 <div class="w-full flex  gap-x-1 pb-4">
-                                    <div class="">
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())
+                                    <div class="">
                                             <x-input.floating id="qty" wire:model.live="po_no" label="Po No"/>
+                                    </div>
                                         @endif
 
-                                    </div>
-                                    <div class="">
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
-                                            <x-input.floating id="dc" wire:model.live="dc_no" label="DC No."/>
-                                        @endif
-                                    </div>
                                     <div class="">
+                                            <x-input.floating id="dc" wire:model.live="dc_no" label="DC No."/>
+                                    </div>
+                                        @endif
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
+                                    <div class="">
                                             <x-input.floating id="no_of_roll" wire:model.live="no_of_roll"
                                                               label="No of Roll"/>
-                                        @endif
                                     </div>
+                                        @endif
                                     <div class="w-[30%]">
                                         <x-dropdown.wrapper label="Product Name" type="productTyped">
                                             <div class="relative ">
@@ -223,14 +223,14 @@
                                             </div>
                                         </x-dropdown.wrapper>
                                     </div>
-                                    <div class="w-[20%]">
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
+                                    <div class="w-[20%]">
                                             <x-input.floating id="qty" wire:model.live="description"
                                                               label="description"/>
-                                        @endif
                                     </div>
-                                    <div class="w-[15%]">
+                                        @endif
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasColour())
+                                    <div class="w-[15%]">
                                             <x-dropdown.wrapper label="Colour Name" type="colourTyped">
                                                 <div class="relative ">
                                                     <x-dropdown.input label="Colour Name" id="colour_name"
@@ -257,10 +257,10 @@
                                                     </x-dropdown.select>
                                                 </div>
                                             </x-dropdown.wrapper>
-                                        @endif
                                     </div>
-                                    <div class="w-[15%]">
+                                        @endif
                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasSize())
+                                    <div class="w-[15%]">
                                             <x-dropdown.wrapper label="Size Name" type="sizeTyped">
                                                 <div class="relative ">
                                                     <x-dropdown.input label="Size Name" id="size_name"
@@ -290,8 +290,8 @@
                                                     </x-dropdown.select>
                                                 </div>
                                             </x-dropdown.wrapper>
-                                        @endif
                                     </div>
+                                        @endif
                                     <div class="w-[10%]">
                                         <x-input.floating id="qty" wire:model.live="qty" label="Quantity"/>
                                     </div>
@@ -335,19 +335,18 @@
                                                     <tr class="text-center border-b font-lex tracking-wider hover:bg-amber-50">
                                                         <td class="py-2 border-r"
                                                             wire:click.prevent="changeItems({{$index}})">{{$index+1}}</td>
-                                                        @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())
-                                                            <td class="py-2 border-r"
-                                                                wire:click.prevent="changeItems({{$index}})">{{$row['po_no']}}</td>
-                                                        @endif
-                                                        @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())
-                                                            <td class="py-2 border-r"
-                                                                wire:click.prevent="changeItems({{$index}})">{{$row['dc_no']}}</td>
-                                                        @endif
+{{--                                                        @if(\Aaran\Aadmin\Src\SaleEntry::hasPo_no())--}}
+{{--                                                            <td class="py-2 border-r"--}}
+{{--                                                                wire:click.prevent="changeItems({{$index}})">{{$row['po_no']}}</td>--}}
+{{--                                                        @endif--}}
+{{--                                                        @if(\Aaran\Aadmin\Src\SaleEntry::hasDc_no())--}}
+{{--                                                            <td class="py-2 border-r"--}}
+{{--                                                                wire:click.prevent="changeItems({{$index}})">{{$row['dc_no']}}</td>--}}
+{{--                                                        @endif--}}
                                                         @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
                                                             <td class="py-2 border-r"
                                                                 wire:click.prevent="changeItems({{$index}})">{{$row['no_of_roll']}}</td>
                                                         @endif
-
                                                         <td class="py-2 border-r"
                                                             wire:click.prevent="changeItems({{$index}})">
                                                             <div class="line-clamp-1">{{$row['product_name']}}
@@ -407,6 +406,30 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="max-w-6xl mx-auto flex justify-end items-start gap-5">
+
+                                <div class="w-1/3 flex text-xs text-400 px-4">
+                                    <div class="w-2/4 space-y-4 text-gray-400 font-merri tracking-wider">
+                                        <div>Taxable No</div>
+                                        <div>GST</div>
+                                        <div>Round off</div>
+                                        <div class="font-semibold">Grand Total</div>
+                                    </div>
+                                    <div class="w-1/4 text-center space-y-4 ">
+                                        <div>:</div>
+                                        <div>:</div>
+                                        <div>:</div>
+                                        <div>:</div>
+                                    </div>
+                                    <div class="w-1/4 text-end space-y-4 tracking-wider font-lex">
+                                        <div>{{number_format($total_taxable,2,'.','')}}</div>
+                                        <div>{{number_format($total_gst,2,'.','')}}</div>
+                                        <div>{{$round_off}}</div>
+                                        <div class="font-semibold">{{number_format($grand_total,2,'.','')}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </x-tabs.content>
                         <x-tabs.content>
                             <div class="w-1/2 space-y-8 gap-5 h-52 pt-3">
@@ -499,34 +522,11 @@
                 </x-tabs.tab-panel>
             </div>
         </div>
-        <div class="max-w-6xl mx-auto flex justify-end items-start gap-5">
-
-            <div class="w-1/3 flex text-xs text-400 px-4">
-                <div class="w-2/4 space-y-4 text-gray-400 font-merri tracking-wider">
-                    <div>Taxable No</div>
-                    <div>GST</div>
-                    <div>Round off</div>
-                    <div class="font-semibold">Grand Total</div>
-                </div>
-                <div class="w-1/4 text-center space-y-4 ">
-                    <div>:</div>
-                    <div>:</div>
-                    <div>:</div>
-                    <div>:</div>
-                </div>
-                <div class="w-1/4 text-end space-y-4 tracking-wider font-lex">
-                    <div>{{number_format($total_taxable,2,'.','')}}</div>
-                    <div>{{number_format($total_gst,2,'.','')}}</div>
-                    <div>{{$round_off}}</div>
-                    <div class="font-semibold">{{number_format($grand_total,2,'.','')}}</div>
-                </div>
-            </div>
-        </div>
 
 
     </div>
     <!-- Display Items ----------------------------------------------------------------------------------------------->
-    <div class="max-w-6xl mx-auto pt-6">
+    <div class="max-w-6xl mx-auto ">
         @if( $common->vid != "")
             <x-forms.m-panel-bottom-button routes="{{ route('sales.print', [$this->common->vid])}}" save back
                                            print/>
@@ -535,11 +535,12 @@
         @endif
     </div>
     {{--    </x-forms.m-panel>--}}
-    <div class="max-w-4xl mx-auto  py-16 space-y-4">
+    <div class="max-w-6xl mx-auto px-10 py-16 space-y-4">
         @if(!$purchaseLogs->isEmpty())
-            <div class="text-xs text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
+            <div class="text-xs text-orange-600  font-merri underline underline-offset-4">Activity</div>
         @endif
         @foreach($purchaseLogs as $row)
+            <div class="px-6">
             <div class="relative ">
                 <div class=" border-l-[3px] border-dotted px-8 text-[10px]  tracking-wider py-3">
                     <div class="flex gap-x-5 ">
@@ -554,6 +555,7 @@
                     <div class="pb-2 font-lex leading-5 py-2 text-justify">{!! $row->description !!}</div>
                 </div>
                 <div class="absolute top-0 -left-1 h-2.5 w-2.5  rounded-full bg-teal-600 "></div>
+            </div>
             </div>
         @endforeach
     </div>
