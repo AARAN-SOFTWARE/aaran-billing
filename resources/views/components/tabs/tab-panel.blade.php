@@ -41,7 +41,7 @@
     <div class=" border-b   border-gray-200 shadow-md"></div>
 
     <!-- Panels -->
-    <div role="tabpanel" class="rounded-b-lg border-l border-r border-b border-gray-200 bg-white text-xs font-lex">
+    <div role="tabpanel" class=" border-l border-r border-b border-gray-200 bg-white text-xs font-lex">
 
         <!-- Content -->
 

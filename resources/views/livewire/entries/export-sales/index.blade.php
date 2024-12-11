@@ -97,13 +97,10 @@
                 @endforeach
             </x-slot:table_body>
         </x-table.form>
-
         <x-modal.delete/>
-
         <!-- Actions ------------------------------------------------------------------------------------------->
+        <div class="">{{ $list->links() }}</div>
 
-
-        <div class="pt-5 w-10/12 mx-auto">{{ $list->links() }}</div>
 
     </x-forms.m-panel>
 </div>

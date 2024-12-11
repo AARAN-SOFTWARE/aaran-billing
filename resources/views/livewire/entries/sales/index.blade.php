@@ -58,7 +58,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sales.log',[$row->id])}}"> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</a>
+                            <a href="{{route('sales.upsert',[$row->id])}}"> {{ date('d-m-Y', strtotime( $row->invoice_date))}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text left>
@@ -236,7 +236,7 @@
 {{--        @endif--}}
 {{--        <x-extra.timeline :list="$log"/>--}}
 
-        <div class="pt-5 w-10/12 mx-auto">{{ $list->links() }}</div>
+        <div class="">{{ $list->links() }}</div>
 
     </x-forms.m-panel>
 

@@ -54,11 +54,11 @@
                     <x-table.row>
 
                         <x-table.cell-text>
-                            <a href="{{route('purchase.log',[$row->id])}}"> {{$row->order->vname}}</a>
+                            <a href="{{route('purchase.upsert',[$row->id])}}"> {{$row->order->vname}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('logs',[$row->id])}}"> {{$row->purchase_no}}</a>
+                            <a href="{{route('purchase.upsert',[$row->id])}}"> {{$row->purchase_no}}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
@@ -107,13 +107,9 @@
 
         <!-- Actions ------------------------------------------------------------------------------------------->
 
-        @if(!$log->isEmpty())
-            <div class="w-10/12 mx-auto font-merri">Log
-            </div>
-        @endif
-        <x-extra.timeline :list="$log"/>
 
-        <div class="pt-5 w-10/12 mx-auto">{{ $list->links() }}</div>
+        <div class="">{{ $list->links() }}</div>
+
 
     </x-forms.m-panel>
 </div>
