@@ -201,5 +201,13 @@ class S101_LabelSeeder extends Seeder
             'cols' => 1,
             'active_id' => '1'
         ]);
+
+        #25
+        Label::create([
+            'id' => 25,
+            'vname' => 'Instrument Bank',
+            'cols' => 1,
+            'active_id' => '1'
+        ]);
     }
 }

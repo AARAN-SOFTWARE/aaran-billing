@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->string('remarks');
             $table->string('chq_no')->nullable();
             $table->string('chq_date')->nullable();
-            $table->foreignId('bank_id')->references('id')->on('commons');
+            $table->foreignId('instrument_bank_id')->references('id')->on('commons');
             $table->string('deposit_on')->nullable();
             $table->string('realised_on')->nullable();
 

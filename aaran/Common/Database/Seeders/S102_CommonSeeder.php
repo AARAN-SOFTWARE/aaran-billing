@@ -34,6 +34,7 @@ class S102_CommonSeeder extends Seeder
         self::AddNew();
         self::accountType();
         self::transaction1();
+        self::instrument();
     }
 
     #region[noRecord]
@@ -1137,5 +1138,53 @@ class S102_CommonSeeder extends Seeder
             'active_id' => '1'
         ]);
     }
+
+    #region[Bank]
+    private static function instrument(): void
+    {
+        Common::create([
+            'label_id' => '25',
+            'vname' => 'State Bank Of India',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '25',
+            'vname' => 'AXIS Bank',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '25',
+            'vname' => 'ICICI Bank',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '25',
+            'vname' => 'Indusind Bank',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '25',
+            'vname' => 'Indian Overseas Bank',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+        Common::create([
+            'label_id' => '25',
+            'vname' => 'Hdfc Bank',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
+    }
+    #endregion
 
 }

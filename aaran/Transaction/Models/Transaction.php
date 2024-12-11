@@ -35,11 +35,9 @@ class Transaction extends Model
         return $this->belongsTo(AccountBook::class, 'account_book_id');
     }
 
-    public function transType(): BelongsTo
+    public function transType()
     {
-        return $this->belongsTo(Common::class);
-
-
+        return $this->belongsTo(Common::class, 'trans_type_id');
     }
 
     public function mode(): BelongsTo
