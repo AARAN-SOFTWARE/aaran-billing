@@ -12,7 +12,7 @@
                 {{$list->count()}}
             </x-table.caption>
             <div class="flex justify-end w-full">
-                    <x-button.print-x href="{{ route('transactions.print',[$mode_id == 111 ? 1 : 2 ]) }}" />
+                <x-button.print-x href="{{ route('transactions.print',[$mode_id == 111 ? 1 : 2 ]) }}"/>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                                      sort-icon="none">Type
                 </x-table.header-text>
 
-{{--                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>--}}
+                {{--                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>--}}
 
                 <x-table.header-text sort-icon="none">Amount</x-table.header-text>
 
@@ -54,13 +54,13 @@
 
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
-                        <x-table.cell-text >{{$row->vch_no+0}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->vch_no+0}}</x-table.cell-text>
 
                         <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
 
                         <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
 
-{{--                        <x-table.cell-text>{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</x-table.cell-text>--}}
+                        {{--                        <x-table.cell-text>{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</x-table.cell-text>--}}
 
                         <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
 
@@ -81,22 +81,13 @@
 
             <!-- Receipt & Payment  ----------------------------------------------------------------------------------->
 
-{{--            <div class="flex gap-3 w-full mb-3">--}}
-{{--                <x-radio.btn value="108" wire:model.live="trans_type_id">Cash Book--}}
-{{--                </x-radio.btn>--}}
-{{--                <x-radio.btn value="109" wire:model.live="trans_type_id">Bank Book--}}
-{{--                </x-radio.btn>--}}
-{{--                <x-radio.btn value="136" wire:model.live="trans_type_id">UPI--}}
-{{--                </x-radio.btn>--}}
-{{--            </div>--}}
-
             <div class="flex gap-x-5 gap-y-3">
 
                 <!-- Left Area  --------------------------------------------------------------------------------------->
 
                 <div class="w-1/2 space-y-3">
 
-                   <!-- Party Name ----------------------------------------------------------------------------------->
+                    <!-- Party Name ----------------------------------------------------------------------------------->
 
 {{--                    <x-input.model-select wire:model.live="trans_type_id">--}}
 {{--                        <option value="Select" selected>Choose</option>--}}
@@ -106,15 +97,29 @@
 {{--                    </x-input.model-select>--}}
 
 
+{{--                    <x-input.model-select wire:model.live="account_book_id">--}}
+{{--                        <option value="" selected>Choose</option>--}}
+{{--                        @foreach($account_books as $account_book)--}}
+{{--                            <option value="{{ $account_book->id }}">--}}
+{{--                                {{ $account_book->vname. ' (ACC-No: - '.$account_book->account_no . ')'}}--}}
+{{--                            </option>--}}
+{{--                        @endforeach--}}
+{{--                    </x-input.model-select>--}}
+
                     <x-input.model-select wire:model.live="account_book_id">
                         <option value="" selected>Choose</option>
                         @foreach($account_books as $account_book)
                             <option value="{{ $account_book->id }}">
-                                {{ $account_book->vname. ' (ACC-No: - '.$account_book->account_no . ')'}}
+                                {{ $account_book->vname . ' (ACC-No: ' . $account_book->account_no . ')' }}
                             </option>
                         @endforeach
                     </x-input.model-select>
 
+                    @if($trans_type_id)
+                        <div>
+                            <strong>Transaction Type ID:</strong> {{ $trans_type_id }}
+                        </div>
+                    @endif
 
                     <x-dropdown.wrapper label="Contact Name" type="contactTyped">
                         <div class="relative ">
@@ -205,35 +210,35 @@
 
                                     <!-- bank ------------------------------------------------------------------------->
 
-                                    @if($receipt_type_name =='Cheque' )
+                                    @if($trans_type_id == 109)
 
-                                        <x-dropdown.wrapper label="Bank" type="bankTyped">
-                                            <div class="relative ">
-
-                                                <x-dropdown.input label="Bank" id="bank_name"
-                                                                  wire:model.live="bank_name"
-                                                                  wire:keydown.arrow-up="decrementBank"
-                                                                  wire:keydown.arrow-down="incrementBank"
-                                                                  wire:keydown.enter="enterBank"/>
+                                        <x-dropdown.wrapper label="Instrument Bank" type="instrumentBankTyped">
+                                            <div class="relative">
+                                                <x-dropdown.input
+                                                    label="Instrument Bank"
+                                                    id="instrument_bank_name"
+                                                    wire:model.live="instrument_bank_name"
+                                                    wire:keydown.arrow-up="decrementInstrumentBank"
+                                                    wire:keydown.arrow-down="incrementInstrumentBank"
+                                                    wire:keydown.enter="enterInstrumentBank"
+                                                />
 
                                                 <x-dropdown.select>
-
-                                                    @if($bankCollection)
-                                                        @forelse ($bankCollection as $i => $bank)
-                                                            <x-dropdown.option highlight="{{$highlightBank === $i  }}"
-                                                                               wire:click.prevent="setBank('{{$bank->vname}}','{{$bank->id}}')">
-                                                                {{ $bank->vname }}
+                                                    @if($instrumentBankCollection)
+                                                        @forelse ($instrumentBankCollection as $i => $instrumentBank)
+                                                            <x-dropdown.option
+                                                                highlight="{{ $highlightInstrumentBank === $i }}"
+                                                                wire:click.prevent="setInstrumentBank('{{ $instrumentBank->vname }}', '{{ $instrumentBank->id }}')">
+                                                                {{ $instrumentBank->vname }}
                                                             </x-dropdown.option>
                                                         @empty
                                                             <x-dropdown.new
-                                                                wire:click.prevent="bankSave('{{$bank_name}}')"
-                                                                label="Bank Details"/>
+                                                                wire:click.prevent="instrumentBankSave('{{ $instrument_bank_name }}')"
+                                                                label="Instrument Bank Details"/>
                                                         @endforelse
                                                     @endif
-
                                                 </x-dropdown.select>
                                             </div>
-
                                         </x-dropdown.wrapper>
 
                                         <x-input.model-date :label="'Chq.Date'"/>
@@ -320,12 +325,9 @@
                 </div>
             </div>
         </x-forms.create>
-
-        <!-- Actions ------------------------------------------------------------------------------------------->
-
-
-
     </x-forms.m-panel>
+
+    <!-- Actions ------------------------------------------------------------------------------------------->
     <div class="max-w-xl mx-auto  py-16 space-y-4">
         @if(!$log->isEmpty())
             <div class="text-xs text-orange-600 px-7 font-merri underline underline-offset-4">Activity</div>
