@@ -25,4 +25,10 @@ class BankBook extends Model
     {
         return $this->belongsTo(Common::class);
     }
+
+        public function accountBook(): BelongsTo
+    {
+        return $this->belongsTo(Transaction::class,'account_book_id','id');
+    }
+
 }

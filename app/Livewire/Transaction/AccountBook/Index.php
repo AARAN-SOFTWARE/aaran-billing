@@ -19,6 +19,8 @@ class Index extends Component
     public $account_no;
     public $ifsc_code;
     public $branch;
+    public $trans_type_id = '';
+    public $trans_type_name = '';
 
     #region[Validation]
     public function rules(): array
@@ -252,76 +254,6 @@ class Index extends Component
     }
 #endregion
 
-    #region[trans_type]
-    public $trans_type_id = '';
-    public $trans_type_name = '';
-    public \Illuminate\Support\Collection $trans_typeCollection;
-    public $highlightTransType = 0;
-    public $trans_typeTyped = false;
-
-    public function decrementTransType(): void
-    {
-        if ($this->highlightTransType === 0) {
-            $this->highlightTransType = count($this->trans_typeCollection) - 1;
-            return;
-        }
-        $this->highlightTransType--;
-    }
-
-    public function incrementTransType(): void
-    {
-        if ($this->highlightTransType === count($this->trans_typeCollection) - 1) {
-            $this->highlightTransType = 0;
-            return;
-        }
-        $this->highlightTransType++;
-    }
-
-    public function setTransType($name, $id): void
-    {
-        $this->trans_type_name = $name;
-        $this->trans_type_id = $id;
-        $this->getTransTypeList();
-    }
-
-    public function enterTransType(): void
-    {
-        $obj = $this->trans_typeCollection[$this->highlightTransType] ?? null;
-
-        $this->trans_type_name = '';
-        $this->trans_typeCollection = \Illuminate\Database\Eloquent\Collection::empty();
-        $this->highlightTransType = 0;
-
-        $this->trans_type_name = $obj['vname'] ?? '';
-        $this->trans_type_id = $obj['id'] ?? '';
-    }
-
-    public function refreshTransType($v): void
-    {
-        $this->trans_type_id = $v['id'];
-        $this->trans_type_name = $v['name'];
-        $this->trans_typeTyped = false;
-    }
-
-    public function transTypeSave($name)
-    {
-        $obj = Common::create([
-            'label_id' => 19,
-            'vname' => $name,
-            'active_id' => '1'
-        ]);
-        $v = ['name' => $name, 'id' => $obj->id];
-        $this->refreshTransType($v);
-    }
-
-    public function getTransTypeList(): void
-    {
-        $this->trans_typeCollection = $this->trans_type_name ?
-            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
-            Common::where('label_id', '=', '19')->get();
-    }
-#endregion
-
     #region[Get-Obj]
     public function getObj($id)
     {
@@ -376,7 +308,7 @@ class Index extends Component
     {
         $this->getBankList();
         $this->getAccountTypeList();
-        $this->getTransTypeList();
+//        $this->getTransTypeList();
         return view('livewire.transaction.account-book.index')->with([
             'list' => $this->getListForm->getList(AccountBook::class),
         ]);
