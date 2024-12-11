@@ -26,7 +26,6 @@ shadow-md print:hidden">
                 {{$slot ?? 'Dashboard'}}
             </div>
         </div>
-
         <div class="w-5/12 flex sm:flex-row flex-col sm:justify-end justify-evenly items-center space-y-1">
             <div class="flex max-w-max justify-center items-center">
                 <livewire:default-company.index/>
@@ -53,7 +52,6 @@ shadow-md print:hidden">
                                             class="inline-flex items-center sm:px-3 px-1 sm:py-2 py-1 border border-gray-300 sm:text-sm text-xs
                                             leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
                                         {{ Auth::user()->name }}
-
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                              viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"

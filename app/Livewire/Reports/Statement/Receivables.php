@@ -64,7 +64,6 @@ class Receivables extends Component
     public function getList()
     {
         $this->opening_Balance();
-
         $sales = Transaction::select([
             'transactions.company_id',
             'transactions.contact_id',
@@ -117,7 +116,7 @@ class Receivables extends Component
     public function render()
     {
         $this->getContact();
-        return view('livewire.reports.statement.receivables')->with([
+        return view( 'livewire.reports.statement.receivables')->with([
             'list' => $this->getList()
         ]);
     }
