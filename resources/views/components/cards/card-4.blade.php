@@ -19,7 +19,7 @@
                     </svg>
                     <div class="w-full flex justify-between text-xs items-center">
                         <h5 class="ml-2 text-slate-800 text-xl font-semibold font-merri">
-                            {{$row->bank->vname}}
+                            {{$row->vname}}
                         </h5>
                         <button class="text-gray-500" @click="open = true">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -60,8 +60,8 @@
                         <table class="w-full text-xs text-center">
                             <tr class="bg-zinc-50 border-b font-merri">
                                 <th class="py-2 border-r">Date</th>
-                                <th class="border-r">A/C name</th>
-                                <th class="border-r">O/P Bal</th>
+{{--                                <th class="border-r">A/C name</th>--}}
+                                <th class="border-r">Amount</th>
                                 <th class="border-r">Type</th>
                                 <th>
                                     <x-icons.icon :icon="'chevrons-up'" class="w-4 h-4"/>
@@ -70,13 +70,19 @@
 
                             @foreach($data as $payment)
                                 <tr class="bg-white hover:bg-teal-50">
+
+                                    @if($payment->account_book_id === $row->id )
+
                                     <td class="py-2 border-r">{{ date('d-m-Y', strtotime($payment->opening_date)) }}</td>
-                                    <td class="border-r">{{ $payment->accountBook->vname }}</td> <!-- Use accountBook relationship -->
+{{--                                    <td class="border-r">{{ $payment->accountBook->vname }}</td> <!-- Use accountBook relationship -->--}}
+
                                     <td class="border-r">{{ $payment->vname }}</td>
                                     <td class="border-r">{{ $payment->mode->vname }}</td>
                                     <td>
                                         <x-icons.icon :icon="'chevrons-down'" class="w-4 h-4"/>
                                     </td>
+                                    @endif
+
                                 </tr>
                             @endforeach
                         </table>

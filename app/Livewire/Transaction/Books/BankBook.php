@@ -9,6 +9,7 @@ use Aaran\Transaction\Models\Transaction;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Aaran\Transaction\Models\BankBook as BankBookModel;
 
@@ -314,22 +315,29 @@ class BankBook extends Component
 //
 //    }
 
-    public $bankBookData;
+
+    #region[Bankbook]
+    public $bankBookData = [];
+    public $payments = [];
+
+//    public function mount()
+//    {
+//        $this->getBankbookData();
+//        $this->getPayment();
+//    }
 
     public function getBankbookData()
     {
         $this->bankBookData = AccountBook::where('trans_type_id', 109)->get();
-
     }
 
-    public $payments;
-    public $paymentBank;
+    #endregion
 
     public function getPayment()
-
     {
-        $this->payments = Transaction::where('trans_type_id', 109)->get();
+        $this->payments = Transaction::with('accountBook')->where('trans_type_id', 109)->get();
     }
+
 
     public function render()
     {

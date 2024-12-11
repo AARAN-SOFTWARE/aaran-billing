@@ -39,7 +39,7 @@ class Index extends Component
     public $vch_no;
 
     public $log;
-    public $trans_type_id;
+//    public $trans_type_id;
     public $account_book_id;
     public $account_books = [];
     #endregion
@@ -56,7 +56,7 @@ class Index extends Component
             $this->mode_name = Common::find(110)->vname;
             $this->vch_no = Transaction::nextNo($this->mode_id);
         }
-        $this->trans_type_id = 108;
+//        $this->trans_type_id = 108;
         $this->account_books = AccountBook::with('transType')->get();
     }
     #endregion
@@ -423,6 +423,76 @@ class Index extends Component
 
     #endregion
 
+    #region[trans_type]
+    public $trans_type_id = '';
+    public $trans_type_name = '';
+    public \Illuminate\Support\Collection $trans_typeCollection;
+    public $highlightTransType = 0;
+    public $trans_typeTyped = false;
+
+    public function decrementTransType(): void
+    {
+        if ($this->highlightTransType === 0) {
+            $this->highlightTransType = count($this->trans_typeCollection) - 1;
+            return;
+        }
+        $this->highlightTransType--;
+    }
+
+    public function incrementTransType(): void
+    {
+        if ($this->highlightTransType === count($this->trans_typeCollection) - 1) {
+            $this->highlightTransType = 0;
+            return;
+        }
+        $this->highlightTransType++;
+    }
+
+    public function setTransType($name, $id): void
+    {
+        $this->trans_type_name = $name;
+        $this->trans_type_id = $id;
+        $this->getTransTypeList();
+    }
+
+    public function enterTransType(): void
+    {
+        $obj = $this->trans_typeCollection[$this->highlightTransType] ?? null;
+
+        $this->trans_type_name = '';
+        $this->trans_typeCollection = \Illuminate\Database\Eloquent\Collection::empty();
+        $this->highlightTransType = 0;
+
+        $this->trans_type_name = $obj['vname'] ?? '';
+        $this->trans_type_id = $obj['id'] ?? '';
+    }
+
+    public function refreshTransType($v): void
+    {
+        $this->trans_type_id = $v['id'];
+        $this->trans_type_name = $v['name'];
+        $this->trans_typeTyped = false;
+    }
+
+    public function transTypeSave($name)
+    {
+        $obj = Common::create([
+            'label_id' => 19,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshTransType($v);
+    }
+
+    public function getTransTypeList(): void
+    {
+        $this->trans_typeCollection = $this->trans_type_name ?
+            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
+            Common::where('label_id', '=', '19')->get();
+    }
+#endregion
+
     #region[instrumentBank]
     public $instrument_bank_id = '';
     public $instrument_bank_name = '';
@@ -567,7 +637,6 @@ class Index extends Component
 
 #endregion
 
-
     #region[Get-Obj]
     public function getObj($id)
     {
@@ -578,8 +647,6 @@ class Index extends Component
             $this->common->active_id = $Transaction->active_id;
             $this->account_book_id = $Transaction->account_book_id;
             $this->contact_id = $Transaction->contact_id;
-
-
             $this->contact_name = $Transaction->contact_id ? Contact::find($Transaction->contact_id)->vname : '';
             $this->vch_no = $Transaction->vch_no;
             $this->paid_to = $Transaction->paid_to;
@@ -587,6 +654,7 @@ class Index extends Component
             $this->order_id = $Transaction->order_id;
             $this->order_name = $Transaction->order_id ? Order::find($Transaction->order_id)->vname : '';
             $this->trans_type_id = $Transaction->trans_type_id;
+            $this->trans_type_name = $Transaction->trans_type_id ? Common::find($Transaction->trans_type_id)->vname : '';
             $this->mode_id = $Transaction->mode_id;
             $this->mode_name = $Transaction->mode_id ? Common::find($Transaction->mode_id)->vname : '';
             $this->vdate = $Transaction->vdate;
@@ -628,6 +696,7 @@ class Index extends Component
         $this->order_name = '';
         $this->amount = '';
         $this->trans_type_id = 108;
+        $this->trans_type_name = 108;
         $this->remarks = '';
         $this->chq_no = '';
         $this->chq_date = '';

@@ -14,15 +14,14 @@
             </div>
         </div>
 
-        `
         <x-input.advance-search :show-filters="$showFilters"/>
-        <div class="grid grid-cols-3 gap-16 justify-items-center">
+        <div class="grid grid-cols-3 gap-16 justify-items-center py-10">
             <x-cards.card-4 :list="$bankBookData" :data="$payments"/>
         </div>
 
     </x-forms.m-panel>
     {{--        <!-- Top Controls --------------------------------------------------------------------------------------------->--}}
-s
+
 
     {{--        <x-table.caption :caption="'Bank Book'">--}}
     {{--            {{$list->count()}}--}}
