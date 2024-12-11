@@ -88,9 +88,9 @@
                 <div class="w-full flex flex-col gap-4">
                     <x-input.model-select wire:model.live="trans_type_id">
                         <option value="Select" selected>Choose</option>
-                        <option value="108">Cash Type</option>
-                        <option value="109">Bank Type</option>
-                        <option value="136">UPI</option>
+                        <option value="108">Cash -Ac</option>
+                        <option value="109">Bank -Ac</option>
+                        <option value="136">UPI -Ac</option>
                     </x-input.model-select>
 
                     <div>
