@@ -3,6 +3,7 @@
 namespace App\Livewire\Transaction\Books;
 
 use Aaran\Transaction\Models\AccountBook;
+use Aaran\Transaction\Models\Transaction;
 use App\Livewire\Trait\CommonTraitNew;
 use Livewire\Component;
 use Aaran\Transaction\Models\CashBook as CashBookModel;
@@ -92,15 +93,22 @@ class CashBook extends Component
 //    }
 
 
-    public $cashBookData;
+    public $cashBookData = [];
+    public $payments = [];
     public function getCashbookData()
     {
         $this->cashBookData = AccountBook::where('trans_type_id','108')->get();
 
 }
+
+    public function getPayment()
+    {
+        $this->payments = Transaction::with('accountBook')->where('trans_type_id', 108)->latest()->get();
+    }
     public function render()
     {
         $this->getCashbookData();
+        $this->getPayment();
         return view('livewire.transaction.books.cash-book')->with([
 //            'list' => $this->getList()
         ]);
