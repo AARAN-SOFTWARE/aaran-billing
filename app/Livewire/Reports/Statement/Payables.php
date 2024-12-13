@@ -27,6 +27,14 @@ class Payables extends Component
     public mixed $invoiceDate_first = '';
     #endregion
 
+    public function mount()
+    {
+        $this->byParty = null;
+        $this->start_date = null;
+        $this->end_date = null;
+
+    }
+
     #region[Contact]
     public function getContact()
     {
@@ -60,47 +68,63 @@ class Payables extends Component
     #endregion
 
 
-    #region[List]
-
     public function getList()
     {
         $this->opening_Balance();
 
-        $purchase = Transaction::select([
+        $salesQuery = Transaction::select([
             'transactions.company_id',
             'transactions.contact_id',
-            DB::raw("'payment' as mode"),
+            DB::raw("'receipt' as mode"),
             "transactions.id as vno",
             'transactions.vdate as vdate',
             DB::raw("'' as grand_total"),
             'transactions.vname',
         ])
             ->where('active_id', '=', 1)
-            ->where('contact_id', '=', $this->byParty)
-            ->where('mode_id','=',110)
-            ->whereDate('vdate', '>=', $this->start_date ?: $this->invoiceDate_first)
-            ->whereDate('vdate', '<=', $this->end_date ?: carbon::now()->format('Y-m-d'))
+            ->where('mode_id', '=', 110)
             ->where('company_id', '=', session()->get('company_id'));
-        return Purchase::select([
-            'purchases.company_id',
-            'purchases.contact_id',
+
+        if ($this->byParty) {
+            $salesQuery->where('contact_id', '=', $this->byParty);
+        }
+        if ($this->start_date) {
+            $salesQuery->whereDate('vdate', '>=', $this->start_date);
+        }
+
+        if ($this->end_date) {
+            $salesQuery->whereDate('vdate', '<=', $this->end_date);
+        }
+        $sales = $salesQuery;
+        $invoiceQuery = Sale::select([
+            'sales.company_id',
+            'sales.contact_id',
             DB::raw("'invoice' as mode"),
-            "purchases.purchase_no as vno",
-            'purchases.purchase_date as vdate',
-            'purchases.grand_total',
+            "sales.invoice_no as vno",
+            'sales.invoice_date as vdate',
+            'sales.grand_total',
             DB::raw("'' as transaction_amount"),
         ])
             ->where('active_id', '=', 1)
-            ->where('contact_id', '=', $this->byParty)
-            ->whereDate('purchase_date', '>=', $this->start_date ?: $this->invoiceDate_first)
-            ->whereDate('purchase_date', '<=', $this->end_date ?: carbon::now()->format('Y-m-d'))
-            ->where('company_id', '=', session()->get('company_id'))
-            ->union($purchase)
-            ->orderBy('vdate')
-            ->orderBy('mode')->get();
-    }
+            ->where('company_id', '=', session()->get('company_id'));
 
-    #endregion
+        if ($this->byParty) {
+            $invoiceQuery->where('contact_id', '=', $this->byParty);
+        }
+
+        if ($this->start_date) {
+            $invoiceQuery->whereDate('invoice_date', '>=', $this->start_date);
+        }
+
+        if ($this->end_date) {
+            $invoiceQuery->whereDate('invoice_date', '<=', $this->end_date);
+        }
+
+        return $invoiceQuery->union($sales)
+            ->orderBy('vdate')
+            ->orderBy('mode')
+            ->get();
+    }
     public function print()
     {
 

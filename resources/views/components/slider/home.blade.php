@@ -112,10 +112,6 @@
                             text_length="28"
                         />
 
-
-
-
-
                     @endforelse
                 @endif
             </ul>

@@ -114,7 +114,6 @@
                 @empty
                 @endforelse
 
-
                 <x-table.row>
                     <x-table.cell-text colspan="3" class=" text-md text-right text-gray-400">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
                     </x-table.cell-text>

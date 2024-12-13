@@ -6,6 +6,7 @@ use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
+use Aaran\Transaction\Models\AccountBook;
 use Aaran\Transaction\Models\Transaction;
 use Livewire\Component;
 
@@ -23,6 +24,7 @@ class Index extends Component
         for ($i = 0; $i < $this->count; $i++) {
             $contact = Contact::pluck('id')->random();
             $company = Company::pluck('id')->random();
+            $account_book = AccountBook::pluck('id')->random();
             $order = Order::pluck('id')->random();
             $trans_type = Common::where('label_id', '=', '19')->pluck('id')->random();
             $mode = Common::where('label_id', '=', '20')->pluck('id')->random();
@@ -31,10 +33,11 @@ class Index extends Component
             } else {
                 $receipttype = Common::where('label_id', '=', '14')->where('id', '!=', '85')->pluck('id')->random();
             }
-            $bank = Common::where('label_id', '=', '9')->pluck('id')->random();
+            $instrument_bank = Common::where('label_id', '=', '25')->pluck('id')->random();
 
             $obj = Transaction::create([
                 'acyear' => session()->get('acyear'),
+                'account_book_id' => $account_book,
                 'company_id' => $company,
                 'contact_id' => $contact,
                 'vch_no'=>Transaction::nextNo($mode),
@@ -48,7 +51,7 @@ class Index extends Component
                 'remarks' => '-',
                 'chq_no' => fake()->numberBetween(100000, 999999),
                 'chq_date' => date('Y-m-d'),
-                'bank_id' => $bank,
+                'instrument_bank_id' => $instrument_bank,
                 'deposit_on' => date('Y-m-d'),
                 'realised_on' => date('Y-m-d'),
                 'against_id' => '1',
