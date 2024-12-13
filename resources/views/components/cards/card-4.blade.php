@@ -67,7 +67,7 @@
 
                                     @if($payment->account_book_id === $row->id )
 
-                                    <td class="py-2 border-r">{{ date('d-m-Y', strtotime($payment->opening_date)) }}</td>
+                                    <td class="py-2 border-r">{{ date('d-m-Y', strtotime($payment->vdate)) }}</td>
 {{--                                    <td class="border-r">{{ $payment->accountBook->vname }}</td> <!-- Use accountBook relationship -->--}}
 
                                     <td class="border-r">{{ $payment->vname }}</td>
