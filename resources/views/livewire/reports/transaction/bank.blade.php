@@ -1,26 +1,66 @@
 <div>
-    <x-slot name="header">Bank Book</x-slot>
+    <x-slot name="header">BankBook</x-slot>
+
     <x-forms.m-panel>
 
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-        {{--        <div class="flex sm:flex-row sm:justify-between sm:items-center  flex-col gap-6 py-4 print:hidden">--}}
-        {{--            <div class="w-2/4 flex items-center space-x-2">--}}
-        {{--                <x-input.search-bar wire:model.live="getListForm.searches"--}}
-        {{--                                    wire:keydown.escape="$set('getListForm.searches', '')" label="Search"/>--}}
-        {{--                --}}{{--        <x-icons.search-new wire:model.live="getListForm.searches"/>--}}
-        {{--                <x-input.toggle-filter :show-filters="$showFilters"/>--}}
-        {{--            </div>--}}
-        {{--            <div class="flex sm:justify-center justify-between">--}}
-        {{--                <x-forms.per-page/>--}}
-        {{--            </div>--}}
-        {{--        </div>--}}
+        <x-table.form>
 
-        <x-input.advance-search :show-filters="$showFilters"/>
+            <x-slot:table_header name="table_header" class="bg-green-100">
 
-        <div class="grid grid-cols-3 gap-16 justify-items-center py-10">
-            <x-cards.card-4 :list="$bankBookData" :data="$payments"/>
-        </div>
+                <x-table.header-serial></x-table.header-serial>
+
+                <x-table.header-text wire:click.prevent="sortBy ('contact_id')" sort-icon="{{$getListForm->sortAsc}}">
+                    VCH NO
+                </x-table.header-text>
+
+                <x-table.header-text sort-icon="none">Date</x-table.header-text>
+
+                <x-table.header-text wire:click.prevent="sortBy ('contact_id')" sort-icon="{{$getListForm->sortAsc}}">
+                    Contact
+                </x-table.header-text>
+
+                <x-table.header-text wire:click.prevent="sortBy('contact_id')"
+                                     sort-icon="none">Type
+                </x-table.header-text>
+
+                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>
+
+                <x-table.header-text sort-icon="none">Amount</x-table.header-text>
+
+            </x-slot:table_header>
+
+            <x-slot:table_body name="table_body">
+
+                @foreach($list as $index=>$row)
+                    {{--@dd($list);--}}
+
+                    <x-table.row>
+
+                        <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+
+                        <x-table.cell-text>{{$row->vch_no+0}}</x-table.cell-text>
+
+                        <x-table.cell-text>{{$row->vdate}}</x-table.cell-text>
+
+                        <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
+
+                        <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
+
+                        <x-table.cell-text>{{($row->mode->vname)}}</x-table.cell-text>
+
+                        <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
+
+                    </x-table.row>
+
+                @endforeach
+
+            </x-slot:table_body>
+
+        </x-table.form>
+
+        <x-modal.delete/>
 
         <x-forms.create :id="$common->vid" :max-width="'6xl'" wire:click="contactUpdate">
 
@@ -35,24 +75,28 @@
                     <!-- Party Name ----------------------------------------------------------------------------------->
 
                     <div class="flex flex-row gap-4">
-                        <x-radio.btn wire:model.live="mode_id" value="110">Receipt</x-radio.btn>
-                        <x-radio.btn wire:model.live="mode_id" value="111">Payment</x-radio.btn>
+                        <x-radio.btn wire:model.live="mode_id" value="111">Receipt</x-radio.btn>
+                        <x-radio.btn wire:model.live="mode_id" value="110">Payment</x-radio.btn>
                     </div>
 
-                    <x-input.model-select wire:model.live="account_book_id">
-                        <option value="" selected>Choose</option>
-                        @foreach($account_books as $account_book)
-                            <option value="{{ $account_book->id }}">
-                                {{ $account_book->vname . ' (ACC-No: ' . $account_book->account_no . ')' }}
-                            </option>
-                        @endforeach
-                    </x-input.model-select>
+                    {{--                    <x-input.model-select wire:model.live="account_book_id">--}}
+                    {{--                        <option value="" selected>Choose</option>--}}
+                    {{--                        @foreach($account_books as $account_book)--}}
+                    {{--                            <option value="{{ $account_book->id }}">--}}
+                    {{--                                {{ $account_book->vname . ' (ACC-No: ' . $account_book->account_no . ')' }}--}}
+                    {{--                            </option>--}}
+                    {{--                        @endforeach--}}
+                    {{--                    </x-input.model-select>--}}
 
-                    {{--                    @if($trans_type_id)--}}
-                    {{--                        <div>--}}
-                    {{--                            <strong>Transaction Type ID:</strong> {{ $trans_type_id }}--}}
-                    {{--                        </div>--}}
-                    {{--                    @endif--}}
+                    {{--                    <div>hello</div>--}}
+                    @if($account_book_id)
+                        <div>{{$account_book_id}}</div>
+                    @endif
+                    @if($trans_type_id)
+                        <div>
+                            <strong>Transaction Type ID:</strong> {{ $trans_type_id }}
+                        </div>
+                    @endif
 
                     <x-dropdown.wrapper label="Contact Name" type="contactTyped">
                         <div class="relative ">
@@ -259,5 +303,6 @@
                 </div>
             </div>
         </x-forms.create>
+
     </x-forms.m-panel>
 </div>

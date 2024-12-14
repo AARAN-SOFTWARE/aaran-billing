@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Transaction\Books;
+namespace App\Livewire\Reports\Transaction;
 
 use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Contact;
@@ -10,96 +10,97 @@ use Aaran\Transaction\Models\Transaction;
 use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
-use Aaran\Transaction\Models\CashBook as CashBookModel;
+use Livewire\WithPagination;
 
-class CashBook extends Component
+class Bank extends Component
 {
     use CommonTraitNew;
+    use WithPagination;
 
-//    #region[properties]
-//    public $opening_balance;
-//    public $opening_date;
-//    public $notes;
+//    public $byParty;
+//    public mixed $opening_balance = '0';
+//    public mixed $transaction_total = 0;
+//    public mixed $receipt_total = 0;
+//
+//    #region[mount]
+//    public function mount($id)
+//    {
+//        $this->byParty = $id;
+//    }
+//
 //    #endregion
 //
-//    #region[Get-Save]
-//    public function getSave(): void
+//    public function opening_Balance()
 //    {
-//        if ($this->common->vname != '') {
-//            if ($this->common->vid == '') {
-//                $this->common->vname = preg_replace('/[^A-Za-z0-9\-]/', '', $this->common->vname);
-//                $cash_book = new CashBookModel();
-//                $extraFields = [
-//                    'opening_balance' => $this->opening_balance,
-//                    'opening_date' => $this->opening_date,
-//                    'notes' => $this->notes,
-//                    'user_id' => auth()->id(),
-//                    'company_id' => session()->get('company_id'),
-//                ];
-//                $this->common->save($cash_book, $extraFields);
-//                $message = "Saved";
-//            } else {
-//                $cash_book = CashBookModel::find($this->common->vid);
-//                $extraFields = [
-//                    'opening_balance' => $this->opening_balance,
-//                    'opening_date' => $this->opening_date,
-//                    'notes' => $this->notes,
-//                    'user_id' => auth()->id(),
-//                    'company_id' => session()->get('company_id'),
-//                ];
-//                $this->common->edit($cash_book, $extraFields);
-//                $message = "Updated";
-//            }
-//            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+//        if ($this->byParty) {
+//            $obj = Transaction::find($this->byParty);
+//            $this->opening_balance = $obj->balance;
+//
+//            $this->transaction_total = Transaction::whereDate('date', '<', $this->start_date ?: $this->invoiceDate_first)
+//                ->where('account_book_id', '=', $this->byParty)
+//                ->sum('grand_total');
+//
+//            $this->receipt_total = Transaction::whereDate('vdate', '<', $this->start_date ?: $this->invoiceDate_first)
+//                ->where('account_book_id', '=', $this->byParty)
+//                ->where('mode_id', '=', 111)
+//                ->sum('vname');
+//
+//            $this->opening_balance = $this->opening_balance + $this->transaction_total - $this->receipt_total;
+//
 //        }
-//    }
-//    #endregion
 //
-//    #region[Get-Obj]
-//    public function getObj($id)
-//    {
-//        if ($id) {
-//            $bank_book = CashBookModel::find($id);
-//            $this->common->vid = $bank_book->id;
-//            $this->common->vname = $bank_book->vname;
-//            $this->common->active_id = $bank_book->active_id;
-//            $this->opening_balance = $bank_book->opening_balance;
-//            $this->opening_date = $bank_book->opening_date;
-//            $this->notes = $bank_book->notes;
-//            return $bank_book;
-//        }
-//        return null;
 //    }
-//    #endregion
 //
-//    #region[Clear-Fields]
-//    public function clearFields(): void
-//    {
-//        $this->common->vid = '';
-//        $this->common->vname = '';
-//        $this->common->active_id = '1';
-//        $this->opening_balance='';
-//        $this->opening_date='';
-//        $this->notes='';
-//    }
-//    #endregion
+//    #region[List]
 //
-//    #region[render]
 //    public function getList()
 //    {
-//        return CashBookModel::select(
-//            'cash_books.*',
-//        )
-//            ->where('cash_books.active_id', '=', $this->getListForm->activeRecord)
-//            ->where('cash_books.company_id', '=', session()->get('company_id'))
-//            ->orderBy('cash_books.id', $this->getListForm->sortAsc ? 'asc' : 'desc')
-//            ->paginate($this->getListForm->perPage);
+//        $this->opening_Balance();
+//
+//        $receipt = Transaction::select([
+//            'transactions.account_book_id',
+//            'transactions.contact_id',
+//            DB::raw("'receipt' as mode"),
+//            "transactions.id as vno",
+//            'transactions.vdate as vdate',
+//            DB::raw("'' as grand_total"),
+//            'transactions.vname',
+//        ])
+//            ->where('active_id', '=', 1)
+//            ->where('contact_id', '=', $this->byParty)
+//            ->where('mode_id', '=', 111)
+//            ->whereDate('vdate', '>=', $this->start_date ?: $this->invoiceDate_first)
+//            ->whereDate('vdate', '<=', $this->end_date ?: Carbon::now()->format('Y-m-d'));
+//
+//                  $payment = Transaction::select([
+//                      'transactions.account_book_id',
+//                      'transactions.contact_id',
+//                      DB::raw("'payment' as mode"),
+//                      "transactions.id as vno",
+//                      'transactions.vdate as vdate',
+//                      DB::raw("'' as grand_total"),
+//                      'transactions.vname',
+//                  ])
+//                      ->where('active_id', '=', 1)
+//                      ->where('contact_id', '=', $this->byParty)
+//                      ->where('mode_id', '=', 110)
+//                      ->whereDate('vdate', '>=', $this->start_date ?: $this->invoiceDate_first)
+//                      ->whereDate('vdate', '<=', $this->end_date ?: carbon::now()->format('Y-m-d'))
+//                      ->where('company_id', '=', session()->get('company_id'));
 //    }
+//
+//    #endregion
 
-    #region[Properties]
+//    public $account_book_id;
+//    public function ()
+//    {
+//
+//}
+
     public $paid_to;
     public $purpose;
     public $vdate;
@@ -117,9 +118,21 @@ class CashBook extends Component
     public $vch_no;
 
     public $log;
+//    public $trans_type_id;
     public $account_book_id;
     public $account_books = [];
+    public $trans_type_id;
     #endregion
+
+    public function mount($id)
+    {
+        $this->transaction = AccountBook::find($id);
+        $this->accountId = $this->transaction->id;
+//        dd($this->account_book_id);
+//        $this->account_books = AccountBook::with('transType')->where('account_book_id',$this->accountId)->get();
+//        dd($this->accountId)
+//        $this->account_books = AccountBook::with('transType')->where('trans_type_id',109)->get();
+    }
 
     #region[Get-Save]
     public function getSave(): void
@@ -130,16 +143,16 @@ class CashBook extends Component
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
-                    'account_book_id' => $this->account_book_id ?: '1',
+                    'account_book_id' => $this->account_book_id ?: $this->accountId,
                     'contact_id' => $this->contact_id ?: '1',
                     'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
-                    'trans_type_id' => $this->trans_type_id ?: '108',
+                    'trans_type_id' => $this->trans_type_id,
                     'mode_id' => $this->mode_id ?: '111',
                     'vdate' => $this->vdate,
-                    'receipttype_id' => $this->receipt_type_id ?: '85',
+                    'receipttype_id' => $this->receipt_type_id ?: '1',
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
@@ -165,7 +178,7 @@ class CashBook extends Component
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
-                    'account_book_id' => $this->account_book_id ?: '1',
+                    'account_book_id' => $this->account_book_id ?: $this->accountId,
                     'contact_id' => $this->contact_id,
                     'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
@@ -178,7 +191,7 @@ class CashBook extends Component
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
-//                    'instrument_bank_id' => $this->instrument_bank_id,
+                    'instrument_bank_id' => $this->instrument_bank_id,
                     'deposit_on' => $this->deposit_on,
                     'realised_on' => $this->realised_on,
                     'ref_no' => $this->ref_no,
@@ -208,13 +221,6 @@ class CashBook extends Component
             $obj->outstanding = $outstanding;
             $obj->save();
         }
-    }
-    #endregion
-
-    #region[Mount]
-    public function mount()
-    {
-        $this->account_books = AccountBook::with('transType')->where('trans_type_id',108)->get();
     }
     #endregion
 
@@ -282,6 +288,79 @@ class CashBook extends Component
     }
 
     #endregion
+
+    #region[bank]
+    public $bank_id = '';
+    public $bank_name = '';
+    public \Illuminate\Support\Collection $bankCollection;
+    public $highlightBank = 0;
+    public $bankTyped = false;
+
+    public function decrementBank(): void
+    {
+        if ($this->highlightBank === 0) {
+            $this->highlightBank = count($this->bankCollection) - 1;
+            return;
+        }
+        $this->highlightBank--;
+    }
+
+    public function incrementBank(): void
+    {
+        if ($this->highlightBank === count($this->bankCollection) - 1) {
+            $this->highlightBank = 0;
+            return;
+        }
+        $this->highlightBank++;
+    }
+
+    public function setBank($name, $id): void
+    {
+        $this->bank_name = $name;
+        $this->bank_id = $id;
+        $this->getBankList();
+    }
+
+    public function enterBank(): void
+    {
+        $obj = $this->bankCollection[$this->highlightBank] ?? null;
+
+        $this->bank_name = '';
+        $this->bankCollection = Collection::empty();
+        $this->highlightBank = 0;
+
+        $this->bank_name = $obj['vname'] ?? '';
+        $this->bank_id = $obj['id'] ?? '';
+    }
+
+    public function refreshBank($v): void
+    {
+        $this->bank_id = $v['id'];
+        $this->bank_name = $v['name'];
+        $this->bankTyped = false;
+    }
+
+    public function bankSave($name)
+    {
+        $obj = Common::create([
+            'label_id' => 9,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshBank($v);
+    }
+
+    public function getBankList(): void
+    {
+        $this->bankCollection = $this->bank_name ?
+            Common::search(trim($this->bank_name))->where('label_id', '=', '9')->get() :
+            Common::where('label_id', '=', '9')
+                ->Orwhere('id', '=', '1')
+                ->get();
+
+    }
+#endregion
 
     #region[receipt_type]
     public $receipt_type_id = '';
@@ -416,6 +495,76 @@ class CashBook extends Component
     }
 
     #endregion
+
+//    #region[trans_type]
+//    public $trans_type_id = '';
+//    public $trans_type_name = '';
+//    public \Illuminate\Support\Collection $trans_typeCollection;
+//    public $highlightTransType = 0;
+//    public $trans_typeTyped = false;
+//
+//    public function decrementTransType(): void
+//    {
+//        if ($this->highlightTransType === 0) {
+//            $this->highlightTransType = count($this->trans_typeCollection) - 1;
+//            return;
+//        }
+//        $this->highlightTransType--;
+//    }
+//
+//    public function incrementTransType(): void
+//    {
+//        if ($this->highlightTransType === count($this->trans_typeCollection) - 1) {
+//            $this->highlightTransType = 0;
+//            return;
+//        }
+//        $this->highlightTransType++;
+//    }
+//
+//    public function setTransType($name, $id): void
+//    {
+//        $this->trans_type_name = $name;
+//        $this->trans_type_id = $id;
+//        $this->getTransTypeList();
+//    }
+//
+//    public function enterTransType(): void
+//    {
+//        $obj = $this->trans_typeCollection[$this->highlightTransType] ?? null;
+//
+//        $this->trans_type_name = '';
+//        $this->trans_typeCollection = \Illuminate\Database\Eloquent\Collection::empty();
+//        $this->highlightTransType = 0;
+//
+//        $this->trans_type_name = $obj['vname'] ?? '';
+//        $this->trans_type_id = $obj['id'] ?? '';
+//    }
+//
+//    public function refreshTransType($v): void
+//    {
+//        $this->trans_type_id = $v['id'];
+//        $this->trans_type_name = $v['name'];
+//        $this->trans_typeTyped = false;
+//    }
+//
+//    public function transTypeSave($name)
+//    {
+//        $obj = Common::create([
+//            'label_id' => 19,
+//            'vname' => $name,
+//            'active_id' => '1'
+//        ]);
+//        $v = ['name' => $name, 'id' => $obj->id];
+//        $this->refreshTransType($v);
+//    }
+//
+//    public function getTransTypeList(): void
+//    {
+//        $this->trans_typeCollection = $this->trans_type_name ?
+//            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
+//            Common::where('label_id', '=', '19')->get();
+//    }
+//#endregion
 
     #region[instrumentBank]
     public $instrument_bank_id = '';
@@ -561,120 +710,50 @@ class CashBook extends Component
 
 #endregion
 
-    #region[trans_type]
-    public $trans_type_id = '';
-    public $trans_type_name = '';
-    public \Illuminate\Support\Collection $trans_typeCollection;
-    public $highlightTransType = 0;
-    public $trans_typeTyped = false;
-
-    public function decrementTransType(): void
-    {
-        if ($this->highlightTransType === 0) {
-            $this->highlightTransType = count($this->trans_typeCollection) - 1;
-            return;
-        }
-        $this->highlightTransType--;
-    }
-
-    public function incrementTransType(): void
-    {
-        if ($this->highlightTransType === count($this->trans_typeCollection) - 1) {
-            $this->highlightTransType = 0;
-            return;
-        }
-        $this->highlightTransType++;
-    }
-
-    public function setTransType($name, $id): void
-    {
-        $this->trans_type_name = $name;
-        $this->trans_type_id = $id;
-        $this->getTransTypeList();
-    }
-
-    public function enterTransType(): void
-    {
-        $obj = $this->trans_typeCollection[$this->highlightTransType] ?? null;
-
-        $this->trans_type_name = '';
-        $this->trans_typeCollection = \Illuminate\Database\Eloquent\Collection::empty();
-        $this->highlightTransType = 0;
-
-        $this->trans_type_name = $obj['vname'] ?? '';
-        $this->trans_type_id = $obj['id'] ?? '';
-    }
-
-    public function refreshTransType($v): void
-    {
-        $this->trans_type_id = $v['id'];
-        $this->trans_type_name = $v['name'];
-        $this->trans_typeTyped = false;
-    }
-
-    public function transTypeSave($name)
-    {
-        $obj = Common::create([
-            'label_id' => 19,
-            'vname' => $name,
-            'active_id' => '1'
-        ]);
-        $v = ['name' => $name, 'id' => $obj->id];
-        $this->refreshTransType($v);
-    }
-
-    public function getTransTypeList(): void
-    {
-        $this->trans_typeCollection = $this->trans_type_name ?
-            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
-            Common::where('label_id', '=', '19')->get();
-    }
-#endregion
-
-    #region[Get-Obj]
-    public function getObj($id)
-    {
-        if ($id) {
-            $Transaction = Transaction::find($id);
-            $this->common->vid = $Transaction->id;
-            $this->common->vname = $Transaction->vname;
-            $this->common->active_id = $Transaction->active_id;
-            $this->account_book_id = $Transaction->account_book_id;
-            $this->contact_id = $Transaction->contact_id;
-            $this->contact_name = $Transaction->contact_id ? Contact::find($Transaction->contact_id)->vname : '';
-            $this->vch_no = $Transaction->vch_no;
-            $this->paid_to = $Transaction->paid_to;
-            $this->purpose = $Transaction->purpose;
-            $this->order_id = $Transaction->order_id;
-            $this->order_name = $Transaction->order_id ? Order::find($Transaction->order_id)->vname : '';
-            $this->trans_type_id = $Transaction->trans_type_id;
-            $this->trans_type_name = $Transaction->trans_type_id ? Common::find($Transaction->trans_type_id)->vname : '';
-            $this->mode_id = $Transaction->mode_id;
-            $this->mode_name = $Transaction->mode_id ? Common::find($Transaction->mode_id)->vname : '';
-            $this->vdate = $Transaction->vdate;
-            $this->amount = $Transaction->amount;
-            $this->receipt_type_id = $Transaction->receipttype_id;
-            $this->receipt_type_name = $Transaction->receipttype_id ? Common::find($Transaction->receipttype_id)->vname : '';
-            $this->remarks = $Transaction->remarks;
-            $this->chq_no = $Transaction->chq_no;
-            $this->chq_date = $Transaction->chq_date;
-            $this->instrument_bank_id = $Transaction->instrument_bank_id;
-            $this->instrument_bank_name = $Transaction->instrument_bank_id ? Common::find($Transaction->instrument_bank_id)->vname : '';
-            $this->deposit_on = $Transaction->deposit_on;
-            $this->realised_on = $Transaction->realised_on;
-            $this->ref_no = $Transaction->ref_no;
-            $this->ref_amount = $Transaction->ref_amount;
-            $this->verified_by = $Transaction->verified_by;
-            $this->verified_on = $Transaction->verified_on;
-            $this->against_id = $Transaction->against_id;
-            $contact_outstanding = Contact::find($this->contact_id);
-            $contact_outstanding->outstanding = $contact_outstanding->outstanding + $this->common->vname;
-            $contact_outstanding->save();
-            return $Transaction;
-        }
-        return null;
-    }
-    #endregion
+//    #region[Get-Obj]
+//    public function getObj($id)
+//    {
+//        if ($id) {
+//            $Transaction = Transaction::find($id);
+//            $this->common->vid = $Transaction->id;
+//            $this->common->vname = $Transaction->vname;
+//            $this->common->active_id = $Transaction->active_id;
+//            $this->account_book_id = $Transaction->account_book_id;
+//            $this->contact_id = $Transaction->contact_id;
+//            $this->contact_name = $Transaction->contact_id ? Contact::find($Transaction->contact_id)->vname : '';
+//            $this->vch_no = $Transaction->vch_no;
+//            $this->paid_to = $Transaction->paid_to;
+//            $this->purpose = $Transaction->purpose;
+//            $this->order_id = $Transaction->order_id;
+//            $this->order_name = $Transaction->order_id ? Order::find($Transaction->order_id)->vname : '';
+////            $this->trans_type_id = $Transaction->trans_type_id;
+////            $this->trans_type_name = $Transaction->trans_type_id ? Common::find($Transaction->trans_type_id)->vname : '';
+//            $this->mode_id = $Transaction->mode_id;
+//            $this->mode_name = $Transaction->mode_id ? Common::find($Transaction->mode_id)->vname : '';
+//            $this->vdate = $Transaction->vdate;
+//            $this->amount = $Transaction->amount;
+//            $this->receipt_type_id = $Transaction->receipttype_id;
+//            $this->receipt_type_name = $Transaction->receipttype_id ? Common::find($Transaction->receipttype_id)->vname : '';
+//            $this->remarks = $Transaction->remarks;
+//            $this->chq_no = $Transaction->chq_no;
+//            $this->chq_date = $Transaction->chq_date;
+//            $this->instrument_bank_id = $Transaction->instrument_bank_id;
+//            $this->instrument_bank_name = $Transaction->instrument_bank_id ? Common::find($Transaction->instrument_bank_id)->vname : '';
+//            $this->deposit_on = $Transaction->deposit_on;
+//            $this->realised_on = $Transaction->realised_on;
+//            $this->ref_no = $Transaction->ref_no;
+//            $this->ref_amount = $Transaction->ref_amount;
+//            $this->verified_by = $Transaction->verified_by;
+//            $this->verified_on = $Transaction->verified_on;
+//            $this->against_id = $Transaction->against_id;
+//            $contact_outstanding = Contact::find($this->contact_id);
+//            $contact_outstanding->outstanding = $contact_outstanding->outstanding + $this->common->vname;
+//            $contact_outstanding->save();
+//            return $Transaction;
+//        }
+//        return null;
+//    }
+//    #endregion
 
     #region[Clear-Fields]
     public function clearFields(): void
@@ -689,8 +768,8 @@ class CashBook extends Component
         $this->order_id = '';
         $this->order_name = '';
         $this->amount = '';
-        $this->trans_type_id = 108;
-        $this->trans_type_name = 108;
+        $this->trans_type_id = 109;
+//        $this->trans_type_name = 108;
         $this->remarks = '';
         $this->chq_no = '';
         $this->chq_date = '';
@@ -710,34 +789,32 @@ class CashBook extends Component
 
     #endregion
 
-    public $cashBookData = [];
-    public $payments = [];
-    public function getCashbookData()
+    public function updatedAccountBookId($value)
     {
-        $this->cashBookData = AccountBook::where('trans_type_id','108')->get();
-
-}
-
-    public function getPayment()
-    {
-        $this->payments = Transaction::with('accountBook')->where('trans_type_id', 108)->latest()->get();
+        $selectedAccountBook = AccountBook::find($value);
+        $this->trans_type_id = $selectedAccountBook ? $selectedAccountBook->trans_type_id : null;
     }
+
+    public $transaction;
+    public $accountId;
+
+
+    #region[Mount]
+
+    #endregion
+
     public function render()
     {
+        $this->getBankList();
         $this->getContactList();
         $this->getReceiptTypeList();
         $this->getOrderList();
         $this->getInstrumentBankList();
-        $this->getCashbookData();
-        $this->getPayment();
-        return view('livewire.transaction.books.cash-book')->with([
-//            'list' => $this->getList()
-            'list' => $this->getListForm->getList(Transaction::class, function ($query) {
-                return $query->where('mode_id', $this->mode_id)
-                    ->where('acyear', session()->get('acyear'))
-                    ->where('company_id', session()->get('company_id'));
-            }),
+
+//        $list = Transaction::with('contact')->where('trans_type_id',109)->where('account_book_id', $this->accountId)->get();
+        $list = Transaction::where('trans_type_id', 109)->where('account_book_id',$this->accountId)->get();
+        return view('livewire.reports.transaction.bank')->with([
+            'list' => $list,
         ]);
     }
-    #endregion
 }
