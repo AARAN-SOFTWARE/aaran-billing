@@ -24,12 +24,10 @@
                     Name
                 </x-table.header-text>
 
-                {{--                <x-table.header-text sortIcon="none">Mobile</x-table.header-text>--}}
 
                 <x-table.header-text sortIcon="none">Contact Type</x-table.header-text>
 
-                {{--                <x-table.header-text sortIcon="none">Contact Person</x-table.header-text>--}}
-                {{--                <x-table.header-text sortIcon="none">GST No</x-table.header-text>--}}
+
                 <x-table.header-text sortIcon="none">Outstanding</x-table.header-text>
 
                 {{--                <x-table.header-action/>--}}
@@ -41,7 +39,6 @@
             <x-slot:table_body name="table_body">
 
                 @foreach($list as $index=>$row)
-                    @if($row->contact_type == 'Creditor')
                         <x-table.row>
 
                             <x-table.cell-text><a href="{{route('contactReport',[$row->id])}}"> {{$index+1}}</a>
@@ -50,39 +47,22 @@
                             <x-table.cell-text left><a href="{{route('contactReport',[$row->id])}}"> {{$row->vname}}</a>
                             </x-table.cell-text>
 
-                            {{--              --}}
+
 
 
                             <x-table.cell-text>
                                 <a href="{{route('contactReport',[$row->id])}}"
-                                   class="{{$row->contact_type == 'Debtor'?:'text-orange-400'}}">
-                                    {{$row->contact_type}}
+                                   class="text-blue-600">
+                                    {{$row->contact_type->vname}}
                                 </a>
                             </x-table.cell-text>
-
-                            {{--                        <x-table.cell-text><a--}}
-                            {{--                                href="{{route('contactReport',[$row->id])}}"> {{$row->contact_person}}</a>--}}
-                            {{--                        </x-table.cell-text>--}}
-
-                            {{--                        <x-table.cell-text><a--}}
-                            {{--                                href="{{route('contactReport',[$row->id])}}"> {{$row->gstin}}</a>--}}
-                            {{--                        </x-table.cell-text>--}}
 
                             <x-table.cell-text>
                                 <a
                                     href="{{route('contactReport',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>
                             </x-table.cell-text>
 
-                            {{--                        <td class="max-w-max print:hidden">--}}
-                            {{--                            <div class="flex justify-center items-center sm:gap-4 gap-2 px-1 self-center">--}}
-                            {{--                                <a href="{{route('contacts.upsert',[$row->id])}}" class="pt-1">--}}
-                            {{--                                    <x-button.edit/>--}}
-                            {{--                                </a>--}}
-                            {{--                                <x-button.delete wire:click="getDelete({{$row->id}})"/>--}}
-                            {{--                            </div>--}}
-                            {{--                        </td>--}}
                         </x-table.row>
-                    @endif
                 @endforeach
 
             </x-slot:table_body>
@@ -93,7 +73,7 @@
 
         <!-- Actions ------------------------------------------------------------------------------------------->
 
-        <div>{{$list->links()}}</div>
+{{--        <div>{{$list->links()}}</div>--}}
 
 
     </x-forms.m-panel>

@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/receviables', App\Livewire\Reports\Transaction\ReceivableReport::class)->name('receviables');
     Route::get('/payables', App\Livewire\Reports\Transaction\PayableReport::class)->name('payables');
+//    Route::get('/payables', App\Livewire\Reports\Statement\Payables::class)->name('payables');
     Route::get('/salesMonthly', App\Livewire\Reports\Sales\MonthlyReport::class)->name('salesMonthly');
     Route::get('/gstReport', App\Livewire\Reports\Sales\GstReport::class)->name('gstReport');
 

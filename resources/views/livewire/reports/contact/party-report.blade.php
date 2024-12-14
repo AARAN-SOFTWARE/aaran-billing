@@ -72,7 +72,6 @@
                 </x-table.row>
 
                 @forelse ($list as $index =>  $row)
-
                     @php
                         if ($row->mode=='Sales Invoice'){
                             if ($party->contact_type_id==124){
@@ -83,7 +82,6 @@
                             }
                             $totalReceipt += floatval($row->transaction_amount);
                     @endphp
-
                     <x-table.row>
                         <x-table.cell-text center>
                             {{ $index + 1 }}

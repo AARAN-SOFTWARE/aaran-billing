@@ -33,7 +33,6 @@ class PartyReport extends Component
     #endregion
 
     #region[opening_balance]
-
     public function opening_Balance()
     {
         if ($this->byParty) {
@@ -57,14 +56,10 @@ class PartyReport extends Component
     }
     #endregion
 
-
     #region[List]
-
     public function getList()
     {
         $this->opening_Balance();
-
-
         $receipt = Transaction::select([
             'transactions.company_id',
             'transactions.contact_id',
@@ -97,7 +92,6 @@ class PartyReport extends Component
             ->whereDate('vdate', '<=', $this->end_date ?: carbon::now()->format('Y-m-d'))
             ->where('company_id', '=', session()->get('company_id'));
 
-
         $purchase = Purchase::select([
             'purchases.company_id',
             'purchases.contact_id',
@@ -113,7 +107,6 @@ class PartyReport extends Component
             ->whereDate('purchase_date', '<=', $this->end_date ?: Carbon::now()->format('Y-m-d'))
             ->where('company_id', '=', session()->get('company_id'));
 
-
         $salesInvoice = Sale::select([
             'sales.company_id',
             'sales.contact_id',
@@ -128,7 +121,6 @@ class PartyReport extends Component
             ->whereDate('invoice_date', '>=', $this->start_date ?: $this->invoiceDate_first)
             ->whereDate('invoice_date', '<=', $this->end_date ?: Carbon::now()->format('Y-m-d'))
             ->where('company_id', '=', session()->get('company_id'));
-
 
         $combined = $salesInvoice->toBase()
             ->union($purchase->toBase())
@@ -152,7 +144,6 @@ class PartyReport extends Component
                 [
                     'party' => $this->byParty, 'start_date' => $this->start_date ?: $this->invoiceDate_first,
                     'end_date' => $this->end_date ?: Carbon::now()->format('Y-m-d'),
-
                 ]));
         }
     }
