@@ -483,7 +483,6 @@ class Index extends Component
                     'tenant_id' => $this->tenant_id ?: '1',
                     'logo' => $this->save_logo(),
                 ];
-                $this->common->logEntry('Company name: '.$this->common->vname,'Company','create',$this->common->vname.'has been created');
                 $this->common->save($company, $extraFields);
                 $message = "Saved";
             } else {
@@ -514,7 +513,6 @@ class Index extends Component
                     'tenant_id' => $this->tenant_id ?: '1',
                     'logo' => $this->save_logo(),
                 ];
-                $this->common->logEntry('Company name: '.$this->common->vname,'Company','update',$this->common->vname.'has been created');
                 $this->common->edit($company, $extraFields);
                 $message = "Updated";
             }
@@ -645,8 +643,6 @@ class Index extends Component
     #region[render]
     public function render()
     {
-        $this->log = Logbook::where('model_name','Company')->get();
-
         $this->getCityList();
         $this->getStateList();
         $this->getPincodeList();

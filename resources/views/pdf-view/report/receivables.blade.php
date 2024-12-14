@@ -12,19 +12,15 @@
         * {
             font-family: Verdana, Arial, sans-serif, Helvetica, Times;
         }
-
         .page-break {
             page-break-after: always;
         }
-
         .wrap {
             overflow-wrap: anywhere;
         }
-
         table {
             width: 100%;
         }
-
         .bg-gray {
             background-color: #F9FAFB;
         }

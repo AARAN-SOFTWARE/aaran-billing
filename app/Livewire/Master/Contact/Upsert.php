@@ -624,7 +624,6 @@ class Upsert extends Component
         if ($this->vname != '') {
             if ($this->vid == "") {
                 $this->validate($this->rules());
-
                 $obj = Contact::create([
                     'vname' => Str::upper($this->vname),
                     'mobile' => $this->mobile,
@@ -643,10 +642,9 @@ class Upsert extends Component
                     'company_id' => session()->get('company_id'),
                 ]);
                 $this->saveItem($obj->id);
-                $this->common->logEntry('Contact name: '.$this->common->vname,'Contact','create',$this->vname.'has been created');
+                $this->common->logEntry('Contact name: '.$this->common->vname,$this->gstin,'create',$this->vname.'has been created');
                 $message = "Saved";
                 $this->getRoute();
-
             } else {
                 $obj = Contact::find($this->vid);
                 $obj->vname = Str::upper($this->vname);
@@ -667,7 +665,7 @@ class Upsert extends Component
                 $obj->save();
 
                 $this->saveItem($obj->id);
-                $this->common->logEntry('Contact','Contact','update',$this->vname.' has been updated');
+                $this->common->logEntry('Contact name: '.$this->common->vname,'Contact','update',$this->vname.' has been updated');
                 $message = "Updated";
                 $this->getRoute();
             }
@@ -835,7 +833,7 @@ class Upsert extends Component
 
     public function render()
     {
-        $this->log = Logbook::where('model_name','Contact')->get();
+        $this->log = Logbook::where('model_name',$this->gstin)->get();
         $this->getCityList();
         $this->getStateList();
         $this->getPincodeList();
