@@ -71,6 +71,7 @@
 {{--                                    <td class="border-r">{{ $payment->accountBook->vname }}</td> <!-- Use accountBook relationship -->--}}
 
                                     <td class="border-r">{{ $payment->vname }}</td>
+
                                     <td class="border-r">{{ $payment->mode->vname }}</td>
                                     <td>
                                         <x-icons.icon :icon="'chevrons-down'" class="w-4 h-4"/>

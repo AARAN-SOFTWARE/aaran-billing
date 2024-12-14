@@ -1112,14 +1112,14 @@ class S102_CommonSeeder extends Seeder
     {
         Common::create([
             'label_id' => '24',
-            'vname' => 'Current',
+            'vname' => 'Current Account',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'
         ]);
         Common::create([
             'label_id' => '24',
-            'vname' => 'Savings',
+            'vname' => 'Savings Account',
             'desc' => '-',
             'desc_1' => '-',
             'active_id' => '1'

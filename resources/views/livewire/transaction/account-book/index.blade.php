@@ -17,12 +17,12 @@
             <x-slot:table_header name="table_header" class="bg-green-100">
 
                 <x-table.header-serial width="20%"/>
+                <x-table.header-text sortIcon="none">Account Name</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Type
                 </x-table.header-text>
                 <x-table.header-text sortIcon="none">Account No</x-table.header-text>
-                <x-table.header-text sortIcon="none">Account Name</x-table.header-text>
                 <x-table.header-text sortIcon="none">Opening Balance</x-table.header-text>
-                <x-table.header-text sortIcon="none">Opening Date</x-table.header-text>
+                {{--                <x-table.header-text sortIcon="none">Opening Date</x-table.header-text>--}}
                 <x-table.header-action/>
 
             </x-slot:table_header>
@@ -39,33 +39,34 @@
                         {{--                        <x-table.cell-text>{{\Aaran\Transaction\Models\AccountBook::common($row->bank->vname)}}</x-table.cell-text>--}}
 
 
-                        {{--                        <x-table.cell-text left>--}}
-                        {{--                            @if($row->transType->vname == 'Cash Book')--}}
-                        {{--                                <a href="{{  route('cashBooks', $row->id) }}">--}}
-                        {{--                                    {{$row->transType->vname}} </a>--}}
-                        {{--                            @elseif($row->transType->vname == 'Bank Book')--}}
-                        {{--                                <a href="{{  route('bankBooks', $row->id) }}">--}}
-                        {{--                                    {{$row->transType->vname}} </a>--}}
-                        {{--                            @else--}}
-                        {{--                                <a href="{{ route('accBooks') }}">--}}
-                        {{--                                    {{$row->transType->vname}} </a>--}}
-                        {{--                            @endif--}}
-                        {{--                        </x-table.cell-text>--}}
-
                         <x-table.cell-text left>
-                            {{$row->transType->vname}}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>{{$row->account_no}}</x-table.cell-text>
-
-                        <x-table.cell-text>
                             {{  $row->vname }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>{{  $row->opening_balance }}
+                        <x-table.cell-text left>
+                            @if($row->transType->vname == 'Cash Book')
+                                <a href="{{route('cashReports', $row->id)}}">
+                                    {{$row->transType->vname}} </a>
+                            @elseif($row->transType->vname == 'Bank Book')
+                                <a href="{{route('bankReports', $row->id)}}">
+                                    {{$row->transType->vname}} </a>
+                            @else
+                                <a href="{{ route('accBooks') }}">
+                                    {{$row->transType->vname}} </a>
+                            @endif
                         </x-table.cell-text>
 
-                        <x-table.cell-text>{{date('d-m-Y',strtotime($row->opening_balance_date))}}</x-table.cell-text>
+
+{{--                        <x-table.cell-text left>--}}
+{{--                            {{$row->transType->vname}}--}}
+{{--                        </x-table.cell-text>--}}
+
+                        <x-table.cell-text>{{$row->account_no}}</x-table.cell-text>
+
+                        <x-table.cell-text right>{{  $row->opening_balance }}
+                        </x-table.cell-text>
+
+                        {{--                        <x-table.cell-text>{{date('d-m-Y',strtotime($row->opening_balance_date))}}</x-table.cell-text>--}}
 
                         <x-table.cell-action id="{{$row->id}}"/>
 

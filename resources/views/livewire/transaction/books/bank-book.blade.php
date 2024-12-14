@@ -34,7 +34,7 @@
 
                     <!-- Party Name ----------------------------------------------------------------------------------->
 
-                    <div class="flex flex-row">
+                    <div class="flex flex-row gap-4">
                         <x-radio.btn wire:model.live="mode_id" value="110">Receipt</x-radio.btn>
                         <x-radio.btn wire:model.live="mode_id" value="111">Payment</x-radio.btn>
                     </div>
