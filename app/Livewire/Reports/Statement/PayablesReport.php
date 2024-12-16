@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Reports\Statement;
 
+use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Contact;
 use Aaran\Transaction\Models\Transaction;
@@ -11,11 +12,12 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Receivables extends Component
+class PayablesReport extends Component
 {
     use CommonTraitNew;
     #region[properties]
     public Collection $contacts;
+    public $partyName;
     public $byParty;
     public $byOrder;
     public $start_date;
@@ -26,10 +28,12 @@ class Receivables extends Component
     public mixed $invoiceDate_first = '';
     #endregion
 
-    #region[Contact]
-    public function getContact()
+    public function mount($id)
     {
-        $this->contacts = Contact::where('company_id', '=', session()->get('company_id'))->where('contact_type_id','124')->get();
+        $this->byParty = $id;
+        $this->contacts = Contact::where('company_id', '=', session()->get('company_id'))->where('contact_type_id','123')->get();
+        $this->partyName = Contact::find($this->byParty)->vname;
+
     }
     #endregion
 
@@ -43,13 +47,13 @@ class Receivables extends Component
 
             $this->invoiceDate_first = Carbon::now()->subYear()->format('Y-m-d');
 
-            $this->sale_total = Sale::whereDate('invoice_date', '<', $this->start_date?:$this->invoiceDate_first)
+            $this->sale_total = Purchase::whereDate('purchase_date', '<', $this->start_date?:$this->invoiceDate_first)
                 ->where('contact_id','=',$this->byParty)
                 ->sum('grand_total');
 
             $this->receipt_total = Transaction::whereDate('vdate', '<', $this->start_date?:$this->invoiceDate_first)
                 ->where('contact_id','=',$this->byParty)
-                ->where('mode_id','=',111)
+                ->where('mode_id','=',110)
                 ->sum('vname');
 
             $this->opening_balance = $this->opening_balance + $this->sale_total - $this->receipt_total;
@@ -58,8 +62,6 @@ class Receivables extends Component
     }
     #endregion
 
-
-    #region[List]
 
     public function getList()
     {
@@ -75,7 +77,7 @@ class Receivables extends Component
         ])
             ->where('active_id', '=', 1)
             ->where('contact_id', '=', $this->byParty)
-            ->where('mode_id','=',111)
+            ->where('mode_id','=',110)
             ->whereDate('vdate', '>=', $this->start_date ?: $this->invoiceDate_first)
             ->whereDate('vdate', '<=', $this->end_date ?: carbon::now()->format('Y-m-d'))
             ->where('company_id', '=', session()->get('company_id'));
@@ -97,26 +99,25 @@ class Receivables extends Component
             ->orderBy('vdate')
             ->orderBy('mode')->get();
     }
-
     #endregion
+
     public function print()
     {
+
         if ($this->byParty != null) {
-            $this->redirect(route('receviables.print',
+            $this->redirect(route('payables.print',
                 [
                     'party' => $this->byParty, 'start_date' => $this->start_date ?: $this->invoiceDate_first,
                     'end_date' => $this->end_date ?: Carbon::now()->format('Y-m-d'),
-
                 ]));
         }
     }
 
-
     #region[Render]
     public function render()
     {
-        $this->getContact();
-        return view( 'livewire.reports.statement.receivables')->with([
+//        $this->getContact();
+        return view('livewire.reports.statement.payables-report')->with([
             'list' => $this->getList()
         ]);
     }

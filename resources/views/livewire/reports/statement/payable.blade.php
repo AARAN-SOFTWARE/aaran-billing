@@ -9,7 +9,7 @@
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
 
-        <x-table.caption :caption="'Payables'">
+        <x-table.caption :caption="'PayablesReport'">
             {{$list->count()}}
         </x-table.caption>
 
@@ -42,20 +42,20 @@
 
                 @foreach($list as $index=>$row)
                         <x-table.row>
-                            <x-table.cell-text><a href="{{route('contactReport',[$row->id])}}"> {{$index+1}}</a>
+                            <x-table.cell-text><a href="{{route('payables-report',[$row->id])}}"> {{$index+1}}</a>
                             </x-table.cell-text>
 
-                            <x-table.cell-text left><a href="{{route('contactReport',[$row->id])}}"> {{$row->vname}}</a>
+                            <x-table.cell-text left><a href="{{route('payables-report',[$row->id])}}"> {{$row->vname}}</a>
                             </x-table.cell-text>
                             <x-table.cell-text>
-                                <a href="{{route('contactReport',[$row->id])}}"
+                                <a href="{{route('payables-report',[$row->id])}}"
                                    class="text-orange-600">
                                     {{$row->contact_type->vname}}
                                 </a>
                             </x-table.cell-text>
                             <x-table.cell-text>
                                 <a
-                                        href="{{route('contactReport',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>
+                                        href="{{route('payables-report',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>
                             </x-table.cell-text>
                         </x-table.row>
                 @endforeach

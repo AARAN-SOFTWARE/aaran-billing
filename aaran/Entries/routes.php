@@ -25,9 +25,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('transactions/{id}', App\Livewire\Entries\Payment\Index::class)->name('transactions');
     Route::get('transactions/{id}/print', App\Http\Controllers\Transaction\PaymentController::class)->name('transactions.print');
 
-    Route::get('/receviables', App\Livewire\Reports\Transaction\ReceivableReport::class)->name('receviables');
-    Route::get('/payables', App\Livewire\Reports\Transaction\PayableReport::class)->name('payables');
-//    Route::get('/payables', App\Livewire\Reports\Statement\Payables::class)->name('payables');
+    Route::get('/receivables', \App\Livewire\Reports\Statement\Receivable::class)->name('receivables');
+    Route::get('/payables', \App\Livewire\Reports\Statement\Payable::class)->name('payables');
+    Route::get('/payables-report/{id}', App\Livewire\Reports\Statement\PayablesReport::class)->name('payables-report');
+    Route::get('/receivables-report/{id}', App\Livewire\Reports\Statement\ReceivablesReport::class)->name('receivables-report');
     Route::get('/salesMonthly', App\Livewire\Reports\Sales\MonthlyReport::class)->name('salesMonthly');
     Route::get('/gstReport', App\Livewire\Reports\Sales\GstReport::class)->name('gstReport');
 

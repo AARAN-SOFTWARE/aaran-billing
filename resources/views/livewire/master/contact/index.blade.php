@@ -83,7 +83,6 @@
                             </div>
                         </td>
                     </x-table.row>
-
                 @endforeach
 
             </x-slot:table_body>
