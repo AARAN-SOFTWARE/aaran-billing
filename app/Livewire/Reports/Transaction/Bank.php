@@ -101,6 +101,7 @@ class Bank extends Component
 //
 //}
 
+    #region[property]
     public $paid_to;
     public $purpose;
     public $vdate;
@@ -124,6 +125,7 @@ class Bank extends Component
     public $trans_type_id;
     #endregion
 
+    #region[Mount]
     public function mount($id)
     {
         $this->transaction = AccountBook::find($id);
@@ -133,6 +135,7 @@ class Bank extends Component
 //        dd($this->accountId)
 //        $this->account_books = AccountBook::with('transType')->where('trans_type_id',109)->get();
     }
+    #endregion
 
     #region[Get-Save]
     public function getSave(): void
@@ -797,11 +800,6 @@ class Bank extends Component
 
     public $transaction;
     public $accountId;
-
-
-    #region[Mount]
-
-    #endregion
 
     public function render()
     {

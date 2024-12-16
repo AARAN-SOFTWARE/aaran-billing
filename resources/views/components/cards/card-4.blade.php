@@ -1,6 +1,8 @@
 @props([
     'list' => null,
-    'data' => null
+    'data' => null,
+    'filter ' => null,
+
 ])
 
 @foreach($list as $index=>$row)
@@ -85,7 +87,11 @@
                 </div>
 
                 <div class="w-full flex justify-between text-xs">
-                    <a href="{{route('bankReports',$row->id)}}" class="text-gray-400 hover:text-blue-600 font-semibold  flex items-center ">
+                    <a href="@if($filter == 2)
+                    {{route('bankReports',$row->id)}}
+                    @else
+                    {{route('cashReports',$row->id)}}
+                    @endif" class="text-gray-400 hover:text-blue-600 font-semibold  flex items-center ">
                         View All
                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">

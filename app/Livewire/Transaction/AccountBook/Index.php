@@ -272,7 +272,8 @@ class Index extends Component
             $this->bank_id = $AccountBook->bank_id;
             $this->bank_name = $AccountBook->bank->vname;
             $this->account_type_id = $AccountBook->account_type_id;
-            $this->account_type_name = $AccountBook->accountType->vname;
+//            $this->account_type_name = $AccountBook->accountType->vname;
+            $this->account_type_name = $AccountBook->account_type_id ? Common::find($AccountBook->account_type_id)->vname : '';
             $this->branch = $AccountBook->branch;
             $this->common->active_id = $AccountBook->active_id;
             return $AccountBook;
@@ -301,7 +302,6 @@ class Index extends Component
         $this->branch = '';
         $this->common->active_id = '1';
     }
-
     #endregion
 
     public function render()
