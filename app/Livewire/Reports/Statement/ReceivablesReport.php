@@ -103,7 +103,7 @@ class ReceivablesReport extends Component
     public function print()
     {
         if ($this->byParty != null) {
-            $this->redirect(route('receviables.print',
+            $this->redirect(route('receivables.print',
                 [
                     'party' => $this->byParty, 'start_date' => $this->start_date ?: $this->invoiceDate_first,
                     'end_date' => $this->end_date ?: Carbon::now()->format('Y-m-d'),
