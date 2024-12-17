@@ -4,9 +4,10 @@ namespace App\Livewire\Transaction\AccountBook;
 
 use Aaran\Common\Models\Common;
 use Aaran\Transaction\Models\AccountBook;
+use Aaran\Transaction\Models\Transaction;
 use App\Livewire\Trait\CommonTraitNew;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class Index extends Component
@@ -21,6 +22,14 @@ class Index extends Component
     public $branch;
     public $trans_type_id = '';
     public $trans_type_name = '';
+    public $filter;
+
+    public function mount($id = null)
+    {
+        if ($id != null) {
+            $this->filter = $id;
+        }
+    }
 
     #region[Validation]
     public function rules(): array
@@ -117,7 +126,7 @@ class Index extends Component
     #region[bank]
     public $bank_name = '';
     public $bank_id = '';
-    public Collection $bankCollection;
+    public \Illuminate\Support\Collection $bankCollection;
     public $highlightBank = 0;
     public $bankTyped = false;
 
@@ -304,13 +313,36 @@ class Index extends Component
     }
     #endregion
 
+    #region[Transactions]
+
+    public function getTransactions()
+    {
+        return Transaction::select('transactions.id', 'transactions.vname', 'transactions.vdate', 'transactions.account_book_id', 'transactions.mode_id','transactions.trans_type_id')
+            ->join('account_books', 'transactions.account_book_id', '=', 'account_books.id')
+            ->where('account_books.active_id', '=', 1)
+            ->get();
+    }
+    #region[render]
+
     public function render()
     {
         $this->getBankList();
         $this->getAccountTypeList();
-//        $this->getTransTypeList();
+
         return view('livewire.transaction.account-book.index')->with([
-            'list' => $this->getListForm->getList(AccountBook::class),
+            'list' => $this->getListForm->getList(AccountBook::class, function ($query) {
+                if ($this->filter == 2) {
+                    return $query -> where('trans_type_id', 109)->get();
+                } elseif ($this->filter == 3) {
+                    return $query -> where('trans_type_id', 108)->get();
+                } else {
+                    return $query ->get();
+                }
+
+            }),
+            'transaction' => $this->getTransactions(),
+
         ]);
     }
+    #endregion
 }
