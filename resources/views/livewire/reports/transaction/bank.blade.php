@@ -1,9 +1,20 @@
 <div>
-    <x-slot name="header">BankBook</x-slot>
+    <x-slot name="header">{{$transName}}</x-slot>
 
     <x-forms.m-panel>
 
         <x-forms.top-controls :show-filters="$showFilters"/>
+
+
+        <div class="w-full  flex-row flex gap-x-5">
+            <div class="w-1/4">
+                <x-input.floating  type="date" wire:model.live="startDate" label="Start Date"/>
+            </div>
+            <div class="w-1/4">
+                <x-input.floating type="date" wire:model.live="endDate"  label="End Date"/>
+            </div>
+        </div>
+
 
         <x-table.form>
 
@@ -31,11 +42,12 @@
 
             </x-slot:table_header>
 
+            @php
+                $totalAmount = 0;
+            @endphp
             <x-slot:table_body name="table_body">
 
                 @foreach($list as $index=>$row)
-                    {{--@dd($list);--}}
-
                     <x-table.row>
 
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
@@ -55,6 +67,11 @@
                     </x-table.row>
 
                 @endforeach
+
+                <x-table.row>
+                    <x-table.cell-text colspan="6">&nbsp;</x-table.cell-text>
+                    <x-table.cell-text colspan=""></x-table.cell-text>
+                </x-table.row>
 
             </x-slot:table_body>
 

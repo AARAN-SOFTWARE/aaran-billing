@@ -60,6 +60,11 @@ class Index extends Component
         $this->account_books = AccountBook::with('transType')->get();
     }
     #endregion
+    public function updatedAccountBookId($value)
+    {
+        $selectedAccountBook = AccountBook::find($value);
+        $this->trans_type_id = $selectedAccountBook ? $selectedAccountBook->trans_type_id : null;
+    }
 
     #region[Get-Save]
     public function getSave(): void
@@ -716,11 +721,7 @@ class Index extends Component
 
     #endregion
 
-    public function updatedAccountBookId($value)
-    {
-        $selectedAccountBook = AccountBook::find($value);
-        $this->trans_type_id = $selectedAccountBook ? $selectedAccountBook->trans_type_id : null;
-    }
+
 
     #region[render]
     public function render()

@@ -1,87 +1,40 @@
 <div>
-    <x-slot name="header">Account Book</x-slot>
+    <x-slot name="header">
+        @if($filter == 2)
+            Bank Books
+        @elseif($filter == 3)
+            Cash Books
+        @else
+            Account Books
+        @endif
+    </x-slot>
+
     <x-forms.m-panel>
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
-
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-        <x-table.caption :caption="'Account Book'">
-            {{$list->count()}}
-        </x-table.caption>
+        @if($filter == 2)
+            <x-table.caption :caption="' Bank Books'">
+                {{$list->count()}}
+            </x-table.caption>
+        @elseif($filter == 3)
+            <x-table.caption :caption="'Cash Books'">
+                {{$list->count()}}
+            </x-table.caption>
 
-        <!-- Table Header --------------------------------------------------------------------------------------------->
-
-        <x-table.form>
-
-            <x-slot:table_header name="table_header" class="bg-green-100">
-
-                <x-table.header-serial width="20%"/>
-                <x-table.header-text sortIcon="none">Account Name</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" sortIcon="{{$getListForm->sortAsc}}">Type
-                </x-table.header-text>
-                <x-table.header-text sortIcon="none">Account No</x-table.header-text>
-                <x-table.header-text sortIcon="none">Opening Balance</x-table.header-text>
-                {{--                <x-table.header-text sortIcon="none">Opening Date</x-table.header-text>--}}
-                <x-table.header-action/>
-
-            </x-slot:table_header>
-
-            <!-- Table Body ------------------------------------------------------------------------------------------->
-
-            <x-slot:table_body name="table_body">
-
-                @foreach($list as $index=>$row)
-
-                    <x-table.row>
-                        <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-
-                        {{--                        <x-table.cell-text>{{\Aaran\Transaction\Models\AccountBook::common($row->bank->vname)}}</x-table.cell-text>--}}
+        @else
+            <x-table.caption :caption="'Account Books'">
+                {{$list->count()}}
+            </x-table.caption>
+        @endif
 
 
-                        <x-table.cell-text left>
-                            {{  $row->vname }}
-                        </x-table.cell-text>
+        <div class="grid grid-cols-3 gap-8 justify-items-center py-8">
+            <x-cards.card-4 :list="$list" :data="$transaction" :filter="$filter"/>
+        </div>
 
-                        <x-table.cell-text left>
-                            @if($row->transType->vname == 'Cash Book')
-                                <a href="{{route('cashReports', $row->id)}}">
-                                    {{$row->transType->vname}} </a>
-                            @elseif($row->transType->vname == 'Bank Book')
-                                <a href="{{route('bankReports', $row->id)}}">
-                                    {{$row->transType->vname}} </a>
-                            @else
-                                <a href="{{ route('accBooks') }}">
-                                    {{$row->transType->vname}} </a>
-                            @endif
-                        </x-table.cell-text>
-
-
-{{--                        <x-table.cell-text left>--}}
-{{--                            {{$row->transType->vname}}--}}
-{{--                        </x-table.cell-text>--}}
-
-                        <x-table.cell-text>{{$row->account_no}}</x-table.cell-text>
-
-                        <x-table.cell-text right>{{  $row->opening_balance }}
-                        </x-table.cell-text>
-
-                        {{--                        <x-table.cell-text>{{date('d-m-Y',strtotime($row->opening_balance_date))}}</x-table.cell-text>--}}
-
-                        <x-table.cell-action id="{{$row->id}}"/>
-
-                    </x-table.row>
-
-                @endforeach
-
-            </x-slot:table_body>
-        </x-table.form>
-
-        <x-modal.delete/>
-
-        <div class="pt-5">{{ $list->links() }}</div>
-
-        <!-- Create  -------------------------------------------------------------------------------------------------->
+            <!-- Create  -------------------------------------------------------------------------------------------------->
         <x-forms.create :id="$common->vid">
 
             <div class="flex flex-col gap-3">
@@ -222,5 +175,7 @@
 
             </div>
         </x-forms.create>
+
     </x-forms.m-panel>
+
 </div>

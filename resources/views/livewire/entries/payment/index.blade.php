@@ -38,9 +38,9 @@
 
                 {{--                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>--}}
 
-                <x-table.header-text sort-icon="none">A/c Name</x-table.header-text>
+{{--                <x-table.header-text sort-icon="none">A/c Name</x-table.header-text>--}}
 
-                <x-table.header-text sort-icon="none">Trans Type</x-table.header-text>
+{{--                <x-table.header-text sort-icon="none">Trans Type</x-table.header-text>--}}
 
                 <x-table.header-text sort-icon="none">Amount</x-table.header-text>
 
@@ -66,9 +66,9 @@
 
                         {{--                        <x-table.cell-text>{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</x-table.cell-text>--}}
 
-                        <x-table.cell-text right>{{$row->accountBook->vname}}</x-table.cell-text>
+{{--                        <x-table.cell-text left>{{$row->accountBook->vname}}</x-table.cell-text>--}}
 
-                        <x-table.cell-text right>{{$row->transType->vname}}</x-table.cell-text>
+{{--                        <x-table.cell-text left>{{$row->transType->vname}}</x-table.cell-text>--}}
 
                         <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
 
