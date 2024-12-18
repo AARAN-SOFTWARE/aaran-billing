@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    {{-- Receivables --}}
+    {{-- ReceivablesReport --}}
 
     <div class="bg-white rounded-md border-t-2 border-[#F5B849] flex flex-col justify-evenly hover:shadow-md">
 
@@ -75,7 +75,7 @@
                 <div class="text-[#F5B849]">{{$transactions['month_receivable']}}</div>
             </div>
             <div>
-                <a href="{{route('receviables')}}" class="text-[#F5B849] text-sm hover:bg-[#fef6e7] px-3 py-1 rounded-md font-semibold inline-flex items-center gap-x-2">
+                <a href="{{route('receivables')}}" class="text-[#F5B849] text-sm hover:bg-[#fef6e7] px-3 py-1 rounded-md font-semibold inline-flex items-center gap-x-2">
                     <span>
                         View All
                     </span>
@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    {{-- Payables --}}
+    {{-- PayablesReport --}}
 
     <div class="bg-white rounded-md border-t-2 border-[#E6533C] flex flex-col justify-evenly hover:shadow-md">
 

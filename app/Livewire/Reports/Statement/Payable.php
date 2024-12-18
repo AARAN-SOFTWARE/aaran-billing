@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Livewire\Reports\Transaction;
+namespace App\Livewire\Reports\Statement;
 
 use Aaran\Master\Models\Contact;
 use App\Livewire\Trait\CommonTraitNew;
 use Livewire\Component;
 
-class PayableReport extends Component
+class Payable extends Component
 {
     use CommonTraitNew;
 
     public function getList()
     {
-        return Contact::where('contact_type_id', '124')->get();
+        return Contact::where('contact_type_id', '123')->get();
     }
 
     public function render()
     {
-        return view('livewire.reports.transaction.payable-report')->with([
+        return view('livewire.reports.statement.payable')->with([
             'list' => $this->getList(),
         ]);
     }

@@ -4,12 +4,15 @@
     <x-forms.m-panel>
         <div class="flex md:flex-row flex-col md:justify-between w-full gap-3">
             <div class="sm:w-[40rem]">
-                <x-input.model-select wire:model.live="byParty" :label="'Party Name'">
-                    <option value="">choose</option>
-                    @foreach($contacts as $contact)
-                        <option value="{{$contact->id}}">{{$contact->vname}}</option>
-                    @endforeach
-                </x-input.model-select>
+{{--                <x-input.model-select wire:model.live="byParty" :label="'Party Name'">--}}
+{{--                    <option value="">choose</option>--}}
+{{--                    @foreach($contacts as $contact)--}}
+{{--                        <option value="{{$contact->id}}">{{$contact->vname}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </x-input.model-select>--}}
+                <div class="text-lg font-merri space-x-5">
+                    <span class="font-lex">Party Name:</span> <span >{{$partyName}}</span>
+                </div>
             </div>
             <x-input.model-date wire:model.live="start_date" :label="'From Date'"/>
             <x-input.model-date wire:model.live="end_date" :label="'To Date'"/>

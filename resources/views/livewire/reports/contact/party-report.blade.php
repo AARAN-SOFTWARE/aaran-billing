@@ -50,27 +50,25 @@
                     $totalReceipt = 0;
                 @endphp
                 <x-table.row>
-                    @if($byParty !=null)
+                @if($byParty !=null)
+                    <x-table.cell-text colspan="3">
+                        <div class="text-right font-bold">
+                            Opening Balance
+                        </div>
+                    </x-table.cell-text>
 
-                        <x-table.cell-text colspan="3">
-                            <div class="text-right font-bold">
-                                Opening Balance
-                            </div>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text colspan="1">
-                            <div class="text-right font-bold">
-                                {{ $opening_balance}}
-                            </div>
-                        </x-table.cell-text>
-                        <x-table.cell-text colspan="1">
-                        </x-table.cell-text>
-                        <x-table.cell-text colspan="1">
-                            {{$opening_balance}}
-                        </x-table.cell-text>
-                    @endif
+                    <x-table.cell-text colspan="1">
+                        <div class="text-right font-bold">
+                            {{ $opening_balance}}
+                        </div>
+                    </x-table.cell-text>
+                    <x-table.cell-text colspan="1">
+                    </x-table.cell-text>
+                    <x-table.cell-text colspan="1">
+                        {{$opening_balance}}
+                    </x-table.cell-text>
+                @endif
                 </x-table.row>
-
                 @forelse ($list as $index =>  $row)
                     @php
                         if ($row->mode=='Sales Invoice'){
