@@ -35,9 +35,19 @@ class Transaction extends Model
         return $this->belongsTo(AccountBook::class, 'account_book_id');
     }
 
+    public function openingBal()
+    {
+        return $this->belongsTo(AccountBook::class, 'opening_bal_id');
+    }
+
     public function transType()
     {
         return $this->belongsTo(Common::class, 'trans_type_id');
+    }
+
+    public function receiptType()
+    {
+        return $this->belongsTo(Common::class, 'receipttype_id');
     }
 
     public function mode(): BelongsTo

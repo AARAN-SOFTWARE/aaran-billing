@@ -47,12 +47,15 @@ class Bank extends Component
     public $transName;
     public $transaction;
     public $accountId;
+    public $opening_bal;
+
     #endregion
 
     #region[Mount]
     public function mount($id)
     {
         $this->transaction = AccountBook::find($id);
+        $this->opening_bal = AccountBook::find($id)->opening_balance;
         $this->accountId = $this->transaction->id;
         $this->transId = $this->transaction->trans_type_id;
         if ($this->transId == 108) {
@@ -64,6 +67,19 @@ class Bank extends Component
         }
     }
     #endregion
+
+    public function updatedAccountBookId($value)
+    {
+        $selectedAccountBook = AccountBook::find($value);
+
+        if ($selectedAccountBook) {
+            $this->trans_type_id = $selectedAccountBook->trans_type_id;
+            $this->opening_bal = $selectedAccountBook->opening_balance; // Ensure this is correct based on your schema
+        } else {
+            $this->trans_type_id = null;
+            $this->opening_bal = null;
+        }
+    }
 
     #region[Get-Save]
     public function getSave(): void
@@ -81,6 +97,7 @@ class Bank extends Component
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
                     'trans_type_id' => $this->trans_type_id ?: $this->transId,
+                    'opening_bal' => $this->opening_bal,
                     'mode_id' => $this->mode_id ?: '111',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '1',
@@ -96,7 +113,6 @@ class Bank extends Component
                     'verified_on' => $this->verified_on,
                     'against_id' => $this->against_id ?: '0',
                     'user_id' => auth()->id(),
-
                 ];
                 $this->common->save($Transaction, $extraFields);
 
@@ -119,6 +135,7 @@ class Bank extends Component
                     'mode_id' => $this->mode_id,
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id,
+                    'opening_bal' => $this->opening_bal,
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
