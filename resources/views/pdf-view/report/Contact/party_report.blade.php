@@ -231,32 +231,52 @@
 <!------Top Company Area------------------------------------------------------------------------------------------>
 <table class="border w-full">
     <tr>
-        <td width="35%" class="right">
+        <td width="20%" class="center">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
                 <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" width="130px">
             @endif
         </td>
-
-        <td width="65%" class="lh-0 left">
-            <div class=" lh-1 font-bold times text-4xl">{{$cmp->get('company_name')}}</div>
-            <div class="lh-2 text-md v-align-b">
+        <td width="60%" class="lh-0 center" >
+            <div class=" lh-1 font-bold times text-2xl">{{$cmp->get('company_name')}}</div>
+            <div class="lh-2 text-md v-align-b ">
                 <div class="times">{{$cmp->get('address_1')}}</div>
                 <div class="times">{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</div>
                 <div class="times">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</div>
                 <div class="times">{{$cmp->get('gstin')}}</div>
             </div>
         </td>
+        <td width="20%" class="center">
+           <div>&nbsp;</div>
+        </td>
     </tr>
-
-    <tr class="border-t">
-        <td colspan="2" class="text-md lh-0 px-10 ">
+    <tr class="border-t ">
+        <td colspan="3" class="text-md lh-0 px-10 ">
             <p class="font-bold text-lg">M/s.{{$contact->vname}}</p>
             <p class="times">{{$billing_address->get('address_1')}}</p>
             <p class="times">{{$billing_address->get('address_2')}}</p>
             <p class="times">{{$billing_address->get('address_3')}}</p>
             <p class="times">GST IN : {{$contact->gstin}}</p>
+        </td>
+    </tr>
+
+</table>
+<table class="border border-t-none">
+    <tr class="lh-0">
+        <th colspan="3" class=" bg-gray center times border-b">
+            <p class="times text-lg py-0">Account statement</p>
+        </th>
+    </tr>
+    <tr class="">
+        <td width="70%" class="text-lg">
+            <p class="text-sm">&nbsp;</p>
+        </td>
+        <td width="" class="text-lg" >
+            <p class="text-sm">From : {{$start_date}}   </p>
+        </td>
+        <td width="" class="text-lg" >
+            <p class="text-sm">To : {{$end_date}}</p>
         </td>
     </tr>
 </table>

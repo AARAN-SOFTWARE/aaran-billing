@@ -4433,16 +4433,16 @@
         },
         {
             "name": "spatie/browsershot",
-            "version": "4.4.0",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/browsershot.git",
-                "reference": "3ff350cd0a36943759e2932a27d8cd18c11e5fdc"
+                "reference": "aae8a337f73f63fc41c4c759fc397ce725312367"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/browsershot/zipball/3ff350cd0a36943759e2932a27d8cd18c11e5fdc",
-                "reference": "3ff350cd0a36943759e2932a27d8cd18c11e5fdc",
+                "url": "https://api.github.com/repos/spatie/browsershot/zipball/aae8a337f73f63fc41c4c759fc397ce725312367",
+                "reference": "aae8a337f73f63fc41c4c759fc397ce725312367",
                 "shasum": ""
             },
             "require": {
@@ -4453,10 +4453,10 @@
                 "symfony/process": "^6.0|^7.0"
             },
             "require-dev": {
-                "pestphp/pest": "^1.20",
+                "pestphp/pest": "^3.0",
                 "spatie/image": "^3.6",
                 "spatie/pdf-to-text": "^1.52",
-                "spatie/phpunit-snapshot-assertions": "^4.2.3"
+                "spatie/phpunit-snapshot-assertions": "^4.2.3|^5.0"
             },
             "type": "library",
             "autoload": {
@@ -4489,7 +4489,7 @@
                 "webpage"
             ],
             "support": {
-                "source": "https://github.com/spatie/browsershot/tree/4.4.0"
+                "source": "https://github.com/spatie/browsershot/tree/5.0.3"
             },
             "funding": [
                 {
@@ -4497,7 +4497,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-25T16:02:22+00:00"
+            "time": "2024-12-16T09:46:16+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -4561,22 +4561,22 @@
         },
         {
             "name": "spatie/laravel-pdf",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-pdf.git",
-                "reference": "fadf23c6249c491fd4924f8ec37166a283269966"
+                "reference": "08af7423cc9b089f359798c8628fd824c51990ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-pdf/zipball/fadf23c6249c491fd4924f8ec37166a283269966",
-                "reference": "fadf23c6249c491fd4924f8ec37166a283269966",
+                "url": "https://api.github.com/repos/spatie/laravel-pdf/zipball/08af7423cc9b089f359798c8628fd824c51990ac",
+                "reference": "08af7423cc9b089f359798c8628fd824c51990ac",
                 "shasum": ""
             },
             "require": {
                 "illuminate/contracts": "^10.0|^11.0",
                 "php": "^8.2",
-                "spatie/browsershot": "^4.0",
+                "spatie/browsershot": "^4.0|^5.0",
                 "spatie/laravel-package-tools": "^1.16.1",
                 "spatie/temporary-directory": "^2.2.1"
             },
@@ -4640,9 +4640,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-pdf/issues",
-                "source": "https://github.com/spatie/laravel-pdf/tree/1.5.2"
+                "source": "https://github.com/spatie/laravel-pdf/tree/1.5.3"
             },
-            "time": "2024-07-16T07:42:10+00:00"
+            "time": "2024-12-09T13:16:56+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -10354,13 +10354,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2",
         "ext-intl": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
