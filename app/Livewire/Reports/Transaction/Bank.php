@@ -21,86 +21,7 @@ class Bank extends Component
     use CommonTraitNew;
     use WithPagination;
 
-//    public $byParty;
-//    public mixed $opening_balance = '0';
-//    public mixed $transaction_total = 0;
-//    public mixed $receipt_total = 0;
-//
-//    #region[mount]
-//    public function mount($id)
-//    {
-//        $this->byParty = $id;
-//    }
-//
-//    #endregion
-//
-//    public function opening_Balance()
-//    {
-//        if ($this->byParty) {
-//            $obj = Transaction::find($this->byParty);
-//            $this->opening_balance = $obj->balance;
-//
-//            $this->transaction_total = Transaction::whereDate('date', '<', $this->start_date ?: $this->invoiceDate_first)
-//                ->where('account_book_id', '=', $this->byParty)
-//                ->sum('grand_total');
-//
-//            $this->receipt_total = Transaction::whereDate('vdate', '<', $this->start_date ?: $this->invoiceDate_first)
-//                ->where('account_book_id', '=', $this->byParty)
-//                ->where('mode_id', '=', 111)
-//                ->sum('vname');
-//
-//            $this->opening_balance = $this->opening_balance + $this->transaction_total - $this->receipt_total;
-//
-//        }
-//
-//    }
-//
-//    #region[List]
-//
-//    public function getList()
-//    {
-//        $this->opening_Balance();
-//
-//        $receipt = Transaction::select([
-//            'transactions.account_book_id',
-//            'transactions.contact_id',
-//            DB::raw("'receipt' as mode"),
-//            "transactions.id as vno",
-//            'transactions.vdate as vdate',
-//            DB::raw("'' as grand_total"),
-//            'transactions.vname',
-//        ])
-//            ->where('active_id', '=', 1)
-//            ->where('contact_id', '=', $this->byParty)
-//            ->where('mode_id', '=', 111)
-//            ->whereDate('vdate', '>=', $this->start_date ?: $this->invoiceDate_first)
-//            ->whereDate('vdate', '<=', $this->end_date ?: Carbon::now()->format('Y-m-d'));
-//
-//                  $payment = Transaction::select([
-//                      'transactions.account_book_id',
-//                      'transactions.contact_id',
-//                      DB::raw("'payment' as mode"),
-//                      "transactions.id as vno",
-//                      'transactions.vdate as vdate',
-//                      DB::raw("'' as grand_total"),
-//                      'transactions.vname',
-//                  ])
-//                      ->where('active_id', '=', 1)
-//                      ->where('contact_id', '=', $this->byParty)
-//                      ->where('mode_id', '=', 110)
-//                      ->whereDate('vdate', '>=', $this->start_date ?: $this->invoiceDate_first)
-//                      ->whereDate('vdate', '<=', $this->end_date ?: carbon::now()->format('Y-m-d'))
-//                      ->where('company_id', '=', session()->get('company_id'));
-//    }
-//
-//    #endregion
-
-//    public $account_book_id;
-//    public function ()
-//    {
-//
-//}
-
+    #region[property]
     public $paid_to;
     public $purpose;
     public $vdate;
@@ -122,17 +43,27 @@ class Bank extends Component
     public $account_book_id;
     public $account_books = [];
     public $trans_type_id;
+    public $transId;
+    public $transName;
+    public $transaction;
+    public $accountId;
     #endregion
 
+    #region[Mount]
     public function mount($id)
     {
         $this->transaction = AccountBook::find($id);
         $this->accountId = $this->transaction->id;
-//        dd($this->account_book_id);
-//        $this->account_books = AccountBook::with('transType')->where('account_book_id',$this->accountId)->get();
-//        dd($this->accountId)
-//        $this->account_books = AccountBook::with('transType')->where('trans_type_id',109)->get();
+        $this->transId = $this->transaction->trans_type_id;
+        if ($this->transId == 108) {
+            $this->transName = Common::find(108)->vname;
+        }elseif ($this->transId == 109) {
+            $this->transName = Common::find(109)->vname;
+        }else {
+            $this->transName = Common::find(136)->vname;
+        }
     }
+    #endregion
 
     #region[Get-Save]
     public function getSave(): void
@@ -149,7 +80,7 @@ class Bank extends Component
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
-                    'trans_type_id' => $this->trans_type_id,
+                    'trans_type_id' => $this->trans_type_id ?: $this->transId,
                     'mode_id' => $this->mode_id ?: '111',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '1',
@@ -184,7 +115,7 @@ class Bank extends Component
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id,
-                    'trans_type_id' => $this->trans_type_id,
+                    'trans_type_id' => $this->trans_type_id ?: $this->transId,
                     'mode_id' => $this->mode_id,
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id,
@@ -496,76 +427,6 @@ class Bank extends Component
 
     #endregion
 
-//    #region[trans_type]
-//    public $trans_type_id = '';
-//    public $trans_type_name = '';
-//    public \Illuminate\Support\Collection $trans_typeCollection;
-//    public $highlightTransType = 0;
-//    public $trans_typeTyped = false;
-//
-//    public function decrementTransType(): void
-//    {
-//        if ($this->highlightTransType === 0) {
-//            $this->highlightTransType = count($this->trans_typeCollection) - 1;
-//            return;
-//        }
-//        $this->highlightTransType--;
-//    }
-//
-//    public function incrementTransType(): void
-//    {
-//        if ($this->highlightTransType === count($this->trans_typeCollection) - 1) {
-//            $this->highlightTransType = 0;
-//            return;
-//        }
-//        $this->highlightTransType++;
-//    }
-//
-//    public function setTransType($name, $id): void
-//    {
-//        $this->trans_type_name = $name;
-//        $this->trans_type_id = $id;
-//        $this->getTransTypeList();
-//    }
-//
-//    public function enterTransType(): void
-//    {
-//        $obj = $this->trans_typeCollection[$this->highlightTransType] ?? null;
-//
-//        $this->trans_type_name = '';
-//        $this->trans_typeCollection = \Illuminate\Database\Eloquent\Collection::empty();
-//        $this->highlightTransType = 0;
-//
-//        $this->trans_type_name = $obj['vname'] ?? '';
-//        $this->trans_type_id = $obj['id'] ?? '';
-//    }
-//
-//    public function refreshTransType($v): void
-//    {
-//        $this->trans_type_id = $v['id'];
-//        $this->trans_type_name = $v['name'];
-//        $this->trans_typeTyped = false;
-//    }
-//
-//    public function transTypeSave($name)
-//    {
-//        $obj = Common::create([
-//            'label_id' => 19,
-//            'vname' => $name,
-//            'active_id' => '1'
-//        ]);
-//        $v = ['name' => $name, 'id' => $obj->id];
-//        $this->refreshTransType($v);
-//    }
-//
-//    public function getTransTypeList(): void
-//    {
-//        $this->trans_typeCollection = $this->trans_type_name ?
-//            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
-//            Common::where('label_id', '=', '19')->get();
-//    }
-//#endregion
-
     #region[instrumentBank]
     public $instrument_bank_id = '';
     public $instrument_bank_name = '';
@@ -710,50 +571,6 @@ class Bank extends Component
 
 #endregion
 
-//    #region[Get-Obj]
-//    public function getObj($id)
-//    {
-//        if ($id) {
-//            $Transaction = Transaction::find($id);
-//            $this->common->vid = $Transaction->id;
-//            $this->common->vname = $Transaction->vname;
-//            $this->common->active_id = $Transaction->active_id;
-//            $this->account_book_id = $Transaction->account_book_id;
-//            $this->contact_id = $Transaction->contact_id;
-//            $this->contact_name = $Transaction->contact_id ? Contact::find($Transaction->contact_id)->vname : '';
-//            $this->vch_no = $Transaction->vch_no;
-//            $this->paid_to = $Transaction->paid_to;
-//            $this->purpose = $Transaction->purpose;
-//            $this->order_id = $Transaction->order_id;
-//            $this->order_name = $Transaction->order_id ? Order::find($Transaction->order_id)->vname : '';
-////            $this->trans_type_id = $Transaction->trans_type_id;
-////            $this->trans_type_name = $Transaction->trans_type_id ? Common::find($Transaction->trans_type_id)->vname : '';
-//            $this->mode_id = $Transaction->mode_id;
-//            $this->mode_name = $Transaction->mode_id ? Common::find($Transaction->mode_id)->vname : '';
-//            $this->vdate = $Transaction->vdate;
-//            $this->amount = $Transaction->amount;
-//            $this->receipt_type_id = $Transaction->receipttype_id;
-//            $this->receipt_type_name = $Transaction->receipttype_id ? Common::find($Transaction->receipttype_id)->vname : '';
-//            $this->remarks = $Transaction->remarks;
-//            $this->chq_no = $Transaction->chq_no;
-//            $this->chq_date = $Transaction->chq_date;
-//            $this->instrument_bank_id = $Transaction->instrument_bank_id;
-//            $this->instrument_bank_name = $Transaction->instrument_bank_id ? Common::find($Transaction->instrument_bank_id)->vname : '';
-//            $this->deposit_on = $Transaction->deposit_on;
-//            $this->realised_on = $Transaction->realised_on;
-//            $this->ref_no = $Transaction->ref_no;
-//            $this->ref_amount = $Transaction->ref_amount;
-//            $this->verified_by = $Transaction->verified_by;
-//            $this->verified_on = $Transaction->verified_on;
-//            $this->against_id = $Transaction->against_id;
-//            $contact_outstanding = Contact::find($this->contact_id);
-//            $contact_outstanding->outstanding = $contact_outstanding->outstanding + $this->common->vname;
-//            $contact_outstanding->save();
-//            return $Transaction;
-//        }
-//        return null;
-//    }
-//    #endregion
 
     #region[Clear-Fields]
     public function clearFields(): void
@@ -768,7 +585,7 @@ class Bank extends Component
         $this->order_id = '';
         $this->order_name = '';
         $this->amount = '';
-        $this->trans_type_id = 109;
+        $this->trans_type_id =$this->transId;
 //        $this->trans_type_name = 108;
         $this->remarks = '';
         $this->chq_no = '';
@@ -789,19 +606,15 @@ class Bank extends Component
 
     #endregion
 
-    public function updatedAccountBookId($value)
-    {
-        $selectedAccountBook = AccountBook::find($value);
-        $this->trans_type_id = $selectedAccountBook ? $selectedAccountBook->trans_type_id : null;
-    }
+//    public function updatedAccountBookId($value)
+//    {
+//        $selectedAccountBook = AccountBook::find($value);
+//        $this->trans_type_id = $selectedAccountBook ? $selectedAccountBook->trans_type_id : null;
+//    }
 
-    public $transaction;
-    public $accountId;
+public $startDate;
+public $endDate;
 
-
-    #region[Mount]
-
-    #endregion
 
     public function render()
     {
@@ -811,8 +624,15 @@ class Bank extends Component
         $this->getOrderList();
         $this->getInstrumentBankList();
 
-//        $list = Transaction::with('contact')->where('trans_type_id',109)->where('account_book_id', $this->accountId)->get();
-        $list = Transaction::where('trans_type_id', 109)->where('account_book_id',$this->accountId)->get();
+        $list = Transaction::where('trans_type_id', $this->transId)
+            ->where('account_book_id',$this->accountId)
+            ->when($this->startDate, function ($query) {
+                return $query->whereDate('vdate', '>=', $this->startDate);
+            })
+            ->when($this->endDate, function ($query) {
+                return $query->whereDate('vdate', '<=', $this->endDate);
+            })
+            ->get();
         return view('livewire.reports.transaction.bank')->with([
             'list' => $list,
         ]);
