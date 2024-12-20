@@ -15,6 +15,12 @@
             </div>
         </div>
 
+        <div class="">
+{{--            <a href="{{ route('report.print') }}">print--}}
+{{--            </a>--}}
+                <x-button.print-x wire:click="print"/>
+        </div>
+
 
         <x-table.form>
 
@@ -38,7 +44,7 @@
                                      sort-icon="none">Type
                 </x-table.header-text>
 
-{{--                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>--}}
+                {{--                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>--}}
 
                 <x-table.header-text sort-icon="none">Payment</x-table.header-text>
 
@@ -48,27 +54,40 @@
 
             </x-slot:table_header>
 
-            @php
-                $totalAmount = 0;
-            @endphp
+
             <x-slot:table_body name="table_body">
 
+                @php
+                    $total_payment = $openingBalance;
+                    $total_receipt = 0;
+                @endphp
+
                 <x-table.row>
-                    <x-table.cell-text :colspan="7" right>
-                        <strong> Opening Balance:</strong>
-                    </x-table.cell-text>
-                    <x-table.cell-text right>
-                        @if($opening_bal)
-                            <div>
-                                {{ $opening_bal}}
-                            </div>
-                        @endif
-                    </x-table.cell-text>
+                    @if($byParty !=null)
+                        <x-table.cell-text :colspan="7" right>
+                            <strong> Opening Balance:</strong>
+                        </x-table.cell-text>
+                        <x-table.cell-text right>
+                            @if($openingBalance)
+                                <div>
+                                    {{ $openingBalance}}
+                                </div>
+                            @endif
+                        </x-table.cell-text>
+                    @endif
                 </x-table.row>
-
                 @foreach($list as $index=>$row)
-                    <x-table.row>
 
+                    @php
+
+                        if ($row->mode== 'payment') {
+                            $total_payment += floatval($row->vname);
+                        } elseif ($row->mode == 'receipt') {
+                            $total_receipt += floatval($row->vname);
+                        }
+                        $balance = $total_payment - $total_receipt;
+                    @endphp
+                    <x-table.row>
 
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
@@ -80,24 +99,33 @@
 
                         <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
 
-{{--                        <x-table.cell-text>{{($row->mode->vname)}}</x-table.cell-text>--}}
+                        <x-table.cell-text right>
+                            @if($row->mode_id == 110)
+                                {{$row->vname+0 }}
+                            @endif
+                        </x-table.cell-text>
 
-
-                        <x-table.cell-text right>@if($row->mode_id == 110)
+                        <x-table.cell-text right>
+                            @if($row->mode_id == 111)
                                 {{$row->vname+0}}
-                            @endif</x-table.cell-text>
-
-                        <x-table.cell-text right>@if($row->mode_id == 111)
-                                {{$row->vname+0}}
-                            @endif</x-table.cell-text>
+                            @endif
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            {{ $balance }}
+                        </x-table.cell-text>
 
                     </x-table.row>
 
                 @endforeach
 
                 <x-table.row>
-                    <x-table.cell-text colspan="7">&nbsp;</x-table.cell-text>
-                    <x-table.cell-text colspan=""></x-table.cell-text>
+
+                    <x-table.cell-text colspan="3" class="text-md text-right text-gray-400 ">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
+                    </x-table.cell-text>
+                    <x-table.cell-text
+                        class="text-right  text-md ">{{$balance}}</x-table.cell-text>
+                    <x-table.cell-text class="text-right  text-md ">{{ $total_receipt }}</x-table.cell-text>
+                    <x-table.cell-text></x-table.cell-text>
                 </x-table.row>
 
             </x-slot:table_body>

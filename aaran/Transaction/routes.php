@@ -15,6 +15,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('reports/{id?}', App\Livewire\Reports\Transaction\Bank::class)->name('reports');
     Route::get('cashReports/{id?}', App\Livewire\Reports\Transaction\Bank::class)->name('cashReports');
-
+    Route::get('report/print/{party}/{start_date?}/{end_date?}', App\Http\Controllers\Transaction\BookReportController::class)->name('report.print');
 
 });
