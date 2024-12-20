@@ -231,19 +231,108 @@
 </head>
 
 <body class="bg-white-100 p-10">
-<table>
-    {{$party}}
-@foreach($list as $index=>$row)
-        <p>{{$index+1}}</p>
+<table class="border w-full">
+    <tr>
+        <td width="35%" class="right">
+            @if($cmp->get('logo')!='no_image')
+                <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
+            @else
+                <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" width="130px">
+            @endif
+        </td>
+        <td width="65%" class="lh-0 left">
+            <div class=" lh-1 font-bold times text-4xl">{{$cmp->get('company_name')}}</div>
+            <div class="lh-2 text-md v-align-b">
+                <div class="times">{{$cmp->get('address_1')}}</div>
+                <div class="times">{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</div>
+                <div class="times">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</div>
+                <div class="times">{{$cmp->get('gstin')}}</div>
+            </div>
+        </td>
+    </tr>
 
-        <p>{{$row->vch_no+0}}</p>
-
-        <p>{{date('d-m-Y',strtotime($row->vdate))}}</p>
-
-        <p left>{{$row->contact->vname}}</p>
-@endforeach
+{{--    <tr class="border-t ">--}}
+{{--        <td colspan="3" class="text-md lh-0 px-10 ">--}}
+{{--            <p class="font-bold text-lg">M/s.{{$contact->vname}}</p>--}}
+{{--            <p class="times">{{$billing_address->get('address_1')}}</p>--}}
+{{--            <p class="times">{{$billing_address->get('address_2')}}</p>--}}
+{{--            <p class="times">{{$billing_address->get('address_3')}}</p>--}}
+{{--            <p class="times">GST IN : {{$contact->gstin}}</p>--}}
+{{--        </td>--}}
+{{--    </tr>--}}
 </table>
+<table class="border-r border-l border-b">
+    <tr class="border-b">
+        <th class="text-lg py-2">{{$trans_name }} - Account Statement</th>
+    </tr>
+    <tr>
+        <td class="text-sm p-2 right">
+            <p>From: {{$start_date}} To: {{$end_date}}</p>
+        </td>
+    </tr>
+</table>
+<table class="border border-t-none">
+    <tr class="bg-gray text-sm lh-2 border-b">
+        <th width="5%" class="border-r py-5">VCH No</th>
+        <th width="12%" class="border-r">Date</th>
+        <th width="auto" class="border-r">Contact</th>
+        <th width="12%" class="border-r">Type</th>
+        <th width="12%" class="border-r">Credit</th>
+        <th width="12%" class="border-r">Debit</th>
+        <th width="12%" class="border-r">Balance</th>
+    </tr>
+    <tr class="text-sm center v-align-c border-b">
+{{--        @if($byParty !=null)--}}
 
+            <td height="26px" class="center border-r" colspan="4">Opening Balance</td>
+            <td class="right border-r ">{{ $opening_balance}}</td>
+            <td class="right border-r ">&nbsp;</td>
+            <td class="right border-r px-2">{{$opening_balance}}</td>
+{{--        @endif--}}
+    </tr>
+    @php
+        $current_balance = $opening_balance; // Initialize current balance with opening balance
+        $total_credit = 0 + $opening_balance; // Initialize total credit
+        $total_debit = 0; // Initialize total debit
+    @endphp
+    @foreach($transaction as $index => $row)
+        <tr class="text-sm center v-align-c">
+            <td height="26px" class="center border-r">{{$index+1}}</td>
+            <td class="center border-r ">{{ date('d-m-Y', strtotime($row->vdate)) }}</td>
+            <td class="center border-r ">{{ $row->contact->vname }}</td>
+            <td class="right border-r ">{{ \Aaran\Transaction\Models\Transaction::common($row->receipttype_id) }}</td>
+            <td class="right border-r px-2">
+                @if($row->mode_id == 110)
+                {{$row->vname + 0 }}
+                @php
+                    $current_balance += ($row->vname + 0);
+                    $total_credit += ($row->vname + 0);
+                @endphp
+                @else
+                    &nbsp; <!-- Empty space for non-credit rows -->
+                @endif
+            </td>
+            <td class="right border-r px-2">
+                @if($row->mode_id == 111) <!-- Debit -->
+                {{$row->vname + 0}}
+                @php
+                    $current_balance -= ($row->vname + 0); // Update balance for debit
+                    $total_debit += ($row->vname + 0); // Accumulate total debit
+                @endphp
+                @else
+                    &nbsp; <!-- Empty space for non-debit rows -->
+                @endif
+            </td>
+            <td class="right border-r px-2">{{ $current_balance }}</td>
+        </tr>
+    @endforeach
+    <tr class="text-sm border-t center v-align-c">
+        <td height="26px" class="center border-r" colspan="4">TOTALS</td>
+        <td class="right border-r ">{{ $total_credit }}</td>
+        <td class="right border-r ">{{ $total_debit }}</td>
+        <td class="right border-r ">{{ $current_balance }}</td>
+    </tr>
+</table>
 </body>
 </html>
 
