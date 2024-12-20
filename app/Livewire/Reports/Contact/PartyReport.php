@@ -127,7 +127,6 @@ class PartyReport extends Component
             ->union($payment->toBase())
             ->union($receipt->toBase());
 
-
         return DB::table(DB::raw("({$combined->toSql()}) as combined"))
             ->mergeBindings($combined)
             ->orderBy('vdate')
@@ -149,7 +148,7 @@ class PartyReport extends Component
     }
     public function render()
     {
-        return view('livewire.reports.contact.party-report')->with([
+        return view(   'livewire.reports.contact.party-report')->with([
             'list' => $this->getList()
         ]);
     }

@@ -260,7 +260,6 @@
             <p class="times">GST IN : {{$contact->gstin}}</p>
         </td>
     </tr>
-
 </table>
 <table class="border border-t-none">
     <tr class="lh-0">
