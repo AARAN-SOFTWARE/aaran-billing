@@ -47,23 +47,47 @@ class Bank extends Component
     public $transName;
     public $transaction;
     public $accountId;
+    public $opening_bal;
+    public $byParty;
+    public $invoiceDate_first;
+
+//    public mixed $opening_balance = '0';
+    public mixed $payment_total = 0;
+    public mixed $receipt_total = 0;
+    public mixed $openingBalance = 0;
     #endregion
 
     #region[Mount]
     public function mount($id)
     {
+        $this->byParty = $id;
         $this->transaction = AccountBook::find($id);
+        $this->opening_bal = AccountBook::find($id)->opening_balance;
         $this->accountId = $this->transaction->id;
         $this->transId = $this->transaction->trans_type_id;
         if ($this->transId == 108) {
             $this->transName = Common::find(108)->vname;
-        }elseif ($this->transId == 109) {
+        } elseif ($this->transId == 109) {
             $this->transName = Common::find(109)->vname;
-        }else {
+        } else {
             $this->transName = Common::find(136)->vname;
         }
     }
+
     #endregion
+
+    public function updatedAccountBookId($value)
+    {
+        $selectedAccountBook = AccountBook::find($value);
+
+        if ($selectedAccountBook) {
+            $this->trans_type_id = $selectedAccountBook->trans_type_id;
+            $this->opening_bal = $selectedAccountBook->opening_balance; // Ensure this is correct based on your schema
+        } else {
+            $this->trans_type_id = null;
+            $this->opening_bal = null;
+        }
+    }
 
     #region[Get-Save]
     public function getSave(): void
@@ -81,6 +105,7 @@ class Bank extends Component
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
                     'trans_type_id' => $this->trans_type_id ?: $this->transId,
+                    'opening_bal' => $this->opening_bal,
                     'mode_id' => $this->mode_id ?: '111',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '1',
@@ -96,7 +121,6 @@ class Bank extends Component
                     'verified_on' => $this->verified_on,
                     'against_id' => $this->against_id ?: '0',
                     'user_id' => auth()->id(),
-
                 ];
                 $this->common->save($Transaction, $extraFields);
 
@@ -119,6 +143,7 @@ class Bank extends Component
                     'mode_id' => $this->mode_id,
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id,
+                    'opening_bal' => $this->opening_bal,
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
@@ -585,7 +610,7 @@ class Bank extends Component
         $this->order_id = '';
         $this->order_name = '';
         $this->amount = '';
-        $this->trans_type_id =$this->transId;
+        $this->trans_type_id = $this->transId;
 //        $this->trans_type_name = 108;
         $this->remarks = '';
         $this->chq_no = '';
@@ -603,7 +628,6 @@ class Bank extends Component
         $this->account_book_id = '';
         $this->vdate = Carbon::now()->format('Y-m-d');
     }
-
     #endregion
 
 //    public function updatedAccountBookId($value)
@@ -612,9 +636,83 @@ class Bank extends Component
 //        $this->trans_type_id = $selectedAccountBook ? $selectedAccountBook->trans_type_id : null;
 //    }
 
-public $startDate;
-public $endDate;
+    public $startDate;
+    public $endDate;
 
+    public function opening_Balance()
+    {
+        if ($this->byParty) {
+            $obj = AccountBook::find($this->byParty);
+            $this->openingBalance = $obj->opening_balance;
+
+            $this->invoiceDate_first = Carbon::now()->subYear()->format('Y-m-d');
+
+            $this->payment_total = Transaction::whereDate('vdate', '<', $this->startDate?:$this->invoiceDate_first)
+                ->where('contact_id','=',$this->byParty)
+                ->where('mode_id','=',110)
+                ->sum('vname');
+
+            $this->receipt_total = Transaction::whereDate('vdate', '<', $this->startDate?:$this->invoiceDate_first)
+                ->where('contact_id','=',$this->byParty)
+                ->where('mode_id','=',111)
+                ->sum('vname');
+
+            $this->openingBalance = $this->openingBalance + $this->payment_total - $this->receipt_total;
+        }
+        return $this->openingBalance;
+    }
+    #endregion
+
+    #region[List]
+    public function getList()
+    {
+        $this->opening_Balance();
+        $payment = Transaction::select([
+            'transactions.company_id',
+            'transactions.contact_id',
+            DB::raw("'receipt' as mode"),
+            "transactions.id as vno",
+            'transactions.vdate as vdate',
+            DB::raw("'' as grand_total"),
+            'transactions.vname as payment_amount',
+        ])
+            ->where('active_id', '=', 1)
+            ->where('contact_id', '=', $this->byParty)
+            ->where('mode_id', '=', 110)
+            ->whereDate('vdate', '>=', $this->startDate ?: $this->invoiceDate_first)
+            ->whereDate('vdate', '<=', $this->endDate ?: Carbon::now()->format('Y-m-d'))
+            ->where('company_id', '=', session()->get('company_id'));
+        return Transaction::select([
+            'transactions.company_id',
+            'transactions.contact_id',
+            DB::raw("'payment' as mode"),
+            "transactions.id as vno",
+            'transactions.vdate as vdate',
+            DB::raw("'' as grand_total"),
+            'transactions.vname as receipt_amount',
+        ])
+            ->where('active_id', '=', 1)
+            ->where('contact_id', '=', $this->byParty)
+            ->where('mode_id', '=', 111)
+            ->whereDate('vdate', '>=', $this->startDate ?: $this->invoiceDate_first)
+            ->whereDate('vdate', '<=', $this->endDate ?: carbon::now()->format('Y-m-d'))
+            ->where('company_id', '=', session()->get('company_id'))
+            ->union($payment)
+            ->get();
+    }
+
+
+    public function print(): void
+    {
+
+        if ($this->byParty != null) {
+            $this->redirect(route('report.print',
+                [
+                    'party' => $this->byParty, 'start_date' => $this->startDate ?: $this->invoiceDate_first,
+                    'end_date' => $this->endDate ?: Carbon::now()->format('Y-m-d'),
+                ]));
+        }
+    }
 
     public function render()
     {
@@ -623,9 +721,10 @@ public $endDate;
         $this->getReceiptTypeList();
         $this->getOrderList();
         $this->getInstrumentBankList();
+        $this->getList();
 
         $list = Transaction::where('trans_type_id', $this->transId)
-            ->where('account_book_id',$this->accountId)
+            ->where('account_book_id', $this->accountId)
             ->when($this->startDate, function ($query) {
                 return $query->whereDate('vdate', '>=', $this->startDate);
             })

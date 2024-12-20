@@ -18,9 +18,7 @@ class ReceivablesController extends Controller
     {
         $sale = $this->getList($party, $start_date, $end_date);
         $this->getBalance($party, $start_date, $end_date);
-//        return pdf('pdf-view.report.receivables', [
         Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
-
         $pdf = PDF::loadView('pdf-view.report.receivables'
             , [
             'list' => $sale,

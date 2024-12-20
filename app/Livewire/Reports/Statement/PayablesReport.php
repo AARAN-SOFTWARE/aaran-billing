@@ -33,12 +33,10 @@ class PayablesReport extends Component
         $this->byParty = $id;
         $this->contacts = Contact::where('company_id', '=', session()->get('company_id'))->where('contact_type_id','123')->get();
         $this->partyName = Contact::find($this->byParty)->vname;
-
     }
     #endregion
 
     #region[opening_balance]
-
     public function opening_Balance()
     {
         if ($this->byParty) {

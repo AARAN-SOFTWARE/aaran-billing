@@ -3,7 +3,6 @@
 namespace App\Livewire\Entries\Payment;
 
 use Aaran\Common\Models\Common;
-use Aaran\Entries\Models\Payment;
 use Aaran\Logbook\Models\Logbook;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
@@ -42,6 +41,8 @@ class Index extends Component
 //    public $trans_type_id;
     public $account_book_id;
     public $account_books = [];
+    public $opening_bal;
+//    public $opening_bal_id;
     #endregion
 
     #region[Mount]
@@ -58,13 +59,23 @@ class Index extends Component
         }
 //        $this->trans_type_id = 108;
         $this->account_books = AccountBook::with('transType')->get();
+        $this->opening_bal = AccountBook::find($id)->opening_balance;
     }
     #endregion
+
     public function updatedAccountBookId($value)
     {
         $selectedAccountBook = AccountBook::find($value);
-        $this->trans_type_id = $selectedAccountBook ? $selectedAccountBook->trans_type_id : null;
+
+        if ($selectedAccountBook) {
+            $this->trans_type_id = $selectedAccountBook->trans_type_id;
+            $this->opening_bal = $selectedAccountBook->opening_balance; // Ensure this is correct based on your schema
+        } else {
+            $this->trans_type_id = null;
+            $this->opening_bal = null;
+        }
     }
+
 
     #region[Get-Save]
     public function getSave(): void
@@ -82,6 +93,7 @@ class Index extends Component
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id ?: '1',
                     'trans_type_id' => $this->trans_type_id ?: '108',
+                    'opening_bal' => $this->opening_bal,
                     'mode_id' => $this->mode_id ?: '111',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '85',
@@ -117,6 +129,7 @@ class Index extends Component
                     'purpose' => $this->purpose,
                     'order_id' => $this->order_id,
                     'trans_type_id' => $this->trans_type_id,
+                    'opening_bal' => $this->opening_bal,
                     'mode_id' => $this->mode_id,
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id,
@@ -660,6 +673,7 @@ class Index extends Component
             $this->order_name = $Transaction->order_id ? Order::find($Transaction->order_id)->vname : '';
             $this->trans_type_id = $Transaction->trans_type_id;
             $this->trans_type_name = $Transaction->trans_type_id ? Common::find($Transaction->trans_type_id)->vname : '';
+            $this->opening_bal = $Transaction->opening_bal;
             $this->mode_id = $Transaction->mode_id;
             $this->mode_name = $Transaction->mode_id ? Common::find($Transaction->mode_id)->vname : '';
             $this->vdate = $Transaction->vdate;
@@ -702,6 +716,7 @@ class Index extends Component
         $this->amount = '';
         $this->trans_type_id = 108;
         $this->trans_type_name = 108;
+        $this->opening_bal = '';
         $this->remarks = '';
         $this->chq_no = '';
         $this->chq_date = '';
@@ -720,8 +735,6 @@ class Index extends Component
     }
 
     #endregion
-
-
 
     #region[render]
     public function render()

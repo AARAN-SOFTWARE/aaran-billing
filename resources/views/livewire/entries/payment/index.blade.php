@@ -24,23 +24,25 @@
 
                 <x-table.header-serial></x-table.header-serial>
 
-                <x-table.header-text wire:click.prevent="sortBy ('contact_id')" sort-icon="{{$getListForm->sortAsc}}">
-                    VCH NO
-                </x-table.header-text>
+{{--                <x-table.header-text wire:click.prevent="sortBy ('contact_id')" sort-icon="{{$getListForm->sortAsc}}">--}}
+{{--                    VCH NO--}}
+{{--                </x-table.header-text>--}}
 
                 <x-table.header-text wire:click.prevent="sortBy ('contact_id')" sort-icon="{{$getListForm->sortAsc}}">
                     Contact
                 </x-table.header-text>
 
-                <x-table.header-text wire:click.prevent="sortBy('contact_id')"
-                                     sort-icon="none">Type
-                </x-table.header-text>
+{{--                <x-table.header-text wire:click.prevent="sortBy('contact_id')"--}}
+{{--                                     sort-icon="none">Type--}}
+{{--                </x-table.header-text>--}}
 
                 {{--                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>--}}
 
-{{--                <x-table.header-text sort-icon="none">A/c Name</x-table.header-text>--}}
+                {{--                <x-table.header-text sort-icon="none">A/c Name</x-table.header-text>--}}
 
-{{--                <x-table.header-text sort-icon="none">Trans Type</x-table.header-text>--}}
+                {{--                <x-table.header-text sort-icon="none">Trans Type</x-table.header-text>--}}
+
+                <x-table.header-text sort-icon="none">Opening Bal</x-table.header-text>
 
                 <x-table.header-text sort-icon="none">Amount</x-table.header-text>
 
@@ -58,17 +60,21 @@
 
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
 
-                        <x-table.cell-text>{{$row->vch_no+0}}</x-table.cell-text>
+{{--                        <x-table.cell-text>{{$row->vch_no+0}}</x-table.cell-text>--}}
 
-                        <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
+                        <x-table.cell-text left>{{$row->contact->vname . ' - ' . $row->receiptType->vname}}</x-table.cell-text>
 
-                        <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
+{{--                        <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>--}}
 
                         {{--                        <x-table.cell-text>{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</x-table.cell-text>--}}
 
-{{--                        <x-table.cell-text left>{{$row->accountBook->vname}}</x-table.cell-text>--}}
+                        {{--                        <x-table.cell-text left>{{$row->accountBook->vname}}</x-table.cell-text>--}}
 
-{{--                        <x-table.cell-text left>{{$row->transType->vname}}</x-table.cell-text>--}}
+                        {{--                        <x-table.cell-text left>{{$row->transType->vname}}</x-table.cell-text>--}}
+
+{{--                        <x-table.cell-text >{{$row->transType->vname . ' ' . $row->opening_bal  }} </x-table.cell-text>--}}
+
+                        <x-table.cell-text >{{$row->opening_bal}} </x-table.cell-text>
 
                         <x-table.cell-text right>{{$row->vname+0}}</x-table.cell-text>
 
@@ -97,22 +103,22 @@
 
                     <!-- Party Name ----------------------------------------------------------------------------------->
 
-{{--                    <x-input.model-select wire:model.live="trans_type_id">--}}
-{{--                        <option value="Select" selected>Choose</option>--}}
-{{--                        <option value="108">Cash Type</option>--}}
-{{--                        <option value="109">Bank Type</option>--}}
-{{--                        <option value="136">UPI</option>--}}
-{{--                    </x-input.model-select>--}}
+                    {{--                    <x-input.model-select wire:model.live="trans_type_id">--}}
+                    {{--                        <option value="Select" selected>Choose</option>--}}
+                    {{--                        <option value="108">Cash Type</option>--}}
+                    {{--                        <option value="109">Bank Type</option>--}}
+                    {{--                        <option value="136">UPI</option>--}}
+                    {{--                    </x-input.model-select>--}}
 
 
-{{--                    <x-input.model-select wire:model.live="account_book_id">--}}
-{{--                        <option value="" selected>Choose</option>--}}
-{{--                        @foreach($account_books as $account_book)--}}
-{{--                            <option value="{{ $account_book->id }}">--}}
-{{--                                {{ $account_book->vname. ' (ACC-No: - '.$account_book->account_no . ')'}}--}}
-{{--                            </option>--}}
-{{--                        @endforeach--}}
-{{--                    </x-input.model-select>--}}
+                    {{--                    <x-input.model-select wire:model.live="account_book_id">--}}
+                    {{--                        <option value="" selected>Choose</option>--}}
+                    {{--                        @foreach($account_books as $account_book)--}}
+                    {{--                            <option value="{{ $account_book->id }}">--}}
+                    {{--                                {{ $account_book->vname. ' (ACC-No: - '.$account_book->account_no . ')'}}--}}
+                    {{--                            </option>--}}
+                    {{--                        @endforeach--}}
+                    {{--                    </x-input.model-select>--}}
 
                     <x-input.model-select wire:model.live="account_book_id">
                         <option value="" selected>Choose</option>
@@ -122,6 +128,12 @@
                             </option>
                         @endforeach
                     </x-input.model-select>
+
+                    @if($opening_bal)
+                        <div>
+                            <strong>Opening Balance:</strong> {{ $opening_bal}}
+                        </div>
+                    @endif
 
                     @if($trans_type_id)
                         <div>
