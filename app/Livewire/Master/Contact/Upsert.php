@@ -27,7 +27,6 @@ class Upsert extends Component
     public $vname;
     public $active_id;
     public $vid;
-
     public string $mobile = '';
     public string $whatsapp = '';
     public string $contact_person = '';
@@ -45,7 +44,6 @@ class Upsert extends Component
     public $email = '';
     public $address_type;
     public $log;
-
     #endregion
 
     #region[rules]
@@ -680,9 +678,7 @@ class Upsert extends Component
             $this->effective_from = '';
             $this->gstin = '';
             $this->email = '';
-
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
-
         }
     }
     #endregion
@@ -728,7 +724,6 @@ class Upsert extends Component
             ]);
         }
     }
-
     #endregion
 
     #region[Mount]
@@ -736,7 +731,6 @@ class Upsert extends Component
     {
         $this->route = url()->previous();
         if ($id != 0) {
-
             $obj = Contact::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
@@ -754,7 +748,6 @@ class Upsert extends Component
             $this->gstin = $obj->gstin;
             $this->email = $obj->email;
             $this->active_id = $obj->active_id;
-
 
             $data = DB::table('contact_details')
                 ->select(
@@ -822,7 +815,6 @@ class Upsert extends Component
             $obj->delete();
         }
     }
-
     #endregion
 
     #region[Route]

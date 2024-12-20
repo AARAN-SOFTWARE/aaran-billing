@@ -41,4 +41,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/summary/print/{year?}', App\Http\Controllers\Report\Sales\SummaryController::class)->name('summary.print');
 
     Route::get('/contactReport/{id}/{month?}/{year?}', App\Livewire\Reports\Contact\PartyReport::class)->name('contactReport');
+    Route::get('/invReport/{id}/{month?}/{year?}', App\Livewire\Reports\Contact\ContactReport::class)->name('invReport');
 });
