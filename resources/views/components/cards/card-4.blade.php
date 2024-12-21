@@ -32,8 +32,12 @@
                                       d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                             </svg>
                         </button>
+
                     </div>
+
+
                 </div>
+
 
                 <div class="flex items-center justify-between font-lex text-sm">
                     <div class="space-y-2">
@@ -87,18 +91,34 @@
                 </div>
 
                 <div class="w-full flex justify-between text-xs">
-                    <a href="
-                  {{route('reports',[$row->id,$row->trans_type_id])}}"
-                       class="text-gray-400 hover:text-blue-600 font-semibold  flex items-center ">
-                        View All
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24"
-                             stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                        </svg>
-                    </a>
+                    <div>
+                        <a href="{{route('reports',[$row->id,$row->trans_type_id])}}"
+                           class="text-gray-400 hover:text-blue-600 font-semibold  flex items-center ">
+                            View All
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            </svg>
+                        </a>
+                    </div>
 
-                    <div>{{$row->transType->vname}}</div>
+                    <div class="gap-2 flex flex-row">
+                        <div class="flex items-center">{{$row->transType->vname}}</div>
+                        <div class="gap-0.5">
+                            <button wire:click="edit({{ $row->id }})" class="rounded-md ">
+
+                                <x-icons.icon :icon="'pencil'"
+                                              class="block w-auto h-5 text-cyan-700 hover:scale-110"/>
+                            </button>
+
+                            <button wire:click="getDelete({{ $row->id }})" class="rounded-md ">
+
+                                <x-icons.icon :icon="'trash'"
+                                              class="block w-auto h-5 text-cyan-700 hover:scale-110"/>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -183,6 +203,8 @@
             </div>
         </div>
     </div>
+
+
 
 @endforeach
 

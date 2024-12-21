@@ -168,15 +168,15 @@ class Bank extends Component
         }
     }
 
-//    public function contactUpdate()
-//    {
-//        if ($this->contact_id) {
-//            $obj = Contact::find($this->contact_id);
-//            $outstanding = $obj->outstanding - $this->common->vname;
-//            $obj->outstanding = $outstanding;
-//            $obj->save();
-//        }
-//    }
+    public function contactUpdate()
+    {
+        if ($this->contact_id) {
+            $obj = Contact::find($this->contact_id);
+            $outstanding = $obj->outstanding - $this->common->vname;
+            $obj->outstanding = $outstanding;
+            $obj->save();
+        }
+    }
     #endregion
 
     #region[Contact]

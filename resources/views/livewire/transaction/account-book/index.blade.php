@@ -34,7 +34,8 @@
             <x-cards.card-4 :list="$list" :data="$transaction" :filter="$filter"/>
         </div>
 
-            <!-- Create  -------------------------------------------------------------------------------------------------->
+        <!-- Create  -------------------------------------------------------------------------------------------------->
+
         <x-forms.create :id="$common->vid">
 
             <div class="flex flex-col gap-3">
@@ -177,5 +178,7 @@
         </x-forms.create>
 
     </x-forms.m-panel>
+
+    <x-modal.delete/>
 
 </div>
