@@ -54,7 +54,7 @@ class Bank extends Component
 //    public mixed $opening_balance = '0';
     public mixed $payment_total = 0;
     public mixed $receipt_total = 0;
-    public mixed $openingBalance = 0;
+    public mixed $opening_balance = 0;
     #endregion
 
     #region[Mount]
@@ -79,7 +79,6 @@ class Bank extends Component
     public function updatedAccountBookId($value)
     {
         $selectedAccountBook = AccountBook::find($value);
-
         if ($selectedAccountBook) {
             $this->trans_type_id = $selectedAccountBook->trans_type_id;
             $this->opening_bal = $selectedAccountBook->opening_balance; // Ensure this is correct based on your schema
@@ -126,7 +125,7 @@ class Bank extends Component
 
                 $this->common->logEntry($this->vch_no, $this->mode_name, 'create', $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been created.');
 
-                $this->contactUpdate();
+//                $this->contactUpdate();
                 $message = "Saved";
             } else {
                 $Transaction = Transaction::find($this->common->vid);
@@ -162,22 +161,22 @@ class Bank extends Component
 
                 $this->common->logEntry($this->vch_no, $this->mode_name, 'update', $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been updated and the amount is ' . $this->common->vname . ' by ' . $this->trans_type_name);
 
-                $this->contactUpdate();
+//                $this->contactUpdate();
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
 
-    public function contactUpdate()
-    {
-        if ($this->contact_id) {
-            $obj = Contact::find($this->contact_id);
-            $outstanding = $obj->outstanding - $this->common->vname;
-            $obj->outstanding = $outstanding;
-            $obj->save();
-        }
-    }
+//    public function contactUpdate()
+//    {
+//        if ($this->contact_id) {
+//            $obj = Contact::find($this->contact_id);
+//            $outstanding = $obj->outstanding - $this->common->vname;
+//            $obj->outstanding = $outstanding;
+//            $obj->save();
+//        }
+//    }
     #endregion
 
     #region[Contact]
@@ -643,7 +642,7 @@ class Bank extends Component
     {
         if ($this->byParty) {
             $obj = AccountBook::find($this->byParty);
-            $this->openingBalance = $obj->opening_balance;
+            $this->opening_balance = $obj->opening_balance;
 
             $this->invoiceDate_first = Carbon::now()->subYear()->format('Y-m-d');
 
@@ -657,9 +656,9 @@ class Bank extends Component
                 ->where('mode_id','=',111)
                 ->sum('vname');
 
-            $this->openingBalance = $this->openingBalance + $this->payment_total - $this->receipt_total;
+            $this->opening_balance = $this->opening_balance + $this->payment_total - $this->receipt_total;
         }
-        return $this->openingBalance;
+        return $this->opening_balance;
     }
     #endregion
 
@@ -701,10 +700,8 @@ class Bank extends Component
             ->get();
     }
 
-
     public function print(): void
     {
-
         if ($this->byParty != null) {
             $this->redirect(route('report.print',
                 [

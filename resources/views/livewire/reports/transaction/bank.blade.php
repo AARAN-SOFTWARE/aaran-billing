@@ -5,7 +5,6 @@
 
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-
         <div class="w-full  flex-row flex gap-x-5">
             <div class="w-1/4">
                 <x-input.floating type="date" wire:model.live="startDate" label="Start Date"/>
@@ -25,11 +24,7 @@
         <x-table.form>
 
             <x-slot:table_header name="table_header" class="bg-green-100">
-
-                <x-table.header-serial></x-table.header-serial>
-
                 {{--                <x-table.header-text sort-icon="none">Opening Date</x-table.header-text>--}}
-
                 <x-table.header-text wire:click.prevent="sortBy ('contact_id')" sort-icon="{{$getListForm->sortAsc}}">
                     VCH NO
                 </x-table.header-text>
@@ -46,9 +41,9 @@
 
                 {{--                <x-table.header-text sort-icon="none">Mode of Payments</x-table.header-text>--}}
 
-                <x-table.header-text sort-icon="none">Payment</x-table.header-text>
+                <x-table.header-text sort-icon="none">Credit</x-table.header-text>
 
-                <x-table.header-text sort-icon="none">Receipt</x-table.header-text>
+                <x-table.header-text sort-icon="none">Debit</x-table.header-text>
 
                 <x-table.header-text sort-icon="none">Balance</x-table.header-text>
 
@@ -56,79 +51,87 @@
 
 
             <x-slot:table_body name="table_body">
-
-                @php
-                    $total_payment = $openingBalance;
-                    $total_receipt = 0;
-                @endphp
-
                 <x-table.row>
-                    @if($byParty !=null)
-                        <x-table.cell-text :colspan="7" right>
+                    @if($byParty != null)
+                        <x-table.cell-text :colspan="4" right>
+                            &nbsp;
+                        </x-table.cell-text>
+                        <x-table.cell-text :colspan="2" center="">
                             <strong> Opening Balance:</strong>
                         </x-table.cell-text>
                         <x-table.cell-text right>
-                            @if($openingBalance)
-                                <div>
-                                    {{ $openingBalance}}
-                                </div>
-                            @endif
+                            <div>
+                                {{ $opening_balance }}
+                            </div>
                         </x-table.cell-text>
                     @endif
                 </x-table.row>
-                @foreach($list as $index=>$row)
 
-                    @php
+                @php
+                    $current_balance = $opening_balance; // Initialize current balance with opening balance
+                    $total_credit = 0 + $opening_balance; // Initialize total credit
+                    $total_debit = 0; // Initialize total debit
+                @endphp
 
-                        if ($row->mode== 'payment') {
-                            $total_payment += floatval($row->vname);
-                        } elseif ($row->mode == 'receipt') {
-                            $total_receipt += floatval($row->vname);
-                        }
-                        $balance = $total_payment - $total_receipt;
-                    @endphp
+                @foreach($list as $index => $row)
                     <x-table.row>
+                        <x-table.cell-text>{{ $index + 1 }}</x-table.cell-text>
 
-                        <x-table.cell-text>{{$index+1}}</x-table.cell-text>
+                        <x-table.cell-text>{{ date('d-m-Y', strtotime($row->vdate)) }}</x-table.cell-text>
 
-                        <x-table.cell-text>{{$row->vch_no+0}}</x-table.cell-text>
+                        <x-table.cell-text left>{{ $row->contact->vname }}</x-table.cell-text>
 
-                        <x-table.cell-text>{{date('d-m-Y',strtotime($row->vdate))}}</x-table.cell-text>
-
-                        <x-table.cell-text left>{{$row->contact->vname}}</x-table.cell-text>
-
-                        <x-table.cell-text>{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</x-table.cell-text>
+                        <x-table.cell-text>{{ \Aaran\Transaction\Models\Transaction::common($row->receipttype_id) }}</x-table.cell-text>
 
                         <x-table.cell-text right>
-                            @if($row->mode_id == 110)
-                                {{$row->vname+0 }}
+                            @if($row->mode_id == 110) <!-- Credit -->
+                            {{$row->vname + 0 }}
+                            @php
+                                $current_balance += ($row->vname + 0); // Update balance for credit
+                                $total_credit += ($row->vname + 0); // Accumulate total credit
+                            @endphp
+                            @else
+                                &nbsp; <!-- Empty space for non-credit rows -->
                             @endif
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                            @if($row->mode_id == 111)
-                                {{$row->vname+0}}
+                            @if($row->mode_id == 111) <!-- Debit -->
+                            {{$row->vname + 0}}
+                            @php
+                                $current_balance -= ($row->vname + 0); // Update balance for debit
+                                $total_debit += ($row->vname + 0); // Accumulate total debit
+                            @endphp
+                            @else
+                                &nbsp; <!-- Empty space for non-debit rows -->
                             @endif
                         </x-table.cell-text>
-                        <x-table.cell-text>
-                            {{ $balance }}
+
+                        <x-table.cell-text right>
+                            {{ $current_balance }} <!-- Display current balance -->
                         </x-table.cell-text>
 
                     </x-table.row>
-
                 @endforeach
 
+                <!-- Totals Row -->
                 <x-table.row>
-
-                    <x-table.cell-text colspan="3" class="text-md text-right text-gray-400 ">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
+                    <x-table.cell-text colspan="4" class="text-md text-right text-gray-400 ">
+                        TOTALS
                     </x-table.cell-text>
-                    <x-table.cell-text
-                        class="text-right  text-md ">{{$balance}}</x-table.cell-text>
-                    <x-table.cell-text class="text-right  text-md ">{{ $total_receipt }}</x-table.cell-text>
-                    <x-table.cell-text></x-table.cell-text>
+                    <x-table.cell-text class="text-right text-md ">
+                        {{ $total_credit }} <!-- Total Credit -->
+                    </x-table.cell-text>
+                    <x-table.cell-text class="text-right text-md ">
+                        {{ $total_debit }} <!-- Total Debit -->
+                    </x-table.cell-text>
+                    <x-table.cell-text class="text-right text-md ">
+                        {{ $current_balance }} <!-- Total Balance -->
+                    </x-table.cell-text>
                 </x-table.row>
 
             </x-slot:table_body>
+
 
         </x-table.form>
 

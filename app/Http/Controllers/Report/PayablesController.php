@@ -24,7 +24,6 @@ class PayablesController extends Controller
         $pdf = PDF::loadView('pdf-view.report.payables'
             , [
             'list' => $purchase,
-
             'cmp' => Company::printDetails(session()->get('company_id')),
             'contact' => Contact::find($party),
             'start_date' => date('d-m-Y', strtotime($start_date)),
@@ -60,13 +59,11 @@ class PayablesController extends Controller
         $this->opening_balance = $this->opening_balance + $this->sale_total - $this->receipt_total;
 
         $this->contact_detail_id=ContactDetail::where('contact_id', '=', $party)->first()->id;
-
     }
     #endregion
 
     private function getList($party, $start_date, $end_date)
     {
-
         $purchase = Transaction::select([
             'transactions.company_id',
             'transactions.contact_id',
@@ -81,7 +78,6 @@ class PayablesController extends Controller
             ->whereBetween('vdate', [$start_date, $end_date])
             ->where('mode_id','=',110)
             ->where('company_id', '=', session()->get('company_id'));
-
         return Purchase::select([
             'purchases.company_id',
             'purchases.contact_id',
