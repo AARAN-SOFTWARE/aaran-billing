@@ -333,7 +333,7 @@
                                                                 wire:click.prevent="changeItems({{$index}})">{{$row['no_of_roll']}}</td>
                                                         @endif
 
-                                                        <td class="py-2 border-r"
+                                                        <td class="py-2 border-r text-left px-2"
                                                             wire:click.prevent="changeItems({{$index}})">
                                                             <div class="line-clamp-1">{{$row['product_name']}}
                                                                 @if($row['description'])
