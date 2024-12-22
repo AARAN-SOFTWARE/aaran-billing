@@ -49,6 +49,7 @@
                 <x-table.header-text sort-icon="none">Credit</x-table.header-text>
 
                 <x-table.header-text sort-icon="none">Balance</x-table.header-text>
+                <x-table.header-action/>
 
             </x-slot:table_header>
 
@@ -127,6 +128,10 @@
                             {{ $current_balance }}
                         </x-table.cell-text>
 
+                        <!-- Edit Button ------------------------------------------------------------------------------>
+                        <x-table.cell-action id="{{$row->id}}"/>
+
+
                     </x-table.row>
                 @endforeach
 
@@ -156,7 +161,7 @@
 
         <!-- Form ----------------------------------------------------------------------------------------------------->
 
-        <x-forms.create :id="$common->vid" :max-width="'6xl'" wire:click="contactUpdate">
+        <x-forms.create :id="$common->vid" :max-width="'6xl'">
 
             <!-- Receipt & Payment  ----------------------------------------------------------------------------------->
 
@@ -172,31 +177,6 @@
                         <x-radio.btn wire:model.live="mode_id" value="111">Receipt</x-radio.btn>
                         <x-radio.btn wire:model.live="mode_id" value="110">Payment</x-radio.btn>
                     </div>
-
-                    {{--                    <x-input.model-select wire:model.live="account_book_id">--}}
-                    {{--                        <option value="" selected>Choose</option>--}}
-                    {{--                        @foreach($account_books as $account_book)--}}
-                    {{--                            <option value="{{ $account_book->id }}">--}}
-                    {{--                                {{ $account_book->vname . ' (ACC-No: ' . $account_book->account_no . ')' }}--}}
-                    {{--                            </option>--}}
-                    {{--                        @endforeach--}}
-                    {{--                    </x-input.model-select>--}}
-
-                    {{--                    <div>hello</div>--}}
-                    @if($account_book_id)
-                        <div>{{$account_book_id}}</div>
-                    @endif
-                    @if($opening_bal)
-                        <div>
-                            <strong>Opening Balance:</strong> {{ $opening_bal}}
-                        </div>
-                    @endif
-
-                    @if($trans_type_id)
-                        <div>
-                            <strong>Transaction Type ID:</strong> {{ $trans_type_id }}
-                        </div>
-                    @endif
 
                     <x-dropdown.wrapper label="Contact Name" type="contactTyped">
                         <div class="relative ">
@@ -227,7 +207,7 @@
 
                     <x-input.model-date wire:model="vdate" :label="'Date'"/>
 
-                    <x-input.floating wire:model="remarks" :label="'Remarks'"/>
+                    <x-input.textarea wire:model="remarks" :label="'Notes'" height="20"/>
 
                 </div>
 

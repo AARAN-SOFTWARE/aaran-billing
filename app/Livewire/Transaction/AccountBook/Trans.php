@@ -43,6 +43,7 @@ class Trans extends Component
     public $account_book_id;
     public $account_books = [];
     public $trans_type_id;
+    public mixed $receipttype_id;
     public $transId;
     public $transName;
     public $accountBook;
@@ -55,9 +56,14 @@ class Trans extends Component
     public mixed $payment_total = 0;
     public mixed $receipt_total = 0;
     public mixed $opening_balance = 0;
+
+    public string $trans_type_name;
+
     #endregion
 
     #region[Mount]
+
+
     public function mount($id)
     {
         $this->byParty = $id;
@@ -134,7 +140,9 @@ class Trans extends Component
 //                $this->contactUpdate();
                 $message = "Saved";
             } else {
+
                 $Transaction = Transaction::find($this->common->vid);
+
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
@@ -160,7 +168,7 @@ class Trans extends Component
                     'verified_by' => $this->verified_by,
                     'verified_on' => $this->verified_on,
                     'against_id' => $this->against_id,
-//                    'account_id' => $this->account_id,
+//                  'account_id' => $this->account_id,
                     'user_id' => auth()->id(),
                 ];
                 $this->common->edit($Transaction, $extraFields);
@@ -714,6 +722,52 @@ class Trans extends Component
         }
     }
 
+    #endregion
+
+    #region[Get-Obj]
+    public function getObj($id)
+    {
+        if ($id) {
+            $obj = Transaction::find($id);
+            $this->common->vid = $obj->id;
+            $this->common->vname = $obj->vname;
+            $this->common->active_id = $obj->active_id;
+            $this->account_book_id = $obj->account_book_id;
+            $this->contact_id = $obj->contact_id;
+            $this->contact_name = $obj->contact_id ? Contact::find($obj->contact_id)->vname : '';
+            $this->vch_no = $obj->vch_no;
+            $this->paid_to = $obj->paid_to;
+            $this->purpose = $obj->purpose;
+            $this->order_id = $obj->order_id;
+            $this->order_name = $obj->order_id ? Order::find($obj->order_id)->vname : '';
+            $this->trans_type_id = $obj->trans_type_id;
+            $this->trans_type_name = $obj->trans_type_id ? Common::find($obj->trans_type_id)->vname : '';
+            $this->opening_bal = $obj->opening_bal;
+            $this->mode_id = $obj->mode_id;
+            $this->mode_name = $obj->mode_id ? Common::find($obj->mode_id)->vname : '';
+            $this->vdate = $obj->vdate;
+            $this->amount = $obj->amount;
+            $this->receipt_type_id = $obj->receipttype_id;
+            $this->receipt_type_name = $obj->receipttype_id ? Common::find($obj->receipttype_id)->vname : '';
+            $this->remarks = $obj->remarks;
+            $this->chq_no = $obj->chq_no;
+            $this->chq_date = $obj->chq_date;
+            $this->instrument_bank_id = $obj->instrument_bank_id;
+            $this->instrument_bank_name = $obj->instrument_bank_id ? Common::find($obj->instrument_bank_id)->vname : '';
+            $this->deposit_on = $obj->deposit_on;
+            $this->realised_on = $obj->realised_on;
+            $this->ref_no = $obj->ref_no;
+            $this->ref_amount = $obj->ref_amount;
+            $this->verified_by = $obj->verified_by;
+            $this->verified_on = $obj->verified_on;
+            $this->against_id = $obj->against_id;
+            $contact_outstanding = Contact::find($this->contact_id);
+            $contact_outstanding->outstanding = $contact_outstanding->outstanding + $this->common->vname;
+            $contact_outstanding->save();
+            return $obj;
+        }
+        return null;
+    }
     #endregion
 
     #region[Render]

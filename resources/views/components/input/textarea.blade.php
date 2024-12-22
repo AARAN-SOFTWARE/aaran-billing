@@ -1,10 +1,11 @@
 @props([
-    'label' => ''
+    'label' => '',
+    'height' => '40'
 ])
 
 <div class="w-full space-y-5 ">
     <div class="relative">
-    <textarea id="hs-floating-textarea" class="peer p-4 block w-full h-40 border-gray-200 rounded-lg text-sm
+    <textarea id="hs-floating-textarea" class="peer p-4 block w-full h-{{$height}} border-gray-200 rounded-lg text-sm
     placeholder:text-transparent focus:border-none focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
     dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600
     focus:pt-8
@@ -22,7 +23,7 @@
       peer-focus:text-blue-600 dark:peer-focus:text-neutral-500
       peer-[:not(:placeholder-shown)]:text-xs
       peer-[:not(:placeholder-shown)]:-translate-y-1.5
-      peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500 dark:text-neutral-500">{{$label}}</label>
+      peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500">{{$label}}</label>
     </div>
 
 </div>
