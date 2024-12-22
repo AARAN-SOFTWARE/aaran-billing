@@ -17,7 +17,7 @@
             <div class="p-3 h-full justify-evenly flex flex-col">
                 <div class="flex items-center mb-2">
 
-                    <x-icons.icon icon="globe"  class="h-6 w-auto text-slate-600"/>
+                    <x-icons.icon icon="globe" class="h-6 w-auto text-slate-600"/>
 
                     <div class="w-full flex justify-between text-xs items-center">
 
@@ -26,7 +26,7 @@
                         </h5>
 
                         <button class="text-gray-500" @click="open = true">
-                            <x-icons.icon icon="eye"  class="h-6 w-auto text-slate-600"/>
+                            <x-icons.icon icon="eye" class="h-6 w-auto text-slate-600"/>
                         </button>
 
                     </div>
@@ -88,7 +88,7 @@
 
                 <div class="w-full flex justify-between text-xs">
                     <div>
-                        <a href="{{route('reports',[$row->id,$row->trans_type_id])}}"
+                        <a href="{{route('trans',[$row->id])}}"
                            class="text-gray-400 hover:text-blue-600 font-semibold  flex items-center ">
                             View All
                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24"

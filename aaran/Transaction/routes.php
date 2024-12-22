@@ -9,6 +9,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
     Route::get('accBooks', \App\Livewire\Transaction\AccountBook\Index::class)->name('accBooks');
+    Route::get('trans/{id?}', App\Livewire\Transaction\AccountBook\Trans::class)->name('trans');
+
+
 
     Route::get('bankBooks/{id?}', \App\Livewire\Transaction\AccountBook\Index::class)->name('bankBooks');
     Route::get('cashBooks/{id?}', \App\Livewire\Transaction\AccountBook\Index::class)->name('cashBooks');
