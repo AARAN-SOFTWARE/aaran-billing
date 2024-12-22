@@ -22,9 +22,10 @@ class Index extends Component
     public $branch;
     public $trans_type_id = '';
     public $trans_type_name = '';
+
     public $filter;
 
-    public function mount($id = null)
+    public function mount($id = null): void
     {
         if ($id != null) {
             $this->filter = $id;

@@ -15,7 +15,7 @@
         <x-forms.top-controls :show-filters="$showFilters"/>
 
         @if($filter == 2)
-            <x-table.caption :caption="'Bank Books'">
+            <x-table.caption :caption="' Bank Books'">
                 {{$list->count()}}
             </x-table.caption>
         @elseif($filter == 3)
@@ -31,9 +31,7 @@
 
 
         <div class="grid grid-cols-3 gap-8 justify-items-center py-8">
-
             <x-cards.card-4 :list="$list" :data="$transaction" :filter="$filter"/>
-
         </div>
 
         <!-- Create  -------------------------------------------------------------------------------------------------->
