@@ -1026,6 +1026,14 @@ class S102_CommonSeeder extends Seeder
             'desc_1' => '-',
             'active_id' => '1'
         ]);
+
+        Common::create([
+            'label_id' => '22',
+            'vname' => 'Debtor',
+            'desc' => '-',
+            'desc_1' => '-',
+            'active_id' => '1'
+        ]);
     }
     #endregion
 

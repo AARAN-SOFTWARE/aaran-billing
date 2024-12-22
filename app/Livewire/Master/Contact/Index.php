@@ -45,10 +45,14 @@ class Index extends Component
             'contact_type.vname as contact_type',
             'msme_type.vname as msme_type',
         )
-            ->where('contacts.company_id',session()->get('company_id'))
-            ->where('contacts.active_id',$this->getListForm->activeRecord)
             ->join('commons as contact_type', 'contact_type.id', '=', 'contacts.contact_type_id')
             ->join('commons as msme_type', 'msme_type.id', '=', 'contacts.msme_type_id')
+
+            ->orWhere('contacts.contact_type_id','=','123')
+            ->orWhere('contacts.contact_type_id','=','124')
+            ->where('contacts.company_id',session()->get('company_id'))
+            ->where('contacts.active_id',$this->getListForm->activeRecord)
+
             ->orderBy('contacts.id',$this->getListForm->sortAsc ? 'asc' : 'desc')
             ->paginate($this->getListForm->perPage);
     }
