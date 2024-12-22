@@ -5,20 +5,24 @@
 
         <x-forms.top-controls :show-filters="$showFilters"/>
 
-        <div class="w-full  flex-row flex gap-x-5">
-            <div class="w-1/4">
-                <x-input.floating type="date" wire:model.live="startDate" label="Start Date"/>
+        <div class="w-full flex-row flex justify-between gap-x-5">
+            <div class="w-full flex-row flex  gap-x-5">
+                <div class="w-1/6">
+                    <x-input.floating type="date" wire:model.live="startDate" label="Start Date"/>
+                </div>
+                <div class="w-1/6">
+                    <x-input.floating type="date" wire:model.live="endDate" label="End Date"/>
+                </div>
             </div>
-            <div class="w-1/4">
-                <x-input.floating type="date" wire:model.live="endDate" label="End Date"/>
+
+            <div class="">
+                <x-button.print-x wire:click="print"/>
             </div>
         </div>
 
-        <div class="">
-{{--            <a href="{{ route('report.print') }}">print--}}
-{{--            </a>--}}
-                <x-button.print-x wire:click="print"/>
-        </div>
+
+        {{--            <a href="{{ route('report.print') }}">print--}}
+        {{--            </a>--}}
 
 
         <x-table.form>
@@ -84,24 +88,26 @@
                         <x-table.cell-text>{{ \Aaran\Transaction\Models\Transaction::common($row->receipttype_id) }}</x-table.cell-text>
 
                         <x-table.cell-text right>
-                            @if($row->mode_id == 110) <!-- Credit -->
-                            {{$row->vname + 0 }}
-                            @php
-                                $current_balance += ($row->vname + 0); // Update balance for credit
-                                $total_credit += ($row->vname + 0); // Accumulate total credit
-                            @endphp
+                            @if($row->mode_id == 110)
+                                <!-- Credit -->
+                                {{$row->vname + 0 }}
+                                @php
+                                    $current_balance += ($row->vname + 0); // Update balance for credit
+                                    $total_credit += ($row->vname + 0); // Accumulate total credit
+                                @endphp
                             @else
                                 &nbsp; <!-- Empty space for non-credit rows -->
                             @endif
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                            @if($row->mode_id == 111) <!-- Debit -->
-                            {{$row->vname + 0}}
-                            @php
-                                $current_balance -= ($row->vname + 0); // Update balance for debit
-                                $total_debit += ($row->vname + 0); // Accumulate total debit
-                            @endphp
+                            @if($row->mode_id == 111)
+                                <!-- Debit -->
+                                {{$row->vname + 0}}
+                                @php
+                                    $current_balance -= ($row->vname + 0); // Update balance for debit
+                                    $total_debit += ($row->vname + 0); // Accumulate total debit
+                                @endphp
                             @else
                                 &nbsp; <!-- Empty space for non-debit rows -->
                             @endif
