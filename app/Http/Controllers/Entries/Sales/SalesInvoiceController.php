@@ -23,7 +23,7 @@ class SalesInvoiceController extends Controller
 
             Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
 
-            $pdf = PDF::loadView('pdf-view.sales.dom.garment'
+            $pdf = PDF::loadView('pdf-view.sales.dom.offset_invoice1'
                 , [
                     'obj' => $sale,
                     'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
