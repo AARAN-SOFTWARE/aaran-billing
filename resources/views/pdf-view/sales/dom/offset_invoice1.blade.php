@@ -221,7 +221,7 @@
 <div class="w-full text-xs right p-1">Original Copy</div>
 <table class="border w-full border-b-none">
     <tr>
-        <td style="width: 145px;height: 145px;">
+        <td class="center" style="width: 145px;height: 145px;">
             @if($cmp->get('logo')!='no_image')
                 <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
             @else
@@ -292,10 +292,11 @@
     @php
         $gstPercent = 0;
     @endphp
+
     @foreach($list as $index => $row)
         <tr class="text-sm center v-align-t">
             <td height="26px" class="center border-r p-1">{{$index+1}} </td>
-            <td class="left border-r p-1">{{$row['po_no']}}</td>
+            <td class="left border-r p-2">{{$row['po_no']}}</td>
             <td class="left border-r p-1">{{$row['dc_no']}}</td>
             <td class="left border-r p-1" style="">
                 @if($row['description'])
@@ -451,6 +452,8 @@
         <td colspan="5" class="">Authorised Signatory</td>
     </tr>
 </table>
+
+<div class="page-break"></div>
 
 
 <!-- Invoice IRN -->
@@ -490,7 +493,7 @@
         <td width="40%" class=""></td>
     </tr>
     <tr class="text-md v-align-t">
-        <td width="70%" class="px-10 lh-0 ">
+        <td width="60%" class="px-10 lh-0 ">
             <p class="font-bold">M/s.{{$obj->contact_name}}</p>
             <p class="times">{{$billing_address->get('address_1')}}</p>
             <p class="times">{{$billing_address->get('address_2')}}</p>
@@ -687,6 +690,7 @@
         <td colspan="5" class="">Authorised Signatory</td>
     </tr>
 </table>
+<div class="page-break"></div>
 
 
 <!-- Invoice IRN -->
