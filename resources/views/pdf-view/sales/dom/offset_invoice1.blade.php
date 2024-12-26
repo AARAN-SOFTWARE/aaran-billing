@@ -162,6 +162,12 @@
         .px-1 {
             padding: 0 1px;
         }
+        .px-2 {
+            padding: 0 2px;
+        }
+        .px-3 {
+            padding: 0 3px;
+        }
 
         .px-5 {
             padding: 0 5px;
@@ -182,6 +188,19 @@
         .py-10 {
             padding: 10px 0;
         }
+
+        .pt-1 {
+            padding-top: 1px;
+        }
+
+        .pt-5 {
+            padding-top: 5px;
+        }
+
+        .pt-10 {
+            padding-top: 10px;
+        }
+
 
         .text-4xl {
             font-size: 36px;
@@ -253,15 +272,15 @@
         <td width="20%"></td>
         <td width="40%" class=""></td>
     </tr>
-    <tr class="text-md v-align-t">
-        <td width="70%" class="px-10 lh-0 ">
+    <tr class="text-md v-align-t border">
+        <td width="60%" class="px-10 lh-0 ">
             <p class="font-bold">M/s.{{$obj->contact_name}}</p>
             <p class="times">{{$billing_address->get('address_1')}}</p>
             <p class="times">{{$billing_address->get('address_2')}}</p>
             <p class="times">{{$billing_address->get('address_3')}}</p>
             <p class="times">{{$billing_address->get('gstcell')}}</p>
         </td>
-        <td width="15%" class=" border-l font-bold px-10 lh-1">
+        <td width="10%" class=" border-l font-bold px-10 lh-1">
             <p>Invoice No:</p>
             <p>Date:</p>
             <p class="">IRN:</p>
@@ -276,18 +295,18 @@
     </tr>
 </table>
 <table class="border border-t-none">
-    <tr class="bg-gray text-sm lh-2 border-b">
+    <tr class="bg-gray text-xs lh-2 border-b">
         <th width="4.33%" class="border-r">S.No</th>
         <th width="6.33%" class="border-r">PO.No</th>
-        <th width="8.33%" class="border-r">DC.No</th>
+        <th width="7.33%" class="border-r">DC.No</th>
         <th width="auto" class="border-r">Particulars</th>
-        <th width="8.33%" class="border-r">HSN Code</th>
-        <th width="4.33%" class="border-r">Quantity</th>
-        <th width="8.33%" class="border-r">Price</th>
+        <th width="7.50%" class="border-r">HSN Code</th>
+        <th width="6.44%" class="border-r">Quantity</th>
+        <th width="8.44%" class="border-r">Price</th>
         <th width="8.33%" class="border-r">Taxable Amount</th>
-        <th width="4.33%" class="border-r">%</th>
-        <th width="16.66" class="border-r">GST</th>
-        <th width="16.66" class="border-r">Sub Total</th>
+        <th width="4.40%" class="border-r">%</th>
+        <th width="19.66" class="border-r">GST</th>
+        <th width="18.66" class="border-r">Sub Total</th>
     </tr>
     @php
         $gstPercent = 0;
@@ -296,9 +315,9 @@
     @foreach($list as $index => $row)
         <tr class="text-sm center v-align-t">
             <td height="26px" class="center border-r p-1">{{$index+1}} </td>
-            <td class="left border-r p-2">{{$row['po_no']}}</td>
-            <td class="left border-r p-1">{{$row['dc_no']}}</td>
-            <td class="left border-r p-1" style="">
+            <td class="center border-r p-2">{{$row['po_no']}}</td>
+            <td class="center border-r p-1">{{$row['dc_no']}}</td>
+            <td class="left border-r p-1 px-2" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
                 @else
@@ -306,12 +325,12 @@
                 @endif
             </td>
             <td class="center border-r p-1">{{$row['hsncode']}}</td>
-            <td class="right border-r p-1">{{$row['qty']+0}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
+            <td class="center border-r p-1">{{$row['qty']+0}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
             <td class="center border-r p-1">{{$row['gst_percent']*2}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['gst_amount'],2,'.','')}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['sub_total'],2,'.','')}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['gst_amount'],2,'.','')}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['sub_total'],2,'.','')}}</td>
         </tr>
         @php
             $gstPercent = $row['gst_percent'];
@@ -335,8 +354,8 @@
         </tr>
     @endfor
     <tr class="text-sm lh-1 right border v-align-c">
-        <td colspan="2" height="20px">E&OE</td>
-        <td colspan="3" class="border-r">Total&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td class="left" colspan="1" height="20px">&nbsp;&nbsp;E&OE</td>
+        <td colspan="4" class="border-r">Total&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td class="border-r">{{$obj->total_qty+0}}</td>
         <td class="border-r"></td>
         <td class="border-r">&nbsp;{{number_format($obj->total_taxable,2,'.','')}}</td>
@@ -355,7 +374,7 @@
                             </span>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">Taxable Value</td>
-        <td class="text-sm right border-b lh-2  v-align-c"
+        <td class="text-sm right border-b lh-2  v-align-c px-2"
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
@@ -363,7 +382,7 @@
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
-            <td class="text-sm right border-b lh-2 v-align-c"
+            <td class="text-sm right border-b lh-2 v-align-c px-2"
                 colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         @else
             <td class="text-md left border-l border-b p-5 lh-2 v-align-c" colspan="4">&nbsp;
@@ -382,13 +401,13 @@
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
-            <td class="text-sm right border-b lh-2 v-align-c"
+            <td class="text-sm right border-b lh-2 v-align-c px-2"
                 colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         @else
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
-            <td class="text-sm right border-b lh-2 v-align-c"
+            <td class="text-sm right border-b lh-2 v-align-c px-2"
                 colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         @endif
     </tr>
@@ -397,11 +416,11 @@
             <div></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">Total GST</td>
-        <td class="text-sm right border-b lh-2 v-align-c"
+        <td class="text-sm right border-b lh-2 v-align-c px-2"
             colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
     </tr>
-    <tr>
-        <td class="text-sm font-bold px-5" rowspan="2" colspan="3" width="100px">
+    <tr class="p-1 lh-2">
+        <td class="text-sm font-bold px-5 " rowspan="2" colspan="3" width="100px">
             <div>ACCOUNT NO</div>
             <div>IFSC CODE</div>
             <div>BANK NAME</div>
@@ -426,16 +445,16 @@
     </tr>
     <tr>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">Round Off</td>
-        <td class="text-sm right border-b lh-2 px-1 v-align-c"
+        <td class="text-sm right border-b lh-2 px-1 v-align-c px-2"
             colspan="2">{{number_format($obj->round_off,2,'.','')}}</td>
     </tr>
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
-            <div>Amount (in words)</div>
+            <div class="text-sm">Amount (in words)</div>
             <div ><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
-        <td class="text-sm right border-b lh-2  v-align-c" colspan="2">
+        <td class="text-sm right border-b lh-2  v-align-c px-2" colspan="2">
             <b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
     </tr>
     <tr class="text-md v-align-t ce">
@@ -492,7 +511,7 @@
         <td width="20%"></td>
         <td width="40%" class=""></td>
     </tr>
-    <tr class="text-md v-align-t">
+    <tr class="text-md v-align-t border">
         <td width="60%" class="px-10 lh-0 ">
             <p class="font-bold">M/s.{{$obj->contact_name}}</p>
             <p class="times">{{$billing_address->get('address_1')}}</p>
@@ -500,7 +519,7 @@
             <p class="times">{{$billing_address->get('address_3')}}</p>
             <p class="times">{{$billing_address->get('gstcell')}}</p>
         </td>
-        <td width="15%" class=" border-l font-bold px-10 lh-1">
+        <td width="10%" class=" border-l font-bold px-10 lh-1">
             <p>Invoice No:</p>
             <p>Date:</p>
             <p class="">IRN:</p>
@@ -518,15 +537,15 @@
     <tr class="bg-gray text-sm lh-2 border-b">
         <th width="4.33%" class="border-r">S.No</th>
         <th width="6.33%" class="border-r">PO.No</th>
-        <th width="8.33%" class="border-r">DC.No</th>
+        <th width="7.33%" class="border-r">DC.No</th>
         <th width="auto" class="border-r">Particulars</th>
-        <th width="8.33%" class="border-r">HSN Code</th>
-        <th width="4.33%" class="border-r">Quantity</th>
-        <th width="8.33%" class="border-r">Price</th>
-        <th width="8.33%" class="border-r">Taxable Amount</th>
-        <th width="4.33%" class="border-r">%</th>
-        <th width="16.66" class="border-r">GST</th>
-        <th width="16.66" class="border-r">Sub Total</th>
+        <th width="7.50%" class="border-r">HSN Code</th>
+        <th width="5.55%" class="border-r">Quantity</th>
+        <th width="8.50%" class="border-r">Price</th>
+        <th width="8.44%" class="border-r">Taxable Amount</th>
+        <th width="4.46%" class="border-r">%</th>
+        <th width="20.66" class="border-r">GST</th>
+        <th width="19.66" class="border-r">Sub Total</th>
     </tr>
     @php
         $gstPercent = 0;
@@ -534,9 +553,9 @@
     @foreach($list as $index => $row)
         <tr class="text-sm center v-align-t">
             <td height="26px" class="center border-r p-1">{{$index+1}} </td>
-            <td class="left border-r p-1">{{$row['po_no']}}</td>
-            <td class="left border-r p-1">{{$row['dc_no']}}</td>
-            <td class="left border-r p-1" style="">
+            <td class="center border-r p-1">{{$row['po_no']}}</td>
+            <td class="center border-r p-1">{{$row['dc_no']}}</td>
+            <td class="left border-r p-1 px-2" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
                 @else
@@ -544,12 +563,12 @@
                 @endif
             </td>
             <td class="center border-r p-1">{{$row['hsncode']}}</td>
-            <td class="right border-r p-1">{{$row['qty']+0}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-            <td class="center border-r p-1">{{$row['gst_percent']*2}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['gst_amount'],2,'.','')}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['sub_total'],2,'.','')}}</td>
+            <td class="center border-r p-1 ">{{$row['qty']+0}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
+            <td class="center border-r p-1 px-2">{{$row['gst_percent']*2}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['gst_amount'],2,'.','')}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['sub_total'],2,'.','')}}</td>
         </tr>
         @php
             $gstPercent = $row['gst_percent'];
@@ -573,12 +592,12 @@
         </tr>
     @endfor
     <tr class="text-sm lh-1 right border v-align-c">
-        <td colspan="2" height="20px">E&OE</td>
-        <td colspan="3" class="border-r">Total&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td class="border-r">{{$obj->total_qty+0}}</td>
+        <td class="left" colspan="1" height="20px">&nbsp;&nbsp;E&OE</td>
+        <td colspan="4" class="border-r">Total&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td class="border-r px-2">{{$obj->total_qty+0}}</td>
         <td class="border-r"></td>
-        <td class="border-r">&nbsp;{{number_format($obj->total_taxable,2,'.','')}}</td>
-        <td colspan="2" class="border-r">&nbsp;{{number_format($obj->total_gst,2,'.','')}}</td>
+        <td class="border-r px-1">&nbsp;{{number_format($obj->total_taxable,2,'.','')}}</td>
+        <td colspan="2" class="border-r px-1">&nbsp;{{number_format($obj->total_gst,2,'.','')}}</td>
         <td>&nbsp;{{number_format($obj->grand_total-$obj->additional,2,'.','')}}</td>
     </tr>
 
@@ -593,20 +612,20 @@
                             </span>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">Taxable Value</td>
-        <td class="text-sm right border-b lh-2  v-align-c"
+        <td class="text-sm right border-b lh-2 px-2 v-align-c"
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
         @if($obj->sales_type=='1')
-            <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
+            <td class="text-md left border-l border-b lh-2 p-5 v-align-c " colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
-            <td class="text-sm right border-b lh-2 v-align-c"
+            <td class="text-sm right border-b lh-2 v-align-c px-2"
                 colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         @else
             <td class="text-md left border-l border-b p-5 lh-2 v-align-c" colspan="4">&nbsp;
             </td>
-            <td class="text-md right border-b lh-2 v-align-c"
+            <td class="text-md right border-b lh-2 v-align-c px-2"
                 colspan="2">&nbsp;
             </td>
         @endif
@@ -620,13 +639,13 @@
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
-            <td class="text-sm right border-b lh-2 v-align-c"
+            <td class="text-sm right border-b lh-2 v-align-c px-2"
                 colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         @else
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
-            <td class="text-sm right border-b lh-2 v-align-c"
+            <td class="text-sm right border-b lh-2 v-align-c px-2"
                 colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         @endif
     </tr>
@@ -634,11 +653,11 @@
         <td colspan="5">
             <div></div>
         </td>
-        <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">Total GST</td>
-        <td class="text-sm right border-b lh-2 v-align-c"
+        <td class="text-md left border-l border-b lh-2 p-5 v-align-c " colspan="4">Total GST</td>
+        <td class="text-sm right border-b lh-2 v-align-c px-2"
             colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
     </tr>
-    <tr>
+    <tr class="lh-2">
         <td class="text-sm font-bold px-5" rowspan="2" colspan="3" width="100px">
             <div>ACCOUNT NO</div>
             <div>IFSC CODE</div>
@@ -664,16 +683,16 @@
     </tr>
     <tr>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">Round Off</td>
-        <td class="text-sm right border-b lh-2 px-1 v-align-c"
+        <td class="text-sm right border-b lh-2 v-align-c px-2"
             colspan="2">{{number_format($obj->round_off,2,'.','')}}</td>
     </tr>
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
-            <div>Amount (in words)</div>
+            <div  class="text-sm">Amount (in words)</div>
             <div ><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
-        <td class="text-sm right border-b lh-2  v-align-c" colspan="2">
+        <td class="text-sm right border-b lh-2 px-2 v-align-c" colspan="2">
             <b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
     </tr>
     <tr class="text-md v-align-t ce">
@@ -729,15 +748,15 @@
         <td width="20%"></td>
         <td width="40%" class=""></td>
     </tr>
-    <tr class="text-md v-align-t">
-        <td width="70%" class="px-10 lh-0 ">
+    <tr class="text-md v-align-t border">
+        <td width="60%" class="px-10 lh-0 ">
             <p class="font-bold">M/s.{{$obj->contact_name}}</p>
             <p class="times">{{$billing_address->get('address_1')}}</p>
             <p class="times">{{$billing_address->get('address_2')}}</p>
             <p class="times">{{$billing_address->get('address_3')}}</p>
             <p class="times">{{$billing_address->get('gstcell')}}</p>
         </td>
-        <td width="15%" class=" border-l font-bold px-10 lh-1">
+        <td width="10%" class=" border-l font-bold px-10 lh-1">
             <p>Invoice No:</p>
             <p>Date:</p>
             <p class="">IRN:</p>
@@ -755,15 +774,15 @@
     <tr class="bg-gray text-sm lh-2 border-b">
         <th width="4.33%" class="border-r">S.No</th>
         <th width="6.33%" class="border-r">PO.No</th>
-        <th width="8.33%" class="border-r">DC.No</th>
+        <th width="7.33%" class="border-r">DC.No</th>
         <th width="auto" class="border-r">Particulars</th>
-        <th width="8.33%" class="border-r">HSN Code</th>
-        <th width="4.33%" class="border-r">Quantity</th>
+        <th width="7.50%" class="border-r">HSN Code</th>
+        <th width="5.33%" class="border-r">Quantity</th>
         <th width="8.33%" class="border-r">Price</th>
-        <th width="8.33%" class="border-r">Taxable Amount</th>
+        <th width="9.33%" class="border-r">Taxable Amount</th>
         <th width="4.33%" class="border-r">%</th>
-        <th width="16.66" class="border-r">GST</th>
-        <th width="16.66" class="border-r">Sub Total</th>
+        <th width="18.66" class="border-r">GST</th>
+        <th width="18.66" class="border-r">Sub Total</th>
     </tr>
     @php
         $gstPercent = 0;
@@ -771,9 +790,9 @@
     @foreach($list as $index => $row)
         <tr class="text-sm center v-align-t">
             <td height="26px" class="center border-r p-1">{{$index+1}} </td>
-            <td class="left border-r p-1">{{$row['po_no']}}</td>
-            <td class="left border-r p-1">{{$row['dc_no']}}</td>
-            <td class="left border-r p-1" style="">
+            <td class="center border-r p-1">{{$row['po_no']}}</td>
+            <td class="center border-r p-1">{{$row['dc_no']}}</td>
+            <td class="left border-r p-1 px-2" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
                 @else
@@ -781,12 +800,12 @@
                 @endif
             </td>
             <td class="center border-r p-1">{{$row['hsncode']}}</td>
-            <td class="right border-r p-1">{{$row['qty']+0}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
+            <td class="center border-r p-1">{{$row['qty']+0}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['price'],2,'.','')}}</td>
+            <td class="right border-r p-1 px-2">&nbsp;{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
             <td class="center border-r p-1">{{$row['gst_percent']*2}}</td>
             <td class="right border-r p-1">&nbsp;{{number_format($row['gst_amount'],2,'.','')}}</td>
-            <td class="right border-r p-1">&nbsp;{{number_format($row['sub_total'],2,'.','')}}</td>
+            <td class="right border-r p-1 px-1">&nbsp;{{number_format($row['sub_total'],2,'.','')}}</td>
         </tr>
         @php
             $gstPercent = $row['gst_percent'];
@@ -810,9 +829,9 @@
         </tr>
     @endfor
     <tr class="text-sm lh-1 right border v-align-c">
-        <td colspan="2" height="20px">E&OE</td>
-        <td colspan="3" class="border-r">Total&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td class="border-r">{{$obj->total_qty+0}}</td>
+        <td class="left" colspan="1" height="20px">&nbsp;&nbsp;E&OE</td>
+        <td colspan="4" class="border-r">Total&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td class="border-r px-2">{{$obj->total_qty+0}}</td>
         <td class="border-r"></td>
         <td class="border-r">&nbsp;{{number_format($obj->total_taxable,2,'.','')}}</td>
         <td colspan="2" class="border-r">&nbsp;{{number_format($obj->total_gst,2,'.','')}}</td>
@@ -829,8 +848,8 @@
                                 Tirupur Jurisdiction Only.
                             </span>
         </td>
-        <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">Taxable Value</td>
-        <td class="text-sm right border-b lh-2  v-align-c"
+        <td class="text-md left border-l border-b lh-2 p-5 v-align-c " colspan="4">Taxable Value</td>
+        <td class="text-sm right border-b lh-2 v-align-c px-2"
             colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
     </tr>
     <tr>
@@ -838,7 +857,7 @@
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
-            <td class="text-sm right border-b lh-2 v-align-c"
+            <td class="text-sm right border-b lh-2 v-align-c px-2"
                 colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         @else
             <td class="text-md left border-l border-b p-5 lh-2 v-align-c" colspan="4">&nbsp;
@@ -854,16 +873,16 @@
             <div>* Seller cannot be responsible for any damage/mistakes.</div>
         </td>
         @if($obj->sales_type=='1')
-            <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
+            <td class="text-md left border-l border-b lh-2 p-5 v-align-c " colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
-            <td class="text-sm right border-b lh-2 v-align-c"
+            <td class="text-sm right border-b lh-2 v-align-c px-2"
                 colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         @else
             <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent}}
                 %
             </td>
-            <td class="text-sm right border-b lh-2 v-align-c"
+            <td class="text-sm right border-b lh-2 v-align-c px-2"
                 colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         @endif
     </tr>
@@ -872,10 +891,10 @@
             <div></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">Total GST</td>
-        <td class="text-sm right border-b lh-2 v-align-c"
+        <td class="text-sm right border-b lh-2 v-align-c px-2"
             colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
     </tr>
-    <tr>
+    <tr class="lh-2 p-1">
         <td class="text-sm font-bold px-5" rowspan="2" colspan="3" width="100px">
             <div>ACCOUNT NO</div>
             <div>IFSC CODE</div>
@@ -901,16 +920,16 @@
     </tr>
     <tr>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4">Round Off</td>
-        <td class="text-sm right border-b lh-2 px-1 v-align-c"
+        <td class="text-sm right border-b lh-2 v-align-c px-2"
             colspan="2">{{number_format($obj->round_off,2,'.','')}}</td>
     </tr>
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
-            <div>Amount (in words)</div>
+            <div class="text-sm">Amount (in words)</div>
             <div ><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
-        <td class="text-sm right border-b lh-2  v-align-c" colspan="2">
+        <td class="text-sm right border-b lh-2 px-2 v-align-c" colspan="2">
             <b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
     </tr>
     <tr class="text-md v-align-t ce">
