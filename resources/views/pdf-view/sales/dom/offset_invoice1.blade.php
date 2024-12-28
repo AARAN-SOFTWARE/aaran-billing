@@ -162,9 +162,11 @@
         .px-1 {
             padding: 0 1px;
         }
+
         .px-2 {
             padding: 0 2px;
         }
+
         .px-3 {
             padding: 0 3px;
         }
@@ -313,7 +315,7 @@
     @endphp
 
     @foreach($list as $index => $row)
-        <tr class="text-sm center v-align-t">
+        <tr class="text-sm center pt-1">
             <td height="26px" class="center border-r p-1">{{$index+1}} </td>
             <td class="center border-r p-2">{{$row['po_no']}}</td>
             <td class="center border-r p-1">{{$row['dc_no']}}</td>
@@ -451,7 +453,7 @@
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
             <div class="text-sm">Amount (in words)</div>
-            <div ><b class="times">{{$rupees}}Only</b></div>
+            <div><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
         <td class="text-sm right border-b lh-2  v-align-c px-2" colspan="2">
@@ -551,7 +553,7 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="text-sm center v-align-t">
+        <tr class="text-sm center pt-1">
             <td height="26px" class="center border-r p-1">{{$index+1}} </td>
             <td class="center border-r p-1">{{$row['po_no']}}</td>
             <td class="center border-r p-1">{{$row['dc_no']}}</td>
@@ -688,8 +690,8 @@
     </tr>
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
-            <div  class="text-sm">Amount (in words)</div>
-            <div ><b class="times">{{$rupees}}Only</b></div>
+            <div class="text-sm">Amount (in words)</div>
+            <div><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
         <td class="text-sm right border-b lh-2 px-2 v-align-c" colspan="2">
@@ -788,7 +790,7 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="text-sm center v-align-t">
+        <tr class="text-sm center pt-1">
             <td height="26px" class="center border-r p-1">{{$index+1}} </td>
             <td class="center border-r p-1">{{$row['po_no']}}</td>
             <td class="center border-r p-1">{{$row['dc_no']}}</td>
@@ -926,7 +928,7 @@
     <tr class="border-t border-b lh-2 ">
         <td colspan="5" class="text-md px-5 v-align-c">
             <div class="text-sm">Amount (in words)</div>
-            <div ><b class="times">{{$rupees}}Only</b></div>
+            <div><b class="times">{{$rupees}}Only</b></div>
         </td>
         <td class="text-md left border-l border-b lh-2 p-5 v-align-c" colspan="4"><b>GRAND TOTAL</b></td>
         <td class="text-sm right border-b lh-2 px-2 v-align-c" colspan="2">

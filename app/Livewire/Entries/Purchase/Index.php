@@ -42,9 +42,17 @@ class Index extends Component
     }
     #endregion
 
+    public $purchasesAllLogs;
+
+    public function getPurchasesLog()
+    {
+        $this->purchasesAllLogs = Logbook::where('model_name', 'Purchase')->take(8)->get();
+    }
+
     #region[Render]
     public function render()
     {
+        $this->getPurchasesLog();
         $this->log = Logbook::where('vname','Purchase')->take(5)->get();
         $this->getListForm->searchField = 'purchase_no';
         $this->getListForm->sortField = 'purchase_no';

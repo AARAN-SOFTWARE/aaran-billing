@@ -15,6 +15,7 @@ class Index extends Component
     use WithPagination;
     public $log;
 
+    public $salesAllLogs;
     #region[create]
     public function create(): void
     {
@@ -52,9 +53,15 @@ class Index extends Component
 //    }
 //    #endregion
 
+    public function getSalesLog()
+    {
+        $this->salesAllLogs = Logbook::where('model_name', 'Sales')->take(8)->get();
+    }
+
     #region[render]
     public function render()
     {
+        $this->getSalesLog();
         $this->getListForm->searchField='invoice_no';
         $this->getListForm->sortField='invoice_no';
         return view('livewire.entries.sales.index')->with([

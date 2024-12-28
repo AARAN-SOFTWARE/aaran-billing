@@ -1333,7 +1333,7 @@ class Upsert extends Component
 
     public function getSalesLog()
     {
-        $this->salesLogs = Logbook::where('model_name', 'Sales')->get();
+        $this->salesLogs = Logbook::where('model_name', 'Sales')->where('vname',$this->invoice_no)->get();
     }
 
     #region[Render]
