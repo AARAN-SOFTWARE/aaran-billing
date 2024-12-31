@@ -17,6 +17,7 @@ use Aaran\MasterGst\Models\MasterGstToken;
 use App\Livewire\Forms\MasterGstApi;
 use App\Livewire\Trait\CommonTraitNew;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
@@ -886,6 +887,41 @@ class Upsert extends Component
 
     public function saveExit(): void
     {
+        $customLabels = [
+            'uniqueno' => 'Unique Number',
+            'acyear' => 'Accounting Year',
+            'company_id' => 'Company ID',
+            'billing_id' => 'Billing ID',
+            'shipping_id' => 'Shipping ID',
+            'contact_id' => 'Contact ID',
+            'invoice_no' => 'Invoice Number',
+            'invoice_date' => 'Invoice Date',
+            'order_id' => 'Order ID',
+            'style_id' => 'Style ID',
+            'despatch_id' => 'Despatch ID',
+            'job_no' => 'Job Number',
+            'sales_type' => 'Sales Type',
+            'transport_id' => 'Transport ID',
+            'destination' => 'Destination',
+            'bundle' => 'Bundle',
+            'distance' => 'Distance',
+            'TransMode' => 'Transport Mode',
+            'Transid' => 'Transport ID',
+            'Transname' => 'Transport Name',
+            'Transdocno' => 'Transport Document Number',
+            'TransdocDt' => 'Transport Document Date',
+            'Vehno' => 'Vehicle Number',
+            'term' => 'Term',
+            'Vehtype' => 'Vehicle Type',
+            'total_qty' => 'Total Quantity',
+            'total_taxable' => 'Total Taxable Amount',
+            'total_gst' => 'Total GST Amount',
+            'ledger_id' => 'Ledger ID',
+            'additional' => 'Additional Information',
+            'round_off' => 'Round Off Amount',
+            'grand_total' => 'Grand Total Amount',
+        ];
+
         if ($this->uniqueno != '') {
             if ($this->common->vid == "") {
                 $this->validate($this->rules());
@@ -928,46 +964,52 @@ class Upsert extends Component
 
                 $this->sales_id = $obj->id;
                 $this->saveItem($this->sales_id);
-                $this->common->logEntry($this->invoice_no,'Sales', 'create', 'The Sales entry has been created for ' . $this->contact_name);
+                $itemDetails = [];
+                foreach ($this->itemList as $sub) {
+                    $itemDetails[] = "Product ID {$sub['product_id']} with PO No: {$sub['po_no']} and DC No: {$sub['dc_no']}";
+                }
+                $itemDetailsStr = implode(', ', $itemDetails);
+
+                $this->common->logEntry($this->invoice_no, 'Sales', 'create', "The Sales entry has been created for  . $this->contact_name. Items: {$itemDetailsStr}");
                 $this->contactUpdate();
                 $message = "Saved";
             } else {
                 $obj = Sale::find($this->common->vid);
                 $previousData = $obj->getOriginal();
-                $mapping = [
-                    'uniqueno' => 'Unique Number',
-                    'acyear' => 'Accounting Year',
-                    'company_id' => 'Company ID',
-                    'billing_id' => 'Billing ID',
-                    'shipping_id' => 'Shipping ID',
-                    'contact_id' => 'Contact ID',
-                    'invoice_no' => 'Invoice Number',
-                    'invoice_date' => 'Invoice Date',
-                    'order_id' => 'Order ID',
-                    'style_id' => 'Style ID',
-                    'despatch_id' => 'Despatch ID',
-                    'job_no' => 'Job Number',
-                    'sales_type' => 'Sales Type',
-                    'transport_id' => 'Transport ID',
-                    'destination' => 'Destination',
-                    'bundle' => 'Bundle',
-                    'distance' => 'Distance',
-                    'TransMode' => 'Transport Mode',
-                    'Transid' => 'Transport ID',
-                    'Transname' => 'Transport Name',
-                    'Transdocno' => 'Transport Document Number',
-                    'TransdocDt' => 'Transport Document Date',
-                    'Vehno' => 'Vehicle Number',
-                    'term' => 'Term',
-                    'Vehtype' => 'Vehicle Type',
-                    'total_qty' => 'Total Quantity',
-                    'total_taxable' => 'Total Taxable Amount',
-                    'total_gst' => 'Total GST Amount',
-                    'ledger_id' => 'Ledger ID',
-                    'additional' => 'Additional Information',
-                    'round_off' => 'Round Off Amount',
-                    'grand_total' => 'Grand Total Amount',
-                ];
+//                $mapping = [
+//                    'uniqueno' => 'Unique Number',
+//                    'acyear' => 'Accounting Year',
+//                    'company_id' => 'Company ID',
+//                    'billing_id' => 'Billing ID',
+//                    'shipping_id' => 'Shipping ID',
+//                    'contact_id' => 'Contact ID',
+//                    'invoice_no' => 'Invoice Number',
+//                    'invoice_date' => 'Invoice Date',
+//                    'order_id' => 'Order ID',
+//                    'style_id' => 'Style ID',
+//                    'despatch_id' => 'Despatch ID',
+//                    'job_no' => 'Job Number',
+//                    'sales_type' => 'Sales Type',
+//                    'transport_id' => 'Transport ID',
+//                    'destination' => 'Destination',
+//                    'bundle' => 'Bundle',
+//                    'distance' => 'Distance',
+//                    'TransMode' => 'Transport Mode',
+//                    'Transid' => 'Transport ID',
+//                    'Transname' => 'Transport Name',
+//                    'Transdocno' => 'Transport Document Number',
+//                    'TransdocDt' => 'Transport Document Date',
+//                    'Vehno' => 'Vehicle Number',
+//                    'term' => 'Term',
+//                    'Vehtype' => 'Vehicle Type',
+//                    'total_qty' => 'Total Quantity',
+//                    'total_taxable' => 'Total Taxable Amount',
+//                    'total_gst' => 'Total GST Amount',
+//                    'ledger_id' => 'Ledger ID',
+//                    'additional' => 'Additional Information',
+//                    'round_off' => 'Round Off Amount',
+//                    'grand_total' => 'Grand Total Amount',
+//                ];
 
                 $obj->uniqueno = session()->get('company_id') . '~' . session()->get('acyear') . '~' . $this->invoice_no;
                 $obj->acyear = session()->get('acyear');
@@ -1009,17 +1051,44 @@ class Upsert extends Component
                 $obj->active_id = $this->common->active_id;
                 $obj->save();
                 $this->sales_id = $obj->id;
+
                 DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
                 $this->saveItem($this->sales_id);
-                $changes = [];
-                foreach ($obj->getChanges() as $key => $newValue) {
-                    $oldValue = $previousData[$key] ?? null;
-                    $friendlyName = $mapping[$key] ?? $key;
-                    $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
+                $itemDetails = [];
+                foreach ($this->itemList as $sub) {
+                    $itemDetails[] = "Product ID: {$sub['product_id']}, PO No: {$sub['po_no']}, DC No: {$sub['dc_no']}, " .
+                        "No of Rolls: {$sub['no_of_roll']}, Colour ID: {$sub['colour_id']}, Size ID: {$sub['size_id']}, " .
+                        "Quantity: {$sub['qty']}, Price: {$sub['price']}, GST Percent: {$sub['gst_percent']}, Description: {$sub['description']}";
                 }
-                $changesMessage = implode(' , ', $changes);
-                $this->common->logEntry($this->invoice_no,'Sales', 'update',
-                    "The Sales entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
+                $itemDetailsStr = implode('; ', $itemDetails);
+                $updatedData = $obj->getAttributes();
+                $changedData = [];
+                foreach ($previousData as $key => $originalValue) {
+                    if (isset($updatedData[$key]) && $updatedData[$key] != $originalValue) {
+                        $fieldLabel = isset($customLabels[$key]) ? $customLabels[$key] : ucfirst(str_replace('_', ' ', $key));
+                        $changedData[] = "{$fieldLabel} changed from '{$originalValue}' to '{$updatedData[$key]}'";
+                    }
+                }
+                $action = 'Updated on ' . now();
+                $description = implode(', ', $changedData);
+                $this->common->logEntry(
+                    $this->invoice_no,
+                    'Sales',
+                    $action,
+                    "The Sales entry has been updated for {$this->contact_name}. Changes: {$description}. Items: {$itemDetailsStr}"
+                );
+
+//                DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
+//                $this->saveItem($this->sales_id);
+//                $changes = [];
+//                foreach ($obj->getChanges() as $key => $newValue) {
+//                    $oldValue = $previousData[$key] ?? null;
+//                    $friendlyName = $mapping[$key] ?? $key;
+//                    $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
+//                }
+//                $changesMessage = implode(' , ', $changes);
+//                $this->common->logEntry($this->invoice_no,'Sales', 'update',
+//                    "The Sales entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
                 $this->contactUpdate();
                 $message = "Updated";
             }
@@ -1269,23 +1338,38 @@ class Upsert extends Component
 
     public function changeItems($index): void
     {
-        $this->itemIndex = $index;
+        if (isset($this->itemList[$index])) {
+            $this->itemIndex = $index;
 
-        $items = $this->itemList[$index];
-        $this->po_no = $items['po_no'];
-        $this->dc_no = $items['dc_no'];
-        $this->no_of_roll = $items['no_of_roll'];
-        $this->product_name = $items['product_name'];
-        $this->product_id = $items['product_id'];
-        $this->colour_name = $items['colour_name'];
-        $this->colour_id = $items['colour_id'];
-        $this->size_name = $items['size_name'];
-        $this->size_id = $items['size_id'];
-        $this->qty = $items['qty'] + 0;
-        $this->price = $items['price'] + 0;
-        $this->gst_percent1 = $items['gst_percent'];
-        $this->description = $items['description'];
-        $this->calculateTotal();
+            $items = $this->itemList[$index];
+            $this->po_no = $items['po_no'];
+            $this->dc_no = $items['dc_no'];
+            $this->no_of_roll = $items['no_of_roll'];
+            $this->product_name = $items['product_name'];
+            $this->product_id = $items['product_id'];
+            $this->colour_name = $items['colour_name'];
+            $this->colour_id = $items['colour_id'];
+            $this->size_name = $items['size_name'];
+            $this->size_id = $items['size_id'];
+            $this->qty = $items['qty'] + 0;
+            $this->price = $items['price'] + 0;
+            $this->gst_percent1 = $items['gst_percent'];
+            $this->description = $items['description'];
+            $this->calculateTotal();
+        }
+    }
+
+    public function deleteItem($index): void
+    {
+        if (isset($this->itemList[$index])) {
+            unset($this->itemList[$index]);
+
+            $this->itemList = array_values($this->itemList);
+
+            $this->calculateTotal();
+        } else {
+            throw new Exception("Item at index {$index} does not exist.");
+        }
     }
 
     public function removeItems($index): void
@@ -1333,7 +1417,7 @@ class Upsert extends Component
 
     public function getSalesLog()
     {
-        $this->salesLogs = Logbook::where('model_name', 'Sales')->where('vname',$this->invoice_no)->get();
+        $this->salesLogs = Logbook::where('model_name', 'Sales')->where('vname', $this->invoice_no)->get();
     }
 
     #region[Render]
