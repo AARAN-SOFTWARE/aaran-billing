@@ -41,9 +41,17 @@ class Index extends Component
     }
     #endregon
 
+    public $exportsalesAllLogs;
+
+    public function getExportSalesLog()
+    {
+        $this->exportsalesAllLogs = Logbook::where('model_name', 'ExportSale')->take(8)->get();
+    }
+
     #region[render]
     public function render()
     {
+        $this->getExportSalesLog();
         $this->getListForm->searchField='invoice_no';
         $this->getListForm->sortField='invoice_no';
         return view('livewire.entries.export-sales.index')->with([

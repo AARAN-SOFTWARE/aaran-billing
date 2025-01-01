@@ -878,7 +878,7 @@ function calculateTotal(): void
 public $purchaseLogs;
     public function getPurchasesLog()
     {
-        $this->purchaseLogs = Logbook::where('model_name', 'Purchase')->get();
+        $this->purchaseLogs = Logbook::where('model_name', 'Purchase')->where('vname',$this->purchase_no)->get();
     }
 
 #region[Render]

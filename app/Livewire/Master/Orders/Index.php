@@ -16,9 +16,14 @@ class Index extends Component
     public $log;
     #endregion
 
-    #region[getSave]
     public function getSave(): void
     {
+        $customLabels = [
+            'vname' => 'Order Name',
+            'order_name' => 'Order No',
+            'company_id' => 'Company ID',
+        ];
+
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
                 $order = new Order();
@@ -27,22 +32,45 @@ class Index extends Component
                     'company_id' => session()->get('company_id'),
                 ];
                 $this->common->save($order, $extraFields);
-                $this->common->logEntry('Order_name','Order','create',$this->common->vname.' has been created');
+                $this->common->logEntry(
+                    'Order_name',
+                    'Order',
+                    'create',
+                    $this->common->vname . ' has been created'
+                );
                 $message = "Saved";
             } else {
                 $order = Order::find($this->common->vid);
+                $originalData = $order->getAttributes();
+
                 $extraFields = [
                     'order_name' => $this->order_name,
                     'company_id' => session()->get('company_id'),
                 ];
                 $this->common->edit($order, $extraFields);
-                $this->common->logEntry('Order','Order','update',$this->common->vname.' has been updated');
+
+                $updatedData = $order->getAttributes();
+                $changedData = [];
+                foreach ($originalData as $key => $originalValue) {
+                    if (isset($updatedData[$key]) && $updatedData[$key] != $originalValue) {
+                        $fieldLabel = isset($customLabels[$key]) ? $customLabels[$key] : ucfirst(str_replace('_', ' ', $key));
+                        $changedData[] = "{$fieldLabel} changed from '{$originalValue}' to '{$updatedData[$key]}'";
+                    }
+                }
+                $action = 'Updated on ' . now(); // Store the date and time of update
+                $description = '';
+                if (!empty($changedData)) {
+                    $description = implode(', ', $changedData); // Concatenate the change descriptions into a string
+                }
+                $this->common->logEntry(
+                    'Order', 'Order', $action, $description
+                );
                 $message = "Updated";
             }
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
+
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
-    #endregion
 
     #region[getObj]
     public function getObj($id)
@@ -79,12 +107,12 @@ class Index extends Component
     #region[render]
     public function render()
     {
-        $this->log = Logbook::where('model_name','Order')->take(5)->get();
+        $this->log = Logbook::where('model_name', 'Order')->take(5)->get();
         $this->getListForm->searchField = 'order_name';
 
         return view('livewire.master.orders.index')->with([
-            'list' => $this->getListForm->getList(Order::class,function ($query){
-                return $query->where('company_id',session()->get('company_id'));
+            'list' => $this->getListForm->getList(Order::class, function ($query) {
+                return $query->where('company_id', session()->get('company_id'));
             }),
         ]);
     }

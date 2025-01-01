@@ -955,7 +955,7 @@ class Upsert extends Component
 
     public function getExportLog()
     {
-        $this->exportLogs = Logbook::where('model_name', 'ExportSale')->get();
+        $this->exportLogs = Logbook::where('model_name', 'ExportSale')->where('vname',$this->invoice_no)->get();
 //        dd($this->exportLogs);
     }
 
