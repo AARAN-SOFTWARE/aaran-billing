@@ -1052,43 +1052,55 @@ class Upsert extends Component
                 $obj->save();
                 $this->sales_id = $obj->id;
 
-                DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
-                $this->saveItem($this->sales_id);
-                $itemDetails = [];
-                foreach ($this->itemList as $sub) {
-                    $itemDetails[] = "Product ID: {$sub['product_id']}, PO No: {$sub['po_no']}, DC No: {$sub['dc_no']}, " .
-                        "No of Rolls: {$sub['no_of_roll']}, Colour ID: {$sub['colour_id']}, Size ID: {$sub['size_id']}, " .
-                        "Quantity: {$sub['qty']}, Price: {$sub['price']}, GST Percent: {$sub['gst_percent']}, Description: {$sub['description']}";
-                }
-                $itemDetailsStr = implode('; ', $itemDetails);
-                $updatedData = $obj->getAttributes();
-                $changedData = [];
-                foreach ($previousData as $key => $originalValue) {
-                    if (isset($updatedData[$key]) && $updatedData[$key] != $originalValue) {
-                        $fieldLabel = isset($customLabels[$key]) ? $customLabels[$key] : ucfirst(str_replace('_', ' ', $key));
-                        $changedData[] = "{$fieldLabel} changed from '{$originalValue}' to '{$updatedData[$key]}'";
-                    }
-                }
-                $action = 'Updated on ' . now();
-                $description = implode(', ', $changedData);
-                $this->common->logEntry(
-                    $this->invoice_no,
-                    'Sales',
-                    $action,
-                    "The Sales entry has been updated for {$this->contact_name}. Changes: {$description}. Items: {$itemDetailsStr}"
-                );
-
 //                DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
 //                $this->saveItem($this->sales_id);
-//                $changes = [];
-//                foreach ($obj->getChanges() as $key => $newValue) {
-//                    $oldValue = $previousData[$key] ?? null;
-//                    $friendlyName = $mapping[$key] ?? $key;
-//                    $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
+//                $itemDetails = [];
+//                foreach ($this->itemList as $sub) {
+//                    $itemDetails[] = "Product ID: {$sub['product_id']}, PO No: {$sub['po_no']}, DC No: {$sub['dc_no']}, " .
+//                        "No of Rolls: {$sub['no_of_roll']}, Colour ID: {$sub['colour_id']}, Size ID: {$sub['size_id']}, " .
+//                        "Quantity: {$sub['qty']}, Price: {$sub['price']}, GST Percent: {$sub['gst_percent']}, Description: {$sub['description']}";
 //                }
-//                $changesMessage = implode(' , ', $changes);
-//                $this->common->logEntry($this->invoice_no,'Sales', 'update',
-//                    "The Sales entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
+//                $itemDetailsStr = implode('; ', $itemDetails);
+//                $updatedData = $obj->getAttributes();
+//                $changedData = [];
+//                foreach ($previousData as $key => $originalValue) {
+//                    if (isset($updatedData[$key]) && $updatedData[$key] != $originalValue) {
+//                        $fieldLabel = isset($customLabels[$key]) ? $customLabels[$key] : ucfirst(str_replace('_', ' ', $key));
+//                        $changedData[] = "{$fieldLabel} changed from '{$originalValue}' to '{$updatedData[$key]}'";
+//                    }
+//                }
+//                $action = 'Updated on ' . now();
+//                $description = implode(', ', $changedData);
+//                $this->common->logEntry(
+//                    $this->invoice_no,
+//                    'Sales',
+//                    $action,
+//                    "The Sales entry has been updated for {$this->contact_name}. Changes: {$description}. Items: {$itemDetailsStr}"
+//                );
+
+                DB::table('saleitems')->where('sale_id', '=', $this->sales_id)->delete();
+                $this->saveItem($this->sales_id);
+                $changes = [];
+                $newItems = [];
+
+                foreach ($this->itemList as $sub) {
+                    if (empty($sub['saleitem_id'])) {
+                        $newItems[] = "Product ID: {$sub['product_name']}, PO No: {$sub['po_no']}, DC No: {$sub['dc_no']}, " .
+                            "No of Rolls: {$sub['no_of_roll']}, Colour ID: {$sub['colour_id']}, Size ID: {$sub['size_name']}, " .
+                            "Quantity: {$sub['qty']}, Price: {$sub['price']}, GST Percent: {$sub['gst_percent']}, Description: {$sub['description']}";
+                    }
+                }
+                foreach ($obj->getChanges() as $key => $newValue) {
+                    $oldValue = $previousData[$key] ?? null;
+                    $friendlyName = $mapping[$key] ?? $key;
+                    $changes[] = "$friendlyName: ' '$newValue'";
+
+                }
+                $changesMessage = implode(' , ', $changes);
+                $newItemsMessage = !empty($newItems) ? implode('; ', $newItems) : 'No new items created';
+
+                $this->common->logEntry($this->invoice_no,'Sales', 'update',
+                    "The Sales entry has been updated for {$this->contact_name}. Changes: {$changesMessage} . New Items: {$newItemsMessage}") ;
                 $this->contactUpdate();
                 $message = "Updated";
             }

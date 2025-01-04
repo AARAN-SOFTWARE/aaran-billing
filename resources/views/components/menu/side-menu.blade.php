@@ -59,6 +59,10 @@
                 <x-menu.sub.logbook/>
             @endif
 
+                @if(Aaran\Aadmin\Src\Customise::hasAccounts())
+                    <x-menu.sub.accounts/>
+                @endif
+
 
             <x-menu.sub.logout/>
 

@@ -165,4 +165,16 @@ class Customise
     }
     #endregion
 
+    #region[Accounts]
+    public static function hasAccounts(): bool
+    {
+        return static::enabled(static::accounts());
+    }
+
+    public static function accounts(): string
+    {
+        return 'accounts';
+    }
+    #endregion
+
 }
