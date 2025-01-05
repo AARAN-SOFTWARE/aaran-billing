@@ -26,7 +26,7 @@ class Index extends Component
         if ($this->common->vid == '') {
             $Ledger = new Ledger();
             $extraFields = [
-                'ledger_id' => $this->ledger_id ?: '1',
+                'ledger_group_id' => $this->ledger_group_id ?: '1',
                 'description' => $this->description,
                 'opening' => $this->opening,
                 'opening_date' => $this->opening_date,
@@ -39,7 +39,7 @@ class Index extends Component
         } else {
             $Ledger = Ledger::find($this->common->vid);
             $extraFields = [
-                'ledger_id' => $this->ledger_id ?: '1',
+                'ledger_group_id' => $this->ledger_group_id ?: '1',
                 'description' => $this->description,
                 'opening' => $this->opening,
                 'opening_date' => $this->opening_date,
@@ -56,7 +56,7 @@ class Index extends Component
 
     #region[ledger]
 
-    public $ledger_id = '';
+    public $ledger_group_id = '';
     public $ledger_name = '';
     public Collection $ledgerCollection;
     public $highlightLedger = 0;
@@ -83,7 +83,7 @@ class Index extends Component
     public function setLedger($name, $id): void
     {
         $this->ledger_name = $name;
-        $this->ledger_id = $id;
+        $this->ledger_group_id = $id;
         $this->getLedgerList();
     }
 
@@ -96,13 +96,13 @@ class Index extends Component
         $this->highlightLedger = 0;
 
         $this->ledger_name = $obj['vname'] ?? '';
-        $this->ledger_id = $obj['id'] ?? '';
+        $this->ledger_group_id = $obj['id'] ?? '';
     }
 
     #[On('refresh-Ledger')]
     public function refreshLedger($v): void
     {
-        $this->ledger_id = $v['id'];
+        $this->ledger_group_id = $v['id'];
         $this->ledger_name = $v['name'];
         $this->ledgerTyped = false;
     }
@@ -121,7 +121,7 @@ class Index extends Component
             $Ledger = Ledger::find($id);
             $this->common->vid = $Ledger->id;
             $this->common->vname = $Ledger->vname;
-            $this->ledger_id = $Ledger->ledger_id;
+            $this->ledger_group_id = $Ledger->ledger_group_id;
             $this->ledger_name = $Ledger->ledger_name;
             $this->description = $Ledger->description;
             $this->opening = $Ledger->opening;
@@ -139,7 +139,7 @@ class Index extends Component
     {
         $this->common->vid = '';
         $this->common->vname = '';
-        $this->ledger_id = '';
+        $this->ledger_group_id = '';
         $this->ledger_name = '';
         $this->description = '';
         $this->opening = '';

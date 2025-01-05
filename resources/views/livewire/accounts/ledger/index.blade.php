@@ -39,7 +39,7 @@
 
                     <x-table.row>
                         <x-table.cell-text>{{$index+1}}</x-table.cell-text>
-                        <x-table.cell-text>{{$row->ledger->vname}}</x-table.cell-text>
+                        <x-table.cell-text>{{$row->ledger_group->vname}}</x-table.cell-text>
                         <x-table.cell-text left>{{$row->vname}}</x-table.cell-text>
                         <x-table.cell-text>{{$row->opening}}</x-table.cell-text>
                         <x-table.cell-text>{{$row->current}}</x-table.cell-text>

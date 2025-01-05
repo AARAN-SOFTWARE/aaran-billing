@@ -24,7 +24,7 @@ class LedgerGroup extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function account(): BelongsTo
+    public function account_head(): BelongsTo
     {
         return $this->belongsTo(AccountHeads::class);
     }

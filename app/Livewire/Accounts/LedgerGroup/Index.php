@@ -26,7 +26,7 @@ class Index extends Component
         if ($this->common->vid == '') {
             $LedgerGroup = new LedgerGroup();
             $extraFields = [
-                'account_id' => $this->account_id ?: '1',
+                'account_head_id' => $this->account_head_id ?: '1',
                 'description' => $this->description,
                 'opening' => $this->opening,
                 'opening_date' => $this->opening_date,
@@ -39,7 +39,7 @@ class Index extends Component
         } else {
             $LedgerGroup = LedgerGroup::find($this->common->vid);
             $extraFields = [
-                'account_id' => $this->account_id ?: '1',
+                'account_head_id' => $this->account_head_id ?: '1',
                 'description' => $this->description,
                 'opening' => $this->opening,
                 'opening_date' => $this->opening_date,
@@ -61,7 +61,7 @@ class Index extends Component
             $LedgerGroup = LedgerGroup::find($id);
             $this->common->vid = $LedgerGroup->id;
             $this->common->vname = $LedgerGroup->vname;
-            $this->account_id = $LedgerGroup->account_id;
+            $this->account_head_id = $LedgerGroup->account_head_id;
             $this->account_name = $LedgerGroup->account_name;
             $this->description = $LedgerGroup->description;
             $this->opening = $LedgerGroup->opening;
@@ -76,7 +76,7 @@ class Index extends Component
 
     #region[account]
 
-    public $account_id = '';
+    public $account_head_id = '';
     public $account_name = '';
     public Collection $accountCollection;
     public $highlightAccount = 0;
@@ -103,7 +103,7 @@ class Index extends Component
     public function setAccount($name, $id): void
     {
         $this->account_name = $name;
-        $this->account_id = $id;
+        $this->account_head_id = $id;
         $this->getAccountList();
     }
 
@@ -116,13 +116,13 @@ class Index extends Component
         $this->highlightAccount = 0;
 
         $this->account_name = $obj['vname'] ?? '';
-        $this->account_id = $obj['id'] ?? '';
+        $this->account_head_id = $obj['id'] ?? '';
     }
 
     #[On('refresh-Account')]
     public function refreshAccount($v): void
     {
-        $this->account_id = $v['id'];
+        $this->account_head_id = $v['id'];
         $this->account_name = $v['name'];
         $this->accountTyped = false;
     }
@@ -139,7 +139,7 @@ class Index extends Component
     {
         $this->common->vid = '';
         $this->common->vname = '';
-        $this->account_id = '';
+        $this->account_head_id = '';
         $this->account_name = '';
         $this->description = '';
         $this->opening = '';

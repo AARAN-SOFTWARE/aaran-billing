@@ -11,10 +11,10 @@ return new class extends Migration
     {
         Schema::create('ledger_groups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('account_id')->references('id')->on('account_heads')->onDelete('cascade');
-            $table->text('vname');
-            $table->longText('description');
-            $table->string('opening');
+            $table->text('vname')->unique();;
+            $table->longText('description')->nullable();
+            $table->foreignId('account_head_id')->references('id')->on('account_heads')->onDelete('cascade');
+            $table->string('opening')->nullable();
             $table->string('opening_date')->nullable();
             $table->string('current')->nullable();
             $table->string('active_id', 3)->nullable();
