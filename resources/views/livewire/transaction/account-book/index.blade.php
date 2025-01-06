@@ -4,6 +4,8 @@
             Bank Books
         @elseif($filter == 3)
             Cash Books
+        @elseif($filter == 4)
+            UPI
         @else
             Account Books
         @endif
@@ -20,6 +22,11 @@
             </x-table.caption>
         @elseif($filter == 3)
             <x-table.caption :caption="'Cash Books'">
+                {{$list->count()}}
+            </x-table.caption>
+
+        @elseif($filter == 4)
+            <x-table.caption :caption="'UPI'">
                 {{$list->count()}}
             </x-table.caption>
 

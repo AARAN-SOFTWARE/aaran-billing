@@ -318,11 +318,12 @@ class Index extends Component
 
     public function getTransactions()
     {
-        return Transaction::select('transactions.id', 'transactions.vname', 'transactions.vdate', 'transactions.account_book_id', 'transactions.mode_id','transactions.trans_type_id')
+        return Transaction::select('transactions.id', 'transactions.vname', 'transactions.vdate', 'transactions.account_book_id', 'transactions.mode_id', 'transactions.trans_type_id')
             ->join('account_books', 'transactions.account_book_id', '=', 'account_books.id')
             ->where('account_books.active_id', '=', 1)
             ->get();
     }
+
     #region[render]
 
     public function render()
@@ -333,11 +334,13 @@ class Index extends Component
         return view('livewire.transaction.account-book.index')->with([
             'list' => $this->getListForm->getList(AccountBook::class, function ($query) {
                 if ($this->filter == 2) {
-                    return $query -> where('trans_type_id', 109)->get();
+                    return $query->where('trans_type_id', 109)->get();
                 } elseif ($this->filter == 3) {
-                    return $query -> where('trans_type_id', 108)->get();
+                    return $query->where('trans_type_id', 108)->get();
+                } elseif ($this->filter == 4) {
+                    return $query->where('trans_type_id', 136)->get();
                 } else {
-                    return $query ->get();
+                    return $query->get();
                 }
 
             }),
