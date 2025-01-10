@@ -12,6 +12,7 @@ use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
 use App\Livewire\Trait\CommonTraitNew;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
@@ -48,7 +49,7 @@ class Upsert extends Component
     public $description;
 
     public string $transport;
-    public  $term;
+    public $term;
     public string $ledger;
     public string $sale;
     public string $product;
@@ -575,7 +576,7 @@ class Upsert extends Component
                     ]);
                     $this->saveItem($obj->id);
                     $this->contactUpdate();
-                    $this->common->logEntry($this->purchase_no,'Purchase','create','The Purchase entry has been created for '.$this->contact_name);
+                    $this->common->logEntry($this->purchase_no, 'Purchase', 'create', 'The Purchase entry has been created for ' . $this->contact_name);
                     $message = "Saved";
                     $this->getRoute();
                 } else {
@@ -633,7 +634,7 @@ class Upsert extends Component
                         $changes[] = "$friendlyName: '$oldValue' Changed to '$newValue'";
                     }
                     $changesMessage = implode(' , ', $changes);
-                    $this->common->logEntry($this->purchase_no,'Purchase', 'update',
+                    $this->common->logEntry($this->purchase_no, 'Purchase', 'update',
                         "The Purchase entry has been updated for {$this->contact_name}. Changes: {$changesMessage}");
                     $this->contactUpdate();
                     $message = "Updated";
@@ -653,8 +654,8 @@ class Upsert extends Component
                 'purchase_id' => $id,
                 'product_id' => $sub['product_id'],
                 'description' => $sub['description'],
-                'colour_id' => $sub['colour_id'] ?: '46',
-                'size_id' => $sub['size_id'] ?: '50',
+                'colour_id' => $sub['colour_id'] ?: '1',
+                'size_id' => $sub['size_id'] ?: '1',
                 'qty' => $sub['qty'],
                 'price' => $sub['price'],
                 'gst_percent' => $sub['gst_percent'],
@@ -665,102 +666,117 @@ class Upsert extends Component
     public function contactUpdate()
     {
         if ($this->contact_id) {
-        $obj = Contact::find($this->contact_id);
-        $outstanding = ($obj->contact_type_id == 124 ? $obj->outstanding - $this->grand_total : $obj->outstanding + $this->grand_total);
-        $obj->outstanding = $outstanding;
-        $obj->save();
-             }
+            $obj = Contact::find($this->contact_id);
+            $outstanding = ($obj->contact_type_id == 124 ? $obj->outstanding - $this->grand_total : $obj->outstanding + $this->grand_total);
+            $obj->outstanding = $outstanding;
+            $obj->save();
+        }
     }
 
 #endregion
 
-#region[mount]
+    #region[mount]
 
-public
-function mount($id): void
-{
-    $this->entry_no = Purchase::nextNo();
-    if ($id != 0) {
-        $obj = Purchase::find($id);
-        $this->common->vid = $obj->id;
-        $this->uniqueno = $obj->uniqueno;
-        $this->acyear = $obj->acyear;
-        $this->contact_id = $obj->contact_id;
-        $this->contact_name = $obj->contact->vname;
-        $this->purchase_no = $obj->purchase_no;
-        $this->purchase_date = $obj->purchase_date;
-        $this->order_id = $obj->order_id;
-        $this->order_name = $obj->order->vname;
-        $this->sales_type = $obj->sales_type;
-        $this->transport_id = $obj->transport_id;
-        $this->transport_name = $obj->transport_id ? Common::find($obj->transport_id)->vname : '';
-        $this->bundle = $obj->bundle;
-        $this->total_qty = $obj->total_qty;
-        $this->total_taxable = $obj->total_taxable;
-        $this->total_gst = $obj->total_gst;
-        $this->ledger_id = $obj->ledger_id;
-        $this->ledger_name = $obj->ledger_id ? Common::find($obj->ledger_id)->vname : '';
-        $this->additional = $obj->additional;
-        $this->round_off = $obj->round_off;
-        $this->grand_total = $obj->grand_total;
-        $this->common->active_id = $obj->active_id;
-        $data = DB::table('purchaseitems')->select('purchaseitems.*',
-            'products.vname as product_name',
-            'colours.vname as colour_name',
-            'sizes.vname as size_name',)->join('products', 'products.id', '=', 'purchaseitems.product_id')
-            ->join('commons as colours', 'colours.id', '=', 'purchaseitems.colour_id')
-            ->join('commons as sizes', 'sizes.id', '=', 'purchaseitems.size_id')->where('purchase_id', '=',
-                $id)->get()->transform(function ($data) {
-                return [
-                    'purchaseitem_id' => $data->id,
-                    'product_name' => $data->product_name,
-                    'description' => $data->description,
-                    'product_id' => $data->product_id,
-                    'colour_name' => $data->colour_name,
-                    'colour_id' => $data->colour_id,
-                    'size_name' => $data->size_name,
-                    'size_id' => $data->size_id,
-                    'qty' => $data->qty,
-                    'price' => $data->price,
-                    'gst_percent' => $data->gst_percent,
-                    'taxable' => $data->qty * $data->price,
-                    'gst_amount' => ($data->qty * $data->price) * ($data->gst_percent) / 100,
-                    'subtotal' => $data->qty * $data->price + (($data->qty * $data->price) * $data->gst_percent / 100),
+    public function mount($id): void
+    {
+        $this->entry_no = Purchase::nextNo();
+        if ($id != 0) {
+            $obj = Purchase::find($id);
+            $this->common->vid = $obj->id;
+            $this->uniqueno = $obj->uniqueno;
+            $this->acyear = $obj->acyear;
+            $this->contact_id = $obj->contact_id;
+            $this->contact_name = $obj->contact->vname;
+            $this->purchase_no = $obj->purchase_no;
+            $this->purchase_date = $obj->purchase_date;
+            $this->order_id = $obj->order_id;
+            $this->order_name = $obj->order->vname;
+            $this->sales_type = $obj->sales_type;
+            $this->transport_id = $obj->transport_id;
+            $this->transport_name = $obj->transport_id ? Common::find($obj->transport_id)->vname : '';
+            $this->bundle = $obj->bundle;
+            $this->total_qty = $obj->total_qty;
+            $this->total_taxable = $obj->total_taxable;
+            $this->total_gst = $obj->total_gst;
+            $this->ledger_id = $obj->ledger_id;
+            $this->ledger_name = $obj->ledger_id ? Common::find($obj->ledger_id)->vname : '';
+            $this->additional = $obj->additional;
+            $this->round_off = $obj->round_off;
+            $this->grand_total = $obj->grand_total;
+            $this->common->active_id = $obj->active_id;
+            $data = DB::table('purchaseitems')->select('purchaseitems.*',
+                'products.vname as product_name',
+                'colours.vname as colour_name',
+                'sizes.vname as size_name',)->join('products', 'products.id', '=', 'purchaseitems.product_id')
+                ->join('commons as colours', 'colours.id', '=', 'purchaseitems.colour_id')
+                ->join('commons as sizes', 'sizes.id', '=', 'purchaseitems.size_id')->where('purchase_id', '=',
+                    $id)->get()->transform(function ($data) {
+                    return [
+                        'purchaseitem_id' => $data->id,
+                        'product_name' => $data->product_name,
+                        'description' => $data->description,
+                        'product_id' => $data->product_id,
+                        'colour_name' => $data->colour_name,
+                        'colour_id' => $data->colour_id,
+                        'size_name' => $data->size_name,
+                        'size_id' => $data->size_id,
+                        'qty' => $data->qty,
+                        'price' => $data->price,
+                        'gst_percent' => $data->gst_percent,
+                        'taxable' => $data->qty * $data->price,
+                        'gst_amount' => ($data->qty * $data->price) * ($data->gst_percent) / 100,
+                        'subtotal' => $data->qty * $data->price + (($data->qty * $data->price) * $data->gst_percent / 100),
+                    ];
+                });
+            $this->itemList = $data;
+            $contact_outstanding = Contact::find($this->contact_id);
+            $contact_outstanding->outstanding = ($contact_outstanding->contact_type_id == 124 ? $contact_outstanding->outstanding + $this->grand_total : $contact_outstanding->outstanding - $this->grand_total);
+            $contact_outstanding->save();
+        } else {
+            $this->uniqueno = "{$this->contact_id}~{$this->entry_no}~{$this->purchase_date}";
+            $this->common->active_id = true;
+            $this->sales_type = '1';
+            $this->gst_percent = 5;
+            $this->additional = 0;
+            $this->grand_total = 0;
+            $this->total_taxable = 0;
+            $this->round_off = 0;
+            $this->total_gst = 0;
+            $this->purchase_date = Carbon::now()->format('Y-m-d');
+        }
+
+        $this->calculateTotal();
+    }
+
+#endregion
+
+    #region[add items]
+
+    public function addItems(): void
+    {
+        if ($this->itemIndex == "") {
+            if (!(empty($this->product_name)) &&
+                !(empty($this->price)) &&
+                !(empty($this->qty))
+            ) {
+                $this->itemList[] = [
+                    'product_name' => $this->product_name,
+                    'product_id' => $this->product_id,
+                    'description' => $this->description,
+                    'colour_id' => $this->colour_id,
+                    'colour_name' => $this->colour_name,
+                    'size_id' => $this->size_id,
+                    'size_name' => $this->size_name,
+                    'qty' => $this->qty,
+                    'price' => $this->price,
+                    'gst_percent' => $this->gst_percent1,
+                    'taxable' => $this->qty * $this->price,
+                    'gst_amount' => ($this->qty * $this->price) * $this->gst_percent1 / 100,
+                    'subtotal' => $this->qty * $this->price + (($this->qty * $this->price) * $this->gst_percent1 / 100),
                 ];
-            });
-        $this->itemList = $data;
-        $contact_outstanding = Contact::find($this->contact_id);
-        $contact_outstanding->outstanding = ($contact_outstanding->contact_type_id == 124 ? $contact_outstanding->outstanding + $this->grand_total : $contact_outstanding->outstanding - $this->grand_total);
-        $contact_outstanding->save();
-    } else {
-        $this->uniqueno = "{$this->contact_id}~{$this->entry_no}~{$this->purchase_date}";
-        $this->common->active_id = true;
-        $this->sales_type = '1';
-        $this->gst_percent = 5;
-        $this->additional = 0;
-        $this->grand_total = 0;
-        $this->total_taxable = 0;
-        $this->round_off = 0;
-        $this->total_gst = 0;
-        $this->purchase_date = Carbon::now()->format('Y-m-d');
-    }
-
-    $this->calculateTotal();
-}
-
-#endregion
-
-#region[add items]
-
-public
-function addItems(): void
-{
-    if ($this->itemIndex == "") {
-        if (!(empty($this->product_name)) &&
-            !(empty($this->price)) &&
-            !(empty($this->qty))
-        ) {
-            $this->itemList[] = [
+            }
+        } else {
+            $this->itemList[$this->itemIndex] = [
                 'product_name' => $this->product_name,
                 'product_id' => $this->product_id,
                 'description' => $this->description,
@@ -776,131 +792,129 @@ function addItems(): void
                 'subtotal' => $this->qty * $this->price + (($this->qty * $this->price) * $this->gst_percent1 / 100),
             ];
         }
-    } else {
-        $this->itemList[$this->itemIndex] = [
-            'product_name' => $this->product_name,
-            'product_id' => $this->product_id,
-            'description' => $this->description,
-            'colour_id' => $this->colour_id,
-            'colour_name' => $this->colour_name,
-            'size_id' => $this->size_id,
-            'size_name' => $this->size_name,
-            'qty' => $this->qty,
-            'price' => $this->price,
-            'gst_percent' => $this->gst_percent1,
-            'taxable' => $this->qty * $this->price,
-            'gst_amount' => ($this->qty * $this->price) * $this->gst_percent1 / 100,
-            'subtotal' => $this->qty * $this->price + (($this->qty * $this->price) * $this->gst_percent1 / 100),
-        ];
+
+        $this->calculateTotal();
+        $this->resetsItems();
+        $this->render();
     }
 
-    $this->calculateTotal();
-    $this->resetsItems();
-    $this->render();
-}
+    public function resetsItems(): void
+    {
+        $this->itemIndex = '';
+        $this->product_name = '';
+        $this->product_id = '';
+        $this->description = '';
+        $this->colour_name = '';
+        $this->colour_id = '';
+        $this->size_name = '';
+        $this->size_id = '';
+        $this->qty = '';
+        $this->price = '';
+        $this->gst_percent = '';
+        $this->calculateTotal();
+    }
 
-public
-function resetsItems(): void
-{
-    $this->itemIndex = '';
-    $this->product_name = '';
-    $this->product_id = '';
-    $this->description = '';
-    $this->colour_name = '';
-    $this->colour_id = '';
-    $this->size_name = '';
-    $this->size_id = '';
-    $this->qty = '';
-    $this->price = '';
-    $this->gst_percent = '';
-    $this->calculateTotal();
-}
+    public function changeItems($index): void
+    {
+        if (isset($this->itemList[$index])) {
 
-public
-function changeItems($index): void
-{
-    $this->itemIndex = $index;
-    $items = $this->itemList[$index];
-    $this->product_name = $items['product_name'];
-    $this->product_id = $items['product_id'];
-    $this->description = $items['description'];
-    $this->colour_name = $items['colour_name'];
-    $this->colour_id = $items['colour_id'];
-    $this->size_name = $items['size_name'];
-    $this->size_id = $items['size_id'];
-    $this->qty = $items['qty'] + 0;
-    $this->price = $items['price'] + 0;
-    $this->gst_percent1 = $items['gst_percent'];
-    $this->calculateTotal();
-}
+            $this->itemIndex = $index;
+            $items = $this->itemList[$index];
+            $this->product_name = $items['product_name'];
+            $this->product_id = $items['product_id'];
+            $this->description = $items['description'];
+            $this->colour_name = $items['colour_name'];
+            $this->colour_id = $items['colour_id'];
+            $this->size_name = $items['size_name'];
+            $this->size_id = $items['size_id'];
+            $this->qty = $items['qty'] + 0;
+            $this->price = $items['price'] + 0;
+            $this->gst_percent1 = $items['gst_percent'];
+            $this->calculateTotal();
+        }
 
-public
-function removeItems($index): void
-{
-    unset($this->itemList[$index]);
-    $this->itemList = collect($this->itemList);
-    $this->calculateTotal();
-}
+    }
+
+    public function deleteItem($index): void
+    {
+        if (isset($this->itemList[$index])) {
+            unset($this->itemList[$index]);
+
+            $this->itemList = array_values($this->itemList);
+
+            $this->calculateTotal();
+        } else {
+            throw new Exception("Item at index {$index} does not exist.");
+        }
+    }
+    public function removeItems($index): void
+    {
+        unset($this->itemList[$index]);
+        $this->itemList = collect($this->itemList);
+        $this->calculateTotal();
+    }
 
 #endregion
 
-#region[Calculate total]
+    #region[Calculate total]
 
-public
-function calculateTotal(): void
-{
-    if ($this->itemList) {
-        $this->total_qty = 0;
-        $this->total_taxable = 0;
-        $this->total_gst = 0;
-        $this->grandtotalBeforeRound = 0;
-        foreach ($this->itemList as $row) {
-            $this->total_qty += round(floatval($row['qty']), 3);
-            $this->total_taxable += round(floatval($row['taxable']), 2);
-            $this->total_gst += round(floatval($row['gst_amount']), 2);
-            $this->grandtotalBeforeRound += round(floatval($row['subtotal']), 2);
-        }
-        $this->grand_total = round($this->grandtotalBeforeRound);
-        $this->round_off = $this->grandtotalBeforeRound - $this->grand_total;
+    public
+    function calculateTotal(): void
+    {
+        if ($this->itemList) {
+            $this->total_qty = 0;
+            $this->total_taxable = 0;
+            $this->total_gst = 0;
+            $this->grandtotalBeforeRound = 0;
+            foreach ($this->itemList as $row) {
+                $this->total_qty += round(floatval($row['qty']), 3);
+                $this->total_taxable += round(floatval($row['taxable']), 2);
+                $this->total_gst += round(floatval($row['gst_amount']), 2);
+                $this->grandtotalBeforeRound += round(floatval($row['subtotal']), 2);
+            }
+            $this->grand_total = round($this->grandtotalBeforeRound);
+            $this->round_off = $this->grandtotalBeforeRound - $this->grand_total;
 
-        if ($this->grandtotalBeforeRound > $this->grand_total) {
-            $this->round_off = round($this->round_off, 2) * -1;
+            if ($this->grandtotalBeforeRound > $this->grand_total) {
+                $this->round_off = round($this->round_off, 2) * -1;
+            }
+            $this->qty = round(floatval($this->qty), 3);
+            $this->total_taxable = round(floatval($this->total_taxable), 2);
+            $this->total_gst = round(floatval($this->total_gst), 2);
+            $this->round_off = round(floatval($this->round_off), 2);
+            $this->grand_total = round((floatval($this->grand_total)) + (floatval($this->additional)), 2);
         }
-        $this->qty = round(floatval($this->qty), 3);
-        $this->total_taxable = round(floatval($this->total_taxable), 2);
-        $this->total_gst = round(floatval($this->total_gst), 2);
-        $this->round_off = round(floatval($this->round_off), 2);
-        $this->grand_total = round((floatval($this->grand_total)) + (floatval($this->additional)), 2);
     }
-}
 
 #endregion
-public $purchaseLogs;
+
+    #region[purchaseLogs]
+    public $purchaseLogs;
+
     public function getPurchasesLog()
     {
-        $this->purchaseLogs = Logbook::where('model_name', 'Purchase')->where('vname',$this->purchase_no)->get();
+        $this->purchaseLogs = Logbook::where('model_name', 'Purchase')->where('vname', $this->purchase_no)->get();
+    }
+    #endregion
+
+    #region[Render]
+    public function getRoute(): void
+    {
+        $this->contactUpdate();
+        $this->redirect(route('purchase'));
     }
 
-#region[Render]
-public
-function getRoute(): void
-{
-    $this->contactUpdate();
-    $this->redirect(route('purchase'));
-}
-
-public
-function render()
-{
-    $this->getPurchasesLog();
-    $this->getContactList();
-    $this->getOrderList();
-    $this->getTransportList();
-    $this->getLedgerList();
-    $this->getColourList();
-    $this->getProductList();
-    $this->getSizeList();
-    return view('livewire.entries.purchase.upsert');
-}
+    public function render()
+    {
+        $this->getPurchasesLog();
+        $this->getContactList();
+        $this->getOrderList();
+        $this->getTransportList();
+        $this->getLedgerList();
+        $this->getColourList();
+        $this->getProductList();
+        $this->getSizeList();
+        return view('livewire.entries.purchase.upsert');
+    }
 #endregion
 }
