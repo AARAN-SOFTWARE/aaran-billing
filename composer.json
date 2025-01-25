@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-intl": "*",
         "barryvdh/laravel-dompdf": "^3.0",
         "chillerlan/php-qrcode": "^5.0",
         "laravel/framework": "^11.9",
@@ -13,8 +14,8 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.0",
-        "spatie/laravel-pdf": "^1.5",
-        "ext-intl": "*"
+        "maatwebsite/excel": "^3.1",
+        "spatie/laravel-pdf": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
